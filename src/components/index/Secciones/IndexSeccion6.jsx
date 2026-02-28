@@ -86,6 +86,8 @@ const IndexSeccion6 = () => {
 
   // Estado para activar CountUp
   const [statsVisible, setStatsVisible] = useState(false);
+  // Ref para evitar que statsVisible en el dep array destruya el ScrollTrigger
+  const statsVisibleRef = useRef(false);
 
   // ═══════════════════════════════════════════════════════════════
   // TIMELINE CINEMÁTICO - Contenido en racimos/fases
@@ -146,7 +148,8 @@ const IndexSeccion6 = () => {
                 }
 
                 // Activar stats CountUp al 80%
-                if (progress >= 0.80 && !statsVisible) {
+                if (progress >= 0.80 && !statsVisibleRef.current) {
+                  statsVisibleRef.current = true;
                   setStatsVisible(true);
                 }
               }
@@ -290,7 +293,7 @@ const IndexSeccion6 = () => {
       if (rafId) cancelAnimationFrame(rafId);
       if (ctx) ctx.revert();
     };
-  }, [statsVisible]);
+  }, []); // Sin statsVisible en deps - evita destruir el PIN al activar CountUp
 
   // ═══════════════════════════════════════════════════════════════
   // RENDER
