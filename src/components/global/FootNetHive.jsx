@@ -11,7 +11,7 @@ const FootNetHive = () => {
   
   const content = {
     es: {
-      heroTagline: "La Magia en Cada Sorbo ✨",
+      heroTagline: "La Magia en Cada Sorbo ✦",
       col1Title: "Descubre Magic Drink",
       col1Links: [
         { text: "Bebidas", href: "/bebidas", icon: "/icons/icono_lata.png" },
@@ -23,7 +23,7 @@ const FootNetHive = () => {
       col2Title: "Conéctate",
       newsletterPlaceholder: "tu@email.com",
       newsletterBtn: "¡Únete!",
-      badges: ["🎁 Promos exclusivas", "✨ Noticias de Hexy", "🆕 Nuevos sabores"],
+      badges: ["Promos exclusivas", "Noticias de Hexy", "Nuevos sabores"],
       col3Title: "Síguenos",
       shareHashtag: "Comparte tu #MagicMoment",
       socials: [
@@ -39,7 +39,7 @@ const FootNetHive = () => {
       langEn: "🇺🇸 EN"
     },
     en: {
-      heroTagline: "Magic in Every Sip ✨",
+      heroTagline: "Magic in Every Sip ✦",
       col1Title: "Discover Magic Drink",
       col1Links: [
         { text: "Drinks", href: "/bebidas", icon: "/icons/icono_lata.png" },
@@ -51,7 +51,7 @@ const FootNetHive = () => {
       col2Title: "Connect",
       newsletterPlaceholder: "your@email.com",
       newsletterBtn: "Join Us!",
-      badges: ["🎁 Exclusive promos", "✨ Hexy news", "🆕 New flavors"],
+      badges: ["Exclusive promos", "Hexy news", "New flavors"],
       col3Title: "Follow Us",
       shareHashtag: "Share your #MagicMoment",
       socials: [
@@ -93,11 +93,11 @@ const FootNetHive = () => {
 
       {/* Decorative stars background */}
       <div className={styles.starsContainer}>
-        <div className={`${styles.star} ${styles.starSmall} ${styles.star1}`}>⭐</div>
-        <div className={`${styles.star} ${styles.starMedium} ${styles.star2}`}>✨</div>
-        <div className={`${styles.star} ${styles.starLarge} ${styles.star3}`}>💫</div>
-        <div className={`${styles.star} ${styles.starSmall} ${styles.star4}`}>⭐</div>
-        <div className={`${styles.star} ${styles.starMedium} ${styles.star5}`}>✨</div>
+        <div className={`${styles.star} ${styles.starSmall} ${styles.star1}`}>✦</div>
+        <div className={`${styles.star} ${styles.starMedium} ${styles.star2}`}>✶</div>
+        <div className={`${styles.star} ${styles.starLarge} ${styles.star3}`}>★</div>
+        <div className={`${styles.star} ${styles.starSmall} ${styles.star4}`}>✦</div>
+        <div className={`${styles.star} ${styles.starMedium} ${styles.star5}`}>✶</div>
       </div>
 
       {/* Bubbles decoration */}

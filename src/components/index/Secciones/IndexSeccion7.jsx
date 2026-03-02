@@ -99,10 +99,10 @@ const IndexSeccion7 = () => {
               />
               {/* Decoraciones kawaii flotantes sobre la imagen */}
               <div className={styles.imageDecorations}>
-                <span className={styles.imageDeco}>{index % 3 === 0 ? '⭐' : index % 3 === 1 ? '💗' : '♪'}</span>
-                <span className={styles.imageDeco}>{index % 3 === 0 ? '💗' : index % 3 === 1 ? '⭐' : '✨'}</span>
-                <span className={styles.imageDeco}>{index % 3 === 0 ? '✨' : index % 3 === 1 ? '💜' : '♫'}</span>
-                <span className={styles.imageDeco}>{index % 3 === 0 ? '💜' : index % 3 === 1 ? '♪' : '💗'}</span>
+                <span className={styles.imageDeco}>{index % 3 === 0 ? '✦' : index % 3 === 1 ? '★' : '♪'}</span>
+                <span className={styles.imageDeco}>{index % 3 === 0 ? '★' : index % 3 === 1 ? '✦' : '✶'}</span>
+                <span className={styles.imageDeco}>{index % 3 === 0 ? '✶' : index % 3 === 1 ? '♫' : '★'}</span>
+                <span className={styles.imageDeco}>{index % 3 === 0 ? '♫' : index % 3 === 1 ? '♪' : '✦'}</span>
               </div>
             </div>
             
@@ -125,14 +125,14 @@ const IndexSeccion7 = () => {
       
       {/* Decoraciones de fondo */}
       <div className={styles.decorations} aria-hidden="true">
-        <span className={styles.deco}>⭐</span>
-        <span className={styles.deco}>💗</span>
+        <span className={styles.deco}>✦</span>
+        <span className={styles.deco}>★</span>
         <span className={styles.deco}>♪</span>
-        <span className={styles.deco}>✨</span>
-        <span className={styles.deco}>💜</span>
+        <span className={styles.deco}>✶</span>
         <span className={styles.deco}>♫</span>
-        <span className={styles.deco}>⭐</span>
-        <span className={styles.deco}>💗</span>
+        <span className={styles.deco}>♪</span>
+        <span className={styles.deco}>✦</span>
+        <span className={styles.deco}>★</span>
       </div>
     </section>
   );

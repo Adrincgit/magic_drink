@@ -205,18 +205,6 @@ const IndexSeccion2 = () => {
         {/* Descripción */}
         <p className={styles.description}>{t.description}</p>
 
-        {/* CTA Button */}
-        <div className={styles.ctaWrapper}>
-          <Button
-            textEs="Descubre los sabores"
-            textEn="Discover flavors"
-            href="/bebidas"
-            variant="magic"
-            size="lg"
-            showArrow={true}
-          />
-        </div>
-
         {/* Scroll Indicator */}
       {/*   <div className={styles.scrollIndicator}>
           <span className={styles.scrollText}>{t.scrollHint}</span>

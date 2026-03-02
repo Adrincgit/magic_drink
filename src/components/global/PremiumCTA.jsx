@@ -93,7 +93,7 @@ const PremiumCTA = ({
             animate={isHovered ? { rotate: 360 } : { rotate: 0 }}
             transition={{ duration: 0.6 }}
           >
-            ⭐
+            ✦
           </motion.span>
         )}
         <span className={styles.text}>

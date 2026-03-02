@@ -680,3 +680,46 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   PARADE IMAGES — Capa decorativa atmósfera
+═══════════════════════════════════════════════════════════════ */
+.paradeImgCollage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.paradeImg {
+  position: absolute;
+  width: 280px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px;
+  opacity: 0.18;
+  filter: saturate(1.4) brightness(0.8);
+  border: 1px solid rgba(255, 106, 215, 0.2);
+  transition: opacity 0.4s ease;
+}
+
+.paradeImgLeft {
+  bottom: 12%;
+  left: 2%;
+  transform: rotate(-6deg);
+}
+
+.paradeImgRight {
+  bottom: 12%;
+  right: 2%;
+  transform: rotate(6deg);
+}
+
+@media (max-width: 768px) {
+  .paradeImg {
+    width: 140px;
+    height: 100px;
+    opacity: 0.12;
+  }
+}

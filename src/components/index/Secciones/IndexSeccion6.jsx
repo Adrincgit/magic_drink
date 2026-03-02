@@ -32,10 +32,10 @@ const IndexSeccion6 = () => {
       cta: "Explorar Wonderpop Plaza",
       statsTitle: "Nuestro Impacto Global",
       stats: [
-        { value: 24, suffix: '', label: 'Ubicaciones globales', icon: '🌍' },
-        { value: 2, suffix: 'M+', label: 'Visitantes mensuales', icon: '👥' },
-        { value: 4.9, suffix: '', label: 'Calificación promedio', icon: '💫', hasStar: true },
-        { value: 500, suffix: 'K+', label: 'Fotos compartidas', icon: '📸' }
+        { value: 24, suffix: '', label: 'Ubicaciones globales', icon: '✦', iconClass: 'globe' },
+        { value: 2, suffix: 'M+', label: 'Visitantes mensuales', icon: '★', iconClass: 'people' },
+        { value: 4.9, suffix: '', label: 'Calificación promedio', icon: '✶', hasStar: true, iconClass: 'star' },
+        { value: 500, suffix: 'K+', label: 'Fotos compartidas', icon: '♫', iconClass: 'camera' }
       ]
     },
     en: {
@@ -53,10 +53,10 @@ const IndexSeccion6 = () => {
       cta: "Explore Wonderpop Plaza",
       statsTitle: "Our Global Impact",
       stats: [
-        { value: 24, suffix: '', label: 'Global locations', icon: '🌍' },
-        { value: 2, suffix: 'M+', label: 'Monthly visitors', icon: '👥' },
-        { value: 4.9, suffix: '', label: 'Average rating', icon: '💫', hasStar: true },
-        { value: 500, suffix: 'K+', label: 'Photos shared', icon: '📸' }
+        { value: 24, suffix: '', label: 'Global locations', icon: '✦', iconClass: 'globe' },
+        { value: 2, suffix: 'M+', label: 'Monthly visitors', icon: '★', iconClass: 'people' },
+        { value: 4.9, suffix: '', label: 'Average rating', icon: '✶', hasStar: true, iconClass: 'star' },
+        { value: 500, suffix: 'K+', label: 'Photos shared', icon: '♫', iconClass: 'camera' }
       ]
     }
   };
@@ -320,7 +320,7 @@ const IndexSeccion6 = () => {
             animationSpeed={6}
             className={styles.gradientTitle}
           >
-            ✨ {t.title} ✨
+            ✦ {t.title} ✦
           </GradientText>
         </h2>
         <p className={styles.tagline}>{t.tagline}</p>
@@ -350,6 +350,22 @@ const IndexSeccion6 = () => {
         <div ref={introContentRef} className={styles.introContent}>
           <h3 className={styles.subtitle}>{t.subtitle}</h3>
           <p className={styles.description}>{t.description}</p>
+
+          {/* Galería atmosférica de Wonderpop Plaza */}
+          <div className={styles.wonderpopImgGallery}>
+            <img
+              src="/image/wonderpop/wonderpop-exterior.png"
+              alt=""
+              className={styles.wonderpopImg}
+              onError={(e) => { e.target.style.display = 'none'; }}
+            />
+            <img
+              src="/image/wonderpop/wonderpop-interior.png"
+              alt=""
+              className={styles.wonderpopImg}
+              onError={(e) => { e.target.style.display = 'none'; }}
+            />
+          </div>
         </div>
 
         {/* FASE 2: Highlights Container (reemplaza intro) */}
@@ -415,7 +431,7 @@ const IndexSeccion6 = () => {
                       separator=","
                     />
                     {stat.suffix}
-                    {stat.hasStar && <span className={styles.starIcon}>⭐</span>}
+                    {stat.hasStar && <span className={styles.starIcon}>★</span>}
                   </>
                 ) : (
                   <>0{stat.suffix}</>

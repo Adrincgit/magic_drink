@@ -432,6 +432,220 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   PLAY BUTTON — Botón de audio por sabor
+═══════════════════════════════════════════════════════════════ */
+.playButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.25rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--em-radius-full);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--em-font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s var(--em-ease-smooth);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.playButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--flavor-color, var(--md-purple)) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.playButton:hover {
+  border-color: var(--flavor-color, var(--md-purple));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
+              0 0 15px color-mix(in srgb, var(--flavor-color, var(--md-purple)) 35%, transparent);
+}
+
+.playButton:hover::before {
+  opacity: 0.15;
+}
+
+.playButton:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Estado activo — reproduciendo */
+.playButtonActive {
+  border-color: var(--flavor-color, var(--md-purple));
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--flavor-color, var(--md-purple)) 40%, transparent),
+              inset 0 0 30px color-mix(in srgb, var(--flavor-color, var(--md-purple)) 10%, transparent);
+}
+
+.playButtonActive::before {
+  opacity: 0.2;
+  animation: playButtonShimmer 3s ease-in-out infinite;
+}
+
+@keyframes playButtonShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.3; }
+}
+
+.playIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--flavor-color, var(--md-purple));
+  flex-shrink: 0;
+  transition: all 0.25s var(--em-ease-smooth);
+}
+
+.playButtonActive .playIconWrapper {
+  box-shadow: 0 0 10px var(--flavor-color, var(--md-purple));
+}
+
+.playIcon {
+  width: 11px;
+  height: 11px;
+  color: #fff;
+}
+
+.playLabel {
+  transition: color 0.3s ease;
+}
+
+.playButtonActive .playLabel {
+  color: var(--flavor-color, #fff);
+}
+
+/* Equalizer Bars — mini visualizador */
+.eqBars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  margin-left: 0.25rem;
+}
+
+.eqBar {
+  width: 3px;
+  background: var(--flavor-color, var(--md-purple));
+  border-radius: 2px;
+  animation: eqBounce 0.8s ease-in-out infinite alternate;
+}
+
+.eqBar:nth-child(1) { height: 40%; animation-delay: 0s; }
+.eqBar:nth-child(2) { height: 80%; animation-delay: 0.15s; }
+.eqBar:nth-child(3) { height: 55%; animation-delay: 0.3s; }
+.eqBar:nth-child(4) { height: 70%; animation-delay: 0.45s; }
+
+@keyframes eqBounce {
+  0% { height: 20%; }
+  100% { height: 100%; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PLAYING STATE — Efectos cuando un sabor suena
+═══════════════════════════════════════════════════════════════ */
+
+/* Card con aura pulsante */
+.flavorCardPlaying {
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.4),
+    0 0 80px var(--flavor-color, var(--md-purple)),
+    0 0 120px color-mix(in srgb, var(--flavor-color, var(--md-purple)) 50%, transparent);
+  border-color: color-mix(in srgb, var(--flavor-color, var(--md-purple)) 60%, transparent);
+  animation: cardAuraPulse 2s ease-in-out infinite;
+}
+
+@keyframes cardAuraPulse {
+  0%, 100% { 
+    box-shadow: 
+      0 30px 80px rgba(0, 0, 0, 0.4),
+      0 0 60px var(--flavor-color, var(--md-purple)),
+      0 0 100px color-mix(in srgb, var(--flavor-color, var(--md-purple)) 40%, transparent);
+  }
+  50% { 
+    box-shadow: 
+      0 30px 80px rgba(0, 0, 0, 0.4),
+      0 0 90px var(--flavor-color, var(--md-purple)),
+      0 0 150px color-mix(in srgb, var(--flavor-color, var(--md-purple)) 55%, transparent);
+  }
+}
+
+/* Glow intensificado cuando suena */
+.canGlowPlaying {
+  opacity: 1 !important;
+  animation: glowPulseIntense 1.5s ease-in-out infinite !important;
+}
+
+@keyframes glowPulseIntense {
+  0%, 100% { opacity: 0.8; transform: scale(1); filter: blur(60px); }
+  50% { opacity: 1; transform: scale(1.2); filter: blur(45px); }
+}
+
+/* Lata sutil hover-like cuando suena */
+.canImagePlaying {
+  animation: canFloat 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4))
+          drop-shadow(0 0 25px var(--flavor-color, var(--md-purple)));
+}
+
+@keyframes canFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-6px) rotate(1deg); }
+  75% { transform: translateY(3px) rotate(-0.5deg); }
+}
+
+/* Ondas de sonido — anillos expandiéndose desde la lata */
+.soundWaves {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.soundWave {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  border: 1.5px solid var(--flavor-color, var(--md-purple));
+  opacity: 0;
+  animation: soundWaveExpand 2.5s ease-out infinite;
+}
+
+.soundWave:nth-child(2) { animation-delay: 0.8s; }
+.soundWave:nth-child(3) { animation-delay: 1.6s; }
+
+@keyframes soundWaveExpand {
+  0% { 
+    width: 50%;
+    height: 50%;
+    opacity: 0.6;
+  }
+  100% { 
+    width: 140%;
+    height: 140%;
+    opacity: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    END PANEL - CTA Final
 ═══════════════════════════════════════════════════════════════ */
 .endPanel {
@@ -621,6 +835,15 @@
   .miniCan {
     width: 45px;
   }
+
+  .playButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.78rem;
+  }
+
+  .soundWaves {
+    display: none;
+  }
 }
 
 /* Small Mobile */
@@ -660,7 +883,12 @@
   .canGlow,
   .orbitRing, .orbitRing2,
   .particle,
-  .miniCan {
+  .miniCan,
+  .eqBar,
+  .soundWave,
+  .canImagePlaying,
+  .flavorCardPlaying,
+  .canGlowPlaying {
     animation: none;
   }
 

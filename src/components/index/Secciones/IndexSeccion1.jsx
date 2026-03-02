@@ -82,7 +82,7 @@ const IndexSeccion1 = () => {
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 5}s`,
               animationDuration: `${3 + Math.random() * 4}s`
-            }}>⭐</div>
+            }}>✦</div>
           ))}
           
           {/* Burbujas */}

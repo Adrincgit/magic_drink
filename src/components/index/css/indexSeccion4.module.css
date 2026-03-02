@@ -297,6 +297,71 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   HEXY QUOTE — Cita en primera persona
+═══════════════════════════════════════════════════════════════ */
+.hexyQuote {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 0;
+  border: none;
+}
+
+.hexyQuoteAvatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--md-pink);
+  box-shadow: 0 0 20px rgba(255, 106, 215, 0.4);
+  flex-shrink: 0;
+}
+
+.hexyQuoteBubble {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 106, 215, 0.12) 0%, rgba(170, 55, 242, 0.08) 100%);
+  border: 1px solid rgba(255, 106, 215, 0.25);
+  border-radius: 20px;
+  border-top-left-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.hexyQuoteBubble::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 8px solid rgba(255, 106, 215, 0.25);
+}
+
+.hexyQuoteText {
+  font-family: var(--em-font-body);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  font-style: italic;
+  margin: 0;
+}
+
+.hexyQuoteSign {
+  display: block;
+  text-align: right;
+  margin-top: 0.5rem;
+  font-family: var(--em-font-headline);
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--md-pink);
+  text-shadow: 0 0 12px rgba(255, 106, 215, 0.5);
+}
+
+/* ═══════════════════════════════════════════════════════════════
    STATS GRID - EPIC VERSION
 ═══════════════════════════════════════════════════════════════ */
 .statsGrid {
@@ -380,8 +445,10 @@
 .statIcon {
   font-size: 2rem;
   z-index: 2;
+  color: var(--accent-color, var(--md-pink));
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-shadow: 0 0 15px currentColor;
 }
 
 .statCard:hover .statIcon {
@@ -575,6 +642,62 @@
   50% {
     transform: rotate(180deg) scale(1.2);
     opacity: 1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DUAL BADGE — Mini foto IRL de Hexy
+═══════════════════════════════════════════════════════════════ */
+.hexyDualBadge {
+  position: absolute;
+  bottom: 12%;
+  right: 5%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  animation: dualBadgeFloat 5s ease-in-out infinite;
+  animation-delay: 1s;
+  transition: transform 0.3s ease;
+}
+
+.hexyDualBadge:hover {
+  transform: scale(1.1);
+}
+
+.dualBadgeImg {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid var(--md-pink);
+  box-shadow: 
+    0 0 20px rgba(255, 106, 215, 0.5),
+    0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.dualBadgeLabel {
+  font-family: var(--em-font-headline);
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--md-white);
+  background: var(--md-gradient-main);
+  padding: 2px 10px;
+  border-radius: 20px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes dualBadgeFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
   }
 }
 
@@ -1019,4 +1142,71 @@
   .curvedLoopWrapper :global(.curved-loop-svg textPath) {
     font-size: 2rem !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HEXY ANIME POSTER (Panel 1)
+═══════════════════════════════════════════════════════════════ */
+.hexyPosterWrapper {
+  margin-top: 2rem;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 106, 215, 0.3);
+  box-shadow: 0 8px 32px rgba(170, 55, 242, 0.25);
+  max-width: 340px;
+}
+
+.hexyPosterImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 20px;
+  transition: transform 0.5s ease;
+}
+
+.hexyPosterWrapper:hover .hexyPosterImg {
+  transform: scale(1.03);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HEXY LIVE CORPORATE (Panel 4)
+═══════════════════════════════════════════════════════════════ */
+.hexyCorporateWrapper {
+  position: relative;
+  margin: 1.5rem 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(130, 210, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(130, 210, 255, 0.15);
+  max-width: 380px;
+}
+
+.hexyCorporateImg {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border-radius: 16px 16px 0 0;
+  filter: brightness(0.9) saturate(1.1);
+  transition: filter 0.4s ease, transform 0.5s ease;
+}
+
+.hexyCorporateWrapper:hover .hexyCorporateImg {
+  filter: brightness(1) saturate(1.2);
+  transform: scale(1.02);
+}
+
+.hexyCorporateLabel {
+  display: block;
+  padding: 0.6rem 1rem;
+  font-family: var(--em-font-headline);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--md-blue);
+  background: rgba(130, 210, 255, 0.08);
+  border-top: 1px solid rgba(130, 210, 255, 0.2);
 }

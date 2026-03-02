@@ -132,7 +132,7 @@ const NavBar = () => {
           </li>
         </ul>
 
-        {/* === RIGHT: Idioma + CTA === */}
+        {/* === RIGHT: Idioma === */}
         <div className={styles.actionsSection}>
           {/* Toggle de Idioma */}
           <div className={styles.languageToggle}>
@@ -150,12 +150,6 @@ const NavBar = () => {
               EN
             </button>
           </div>
-
-          {/* CTA Principal */}
-          <a href="/wonderpop" className={styles.ctaButton}>
-            <span className={styles.ctaIcon}>📍</span>
-            {ingles ? "Visit Us" : "Visítanos"}
-          </a>
         </div>
 
         {/* === MOBILE: Hamburguesa === */}
@@ -257,12 +251,6 @@ const NavBar = () => {
                 EN
               </button>
             </div>
-
-            {/* CTA en móvil */}
-            <a href="/wonderpop" className={styles.mobileCtaButton} onClick={closeMobileMenu}>
-              <span className={styles.ctaIcon}>📍</span>
-              {ingles ? "Visit Us" : "Visítanos"}
-            </a>
 
             {/* Botón cerrar */}
             <button className={styles.closeButton} onClick={closeMobileMenu}>

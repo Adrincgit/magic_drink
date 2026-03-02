@@ -28,22 +28,24 @@ const IndexSeccion4 = () => {
       intro: {
         tag: "LA IDOL DE MAGIC DRINK",
         title: "Hexy",
-        subtitle: "DJ Sweet Hex",
+        subtitle: "La brujita que mueve al mundo",
         description: "La voz que conquistó millones de corazones"
       },
-      // Panel 2 - El misterio
-      mystery: {
-        title: "¿Quién es DJ Sweet Hex?",
-        text: "Nadie sabe con certeza quién está detrás del nombre. Algunos dicen que es una productora anónima, otros creen que es un equipo creativo entero.",
-        highlight: "El misterio es parte de la magia."
+      // Panel 2 - Ícono cultural
+      icon: {
+        title: "Un fenómeno global",
+        text: "Donde Hexy aparece, la energía cambia. Sus canciones se quedan en la cabeza, sus shows agotan entradas en minutos y su imagen ya es parte de la cultura pop de toda una generación.",
+        hexyQuote: "¡Cada sabor tiene su propia canción! Solo tienes que escuchar con el corazón... y con la lengua.",
+        hexySign: "— Hexy ✦",
+        highlight: "No es solo música. Es un estado de ánimo."
       },
       // Panel 3 - Los números
       stats: {
         title: "Los números hablan",
         items: [
-          { value: 5, suffix: "B+", label: "Streams globales", icon: "🎵", accentColor: "#FF6AD7" },
-          { value: 40, suffix: "+", label: "Países con campañas", icon: "🌍", accentColor: "#82D2FF" },
-          { value: 1, prefix: "#", suffix: "", label: "Idol del Magic Drink Day", icon: "👑", accentColor: "#F9F871" }
+          { value: 5, suffix: "B+", label: "Streams globales", icon: "♫", accentColor: "#FF6AD7" },
+          { value: 40, suffix: "+", label: "Países con campañas", icon: "✦", accentColor: "#82D2FF" },
+          { value: 1, prefix: "#", suffix: "", label: "Idol del Magic Drink Day", icon: "★", accentColor: "#F9F871" }
         ]
       },
       // Panel 4 - La experiencia
@@ -58,20 +60,22 @@ const IndexSeccion4 = () => {
       intro: {
         tag: "THE MAGIC DRINK IDOL",
         title: "Hexy",
-        subtitle: "DJ Sweet Hex",
+        subtitle: "The little witch moving the world",
         description: "The voice that conquered millions of hearts"
       },
-      mystery: {
-        title: "Who is DJ Sweet Hex?",
-        text: "No one knows for sure who is behind the name. Some say it's an anonymous producer, others believe it's an entire creative team.",
-        highlight: "The mystery is part of the magic."
+      icon: {
+        title: "A global phenomenon",
+        text: "Wherever Hexy shows up, the energy shifts. Her songs get stuck in your head, her shows sell out in minutes, and her image is already part of an entire generation's pop culture.",
+        hexyQuote: "Every flavor has its own song! You just have to listen with your heart... and your tongue.",
+        hexySign: "— Hexy ✦",
+        highlight: "It's not just music. It's a state of mind."
       },
       stats: {
         title: "Numbers speak",
         items: [
-          { value: 5, suffix: "B+", label: "Global streams", icon: "🎵", accentColor: "#FF6AD7" },
-          { value: 40, suffix: "+", label: "Countries with campaigns", icon: "🌍", accentColor: "#82D2FF" },
-          { value: 1, prefix: "#", suffix: "", label: "Magic Drink Day idol", icon: "👑", accentColor: "#F9F871" }
+          { value: 5, suffix: "B+", label: "Global streams", icon: "♫", accentColor: "#FF6AD7" },
+          { value: 40, suffix: "+", label: "Countries with campaigns", icon: "✦", accentColor: "#82D2FF" },
+          { value: 1, prefix: "#", suffix: "", label: "Magic Drink Day idol", icon: "★", accentColor: "#F9F871" }
         ]
       },
       experience: {
@@ -198,18 +202,25 @@ const IndexSeccion4 = () => {
             {/* Glow de fondo */}
             <div className={styles.hexyGlow}></div>
             
-       
-            
-            {/* Imagen de Hexy */}
+            {/* Imagen principal de Hexy — Anime Banner */}
             <img
-              src="/image/hexy/hexy-highlight.png"
-              alt="Hexy - DJ Sweet Hex"
+              src="/image/hexy/hexy-anime-banner.png"
+              alt="Hexy - La idol de Magic Drink"
               className={styles.hexyImage}
+              onError={(e) => { e.target.src = '/image/hexy/hexy-highlight.png'; }}
             />
             
-            {/* Badge flotante */}
-            <div className={styles.hexyBadge}>
-              <span>✨</span>
+            {/* Badge flotante — Anime/Real duality hint */}
+            <div className={styles.hexyDualBadge}>
+              <img 
+                src="/image/hexy/hexy-live-can.png" 
+                alt={ingles ? "Hexy in real life" : "Hexy en la vida real"}
+                className={styles.dualBadgeImg}
+                onError={(e) => { e.target.parentElement.style.display = 'none'; }}
+              />
+              <span className={styles.dualBadgeLabel}>
+                {ingles ? "IRL" : "IRL"}
+              </span>
             </div>
 
             {/* Partículas */}
@@ -262,10 +273,19 @@ const IndexSeccion4 = () => {
               <p className={`${styles.heroDescription} ${styles.animateIn}`}>
                 {t.intro.description}
               </p>
+
+              {/* Hexy Anime Poster */}
+              <div className={`${styles.hexyPosterWrapper} ${styles.animateIn}`}>
+                <img
+                  src="/image/hexy/hexy-anime-poster.png"
+                  alt={ingles ? "Hexy official poster" : "Póster oficial de Hexy"}
+                  className={styles.hexyPosterImg}
+                  onError={(e) => { e.target.parentElement.style.display = 'none'; }}
+                />
+              </div>
             </div>
           </div>
 
-          {/* Panel 2: El Misterio */}
           <div ref={(el) => addPanelRef(el, 1)} className={styles.panel}>
             <div className={styles.panelInner}>
               <div className={`${styles.sectionTitle} ${styles.animateIn}`}>
@@ -276,16 +296,29 @@ const IndexSeccion4 = () => {
                   containerClassName={styles.scrollRevealContainer}
                   textClassName={styles.mysteryTitleText}
                 >
-                  {t.mystery.title}
+                  {t.icon.title}
                 </ScrollReveal>
               </div>
               <p className={`${styles.mysteryText}`}>
-                {t.mystery.text}
+                {t.icon.text}
               </p>
+            
+              <blockquote className={`${styles.hexyQuote} ${styles.animateIn}`}>
+                <img 
+                  src="/image/hexy/hexy-anime-chibi.png" 
+                  alt="Hexy" 
+                  className={styles.hexyQuoteAvatar}
+                  onError={(e) => { e.target.style.display = 'none'; }}
+                />
+                <div className={styles.hexyQuoteBubble}>
+                  <p className={styles.hexyQuoteText}>"{t.icon.hexyQuote}"</p>
+                  <span className={styles.hexyQuoteSign}>{t.icon.hexySign}</span>
+                </div>
+              </blockquote>
               <blockquote className={`${styles.highlight} ${styles.animateIn}`}>
                 <span className={styles.quoteIcon}>"</span>
                 <ShinyText
-                  text={t.mystery.highlight}
+                  text={t.icon.highlight}
                   speed={2}
                   color="#F9F871"
                   shineColor="#ffffff"
@@ -294,7 +327,7 @@ const IndexSeccion4 = () => {
             </div>
           </div>
 
-          {/* Panel 3: Stats - EPIC VERSION */}
+         
           <div ref={(el) => addPanelRef(el, 2)} className={styles.panel}>
             <div className={styles.panelInner}>
               <div className={`${styles.sectionTitle} ${styles.animateIn}`}>
@@ -372,6 +405,20 @@ const IndexSeccion4 = () => {
               <p className={`${styles.experienceText} ${styles.animateIn}`}>
                 {t.experience.text}
               </p>
+
+              {/* Hexy IRL Corporate Image */}
+              <div className={`${styles.hexyCorporateWrapper} ${styles.animateIn}`}>
+                <img
+                  src="/image/hexy/hexy-live-corporate.png"
+                  alt={ingles ? "Hexy at a Magic Drink event" : "Hexy en evento Magic Drink"}
+                  className={styles.hexyCorporateImg}
+                  onError={(e) => { e.target.parentElement.style.display = 'none'; }}
+                />
+                <span className={styles.hexyCorporateLabel}>
+                  {ingles ? "Hexy • Official Campaign" : "Hexy • Campaña Oficial"}
+                </span>
+              </div>
+
               <div className={`${styles.ctaGroup} ${styles.animateIn}`}>
                 <Button
                   textEs={t.experience.cta}
@@ -380,13 +427,6 @@ const IndexSeccion4 = () => {
                   variant="magic"
                   size="lg"
                   showArrow={true}
-                />
-                <Button
-                  textEs={t.experience.ctaSecondary}
-                  textEn={t.experience.ctaSecondary}
-                  href="/hexy"
-                  variant="secondary"
-                  size="lg"
                 />
               </div>
             </div>
