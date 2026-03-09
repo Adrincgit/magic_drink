@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { isEnglish } from '../../../data/variables';
 import styles from '../css/indexSeccion3.module.css';
@@ -10,12 +10,41 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Registrar ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
+// Símbolos flotantes únicos por sabor — se muestran cuando el sabor suena
+const FLAVOR_SYMBOLS = {
+  'magic-original': ['★', '✦', '✧', '★', '✦', '✧', '★', '✦'],
+  'banana-drama':   ['♩', '♪', '♫', '♬', '♩', '♪', '♫', '♬'],
+  'bubble-tape':    ['○', '◎', '◌', '◯', '○', '◎', '◌', '◯'],
+  'dragon-grape':   ['◆', '▲', '◇', '△', '◆', '▲', '◇', '△'],
+  'sparkle-soda':   ['✦', '✧', '⋆', '✦', '✧', '⋆', '✦', '✧'],
+  'witchy-kiwi':    ['✶', '∴', '⁂', '✶', '∴', '⁂', '✶', '∴'],
+};
+
+// Colores por audioId — estable fuera del ciclo de render (para efectos de ambiente)
+const FLAVOR_COLORS = {
+  'magic-original': { color: '#AA37F2', accentColor: '#FF6AD7' },
+  'banana-drama':   { color: '#FFE066', accentColor: '#FF6AD7' },
+  'bubble-tape':    { color: '#FF6AD7', accentColor: '#82D2FF' },
+  'dragon-grape':   { color: '#9B4DCA', accentColor: '#FF6AD7' },
+  'sparkle-soda':   { color: '#82D2FF', accentColor: '#F9F871' },
+  'witchy-kiwi':    { color: '#7ED957', accentColor: '#98FFDE' },
+};
+
+// Índice fijo por sabor (no cambia con el idioma)
+const FLAVOR_INDEX = {
+  'magic-original': 0, 'banana-drama': 1, 'bubble-tape': 2,
+  'dragon-grape': 3,   'sparkle-soda': 4, 'witchy-kiwi': 5,
+};
+
 const IndexSeccion3 = () => {
   const ingles = useStore(isEnglish);
   const sectionRef = useRef(null);
   const triggerRef = useRef(null);
   const horizontalRef = useRef(null);
-  const { toggleFlavor, isFlavorPlaying, isPlaying } = useFlavorAudio();
+  const cardRefs = useRef([]);
+  const prevFlavorRef = useRef(null);
+  const [kiwiAfterglow, setKiwiAfterglow] = useState(false);
+  const { toggleFlavor, isFlavorPlaying, isPlaying, currentFlavor, progress, onFlavorEnded } = useFlavorAudio();
   
   const content = {
     es: {
@@ -184,6 +213,87 @@ const IndexSeccion3 = () => {
   
   const t = ingles ? content.en : content.es;
 
+  // Flavor activo — derivado del estado reactivo del hook de audio
+  const activeFlavor = (currentFlavor && isPlaying)
+    ? (t.flavors.find(f => f.audioId === currentFlavor) ?? null)
+    : null;
+
+  // GSAP: pop de activación cuando empieza a sonar un sabor
+  useEffect(() => {
+    if (!isPlaying || !currentFlavor) return;
+    if (currentFlavor === prevFlavorRef.current) return;
+    const idx = FLAVOR_INDEX[currentFlavor];
+    const card = cardRefs.current[idx];
+    if (card) {
+      gsap.fromTo(card,
+        { scale: 1 },
+        { scale: 1.04, duration: 0.14, yoyo: true, repeat: 1, ease: 'power2.out' }
+      );
+    }
+    prevFlavorRef.current = currentFlavor;
+  }, [currentFlavor, isPlaying]);
+
+  // Ambient screen glow: resplandor de color en los bordes de pantalla
+  useEffect(() => {
+    let el = document.getElementById('md-flavor-ambient');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'md-flavor-ambient';
+      Object.assign(el.style, {
+        position: 'fixed', inset: '0',
+        pointerEvents: 'none', zIndex: '9995',
+        transition: 'box-shadow 0.9s ease',
+      });
+      document.body.appendChild(el);
+    }
+    if (isPlaying && currentFlavor) {
+      const c = FLAVOR_COLORS[currentFlavor];
+      if (c) {
+        el.style.boxShadow = [
+          `inset 0 0 220px 60px ${c.color}40`,
+          `inset 0 0 80px 15px ${c.accentColor}28`,
+        ].join(', ');
+      }
+    } else {
+      el.style.boxShadow = 'none';
+    }
+    return () => {
+      const a = document.getElementById('md-flavor-ambient');
+      if (a) a.style.boxShadow = 'none';
+    };
+  }, [currentFlavor, isPlaying]);
+
+  // ✶ Kiwi Afterglow — Escuchar cuando Witchy Kiwi termina
+  useEffect(() => {
+    const unsubscribe = onFlavorEnded((endedFlavor) => {
+      if (endedFlavor === 'witchy-kiwi') {
+        setKiwiAfterglow(true);
+      }
+    });
+    return unsubscribe;
+  }, [onFlavorEnded]);
+
+  // ✶ Kiwi Afterglow — Animar overlay DESPUÉS de que React lo renderice
+  useEffect(() => {
+    if (!kiwiAfterglow) return;
+    // requestAnimationFrame para asegurar que el DOM está pintado
+    const rafId = requestAnimationFrame(() => {
+      const overlay = document.getElementById('kiwi-afterglow');
+      if (overlay) {
+        const tl = gsap.timeline();
+        tl.fromTo(overlay,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.8, ease: 'power2.inOut' }
+        )
+        .to(overlay, {
+          opacity: 0, duration: 1.5, ease: 'power2.in', delay: 2.5,
+          onComplete: () => setKiwiAfterglow(false)
+        });
+      }
+    });
+    return () => cancelAnimationFrame(rafId);
+  }, [kiwiAfterglow]);
+
   // GSAP ScrollTrigger - Scroll Horizontal
   useEffect(() => {
     const section = sectionRef.current;
@@ -298,7 +408,14 @@ const IndexSeccion3 = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className={styles.section}>
+    <section
+      ref={sectionRef}
+      className={`${styles.section} ${activeFlavor ? styles.sectionActive : ''}`}
+      style={activeFlavor ? {
+        '--active-color': activeFlavor.color,
+        '--active-accent': activeFlavor.accentColor,
+      } : undefined}
+    >
       {/* Fondo con orbes flotantes */}
     {/*   <div className={styles.backgroundOrbs}>
         <div className={styles.orb1}></div>
@@ -319,7 +436,12 @@ const IndexSeccion3 = () => {
               <p className={styles.introSubtitle}>{t.sectionSubtitle}</p>
               <div className={styles.scrollHint}>
                 <span>{ingles ? "Scroll to explore" : "Desliza para explorar"}</span>
-                <div className={styles.scrollArrow}>→</div>
+                <div
+                  className={styles.scrollArrow}
+                  style={activeFlavor ? {
+                    background: `linear-gradient(135deg, ${activeFlavor.color}, ${activeFlavor.accentColor})`
+                  } : undefined}
+                >→</div>
               </div>
             </div>
           </div>
@@ -328,8 +450,9 @@ const IndexSeccion3 = () => {
           {t.flavors.map((flavor, index) => {
             const playing = isFlavorPlaying(flavor.audioId);
             return (
-            <div 
-              key={index} 
+            <div
+              key={index}
+              ref={el => cardRefs.current[index] = el}
               className={`${styles.flavorCard} ${playing ? styles.flavorCardPlaying : ''}`}
               style={{
                 '--flavor-color': flavor.color,
@@ -346,7 +469,7 @@ const IndexSeccion3 = () => {
                 {/* Lado izquierdo - Info */}
                 <div className={styles.cardInfo}>
                   <span className={styles.flavorTagline}>{flavor.tagline}</span>
-                  <h3 className={styles.flavorName}>{flavor.name}</h3>
+                  <h3 className={`${styles.flavorName} ${playing ? styles.flavorNameActive : ''}`}>{flavor.name}</h3>
                   <p className={styles.flavorDescription}>{flavor.description}</p>
                   
                   {/* Play Button — Escucha el tono de este sabor */}
@@ -406,6 +529,10 @@ const IndexSeccion3 = () => {
                   <div className={styles.canContainer}>
                     {/* Glow de fondo */}
                     <div className={`${styles.canGlow} ${playing ? styles.canGlowPlaying : ''}`}></div>
+                    {/* Rayo de luz vertical cuando el sabor suena */}
+                    {playing && (
+                      <div className={styles.canBeam}></div>
+                    )}
                     {/* Ondas de sonido cuando está reproduciendo */}
                     {playing && (
                       <div className={styles.soundWaves} aria-hidden="true">
@@ -423,20 +550,34 @@ const IndexSeccion3 = () => {
                       alt={flavor.name}
                       className={`${styles.canImage} ${playing ? styles.canImagePlaying : ''}`}
                     />
-                    {/* Partículas */}
+                    {/* Partículas — símbolos únicos por sabor */}
                     <div className={styles.particles}>
-                      {[...Array(8)].map((_, i) => (
+                      {(FLAVOR_SYMBOLS[flavor.audioId] || []).map((sym, i) => (
                         <span 
                           key={i} 
                           className={styles.particle}
                           style={{ '--i': i }}
-                        >✦</span>
+                        >{sym}</span>
                       ))}
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* At mósfera: símbolos flotantes únicos por sabor */}
+              {playing && (
+                <div className={styles.flavorAtmosphere} aria-hidden="true">
+                  {(FLAVOR_SYMBOLS[flavor.audioId] || []).map((sym, i) => (
+                    <span
+                      key={i}
+                      className={styles.atmosphereSymbol}
+                      style={{ '--sym-i': i, color: flavor.color }}
+                    >
+                      {sym}
+                    </span>
+                  ))}
+                </div>
+              )}
               {/* Decoración de esquina */}
               <div className={styles.cornerDecor}>
                 <span>Magic Drink</span>
@@ -474,6 +615,62 @@ const IndexSeccion3 = () => {
           </div>
         </div>
       </div>
+
+      {/* Mini player fijo — visible desde cualquier posición de scroll */}
+      {activeFlavor && (
+        <div
+          className={styles.nowPlayingFixed}
+          style={{ '--dot-color': activeFlavor.color, '--dot-accent': activeFlavor.accentColor }}
+        >
+          {/* Barra de progreso circular / lineal */}
+          <div className={styles.nowPlayingProgress}>
+            <div 
+              className={styles.nowPlayingProgressBar} 
+              style={{ '--progress': `${(progress || 0) * 100}%` }}
+            />
+          </div>
+          <span className={styles.nowPlayingEq} aria-hidden="true">
+            <span className={styles.nowPlayingBar}></span>
+            <span className={styles.nowPlayingBar}></span>
+            <span className={styles.nowPlayingBar}></span>
+          </span>
+          <span className={styles.nowPlayingText}>
+            {ingles ? 'Now:' : 'Ahora:'}&nbsp;
+            <strong style={{ color: activeFlavor.color }}>{activeFlavor.name}</strong>
+          </span>
+          <button
+            className={styles.nowPlayingStop}
+            onClick={() => toggleFlavor(activeFlavor.audioId)}
+            aria-label={ingles ? 'Stop playing' : 'Parar'}
+          >✕</button>
+        </div>
+      )}
+
+      {/* ✶ Kiwi Afterglow — Overlay misterioso al terminar Witchy Kiwi */}
+      {kiwiAfterglow && (
+        <div id="kiwi-afterglow" className={styles.kiwiAfterglowOverlay}>
+          <div className={styles.kiwiAfterglowPulse}></div>
+          <div className={styles.kiwiAfterglowContent}>
+            <span className={styles.kiwiAfterglowSymbol}>✶</span>
+            <p className={styles.kiwiAfterglowMessage}>
+              {ingles ? 'Did you feel it?' : '¿Lo sentiste?'}
+            </p>
+            <span className={styles.kiwiAfterglowSubtext}>
+              {ingles ? 'Some things can\'t be explained...' : 'Hay cosas que no se explican...'}
+            </span>
+          </div>
+          {/* Símbolos dispersándose */}
+          <div className={styles.kiwiAfterglowSymbols} aria-hidden="true">
+            {['✶', '∴', '⁂', '✶', '∴', '⁂', '✶', '∴', '⁂', '✶', '∴', '⁂'].map((sym, i) => (
+              <span
+                key={i}
+                className={styles.kiwiScatterSymbol}
+                style={{ '--scatter-i': i }}
+              >{sym}</span>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 };

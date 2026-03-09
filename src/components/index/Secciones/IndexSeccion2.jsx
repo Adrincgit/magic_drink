@@ -21,31 +21,31 @@ const IndexSeccion2 = () => {
 
   const content = {
     es: {
-      tagline: "EL ORIGINAL • DESDE 2018",
+      tagline: "✦ LA #1 DEL MUNDO • DESDE 2018 ✦",
       brandMagic: "Magic",
       brandDrink: "Drink",
-      subtitle: "La bebida que conquistó el mundo",
-      description: "Sin cafeína. Sin secretos oscuros. Solo pura magia líquida que despierta tu mejor versión.",
+      subtitle: "Un sorbo y el mundo se siente diferente",
+      description: "Cero cafeína. Cero ingredientes artificiales. Y aun así, millones de personas juran que les cambia el día. La ciencia no lo explica del todo — pero tu sonrisa sí.",
       stats: [
-        { number: "147", suffix: "M", label: "Fans globales" },
-        { number: "89", suffix: "%", label: "Vuelven a comprar" },
-        { number: "6", suffix: "", label: "Sabores únicos" },
-        { number: "0", suffix: "mg", label: "Cafeína" }
+        { number: "820", suffix: "M+", label: "Latas vendidas al año" },
+        { number: "94", suffix: "%", label: "Repiten después del primer sorbo" },
+        { number: "53", suffix: "+", label: "Países conquistados" },
+        { number: "0", suffix: "mg", label: "Cafeína añadida" }
       ],
       cta: "Descubre los sabores",
       scrollHint: "Desliza para explorar"
     },
     en: {
-      tagline: "THE ORIGINAL • SINCE 2018",
+      tagline: "✦ WORLD'S #1 • SINCE 2018 ✦",
       brandMagic: "Magic",
       brandDrink: "Drink",
-      subtitle: "The drink that conquered the world",
-      description: "No caffeine. No dark secrets. Just pure liquid magic that awakens your best self.",
+      subtitle: "One sip and the world feels different",
+      description: "Zero caffeine. Zero artificial ingredients. And yet, millions swear it changes their entire day. Science can't fully explain it — but your smile does.",
       stats: [
-        { number: "147", suffix: "M", label: "Global fans" },
-        { number: "89", suffix: "%", label: "Buy again" },
-        { number: "6", suffix: "", label: "Unique flavors" },
-        { number: "0", suffix: "mg", label: "Caffeine" }
+        { number: "820", suffix: "M+", label: "Cans sold per year" },
+        { number: "94", suffix: "%", label: "Come back after first sip" },
+        { number: "53", suffix: "+", label: "Countries conquered" },
+        { number: "0", suffix: "mg", label: "Caffeine added" }
       ],
       cta: "Discover flavors",
       scrollHint: "Scroll to explore"

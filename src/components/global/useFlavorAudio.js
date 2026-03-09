@@ -2,11 +2,11 @@
  * useFlavorAudio — Hook global de audio para sabores Magic Drink
  * 
  * Maneja un solo <audio> global para que no suenen 2 loops a la vez.
- * Cada sabor tiene su propio loop asignado.
- * Incluye crossfade suave entre sabores y estado de "playing".
+ * Cada sabor tiene su propio loop asignado (excepto witchy-kiwi).
+ * Incluye crossfade suave entre sabores, estado de "playing",
+ * progreso de reproducción y callback cuando un track termina.
  * 
  * Rutas esperadas: /audio/loops/loop_{flavor}.mp3
- * Los loops deben ser archivos de 8-15s diseñados para repetir seamlessly.
  */
 
 import { useEffect, useRef, useState, useCallback } from 'react';
@@ -21,17 +21,47 @@ const FLAVOR_AUDIO_MAP = {
   'dragon-grape': '/audio/loops/loop_dragon.mp3',
 };
 
+// Sabores que NO hacen loop (se reproducen una sola vez)
+const NO_LOOP_FLAVORS = new Set(['witchy-kiwi']);
+
 // Singleton: una sola instancia de audio compartida entre todos los componentes
 let globalAudio = null;
 let globalCurrentFlavor = null;
 let globalIsPlaying = false;
+let globalProgress = 0;       // 0–1 progreso de reproducción
+let globalDuration = 0;       // duración total en segundos
 let globalListeners = new Set();
+let globalOnEndedCallbacks = new Set();
+let progressRAF = null;
 
 const notifyListeners = () => {
   globalListeners.forEach(fn => fn({
     currentFlavor: globalCurrentFlavor,
     isPlaying: globalIsPlaying,
+    progress: globalProgress,
+    duration: globalDuration,
   }));
+};
+
+// Actualiza el progreso continuamente mientras suena
+const startProgressTracking = () => {
+  const tick = () => {
+    if (globalAudio && globalIsPlaying && globalAudio.duration) {
+      globalProgress = globalAudio.currentTime / globalAudio.duration;
+      globalDuration = globalAudio.duration;
+      notifyListeners();
+    }
+    if (globalIsPlaying) {
+      progressRAF = requestAnimationFrame(tick);
+    }
+  };
+  cancelAnimationFrame(progressRAF);
+  progressRAF = requestAnimationFrame(tick);
+};
+
+const stopProgressTracking = () => {
+  cancelAnimationFrame(progressRAF);
+  progressRAF = null;
 };
 
 const getOrCreateAudio = () => {
@@ -40,6 +70,23 @@ const getOrCreateAudio = () => {
     globalAudio.loop = true;
     globalAudio.volume = 0;
     globalAudio.preload = 'none';
+
+    // Cuando un track termina naturalmente (solo NO_LOOP_FLAVORS)
+    globalAudio.addEventListener('ended', () => {
+      const endedFlavor = globalCurrentFlavor;
+      globalIsPlaying = false;
+      globalProgress = 1;
+      stopProgressTracking();
+      notifyListeners();
+      // Notificar callbacks registrados
+      if (endedFlavor) {
+        globalOnEndedCallbacks.forEach(fn => fn(endedFlavor));
+      }
+      // Reset después de notificar
+      globalCurrentFlavor = null;
+      globalProgress = 0;
+      notifyListeners();
+    });
   }
   return globalAudio;
 };
@@ -75,6 +122,8 @@ const useFlavorAudio = () => {
   const [state, setState] = useState({
     currentFlavor: globalCurrentFlavor,
     isPlaying: globalIsPlaying,
+    progress: globalProgress,
+    duration: globalDuration,
   });
 
   // Suscribirse a cambios globales
@@ -82,6 +131,15 @@ const useFlavorAudio = () => {
     const listener = (newState) => setState(newState);
     globalListeners.add(listener);
     return () => globalListeners.delete(listener);
+  }, []);
+
+  /**
+   * Registrar callback para cuando un track termina naturalmente
+   * (solo se dispara para sabores en NO_LOOP_FLAVORS)
+   */
+  const onFlavorEnded = useCallback((callback) => {
+    globalOnEndedCallbacks.add(callback);
+    return () => globalOnEndedCallbacks.delete(callback);
   }, []);
 
   /**
@@ -101,6 +159,7 @@ const useFlavorAudio = () => {
       await fadeAudio(audio, 0, 300);
       audio.pause();
       globalIsPlaying = false;
+      stopProgressTracking();
       notifyListeners();
       return;
     }
@@ -111,12 +170,17 @@ const useFlavorAudio = () => {
       if (globalIsPlaying) {
         await fadeAudio(audio, 0, 250);
         audio.pause();
+        stopProgressTracking();
       }
+
+      // Configurar loop según el sabor
+      audio.loop = !NO_LOOP_FLAVORS.has(flavorId);
 
       // Cargar el nuevo
       audio.src = audioSrc;
       audio.currentTime = 0;
       globalCurrentFlavor = flavorId;
+      globalProgress = 0;
     }
 
     // Play con fade in
@@ -124,11 +188,12 @@ const useFlavorAudio = () => {
       await audio.play();
       globalIsPlaying = true;
       notifyListeners();
+      startProgressTracking();
       await fadeAudio(audio, 0.65, 500);
     } catch (err) {
-      // Browser bloqueó autoplay — necesita interacción del usuario
       console.warn('[useFlavorAudio] Playback blocked:', err.message);
       globalIsPlaying = false;
+      stopProgressTracking();
       notifyListeners();
     }
   }, []);
@@ -143,6 +208,8 @@ const useFlavorAudio = () => {
       audio.pause();
       globalIsPlaying = false;
       globalCurrentFlavor = null;
+      globalProgress = 0;
+      stopProgressTracking();
       notifyListeners();
     }
   }, []);
@@ -157,9 +224,12 @@ const useFlavorAudio = () => {
   return {
     currentFlavor: state.currentFlavor,
     isPlaying: state.isPlaying,
+    progress: state.progress,
+    duration: state.duration,
     toggleFlavor,
     stopAll,
     isFlavorPlaying,
+    onFlavorEnded,
     FLAVOR_AUDIO_MAP,
   };
 };

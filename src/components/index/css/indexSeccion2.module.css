@@ -10,7 +10,7 @@
   min-height: 170vh;
   background: var(--md-gray-dark);
   overflow: hidden;
-  z-index: 2;
+  /* NO z-index aquí — el SplashCursor (fixed, hero z:1) debe verse a través del fondo */
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -88,7 +88,7 @@
   align-items: center;
   justify-content: center;
   padding: 120px 2rem 4rem;
-  z-index: 1;
+  z-index: 2; /* Contenido encima del SplashCursor (hero z:1) */
   gap: 2rem;
 }
 
@@ -132,6 +132,8 @@
   font-weight: 900;
   letter-spacing: -0.03em;
   color: var(--md-yellow);
+  -webkit-text-stroke: 15px #29130a;
+  paint-order: stroke fill;
   text-shadow: 
     0 0 60px rgba(249, 248, 113, 0.5),
     0 0 120px rgba(249, 248, 113, 0.3),
@@ -140,6 +142,7 @@
   flex-wrap: nowrap;
 }
 
+
 /* DRINK - Azul */
 .brandDrink {
   font-family: var(--em-font-headline) !important;
@@ -147,6 +150,8 @@
   font-weight: 900;
   letter-spacing: -0.03em;
   color: var(--md-blue);
+  -webkit-text-stroke: 15px #29130a;
+  paint-order: stroke fill;
   text-shadow: 
     0 0 60px rgba(130, 210, 255, 0.5),
     0 0 120px rgba(130, 210, 255, 0.3),

@@ -61,7 +61,7 @@ const IndexSeccion1 = () => {
           colorChangeSpeed={15}
           blurAmount={20}
           glowIntensity={0.6}
-          zIndex={1}
+          zIndex={-1}
         />
 
         {/* Imagen de Fondo con Efecto Spotlight */}
