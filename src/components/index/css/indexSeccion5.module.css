@@ -65,20 +65,22 @@
 }
 
 .titlePrefix,
-.titleSuffix {
-  color: #ffe100;
+.titleSuffix, .titleMagic, .titleDrink {
+   font-family: var(--em-font-headline) !important;
+   -webkit-text-stroke: 10px #29130a;
+   paint-order: stroke fill;
+  color: var(--md-yellow, #F9F871);
 }
 
 .titleMagic {
+  
   color: var(--md-yellow, #F9F871);
-  -webkit-text-stroke: 10px #29130a;
-  paint-order: stroke fill;
 }
 
 .titleDrink {
+  
   color: var(--md-blue, #82D2FF);
-  -webkit-text-stroke: 10px #29130a;
-  paint-order: stroke fill;
+
 }
 
 /* ═══════════════════════════════════════════════════════════════
