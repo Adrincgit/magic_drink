@@ -7,7 +7,7 @@
 .section {
   position: relative;
   width: 100%;
-  min-height: 170vh;
+  min-height: 150vh;
   background: var(--md-gray-dark);
   overflow: hidden;
   /* NO z-index aquí — el SplashCursor (fixed, hero z:1) debe verse a través del fondo */

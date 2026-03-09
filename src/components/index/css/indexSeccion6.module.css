@@ -75,6 +75,7 @@
   text-align: center;
   will-change: transform, opacity, filter;
   pointer-events: none;
+  width: 100vw;
 }
 
 .titleText {
@@ -155,7 +156,7 @@
    ═══════════════════════════════════════════════════════════════════ */
 .introContent {
   position: absolute;
-  bottom: 12%;
+  bottom: 4%;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
@@ -584,15 +585,15 @@
 .wonderpopImgGallery {
   display: flex;
   gap: 0.75rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   justify-content: center;
 }
 
 .wonderpopImg {
-  flex: 1;
+  flex: 0 1 auto;
   min-width: 0;
-  max-width: 200px;
-  height: 130px;
+  max-width: 160px;
+  height: 100px;
   object-fit: cover;
   border-radius: 12px;
   border: 1px solid rgba(255, 106, 215, 0.3);

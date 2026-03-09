@@ -22,14 +22,20 @@ const IndexSeccion5 = () => {
   
   const content = {
     es: {
-      title: "¡Día de la Magic Drink!",
+      titlePrefix: "¡Día de la ",
+      titleMagic: "Magic",
+      titleDrink: "Drink",
+      titleSuffix: "!",
       subtitle: "El festival mundial donde celebramos la bebida más querida del planeta.",
       body: "Cada año, millones de fans se reúnen para disfrutar desfiles llenos de color, globos gigantes, música de Hexy y momentos mágicos.",
       highlight: "Porque cuando compartes una Magic Drink, compartes felicidad.",
       cta: "Descubre más sobre el Magic Drink Day"
     },
     en: {
-      title: "Magic Drink Day!",
+      titlePrefix: "",
+      titleMagic: "Magic",
+      titleDrink: "Drink",
+      titleSuffix: " Day!",
       subtitle: "The worldwide festival celebrating the most beloved beverage on the planet.",
       body: "Every year, millions of fans gather to enjoy colorful parades, giant balloons, Hexy's music, and magical moments.",
       highlight: "Because when you share a Magic Drink, you share happiness.",
@@ -210,7 +216,13 @@ const IndexSeccion5 = () => {
       </div>
 
       <div ref={titleRef} className={styles.cinematicTitle}>
-        <h1 className={styles.titleText}>{t.title}</h1>
+        <h1 className={styles.titleText}>
+          {t.titlePrefix && <span className={styles.titlePrefix}>{t.titlePrefix}</span>}
+          <span className={styles.titleMagic}>{t.titleMagic}</span>
+          {" "}
+          <span className={styles.titleDrink}>{t.titleDrink}</span>
+          <span className={styles.titleSuffix}>{t.titleSuffix}</span>
+        </h1>
       </div>
 
       <div ref={imageWrapperRef} className={styles.cinematicImageWrapper}>

@@ -178,7 +178,7 @@ const IndexSeccion6 = () => {
           // FASE 2: TÍTULO SE REDUCE Y SUBE (10% - 15%)
           // ═══════════════════════════════════════════════════════════
           tl.to(title,
-            { scale: 0.35, y: "-38vh", duration: 0.05, ease: "power2.inOut" },
+            { scale: 0.35, y: "-30vh", duration: 0.05, ease: "power2.inOut" },
             0.10
           );
 

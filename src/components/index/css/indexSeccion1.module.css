@@ -276,6 +276,7 @@
   opacity: 0;
   transform: translateY(30px) scale(0.95);
   animation: magicAppear 1.2s var(--em-ease-smooth) 0.3s forwards;
+  -webkit-text-stroke: 2px #29130a;
 }
 
 .titleLine {
