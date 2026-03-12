@@ -27,6 +27,46 @@
   transform: rotate(180deg);
 }
 
+/* reusable wave svg sizing */
+.wavySvg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 120px;
+}
+
+.wavySvgDesktop {
+  display: block;
+}
+
+.wavySvgMobile {
+  display: none;
+}
+
+/* section-specific waves */
+.sectionWavyTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 3;
+}
+
+.sectionWavyBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 3;
+  transform: rotate(180deg);
+}
+
 .wavySvg {
   position: relative;
   display: block;

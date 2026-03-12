@@ -109,6 +109,9 @@ const IndexSeccion6 = () => {
     let rafId;
 
     const initCinematicTimeline = () => {
+      // grab original body background so we can restore it
+      const originalBodyBg = document.body.style.background;
+
       const waitForVideo = new Promise((resolve) => {
         if (video.readyState >= 2) {
           resolve();
@@ -134,6 +137,10 @@ const IndexSeccion6 = () => {
               pin: true,
               scrub: 0.8,
               anticipatePin: 1,
+              onEnter: () => { document.body.style.background = 'var(--md-gray-dark)'; },
+              onLeave: () => { document.body.style.background = originalBodyBg; },
+              onEnterBack: () => { document.body.style.background = 'var(--md-gray-dark)'; },
+              onLeaveBack: () => { document.body.style.background = originalBodyBg; },
               onUpdate: (self) => {
                 const progress = self.progress;
                 

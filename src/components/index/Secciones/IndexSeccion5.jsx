@@ -78,6 +78,7 @@ const IndexSeccion5 = () => {
         ctx = gsap.context(() => {
           
           // 🎯 TIMELINE PRINCIPAL - Reducido a 300% para evitar solapamiento
+          const originalBodyBg = document.body.style.background;
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: section,
@@ -86,6 +87,10 @@ const IndexSeccion5 = () => {
               pin: true,
               scrub: 0.5, // Más suave
               anticipatePin: 1,
+              onEnter: () => { document.body.style.background = 'var(--md-gray-dark)'; },
+              onLeave: () => { document.body.style.background = originalBodyBg; },
+              onEnterBack: () => { document.body.style.background = 'var(--md-gray-dark)'; },
+              onLeaveBack: () => { document.body.style.background = originalBodyBg; },
               onUpdate: (self) => {
                 const progress = self.progress;
                 

@@ -1,0 +1,97 @@
+/* ========================================
+   INDEX SECCION 8 - PREGUNTAS & RESPUESTAS
+   Magic Drink - Kawaii Cosmic Refresh
+   ======================================== */
+
+.section {
+  position: relative;
+  min-height: 70vh;
+  padding: clamp(80px, 12vw, 100px) clamp(16px, 6vw, 80px);
+    background: var(--md-gray-dark);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionLight {
+  background: linear-gradient(
+    180deg,
+    #E8D4FF 0%,
+    #C4AAFF 100%
+  );
+}
+
+.header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--em-space-3xl) auto;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-family: var(--em-font-headline);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  color: var(--md-white);
+  text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  margin: 0;
+}
+
+.qaList {
+  width: 100%;
+  max-width: 900px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--em-space-lg);
+}
+
+.qaItem {
+  background: var(--md-white);
+  border-radius: var(--em-radius-lg);
+  padding: var(--em-space-lg) var(--em-space-xl);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.qaItem:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.question {
+  font-family: var(--em-font-headline);
+  font-size: clamp(18px, 2.2vw, 22px);
+  color: var(--md-purple-dark);
+}
+
+.answer {
+  margin-top: var(--em-space-sm);
+  font-family: var(--em-font-body);
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: #333;
+  line-height: 1.6;
+}
+
+.open .answer {
+  display: block;
+}
+
+.open {
+  background: linear-gradient(135deg, var(--md-pink), var(--md-blue));
+  color: var(--md-white);
+}
+
+.open .question {
+  color: var(--md-white);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .qaItem {
+    padding: var(--em-space-lg);
+  }
+}

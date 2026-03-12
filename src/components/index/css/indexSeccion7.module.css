@@ -3,6 +3,46 @@
    Magic Drink - Kawaii Cosmic Refresh
    ======================================== */
 
+/* Wavy section borders (top & bottom) */
+.sectionWavyTop,
+.sectionWavyBottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 3;
+  /* ambos flippeds verticalmente para que las crestas miren hacia arriba */
+  transform: rotate(180deg);
+}
+
+.sectionWavyTop {
+  top: 0;
+}
+
+.sectionWavyBottom {
+  bottom: 0;
+  /* además de la rotación compartida, damos un flip vertical */
+  transform: rotate(180deg) scaleY(-1);
+}
+
+/* reuse wavy svg sizing rules */
+.wavySvg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 120px;
+}
+
+.wavySvgDesktop {
+  display: block;
+}
+
+.wavySvgMobile {
+  display: none;
+}
+
 /* ========== Sección Principal ========== */
 .section {
   position: relative;

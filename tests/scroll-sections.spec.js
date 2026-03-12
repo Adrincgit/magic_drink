@@ -16,6 +16,9 @@ test.describe('Magic Drink - Test de scroll entre secciones', () => {
   // TEST 1: Scroll completo sin errores de consola
   // ─────────────────────────────────────────────────────────────
   test('Scroll completo - sin errores JS críticos', async ({ page }) => {
+    /**
+     * @type {string[]}
+     */
     const consoleErrors = [];
 
     // Capturar errores de consola
@@ -107,6 +110,7 @@ test.describe('Magic Drink - Test de scroll entre secciones', () => {
         return active;
       });
 
+      // @ts-ignore
       scrollLog.push({ targetY, currentScrollY, section: viewportContent?.substring(0, 60) });
 
       // Detectar salto: si el scroll visible "retrocede" más de 200px de golpe
@@ -172,6 +176,7 @@ test.describe('Magic Drink - Test de scroll entre secciones', () => {
       { name: '12_seccion7_inicio', y: viewportHeight * 15 },
       { name: '13_seccion7_cards', y: viewportHeight * 16 },
       { name: '14_final', y: pageHeight - viewportHeight },
+      { name: '15_seccion8_inicio', y: viewportHeight * 17 },
     ];
 
     // Asegurar carpeta
