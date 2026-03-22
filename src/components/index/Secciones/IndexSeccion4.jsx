@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { isEnglish } from '../../../data/variables';
 import styles from '../css/indexSeccion4.module.css';
@@ -21,6 +21,13 @@ const IndexSeccion4 = () => {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
   const panelsRef = useRef([]);
+
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 900);
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 900);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
   const content = {
     es: {
@@ -441,7 +448,7 @@ const IndexSeccion4 = () => {
         <CurvedLoop
           marqueeText={ingles ? "MUSIC & FLAVOR  ♫  FEEL THE MAGIC  ♪ " : "MUSICA Y SABOR  ♫  SIENTE LA MAGIA  ♪ "}
           speed={1.5}
-          curveAmount={250}
+          curveAmount={isMobile ? 30 : 250}
           direction="left"
           interactive={false}
           className={styles.curvedLoopText}

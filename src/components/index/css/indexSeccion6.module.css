@@ -700,3 +700,16 @@
   gap: 0.75rem;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Anular opacity:0 GSAP-desktop en el render móvil estático
+───────────────────────────────────────────────────────────── */
+.wonderpopMobileSection .highlightItem {
+  opacity: 1;
+}
+
+.wonderpopMobileSection .ctaWrapper {
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+}
+

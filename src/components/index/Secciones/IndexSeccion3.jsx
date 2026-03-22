@@ -44,6 +44,12 @@ const IndexSeccion3 = () => {
   const cardRefs = useRef([]);
   const prevFlavorRef = useRef(null);
   const [kiwiAfterglow, setKiwiAfterglow] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 900);
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 900);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
   const { toggleFlavor, isFlavorPlaying, isPlaying, currentFlavor, progress, onFlavorEnded } = useFlavorAudio();
   
   const content = {
@@ -300,6 +306,13 @@ const IndexSeccion3 = () => {
     const horizontal = horizontalRef.current;
     const trigger = triggerRef.current;
     
+    // En móvil ≤ 900px: deshabilitar GSAP pin para evitar spacer y gap
+    if (isMobile) {
+      if (section) section.style.minHeight = '';
+      if (horizontal) horizontal.style.transform = '';
+      return;
+    }
+
     if (!section || !horizontal || !trigger) return;
 
     let ctx;
@@ -405,7 +418,7 @@ const IndexSeccion3 = () => {
       if (rafId) cancelAnimationFrame(rafId);
       if (ctx) ctx.revert();
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <section

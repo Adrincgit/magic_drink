@@ -554,6 +554,7 @@
     flex-direction: column;
     width: 100%;
     gap: var(--em-space-sm);
+    padding: 0;
   }
 
   .scrollIndicator {
@@ -609,6 +610,8 @@
 
   .heroContent {
     padding: var(--em-space-lg) var(--em-space-sm);
+    padding-top: 5rem; /* Garantizar que el título no quede bajo el Navbar */
+    justify-content: flex-start;
   }
 
   .heroSubtitle {

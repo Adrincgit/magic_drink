@@ -819,7 +819,7 @@
 ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .container {
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 2fr 3fr;
     gap: 2rem;
     padding: 0 1.5rem;
   }

@@ -723,15 +723,17 @@
 @media (max-width: 1024px) {
   .flavorCard {
     width: 95vw;
-    height: 80vh;
+    height: 80svh;
     margin: 0 2vw;
   }
 
   .cardContent {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    gap: 2rem;
+    grid-template-rows: auto auto; /* auto/auto en vez de auto/1fr para no sobre-estirar */
+    gap: 1.5rem;
     padding: 2rem;
+    height: auto; /* Override height:100% en modo columna */
+    align-content: center;
   }
 
   .cardInfo {
@@ -745,7 +747,7 @@
   }
 
   .canContainer {
-    max-width: 250px;
+    max-width: 220px;
   }
 
   .flavorStats {
@@ -760,11 +762,35 @@
   }
 }
 
+/* Mobile intermedio (≤ 900px) — coincide con el umbral isMobile del JS
+   Garantiza layout vertical cuando GSAP está desactivado pero 768px < ancho ≤ 900px */
+@media (max-width: 900px) {
+  .horizontalTrigger {
+    height: auto;
+    overflow: visible;
+  }
+
+  .horizontalTrack {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    padding: 0.5rem;
+    align-items: center;
+  }
+
+  .introPanel,
+  .endPanel {
+    width: 100%;
+    height: auto;
+    min-height: unset;
+  }
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .horizontalTrigger {
     height: auto;
-    min-height: 100vh;
+    min-height: 100svh;
   }
 
   .horizontalTrack {
@@ -775,44 +801,70 @@
 
   .introPanel,
   .endPanel {
-    min-height: 60vh;
+    min-height: 60svh;
     height: auto;
     padding: 4rem 1.5rem;
   }
 
   .flavorCard {
     width: calc(100% - 2rem);
+    /* Sin min-height fijo: el contenido dicta la altura */
     height: auto;
-    min-height: 80vh;
+    min-height: 0;
     margin: 1rem;
     border-radius: 24px;
+    /* overflow:hidden se mantiene para el border-radius y pseudo-elementos */
+    overflow: hidden;
   }
 
   .cardContent {
+    /* Override height: 100% del desktop — en móvil el contenido dicta */
+    height: auto;
     padding: 1.5rem;
-    gap: 1.5rem;
+    gap: 1rem;
+    /* Sin grid-template-rows heredada del tablet */
+    grid-template-rows: auto auto;
+  }
+
+  .cardInfo {
+    gap: 0.75rem;
   }
 
   .flavorName {
-    font-size: 2rem;
+    font-size: 1.9rem;
   }
 
   .flavorDescription {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
+  /* Lata más pequeña en móvil para que no acapare el espacio vertical */
   .canContainer {
-    max-width: 200px;
+    max-width: 150px;
+    width: 150px;
+    height: 150px;
+    aspect-ratio: unset;
   }
 
   .canImage {
-    width: 80%;
-    max-width: 180px;
+    width: 75%;
+    max-width: 120px;
   }
 
   .flavorStats {
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+  }
+
+  .statLabel {
+    font-size: 0.7rem;
+  }
+
+  .statValue {
+    font-size: 1.05rem;
   }
 
   .flavorNumber {
@@ -848,31 +900,75 @@
   }
 }
 
-/* Small Mobile */
+/* Small Mobile (≤ 480px — gama baja como Samsung A12) */
 @media (max-width: 480px) {
   .flavorCard {
     border-radius: 20px;
-    min-height: 70vh;
+    /* Sin min-height: el contenido define la altura */
+    min-height: 0;
+    margin: 0.75rem;
   }
 
   .cardContent {
-    padding: 1rem;
+    padding: 1.25rem;
+    gap: 0.75rem;
   }
 
   .flavorTagline {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
   }
 
   .flavorName {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
   }
 
+  .flavorDescription {
+    font-size: 0.85rem;
+    /* Limitar a 3 líneas para no empujar los stats */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Lata aún más compacta en pantallas muy pequeñas */
   .canContainer {
-    max-width: 160px;
+    max-width: 120px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .canImage {
+    max-width: 100px;
+  }
+
+  .canGlow {
+    filter: blur(30px);
+  }
+
+  .flavorStats {
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .statLabel {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+
+  .statValue {
+    font-size: 1rem;
   }
 
   .endTitle {
     font-size: 1.75rem;
+  }
+
+  .playButton {
+    font-size: 0.75rem;
+    padding: 0.45rem 0.9rem;
   }
 }
 
