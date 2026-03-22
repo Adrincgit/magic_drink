@@ -743,3 +743,72 @@
     opacity: 0.12;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYOUT MÓVIL — Sin GSAP/pin, todo el contenido visible
+   Se activa para ≤ 900px desde JavaScript (isMobile)
+═══════════════════════════════════════════════════════════════ */
+.mobileCinematicSection {
+  position: relative;
+  width: 100%;
+  min-height: 100svh; /* svh: excluye la barra del browser en móvil */
+  background: var(--md-gray-dark, #2C2633);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Vídeo de fondo en loop */
+.mobileBgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+/* Overlay oscuro para legibilidad del texto */
+.mobileOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(44, 38, 51, 0.35) 0%,
+    rgba(44, 38, 51, 0.65) 60%,
+    rgba(44, 38, 51, 0.88) 100%
+  );
+}
+
+/* Contenedor de texto centrado */
+.mobileContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5rem 1.5rem 4rem;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+/* Título móvil */
+.mobileTitleText {
+  font-family: 'BakeSoda', 'Syne', sans-serif;
+  font-size: clamp(3rem, 14vw, 5.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  margin: 0 0 0.5rem;
+  text-shadow:
+    0 0 40px rgba(255, 106, 215, 0.7),
+    0 4px 20px rgba(0, 0, 0, 0.9);
+  -webkit-text-stroke: 5px #29130a;
+  paint-order: stroke fill;
+  color: var(--md-yellow, #F9F871);
+}

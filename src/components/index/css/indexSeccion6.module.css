@@ -617,3 +617,86 @@
     height: 90px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYOUT MÓVIL — Sin GSAP/pin, flujo normal de página
+   Se activa para ≤ 900px desde JavaScript (isMobile)
+═══════════════════════════════════════════════════════════════ */
+.wonderpopMobileSection {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  background: var(--md-gray-dark, #2C2633);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding-bottom: 3rem;
+}
+
+/* Título hero en móvil — flujo normal */
+.mobileHeroTitle {
+  width: 100%;
+  text-align: center;
+  padding: 4.5rem 1rem 1.5rem;
+  z-index: 2;
+  position: relative;
+}
+
+/* Vídeo en móvil — tamaño normal, no fullscreen */
+.mobileVideoWrapper {
+  position: relative;
+  width: 90%;
+  max-width: 480px;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 2;
+  margin-bottom: 1.5rem;
+  border: 2px solid rgba(255, 106, 215, 0.4);
+  box-shadow: 0 8px 30px rgba(170, 55, 242, 0.3);
+}
+
+/* Intro content en móvil — flujo normal */
+.mobileIntroContent {
+  width: 90%;
+  max-width: 480px;
+  text-align: center;
+  z-index: 2;
+  margin-bottom: 1.5rem;
+}
+
+/* Highlights en móvil — flujo normal */
+.mobileHighlightsContainer {
+  width: 90%;
+  max-width: 480px;
+  z-index: 2;
+  margin-bottom: 2rem;
+}
+
+/* Stats en móvil — flujo normal */
+.mobileStatsContainer {
+  width: 90%;
+  max-width: 480px;
+  z-index: 2;
+  text-align: center;
+  padding: 0 0 1rem;
+}
+
+/* En la sección móvil los highlights NO son absolutos */
+.wonderpopMobileSection .highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 1.5rem;
+}
+
+/* Stats grid 2 columnas en móvil */
+.wonderpopMobileSection .statsGrid {
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+

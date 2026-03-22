@@ -10,6 +10,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const detectMobile = () => typeof window !== 'undefined' && window.innerWidth <= 900;
+
 const IndexSeccion6 = () => {
   const ingles = useStore(isEnglish);
   
@@ -89,6 +91,14 @@ const IndexSeccion6 = () => {
   // Ref para evitar que statsVisible en el dep array destruya el ScrollTrigger
   const statsVisibleRef = useRef(false);
 
+  // Detección móvil
+  const [isMobile, setIsMobile] = useState(detectMobile);
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 900);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
   // ═══════════════════════════════════════════════════════════════
   // TIMELINE CINEMÁTICO - Contenido en racimos/fases
   // ═══════════════════════════════════════════════════════════════
@@ -103,15 +113,12 @@ const IndexSeccion6 = () => {
     const cta = ctaRef.current;
     const statsContainer = statsContainerRef.current;
 
-    if (!section || !video || !title) return;
+    if (isMobile || !section || !video || !title) return;
 
     let ctx;
     let rafId;
 
     const initCinematicTimeline = () => {
-      // grab original body background so we can restore it
-      const originalBodyBg = document.body.style.background;
-
       const waitForVideo = new Promise((resolve) => {
         if (video.readyState >= 2) {
           resolve();
@@ -137,10 +144,11 @@ const IndexSeccion6 = () => {
               pin: true,
               scrub: 0.8,
               anticipatePin: 1,
-              onEnter: () => { document.body.style.background = 'var(--md-gray-dark)'; },
-              onLeave: () => { document.body.style.background = originalBodyBg; },
-              onEnterBack: () => { document.body.style.background = 'var(--md-gray-dark)'; },
-              onLeaveBack: () => { document.body.style.background = originalBodyBg; },
+              // No tocar document.body.style — el layout tiene background fijo
+              onEnter: () => {},
+              onLeave: () => {},
+              onEnterBack: () => {},
+              onLeaveBack: () => {},
               onUpdate: (self) => {
                 const progress = self.progress;
                 
@@ -300,11 +308,108 @@ const IndexSeccion6 = () => {
       if (rafId) cancelAnimationFrame(rafId);
       if (ctx) ctx.revert();
     };
-  }, []); // Sin statsVisible en deps - evita destruir el PIN al activar CountUp
+  }, [isMobile]); // Re-init si cambia móvil/desktop
 
   // ═══════════════════════════════════════════════════════════════
   // RENDER
   // ═══════════════════════════════════════════════════════════════
+
+  /* ─── RENDER MÓVIL — layout estático sin GSAP/pin ─── */
+  if (isMobile) {
+    return (
+      <section className={styles.wonderpopMobileSection}>
+        <div className={styles.darkBackground}></div>
+
+        {/* Título */}
+        <div className={styles.mobileHeroTitle}>
+          <h2 className={styles.titleText}>
+            <GradientText
+              colors={['#FF6AD7', '#AA37F2', '#82D2FF', '#F9F871', '#FF6AD7']}
+              animationSpeed={6}
+              className={styles.gradientTitle}
+            >
+              ✦ {t.title} ✦
+            </GradientText>
+          </h2>
+          <p className={styles.tagline}>{t.tagline}</p>
+        </div>
+
+        {/* Vídeo en loop (no scrubbing) */}
+        <div className={styles.mobileVideoWrapper}>
+          <video
+            className={styles.video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/image/wonderpop/wonderpop-poster.png"
+          >
+            <source src="/videos/wonderpop.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        {/* Intro content */}
+        <div className={styles.mobileIntroContent}>
+          <h3 className={styles.subtitle}>{t.subtitle}</h3>
+          <p className={styles.description}>{t.description}</p>
+          <div className={styles.wonderpopImgGallery}>
+            <img src="/image/wonderpop/wonderpop-exterior.png" alt="" className={styles.wonderpopImg} onError={(e) => { e.target.style.display = 'none'; }} />
+            <img src="/image/wonderpop/wonderpop-interior.png" alt="" className={styles.wonderpopImg} onError={(e) => { e.target.style.display = 'none'; }} />
+          </div>
+        </div>
+
+        {/* Highlights */}
+        <div className={styles.mobileHighlightsContainer}>
+          <h4 className={styles.highlightsTitle}>{t.highlightsTitle}</h4>
+          <ul className={styles.highlights}>
+            {t.highlights.map((item, index) => (
+              <li key={index} className={styles.highlightItem}>
+                <div className={styles.iconWrapper}>
+                  <img src={item.icon} alt="" className={styles.icon} loading="lazy" />
+                </div>
+                <span className={styles.highlightText}>{item.text}</span>
+              </li>
+            ))}
+          </ul>
+          <div className={styles.ctaWrapper}>
+            <Button
+              href="/wonderpop"
+              textEs={content.es.cta}
+              textEn={content.en.cta}
+              variant="magic"
+              size="lg"
+              showArrow={true}
+            />
+          </div>
+        </div>
+
+        {/* Stats siempre visibles en móvil */}
+        <div className={styles.mobileStatsContainer}>
+          <h3 className={styles.statsTitle}>
+            <GradientText colors={['#FF6AD7', '#AA37F2', '#82D2FF']} animationSpeed={4}>
+              {t.statsTitle}
+            </GradientText>
+          </h3>
+          <div className={styles.statsGrid}>
+            {t.stats.map((stat, index) => (
+              <div key={index} className={styles.statCard}>
+                <div className={styles.statNumber}>
+                  <CountUp to={stat.value} from={0} duration={2} delay={index * 0.15} separator="," />
+                  {stat.suffix}
+                  {stat.hasStar && <span className={styles.starIcon}>★</span>}
+                </div>
+                <div className={styles.statLabel}>{stat.label}</div>
+                <div className={styles.statIcon}>{stat.icon}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  /* ─── RENDER DESKTOP (GSAP Cinematic) ─── */
   return (
     <section ref={sectionRef} className={styles.wonderpopSection}>
       {/* Fondo sólido */}

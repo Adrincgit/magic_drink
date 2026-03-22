@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { isEnglish, isDarkMode } from '../../../data/variables';
 import Button from '../../global/Button';
@@ -8,10 +8,20 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Detecta móvil una sola vez al montar (sin flash: lazy initializer)
+const detectMobile = () => typeof window !== 'undefined' && window.innerWidth <= 900;
+
 const IndexSeccion5 = () => {
   const ingles = useStore(isEnglish);
   const darkMode = useStore(isDarkMode);
-  
+  const [isMobile, setIsMobile] = useState(detectMobile);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 900);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const imageWrapperRef = useRef(null);
@@ -55,7 +65,7 @@ const IndexSeccion5 = () => {
     const subtitles = subtitlesRef.current;
     const finalSubtitles = finalSubtitlesRef.current;
     
-    if (!section || !title || !imageWrapper || !video) return;
+    if (isMobile || !section || !title || !imageWrapper || !video) return;
 
     let ctx;
     let rafId;
@@ -78,19 +88,19 @@ const IndexSeccion5 = () => {
         ctx = gsap.context(() => {
           
           // 🎯 TIMELINE PRINCIPAL - Reducido a 300% para evitar solapamiento
-          const originalBodyBg = document.body.style.background;
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: section,
               start: "top top",
-              end: "+=300%", // Reducido de 400%
+              end: "+=300%",
               pin: true,
-              scrub: 0.5, // Más suave
+              scrub: 0.5,
               anticipatePin: 1,
-              onEnter: () => { document.body.style.background = 'var(--md-gray-dark)'; },
-              onLeave: () => { document.body.style.background = originalBodyBg; },
-              onEnterBack: () => { document.body.style.background = 'var(--md-gray-dark)'; },
-              onLeaveBack: () => { document.body.style.background = originalBodyBg; },
+              // No tocar document.body.style porque el layout tiene background fijo
+              onEnter: () => {},
+              onLeave: () => {},
+              onEnterBack: () => {},
+              onLeaveBack: () => {},
               onUpdate: (self) => {
                 const progress = self.progress;
                 
@@ -195,8 +205,56 @@ const IndexSeccion5 = () => {
       if (rafId) cancelAnimationFrame(rafId);
       if (ctx) ctx.revert();
     };
-  }, []);
-  
+  }, [isMobile]);
+
+  /* ═══════════════════════════════════════════════════════════════
+     RENDER MÓVIL — Layout estático sin GSAP/pin
+     Para dispositivos ≤ 900px: vídeo en loop + todo el contenido visible
+  ═══════════════════════════════════════════════════════════════ */
+  if (isMobile) {
+    return (
+      <section className={styles.mobileCinematicSection}>
+        {/* Vídeo de fondo en loop */}
+        <video
+          className={styles.mobileBgVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          <source src="/videos/parade2.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay oscuro para legibilidad */}
+        <div className={styles.mobileOverlay}></div>
+
+        <div className={styles.mobileContent}>
+          <h1 className={styles.mobileTitleText}>
+            {t.titlePrefix && <span className={styles.titlePrefix}>{t.titlePrefix}</span>}
+            <span className={styles.titleMagic}>{t.titleMagic}</span>
+            {' '}
+            <span className={styles.titleDrink}>{t.titleDrink}</span>
+            <span className={styles.titleSuffix}>{t.titleSuffix}</span>
+          </h1>
+          <h3 className={styles.subtitleText}>{t.subtitle}</h3>
+          <p className={styles.bodyText}>{t.body}</p>
+          <p className={styles.highlightText}>{t.highlight}</p>
+          <div className={styles.ctaBox}>
+            <Button
+              variant="magic"
+              href="/magicdrinkday"
+              textEs={t.cta}
+              textEn={t.cta}
+              size="lg"
+              showArrow={true}
+            />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  /* ─── RENDER DESKTOP (GSAP Cinematic) ─── */
   return (
     <section 
       ref={sectionRef}
