@@ -3,6 +3,82 @@
 *(Versión Alpha / v0 del Portal Oficial)*  
 
 ---
+
+# 🛠️ Entorno Técnico
+
+## Comandos
+
+```bash
+npm run dev      # Servidor de desarrollo (Astro)
+npm run build    # astro check && astro build (verifica tipos + genera dist/)
+npm run preview  # Sirve dist/ localmente
+```
+
+> Siempre verificar con `npm run build` tras cambios — debe terminar con `[build] Complete!` y 0 errores.
+
+## Stack
+- **Astro 5 + React 18** — todas las secciones son `client:only` (sin SSR)
+- **GSAP + ScrollTrigger** — animaciones scroll en `index`; desactivado en móvil (≤900px)
+- **CSS Modules + Tailwind** — estilos prioritarios en Modules, Tailwind solo para utilidades puntuales
+- **nanostores** — estado global: `isEnglish`, `isDarkMode` en `src/data/variables.js`
+
+## Patrón de sección React
+
+Cada sección importa estilos, estado global e i18n inline:
+
+```jsx
+import { useStore } from '@nanostores/react';
+import { isEnglish } from '../../../data/variables';
+import styles from '../css/indexSeccionN.module.css';
+
+const content = { es: { title: '...' }, en: { title: '...' } };
+
+export default function IndexSeccionN() {
+  const ingles = useStore(isEnglish);
+  const t = ingles ? content.en : content.es;
+  return <section className={styles.sectionName}>...</section>;
+}
+```
+
+> ⚠️ **NO** usar `src/data/translations.js` para contenido de Magic Drink — ese archivo pertenece a otro proyecto (Adrinc/EnergyMedia). El i18n de Magic Drink va **inline** dentro de cada componente.
+
+## Patrón GSAP mobile (≤900px)
+
+En secciones con GSAP, detectar `isMobile` para renderizar layout estático:
+
+```jsx
+const [isMobile, setIsMobile] = useState(() => 
+  typeof window !== 'undefined' && window.innerWidth <= 900
+);
+useEffect(() => {
+  const onResize = () => setIsMobile(window.innerWidth <= 900);
+  window.addEventListener('resize', onResize);
+  return () => window.removeEventListener('resize', onResize);
+}, []);
+
+// En el GSAP useEffect:
+if (isMobile) {
+  // limpiar estilos inline y salir
+  return;
+}
+```
+
+El CSS debe tener breakpoint `@media (max-width: 900px)` para el layout vertical (además del `@media (max-width: 768px)` de mobile).
+
+## Variables CSS globales
+
+Definidas en `src/styles/global.css`. Todas las variables `--md-*` (paleta) son accesibles en cualquier CSS Module.
+
+## Pitfalls conocidos
+
+- `ViewTransitions` está **comentado** en `LayoutBasic.astro` → no funcional en alpha
+- `src/data/translations.js` es de otro proyecto → no usarlo para copy de Magic Drink
+- `Layout.astro` existe pero **no se usa** → siempre usar `LayoutBasic.astro`
+- Las páginas `bebidas`, `hexy`, `merch`, `magicdrinkday`, `wonderpop` **no existen aún** (solo `index`, `contacto`, `404`)
+- Los porcentajes `%` en `grid-template-columns` + `gap` causan overflow — usar unidades `fr`
+
+---
+
 # 🟣 Descripción de la Magic Drink
 
 Magic Drink es una bebida moderna que, en el mundo real, se ha convertido en un fenómeno global. Superó a todas las sodas tradicionales no por ser más agresiva o dañina, sino por lo contrario: es extremadamente adictiva a nivel sensorial, pero no contiene cafeína ni sustancias perjudiciales para la salud. Esto la volvió un caso único y desconcertante para la industria.
@@ -127,10 +203,11 @@ Este es el portal web oficial de **Magic Drink**, la bebida más popular del mun
 Es un sitio corporativo moderno, kawaii, vibrante y construido con:
 
 - **Astro 5 + React 18**  
-- Arquitectura SSG + islas de interactividad  
+- Arquitectura SSG + islas de interactividad (`client:only`)  
 - Sistema híbrido de **Tailwind CSS + CSS Modules**  
-- En el futuro: animaciones con **GSAP**, **Rive** y **Three.js**  
-- En la versión **ALPHA (v0)**: solo estructura, UI y contenido estático, sin animaciones avanzadas
+- **GSAP + ScrollTrigger** implementado en secciones de `index` (con patrón mobile ≤900px)  
+- **Rive** y **Three.js** instalados, aún sin implementar en páginas  
+- En la versión **ALPHA (v0)**: `index` y `contacto` completas; resto de páginas pendientes
 
 La web presenta:
 
@@ -263,54 +340,58 @@ El contenido DEBE cumplir:
 
 # 🧃 Componentes Globales
 
-Ubicación:  
-`src/components/global/`
+Ubicación: `src/components/global/`  
+NavBar en: `src/components/react_components/NavBar.jsx` (montado en `LayoutBasic.astro` via `RouterLinks.jsx`)
 
-Incluye:
+**Existentes actualmente:**
 
-- NavBar.jsx  
-- FootNetHive.jsx (Footer oficial con íconos reales)
-- ButtonPrimary.jsx  
-- ButtonSecondary.jsx  
-- MagicCard.jsx  
-- TestimonialCard.jsx  
-- SectionWrapper.jsx  
-- AudioPlayer.jsx  
+- `Button.jsx` — botón genérico
+- `CinematicSection.jsx` + `cinematicSection.module.css` — sección de video cinemático con pin GSAP
+- `CtaCard.jsx` — tarjeta call-to-action
+- `FootNetHive.jsx` — Footer oficial con íconos SVG/PNG reales
+- `MetricBadge.jsx` — badge de métrica/estadística
+- `PremiumCTA.jsx` — CTA estilo premium
+- `SectionTitle.jsx` — título de sección con clase CSS
+- `SplashCursor.jsx` — efecto cursor personalizado
+- `animations/` — BlurText, CountUp, ASCIIText, CurvedLoop, GradientText, riveComponent, etc.
 
 ---
 
-# 🗂️ Estructura del Proyecto
+# 🗂️ Estructura del Proyecto (estado Alpha actual)
 
 ```
 src/
-├── pages/
-│   ├── index.astro
-│   ├── bebidas.astro
-│   ├── hexy.astro
-│   ├── merch.astro
-│   ├── magicdrinkday.astro
-│   ├── wonderpop.astro
-│   └── contacto.astro
+├── pages/                        # Solo 4 páginas reales en alpha
+│   ├── index.astro               ✅ completada con 8 secciones
+│   ├── contacto.astro            ✅
+│   ├── 404.astro                 ✅
+│   └── test-sticky.astro         (temporal dev)
 ├── components/
 │   ├── index/
-│   ├── bebidas/
-│   ├── hexy/
-│   ├── merch/
-│   ├── magicdrinkday/
-│   ├── wonderpop/
+│   │   ├── Secciones/            # IndexSeccion1.jsx … IndexSeccion8.jsx
+│   │   ├── components/           # Sub-componentes (VideoLightbox, etc.)
+│   │   └── css/                  # indexSeccionN.module.css
+│   ├── global/                   # Reutilizables cross-página
+│   ├── react_components/         # NavBar.jsx, RouterLinks.jsx, FormContacto/
 │   └── contacto/
 ├── layouts/
-│   └── LayoutBasic.astro
+│   └── LayoutBasic.astro         # ← siempre usar este
 ├── data/
-│   ├── translations.js
-│   └── translations{Pagina}.js
+│   ├── variables.js              # nanostores: isEnglish, isDarkMode
+│   ├── translationsGlobal.js     # strings de NavBar y footer
+│   ├── translationsIndex.js      # strings de index (legacy, mayormente inline)
+│   └── translations.js           # ⚠️ es de otro proyecto — NO usar
+├── styles/
+│   └── global.css                # Variables CSS --md-*, font-face
 └── public/
-    ├── images/
-    ├── drinks/
-    ├── hexy/
-    ├── merch/
-    └── parade/
+    ├── icons/                    # logo.png, icono_*.png, *.svg social
+    ├── image/                    # backgrounds/, brands/, drinks/, hexy/, etc.
+    ├── audio/loops/
+    ├── videos/
+    └── rive/                     # 404.riv
 ```
+
+**Páginas pendientes (v1):** `bebidas`, `hexy`, `merch`, `magicdrinkday`, `wonderpop`
 
 ---
 
