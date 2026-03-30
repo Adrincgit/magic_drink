@@ -374,7 +374,7 @@ const IndexSeccion6 = () => {
           </ul>
           <div className={styles.ctaWrapper}>
             <Button
-              href="/wonderpop"
+              href="/wonderpop-plaza"
               textEs={content.es.cta}
               textEn={content.en.cta}
               variant="magic"
@@ -500,7 +500,7 @@ const IndexSeccion6 = () => {
           
           <div ref={ctaRef} className={styles.ctaWrapper}>
             <Button 
-              href="/wonderpop"
+              href="/wonderpop-plaza"
               textEs={content.es.cta}
               textEn={content.en.cta}
               variant="magic"

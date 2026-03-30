@@ -1,6 +1,7 @@
 import React from "react";
 import { isEnglish, isDarkMode } from '../../data/variables';
 import { useStore } from '@nanostores/react';
+import { magicDrinkGlobalContent } from '../../data/magicDrinkGlobalContent';
 import styles from "./css/footnethive.module.css";
 import { useState, useRef } from 'react';
 
@@ -13,13 +14,7 @@ const FootNetHive = () => {
     es: {
       heroTagline: "La Magia en Cada Sorbo ✦",
       col1Title: "Descubre Magic Drink",
-      col1Links: [
-        { text: "Bebidas", href: "/bebidas", icon: "/icons/icono_lata.png" },
-        { text: "Hexy Music", href: "/hexy", icon: "/icons/icono_hexy.png" },
-        { text: "Merch Oficial", href: "/merch", icon: "/icons/icono_bolsa.png" },
-        { text: "Magic Drink Day", href: "/magicdrinkday", icon: "/icons/icono_globo.png" },
-        { text: "Wonderpop Plaza", href: "/wonderpop", icon: "/icons/icono_plaza.png" }
-      ],
+      col1Links: magicDrinkGlobalContent.es.footer.quickLinks,
       col2Title: "Conéctate",
       newsletterPlaceholder: "tu@email.com",
       newsletterBtn: "¡Únete!",
@@ -41,13 +36,7 @@ const FootNetHive = () => {
     en: {
       heroTagline: "Magic in Every Sip ✦",
       col1Title: "Discover Magic Drink",
-      col1Links: [
-        { text: "Drinks", href: "/bebidas", icon: "/icons/icono_lata.png" },
-        { text: "Hexy Music", href: "/hexy", icon: "/icons/icono_hexy.png" },
-        { text: "Official Merch", href: "/merch", icon: "/icons/icono_bolsa.png" },
-        { text: "Magic Drink Day", href: "/magicdrinkday", icon: "/icons/icono_globo.png" },
-        { text: "Wonderpop Plaza", href: "/wonderpop", icon: "/icons/icono_plaza.png" }
-      ],
+      col1Links: magicDrinkGlobalContent.en.footer.quickLinks,
       col2Title: "Connect",
       newsletterPlaceholder: "your@email.com",
       newsletterBtn: "Join Us!",

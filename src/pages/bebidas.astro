@@ -1,0 +1,8 @@
+---
+import LayoutBasic from '../layouts/LayoutBasic.astro';
+import BebidasShowcase from '../components/bebidas/BebidasShowcase.jsx';
+---
+
+<LayoutBasic title="Magic Drink | Bebidas" showFooter={true}>
+  <BebidasShowcase client:only />
+</LayoutBasic>

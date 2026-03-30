@@ -1,0 +1,8 @@
+---
+import LayoutBasic from '../layouts/LayoutBasic.astro';
+import WonderpopPlazaSeccion from '../components/wonderpop/WonderpopPlazaSeccion.jsx';
+---
+
+<LayoutBasic title="Magic Drink | Wonderpop Plaza" showFooter={true}>
+  <WonderpopPlazaSeccion client:only />
+</LayoutBasic>

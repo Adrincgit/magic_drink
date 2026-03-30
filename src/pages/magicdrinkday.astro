@@ -1,0 +1,8 @@
+---
+import LayoutBasic from '../layouts/LayoutBasic.astro';
+import MagicDrinkDaySeccion from '../components/magicdrinkday/MagicDrinkDaySeccion.jsx';
+---
+
+<LayoutBasic title="Magic Drink | Magic Drink Day" showFooter={true}>
+  <MagicDrinkDaySeccion client:only />
+</LayoutBasic>

@@ -1,0 +1,238 @@
+.page {
+  position: relative;
+  overflow: clip;
+  padding: 8.5rem 0 6rem;
+  background:
+    radial-gradient(circle at top left, rgba(255, 106, 215, 0.15), transparent 36%),
+    radial-gradient(circle at top right, rgba(130, 210, 255, 0.12), transparent 30%),
+    linear-gradient(180deg, #261f2f 0%, #2c2633 100%);
+  color: var(--md-white);
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.05), transparent 18%),
+    radial-gradient(circle at 80% 15%, rgba(255, 255, 255, 0.04), transparent 16%);
+  pointer-events: none;
+}
+
+.hero,
+.metricsSection,
+.pillarsSection,
+.statementsSection,
+.closingSection {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 2.4rem));
+  margin: 0 auto;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.95fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.eyebrow {
+  width: fit-content;
+  margin: 0 0 1rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--md-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+}
+
+.title,
+.sectionHeading h2,
+.closingCard h2 {
+  margin: 0;
+  font-family: var(--em-font-headline);
+  line-height: 0.96;
+  font-size: clamp(2.8rem, 6vw, 5.6rem);
+}
+
+.subtitle,
+.heroCard p,
+.pillarCard p,
+.closingCard p {
+  margin: 1rem 0 0;
+  color: var(--em-text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.heroVisual {
+  position: relative;
+  min-height: 520px;
+}
+
+.heroCard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(330px, 90%);
+  padding: 1.4rem;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--md-shadow-card);
+}
+
+.heroCardLabel {
+  color: var(--md-pink);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+}
+
+.heroImage {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: min(430px, 92%);
+  filter:
+    drop-shadow(0 22px 48px rgba(0, 0, 0, 0.34))
+    drop-shadow(0 0 26px rgba(255, 106, 215, 0.28));
+}
+
+.metricsSection {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.metricCard,
+.pillarCard,
+.statementCard,
+.closingCard {
+  padding: 1.4rem;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+}
+
+.metricCard strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--md-white);
+  font-family: var(--em-font-headline);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+}
+
+.metricCard span {
+  color: var(--em-text-secondary);
+  line-height: 1.6;
+}
+
+.pillarsSection,
+.statementsSection,
+.closingSection {
+  margin-top: 2rem;
+}
+
+.sectionHeading {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.sectionHeading h2 {
+  font-size: clamp(2rem, 4vw, 3.6rem);
+}
+
+.pillarsGrid,
+.statementList {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.pillarsGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pillarCard h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--md-white);
+}
+
+.statementCard {
+  margin: 0;
+  color: var(--md-white);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.7;
+}
+
+.statementList {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.closingCard {
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .hero,
+  .metricsSection,
+  .pillarsGrid,
+  .statementList {
+    grid-template-columns: 1fr;
+  }
+
+  .heroVisual {
+    min-height: 480px;
+  }
+
+  .heroCard {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .heroImage {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-top: 7rem;
+  }
+
+  .hero,
+  .metricsSection,
+  .pillarsSection,
+  .statementsSection,
+  .closingSection {
+    width: min(1180px, calc(100% - 1.2rem));
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions :global(a) {
+    width: 100%;
+    justify-content: center;
+  }
+}

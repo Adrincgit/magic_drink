@@ -33,7 +33,7 @@
   gap: clamp(1rem, 2vw, 2rem);
   
   /* Dimensiones */
-  max-width: 1180px;
+  max-width: 1320px;
   width: calc(100% - 2 * var(--em-space-lg));
   min-height: 68px;
   padding: 10px 14px;
@@ -108,7 +108,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+  gap: clamp(0.75rem, 1.8vw, 1.45rem);
   align-items: center;
 }
 
@@ -121,10 +121,10 @@
   color: var(--em-text-secondary);
   text-decoration: none;
   font-family: var(--em-font-body);
-  font-size: 1rem;
+  font-size: 0.94rem;
   font-weight: 500;
   position: relative;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 20px;
   transition: all 0.3s var(--em-ease-smooth);
   background: transparent;
@@ -220,7 +220,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.65rem 1.5rem;
+  padding: 0.65rem 1.2rem;
   background: var(--md-yellow);
   color: var(--md-gray-dark);
   font-family: var(--em-font-body);
@@ -584,12 +584,17 @@
   }
 
   .navLinks {
-    gap: 1.5rem;
+    gap: 0.75rem;
   }
 
   .navLink {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.82rem;
+    padding: 0.35rem 0.55rem;
+  }
+
+  .ctaButton {
+    padding: 0.55rem 1rem;
+    font-size: 0.86rem;
   }
 }
 

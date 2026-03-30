@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import styles from "./navbar.module.css";
-
+import React, { useEffect, useState } from "react";
 import { useStore } from "@nanostores/react";
-import { isEnglish } from "../../data/variables"; 
+import { isEnglish } from "../../data/variables";
 import { useLang } from "../../data/signals";
-import { translationsGlobal } from "../../data/translationsGlobal";
+import { magicDrinkGlobalContent } from "../../data/magicDrinkGlobalContent";
+import styles from "./navbar.module.css";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,7 +14,7 @@ const NavBar = () => {
   const ingles = useStore(isEnglish);
   
   // Traducciones del navbar
-  const navTranslations = ingles ? translationsGlobal.en.navbar : translationsGlobal.es.navbar;
+  const navTranslations = ingles ? magicDrinkGlobalContent.en.navbar : magicDrinkGlobalContent.es.navbar;
 
   // Función para navegar al inicio
   const handleLogoClick = (e) => {
@@ -49,13 +48,8 @@ const NavBar = () => {
 
   // Función para cambiar idioma
   const handleLanguageChange = (newLang) => {
-    if (newLang === 'en') {
-      isEnglish.set(true);
-      changeLang('en');
-    } else {
-      isEnglish.set(false);
-      changeLang('es');
-    }
+    isEnglish.set(newLang === 'en');
+    changeLang(newLang);
   };
 
   // Función para toggle del menú móvil
@@ -98,43 +92,25 @@ const NavBar = () => {
 
         {/* === CENTER: Links === */}
         <ul className={styles.navLinks}>
-          <li className={styles.navItem}>
-            <a 
-              href="/bebidas" 
-              className={`${styles.navLink} ${isActiveLink("/bebidas") ? styles.activeLink : ""}`}
-            >
-              {ingles ? "Drinks" : "Bebidas"}
-            </a>
-          </li>
-          <li className={styles.navItem}>
-            <a 
-              href="/hexy" 
-              className={`${styles.navLink} ${isActiveLink("/hexy") ? styles.activeLink : ""}`}
-            >
-              Hexy
-            </a>
-          </li>
-          <li className={styles.navItem}>
-            <a 
-              href="/merch" 
-              className={`${styles.navLink} ${isActiveLink("/merch") ? styles.activeLink : ""}`}
-            >
-              Merch
-            </a>
-          </li>
-          <li className={styles.navItem}>
-            <a 
-              href="/wonderpop" 
-              className={`${styles.navLink} ${isActiveLink("/wonderpop") ? styles.activeLink : ""}`}
-            >
-              Wonderpop
-            </a>
-          </li>
+          {navTranslations.links.map((link) => (
+            <li key={link.href} className={styles.navItem}>
+              <a 
+                href={link.href} 
+                className={`${styles.navLink} ${isActiveLink(link.href) ? styles.activeLink : ""}`}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
         </ul>
 
         {/* === RIGHT: Idioma === */}
         <div className={styles.actionsSection}>
-          {/* Toggle de Idioma */}
+          <a href="/contacto" className={styles.ctaButton}>
+            <span className={styles.ctaIcon}>+</span>
+            <span>{navTranslations.contactCta}</span>
+          </a>
+
           <div className={styles.languageToggle}>
             <button 
               className={`${styles.langButton} ${!ingles ? styles.langActive : ''}`}
@@ -197,40 +173,24 @@ const NavBar = () => {
 
             {/* Links móvil */}
             <ul className={styles.mobileLinks}>
+              {navTranslations.links.map((link) => (
+                <li key={link.href}>
+                  <a 
+                    href={link.href} 
+                    className={`${styles.mobileLink} ${isActiveLink(link.href) ? styles.mobileLinkActive : ""}`}
+                    onClick={closeMobileMenu}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
               <li>
                 <a 
-                  href="/bebidas" 
-                  className={`${styles.mobileLink} ${isActiveLink("/bebidas") ? styles.mobileLinkActive : ""}`}
+                  href="/contacto" 
+                  className={`${styles.mobileLink} ${isActiveLink("/contacto") ? styles.mobileLinkActive : ""}`}
                   onClick={closeMobileMenu}
                 >
-                  {ingles ? "Drinks" : "Bebidas"}
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/hexy" 
-                  className={`${styles.mobileLink} ${isActiveLink("/hexy") ? styles.mobileLinkActive : ""}`}
-                  onClick={closeMobileMenu}
-                >
-                  Hexy
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/merch" 
-                  className={`${styles.mobileLink} ${isActiveLink("/merch") ? styles.mobileLinkActive : ""}`}
-                  onClick={closeMobileMenu}
-                >
-                  Merch
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/wonderpop" 
-                  className={`${styles.mobileLink} ${isActiveLink("/wonderpop") ? styles.mobileLinkActive : ""}`}
-                  onClick={closeMobileMenu}
-                >
-                  Wonderpop
+                  {navTranslations.contactCta}
                 </a>
               </li>
             </ul>

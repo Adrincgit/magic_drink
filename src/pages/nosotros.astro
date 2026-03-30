@@ -1,0 +1,8 @@
+---
+import LayoutBasic from '../layouts/LayoutBasic.astro';
+import NosotrosSeccion from '../components/nosotros/NosotrosSeccion.jsx';
+---
+
+<LayoutBasic title="Magic Drink | Nosotros" showFooter={true}>
+  <NosotrosSeccion client:only />
+</LayoutBasic>
