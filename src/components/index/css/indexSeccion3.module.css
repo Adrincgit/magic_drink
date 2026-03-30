@@ -928,6 +928,7 @@
     /* Limitar a 3 líneas para no empujar los stats */
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
