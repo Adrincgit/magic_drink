@@ -1,0 +1,138 @@
+/* ========================================
+   BEBIDAS SECCION 3 — CTA FINAL
+   ======================================== */
+
+.section {
+  position: relative;
+  width: 100%;
+  padding: 6rem 2rem;
+  background: var(--md-gradient-main);
+  overflow: hidden;
+  text-align: center;
+}
+
+.dark {
+  background: linear-gradient(135deg, #3a1660, #6822a8);
+}
+
+/* ═══════════════════════════════════════
+   DECORATIVE BG
+   ═══════════════════════════════════════ */
+.bgDecorations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.circle1 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  top: -120px;
+  left: -80px;
+}
+
+.circle2 {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  bottom: -80px;
+  right: -60px;
+}
+
+/* ═══════════════════════════════════════
+   INNER
+   ═══════════════════════════════════════ */
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #fff;
+  margin: 0 0 1rem;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin: 0 0 2.5rem;
+}
+
+/* ═══════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════ */
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btnPrimary,
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.btnPrimary {
+  background: #fff;
+  color: var(--md-purple);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+}
+
+.btnSecondary {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.btnSecondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+}

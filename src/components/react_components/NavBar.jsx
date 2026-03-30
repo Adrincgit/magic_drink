@@ -106,11 +106,6 @@ const NavBar = () => {
 
         {/* === RIGHT: Idioma === */}
         <div className={styles.actionsSection}>
-          <a href="/contacto" className={styles.ctaButton}>
-            <span className={styles.ctaIcon}>+</span>
-            <span>{navTranslations.contactCta}</span>
-          </a>
-
           <div className={styles.languageToggle}>
             <button 
               className={`${styles.langButton} ${!ingles ? styles.langActive : ''}`}
@@ -184,15 +179,6 @@ const NavBar = () => {
                   </a>
                 </li>
               ))}
-              <li>
-                <a 
-                  href="/contacto" 
-                  className={`${styles.mobileLink} ${isActiveLink("/contacto") ? styles.mobileLinkActive : ""}`}
-                  onClick={closeMobileMenu}
-                >
-                  {navTranslations.contactCta}
-                </a>
-              </li>
             </ul>
 
             {/* Idioma en móvil */}

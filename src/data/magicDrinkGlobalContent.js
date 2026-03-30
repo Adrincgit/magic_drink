@@ -7,7 +7,6 @@ export const magicDrinkGlobalContent = {
         { label: 'Wonderpop Plaza', href: '/wonderpop-plaza' },
         { label: 'Nosotros', href: '/nosotros' },
       ],
-      contactCta: 'Contacto',
     },
     footer: {
       quickLinks: [
@@ -27,7 +26,6 @@ export const magicDrinkGlobalContent = {
         { label: 'Wonderpop Plaza', href: '/wonderpop-plaza' },
         { label: 'About', href: '/nosotros' },
       ],
-      contactCta: 'Contact',
     },
     footer: {
       quickLinks: [

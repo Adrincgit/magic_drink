@@ -1,0 +1,317 @@
+/* ========================================
+   BEBIDAS SECCION 2 — FLAVOR CARDS
+   ======================================== */
+
+.section {
+  width: 100%;
+  padding: 5rem 2rem;
+  background: var(--md-gray);
+}
+
+.dark {
+  background: var(--md-gray-dark);
+}
+
+/* ═══════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════ */
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--md-purple);
+  margin: 0 0 1rem;
+}
+
+.dark .title {
+  color: var(--md-pink);
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.dark .subtitle {
+  color: #aaa;
+}
+
+/* ═══════════════════════════════════════
+   GRID
+   ═══════════════════════════════════════ */
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════
+   CARD
+   ═══════════════════════════════════════ */
+.card {
+  position: relative;
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(170, 55, 242, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .card {
+  background: #1e1a24;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--md-shadow-hover);
+}
+
+.accentBar {
+  height: 5px;
+  background: var(--card-color);
+  transition: background 0.3s ease;
+}
+
+.cardContent {
+  display: flex;
+  align-items: center;
+  padding: 2.5rem;
+  gap: 2.5rem;
+}
+
+/* ═══════════════════════════════════════
+   CAN SIDE
+   ═══════════════════════════════════════ */
+.canSide {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canImg {
+  width: 160px;
+  height: auto;
+  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.18));
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.canHover {
+  transform: rotate(-4deg) scale(1.08);
+}
+
+/* ═══════════════════════════════════════
+   INFO SIDE
+   ═══════════════════════════════════════ */
+.infoSide {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardName {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: var(--card-color);
+  margin: 0 0 0.35rem;
+}
+
+.cardTagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #777;
+  margin: 0 0 0.75rem;
+  font-style: italic;
+}
+
+.dark .cardTagline {
+  color: #999;
+}
+
+.cardDesc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.65;
+  margin: 0 0 1.25rem;
+}
+
+.dark .cardDesc {
+  color: #bbb;
+}
+
+/* ═══════════════════════════════════════
+   STATS
+   ═══════════════════════════════════════ */
+.stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.6rem 1rem;
+  border-radius: 14px;
+  background: rgba(170, 55, 242, 0.06);
+}
+
+.dark .stat {
+  background: rgba(170, 55, 242, 0.15);
+}
+
+.statLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+}
+
+.dark .statLabel {
+  color: #999;
+}
+
+.statValue {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--card-color);
+}
+
+/* ═══════════════════════════════════════
+   RITUAL
+   ═══════════════════════════════════════ */
+.ritual {
+  margin-bottom: 1rem;
+}
+
+.ritualLabel {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--card-accent);
+}
+
+.ritualText {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+  margin: 0.35rem 0 0;
+}
+
+.dark .ritualText {
+  color: #aaa;
+}
+
+/* ═══════════════════════════════════════
+   NOTES (tags)
+   ═══════════════════════════════════════ */
+.notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.noteTag {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--card-color);
+  background: color-mix(in srgb, var(--card-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--card-color) 25%, transparent);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+
+  .cardContent {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .canImg {
+    width: 130px;
+  }
+
+  .stats {
+    justify-content: center;
+  }
+
+  .notes {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .grid {
+    gap: 2rem;
+  }
+
+  .cardContent {
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .cardName {
+    font-size: 1.4rem;
+  }
+
+  .canImg {
+    width: 110px;
+  }
+
+  .stats {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    margin-bottom: 2.5rem;
+  }
+
+  .cardName {
+    font-size: 1.2rem;
+  }
+
+  .canImg {
+    width: 100px;
+  }
+}
