@@ -5,7 +5,7 @@ export default defineConfig({
   testDir: './tests',
   timeout: 60000,
   use: {
-    baseURL: process.env.MAGIC_DRINK_TEST_URL || 'http://127.0.0.1:4321',
+    baseURL: process.env.MAGIC_DRINK_TEST_URL || 'http://localhost:4321',
     headless: true,
     channel: 'chrome',
     viewport: { width: 1440, height: 900 },
