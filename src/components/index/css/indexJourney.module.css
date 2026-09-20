@@ -1,4 +1,4 @@
-﻿.journey {
+.journey {
   --ink: #21132d;
   --cream: #fff8df;
   --yellow: #ffdc55;
@@ -424,12 +424,12 @@
 }
 
 .shadeLeft {
-  background: linear-gradient(90deg, #1e102ddb 0%, #271834bd 23%, #25153369 42%, #25153300 69%);
+  background: none;
 }
 
 .shadeRight {
   opacity: 0;
-  background: linear-gradient(270deg, #1e102ff5 0%, #271834e3 21%, #25153388 39%, #25153300 67%);
+  background: none;
 }
 
 .atmosphere {
@@ -605,10 +605,10 @@
 .intro {
   font-size: 18px;
   line-height: 1.65;
-  font-weight: 400;
-  color: #fff2eddd;
+  font-weight: 500;
+  color: #fff8ef;
   margin: 28px 0 30px;
-  text-shadow: 0 2px 12px #20122655;
+  text-shadow: 0 1px 3px #201226, 0 2px 10px #201226;
 }
 
 .actions {
@@ -702,7 +702,7 @@
   line-height: 1.03;
   letter-spacing: 0.3px;
   margin: 0;
-  text-shadow: 0 4px 20px #21132d55;
+  text-shadow: 0 2px 2px #291833, 0 4px 16px #291833aa;
 }
 
 .copy h2 em {
@@ -1203,24 +1203,10 @@
     left: 80%;
   }
   .shadeLeft {
-    background: linear-gradient(
-      180deg,
-      #21122bc7 0%,
-      #21122bda 15%,
-      #291a36b3 40%,
-      #291a3625 69%,
-      #24162c15
-    );
+    background: none;
   }
   .shadeRight {
-    background: linear-gradient(
-      180deg,
-      #21122b7a 0%,
-      #21122b00 30%,
-      #21122b26 47%,
-      #21122be8 67%,
-      #21122bfa 100%
-    );
+    background: none;
   }
   .cityCopy {
     top: 112px;
@@ -1425,7 +1411,7 @@
     display: none;
   }
   .shadeLeft {
-    background: #21132d85;
+    background: none;
   }
   .shadeRight {
     display: none;
@@ -1510,4 +1496,8 @@
 }
 .sunPlane i {
   top: 52%;
+}
+/* Protect only the lettering: the scenery no longer sits behind side curtains. */
+.copy .eyebrow, .soundLink, .textLink {
+  text-shadow: 0 1px 3px #21132d, 0 2px 9px #21132d;
 }

@@ -1,0 +1,23 @@
+.world {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(#6b428b 0%, #cf7baa 46%, #ffb57d 76%, #aa9574);
+}
+.fallback, .sky, .world canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+.fallback { object-fit: cover; object-position: 50% 65%; }
+.sky { object-fit: cover; opacity: 0; }
+.world canvas { display: block; opacity: 0; }
+.world[data-renderer='webgl'] .fallback { visibility: hidden; }
+.world[data-renderer='webgl'] .sky,
+.world[data-renderer='webgl'] canvas { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .world canvas, .sky { display: none; }
+  .world .fallback { visibility: visible !important; }
+}

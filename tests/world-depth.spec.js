@@ -35,7 +35,7 @@ test('WonderPop appears only in the garden and approaches without shrinking', as
   page,
 }) => {
   await openLanding(page);
-  const landmark = page.locator('[data-depth="plaza"]');
+  const landmark = page.locator('[data-garden-world]');
   for (const p of [0, 0.162, 0.313, 0.49, 0.59]) {
     await goWorld(page, p);
     await expect(landmark).toBeHidden();
@@ -43,10 +43,14 @@ test('WonderPop appears only in the garden and approaches without shrinking', as
   let previousWidth = 0;
   for (const p of [0.635, 0.65, 0.68, 0.72, 0.76, 0.80, 0.82]) {
     await goWorld(page, p);
-    const bounds = await landmark.boundingBox();
-    expect(bounds.width).toBeGreaterThanOrEqual(previousWidth);
-    expect(bounds.x + bounds.width / 2).toBeCloseTo(720, 0);
-    previousWidth = bounds.width;
+    await expect(landmark).toHaveAttribute('data-renderer', 'webgl');
+    const view = await landmark.evaluate(el => el.gardenDiagnostics());
+    const width = view.buildingRight.x - view.buildingLeft.x;
+    expect(width).toBeGreaterThanOrEqual(previousWidth);
+    expect(view.buildingFoot.x).toBeCloseTo(0.5, 2);
+    expect(view.buildingFoot.y).toBeGreaterThan(0.6);
+    expect(view.groundY).toBe(0);
+    previousWidth = width;
   }
   await goWorld(page, 0.68);
   await expect(page.locator('[data-world-copy="plaza"]')).toBeVisible();

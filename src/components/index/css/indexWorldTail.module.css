@@ -645,62 +645,9 @@
     opacity: 0;
   }
 }
-/* Scene 5: a centered vanishing point, architecture behind two garden planes. */
+/* Scene 5: HTML copy and transition canopy over the shared WebGL camera. */
 .plaza {
   overflow: visible;
-}
-.gardenTerrain {
-  position: absolute;
-  inset: -4%;
-  width: 108%;
-  height: 108%;
-  max-width: none;
-  object-fit: cover;
-  object-position: 50% 48%;
-}
-.plazaLandmark {
-  position: absolute;
-  height: 48svh;
-  width: 32svh;
-  left: calc(50% - 16svh);
-  bottom: 19svh;
-  z-index: 1;
-  transform-origin: 50% 74%;
-}
-.plazaLandmark img {
-  height: 100%;
-  width: 100%;
-  max-width: none;
-}
-.gardenTree {
-  position: absolute;
-  width: 190svh;
-  height: 126.6667svh;
-  left: calc(50% - 95svh);
-  bottom: -10svh;
-  transform-origin: 50% 65%;
-  z-index: 3;
-}
-.gardenTree[data-tree-distance='near'] {
-  width: 250svh;
-  height: 166.6667svh;
-  left: calc(50% - 125svh);
-  bottom: -32svh;
-  z-index: 4;
-}
-.gardenTree img {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  transform-origin: 15% 100%;
-  animation: treeSway 9s ease-in-out infinite alternate;
-}
-.gardenTree[data-garden-tree='right'] img {
-  transform-origin: 85% 100%;
-  animation-delay: -5s;
-}
-.gardenTree[data-tree-distance='near'] img {
-  animation-duration: 12s;
 }
 .canopyVeil {
   position: absolute;
@@ -716,35 +663,6 @@
   /* Some painted highlights contain slight alpha. A feathered opaque core
      makes the scene swap invisible without squaring off the leaf silhouette. */
   background: radial-gradient(ellipse, #27301d 55%, #27301d00 68%);
-}
-@keyframes treeSway {
-  from { transform: rotate(-0.35deg); }
-  to { transform: rotate(0.35deg); }
-}
-.approachGarden {
-  position: absolute;
-  width: 150svh;
-  height: 100svh;
-  left: calc(50% - 75svh);
-  bottom: -10svh;
-  transform-origin: 50% 62%;
-  z-index: 2;
-}
-.approachGarden img,
-.approachArch img {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: fill;
-}
-.approachArch {
-  position: absolute;
-  width: 150svh;
-  height: 100svh;
-  left: calc(50% - 75svh);
-  bottom: -6svh;
-  transform-origin: 50% 65%;
-  z-index: 3;
 }
 .plazaShade {
   z-index: 6;
@@ -766,32 +684,6 @@
 }
 .plazaCopy .keepGoing {
   justify-content: center;
-}
-.pathLights {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-}
-.pathLights i {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  left: calc(20% + var(--i) * 5%);
-
-  background: #ffe1a1;
-  box-shadow: 0 0 11px 3px #ffc87888;
-  animation: firefly calc(3s + var(--i) * 0.3s) ease-in-out infinite alternate;
-}
-@keyframes firefly {
-  from {
-    opacity: 0.15;
-    transform: translateY(3px);
-  }
-  to {
-    opacity: 0.85;
-    transform: translateY(-6px);
-  }
 }
 /* Scene 6: camera projection around the same vanishing point for the whole room. */
 .atriumWorld {
@@ -999,18 +891,6 @@
   }
   .plazaCopy .keepGoing {
     display: none;
-  }
-  .approachGarden {
-    width: 95svh;
-    height: 80svh;
-    left: calc(50% - 47.5svh);
-    bottom: -5svh;
-  }
-  .approachArch {
-    width: 95svh;
-    height: 78svh;
-    left: calc(50% - 47.5svh);
-    bottom: -5svh;
   }
   .pendants {
     inset: -8% -24%;

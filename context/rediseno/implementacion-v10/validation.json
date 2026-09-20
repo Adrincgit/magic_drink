@@ -1,0 +1,17 @@
+{
+  "build": { "command": "npm run build", "passed": true, "pages": 9, "errors": 0, "warnings": 0, "hints": 79 },
+  "tests": {
+    "uniqueCasesValidated": 20,
+    "initialSuite": { "passed": 18, "failed": 2 },
+    "resolvedFailures": [
+      "New darkness test used nonexistent data-shade-left/right selectors; corrected to data-shade=left/right.",
+      "Foliage coverage probe was removed by HMR while editing. Rechecked after edits settled; coverage passes at desktop and mobile in both directions."
+    ],
+    "targetedRecheck": { "passed": 3, "failed": 0, "includes": ["opening shades and opaque audience", "foliage coverage", "localhost and IPv4 hydration after build"] },
+    "afterRenderOptimization": { "passed": 4, "failed": 0, "file": "tests/garden-camera.spec.js" }
+  },
+  "visual": { "browser": "Chrome 153.0.8010.52", "captures": 54, "viewports": ["2559x1304", "1440x900", "390x844"], "loadErrors": 0, "horizontalOverflow": false, "report": "capture-report.json" },
+  "performance": { "report": "performance.json", "physicalPhoneTested": false, "networkBenchmark": false },
+  "localServer": { "url": "http://localhost:4321/", "existingProcessPreserved": true },
+  "deferred": "Scene 6 redesign"
+}

@@ -14,20 +14,15 @@ export function createWorldDirector(root) {
   const query = (selector) => root.querySelector(selector);
   const opening = query('[data-opening]');
   const openingNav = query('[data-opening-navigation]');
-  const landmark = query('[data-depth="plaza"]');
   const ground = query('[data-world-ground]');
   const festival = query('[data-world-scene="festival"]');
   const courtyard = query('[data-courtyard]');
   const rig = query('[data-festival-rig]');
   const audience = [...root.querySelectorAll('[data-audience-row]')];
-  const crowdFar = query('[data-crowd-far]');
   const airship = query('[data-airship]');
   const plaza = query('[data-world-scene="plaza"]');
-  const terrain = query('[data-garden-terrain]');
-  const gardenFar = query('[data-approach-garden="far"]');
-  const trees = [...root.querySelectorAll('[data-garden-tree]')];
+  const garden = query('[data-garden-world]');
   const canopyVeil = query('[data-canopy-veil]');
-  const arch = query('[data-approach-arch]');
   const interior = query('[data-world-interior]');
   const atriumWorld = query('[data-atrium-world]');
   const atrium = query('[data-atrium]');
@@ -53,15 +48,9 @@ export function createWorldDirector(root) {
     courtyard,
     rig,
     ...audience,
-    crowdFar,
     airship,
     plaza,
-    landmark,
-    terrain,
-    gardenFar,
-    ...trees,
     canopyVeil,
-    arch,
     interior,
     atriumWorld,
     atrium,
@@ -88,6 +77,8 @@ export function createWorldDirector(root) {
 
   return {
     render(r, width, height, reduced) {
+      garden.gardenState = { progress: r, width, height, reduced };
+      garden.dispatchEvent(new CustomEvent('garden:camera', { detail: garden.gardenState }));
       if (reduced) {
         animated.forEach((element) => gsap.set(element, { clearProps: 'all' }));
         copies.forEach((element) => {
@@ -141,11 +132,6 @@ export function createWorldDirector(root) {
           y: height * ((mobile ? 0.14 : 0.015) + 0.035 * concertTravel),
           scale: 0.98 + 0.08 * concertTravel,
         });
-        gsap.set(crowdFar, {
-          x: -width * 0.028 * concertTravel,
-          scale: 1 + 0.06 * concertTravel,
-          y: height * 0.015 * concertTravel,
-        });
         audience.forEach((row, i) => gsap.set(row, {
           x: -width * (0.045 + i * 0.047) * concertTravel,
           scale: 1 + (0.045 + i * 0.034) * concertTravel,
@@ -162,27 +148,8 @@ export function createWorldDirector(root) {
       // Reveal a new, already centered view under an opaque canopy. Its camera
       // only advances: the building never shrinks or slides in from the concert.
       if (active(0.59, 0.86)) {
-        const door = phase(r, 0.752, 0.846);
         gsap.set(plaza, { autoAlpha: phase(r, 0.613, 0.619) * (1 - phase(r, 0.815, 0.853)) });
         plaza.dataset.worldActive = String(r > 0.6 && r < 0.86 && !document.hidden);
-        gsap.set(landmark, {
-          x: 0, y: -height * 0.19 * door,
-          scale: 1 + 0.5 * walk + 7 * door,
-          transformOrigin: '50% 74%',
-        });
-        gsap.set(terrain, { scale: 1 + 0.5 * walk + 0.65 * door, transformOrigin: '50% 76%' });
-        gsap.set(gardenFar, { scale: 1.1 + 1.3 * walk + 2 * door, y: height * 0.15 * walk });
-        trees.forEach(tree => {
-          const near = tree.dataset.treeDistance === 'near';
-          const side = tree.dataset.gardenTree === 'left' ? -1 : 1;
-          gsap.set(tree, {
-            x: side * height * (near ? 0.8 : 0.36) * walk,
-            y: height * (near ? 0.18 : 0.06) * walk,
-            scale: 1 + (near ? 1.1 : 0.65) * walk + 2 * door,
-          });
-        });
-        const passArch = phase(r, 0.614, 0.71);
-        gsap.set(arch, { scale: 1.5 + 3.9 * passArch, autoAlpha: 1 - phase(r, 0.7, 0.74) });
         copy('plaza', phase(r, 0.642, 0.667) * (1 - phase(r, 0.711, 0.742)), -30 * walk);
       }
 

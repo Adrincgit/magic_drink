@@ -1,0 +1,12 @@
+{
+  "environment": "Headless Google Chrome, 390x844, DPR 2, touch emulation, CPU slowdown 4x. Local server, warm decoded images and preloaded WebGL garden. Not a physical phone or a network benchmark.",
+  "frames": 349,
+  "medianFrameMs": 6.1,
+  "p95FrameMs": 24.2,
+  "framesOver50ms": 4,
+  "longTasks": [
+    53,
+    57
+  ],
+  "horizontalOverflow": false
+}

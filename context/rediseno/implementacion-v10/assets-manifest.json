@@ -1,0 +1,54 @@
+[
+  {
+    "name": "garden-ground-atlas-v10",
+    "prompt": "Create a GAME GROUND TEXTURE ATLAS for the illustrated Magic Drink garden. Reference image is STYLE AND MATERIAL reference only. Perfectly ORTHOGRAPHIC TOP DOWN, camera looking straight down at the ground, no perspective whatsoever, no horizon, no sky, no building, no trees or lamps. Square 1024x1024. A straight lavender/mauve flagstone pedestrian walkway runs vertically from top to bottom in the exact central 24% of image, constant width, completely parallel straight edges, tiny gold star inlays. Continuous green lawn across remaining left and right 38% each, low dense flower beds immediately beside both edges of the walkway, white pink lilac flowers with subtle warm gold border lighting. Seamless tileable top and bottom edges. Detailed painterly luxurious fairy plaza style, soft evening warm lighting, consistent across full surface. No diagonal perspective lines, no vanishing point, no shadows of tall objects. Opaque image.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/wonderpop-garden-path-v4.webp"
+    ],
+    "file": "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\garden-ground-atlas-v10.webp",
+    "width": 1254,
+    "height": 1254,
+    "alpha": false,
+    "bytes": 591084
+  },
+  {
+    "name": "garden-planter-v10",
+    "prompt": "One isolated decorative garden planter for the Magic Drink WonderPop Plaza illustrated 2.5D website. True transparent background. Entire planter fully within image, front view near eye height. Short heavy lavender stone square plinth with simple gold trim, a wide urn overflowing with lush purple lilac white flowers and dark green small leaves, little warm fairy lights nestled among flowers. Match polished painterly violet gold architecture in reference 1; reference 2 is lighting style only. Object only, no floor plane, no landscape, no cast backdrop or lettering. Occupies middle 85% of square 1024x1024, bottom of plinth at y95%. Opaque solid body and flowers, transparent exterior, very subtle light glow only around tiny lamps.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/wonderpop-front-v2.webp",
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/lamp.webp"
+    ],
+    "file": "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\garden-planter-v10.webp",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true,
+    "bytes": 434820
+  },
+  {
+    "name": "garden-static-v10",
+    "prompt": "Create a finished landscape illustrated website scene of WonderPop Plaza garden entrance. 1536x1024 landscape. Reference 1 is exact building identity, reference 2 garden visual style, reference 3 exact lamps with purple gold-star banners. Frontal centered straight garden walkway from bottom foreground toward building centered at distance, building base FIRMLY touching the end of the path and casting a contact shadow, no floating. Many individually spaced lampposts with star banners and stone flower urns on BOTH sides of the path in deep linear perspective, large nearer lamps and small distant lamps. Lush tall flowering trees on both sides form an overhead canopy, open center. Pastel purple orange sunset sky. Building at far end has accurate red-orange WonderPop PLAZA sign, gold star and warmly glowing windows. Polished painterly detailed luxurious illustration. No UI text or interface. This is a coherent single final fallback image for visitors without WebGL, never a cutout collage. Path and building and trees share same ground plane.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/wonderpop-front-v2.webp",
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/wonderpop-garden-path-v4.webp",
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/lamp.webp"
+    ],
+    "file": "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\garden-static-v10.webp",
+    "width": 1536,
+    "height": 1024,
+    "alpha": false,
+    "bytes": 579556
+  },
+  {
+    "name": "garden-tree-v10",
+    "prompt": "Use case: stylized-concept. Asset: isolated complete mature flowering garden tree for a 2.5D illustrated magical plaza website. References: image1 ONLY painting style, foliage colors and trunk material; image2 ONLY warm golden decorative light color. Generate ONE whole tree, centered full silhouette entirely inside a portrait 1024x1536 transparent canvas, all branches, rounded foliage canopy, roots and flower mound visible with 6 percent transparent margin around every side. Full independent object, NOT an edge-framing tree, NOT a cropped canopy. Tall elegant slightly curving brown trunk with spreading branches, deep green lush foliage, clusters of lilac/purple blossoms, tiny warm gold fairy lights distributed through branches. Fine painterly richly detailed game environment art consistent with reference. Crown occupies upper 58 percent, lower trunk clear and visible, small flowers and greenery at roots. Small asymmetry, canopy widest at 80 percent canvas width. Roots painted at y=94 percent of image. Front view. Truly transparent background, solid fully opaque tree interiors, clean antialiased alpha edges, no haze, no sky, no background garden, no border, no rectangular color patch, no words. This tree must be repeated at several depths along an avenue with no visible rectangular edges.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/garden-trees-left-v3.webp",
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/lamp.webp"
+    ],
+    "file": "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\garden-tree-v10.webp",
+    "width": 1024,
+    "height": 1536,
+    "alpha": true,
+    "bytes": 739790
+  }
+]

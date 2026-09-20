@@ -1,0 +1,384 @@
+{
+  "browser": "153.0.8010.52",
+  "errors": [],
+  "captures": [
+    {
+      "size": "wide",
+      "label": "hero",
+      "overflow": false,
+      "y": 0,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "city",
+      "overflow": false,
+      "y": 1986,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "hexy",
+      "overflow": false,
+      "y": 3839,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "join-035",
+      "overflow": false,
+      "y": 4290,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "join-037",
+      "overflow": false,
+      "y": 4535,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "join-039",
+      "overflow": false,
+      "y": 4781,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "join-041",
+      "overflow": false,
+      "y": 5026,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "festival",
+      "overflow": false,
+      "y": 6006,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "join-060",
+      "overflow": false,
+      "y": 7355,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "join-0616",
+      "overflow": false,
+      "y": 7551,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "join-063",
+      "overflow": false,
+      "y": 7723,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "garden-entry",
+      "overflow": false,
+      "y": 7955,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "plaza",
+      "overflow": false,
+      "y": 8335,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "plaza-near",
+      "overflow": false,
+      "y": 9010,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "walk",
+      "overflow": false,
+      "y": 9377,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "door",
+      "overflow": false,
+      "y": 9806,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "interior",
+      "overflow": false,
+      "y": 10763,
+      "height": 13562
+    },
+    {
+      "size": "wide",
+      "label": "original",
+      "overflow": false,
+      "y": 12258,
+      "height": 13562
+    },
+    {
+      "size": "desktop",
+      "label": "hero",
+      "overflow": false,
+      "y": 0,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "city",
+      "overflow": false,
+      "y": 1371,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "hexy",
+      "overflow": false,
+      "y": 2650,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-035",
+      "overflow": false,
+      "y": 2961,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-037",
+      "overflow": false,
+      "y": 3130,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-039",
+      "overflow": false,
+      "y": 3299,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-041",
+      "overflow": false,
+      "y": 3469,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "festival",
+      "overflow": false,
+      "y": 4145,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-060",
+      "overflow": false,
+      "y": 5076,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-0616",
+      "overflow": false,
+      "y": 5211,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-063",
+      "overflow": false,
+      "y": 5330,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "garden-entry",
+      "overflow": false,
+      "y": 5491,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "plaza",
+      "overflow": false,
+      "y": 5753,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "plaza-near",
+      "overflow": false,
+      "y": 6218,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "walk",
+      "overflow": false,
+      "y": 6472,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "door",
+      "overflow": false,
+      "y": 6768,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "interior",
+      "overflow": false,
+      "y": 7428,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "original",
+      "overflow": false,
+      "y": 8460,
+      "height": 9360
+    },
+    {
+      "size": "mobile",
+      "label": "hero",
+      "overflow": false,
+      "y": 0,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "city",
+      "overflow": false,
+      "y": 1162,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "hexy",
+      "overflow": false,
+      "y": 2247,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-035",
+      "overflow": false,
+      "y": 2511,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-037",
+      "overflow": false,
+      "y": 2654,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-039",
+      "overflow": false,
+      "y": 2798,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-041",
+      "overflow": false,
+      "y": 2941,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "festival",
+      "overflow": false,
+      "y": 3515,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-060",
+      "overflow": false,
+      "y": 4304,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-0616",
+      "overflow": false,
+      "y": 4419,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-063",
+      "overflow": false,
+      "y": 4520,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "garden-entry",
+      "overflow": false,
+      "y": 4656,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "plaza",
+      "overflow": false,
+      "y": 4878,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "plaza-near",
+      "overflow": false,
+      "y": 5273,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "walk",
+      "overflow": false,
+      "y": 5488,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "door",
+      "overflow": false,
+      "y": 5739,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "interior",
+      "overflow": false,
+      "y": 6299,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "original",
+      "overflow": false,
+      "y": 7174,
+      "height": 8018
+    }
+  ]
+}

@@ -10,15 +10,6 @@
   height: auto;
   animation: drift 24s ease-in-out infinite alternate;
 }
-.distantAudience {
-  position: absolute;
-  width: max(230svh, 125vw);
-  left: min(calc(50% - 115svh), -12.5vw);
-  bottom: 19svh;
-  z-index: 1;
-  opacity: 0.88;
-  transform-origin: 50% 100%;
-}
 .audienceRow {
   position: absolute;
   width: max(var(--width), 126vw);
@@ -40,8 +31,7 @@
 @media (max-width: 700px) {
   .airship { width: 16svh; left: 63%; top: 25%; }
   .airship img { animation-name: driftMobile; }
-  .distantAudience { bottom: 11svh; }
-  .audienceRow[data-audience-row='1'] { --width: 120svh; --bottom: 1svh; }
+    .audienceRow[data-audience-row='1'] { --width: 120svh; --bottom: 1svh; }
   .audienceRow[data-audience-row='2'] { --width: 136svh; --bottom: -7svh; }
   .audienceRow[data-audience-row='3'] { --width: 145svh; --bottom: -13svh; }
   .audienceRow[data-audience-row='4'] { --width: 154svh; --bottom: -19svh; }

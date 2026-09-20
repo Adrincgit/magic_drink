@@ -27,7 +27,7 @@ test('depth planes move independently and ambient clouds keep moving at rest', a
   expect(Math.abs(after.distance - before.distance)).toBeLessThan(
     Math.abs(after.street - before.street) * 0.5,
   );
-  await expect(page.locator('[data-depth="plaza"]')).toBeHidden();
+  await expect(page.locator('[data-garden-world]')).toBeHidden();
   expect(Math.abs(after.furniture - before.furniture)).toBeGreaterThan(
     Math.abs(after.street - before.street),
   );

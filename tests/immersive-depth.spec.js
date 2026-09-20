@@ -64,10 +64,9 @@ test('the performer stays centered on the stage through scroll, pointer and view
       expect(position.height).toBeLessThan(0.3);
     }
     await goWorld(page, 0.68);
-    const center = await page.locator('[data-depth="plaza"] img').evaluate((el) => {
-      const r = el.getBoundingClientRect();
-      return (r.x + r.width / 2) / innerWidth;
-    });
+    const garden = page.locator('[data-garden-world]');
+    await expect(garden).toHaveAttribute('data-renderer', 'webgl');
+    const center = await garden.evaluate(el => el.gardenDiagnostics().buildingFoot.x);
     expect(center).toBeCloseTo(0.5, 2);
   }
 });

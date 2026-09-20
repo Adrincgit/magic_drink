@@ -1,4 +1,5 @@
-﻿import styles from '../css/indexWorldTail.module.css';
+import GardenWorld from './GardenWorld';
+import styles from '../css/indexWorldTail.module.css';
 
 import depth from '../css/festivalDepth.module.css'; // Audience planes and sky animation.
 
@@ -26,9 +27,6 @@ export default function IndexWorldTail({ en = false }) {
         />
         <div className={depth.airship} data-airship data-look="city" aria-hidden="true">
           <img src={`${art}hexy-airship-v3.webp`} alt="" width="1536" height="1024" loading="lazy" />
-        </div>
-        <div className={depth.distantAudience} data-crowd-far data-look="city" aria-hidden="true">
-          <img src={`${art}crowd-far-v2.webp`} alt="" width="2172" height="724" loading="lazy" />
         </div>
         <div className={styles.festivalRig} data-festival-rig data-look="street">
           <img
@@ -115,45 +113,7 @@ export default function IndexWorldTail({ en = false }) {
         data-world-scene="plaza"
         aria-label="WonderPop Plaza"
       >
-        <img className={styles.gardenTerrain} data-garden-terrain
-          src={`${art}wonderpop-garden-path-v4.webp`} alt="" width="1536" height="1024" loading="lazy" />
-        <div className={styles.plazaLandmark} data-depth="plaza" data-look="landmark" aria-hidden="true">
-          <img src={`${art}wonderpop-front-v2.webp`} alt="" width="1024" height="1536" loading="lazy" />
-        </div>
-        <div
-          className={styles.approachGarden}
-          data-approach-garden="far"
-          data-look="city"
-          aria-hidden="true"
-        >
-          <img
-            src={`${art}boulevard-garden-v2.webp`}
-            width="1536"
-            height="1024"
-            alt=""
-            loading="lazy"
-          />
-        </div>
-        {['middle', 'near'].flatMap(distance => ['left', 'right'].map(side => (
-          <div key={`${distance}-${side}`} className={styles.gardenTree}
-            data-garden-tree={side} data-tree-distance={distance} data-look={distance === 'near' ? 'near' : 'street'} aria-hidden="true">
-            <img src={`${art}garden-trees-${side}-v3.webp`} alt="" width="1536" height="1024" loading="lazy" />
-          </div>
-        )))}
-        <div className={styles.approachArch} data-approach-arch data-look="near" aria-hidden="true">
-          <img
-            src={`${art}plaza-threshold.webp`}
-            width="1536"
-            height="1024"
-            alt=""
-            loading="lazy"
-          />
-        </div>
-        <div className={styles.pathLights} aria-hidden="true">
-          {Array.from({ length: 12 }, (_, i) => (
-            <i key={i} style={{ '--i': i, top: `${45 + (i % 4) * 10}%` }} />
-          ))}
-        </div>
+        <GardenWorld />
         <div className={styles.plazaShade} aria-hidden="true" />
         <div className={`${styles.copy} ${styles.plazaCopy}`} data-world-copy="plaza">
           <p className={styles.eyebrow}>05 / WONDERPOP PLAZA</p>
