@@ -49,7 +49,7 @@ export function mountJourney(root, onChapter) {
       Object.values(layers).forEach((el) => gsap.set(el, { clearProps: 'all' }));
       root.dataset.progress = '0';
       root.dataset.worldProgress = '0';
-      world.render(0, width, height, 0, true);
+      world.render(0, width, height, true);
       return;
     }
     const worldProgress = clamp((scrollY - start) / distance);
@@ -66,13 +66,6 @@ export function mountJourney(root, onChapter) {
       gsap.set(layers.hills, { x: x * 0.09, y: -height * 0.004 * toCity });
       gsap.set(layers.water, { x: x * 0.31, y: -height * 0.015 * toCity });
       gsap.set(layers.sun, { x: x * 0.035 });
-      gsap.set(layers.plaza, {
-        x: x * 0.88,
-        y: -height * 0.009 * toMusic,
-        scale: 1.02 - 0.02 * toCity,
-        transformOrigin: '85% 85%',
-        autoAlpha: 1,
-      });
       gsap.set(layers.street, { x, scale: pullback, transformOrigin: '50% 82%' });
       gsap.set(layers.furniture, { x: x * 1.12, y: height * 0.015 * toCity });
       const foregroundX = -width * 1.23 * phase(p, 0.04, 0.35);
@@ -103,7 +96,7 @@ export function mountJourney(root, onChapter) {
       gsap.set(exit, { opacity: 0 });
       lastOpening = p;
     }
-    world.render(worldProgress, width, height, camera[2], false);
+    world.render(worldProgress, width, height, false);
     progressBar.style.transform = `scaleX(${p})`;
     const chapter = worldProgress > 0.36 ? -1 : p < 0.23 ? 0 : p < 0.67 ? 1 : 2;
     if (chapter !== current) {

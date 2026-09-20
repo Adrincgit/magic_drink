@@ -217,25 +217,7 @@
   will-change: transform;
 }
 
-.plazaPlane {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 300svh;
-  height: 100%;
-  z-index: 3;
-  pointer-events: none;
-  will-change: transform;
-}
 
-.plazaPlane img {
-  position: absolute;
-  left: 80%;
-  bottom: 14%;
-  height: 95%;
-  width: auto;
-  max-width: none;
-}
 
 .streetArt {
   display: block;
@@ -260,6 +242,15 @@
   object-fit: cover;
   object-position: center 40%;
   display: block;
+}
+.billboard .posterFrame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+.billboard .posterFrame[data-visible='true'] {
+  opacity: 1;
 }
 
 .screenGlow {
@@ -1418,8 +1409,7 @@
     margin-left: 0;
   }
   .distance,
-  .street,
-  .plazaPlane {
+  .street {
     width: 300svh;
     height: 100svh;
     opacity: 0.3;

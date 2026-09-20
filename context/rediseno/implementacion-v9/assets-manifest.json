@@ -1,0 +1,188 @@
+{
+  "generator": "builtin imagegen",
+  "assets": [
+    {
+      "name": "hexy-poster-wave-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/hexy-poster.webp"
+      ],
+      "prompt": "Use case: illustration-story. Edit the reference concert poster into another frame for a looping LED billboard. Portrait 2:3. Keep the exact same petite youthful 14-year-old Hexy identity, face, pink hair, navy hat with golden star, modest sailor costume, red bow, knee socks, boots, same TWO round pink bunny mascots, same violet/pink starry stage and camera framing. Full body, cheerful age-appropriate performance. Do not change proportions or make adult. No frame, no lettering, no UI. Pose: Hexy holds the microphone at her mouth and waves her other hand at shoulder height with a bright smile, both feet grounded; bunny on left lifts both ears and cheers, bunny on right spins halfway. Preserve hat size, face and stage horizon. This must be a clearly different but coherent next concert pose.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-97e1f53f-7759-495d-b853-1f936af69b5f.png",
+      "output": "public/image/journey/hexy-poster-wave-v3.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "isOpaque": true,
+      "bytes": 341916
+    },
+    {
+      "name": "hexy-poster-sing-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/hexy-poster.webp"
+      ],
+      "prompt": "Use case: illustration-story. Edit the reference concert poster into another frame for a looping LED billboard. Portrait 2:3. Keep the exact same petite youthful 14-year-old Hexy identity, face, pink hair, navy hat with golden star, modest sailor costume, red bow, knee socks, boots, same TWO round pink bunny mascots, same violet/pink starry stage and camera framing. Full body, cheerful age-appropriate performance. Do not change proportions or make adult. No frame, no lettering, no UI. Pose: Hexy leans gently into singing, eyes closed joyfully, microphone held at mouth with one hand and the other hand over her chest. Feet together. Left bunny claps, right bunny jumps with raised arms. Preserve hat size, face and stage horizon.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-078d41e0-42fa-4a4a-abdb-88ba57f866ad.png",
+      "output": "public/image/journey/hexy-poster-sing-v3.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "isOpaque": true,
+      "bytes": 340620
+    },
+    {
+      "name": "hexy-poster-finale-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/hexy-poster.webp"
+      ],
+      "prompt": "Use case: illustration-story. Edit the reference concert poster into another frame for a looping LED billboard. Portrait 2:3. Keep the exact same petite youthful 14-year-old Hexy identity, face, pink hair, navy hat with golden star, modest sailor costume, red bow, knee socks, boots, same TWO round pink bunny mascots, same violet/pink starry stage and camera framing. Full body, cheerful age-appropriate performance. Do not change proportions or make adult. No frame, no lettering, no UI. Pose: Hexy points her free hand outward toward the audience while singing, feet planted in a small dance step. Open cheerful pink eyes. Both bunny mascots dance with arms out. Preserve hat size, face and stage horizon.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-d3dc908a-860e-4467-a023-df047c6d6b8c.png",
+      "output": "public/image/journey/hexy-poster-finale-v3.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "isOpaque": true,
+      "bytes": 347008
+    },
+    {
+      "name": "audience-row-1-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/crowd-middle-v2.webp"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE isolated SINGLE horizontal row of 34 concert spectators, seen from behind at eye level, shoulders and heads with occasional raised arms and golden/pink glow sticks. This is depth plane 1 of 4 separate parallax rows. Wide 3:1 canvas. Exactly ONE line of people, NO second/third row or crowd behind them. Match reference painterly amber rim light, violet evening shadows, casual jackets and varied hair. Fresh distinct people, no repeated recognizable reference figures, no child on shoulders. The row is anchored to the bottom edge; bodies cropped at waist by canvas bottom; upper 45% of canvas TRUE transparent alpha. No stage, no buildings, no floor, no rectangular backdrop or shadow slab. Clean natural silhouette with gaps between raised arms. Reference is style only.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-28348d35-e9e1-4180-9c74-e7e4be3fae14.png",
+      "output": "public/image/journey/audience-row-1-v3.webp",
+      "width": 2172,
+      "height": 724,
+      "hasAlpha": true,
+      "isOpaque": false,
+      "bytes": 278704
+    },
+    {
+      "name": "audience-row-2-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/crowd-middle-v2.webp"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE isolated SINGLE horizontal row of 23 concert spectators, seen from behind at eye level, shoulders and heads with occasional raised arms and golden/pink glow sticks. This is depth plane 2 of 4 separate parallax rows. Wide 3:1 canvas. Exactly ONE line of people, NO second/third row or crowd behind them. Match reference painterly amber rim light, violet evening shadows, casual jackets and varied hair. Fresh distinct people, no repeated recognizable reference figures, no child on shoulders. The row is anchored to the bottom edge; bodies cropped at waist by canvas bottom; upper 45% of canvas TRUE transparent alpha. No stage, no buildings, no floor, no rectangular backdrop or shadow slab. Clean natural silhouette with gaps between raised arms. Reference is style only.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-cf379b1e-858b-427b-bd84-0ad09c9f45e6.png",
+      "output": "public/image/journey/audience-row-2-v3.webp",
+      "width": 2172,
+      "height": 724,
+      "hasAlpha": true,
+      "isOpaque": false,
+      "bytes": 343266
+    },
+    {
+      "name": "audience-row-3-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/crowd-middle-v2.webp"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE isolated SINGLE horizontal row of 14 concert spectators, seen from behind at eye level, shoulders and heads with occasional raised arms and golden/pink glow sticks. This is depth plane 3 of 4 separate parallax rows. Wide 3:1 canvas. Exactly ONE line of people, NO second/third row or crowd behind them. Match reference painterly amber rim light, violet evening shadows, casual jackets and varied hair. Fresh distinct people, no repeated recognizable reference figures, no child on shoulders. The row is anchored to the bottom edge; bodies cropped at waist by canvas bottom; upper 45% of canvas TRUE transparent alpha. No stage, no buildings, no floor, no rectangular backdrop or shadow slab. Clean natural silhouette with gaps between raised arms. Reference is style only.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-1a804181-ac31-447d-9b8c-2b833e74dcaa.png",
+      "output": "public/image/journey/audience-row-3-v3.webp",
+      "width": 2172,
+      "height": 724,
+      "hasAlpha": true,
+      "isOpaque": false,
+      "bytes": 322098
+    },
+    {
+      "name": "audience-row-4-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/crowd-middle-v2.webp"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE isolated SINGLE horizontal row of 9 concert spectators, seen from behind at eye level, shoulders and heads with occasional raised arms and golden/pink glow sticks. This is depth plane 4 of 4 separate parallax rows. Wide 3:1 canvas. Exactly ONE line of people, NO second/third row or crowd behind them. Match reference painterly amber rim light, violet evening shadows, casual jackets and varied hair. Fresh distinct people, no repeated recognizable reference figures, no child on shoulders. The row is anchored to the bottom edge; bodies cropped at waist by canvas bottom; upper 45% of canvas TRUE transparent alpha. No stage, no buildings, no floor, no rectangular backdrop or shadow slab. Clean natural silhouette with gaps between raised arms. Reference is style only.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-303f9905-c930-4fe9-a65f-298ccd0eea39.png",
+      "output": "public/image/journey/audience-row-4-v3.webp",
+      "width": 2172,
+      "height": 724,
+      "hasAlpha": true,
+      "isOpaque": false,
+      "bytes": 362986
+    },
+    {
+      "name": "garden-canopy-veil-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/boulevard-garden-v2.webp"
+      ],
+      "prompt": "Use case: illustration-story. Foreground transition occluder: very close lush garden branches, leaves and creamy/lilac blossoms with a few warm tiny fairy lights, in the same painterly deep green/amber/violet dusk style as reference. Landscape 3:2. Dense interwoven foliage covers the CENTER 75% of the canvas completely OPAQUE (no see-through holes in central mass), natural irregular feathery leafy silhouette around all four outer edges fading into TRUE transparent alpha margin. No square or straight cut edges. Looks like a leafy tree branch passing extremely close to a moving camera. No architecture, no trunks, no sky, no ground, no text, no people. The solid center will physically conceal a scene change.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-7d44e241-2007-47bd-8d03-58369f1adfff.png",
+      "output": "public/image/journey/garden-canopy-veil-v3.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "isOpaque": false,
+      "bytes": 708046
+    },
+    {
+      "name": "garden-trees-left-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/boulevard-garden-v2.webp"
+      ],
+      "prompt": "Use case: illustration-story. Isolated tall leafy garden tree on LEFT of a landscape 3:2 transparent canvas. Rich hand painted deep green/teal leaves, lilac flowers, amber fairy lights, warm violet twilight matching reference. Thick graceful trunk occupies left 10-28% from bottom to top, full lush canopy spreads across upper left HALF, several overhanging branches toward center. Lower left has a low flower bed. Right 55% completely transparent. Tree trunk rooted on bottom edge, side canopy naturally cropped at left and top. ONE tree, no row of smaller trees, no lantern post, no pot, no building, no ground plane. TRUE transparent alpha through leaf gaps and entire right portion. This near tree will pass the camera.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-a9ffa8de-7edf-4b90-9f98-5ff8914a0c0e.png",
+      "output": "public/image/journey/garden-trees-left-v3.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "isOpaque": false,
+      "bytes": 481098
+    },
+    {
+      "name": "garden-trees-right-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/boulevard-garden-v2.webp"
+      ],
+      "prompt": "Use case: illustration-story. Isolated tall leafy garden tree on RIGHT of a landscape 3:2 transparent canvas. A DIFFERENT tree: broad oak-like canopy, textured branching trunk, dense deep green leaves with violet dusk shadows, a few creamy blossoms and amber fairy lights. Hand-painted to match reference. Trunk occupies right 73-90% from bottom to top, foliage across upper right HALF with branches reaching center. Small hydrangeas around trunk at bottom right. Left 55% completely transparent. Rooted at bottom edge, canopy naturally cropped at right and top. ONE tree, no row, no pot, no architecture, no floor or sky. TRUE transparent alpha through leaf gaps and left portion. This near tree will pass the camera.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-a3302b07-6677-4649-9ef3-b8e59a06df83.png",
+      "output": "public/image/journey/garden-trees-right-v3.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "isOpaque": false,
+      "bytes": 407100
+    },
+    {
+      "name": "hexy-airship-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/hexy-poster.webp"
+      ],
+      "prompt": "Use case: ads-marketing. Isolated small whimsical advertising ZEPPELIN seen side-on in a painterly purple and amber sunset world. TRUE transparent background, landscape 3:2 canvas. Entire airship within frame including fins, tiny gondola and propellers. Deep purple fabric hull with golden stars and elegant warm trim. On the side of the hull is a clearly PRINTED campaign illustration of the reference character Hexy (same petite youthful 14-year-old girl, pink hair, navy wizard hat, modest sailor outfit) happily holding a small purple Magic Drink soda can with golden star and yellow/cyan MAGIC DRINK logo. She is a printed graphic ON the hull, not a person riding outside. No extra text besides tiny MAGIC DRINK on can. Artful believable airship proportions, no oversized character, no sky or ground, no watermark.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-1dee5fb9-184e-47c3-a174-f82202250689.png",
+      "output": "public/image/journey/hexy-airship-v3.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "isOpaque": false,
+      "bytes": 290970
+    },
+    {
+      "name": "wonderpop-garden-path-v3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/boulevard-garden-v2.webp",
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/wonderpop-front-v2.webp"
+      ],
+      "prompt": "Use case: illustration-story. New terrain/background plate for a camera traveling straight through the WonderPop garden. Landscape 3:2. Rich hand-painted twilight purple, amber and natural deep green matching references. Frontal perfectly centered ONE POINT perspective: a pale lilac stone WALKING PATH runs from entire lower center foreground to vanishing point x50% y46%. Lush grass, low flowering hedges, lavender, daisies, warm recessed path lights flank it. A few small distant garden trees and a low hedge at horizon. Upper 42% softly painted lavender-pink evening sky, no main building: central distant region must stay clear because WonderPop building is a separate layer. NOT the city plaza cobblestones, no river, no bridge, no repeated gold stars in pavement. No people, furniture, signage or prominent foreground trees (those are separate layers). Opaque complete image edge to edge, detailed ground at bottom, no transparent regions.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-63647a3b-42e4-4106-9021-56abd660d8f1.png",
+      "output": "context/rediseno/implementacion-v9/arte-fuente/wonderpop-garden-path-v3.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": false,
+      "isOpaque": true,
+      "bytes": 356876,
+      "supersededBy": "wonderpop-garden-path-v4"
+    },
+    {
+      "name": "wonderpop-garden-path-v4",
+      "prompt": "Edit this garden terrain plate for a layered illustrated website. Preserve exact polished painterly purple-pink dusk style, flowers, fairy lights, landscaping. Recompose perspective: the distant hedge HORIZON AND PATH VANISHING POINT MUST BE at x50%, y77% of canvas. Upper 70% is open purple pink sunset sky. All distant garden shrubs sit along y72-80%. A FLAT stone garden path exists ONLY in the lower 23% of image, vanishes at x50% y77% and widens toward bottom corners. No road ramp and no staircase. No building: a separate WonderPop landmark will be placed centered with its feet at y81%, so there must be NO visible path above y77%. Lateral dark green lawns and elegant flowerbeds below horizon. No tall foreground tree, no people, no lettering. Opaque 1536x1024 landscape background plate.",
+      "refs": [
+        "public/image/journey/wonderpop-garden-path-v3.webp"
+      ],
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-6b7a1cc1-106e-4a9f-8b2f-ea750b254734.png",
+      "output": "public/image/journey/wonderpop-garden-path-v4.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": false,
+      "bytes": 214322
+    }
+  ]
+}

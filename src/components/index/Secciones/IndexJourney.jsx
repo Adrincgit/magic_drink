@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { mountJourney } from '../animations/journeyMotion';
 import styles from '../css/indexJourney.module.css';
 import IndexWorldTail from './IndexWorldTail';
+import BillboardSequence from './BillboardSequence';
 
 const art = '/image/journey/';
 const words = {
@@ -218,14 +219,6 @@ export default function IndexJourney({ en = false }) {
               loading="lazy"
             />
           </div>
-          <div
-            className={styles.plazaPlane}
-            data-depth="plaza"
-            data-look="landmark"
-            aria-hidden="true"
-          >
-            <img src={`${art}wonderpop-front-v2.webp`} alt="" width="1024" height="1536" />
-          </div>
           <div className={styles.openingScene} data-opening>
             <div
               className={styles.street}
@@ -241,10 +234,7 @@ export default function IndexJourney({ en = false }) {
                 height="724"
                 fetchpriority="high"
               />
-              <div className={styles.billboard} data-billboard>
-                <img src={`${art}hexy-poster.webp`} alt="" width="1024" height="1536" />
-                <div className={styles.screenGlow} />
-              </div>
+              <BillboardSequence active={chapter === 1 || chapter === 2} />
               <span className={`${styles.shopLight} ${styles.lightOne}`} />
               <span className={`${styles.shopLight} ${styles.lightTwo}`} />
             </div>

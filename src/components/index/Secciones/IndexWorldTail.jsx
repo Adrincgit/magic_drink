@@ -1,5 +1,7 @@
 ﻿import styles from '../css/indexWorldTail.module.css';
 
+import depth from '../css/festivalDepth.module.css'; // Audience planes and sky animation.
+
 const art = '/image/journey/';
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
@@ -22,6 +24,12 @@ export default function IndexWorldTail({ en = false }) {
           height="887"
           loading="lazy"
         />
+        <div className={depth.airship} data-airship data-look="city" aria-hidden="true">
+          <img src={`${art}hexy-airship-v3.webp`} alt="" width="1536" height="1024" loading="lazy" />
+        </div>
+        <div className={depth.distantAudience} data-crowd-far data-look="city" aria-hidden="true">
+          <img src={`${art}crowd-far-v2.webp`} alt="" width="2172" height="724" loading="lazy" />
+        </div>
         <div className={styles.festivalRig} data-festival-rig data-look="street">
           <img
             className={styles.pavilion}
@@ -48,20 +56,12 @@ export default function IndexWorldTail({ en = false }) {
           </div>
           <div className={styles.stageGlow} aria-hidden="true" />
         </div>
-        <div
-          className={`${styles.middleCrowd} ${styles.farCrowd}`}
-          data-crowd-far
-          data-look="city"
-          aria-hidden="true"
-        >
-          <img src={`${art}crowd-far-v2.webp`} alt="" width="2172" height="724" loading="lazy" />
-        </div>
-        <div className={styles.middleCrowd} data-crowd-middle data-look="street" aria-hidden="true">
-          <img src={`${art}crowd-middle-v2.webp`} alt="" width="2172" height="724" loading="lazy" />
-        </div>
-        <div className={styles.crowd} data-crowd data-look="near" aria-hidden="true">
-          <img src={`${art}festival-crowd.webp`} alt="" width="2172" height="724" loading="lazy" />
-        </div>
+        {[1, 2, 3, 4].map(row => (
+          <div key={row} className={depth.audienceRow} data-audience-row={row}
+            data-crowd={row === 4 ? '' : undefined} data-look={row < 3 ? 'street' : 'near'} aria-hidden="true">
+            <img src={`${art}audience-row-${row}-v3.webp`} alt="" width="2172" height="724" loading="lazy" />
+          </div>
+        ))}
         <div className={styles.festivalShade} aria-hidden="true" />
         <div className={`${styles.copy} ${styles.festivalCopy}`} data-world-copy="festival">
           <p className={styles.eyebrow}>04 / MAGIC DRINK DAY</p>
@@ -115,6 +115,11 @@ export default function IndexWorldTail({ en = false }) {
         data-world-scene="plaza"
         aria-label="WonderPop Plaza"
       >
+        <img className={styles.gardenTerrain} data-garden-terrain
+          src={`${art}wonderpop-garden-path-v4.webp`} alt="" width="1536" height="1024" loading="lazy" />
+        <div className={styles.plazaLandmark} data-depth="plaza" data-look="landmark" aria-hidden="true">
+          <img src={`${art}wonderpop-front-v2.webp`} alt="" width="1024" height="1536" loading="lazy" />
+        </div>
         <div
           className={styles.approachGarden}
           data-approach-garden="far"
@@ -129,20 +134,12 @@ export default function IndexWorldTail({ en = false }) {
             loading="lazy"
           />
         </div>
-        <div
-          className={`${styles.approachGarden} ${styles.gardenNear}`}
-          data-approach-garden="near"
-          data-look="near"
-          aria-hidden="true"
-        >
-          <img
-            src={`${art}boulevard-garden-v2.webp`}
-            width="1536"
-            height="1024"
-            alt=""
-            loading="lazy"
-          />
-        </div>
+        {['middle', 'near'].flatMap(distance => ['left', 'right'].map(side => (
+          <div key={`${distance}-${side}`} className={styles.gardenTree}
+            data-garden-tree={side} data-tree-distance={distance} data-look={distance === 'near' ? 'near' : 'street'} aria-hidden="true">
+            <img src={`${art}garden-trees-${side}-v3.webp`} alt="" width="1536" height="1024" loading="lazy" />
+          </div>
+        )))}
         <div className={styles.approachArch} data-approach-arch data-look="near" aria-hidden="true">
           <img
             src={`${art}plaza-threshold.webp`}
@@ -177,8 +174,8 @@ export default function IndexWorldTail({ en = false }) {
           </h2>
           <p>
             {en
-              ? 'You have seen its lights. Come a little closer.'
-              : 'Ya viste sus luces. Acércate un poco más.'}
+              ? 'A path through the gardens. A world waiting for you.'
+              : 'Un camino entre jardines. Un mundo que te espera.'}
           </p>
           <span className={styles.keepGoing}>
             {en ? 'KEEP SCROLLING' : 'SIGUE EXPLORANDO'} <span aria-hidden="true">↓</span>
@@ -369,6 +366,8 @@ export default function IndexWorldTail({ en = false }) {
         <img src={`${art}foliage.webp`} alt="" width="1254" height="1254" />
       </div>
       <div className={styles.doorLight} data-door-light aria-hidden="true" />
+      <img className={styles.canopyVeil} data-canopy-veil
+        src={`${art}garden-canopy-veil-v3.webp`} width="1536" height="1024" alt="" loading="lazy" />
       <div className={styles.worldRail} data-world-rail aria-hidden="true">
         <span data-world-label>MAGIC DRINK DAY</span>
         <i />

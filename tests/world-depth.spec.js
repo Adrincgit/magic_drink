@@ -31,25 +31,28 @@ test('one persistent viewport carries every chapter across the former section bo
   await expect(page.locator('main video')).toHaveCount(0);
 });
 
-test('the same WonderPop landmark travels from the opening city to its entrance', async ({
+test('WonderPop appears only in the garden and approaches without shrinking', async ({
   page,
 }) => {
   await openLanding(page);
   const landmark = page.locator('[data-depth="plaza"]');
-  await goWorld(page, 0.313);
-  await landmark.evaluate((element) => {
-    element.dataset.identity = 'shared-landmark';
-  });
-  const before = await landmark.evaluate((element) => getComputedStyle(element).transform);
+  for (const p of [0, 0.162, 0.313, 0.49, 0.59]) {
+    await goWorld(page, p);
+    await expect(landmark).toBeHidden();
+  }
+  let previousWidth = 0;
+  for (const p of [0.635, 0.65, 0.68, 0.72, 0.76, 0.80, 0.82]) {
+    await goWorld(page, p);
+    const bounds = await landmark.boundingBox();
+    expect(bounds.width).toBeGreaterThanOrEqual(previousWidth);
+    expect(bounds.x + bounds.width / 2).toBeCloseTo(720, 0);
+    previousWidth = bounds.width;
+  }
   await goWorld(page, 0.68);
-  await expect(landmark).toHaveAttribute('data-identity', 'shared-landmark');
-  expect(await landmark.evaluate((element) => getComputedStyle(element).transform)).not.toBe(
-    before,
-  );
   await expect(page.locator('[data-world-copy="plaza"]')).toBeVisible();
   await goWorld(page, 0.878);
   await expect(page.locator('[data-world-copy="interior"]')).toBeVisible();
-  expect(await landmark.evaluate((element) => getComputedStyle(element).visibility)).toBe('hidden');
+  await expect(landmark).toBeHidden();
 });
 
 test('late or failed artwork cannot change the scroll distance or skip a chapter', async ({
