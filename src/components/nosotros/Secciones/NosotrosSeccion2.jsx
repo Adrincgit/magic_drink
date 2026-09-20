@@ -15,7 +15,7 @@ const content = {
       'Creamos una bebida moderna, saludable y emocionalmente memorable. Una que no necesita cafeína para sentirse viva ni exceso para volverse indispensable. Lo que Magic Drink ofrece es algo que la ciencia aún estudia y los consumidores simplemente disfrutan.',
     metrics: [
       { value: '190+', label: 'mercados que reconocen la marca' },
-      { value: '1', label: 'Original que nos conecta' },
+      { value: '1', label: 'Bebida que nos conecta' },
       { value: '24/7', label: 'presencia en rutinas reales' },
     ],
     cardLabel: 'Manifiesto Corporativo',
@@ -28,7 +28,7 @@ const content = {
       'We created a modern, healthy, emotionally memorable drink. One that does not need caffeine to feel alive or excess to become indispensable. What Magic Drink offers is something science still studies and consumers simply enjoy.',
     metrics: [
       { value: '190+', label: 'markets where the brand is recognized' },
-      { value: '1', label: 'Original bringing us together' },
+      { value: '1', label: 'Drink bringing us together' },
       { value: '24/7', label: 'presence inside real routines' },
     ],
     cardLabel: 'Corporate Manifesto',

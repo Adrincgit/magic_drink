@@ -62,7 +62,7 @@ const IndexSeccion3 = () => {
       endSubtitle: "6 sabores únicos esperándote",
       flavors: [
         {
-          name: "Magic Original",
+          name: "Magic Drink",
           tagline: "El sabor que equilibró al mundo",
           description: "Frutas púrpuras en perfecta armonía — concentradas, equilibradas, pensadas para ti. No por nada fue el primero en conquistar al mundo. Ya sabes por qué.",
           color: "#AA37F2",
@@ -143,7 +143,7 @@ const IndexSeccion3 = () => {
       endSubtitle: "6 unique flavors waiting for you",
       flavors: [
         {
-          name: "Magic Original",
+          name: "Magic Drink",
           tagline: "The flavor that balanced the world",
           description: "Purple fruits in perfect harmony — concentrated, balanced, designed for you. There's a reason it conquered the world first. You already know why.",
           color: "#AA37F2",

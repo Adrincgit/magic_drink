@@ -10,7 +10,7 @@ const content = {
     title: 'El desfile anual donde el brillo de la marca se vuelve ciudad.',
     body:
       'Carrozas, globos, musica de Hexy y miles de personas celebrando el sabor mas querido del planeta. El evento sigue creciendo como una fiesta oficial de escala global.',
-    ctaPrimary: 'Volver a bebidas',
+    ctaPrimary: 'Conoce Magic Drink',
     ctaSecondary: 'Ver Wonderpop Plaza',
   },
   en: {
@@ -18,7 +18,7 @@ const content = {
     title: 'The annual parade where the brand glow turns into a whole city.',
     body:
       'Floats, balloons, Hexy music, and thousands of people celebrating the worlds most beloved beverage. The event keeps growing like an official festival of global scale.',
-    ctaPrimary: 'Back to drinks',
+    ctaPrimary: 'Discover Magic Drink',
     ctaSecondary: 'See Wonderpop Plaza',
   },
 };

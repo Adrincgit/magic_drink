@@ -18,7 +18,7 @@ const FootNetHive = () => {
       col2Title: "Conéctate",
       newsletterPlaceholder: "tu@email.com",
       newsletterBtn: "¡Únete!",
-      badges: ["Promos exclusivas", "Noticias de Hexy", "Momentos Original"],
+      badges: ["Promos exclusivas", "Noticias de Hexy", "Momentos Magic Drink"],
       col3Title: "Síguenos",
       shareHashtag: "Comparte tu #MagicMoment",
       socials: [
@@ -40,7 +40,7 @@ const FootNetHive = () => {
       col2Title: "Connect",
       newsletterPlaceholder: "your@email.com",
       newsletterBtn: "Join Us!",
-      badges: ["Exclusive promos", "Hexy news", "Original moments"],
+      badges: ["Exclusive promos", "Hexy news", "Magic Drink moments"],
       col3Title: "Follow Us",
       shareHashtag: "Share your #MagicMoment",
       socials: [

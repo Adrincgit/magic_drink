@@ -60,7 +60,7 @@ test('navigation, languages and user-initiated audio work; navigation remains ab
   await page.locator('header').getByRole('button', { name: 'EN', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page.locator('[data-chapter="2"] h2')).toContainText('This is Hexy.');
-  await expect(page.locator('#festival h2')).toContainText('All of us.');
+  await expect(page.locator('#festival h2')).toContainText('Magic Drink');
   await goWorld(page, 0.49);
   const nav = page.locator('header').getByRole('button', { name: 'EN', exact: true });
   await nav.click({ trial: true });
@@ -127,7 +127,7 @@ test('reduced motion exposes the story as ordinary readable sections', async ({ 
   }
 });
 
-test('Hexy deep link opens its scene and the product route offers only Original', async ({
+test('Hexy deep link opens its scene and the product route offers only Magic Drink', async ({
   page,
 }) => {
   await openLanding(page, '#hexy');
@@ -135,9 +135,9 @@ test('Hexy deep link opens its scene and the product route offers only Original'
     .poll(() => page.locator('[data-journey]').evaluate((el) => Number(el.dataset.progress)))
     .toBeCloseTo(0.87, 2);
   await page.goto('/bebidas', { waitUntil: 'networkidle' });
-  await expect(page.locator('main h1')).toContainText('Original');
+  await expect(page.locator('main h1')).toHaveText(/Magic\s*Drink\./);
   await expect(page.locator('body')).not.toContainText(
-    /Bubble Tape|Dragon Grape|Banana Drama|6 sabores|6 official flavors/,
+    /Original|Bubble Tape|Dragon Grape|Banana Drama|6 sabores|6 official flavors/,
   );
   await expect(page.locator('img[src="/image/journey/original.webp"]')).toBeVisible();
 });

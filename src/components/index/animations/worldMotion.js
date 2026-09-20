@@ -211,7 +211,7 @@ export function createWorldDirector(root) {
           ? '04 / MAGIC DRINK DAY'
           : r < 0.915
             ? '05 / WONDERPOP PLAZA'
-            : '06 / MAGIC DRINK ORIGINAL';
+            : '06 / MAGIC DRINK';
       if (label.textContent !== nextLabel) label.textContent = nextLabel;
       root.dataset.worldChapter =
         r < 0.36 ? 'opening' : r < 0.62 ? 'festival' : r < 0.915 ? 'wonderpop' : 'original';

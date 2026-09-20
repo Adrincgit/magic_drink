@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStore } from '@nanostores/react';
 import { isEnglish } from '../../../data/variables';
+import { SceneButton } from '../../global/SceneControls';
 import styles from '../css/hexySeccion4.module.css';
 
 const content = {
@@ -9,8 +10,8 @@ const content = {
     headingAccent: 'vuelva a sonar',
     headingSuffix: '',
     description:
-      'Conoce Magic Drink Original o entra a Wonderpop Plaza, donde Hexy, las luces y los Magic Bunnies convierten cada momento en algo que se queda tarareando.',
-    ctaPrimary: 'Conoce la Original',
+      'Conoce Magic Drink o entra a Wonderpop Plaza, donde Hexy, las luces y los Magic Bunnies convierten cada momento en algo que se queda tarareando.',
+    ctaPrimary: 'Conoce Magic Drink',
     ctaSecondary: 'Entrar a Wonderpop Plaza',
   },
   en: {
@@ -18,8 +19,8 @@ const content = {
     headingAccent: 'play again',
     headingSuffix: '',
     description:
-      'Discover Magic Drink Original or enter Wonderpop Plaza, where Hexy, the lights, and the Magic Bunnies turn each moment into something you keep humming.',
-    ctaPrimary: 'Discover Original',
+      'Discover Magic Drink or enter Wonderpop Plaza, where Hexy, the lights, and the Magic Bunnies turn each moment into something you keep humming.',
+    ctaPrimary: 'Discover Magic Drink',
     ctaSecondary: 'Enter Wonderpop Plaza',
   },
 };
@@ -51,12 +52,8 @@ export default function HexySeccion4() {
         <p className={styles.description}>{t.description}</p>
 
         <div className={styles.actions}>
-          <a href="/bebidas" className={styles.btnPrimary}>
-            {t.ctaPrimary} {'\u2192'}
-          </a>
-          <a href="/wonderpop-plaza" className={styles.btnSecondary}>
-            {t.ctaSecondary} {'\u2192'}
-          </a>
+          <SceneButton href="/bebidas">{t.ctaPrimary}</SceneButton>
+          <SceneButton href="/wonderpop-plaza" variant="violet">{t.ctaSecondary}</SceneButton>
         </div>
       </div>
     </section>

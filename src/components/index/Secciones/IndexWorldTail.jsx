@@ -1,3 +1,4 @@
+import { SceneButton, SceneLabel, SceneNote } from '../../global/SceneControls';
 import GardenWorld from './GardenWorld';
 import DJSequence from './DJSequence';
 import FestivalCrowdMotion from './FestivalCrowdMotion';
@@ -6,7 +7,7 @@ import styles from '../css/indexWorldTail.module.css';
 import depth from '../css/festivalDepth.module.css'; // Audience planes and sky animation.
 
 const art = '/image/journey/';
-const Arrow = () => <span aria-hidden="true">↗</span>;
+
 
 export default function IndexWorldTail({ en = false }) {
   return (
@@ -60,35 +61,26 @@ export default function IndexWorldTail({ en = false }) {
         <FestivalCrowdMotion />
         <div className={styles.festivalShade} aria-hidden="true" />
         <div className={`${styles.copy} ${styles.festivalCopy}`} data-world-copy="festival">
-          <p className={styles.eyebrow}>04 / MAGIC DRINK DAY</p>
+          <SceneLabel>04 / MAGIC DRINK DAY</SceneLabel>
           <h2>
             {en ? (
               <>
-                The city.
+                Magic Drink
                 <br />
-                The music.
-                <br />
-                <em>All of us.</em>
+                <em>Day.</em>
               </>
             ) : (
               <>
-                La ciudad.
+                Magic Drink
                 <br />
-                La música.
-                <br />
-                <em>Todos juntos.</em>
+                <em>Day.</em>
               </>
             )}
           </h2>
-          <p>
-            {en
-              ? 'Some moments deserve their own soundtrack.'
-              : 'Hay momentos que merecen su propia canción.'}
-          </p>
-          <a className={styles.button} href="/magicdrinkday">
-            {en ? 'Join the celebration' : 'Vive Magic Drink Day'}
-            <Arrow />
-          </a>
+          <SceneNote>{en
+              ? 'Parades, giant balloons and Hexy on stage. The world celebrates its favorite drink.'
+              : 'Desfiles, globos gigantes y Hexy sobre el escenario. El mundo celebra su bebida favorita.'}</SceneNote>
+          <SceneButton href="/magicdrinkday" variant="ticket">{en ? 'Join the celebration' : 'Vive Magic Drink Day'}</SceneButton>
         </div>
         <div className={styles.confetti} data-look="near" aria-hidden="true">
           {Array.from({ length: 66 }, (_, i) => (
@@ -114,7 +106,7 @@ export default function IndexWorldTail({ en = false }) {
         <GardenWorld />
         <div className={styles.plazaShade} aria-hidden="true" />
         <div className={`${styles.copy} ${styles.plazaCopy}`} data-world-copy="plaza">
-          <p className={styles.eyebrow}>05 / WONDERPOP PLAZA</p>
+          <SceneLabel>05 / WONDERPOP PLAZA</SceneLabel>
           <h2>
             {en ? (
               <>
@@ -130,11 +122,9 @@ export default function IndexWorldTail({ en = false }) {
               </>
             )}
           </h2>
-          <p>
-            {en
-              ? 'A path through the gardens. A world waiting for you.'
-              : 'Un camino entre jardines. Un mundo que te espera.'}
-          </p>
+          <SceneNote>{en
+              ? 'Just a few steps from Magic Drink’s official shopping plaza.'
+              : 'Estás a unos pasos del centro comercial oficial de Magic Drink.'}</SceneNote>
           <span className={styles.keepGoing}>
             {en ? 'KEEP SCROLLING' : 'SIGUE EXPLORANDO'} <span aria-hidden="true">↓</span>
           </span>
@@ -213,7 +203,7 @@ export default function IndexWorldTail({ en = false }) {
         data-world-copy="interior"
         aria-label={en ? 'Inside WonderPop Plaza' : 'Dentro de WonderPop Plaza'}
       >
-        <p className={styles.eyebrow}>WONDERPOP PLAZA</p>
+        <SceneLabel>WONDERPOP PLAZA</SceneLabel>
         <h2>
           {en ? (
             <>
@@ -229,22 +219,17 @@ export default function IndexWorldTail({ en = false }) {
             </>
           )}
         </h2>
-        <p>
-          {en
-            ? 'Your music, your Original. And a thousand reasons to stay a little longer.'
-            : 'Tu música, tu Original. Y mil razones para quedarte un rato más.'}
-        </p>
-        <a className={styles.button} href="/wonderpop-plaza">
-          {en ? 'Discover WonderPop' : 'Descubre WonderPop'}
-          <Arrow />
-        </a>
+        <SceneNote>{en
+            ? 'Official shops, games, music and Magic Bunnies. Welcome to Magic Drink’s shopping plaza.'
+            : 'Tiendas oficiales, juegos, música y Magic Bunnies. Bienvenido al centro comercial de Magic Drink.'}</SceneNote>
+        <SceneButton href="/wonderpop-plaza">{en ? 'Discover WonderPop' : 'Descubre WonderPop'}</SceneButton>
       </section>
 
       <section
         className={styles.closing}
         id="la-original"
         data-world-scene="closing"
-        aria-label="Magic Drink Original"
+        aria-label="Magic Drink"
       >
         <div className={styles.closingShade} aria-hidden="true" />
         <div className={styles.closingDisplay} data-closing-display data-look="near">
@@ -265,38 +250,33 @@ export default function IndexWorldTail({ en = false }) {
           <img
             className={styles.closingCan}
             src={`${art}original-dynamic-v2.webp`}
-            alt="Magic Drink Original"
+            alt="Magic Drink"
             width="1024"
             height="1536"
             loading="lazy"
           />
         </div>
         <div className={`${styles.copy} ${styles.closingCopy}`} data-world-copy="closing">
-          <p className={styles.eyebrow}>06 / MAGIC DRINK ORIGINAL</p>
+          <SceneLabel>06 / MAGIC DRINK</SceneLabel>
           <h2>
             {en ? (
               <>
-                Your world.
+                Magic
                 <br />
-                <em>Your Original.</em>
+                <em>Drink.</em>
               </>
             ) : (
               <>
-                Tu mundo.
+                Magic
                 <br />
-                <em>Tu Original.</em>
+                <em>Drink.</em>
               </>
             )}
           </h2>
-          <p>
-            {en
-              ? 'Take a little of this moment with you.'
-              : 'Llévate un poco de este momento contigo.'}
-          </p>
-          <a className={styles.button} href="/bebidas">
-            {en ? 'Discover Original' : 'Conoce la Original'}
-            <Arrow />
-          </a>
+          <SceneNote>{en
+              ? 'The world’s favorite drink. Get to know what’s behind the purple can.'
+              : 'La bebida favorita del mundo. Descubre qué hay detrás de la lata morada.'}</SceneNote>
+          <SceneButton href="/bebidas">{en ? 'Discover Magic Drink' : 'Conoce Magic Drink'}</SceneButton>
           <span className={styles.signature}>Spark more everyday.</span>
         </div>
         <footer className={styles.footer} data-world-footer>

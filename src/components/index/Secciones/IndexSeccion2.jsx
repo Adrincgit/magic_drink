@@ -183,7 +183,7 @@ const IndexSeccion2 = () => {
           </div>
           <img 
             src="/image/drinks/lata_original.webp" 
-            alt="Magic Drink Original"
+            alt="Magic Drink"
             className={styles.canImage}
           />
           {/* Partículas flotantes */}

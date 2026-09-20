@@ -1,9 +1,9 @@
 import { useStore } from '@nanostores/react';
 import { isEnglish } from '../../data/variables';
-import styles from './css/button.module.css';
+import { SceneButton } from './SceneControls';
 
 /**
- * Button - Componente de botón reutilizable con gradiente CTA de Energy Media
+ * Button - API compartida de enlaces y acciones, con los marcos ilustrados de Magic Drink
  * 
  * @param {Object} props
  * @param {string} props.textEs - Texto en español
@@ -38,54 +38,22 @@ const Button = ({
   const ingles = useStore(isEnglish);
   const text = ingles ? textEn : textEs;
 
-  // Construir clases del botón
-  const buttonClasses = [
-    styles.button,
-    styles[variant],
-    styles[size],
-    fullWidth ? styles.fullWidth : '',
-    disabled ? styles.disabled : '',
-    className,
-  ].filter(Boolean).join(' ');
-
-  // Contenido interno del botón
-  const ButtonContent = () => (
-    <>
-      {variant === 'magic' && <span className={styles.ornLeft} data-side="left"></span>}
-      {icon && <span className={styles.icon}>{icon}</span>}
-      <span className={styles.text}>{text}</span>
-      {showArrow && <span className={styles.arrow}>→</span>}
-      {variant === 'magic' && <span className={styles.ornRight} data-side="right"></span>}
-    </>
-  );
-
-  // Si tiene href, renderizar como enlace
-  if (href && !disabled) {
-    return (
-      <a
-        href={href}
-        className={buttonClasses}
-        target={external ? '_blank' : undefined}
-        rel={external ? 'noopener noreferrer' : undefined}
-        onClick={onClick}
-      >
-        <span className={styles.bgOverlay}></span>
-        <ButtonContent />
-      </a>
-    );
-  }
-
-  // Si no tiene href, renderizar como botón
   return (
-    <button
-      type={type}
-      className={buttonClasses}
+    <SceneButton
+      href={disabled ? undefined : href}
+      variant={variant === 'secondary' || variant === 'outline' ? 'violet' : 'gold'}
+      size={size}
+      fullWidth={fullWidth}
+      showArrow={showArrow}
+      className={className}
       onClick={onClick}
-      disabled={disabled}
+      type={href && !disabled ? undefined : type}
+      disabled={disabled || undefined}
+      target={external && href ? '_blank' : undefined}
+      rel={external && href ? 'noopener noreferrer' : undefined}
     >
-      <span className={styles.bgOverlay}></span>
-      <ButtonContent />
-    </button>
+      {icon && <span aria-hidden="true">{icon} </span>}{text}
+    </SceneButton>
   );
 };
 

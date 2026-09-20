@@ -3,33 +3,35 @@ import { mountJourney } from '../animations/journeyMotion';
 import styles from '../css/indexJourney.module.css';
 import IndexWorldTail from './IndexWorldTail';
 import BillboardSequence from './BillboardSequence';
+import { SceneButton, SceneLabel, SceneNote } from '../../global/SceneControls';
+import ScenePlayer from '../../global/ScenePlayer';
 
 const art = '/image/journey/';
 const words = {
   es: {
-    original: 'LA',
+    claim: 'LA BEBIDA N.º 1 DEL MUNDO',
     world: (
       <>
-        Un sorbo. Tu música.
+        Un sabor que no puedes dejar de querer.
         <br />
-        Un mundo por descubrir.
+        Saludable y sin cafeína.
       </>
     ),
-    enter: 'Entra en su mundo',
+    enter: 'Descubre por qué',
     listen: 'Escucha a Hexy',
-    eyebrow: 'UN MUNDO MÁS BRILLANTE',
+    eyebrow: 'ASÍ SE SIENTE MAGIC DRINK',
     city: (
       <>
-        La ciudad tiene
+        Adiós, días
         <br />
-        <em>su propio ritmo.</em>
+        <em>aburridos.</em>
       </>
     ),
     cityBody: (
       <>
-        En la calle. En tus canciones.
+        Con Magic Drink, lo cotidiano se siente menos aburrido.
         <br />
-        En esos momentos que quieres repetir.
+        Por algo se ha convertido en la favorita del mundo.
       </>
     ),
     follow: 'Sigue la música',
@@ -41,38 +43,38 @@ const words = {
         <em>a Hexy.</em>
       </>
     ),
-    musicBody: 'Una canción. Una sonrisa. La Original.',
+    musicBody: 'Sus canciones ya se quedan en tu cabeza. Los fans dicen que, con una Magic Drink, se vuelven todavía más adictivas.',
     meet: 'Conoce a Hexy',
     scroll: 'DESLIZA Y DESCUBRE',
-    chapters: ['LA ORIGINAL', 'LA CIUDAD', 'HEXY'],
+    chapters: ['MAGIC DRINK', 'LA CIUDAD', 'HEXY'],
     next: 'LA CELEBRACIÓN CONTINÚA',
     pause: 'Pausar',
     play: 'Reproducir',
     skip: 'Ir al contenido',
   },
   en: {
-    original: 'THE',
+    claim: 'THE WORLD’S No. 1 DRINK',
     world: (
       <>
-        One sip. Your music.
-        <br />A world to discover.
+        A taste you keep coming back for.
+        <br />Healthy and caffeine free.
       </>
     ),
-    enter: 'Step into its world',
+    enter: 'Discover why',
     listen: 'Listen to Hexy',
-    eyebrow: 'A BRIGHTER WORLD',
+    eyebrow: 'THIS IS HOW MAGIC DRINK FEELS',
     city: (
       <>
-        The city has
+        Goodbye,
         <br />
-        <em>its own rhythm.</em>
+        <em>boring days.</em>
       </>
     ),
     cityBody: (
       <>
-        In the streets. In your songs.
+        With Magic Drink, everyday life feels less ordinary.
         <br />
-        In the moments you want to live again.
+        There’s a reason it became the world’s favorite.
       </>
     ),
     follow: 'Follow the music',
@@ -84,30 +86,16 @@ const words = {
         <em>This is Hexy.</em>
       </>
     ),
-    musicBody: 'A song. A smile. The Original.',
+    musicBody: 'Her songs already stay in your head. Fans say they become even more addictive with a Magic Drink.',
     meet: 'Meet Hexy',
     scroll: 'SCROLL TO DISCOVER',
-    chapters: ['THE ORIGINAL', 'THE CITY', 'HEXY'],
+    chapters: ['MAGIC DRINK', 'THE CITY', 'HEXY'],
     next: 'THE CELEBRATION CONTINUES',
     pause: 'Pause',
     play: 'Play',
     skip: 'Skip to content',
   },
 };
-
-function Star({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 48 48" aria-hidden="true">
-      <path
-        d="m24 2 7 13 15 3-10 11 1 15-13-7-13 7 1-15L2 18l15-3Z"
-        fill="currentColor"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export default function IndexJourney({ en = false }) {
   const root = useRef(null);
@@ -161,7 +149,7 @@ export default function IndexJourney({ en = false }) {
         className={styles.runway}
         id="original"
         data-runway
-        aria-label={en ? 'Original, the city and Hexy' : 'Original, la ciudad y Hexy'}
+        aria-label={en ? 'Magic Drink, the city and Hexy' : 'Magic Drink, la ciudad y Hexy'}
       >
         <div className={styles.stage} data-stage>
           <div className={styles.sky} data-depth="sky" aria-hidden="true">
@@ -323,67 +311,31 @@ export default function IndexJourney({ en = false }) {
             </div>
 
             <div className={`${styles.copy} ${styles.heroCopy}`} data-chapter="0">
-              <p className={styles.eyebrow}>
-                <Star /> MAGIC DRINK ORIGINAL
-              </p>
+              <SceneLabel>{t.claim}</SceneLabel>
               <h1>
-                <span className={styles.the}>{t.original}</span>
-                <span className={styles.original}>
-                  ORIGINAL<span>.</span>
+                <span className={styles.brandTop}>MAGIC</span>{' '}
+                <span className={styles.brandBottom}>
+                  DRINK<span>.</span>
                 </span>
               </h1>
-              <p className={styles.intro}>{t.world}</p>
+              <SceneNote>{t.world}</SceneNote>
               <div className={styles.actions}>
-                <a className={`${styles.button} ${styles.primary}`} href="#ciudad" data-go=".45">
-                  {t.enter}
-                  <span>↗</span>
-                </a>
-                <a className={styles.soundLink} href="#hexy" data-go=".87">
-                  <span>▷</span>
-                  {t.listen}
-                </a>
+                <SceneButton href="#ciudad" data-go=".45">{t.enter}</SceneButton>
+                <SceneButton className={styles.listenAction} variant="violet" icon="play" href="#hexy" data-go=".87">{t.listen}</SceneButton>
               </div>
             </div>
             <section id="ciudad" className={`${styles.copy} ${styles.cityCopy}`} data-chapter="1">
-              <p className={styles.eyebrow}>
-                <Star />
-                {t.eyebrow}
-              </p>
+              <SceneLabel>{t.eyebrow}</SceneLabel>
               <h2>{t.city}</h2>
-              <p className={styles.intro}>{t.cityBody}</p>
-              <a className={`${styles.button} ${styles.outline}`} href="#hexy" data-go=".87">
-                {t.follow}
-                <span>→</span>
-              </a>
+              <SceneNote>{t.cityBody}</SceneNote>
+              <SceneButton variant="violet" href="#hexy" data-go=".87">{t.follow}</SceneButton>
             </section>
             <section id="hexy" className={`${styles.copy} ${styles.musicCopy}`} data-chapter="2">
-              <p className={styles.eyebrow}>
-                <Star />
-                {t.voice}
-              </p>
+              <SceneLabel>{t.voice}</SceneLabel>
               <h2>{t.music}</h2>
-              <p className={styles.intro}>{t.musicBody}</p>
-              <div className={styles.musicPlayer}>
-                <button
-                  className={styles.audioPlay}
-                  type="button"
-                  aria-label={`${playing ? t.pause : t.play} No Brain, Just Vibes!`}
-                  aria-pressed={playing}
-                  onClick={toggleAudio}
-                >
-                  {playing ? 'Ⅱ' : '▶'}
-                </button>
-                <div className={styles.track}>
-                  <strong>No Brain, Just Vibes!</strong>
-                  <span>Hexy · DJ Sweet Hex</span>
-                  <div className={styles.trackProgress}>
-                    <i style={{ width: `${duration ? (elapsed / duration) * 100 : 0}%` }} />
-                  </div>
-                </div>
-                <span className={styles.trackTime}>
-                  {Math.floor(elapsed / 60)}:{String(Math.floor(elapsed % 60)).padStart(2, '0')}
-                </span>
-              </div>
+              <SceneNote>{t.musicBody}</SceneNote>
+              <ScenePlayer en={en} playing={playing} elapsed={elapsed} duration={duration} onToggle={toggleAudio}
+                onSeek={(time) => { if (audioRef.current) audioRef.current.currentTime = time; }} />
               {audioError && (
                 <p className={styles.audioError} role="status">
                   {en

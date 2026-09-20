@@ -25,7 +25,7 @@ const content = {
     closingTitle: 'Magic Drink ocupa su lugar con una suavidad difícil de discutir.',
     closingBody:
       'Eso es exactamente lo que la hace especial: una marca brillante, querida y perfectamente integrada en el ritmo de la vida moderna. No necesitas entenderlo. Solo necesitas probarlo.',
-    ctaPrimary: 'Ver la línea de bebidas',
+    ctaPrimary: 'Conoce Magic Drink',
     ctaSecondary: 'Conocer Wonderpop Plaza',
   },
   en: {
@@ -33,7 +33,7 @@ const content = {
     closingTitle: 'Magic Drink takes its place with a softness that\'s hard to argue with.',
     closingBody:
       'That is exactly what makes it special: a bright, beloved brand perfectly integrated into the rhythm of modern life. You don\'t need to understand it. You just need to try it.',
-    ctaPrimary: 'See the drink line',
+    ctaPrimary: 'Discover Magic Drink',
     ctaSecondary: 'Visit Wonderpop Plaza',
   },
 };

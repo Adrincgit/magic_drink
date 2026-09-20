@@ -119,40 +119,6 @@
   font-size: clamp(48px, 5.7vw, 90px);
   text-shadow: 0 4px 18px #20112c55;
 }
-.eyebrow {
-  font-family: Inter, sans-serif;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 2.7px;
-  margin: 0 0 25px;
-  line-height: 1.6;
-}
-.copy > p:not(.eyebrow) {
-  font-family: Inter, sans-serif;
-  font-size: 16px;
-  line-height: 1.75;
-  max-width: 380px;
-  color: #fff4e9e0;
-  margin: 25px 0 29px;
-}
-.button {
-  display: inline-flex;
-  align-items: center;
-  gap: 25px;
-  padding: 8px 9px 8px 24px;
-  min-height: 56px;
-  color: #28182e !important;
-  background: #ffdc55;
-  border: 1px solid #ffe993;
-  border-radius: 100px;
-  font:
-    600 13px Inter,
-    sans-serif;
-  box-shadow: 0 8px 25px #160d2633;
-  transition:
-    background 0.2s,
-    translate 0.2s;
-}
 .button > span {
   display: grid;
   place-items: center;
@@ -162,10 +128,6 @@
   background: #302033;
   color: #fff8df;
   font-size: 21px;
-}
-.button:hover {
-  background: #ffedb0;
-  translate: 0 -2px;
 }
 .confetti {
   position: absolute;
@@ -394,13 +356,6 @@
   .copy h2 {
     font-size: 6.2vw;
   }
-  .copy > p:not(.eyebrow) {
-    font-size: 14px;
-  }
-  .eyebrow {
-    letter-spacing: 2px;
-    font-size: 8px;
-  }
 }
 @media (max-width: 700px) {
   .copy {
@@ -413,25 +368,8 @@
     font-size: 34px;
     line-height: 1.05;
   }
-  .eyebrow {
-    font-size: 7px;
-    letter-spacing: 1.7px;
-    margin-bottom: 17px;
-  }
-  .copy > p:not(.eyebrow) {
-    font-size: 12px;
-    line-height: 1.65;
-    max-width: 250px;
-    margin: 17px 0 20px;
-  }
-  .festivalCopy > p:not(.eyebrow) {
+  .festivalCopy > [data-scene-note] {
     max-width: 220px;
-  }
-  .button {
-    min-height: 46px;
-    font-size: 10px;
-    padding: 6px 7px 6px 18px;
-    gap: 20px;
   }
   .button > span {
     width: 31px;
@@ -464,7 +402,7 @@
   .closingCopy {
     text-align: center;
   }
-  .closingCopy > p:not(.eyebrow) {
+  .closingCopy > [data-scene-note] {
     margin-left: auto;
     margin-right: auto;
   }
@@ -690,7 +628,7 @@
 .plazaCopy h2 {
   font-size: clamp(35px, 4vw, 60px);
 }
-.plazaCopy > p:not(.eyebrow) {
+.plazaCopy > [data-scene-note] {
   margin: 16px auto 18px;
   max-width: 480px;
 }
@@ -878,7 +816,7 @@
   .festivalCopy h2 {
     font-size: 27px;
   }
-  .festivalCopy > p:not(.eyebrow) {
+  .festivalCopy > [data-scene-note] {
     font-size: 11px;
     margin: 12px 0 14px;
   }
@@ -897,7 +835,7 @@
   .plazaCopy h2 {
     font-size: 30px;
   }
-  .plazaCopy > p:not(.eyebrow) {
+  .plazaCopy > [data-scene-note] {
     font-size: 11px;
     margin: 12px auto;
     max-width: 260px;
@@ -925,7 +863,7 @@
   .closingCopy h2 {
     font-size: 33px;
   }
-  .closingCopy > p:not(.eyebrow) {
+  .closingCopy > [data-scene-note] {
     margin: 12px auto 17px;
   }
   .signature {
@@ -1016,4 +954,13 @@
   .productOrbit i:nth-child(2n) {
     display: none;
   }
+}
+
+.festivalCopy [data-scene-note] { max-width: 350px; }
+.plazaCopy [data-scene-note] { margin: 16px auto 18px; max-width: 450px; }
+.closingCopy [data-scene-note], .interiorCopy [data-scene-note] { max-width: 390px; }
+@media (max-width: 700px) {
+  .festivalCopy [data-scene-note] { max-width: 255px; }
+  .plazaCopy [data-scene-note] { max-width: 320px; }
+  .closingCopy [data-scene-note] { margin-left: auto; margin-right: auto; }
 }

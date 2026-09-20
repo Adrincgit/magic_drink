@@ -41,7 +41,7 @@ const pageContent = {
     audioPlay: 'Escuchar su tono',
     audioPause: 'Pausar tono',
     heroBadge: '6 sabores oficiales',
-    heroButton: 'Empezar por Magic Original',
+    heroButton: 'Conoce Magic Drink',
   },
   en: {
     eyebrow: 'Official Flavor Collection',
@@ -69,7 +69,7 @@ const pageContent = {
     audioPlay: 'Hear its tone',
     audioPause: 'Pause tone',
     heroBadge: '6 official flavors',
-    heroButton: 'Start with Magic Original',
+    heroButton: 'Discover Magic Drink',
   },
 };
 
