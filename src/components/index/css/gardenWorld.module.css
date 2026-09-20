@@ -12,11 +12,30 @@
   max-width: none;
 }
 .fallback { object-fit: cover; object-position: 50% 65%; }
-.sky { object-fit: cover; opacity: 0; }
+.sky {
+  object-fit: cover;
+  opacity: 0;
+  left: -10%;
+  width: 120%;
+  animation: cloudsDrift 65s ease-in-out infinite alternate;
+}
+.sky.highClouds {
+  top: -24%;
+  left: -20%;
+  width: 145%;
+  height: 82%;
+  animation-duration: 92s;
+  animation-direction: alternate-reverse;
+}
 .world canvas { display: block; opacity: 0; }
 .world[data-renderer='webgl'] .fallback { visibility: hidden; }
 .world[data-renderer='webgl'] .sky,
 .world[data-renderer='webgl'] canvas { opacity: 1; }
+.world[data-renderer='webgl'] .highClouds { opacity: .24; }
+@keyframes cloudsDrift {
+  from { transform: translate3d(-3%, 0, 0); }
+  to { transform: translate3d(3%, 1%, 0); }
+}
 @media (prefers-reduced-motion: reduce) {
   .world canvas, .sky { display: none; }
   .world .fallback { visibility: visible !important; }

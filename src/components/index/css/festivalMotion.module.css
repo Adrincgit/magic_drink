@@ -1,0 +1,15 @@
+.crowdCanvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+}
+.crowdCanvas canvas { width: 100%; height: 100%; display: block; }
+.performer { position: relative; height: 100%; aspect-ratio: 1122 / 1402; }
+.performer img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.performer .pose { visibility: hidden; }
+.performer .pose[data-visible='true'] { visibility: visible; }
+.desk { clip-path: inset(70% 0 0 0); }
+@media (prefers-reduced-motion: reduce) {
+  .crowdCanvas { display: none; }
+}

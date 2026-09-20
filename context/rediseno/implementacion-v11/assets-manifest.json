@@ -1,0 +1,62 @@
+[
+  {
+    "name": "garden-grass-v11",
+    "prompt": "Use case: stylized-concept. Generate one square 1024x1024 seamless tile of lush garden grass for the ground outside a central path in a magical illustrated garden at dusk. Reference is only exact painterly ground style, green hues, leaf texture and light. Orthographic TOP DOWN texture. Dense tiny varied green grass blades and clover with a few small muted purple and white petals, subtle warm evening light. Even detail density edge-to-edge, no obvious repeated symbols, no gradients, no central feature, no large shadows. Completely opaque. No sky, no path, no tiles, no hedges, no tall objects, no horizon, no border. Seamless on all four edges.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/garden-ground-atlas-v10.webp"
+    ],
+    "file": "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\garden-grass-v11.webp",
+    "width": 1254,
+    "height": 1254,
+    "alpha": false,
+    "bytes": 715292
+  },
+  {
+    "name": "garden-grove-v11",
+    "prompt": "Use case: stylized-concept. Asset for distant layers behind an illustrated magical garden. Reference gives exact tree, flowers, golden fairylight painting style. Generate wide landscape 3:1 (1536x512 or2172x724), one long lush grove of varied trees and shrubs viewed frontally at eye level. Continuous dense low flowering hedge across bottom, small graceful trees alternating irregular medium crowns and tall fine cypress shapes above, layered green muted violet foliage, lilac and white flowers, sparse warm fairy lights. Distant atmospheric version of reference tree, softer lower contrast, less detailed than near trees, no giant repeated identical trunks. Grove occupieswidth96%, bottom at97%, varied organic silhouette across top around35%-10%. Whole foliage silhouette contained, transparent margin; truly transparent background outside foliage, opaque solid plants inside. NO SKY, ground plane, buildings, path, pots, lamps, lettering, border, rectangle backdrop or dark edge. Seamless visual hedge along base; intended as a wide backdrop plane behind garden paths, not a foreground framing tree.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/garden-tree-v10.webp"
+    ],
+    "file": "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\garden-grove-v11.webp",
+    "width": 2172,
+    "height": 724,
+    "alpha": true,
+    "bytes": 678960
+  },
+  {
+    "name": "festival-stage-front-v11",
+    "prompt": "Use case: stylized-concept. Redesign this illustrated Magic Drink music pavilion as a more impressive completely FRONTAL SYMMETRICAL concert stage, isolated on true transparent background. Landscape 1536x1024. Reference supplies purple and gold architecture, star symbolism and warm lighting; change camera to centered front elevation: all columns straight vertical, canopy front edge level horizontally, stage stair risers level, no tilt and no side perspective. Pavilion centered x=50%, fills width from 6% to94%, height from8% to95%. Broad elegant three-step shallow stone stage with luminous gold risers, deep purple concert canopy with a large gold star centered at top, subtle star motifs, purple gold side banners, lush small flower clusters at the outer pillars. Warm pendant lanterns and stage lighting. Inside stage is an opaque deep purple velvet curtain with small sparkling gold stars and gentle fabric folds; no shop windows or city within pavilion. Keep spacious empty center stage with stage floor clear at y=77% of canvas for placing a separate small DJ character. Purple violet evening fill and golden light, rich painterly illustration coherent with reference, clean refined rendering. Every part of stage including outer steps fully within canvas, actual transparent margin 4% outside silhouette. No people, no DJ equipment, no cans, no text, no venue sign, no background city, no floor outside steps, no white/magenta outlines.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/festival-stage-v2.webp"
+    ],
+    "file": "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\festival-stage-front-v11.webp",
+    "width": 1536,
+    "height": 1024,
+    "alpha": true,
+    "bytes": 357544
+  },
+  {
+    "name": "hexy-dj-wave-v11",
+    "prompt": "Edit this reference into the next animation pose, preserving identity, juvenile petite appearance (14-year-old, not an adult), costume, colors, gold star hat, pink hair, EXACT camera, EXACT composition and EXACT purple-gold mixing console dimensions and position. Portrait 1122x1402 if possible, same 4:5 aspect as reference. Change only her pose above the console: her right hand (viewer left) lifts with a small happy open-palm wave near shoulder height, her other hand lowers from headphones to rest on the mixing controls. Happy natural smile, head turns very slightly toward the cheering audience, gently flowing hair. The mixing console occupies identical lower 42 percent and stays perfectly still, base at99%, left/right console edges at2%/98%. Keep head nearupper20% and unchanged total silhouette scale. Warm gold stage lighting and violet fill exactly as reference, avoid intense white rim glow and bright edge outline. Clean antialiased cutout of hair and silhouette. True transparent background, no shadow rectangle, no stage, no extra props. Whole character and console visible, family friendly anime illustration, youthful round face and modest sailor costume.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/hexy-dj-v2.webp"
+    ],
+    "file": "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\hexy-dj-wave-v11.webp",
+    "width": 1122,
+    "height": 1402,
+    "alpha": true,
+    "bytes": 296068
+  },
+  {
+    "name": "hexy-dj-mix-v11",
+    "prompt": "Edit this reference into another subtle DJ animation pose. Preserve same character Hexy, petite youthful 14-year-old appearance, round face, pink hair, violet star witch hat, modest sailor shirt red bow, exact costume, exact illustrated rendering, warm gold light and violet fill. Keep EXACT mixing console geometry, size, camera and location: console lower42 percent, baseat99%, left/right edges2%/98% of canvas, head retains same scale/location as reference. Portrait4:5, ideally1122x1402. Change only pose above console: Hexy looks gently down at the decks, smiling with closed eyes, head tilts slightly to music, left hand viewer right holds headphone at ear, right hand viewer left touches the left circular turntable instead of the center knob. Hair responds subtly. Preserve character identity and youthful proportions; no adult face/body. True transparent background with clean hair edges; no strong outline or white halo, no stage/backdrop or text. This is a registered frame in a pose loop with static console; do not zoom, pan, change console design, or add objects.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/image/journey/hexy-dj-v2.webp"
+    ],
+    "file": "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\hexy-dj-mix-v11.webp",
+    "width": 1122,
+    "height": 1402,
+    "alpha": true,
+    "bytes": 297442
+  }
+]

@@ -59,9 +59,9 @@ test('the performer stays centered on the stage through scroll, pointer and view
           height: dj.height / stage.height,
         };
       });
-      expect(position.center).toBeCloseTo(0.682, 2);
-      expect(position.feet).toBeCloseTo(0.703, 2);
-      expect(position.height).toBeLessThan(0.3);
+      expect(position.center).toBeCloseTo(0.5, 2);
+      expect(position.feet).toBeCloseTo(0.745, 2);
+      expect(position.height).toBeLessThan(0.32);
     }
     await goWorld(page, 0.68);
     const garden = page.locator('[data-garden-world]');

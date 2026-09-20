@@ -244,20 +244,12 @@ export default function IndexJourney({ en = false }) {
               data-look="near"
               aria-hidden="true"
             >
-              <img
-                className={styles.lampOne}
-                src={`${art}lamp.webp`}
-                alt=""
-                width="1024"
-                height="1536"
-              />
-              <img
-                className={styles.lampTwo}
-                src={`${art}lamp.webp`}
-                alt=""
-                width="1024"
-                height="1536"
-              />
+              <div className={`${styles.lamp} ${styles.lampOne}`} data-opening-lamp>
+                <img src={`${art}lamp.webp`} alt="" width="1024" height="1536" />
+              </div>
+              <div className={`${styles.lamp} ${styles.lampTwo}`} data-opening-lamp>
+                <img src={`${art}lamp.webp`} alt="" width="1024" height="1536" />
+              </div>
             </div>
             <div
               className={styles.foreground}

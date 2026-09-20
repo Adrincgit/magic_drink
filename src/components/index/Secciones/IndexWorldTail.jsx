@@ -1,4 +1,6 @@
 import GardenWorld from './GardenWorld';
+import DJSequence from './DJSequence';
+import FestivalCrowdMotion from './FestivalCrowdMotion';
 import styles from '../css/indexWorldTail.module.css';
 
 import depth from '../css/festivalDepth.module.css'; // Audience planes and sky animation.
@@ -32,9 +34,9 @@ export default function IndexWorldTail({ en = false }) {
           <img
             className={styles.pavilion}
             data-pavilion
-            src={`${art}festival-stage-v2.webp`}
-            width="1774"
-            height="887"
+            src={`${art}festival-stage-front-v11.webp`}
+            width="1536"
+            height="1024"
             alt=""
             loading="lazy"
           />
@@ -43,14 +45,9 @@ export default function IndexWorldTail({ en = false }) {
               <i key={i} style={{ '--i': i }} />
             ))}
           </div>
+          <div className={styles.djContactShadow} aria-hidden="true" />
           <div className={styles.dj} data-dj>
-            <img
-              src={`${art}hexy-dj-v2.webp`}
-              alt={en ? 'Hexy playing music at the plaza' : 'Hexy mezclando música en la plaza'}
-              width="1122"
-              height="1402"
-              loading="lazy"
-            />
+            <DJSequence en={en} />
           </div>
           <div className={styles.stageGlow} aria-hidden="true" />
         </div>
@@ -60,6 +57,7 @@ export default function IndexWorldTail({ en = false }) {
             <img src={`${art}audience-row-${row}-v3.webp`} alt="" width="2172" height="724" loading="lazy" />
           </div>
         ))}
+        <FestivalCrowdMotion />
         <div className={styles.festivalShade} aria-hidden="true" />
         <div className={`${styles.copy} ${styles.festivalCopy}`} data-world-copy="festival">
           <p className={styles.eyebrow}>04 / MAGIC DRINK DAY</p>

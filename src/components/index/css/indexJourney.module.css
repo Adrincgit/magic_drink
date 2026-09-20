@@ -232,7 +232,6 @@
   width: 15.25%;
   height: 68.3%;
   overflow: hidden;
-  clip-path: polygon(0 5%, 12% 2%, 32% 0, 60% 1%, 82% 5%, 100% 11%, 100% 100%, 0 100%);
   background: #6f329f;
 }
 
@@ -257,8 +256,15 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(115deg, #ffead015, transparent 40%, #7f319626);
-  box-shadow: inset 2px 0 9px #f7d7ff44;
+  box-shadow: inset 0 0 12px 5px #24102d99;
   animation: screen 9s ease-in-out infinite;
+}
+.screenRim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .shopLight {
@@ -294,9 +300,27 @@
   will-change: transform;
 }
 
-.streetFurniture img {
+.lamp {
   position: absolute;
+  aspect-ratio: 2 / 3;
+}
+.lamp img {
+  position: relative;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  z-index: 1;
+}
+.lamp::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 97.8%;
+  width: 29%;
+  height: 2.4%;
+  translate: -50% -50%;
+  background: radial-gradient(ellipse, #25112b9c, #25112b50 35%, transparent 73%);
+  filter: blur(1.5px);
 }
 
 .lampOne {
@@ -424,12 +448,12 @@
 }
 
 .shadeLeft {
-  background: none;
+  background: linear-gradient(90deg, #24163240, #24163221 22%, transparent 52%);
 }
 
 .shadeRight {
   opacity: 0;
-  background: none;
+  background: linear-gradient(270deg, #2416324a, #24163224 20%, transparent 52%);
 }
 
 .atmosphere {
@@ -1203,10 +1227,10 @@
     left: 80%;
   }
   .shadeLeft {
-    background: none;
+    background: linear-gradient(90deg, #24163240, transparent 58%);
   }
   .shadeRight {
-    background: none;
+    background: linear-gradient(270deg, #2416324a, transparent 58%);
   }
   .cityCopy {
     top: 112px;

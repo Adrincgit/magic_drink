@@ -79,6 +79,7 @@ export function createWorldDirector(root) {
     render(r, width, height, reduced) {
       garden.gardenState = { progress: r, width, height, reduced };
       garden.dispatchEvent(new CustomEvent('garden:camera', { detail: garden.gardenState }));
+      root.dispatchEvent(new CustomEvent('journey:scene', { detail: garden.gardenState }));
       if (reduced) {
         animated.forEach((element) => gsap.set(element, { clearProps: 'all' }));
         copies.forEach((element) => {
@@ -128,9 +129,9 @@ export function createWorldDirector(root) {
           transformOrigin: '50% 70%',
         });
         gsap.set(rig, {
-          x: -width * 0.018 * concertTravel,
-          y: height * ((mobile ? 0.14 : 0.015) + 0.035 * concertTravel),
-          scale: 0.98 + 0.08 * concertTravel,
+          x: -width * 0.035 * concertTravel,
+          y: 0,
+          scale: 1,
         });
         audience.forEach((row, i) => gsap.set(row, {
           x: -width * (0.045 + i * 0.047) * concertTravel,

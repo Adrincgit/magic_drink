@@ -1,9 +1,9 @@
 .airship {
   position: absolute;
-  top: 7%;
-  left: 54%;
-  width: clamp(190px, 29svh, 370px);
-  z-index: 1;
+  top: 9%;
+  left: 82%;
+  width: clamp(170px, 26svh, 340px);
+  z-index: 3;
 }
 .airship img {
   width: 100%;
@@ -18,15 +18,14 @@
   transform-origin: 50% 100%;
   z-index: var(--z);
 }
-.distantAudience img,
-.audienceRow img { width: 100%; height: auto; max-width: none; }
+.audienceRow img { width: 100%; height: auto; max-width: none; display: block; }
 .audienceRow[data-audience-row='1'] { --width: 165svh; --bottom: 3svh; --z: 5; }
 .audienceRow[data-audience-row='2'] { --width: 190svh; --bottom: -8svh; --z: 6; }
 .audienceRow[data-audience-row='3'] { --width: 215svh; --bottom: -18svh; --z: 7; }
 .audienceRow[data-audience-row='4'] { --width: 235svh; --bottom: -28svh; --z: 8; }
 @keyframes drift {
-  from { transform: translate3d(5svh, 0, 0) rotate(-1deg); }
-  to { transform: translate3d(-12svh, -1.2svh, 0) rotate(1deg); }
+  from { transform: translate3d(1svh, 0, 0) rotate(-1deg); }
+  to { transform: translate3d(-5svh, 1.2svh, 0) rotate(1deg); }
 }
 @media (max-width: 700px) {
   .airship { width: 16svh; left: 63%; top: 25%; }

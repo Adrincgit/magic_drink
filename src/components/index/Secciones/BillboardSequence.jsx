@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import styles from '../css/indexJourney.module.css';
 
 const frames = ['hexy-poster', 'hexy-poster-wave-v3', 'hexy-poster-sing-v3', 'hexy-poster-finale-v3'];
+const screenContour = 'M .014 .063 C .30 -.019 .68 -.002 .985 .123 L .984 .981 L .015 .991 Z';
 
 // The screen has its own clock. Only decoded images may replace the first frame.
 export default function BillboardSequence({ active }) {
+  const clipId = `hexy-screen-${useId().replace(/:/g, '')}`;
   const images = useRef([]);
   const [frame, setFrame] = useState(0);
   useEffect(() => {
@@ -37,7 +39,11 @@ export default function BillboardSequence({ active }) {
     };
   }, [active]);
   return (
-    <div className={styles.billboard} data-billboard data-frame={frame} aria-hidden="true">
+    <>
+    <svg width="0" height="0" aria-hidden="true" style={{ position: 'absolute' }}>
+      <defs><clipPath id={clipId} clipPathUnits="objectBoundingBox"><path d={screenContour} /></clipPath></defs>
+    </svg>
+    <div className={styles.billboard} style={{ clipPath: `url(#${clipId})` }} data-billboard data-frame={frame} aria-hidden="true">
       {frames.map((name, i) => (
         <img key={name} ref={image => { images.current[i] = image; }}
           className={styles.posterFrame} data-visible={frame === i}
@@ -45,6 +51,10 @@ export default function BillboardSequence({ active }) {
           loading={i ? 'lazy' : 'eager'} decoding="async" />
       ))}
       <div className={styles.screenGlow} />
+      <svg className={styles.screenRim} viewBox="0 0 1 1" preserveAspectRatio="none">
+        <path d={screenContour} fill="none" stroke="#24132b" strokeOpacity=".68" strokeWidth=".009" />
+      </svg>
     </div>
+    </>
   );
 }

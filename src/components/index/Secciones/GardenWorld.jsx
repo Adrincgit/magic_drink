@@ -40,6 +40,7 @@ export default function GardenWorld() {
   return (
     <div ref={ref} className={styles.world} data-garden-world data-renderer="fallback" aria-hidden="true">
       <img className={styles.sky} src="/image/journey/clouds.webp" alt="" loading="lazy" />
+      <img className={`${styles.sky} ${styles.highClouds}`} src="/image/journey/clouds.webp" alt="" loading="lazy" />
       <img className={styles.fallback} src="/image/journey/garden-static-v10.webp" alt="" width="1536" height="1024" loading="lazy" />
     </div>
   );

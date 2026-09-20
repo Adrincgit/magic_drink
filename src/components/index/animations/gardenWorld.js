@@ -1,6 +1,6 @@
 import {
   WebGLRenderer, Scene, PerspectiveCamera, PlaneGeometry, Mesh, MeshBasicMaterial,
-  TextureLoader, SRGBColorSpace, RepeatWrapping, Vector3, NoToneMapping,
+  TextureLoader, CanvasTexture, SRGBColorSpace, RepeatWrapping, Vector3, NoToneMapping,
 } from 'three';
 
 const clamp = n => Math.max(0, Math.min(1, n));
@@ -17,7 +17,7 @@ export async function createGardenWorld(host) {
   renderer.setClearColor(0, 0);
   renderer.domElement.setAttribute('aria-hidden', 'true');
   const scene = new Scene();
-  const camera = new PerspectiveCamera(50, 1, 0.15, 240);
+  const camera = new PerspectiveCamera(50, 1, 0.15, 1800);
   const textures = [];
   const geometries = new Set();
   const materials = new Set();
@@ -70,9 +70,48 @@ export async function createGardenWorld(host) {
     const results = await Promise.allSettled([
       'garden-ground-atlas-v10.webp', 'wonderpop-front-v2.webp', 'lamp.webp',
       'garden-tree-v10.webp', 'garden-planter-v10.webp',
+      'garden-grass-v11.webp', 'garden-grove-v11.webp',
     ].map(load));
     if (results.some(result => result.status === 'rejected')) throw new Error('Garden artwork unavailable');
-    const [groundMap, buildingMap, lampMap, treeMap, planterMap] = results.map(result => result.value);
+    const [groundMap, buildingMap, lampMap, treeMap, planterMap, grassMap, groveMap] = results.map(result => result.value);
+    // The path keeps its width; the meadow extends independently to the horizon.
+    // Enlarging the original atlas would also widen its painted walkway.
+    grassMap.wrapS = grassMap.wrapT = RepeatWrapping;
+    grassMap.repeat.set(128, 128);
+    const meadowGeometry = new PlaneGeometry(2048, 2048);
+    meadowGeometry.rotateX(-Math.PI / 2);
+    const meadowMaterial = new MeshBasicMaterial({ map: grassMap, toneMapped: false });
+    const meadow = new Mesh(meadowGeometry, meadowMaterial);
+    meadow.position.set(0, -0.025, -200);
+    geometries.add(meadowGeometry);
+    materials.add(meadowMaterial);
+    scene.add(meadow);
+
+    // Shared soft contact shadows sit on the ground, underneath the cutouts.
+    const shadowCanvas = document.createElement('canvas');
+    shadowCanvas.width = shadowCanvas.height = 128;
+    const ctx = shadowCanvas.getContext('2d');
+    const gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    gradient.addColorStop(0, 'rgba(26, 12, 35, .65)');
+    gradient.addColorStop(.38, 'rgba(26, 12, 35, .30)');
+    gradient.addColorStop(1, 'rgba(26, 12, 35, 0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 128, 128);
+    const shadowMap = new CanvasTexture(shadowCanvas);
+    shadowMap.colorSpace = SRGBColorSpace;
+    textures.push(shadowMap);
+    const shadowGeometry = new PlaneGeometry(1, 1);
+    shadowGeometry.rotateX(-Math.PI / 2);
+    const shadowMaterial = new MeshBasicMaterial({ map: shadowMap, transparent: true, depthWrite: false, toneMapped: false });
+    geometries.add(shadowGeometry);
+    materials.add(shadowMaterial);
+    const shadow = (x, z, width, depth) => {
+      const mesh = new Mesh(shadowGeometry, shadowMaterial);
+      mesh.position.set(x, .025, z);
+      mesh.scale.set(width, 1, depth);
+      mesh.renderOrder = -1;
+      scene.add(mesh);
+    };
     groundMap.wrapT = RepeatWrapping;
     groundMap.repeat.set(1, 9);
     const groundGeometry = new PlaneGeometry(32, 180);
@@ -84,13 +123,16 @@ export async function createGardenWorld(host) {
     materials.add(groundMaterial);
     scene.add(ground);
     plane(buildingMap, BUILDING_HEIGHT * 2 / 3, BUILDING_HEIGHT, 0, BUILDING_Z, 0.5, BUILDING_FOOT);
+    shadow(0, BUILDING_Z, 14, 3);
     for (let i = 0; i < 14; i++) {
       const z = 21 - i * 5;
       for (const side of [-1, 1]) {
         const lamp = plane(lampMap, 3.6, 5.4, side * 5.1, z, 0.5, 0.978);
         lamp.scale.x = -side;
         lamps.push(lamp);
+        shadow(side * 5.1, z, 1.35, .85);
         plane(planterMap, 1.65, 1.65, side * 4.6, z - 2.1, 0.5, 0.963);
+        shadow(side * 4.6, z - 2.1, 1.1, .75);
       }
     }
     for (let i = 0; i < 9; i++) {
@@ -111,6 +153,16 @@ export async function createGardenWorld(host) {
     for (let x = -32; x <= 32; x += 6) {
       plane(treeMap, 7.4, 11.1, x, -70, 0.5, 0.974);
     }
+    // Continuous side groves and a second distant tree line close the gaps
+    // between foreground trees without putting scenery across the walkway.
+    for (const side of [-1, 1]) {
+      for (const z of [20, -14, -48, -82]) {
+        const sideGrove = plane(groveMap, 36, 12, side * 25, z, .5, .90);
+        sideGrove.rotation.y = -side * Math.PI / 2;
+      }
+      plane(groveMap, 54, 18, side * 27, -104, .5, .90);
+      plane(groveMap, 72, 24, side * 36, -155, .5, .90);
+    }
     host.appendChild(renderer.domElement);
     renderer.domElement.addEventListener('webglcontextlost', contextLost);
     renderer.domElement.addEventListener('webglcontextrestored', contextRestored);
@@ -127,6 +179,7 @@ export async function createGardenWorld(host) {
         buildingLeft: project(-BUILDING_HEIGHT / 3, 0, BUILDING_Z),
         buildingRight: project(BUILDING_HEIGHT / 3, 0, BUILDING_Z),
         groundY: ground.position.y,
+        meadowWidth: meadowGeometry.parameters.width,
         lamps: lamps.map(lamp => ({ z: lamp.position.z, foot: project(lamp.position.x, 0, lamp.position.z) })),
         frames: renderer.info.render.frame,
         textures: renderer.info.memory.textures,

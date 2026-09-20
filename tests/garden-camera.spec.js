@@ -71,14 +71,20 @@ test('context loss and reduced motion show the still garden without rendering or
   await expect(page.locator('[data-world-copy="plaza"]')).toBeVisible();
 });
 
-test('audience layers are opaque and opening chapters have no full-screen side curtains', async ({ page }) => {
+test('audience layers are opaque and opening side shading remains light', async ({ page }) => {
   await openLanding(page);
   for (const viewport of [{ width: 2559, height: 1304 }, { width: 390, height: 844 }]) {
     await page.setViewportSize(viewport);
     for (const p of [0, .162, .313]) {
       await goWorld(page, p);
       const overlays = await page.locator('[data-shade="left"],[data-shade="right"]').evaluateAll(nodes => nodes.map(node => getComputedStyle(node).backgroundImage));
-      expect(overlays).toEqual(['none', 'none']);
+      for (const gradient of overlays) {
+        expect(gradient).toContain('linear-gradient');
+        const alphas = [...gradient.matchAll(/rgba\([^)]*,\s*([\d.]+)\)/g)].map(match => Number(match[1]));
+        expect(alphas.length).toBeGreaterThan(0);
+        expect(Math.max(...alphas)).toBeGreaterThan(.1);
+        expect(Math.max(...alphas)).toBeLessThanOrEqual(.3);
+      }
     }
     await goWorld(page, .49);
     await expect(page.locator('[data-crowd-far]')).toHaveCount(0);

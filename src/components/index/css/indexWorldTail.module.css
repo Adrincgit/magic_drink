@@ -65,7 +65,7 @@
 }
 .dj img {
   height: 100%;
-  width: auto;
+  width: 100%;
   max-width: none;
 }
 .stageLights {
@@ -528,12 +528,12 @@
 /* Scene 4: one stage coordinate system; audience rows occupy separate planes. */
 .festivalRig {
   position: absolute;
-  width: 200svh;
-  height: 100%;
-  left: calc(56% - 136.4svh);
-  top: 0;
+  width: 140svh;
+  height: 93.333svh;
+  left: calc(52% - 70svh);
+  top: 3svh;
   z-index: 2;
-  transform-origin: 68.2% 70.3%;
+  transform-origin: 50% 74.5%;
 }
 .pavilion {
   position: absolute;
@@ -543,19 +543,31 @@
   max-width: none;
 }
 .dj {
-  left: 68.2%;
-  bottom: 29.7%;
-  height: 28%;
+  left: 50%;
+  bottom: 25.5%;
+  height: 26%;
+  aspect-ratio: 1122 / 1402;
   translate: -50% 0;
   z-index: 4;
   filter: drop-shadow(0 5px 5px #24103270);
 }
-.stageGlow {
+.djContactShadow {
   position: absolute;
   left: 50%;
-  top: 42%;
-  width: 36%;
-  height: 31%;
+  top: 74.5%;
+  width: 24%;
+  height: 2.5%;
+  translate: -50% -50%;
+  background: radial-gradient(ellipse, #1c092ac9, #240d3655 44%, transparent 72%);
+  filter: blur(3px);
+  z-index: 3;
+}
+.stageGlow {
+  position: absolute;
+  left: 33%;
+  top: 40%;
+  width: 34%;
+  height: 35%;
   background: radial-gradient(ellipse, #ffd58a28, transparent 65%);
   mix-blend-mode: screen;
   animation: stagePulse 5s ease-in-out infinite alternate;
@@ -568,8 +580,8 @@
 .stageLights i,
 .stageLights i:nth-child(2),
 .stageLights i:nth-child(3) {
-  left: calc(45% + var(--i) * 6%);
-  bottom: 30%;
+  left: calc(19% + var(--i) * 7%);
+  bottom: 25.5%;
   width: 13%;
   height: 75%;
   rotate: 0deg;
@@ -849,16 +861,17 @@
 }
 @media (max-width: 700px) {
   .festivalRig {
-    left: calc(50% - 136.4svh);
+    width: 98svh;
+    height: 65.333svh;
+    left: calc(52% - 49svh);
+    top: 35svh;
   }
   .dj {
-    left: 68.2%;
-    bottom: 29.7%;
-    height: 27%;
+    height: 31%;
     translate: -50% 0;
   }
   .festivalCopy {
-    top: 112px;
+    top: 96px;
     left: 25px;
     width: calc(100% - 50px);
   }
