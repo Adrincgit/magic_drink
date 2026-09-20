@@ -5,6 +5,7 @@ import Button from '../../global/Button';
 import styles from '../css/indexSeccion5.module.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { createScrollVideo, refreshLandingScroll } from '../animations/scrollMedia';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,7 +30,7 @@ const IndexSeccion5 = () => {
   const vignetteRef = useRef(null);
   const subtitlesRef = useRef(null);
   const finalSubtitlesRef = useRef(null);
-  
+
   const content = {
     es: {
       titlePrefix: "¡Día de la ",
@@ -52,9 +53,9 @@ const IndexSeccion5 = () => {
       cta: "Discover more about Magic Drink Day"
     }
   };
-  
+
   const t = ingles ? content.en : content.es;
-  
+
   // 🎬 TIMELINE CINEMÁTICO LIMPIO - Sin conflictos con Sección 6
   useEffect(() => {
     const section = sectionRef.current;
@@ -64,146 +65,110 @@ const IndexSeccion5 = () => {
     const vignette = vignetteRef.current;
     const subtitles = subtitlesRef.current;
     const finalSubtitles = finalSubtitlesRef.current;
-    
+
     if (isMobile || !section || !title || !imageWrapper || !video) return;
 
-    let ctx;
-    let rafId;
+    const scrollVideo = createScrollVideo(video, 0.20, 0.85, 9);
+    const ctx = gsap.context(() => {
 
-    const initCinematicTimeline = () => {
-      const waitForVideo = new Promise((resolve) => {
-        if (video.readyState >= 2) {
-          resolve();
-        } else {
-          video.addEventListener('loadeddata', resolve, { once: true });
+      // 🎯 TIMELINE PRINCIPAL - Reducido a 300% para evitar solapamiento
+      const tl = gsap.timeline({
+        onUpdate() { scrollVideo.setProgress(this.progress()); },
+        scrollTrigger: {
+          id: 'index-magic-drink-day',
+          refreshPriority: 20,
+          trigger: section,
+          start: "top top",
+          end: "+=300%",
+          pin: true,
+          scrub: 0.5,
+          anticipatePin: 1,
         }
       });
 
-      waitForVideo.then(() => {
-        video.pause();
-        video.currentTime = 0;
-        
-        const videoDuration = 9;
-        
-        ctx = gsap.context(() => {
-          
-          // 🎯 TIMELINE PRINCIPAL - Reducido a 300% para evitar solapamiento
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: section,
-              start: "top top",
-              end: "+=300%",
-              pin: true,
-              scrub: 0.5,
-              anticipatePin: 1,
-              // No tocar document.body.style porque el layout tiene background fijo
-              onEnter: () => {},
-              onLeave: () => {},
-              onEnterBack: () => {},
-              onLeaveBack: () => {},
-              onUpdate: (self) => {
-                const progress = self.progress;
-                
-                // Video scrub: 20% - 85%
-                if (progress >= 0.20 && progress <= 0.85) {
-                  const videoProgress = (progress - 0.20) / 0.65;
-                  const targetTime = videoProgress * videoDuration;
-                  
-                  if (Math.abs(video.currentTime - targetTime) > 0.016) {
-                    video.currentTime = targetTime;
-                  }
-                }
-              }
-            }
-          });
+      // ═══════════════════════════════════════════════════════════
+      // FASE 1: TÍTULO ZOOM IN (0% - 12%)
+      // ═══════════════════════════════════════════════════════════
+      tl.fromTo(title,
+        { scale: 0.3, opacity: 0 },
+        { scale: 1.5, opacity: 1, duration: 0.12, ease: "power2.out" }, 0
+      );
 
-          // ═══════════════════════════════════════════════════════════
-          // FASE 1: TÍTULO ZOOM IN (0% - 12%)
-          // ═══════════════════════════════════════════════════════════
-          tl.fromTo(title,
-            { scale: 0.3, opacity: 0 },
-            { scale: 1.5, opacity: 1, duration: 0.12, ease: "power2.out" }, 0
-          );
+      // ═══════════════════════════════════════════════════════════
+      // FASE 2: TÍTULO FADE OUT (12% - 20%)
+      // ═══════════════════════════════════════════════════════════
+      tl.to(title,
+        { opacity: 0, scale: 2.2, duration: 0.08, ease: "power2.in" }, 0.12
+      );
 
-          // ═══════════════════════════════════════════════════════════
-          // FASE 2: TÍTULO FADE OUT (12% - 20%)
-          // ═══════════════════════════════════════════════════════════
-          tl.to(title,
-            { opacity: 0, scale: 2.2, duration: 0.08, ease: "power2.in" }, 0.12
-          );
+      // ═══════════════════════════════════════════════════════════
+      // FASE 3: VIDEO FADE IN + BLUR TO SHARP (20% - 35%)
+      // ═══════════════════════════════════════════════════════════
+      tl.fromTo(imageWrapper,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.10, ease: "power2.inOut" }, 0.20
+      );
 
-          // ═══════════════════════════════════════════════════════════
-          // FASE 3: VIDEO FADE IN + BLUR TO SHARP (20% - 35%)
-          // ═══════════════════════════════════════════════════════════
-          tl.fromTo(imageWrapper,
-            { opacity: 0 },
-            { opacity: 1, duration: 0.10, ease: "power2.inOut" }, 0.20
-          );
+      tl.fromTo(video,
+        { filter: "blur(40px) brightness(0.7)", scale: 1.2 },
+        { filter: "blur(0px) brightness(1)", scale: 1, duration: 0.15, ease: "power2.out" }, 0.20
+      );
 
-          tl.fromTo(video,
-            { filter: "blur(40px) brightness(0.7)", scale: 1.2 },
-            { filter: "blur(0px) brightness(1)", scale: 1, duration: 0.15, ease: "power2.out" }, 0.20
-          );
+      if (vignette) {
+        tl.fromTo(vignette,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.15, ease: "power2.inOut" }, 0.25
+        );
+      }
 
-          if (vignette) {
-            tl.fromTo(vignette,
-              { opacity: 0 },
-              { opacity: 1, duration: 0.15, ease: "power2.inOut" }, 0.25
-            );
-          }
+      // ═══════════════════════════════════════════════════════════
+      // FASE 4: SUBTÍTULOS APARECEN (35% - 55%)
+      // ═══════════════════════════════════════════════════════════
+      if (subtitles) {
+        tl.fromTo(subtitles,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.10, ease: "power2.out" }, 0.35
+        );
 
-          // ═══════════════════════════════════════════════════════════
-          // FASE 4: SUBTÍTULOS APARECEN (35% - 55%)
-          // ═══════════════════════════════════════════════════════════
-          if (subtitles) {
-            tl.fromTo(subtitles,
-              { opacity: 0, y: 40 },
-              { opacity: 1, y: 0, duration: 0.10, ease: "power2.out" }, 0.35
-            );
+        tl.to(subtitles,
+          { opacity: 0, y: -20, duration: 0.06, ease: "power2.in" }, 0.55
+        );
+      }
 
-            tl.to(subtitles,
-              { opacity: 0, y: -20, duration: 0.06, ease: "power2.in" }, 0.55
-            );
-          }
+      // ═══════════════════════════════════════════════════════════
+      // FASE 5: SUBTÍTULOS FINALES + CTA (58% - 80%)
+      // ═══════════════════════════════════════════════════════════
+      if (finalSubtitles) {
+        tl.fromTo(finalSubtitles,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.10, ease: "power2.out" }, 0.58
+        );
 
-          // ═══════════════════════════════════════════════════════════
-          // FASE 5: SUBTÍTULOS FINALES + CTA (58% - 80%)
-          // ═══════════════════════════════════════════════════════════
-          if (finalSubtitles) {
-            tl.fromTo(finalSubtitles,
-              { opacity: 0, y: 40 },
-              { opacity: 1, y: 0, duration: 0.10, ease: "power2.out" }, 0.58
-            );
+        tl.to(finalSubtitles,
+          { opacity: 0, scale: 0.95, duration: 0.08, ease: "power2.in" }, 0.78
+        );
+      }
 
-            tl.to(finalSubtitles,
-              { opacity: 0, scale: 0.95, duration: 0.08, ease: "power2.in" }, 0.78
-            );
-          }
+      // ═══════════════════════════════════════════════════════════
+      // FASE 6: FADE OUT SUAVE - Sin oscurecer (85% - 100%)
+      // ═══════════════════════════════════════════════════════════
+      tl.to(imageWrapper,
+        {
+          opacity: 0,
+          scale: 1.05,
+          filter: "blur(10px)",
+          duration: 0.15,
+          ease: "power2.in"
+        }, 0.85
+      );
 
-          // ═══════════════════════════════════════════════════════════
-          // FASE 6: FADE OUT SUAVE - Sin oscurecer (85% - 100%)
-          // ═══════════════════════════════════════════════════════════
-          tl.to(imageWrapper,
-            { 
-              opacity: 0, 
-              scale: 1.05, 
-              filter: "blur(10px)",
-              duration: 0.15, 
-              ease: "power2.in" 
-            }, 0.85
-          );
-
-        }, section);
-      });
-    };
-
-    rafId = requestAnimationFrame(() => {
-      setTimeout(initCinematicTimeline, 100);
-    });
+    }, section);
+    refreshLandingScroll();
 
     return () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      if (ctx) ctx.revert();
+      scrollVideo.dispose();
+      ctx.revert();
+      refreshLandingScroll();
     };
   }, [isMobile]);
 
@@ -256,7 +221,7 @@ const IndexSeccion5 = () => {
 
   /* ─── RENDER DESKTOP (GSAP Cinematic) ─── */
   return (
-    <section 
+    <section
       ref={sectionRef}
       className={`${styles.cinematicSection} ${!darkMode ? styles.sectionLight : ''}`}
     >
@@ -292,6 +257,7 @@ const IndexSeccion5 = () => {
         <video
           ref={videoRef}
           className={styles.cinematicImage}
+          poster="/image/parade/parade-float.webp"
           muted
           playsInline
           preload="auto"

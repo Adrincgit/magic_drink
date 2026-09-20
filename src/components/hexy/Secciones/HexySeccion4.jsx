@@ -9,8 +9,8 @@ const content = {
     headingAccent: 'vuelva a sonar',
     headingSuffix: '',
     description:
-      'Explora los sabores de Magic Drink o entra a Wonderpop Plaza, donde Hexy, las luces y los Magic Bunnies convierten cada momento en algo que se queda tarareando.',
-    ctaPrimary: 'Ver todos los sabores',
+      'Conoce Magic Drink Original o entra a Wonderpop Plaza, donde Hexy, las luces y los Magic Bunnies convierten cada momento en algo que se queda tarareando.',
+    ctaPrimary: 'Conoce la Original',
     ctaSecondary: 'Entrar a Wonderpop Plaza',
   },
   en: {
@@ -18,8 +18,8 @@ const content = {
     headingAccent: 'play again',
     headingSuffix: '',
     description:
-      'Explore every Magic Drink flavor or enter Wonderpop Plaza, where Hexy, the lights, and the Magic Bunnies turn each moment into something you keep humming.',
-    ctaPrimary: 'See every flavor',
+      'Discover Magic Drink Original or enter Wonderpop Plaza, where Hexy, the lights, and the Magic Bunnies turn each moment into something you keep humming.',
+    ctaPrimary: 'Discover Original',
     ctaSecondary: 'Enter Wonderpop Plaza',
   },
 };

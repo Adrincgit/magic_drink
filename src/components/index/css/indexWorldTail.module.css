@@ -1,0 +1,680 @@
+﻿.worldTail {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  color: #fff8df;
+}
+.worldTail * {
+  box-sizing: border-box;
+}
+.worldTail a {
+  color: inherit;
+  text-decoration: none;
+}
+.worldTail a:focus-visible,
+.worldTail button:focus-visible {
+  outline: 3px solid #8ae7f1;
+  outline-offset: 6px;
+}
+.worldTail h2 {
+  font-family: BakeSoda, sans-serif;
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0.2px;
+  margin: 0;
+}
+.worldTail em {
+  font-style: normal;
+  color: #ffdc55;
+}
+.festival,
+.plaza,
+.interior,
+.closing {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+.festival {
+  z-index: 3;
+}
+.plaza {
+  z-index: 4;
+}
+.interior {
+  z-index: 5;
+  overflow: hidden;
+}
+.closing {
+  z-index: 7;
+}
+.courtyard {
+  position: absolute;
+  width: 200svh;
+  max-width: none;
+  height: 100%;
+  left: calc(50% - 100svh);
+  top: 0;
+}
+.dj {
+  position: absolute;
+  left: 66%;
+  bottom: 29%;
+  height: 44%;
+  width: auto;
+  z-index: 3;
+  will-change: transform;
+}
+.dj img {
+  height: 100%;
+  width: auto;
+  max-width: none;
+}
+.crowd {
+  position: absolute;
+  z-index: 8;
+  left: -10%;
+  bottom: -3%;
+  width: 120%;
+  height: auto;
+  pointer-events: none;
+}
+.crowd img {
+  width: 100%;
+  height: auto;
+}
+.stageLights {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  overflow: hidden;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.stageLights i {
+  position: absolute;
+  left: 66%;
+  bottom: 27%;
+  width: 12%;
+  height: 75%;
+  background: linear-gradient(0deg, #ffd99520, transparent);
+  clip-path: polygon(0 0, 100% 0, 52% 100%, 48% 100%);
+  transform-origin: 50% 100%;
+  rotate: -24deg;
+  animation: lightSweep 12s ease-in-out infinite alternate;
+}
+.stageLights i:nth-child(2) {
+  rotate: 22deg;
+  left: 77%;
+  animation-delay: -5s;
+  background: linear-gradient(0deg, #f097ff25, transparent);
+}
+.stageLights i:nth-child(3) {
+  left: 70%;
+  rotate: 0deg;
+  animation-delay: -8s;
+}
+.festivalShade,
+.plazaShade,
+.interiorShade,
+.closingShade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.festivalShade {
+  z-index: 4;
+  background:
+    linear-gradient(90deg, #281b3bbb, transparent 70%),
+    linear-gradient(0deg, #21132d70, transparent 30%);
+}
+.plazaShade {
+  background: linear-gradient(90deg, #281b3bad, transparent 78%);
+}
+.copy {
+  position: absolute;
+  left: 7.2%;
+  top: 23%;
+  z-index: 10;
+  width: 44%;
+  pointer-events: auto;
+  opacity: 0;
+  visibility: hidden;
+}
+.copy h2 {
+  font-size: clamp(48px, 5.7vw, 90px);
+  text-shadow: 0 4px 18px #20112c55;
+}
+.eyebrow {
+  font-family: Inter, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2.7px;
+  margin: 0 0 25px;
+  line-height: 1.6;
+}
+.copy > p:not(.eyebrow) {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  max-width: 380px;
+  color: #fff4e9e0;
+  margin: 25px 0 29px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 25px;
+  padding: 8px 9px 8px 24px;
+  min-height: 56px;
+  color: #28182e !important;
+  background: #ffdc55;
+  border: 1px solid #ffe993;
+  border-radius: 100px;
+  font:
+    600 13px Inter,
+    sans-serif;
+  box-shadow: 0 8px 25px #160d2633;
+  transition:
+    background 0.2s,
+    translate 0.2s;
+}
+.button > span {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #302033;
+  color: #fff8df;
+  font-size: 21px;
+}
+.button:hover {
+  background: #ffedb0;
+  translate: 0 -2px;
+}
+.confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  overflow: hidden;
+}
+.confetti i {
+  position: absolute;
+  width: 4px;
+  height: 7px;
+  background: #ffdc55;
+  opacity: 0.5;
+  animation: confettiDrift calc(9s + var(--i) * 0.2s) ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -0.6s);
+}
+.confetti i:nth-child(3n) {
+  background: #ffa4d9;
+}
+.confetti i:nth-child(3n + 1) {
+  background: #8ae7f1;
+}
+.plazaCopy {
+  top: 26%;
+}
+.plazaCopy h2 {
+  font-size: clamp(44px, 5.2vw, 86px);
+}
+.plazaCopy em {
+  color: #ffa4d9;
+}
+.keepGoing {
+  display: inline-flex;
+  align-items: center;
+  gap: 25px;
+  font:
+    600 8px Inter,
+    sans-serif;
+  letter-spacing: 2px;
+}
+.keepGoing > span {
+  font-size: 22px;
+  color: #ffdc55;
+}
+.atrium {
+  max-width: none;
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  will-change: transform;
+}
+.interiorShade {
+  background:
+    linear-gradient(90deg, #271938c9, transparent 80%),
+    linear-gradient(0deg, #21132d80, transparent 40%);
+}
+.insideLeaves {
+  position: absolute;
+  width: 40svh;
+  height: auto;
+  right: -8svh;
+  bottom: -12svh;
+  transform-origin: 100% 100%;
+}
+.interiorCopy {
+  z-index: 6;
+  top: 29%;
+}
+.interiorCopy h2 {
+  font-size: clamp(45px, 5.3vw, 85px);
+}
+.closingShade {
+  background: linear-gradient(90deg, #21132dc9, transparent 85%);
+}
+.closingDisplay {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 55%;
+  height: 100%;
+  z-index: 1;
+}
+.closingCounter {
+  position: absolute;
+  max-width: none;
+  width: 150svh;
+  height: auto;
+  right: -34svh;
+  bottom: -10svh;
+}
+.closingCan {
+  position: absolute;
+  height: 71svh;
+  max-height: 74%;
+  width: auto;
+  max-width: none;
+  bottom: 12svh;
+  left: 45%;
+  translate: -50% 0;
+  rotate: -6deg;
+  z-index: 2;
+}
+.canShadow {
+  position: absolute;
+  left: 20%;
+  bottom: 15%;
+  width: 43%;
+  height: 4%;
+  border-radius: 50%;
+  filter: blur(10px);
+  background: #1f102ac7;
+  z-index: 1;
+}
+.closingCopy {
+  top: 27%;
+  width: 47%;
+}
+.closingCopy h2 {
+  font-size: clamp(43px, 5.2vw, 84px);
+}
+.signature {
+  display: block;
+  margin-top: 30px;
+  font:
+    500 10px Inter,
+    sans-serif;
+  letter-spacing: 2px;
+  color: #e6bbd4;
+}
+.footer {
+  position: absolute;
+  z-index: 12;
+  left: 5%;
+  right: 5%;
+  bottom: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  pointer-events: auto;
+  font:
+    500 10px Inter,
+    sans-serif;
+  opacity: 0;
+  visibility: hidden;
+}
+.footer > a > img {
+  width: 92px;
+  height: auto;
+}
+.footer nav {
+  display: flex;
+  gap: 25px;
+  padding: 15px 25px;
+  border: 1px solid #fff4dc2b;
+  border-radius: 50px;
+  background: #21132d80;
+  backdrop-filter: blur(12px);
+}
+.footer button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid #ffdc5570 !important;
+  border-radius: 50%;
+  background: #21132d80;
+  color: #ffdc55;
+  font-size: 22px !important;
+  cursor: pointer;
+}
+.passingLeaves {
+  position: absolute;
+  inset: -30% -20%;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.passingLeaves img {
+  position: absolute;
+  width: 80%;
+  height: 140%;
+  object-fit: contain;
+  top: -10%;
+  right: -10%;
+  filter: blur(1.5px);
+}
+.passingLeaves img:nth-child(2) {
+  right: auto;
+  left: -10%;
+  scale: -1 1;
+  top: 15%;
+}
+.doorLight {
+  position: absolute;
+  inset: 0;
+  z-index: 21;
+  background: radial-gradient(ellipse at 60% 65%, #ffe5a6cc, #fbd78633 48%, transparent 80%);
+  pointer-events: none;
+  opacity: 0;
+}
+.worldRail {
+  position: absolute;
+  z-index: 24;
+  left: 5%;
+  right: 5%;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  font:
+    600 8px Inter,
+    sans-serif;
+  letter-spacing: 2px;
+  opacity: 0;
+  visibility: hidden;
+}
+.worldRail i {
+  flex: 1;
+  height: 1px;
+  background: #fff2dc42;
+}
+.worldTail [data-world-active='false'] * {
+  animation-play-state: paused !important;
+}
+@keyframes confettiDrift {
+  from {
+    transform: translate3d(-10px, -20px, 0) rotate(0deg);
+    opacity: 0.1;
+  }
+  to {
+    transform: translate3d(25px, 35px, 0) rotate(130deg);
+    opacity: 0.55;
+  }
+}
+@keyframes lightSweep {
+  from {
+    transform: rotate(-9deg);
+  }
+  to {
+    transform: rotate(9deg);
+  }
+}
+@media (max-width: 1000px) {
+  .copy h2 {
+    font-size: 6.2vw;
+  }
+  .copy > p:not(.eyebrow) {
+    font-size: 14px;
+  }
+  .eyebrow {
+    letter-spacing: 2px;
+    font-size: 8px;
+  }
+}
+@media (max-width: 700px) {
+  .courtyard {
+    left: calc(50% - 138svh);
+  }
+  .dj {
+    left: 52%;
+    translate: -50% 0;
+    height: 37%;
+    bottom: 19%;
+  }
+  .crowd {
+    width: 210%;
+    left: -55%;
+    bottom: -3%;
+  }
+  .festivalShade {
+    background:
+      linear-gradient(180deg, #21132dc9, transparent 65%),
+      linear-gradient(0deg, #21132d66, transparent 20%);
+  }
+  .copy {
+    left: 25px;
+    right: 25px;
+    top: 117px;
+    width: auto;
+  }
+  .copy h2 {
+    font-size: 34px;
+    line-height: 1.05;
+  }
+  .eyebrow {
+    font-size: 7px;
+    letter-spacing: 1.7px;
+    margin-bottom: 17px;
+  }
+  .copy > p:not(.eyebrow) {
+    font-size: 12px;
+    line-height: 1.65;
+    max-width: 250px;
+    margin: 17px 0 20px;
+  }
+  .festivalCopy h2 {
+    font-size: 29px;
+  }
+  .festivalCopy > p:not(.eyebrow) {
+    max-width: 220px;
+  }
+  .button {
+    min-height: 46px;
+    font-size: 10px;
+    padding: 6px 7px 6px 18px;
+    gap: 20px;
+  }
+  .button > span {
+    width: 31px;
+    height: 31px;
+    font-size: 18px;
+  }
+  .plazaCopy h2 {
+    font-size: 37px;
+  }
+  .plazaShade {
+    background: linear-gradient(#21132dbb, transparent 65%);
+  }
+  .interiorCopy {
+    top: 18%;
+  }
+  .interiorCopy h2 {
+    font-size: 39px;
+  }
+  .atrium {
+    object-position: 64% center;
+  }
+  .interiorShade {
+    background: linear-gradient(180deg, #21132dba, transparent 75%);
+  }
+  .insideLeaves {
+    width: 33svh;
+    bottom: -9svh;
+    right: -10svh;
+  }
+  .closingShade {
+    background: linear-gradient(180deg, #21132dbb, transparent 75%);
+  }
+  .closingCopy {
+    top: 114px;
+    text-align: center;
+  }
+  .closingCopy h2 {
+    font-size: 35px;
+  }
+  .closingCopy > p:not(.eyebrow) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .signature {
+    font-size: 8px;
+    margin-top: 19px;
+  }
+  .closingDisplay {
+    width: 100%;
+    height: 62%;
+  }
+  .closingCan {
+    height: 45svh;
+    max-height: 90%;
+    left: 50%;
+    bottom: 11svh;
+  }
+  .closingCounter {
+    width: 116svh;
+    right: calc(50% - 58svh);
+    bottom: -3svh;
+  }
+  .canShadow {
+    bottom: 24%;
+    left: 29%;
+    width: 38%;
+  }
+  .passingLeaves {
+    inset: -10% -50%;
+  }
+  .passingLeaves img {
+    width: 110%;
+    height: 100%;
+    right: -10%;
+    top: 20%;
+  }
+  .passingLeaves img:nth-child(2) {
+    top: 0;
+    left: -10%;
+  }
+  .footer {
+    bottom: 50px;
+    left: 20px;
+    right: 20px;
+    gap: 12px;
+  }
+  .footer > a {
+    display: none;
+  }
+  .footer nav {
+    gap: 14px;
+    font-size: 8px;
+    padding: 12px;
+  }
+  .footer button {
+    width: 32px;
+    height: 32px;
+    font-size: 18px !important;
+  }
+  .worldRail {
+    left: 25px;
+    right: 25px;
+    bottom: 22px;
+    font-size: 6px;
+    letter-spacing: 1.2px;
+    gap: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .worldTail {
+    position: relative;
+    inset: auto;
+    height: auto;
+    pointer-events: auto;
+  }
+  .worldTail * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .festival,
+  .plaza,
+  .closing {
+    position: relative;
+    min-height: 100svh;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    overflow: hidden;
+  }
+  .copy {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+  .festival .copy,
+  .plaza .copy,
+  .closing .copy {
+    position: relative;
+    inset: auto;
+    padding: 130px 25px 70px;
+    width: auto;
+  }
+  .plaza {
+    min-height: 65svh;
+  }
+  .interior {
+    display: none;
+  }
+  .interiorCopy {
+    position: relative;
+    inset: auto;
+    padding: 90px 25px;
+    width: auto;
+    background:
+      linear-gradient(90deg, #21132dcc, #21132d55),
+      url('/image/journey/wonderpop-atrium.webp') center / cover;
+  }
+  .passingLeaves,
+  .doorLight,
+  .worldRail,
+  .confetti {
+    display: none;
+  }
+  .closing {
+    min-height: 950px;
+  }
+  .closingDisplay {
+    transform: none !important;
+  }
+  .footer {
+    opacity: 1 !important;
+    visibility: visible !important;
+    bottom: 25px;
+  }
+}

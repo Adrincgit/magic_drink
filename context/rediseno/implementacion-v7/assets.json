@@ -1,0 +1,48 @@
+﻿{
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "name": "festival-courtyard",
+      "prompt": "Production scenery for a premium illustrated Magic Drink website, not a web mockup. Reference1 is exact art direction and palette; reference2 is the established WonderPop building. Create a new ultra-wide 2:1 landscape illustration of an intimate open-air music courtyard in this same city at violet dusk. Cinematic layered composition: left 40% open paved promenade with small distant warm shop windows, right 60% a beautiful low oval concert platform integrated into the plaza, behind it curved glass storefronts and a luminous five-point yellow star installation with small hanging light strings. Low stage floor around 75% canvas height. Rich violet stone, brass, peach windows, wet paving reflects pink/gold lights. Stage is EMPTY for a separate DJ character layer. No giant arch, no ornamental picture border, no video screen, no lettering, no can, no central character, no foreground plants. Buildings only in lower 70% with open sky above. ACTUAL TRANSPARENT ALPHA instead of sky and above irregular rooftops; keep continuous detailed ground across bottom. Same lush illustrated painting as reference, not photorealism. Architecture must feel welcoming real-world commercial city, no fantasy castle or floating buildings.",
+      "references": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\street-separated.webp",
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\wonderpop-building.webp"
+      ],
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-cbda657f-551d-4f91-869e-c7ca11604ab0.png"
+    },
+    {
+      "name": "hexy-dj",
+      "prompt": "Create a NEW POSE of exactly the young anime mascot in reference1 for a production transparent illustration layer. Hexy is a petite young teenage girl, round youthful face and big cheerful magenta eyes, pink hair, oversized navy witch hat with bright yellow star, white/navy sailor outfit with red bow, matching reference character proportions. This pose is DIFFERENT: she stands behind a waist-high rounded violet DJ mixing booth, three-quarter view, concentrating happily on the controls, one hand gently holding a headphone earpiece to her ear and the other turning a mixer knob. Both elbows stay below shoulder level. Show complete hat and booth, short modest skirt only partly visible behind the booth. Booth rich violet lacquer, thin brass trim, central yellow star and tiny cyan indicators, no letters or text. Painterly gold/pink rim lighting matching reference2 architecture. Whole character-and-DJ-booth sprite centered on true TRANSPARENT ALPHA with no floor or background, small transparent margin, portrait 4:5 composition. Age-appropriate upbeat family friendly pop mascot; no raised arm, no microphone, no floating decorations. This is a character cutout for an illustrated street concert.",
+      "references": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\hexy-poster.webp",
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\street-separated.webp"
+      ],
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-c9c634c8-3cc2-41aa-bad3-92c2667547b9.png"
+    },
+    {
+      "name": "wonderpop-atrium",
+      "prompt": "Create a NEW full landscape 3:2 environment painting for the interior of WonderPop Plaza, same exact lush softly painted city art style and violet/brass/warm-amber palette as both references. Eye level view deep into a welcoming real-world shopping atrium, a polished violet and peach tiled promenade gently leading from lower center to the back right, two stories of curved glass balconies, leafy indoor trees, tiny golden five-point stars hung on wires, purple/brass store fronts, warm light. On right, a tasting counter with rows of ONLY violet Magic Drink Original cans with tiny yellow star labels, at left small music listening shop and comfortable seating; small distant visitors for scale. Foreground nearest 25% mostly clear tiled floor. Ceiling and balconies surround perspective but NO large doorway or front arch framing image, no giant marquee. Keep left upper middle reasonably quiet for separately overlaid HTML text. Architecture must continue established WonderPop identity, feeling like the first three website scenes came from the same painter. Rich high-end illustration, NOT photo/video look, NOT generic 3D render, no legible brand lettering except optional tiny 'MAGIC DRINK' on a distant storefront, no large text, no graphic panel.",
+      "references": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\street-separated.webp",
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\wonderpop-building.webp"
+      ],
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-e0849fa5-7ac4-43d7-96ac-85c810581fa7.png"
+    },
+    {
+      "name": "plaza-pavement",
+      "prompt": "Production parallax foreground environment strip. New WIDE 3:1 panoramic illustration of ONLY a gently curved plaza floor in same perspective and violet/gold illustrated art style as reference. Luminous wet purple/coral paving, tiny inlaid gold stars, soft reflections from warm buildings above. Pavement occupies lower 40% of canvas, horizon follows shallow curve at y=62%, upper 60% is REAL TRANSPARENT ALPHA. Small low violet stone planters with a few shrubs at extreme far left and right horizon ends, unobstructed empty central ground, no buildings, no people, no can, no architecture or lettering. It will be layered in front of a separately rendered WonderPop building, so keep foreground clean and wide with no stairs. It is an actual illustration sprite on transparency, no painted checkerboard.",
+      "references": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\street-separated.webp"
+      ],
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-f28221f6-3e3f-435e-bb7b-b5b6cc966afe.png"
+    },
+    {
+      "name": "festival-crowd",
+      "prompt": "Create a wide 3:1 production foreground cutout for a family friendly illustrated city music festival. Real transparent alpha across upper 65% of canvas, along bottom edge a sparse row of about eight small audience silhouettes seen from BEHIND at eye-level: friends and families watching a concert away from camera, some holding small pink or gold glow sticks, two simple star-shaped gold balloons at the far left corner. Silhouettes and clothing are deep violet with warm gold/pink rim lighting, detailed soft painted edges matching reference, some front leaves at extreme lower corners. The heads are only in lower quarter, leave wide clear space around the CENTER so scene behind and HTML content stays visible. No faces visible, no main characters, no raised mass of arms, no foreground giant heads. No background, no stage, no floor, no lettering, no photo look. This is a restrained foreground depth layer, shallow strip, full-width composition.",
+      "references": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\street-separated.webp"
+      ],
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-afb10f0b-8996-4c65-844b-8746d886c5ac.png"
+    }
+  ]
+}

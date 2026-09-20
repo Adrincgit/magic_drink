@@ -2,33 +2,10 @@
 import LayoutBasic from '../layouts/LayoutBasic.astro';
 
 
-import IndexSeccion1 from '../components/index/Secciones/IndexSeccion1.jsx'; 
-import IndexSeccion2 from '../components/index/Secciones/IndexSeccion2.jsx';
-import IndexSeccion3 from '../components/index/Secciones/IndexSeccion3.jsx';
-import IndexInterlude from '../components/index/Secciones/IndexInterlude.jsx';
-import IndexSeccion4 from '../components/index/Secciones/IndexSeccion4.jsx';
-import IndexSeccion5 from '../components/index/Secciones/IndexSeccion5.jsx';
-import IndexSeccion6 from '../components/index/Secciones/IndexSeccion6.jsx';
-import IndexSeccion7 from '../components/index/Secciones/IndexSeccion7.jsx';
-import IndexSeccion8 from '../components/index/Secciones/IndexSeccion8.jsx';
+import IndexExperience from '../components/index/IndexExperience.jsx';
 ---
 
-<LayoutBasic title="Magic Drink" showFooter={true}>
-
-    <IndexSeccion1 transition:persist client:only/>
-    <IndexSeccion2 transition:persist client:only/>
-    <IndexSeccion3 transition:persist client:only/>
-    <IndexInterlude transition:persist client:only/>
-    <IndexSeccion4 transition:persist client:only/>
-    <IndexSeccion5 transition:persist client:only/>
-    <IndexSeccion6 transition:persist client:only/>
-    <IndexSeccion7 transition:persist client:only/>
-    <IndexSeccion8 transition:persist client:only/>
-
-
-
-
-    
-
+<LayoutBasic title="Magic Drink Original — Tu música. Tu mundo." description="Magic Drink Original, la música de Hexy y WonderPop Plaza. Todo empieza con un sorbo." lang="es" showNavBar={true} showFooter={false}>
+    <IndexExperience client:load />
 </LayoutBasic>
 

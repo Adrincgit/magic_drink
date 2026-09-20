@@ -1,0 +1,28 @@
+﻿{
+  "assets": [
+    {
+      "name": "atrium-distance",
+      "prompt": "Edit this exact illustration into the BACK layer for a layered parallax scene. Preserve identical canvas 1536x1024, camera, scale, composition, architecture, light, people in distance and paving. Remove the closest right-hand curved tasting counter from lower/right third, its salesperson, front decorative flowers and the large hanging star/globe lamps above the counter near upper-right. Remove ONLY the closest large tree and lounge chairs on the left lower side; keep distant trees and upper balconies. Reconstruct the newly exposed floor, distant storefronts and architectural structure naturally. Keep the result as a complete opaque background painting, no holes or transparency. Exact continuity with input, do not change scene style, no new text, no design mockup.",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\wonderpop-atrium.webp"
+      ],
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-9f9e75a7-6c7f-4a81-ac5a-9959f11843f8.png"
+    },
+    {
+      "name": "atrium-bar",
+      "prompt": "Extract a precise parallax foreground layer from this reference illustration. Keep the EXACT 1536x1024 landscape canvas and EXACT positions/scales. Keep ONLY the nearest right-hand curved tasting bar/counter with its violet cans, salesperson, lower-right planters/flowers, and the decorative star/globe lamps suspended above that same bar in upper-right. All other pixels become TRUE TRANSPARENT ALPHA. This is one right-side foreground group, do NOT center it, do NOT enlarge it, do NOT change its shape or reconstruct unrelated objects. Preserve all original painted detail, lighting and perspective. Transparent left 65% and transparent spaces between hanging lamps, no replacement backdrop, no painted checkerboard.",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\wonderpop-atrium.webp"
+      ],
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-1694fbea-3e4a-48ee-b5e3-b6b460d80119.png"
+    },
+    {
+      "name": "atrium-garden",
+      "prompt": "Extract a precise parallax middle layer from this exact reference illustration. Keep EXACT original 1536x1024 landscape canvas, locations, scale and perspective. Keep ONLY the closest large leafy illuminated indoor tree growing at the left-center of the atrium, its trunk/planter, and the two purple lounge chairs and their small side table at lower-left. Everything else is TRUE TRANSPARENT ALPHA, including all architecture, floor, right-hand bar, people, distant trees and sky. Do not center or resize the retained objects. Preserve exact warm gold and purple painted style and edge glow. This is a static indoor garden/seat cutout aligned to the original composition, not a mockup.",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\wonderpop-atrium.webp"
+      ],
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-bff00e40-d6ae-46dc-80de-8b80ff93f97e.png"
+    }
+  ]
+}

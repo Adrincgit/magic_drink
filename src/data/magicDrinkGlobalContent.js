@@ -2,7 +2,7 @@ export const magicDrinkGlobalContent = {
   es: {
     navbar: {
       links: [
-        { label: 'Bebidas', href: '/bebidas' },
+        { label: 'Original', href: '/bebidas' },
         { label: 'Hexy', href: '/hexy' },
         { label: 'Wonderpop Plaza', href: '/wonderpop-plaza' },
         { label: 'Nosotros', href: '/nosotros' },
@@ -10,7 +10,7 @@ export const magicDrinkGlobalContent = {
     },
     footer: {
       quickLinks: [
-        { text: 'Bebidas', href: '/bebidas', icon: '/icons/icono_lata.webp' },
+        { text: 'Original', href: '/bebidas', icon: '/icons/icono_lata.webp' },
         { text: 'Hexy Music', href: '/hexy', icon: '/icons/icono_hexy.webp' },
         { text: 'Wonderpop Plaza', href: '/wonderpop-plaza', icon: '/icons/icono_plaza.webp' },
         { text: 'Nosotros', href: '/nosotros', icon: '/icons/icono_gorro.webp' },
@@ -21,7 +21,7 @@ export const magicDrinkGlobalContent = {
   en: {
     navbar: {
       links: [
-        { label: 'Drinks', href: '/bebidas' },
+        { label: 'Original', href: '/bebidas' },
         { label: 'Hexy', href: '/hexy' },
         { label: 'Wonderpop Plaza', href: '/wonderpop-plaza' },
         { label: 'About', href: '/nosotros' },
@@ -29,7 +29,7 @@ export const magicDrinkGlobalContent = {
     },
     footer: {
       quickLinks: [
-        { text: 'Drinks', href: '/bebidas', icon: '/icons/icono_lata.webp' },
+        { text: 'Original', href: '/bebidas', icon: '/icons/icono_lata.webp' },
         { text: 'Hexy Music', href: '/hexy', icon: '/icons/icono_hexy.webp' },
         { text: 'Wonderpop Plaza', href: '/wonderpop-plaza', icon: '/icons/icono_plaza.webp' },
         { text: 'About', href: '/nosotros', icon: '/icons/icono_gorro.webp' },

@@ -1,10 +1,8 @@
 ---
 import LayoutBasic from '../layouts/LayoutBasic.astro';
-import BebidasSeccion1 from '../components/bebidas/Secciones/BebidasSeccion1.jsx';
-import BebidasSeccion3 from '../components/bebidas/Secciones/BebidasSeccion3.jsx';
+import OriginalProduct from '../components/bebidas/OriginalProduct.jsx';
 ---
 
-<LayoutBasic title="Magic Drink | Bebidas" showFooter={true}>
-  <BebidasSeccion1 client:only="react" />
-  <BebidasSeccion3 client:only="react" />
+<LayoutBasic title="Magic Drink Original" description="Conoce Magic Drink Original. La lata morada, la estrella amarilla y el principio de todo." showFooter={true}>
+  <OriginalProduct client:load />
 </LayoutBasic>

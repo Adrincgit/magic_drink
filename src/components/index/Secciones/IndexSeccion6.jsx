@@ -7,6 +7,7 @@ import GradientText from '../../global/animations/GradientText/GradientText';
 import CountUp from '../../global/animations/CountUp';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { createScrollVideo, refreshLandingScroll } from '../animations/scrollMedia';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +15,7 @@ const detectMobile = () => typeof window !== 'undefined' && window.innerWidth <=
 
 const IndexSeccion6 = () => {
   const ingles = useStore(isEnglish);
-  
+
   // ═══════════════════════════════════════════════════════════════
   // CONTENIDO - Objeto de traducciones (patrón estándar)
   // ═══════════════════════════════════════════════════════════════
@@ -73,15 +74,15 @@ const IndexSeccion6 = () => {
   const particlesRef = useRef(null);
   const videoWrapperRef = useRef(null);
   const videoRef = useRef(null);
-  
+
   // Fase 1: Intro (subtítulo + descripción)
   const introContentRef = useRef(null);
-  
+
   // Fase 2: Highlights + CTA
   const highlightsContainerRef = useRef(null);
   const highlightItemsRef = useRef([]);
   const ctaRef = useRef(null);
-  
+
   // Fase 3: Stats
   const statsContainerRef = useRef(null);
   const statCardsRef = useRef([]);
@@ -115,198 +116,164 @@ const IndexSeccion6 = () => {
 
     if (isMobile || !section || !video || !title) return;
 
-    let ctx;
-    let rafId;
+    const scrollVideo = createScrollVideo(video, 0.12, 0.72);
+    const ctx = gsap.context(() => {
 
-    const initCinematicTimeline = () => {
-      const waitForVideo = new Promise((resolve) => {
-        if (video.readyState >= 2) {
-          resolve();
-        } else {
-          video.addEventListener('loadeddata', resolve, { once: true });
-          setTimeout(resolve, 3000);
+      const tl = gsap.timeline({
+        onUpdate() { scrollVideo.setProgress(this.progress()); },
+        scrollTrigger: {
+          id: 'index-wonderpop',
+          refreshPriority: 10,
+          trigger: section,
+          start: "top top",
+          end: "+=550%",
+          pin: true,
+          scrub: 0.8,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            const progress = self.progress;
+
+            // Activar stats CountUp al 80%
+            if (progress >= 0.80 && !statsVisibleRef.current) {
+              statsVisibleRef.current = true;
+              setStatsVisible(true);
+            }
+          }
         }
       });
 
-      waitForVideo.then(() => {
-        video.pause();
-        video.currentTime = 0;
-        
-        const videoDuration = video.duration || 10;
+      // ═══════════════════════════════════════════════════════════
+      // FASE 1: TÍTULO ZOOM-IN (0% - 10%)
+      // ═══════════════════════════════════════════════════════════
+      tl.fromTo(title,
+        { scale: 0.15, opacity: 0, filter: "blur(25px)" },
+        { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.10, ease: "back.out(1.4)" },
+        0
+      );
 
-        ctx = gsap.context(() => {
-          
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: section,
-              start: "top top",
-              end: "+=550%",
-              pin: true,
-              scrub: 0.8,
-              anticipatePin: 1,
-              // No tocar document.body.style — el layout tiene background fijo
-              onEnter: () => {},
-              onLeave: () => {},
-              onEnterBack: () => {},
-              onLeaveBack: () => {},
-              onUpdate: (self) => {
-                const progress = self.progress;
-                
-                // Video scrub: 12% - 72%
-                if (progress >= 0.12 && progress <= 0.72) {
-                  const videoProgress = (progress - 0.12) / 0.60;
-                  const targetTime = videoProgress * videoDuration;
-                  
-                  if (Math.abs(video.currentTime - targetTime) > 0.02) {
-                    video.currentTime = targetTime;
-                  }
-                }
+      // Partículas aparecen con fade-in después del título
+      if (particles) {
+        tl.fromTo(particles,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.08, ease: "power2.out" },
+          0.06
+        );
+      }
 
-                // Activar stats CountUp al 80%
-                if (progress >= 0.80 && !statsVisibleRef.current) {
-                  statsVisibleRef.current = true;
-                  setStatsVisible(true);
-                }
-              }
-            }
-          });
+      // ═══════════════════════════════════════════════════════════
+      // FASE 2: TÍTULO SE REDUCE Y SUBE (10% - 15%)
+      // ═══════════════════════════════════════════════════════════
+      tl.to(title,
+        { scale: 0.35, y: "-30vh", duration: 0.05, ease: "power2.inOut" },
+        0.10
+      );
 
-          // ═══════════════════════════════════════════════════════════
-          // FASE 1: TÍTULO ZOOM-IN (0% - 10%)
-          // ═══════════════════════════════════════════════════════════
-          tl.fromTo(title,
-            { scale: 0.15, opacity: 0, filter: "blur(25px)" },
-            { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.10, ease: "back.out(1.4)" },
-            0
-          );
+      // ═══════════════════════════════════════════════════════════
+      // FASE 3: VIDEO APARECE CENTRADO (12% - 22%)
+      // ═══════════════════════════════════════════════════════════
+      tl.fromTo(videoWrapper,
+        { opacity: 0, scale: 0.75, y: 80 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.10, ease: "power2.out" },
+        0.12
+      );
 
-          // Partículas aparecen con fade-in después del título
-          if (particles) {
-            tl.fromTo(particles,
-              { opacity: 0 },
-              { opacity: 1, duration: 0.08, ease: "power2.out" },
-              0.06
-            );
-          }
+      tl.fromTo(video,
+        { filter: "blur(30px) brightness(0.5)" },
+        { filter: "blur(0px) brightness(1)", duration: 0.10, ease: "power2.out" },
+        0.12
+      );
 
-          // ═══════════════════════════════════════════════════════════
-          // FASE 2: TÍTULO SE REDUCE Y SUBE (10% - 15%)
-          // ═══════════════════════════════════════════════════════════
-          tl.to(title,
-            { scale: 0.35, y: "-30vh", duration: 0.05, ease: "power2.inOut" },
-            0.10
-          );
+      // ═══════════════════════════════════════════════════════════
+      // FASE 4: INTRO CONTENT APARECE (22% - 32%)
+      // Subtítulo + descripción aparecen debajo del video
+      // ═══════════════════════════════════════════════════════════
+      if (introContent) {
+        tl.fromTo(introContent,
+          { opacity: 0, y: 60, filter: "blur(12px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.10, ease: "power2.out" },
+          0.22
+        );
+      }
 
-          // ═══════════════════════════════════════════════════════════
-          // FASE 3: VIDEO APARECE CENTRADO (12% - 22%)
-          // ═══════════════════════════════════════════════════════════
-          tl.fromTo(videoWrapper,
-            { opacity: 0, scale: 0.75, y: 80 },
-            { opacity: 1, scale: 1, y: 0, duration: 0.10, ease: "power2.out" },
-            0.12
-          );
+      // ═══════════════════════════════════════════════════════════
+      // FASE 5: INTRO DESAPARECE (38% - 45%)
+      // ═══════════════════════════════════════════════════════════
+      if (introContent) {
+        tl.to(introContent,
+          { opacity: 0, y: -40, filter: "blur(10px)", duration: 0.07, ease: "power2.in" },
+          0.38
+        );
+      }
 
-          tl.fromTo(video,
-            { filter: "blur(30px) brightness(0.5)" },
-            { filter: "blur(0px) brightness(1)", duration: 0.10, ease: "power2.out" },
-            0.12
-          );
+      // ═══════════════════════════════════════════════════════════
+      // FASE 6: HIGHLIGHTS APARECEN UNO A UNO (45% - 62%)
+      // ═══════════════════════════════════════════════════════════
+      if (highlightsContainer) {
+        tl.fromTo(highlightsContainer,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.05 },
+          0.45
+        );
+      }
 
-          // ═══════════════════════════════════════════════════════════
-          // FASE 4: INTRO CONTENT APARECE (22% - 32%)
-          // Subtítulo + descripción aparecen debajo del video
-          // ═══════════════════════════════════════════════════════════
-          if (introContent) {
-            tl.fromTo(introContent,
-              { opacity: 0, y: 60, filter: "blur(12px)" },
-              { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.10, ease: "power2.out" },
-              0.22
-            );
-          }
-
-          // ═══════════════════════════════════════════════════════════
-          // FASE 5: INTRO DESAPARECE (38% - 45%)
-          // ═══════════════════════════════════════════════════════════
-          if (introContent) {
-            tl.to(introContent,
-              { opacity: 0, y: -40, filter: "blur(10px)", duration: 0.07, ease: "power2.in" },
-              0.38
-            );
-          }
-
-          // ═══════════════════════════════════════════════════════════
-          // FASE 6: HIGHLIGHTS APARECEN UNO A UNO (45% - 62%)
-          // ═══════════════════════════════════════════════════════════
-          if (highlightsContainer) {
-            tl.fromTo(highlightsContainer,
-              { opacity: 0, y: 40 },
-              { opacity: 1, y: 0, duration: 0.05 },
-              0.45
-            );
-          }
-
-          const highlightItems = highlightItemsRef.current.filter(Boolean);
-          highlightItems.forEach((item, index) => {
-            tl.fromTo(item,
-              { opacity: 0, x: 100, scale: 0.8 },
-              { opacity: 1, x: 0, scale: 1, duration: 0.04, ease: "back.out(1.3)" },
-              0.48 + (index * 0.03)
-            );
-          });
-
-          // CTA aparece después de highlights
-          if (cta) {
-            tl.fromTo(cta,
-              { opacity: 0, y: 40, scale: 0.85 },
-              { opacity: 1, y: 0, scale: 1, duration: 0.05, ease: "back.out(1.4)" },
-              0.62
-            );
-          }
-
-          // ═══════════════════════════════════════════════════════════
-          // FASE 7: PAUSA - TODO VISIBLE (62% - 72%)
-          // ═══════════════════════════════════════════════════════════
-          tl.to({}, { duration: 0.10 }, 0.62);
-
-          // ═══════════════════════════════════════════════════════════
-          // FASE 8: TODO DESAPARECE (72% - 80%)
-          // ═══════════════════════════════════════════════════════════
-          tl.to([videoWrapper, highlightsContainer, title],
-            { opacity: 0, y: -60, scale: 0.9, filter: "blur(12px)", duration: 0.08, ease: "power2.in" },
-            0.72
-          );
-
-          // ═══════════════════════════════════════════════════════════
-          // FASE 9: STATS APARECEN (80% - 100%)
-          // ═══════════════════════════════════════════════════════════
-          if (statsContainer) {
-            tl.fromTo(statsContainer,
-              { opacity: 0, y: 100, scale: 0.8, pointerEvents: 'none' },
-              { opacity: 1, y: 0, scale: 1, pointerEvents: 'auto', duration: 0.10, ease: "power2.out" },
-              0.80
-            );
-          }
-
-          const statCards = statCardsRef.current.filter(Boolean);
-          statCards.forEach((card, index) => {
-            tl.fromTo(card,
-              { opacity: 0, y: 80, scale: 0.7, rotateY: 20 },
-              { opacity: 1, y: 0, scale: 1, rotateY: 0, duration: 0.06, ease: "back.out(1.3)" },
-              0.84 + (index * 0.03)
-            );
-          });
-
-        }, section);
+      const highlightItems = highlightItemsRef.current.filter(Boolean);
+      highlightItems.forEach((item, index) => {
+        tl.fromTo(item,
+          { opacity: 0, x: 100, scale: 0.8 },
+          { opacity: 1, x: 0, scale: 1, duration: 0.04, ease: "back.out(1.3)" },
+          0.48 + (index * 0.03)
+        );
       });
-    };
 
-    rafId = requestAnimationFrame(() => {
-      setTimeout(initCinematicTimeline, 150);
-    });
+      // CTA aparece después de highlights
+      if (cta) {
+        tl.fromTo(cta,
+          { opacity: 0, y: 40, scale: 0.85 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.05, ease: "back.out(1.4)" },
+          0.62
+        );
+      }
+
+      // ═══════════════════════════════════════════════════════════
+      // FASE 7: PAUSA - TODO VISIBLE (62% - 72%)
+      // ═══════════════════════════════════════════════════════════
+      tl.to({}, { duration: 0.10 }, 0.62);
+
+      // ═══════════════════════════════════════════════════════════
+      // FASE 8: TODO DESAPARECE (72% - 80%)
+      // ═══════════════════════════════════════════════════════════
+      tl.to([videoWrapper, highlightsContainer, title],
+        { opacity: 0, y: -60, scale: 0.9, filter: "blur(12px)", duration: 0.08, ease: "power2.in" },
+        0.72
+      );
+
+      // ═══════════════════════════════════════════════════════════
+      // FASE 9: STATS APARECEN (80% - 100%)
+      // ═══════════════════════════════════════════════════════════
+      if (statsContainer) {
+        tl.fromTo(statsContainer,
+          { opacity: 0, y: 100, scale: 0.8, pointerEvents: 'none' },
+          { opacity: 1, y: 0, scale: 1, pointerEvents: 'auto', duration: 0.10, ease: "power2.out" },
+          0.80
+        );
+      }
+
+      const statCards = statCardsRef.current.filter(Boolean);
+      statCards.forEach((card, index) => {
+        tl.fromTo(card,
+          { opacity: 0, y: 80, scale: 0.7, rotateY: 20 },
+          { opacity: 1, y: 0, scale: 1, rotateY: 0, duration: 0.06, ease: "back.out(1.3)" },
+          0.84 + (index * 0.03)
+        );
+      });
+
+    }, section);
+    refreshLandingScroll();
 
     return () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      if (ctx) ctx.revert();
+      scrollVideo.dispose();
+      ctx.revert();
+      refreshLandingScroll();
     };
   }, [isMobile]); // Re-init si cambia móvil/desktop
 
@@ -442,11 +409,11 @@ const IndexSeccion6 = () => {
           LAYOUT CENTRAL: VIDEO + CONTENIDO EN FASES
       ══════════════════════════════════════════════════════════ */}
       <div className={styles.mainLayout}>
-        
+
         {/* Video centrado */}
         <div ref={videoWrapperRef} className={styles.videoWrapper}>
           <div className={styles.videoBorder}></div>
-          <video 
+          <video
             ref={videoRef}
             className={styles.video}
             muted
@@ -485,7 +452,7 @@ const IndexSeccion6 = () => {
           <h4 className={styles.highlightsTitle}>{t.highlightsTitle}</h4>
           <ul className={styles.highlights}>
             {t.highlights.map((item, index) => (
-              <li 
+              <li
                 key={index}
                 ref={el => highlightItemsRef.current[index] = el}
                 className={styles.highlightItem}
@@ -497,9 +464,9 @@ const IndexSeccion6 = () => {
               </li>
             ))}
           </ul>
-          
+
           <div ref={ctaRef} className={styles.ctaWrapper}>
-            <Button 
+            <Button
               href="/wonderpop-plaza"
               textEs={content.es.cta}
               textEn={content.en.cta}
@@ -527,9 +494,9 @@ const IndexSeccion6 = () => {
         </h3>
         <div className={styles.statsGrid}>
           {t.stats.map((stat, index) => (
-            <div 
+            <div
               key={index}
-              ref={el => statCardsRef.current[index] = el} 
+              ref={el => statCardsRef.current[index] = el}
               className={styles.statCard}
             >
               <div className={styles.statNumber}>

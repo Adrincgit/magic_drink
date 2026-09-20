@@ -6,6 +6,7 @@ import Button from '../../global/Button';
 import useFlavorAudio from '../../global/useFlavorAudio';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { observeLandingLayout, refreshLandingScroll } from '../animations/scrollMedia';
 
 // Registrar ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
@@ -317,18 +318,19 @@ const IndexSeccion3 = () => {
 
     let ctx;
     let rafId;
+    let disposed = false;
+    const stopObservingLayout = observeLandingLayout();
     
     // Función para inicializar ScrollTrigger
     const initScrollTrigger = () => {
-      // Calcular el ancho total del scroll horizontal
-      const totalWidth = horizontal.scrollWidth - window.innerWidth;
-
       ctx = gsap.context(() => {
         // Crear el ScrollTrigger para el efecto horizontal
         const scrollTween = gsap.to(horizontal, {
-          x: -totalWidth,
+          x: () => -(horizontal.scrollWidth - window.innerWidth),
           ease: "none",
           scrollTrigger: {
+            id: 'index-horizontal',
+            refreshPriority: 30,
             trigger: trigger,
             start: "top top",
             end: () => `+=${horizontal.scrollWidth - window.innerWidth}`,
@@ -368,55 +370,33 @@ const IndexSeccion3 = () => {
       }, sectionRef);
     };
 
-    // Esperar a que el DOM esté completamente renderizado
-    // Usamos múltiples estrategias para asegurar compatibilidad cross-browser
-    const waitForLayout = () => {
-      // 1. Esperar al siguiente frame de animación
-      rafId = requestAnimationFrame(() => {
-        // 2. Pequeño timeout adicional para Chrome/Edge
-        setTimeout(() => {
-          initScrollTrigger();
-          
-          // 3. Refresh adicional después de que las imágenes carguen
-          const images = horizontal.querySelectorAll('img');
-          let loadedImages = 0;
-          const totalImages = images.length;
-          
-          if (totalImages === 0) {
-            ScrollTrigger.refresh();
-            return;
-          }
-          
-          images.forEach((img) => {
-            if (img.complete) {
-              loadedImages++;
-              if (loadedImages === totalImages) {
-                ScrollTrigger.refresh();
-              }
-            } else {
-              img.addEventListener('load', () => {
-                loadedImages++;
-                if (loadedImages === totalImages) {
-                  ScrollTrigger.refresh();
-                }
-              }, { once: true });
-            }
-          });
-        }, 100);
-      });
+    // Reserve the horizontal distance without waiting for unrelated videos to load.
+    const refreshLayout = () => {
+      if (!disposed) refreshLandingScroll();
     };
-
-    // Verificar si el documento ya está cargado
-    if (document.readyState === 'complete') {
-      waitForLayout();
-    } else {
-      window.addEventListener('load', waitForLayout, { once: true });
-    }
+    rafId = requestAnimationFrame(() => {
+      initScrollTrigger();
+      refreshLayout();
+    });
+    const images = horizontal.querySelectorAll('img');
+    images.forEach((img) => {
+      img.addEventListener('load', refreshLayout);
+      img.addEventListener('error', refreshLayout);
+    });
+    document.fonts?.ready.then(refreshLayout);
 
     // Cleanup
     return () => {
+      disposed = true;
+      stopObservingLayout();
       if (rafId) cancelAnimationFrame(rafId);
+      images.forEach((img) => {
+        img.removeEventListener('load', refreshLayout);
+        img.removeEventListener('error', refreshLayout);
+      });
       if (ctx) ctx.revert();
+      section.style.minHeight = '';
+      refreshLandingScroll();
     };
   }, [isMobile]);
 

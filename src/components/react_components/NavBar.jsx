@@ -128,6 +128,8 @@ const NavBar = () => {
           className={styles.hamburger}
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="magicdrink-mobile-menu"
         >
           <span className={`${styles.hamburgerLine} ${mobileMenuOpen ? styles.hamburgerActive : ''}`}></span>
           <span className={`${styles.hamburgerLine} ${mobileMenuOpen ? styles.hamburgerActive : ''}`}></span>
@@ -158,7 +160,7 @@ const NavBar = () => {
 
       {/* === MENÚ MÓVIL OVERLAY === */}
       {mobileMenuOpen && (
-        <div className={styles.mobileOverlay} onClick={closeMobileMenu}>
+        <div id="magicdrink-mobile-menu" className={styles.mobileOverlay} onClick={closeMobileMenu}>
           <div className={styles.mobileContent} onClick={(e) => e.stopPropagation()}>
             
             {/* Logo en menú móvil */}
@@ -199,7 +201,7 @@ const NavBar = () => {
             </div>
 
             {/* Botón cerrar */}
-            <button className={styles.closeButton} onClick={closeMobileMenu}>
+            <button className={styles.closeButton} onClick={closeMobileMenu} aria-label={ingles ? 'Close menu' : 'Cerrar menú'}>
               ✕
             </button>
           </div>

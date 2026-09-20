@@ -1,201 +1,146 @@
-// @ts-check
 import { test, expect } from '@playwright/test';
-import { mkdirSync } from 'fs';
+import { openLanding, goTo, goWorld } from './landing.helpers';
 
+const errors = new WeakMap();
+test.beforeEach(async ({ page }) => {
+  errors.set(page, []);
+  page.on('pageerror', (e) => errors.get(page).push(e.message));
+});
+test.afterEach(async ({ page }) => {
+  expect(errors.get(page)).toEqual([]);
+});
 
-test.describe('Magic Drink - Test de scroll entre secciones', () => {
+test('depth planes move independently and ambient clouds keep moving at rest', async ({ page }) => {
+  await openLanding(page);
+  const transforms = () =>
+    page
+      .locator('[data-depth]')
+      .evaluateAll((els) =>
+        Object.fromEntries(
+          els.map((el) => [el.dataset.depth, new DOMMatrix(getComputedStyle(el).transform).m41]),
+        ),
+      );
+  const before = await transforms();
+  await goTo(page, '[data-runway]', 0.45);
+  const after = await transforms();
+  expect(Math.abs(after.street - before.street)).toBeGreaterThan(150);
+  expect(Math.abs(after.distance - before.distance)).toBeLessThan(
+    Math.abs(after.street - before.street) * 0.5,
+  );
+  expect(Math.abs(after.plaza - before.plaza)).toBeGreaterThan(
+    Math.abs(after.distance - before.distance),
+  );
+  expect(Math.abs(after.plaza - before.plaza)).toBeLessThan(Math.abs(after.street - before.street));
+  expect(Math.abs(after.furniture - before.furniture)).toBeGreaterThan(
+    Math.abs(after.street - before.street),
+  );
+  const cloud = page.locator('[data-depth="cloud-near"] img');
+  const ambientBefore = await cloud.evaluate((el) => getComputedStyle(el).transform);
+  await page.waitForTimeout(300);
+  const ambientAfter = await cloud.evaluate((el) => getComputedStyle(el).transform);
+  expect(ambientAfter).not.toBe(ambientBefore);
+  expect((await transforms()).street).toBeCloseTo(after.street, 2);
+  await goWorld(page, 0.49);
+  await expect(page.locator('[data-world-scene="festival"]')).toHaveAttribute(
+    'data-world-active',
+    'true',
+  );
+});
 
-  test.beforeEach(async ({ page }) => {
-    // Ir a la página principal
-    await page.goto('/', { waitUntil: 'networkidle' });
-    // Esperar a que React hidrate
-    await page.waitForTimeout(2000);
+test('navigation, languages and user-initiated audio work; navigation remains above later sections', async ({
+  page,
+}) => {
+  await openLanding(page);
+  expect(await page.locator('audio').evaluate((a) => a.paused)).toBe(true);
+  await page.getByRole('button', { name: 'HEXY', exact: true }).click();
+  await expect
+    .poll(() => page.locator('[data-journey]').evaluate((el) => Number(el.dataset.progress)))
+    .toBeCloseTo(0.87, 2);
+  await page.getByRole('button', { name: 'Reproducir No Brain, Just Vibes!' }).click();
+  await expect.poll(() => page.locator('audio').evaluate((a) => a.paused)).toBe(false);
+  await page.getByRole('button', { name: 'Pausar No Brain, Just Vibes!' }).click();
+  await expect.poll(() => page.locator('audio').evaluate((a) => a.paused)).toBe(true);
+  await page.locator('header').getByRole('button', { name: 'EN', exact: true }).click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(page.locator('[data-chapter="2"] h2')).toContainText('This is Hexy.');
+  await expect(page.locator('#festival h2')).toContainText('All of us.');
+  await goWorld(page, 0.49);
+  const nav = page.locator('header').getByRole('button', { name: 'EN', exact: true });
+  await nav.click({ trial: true });
+  const onTop = await nav.evaluate((el) => {
+    const b = el.getBoundingClientRect();
+    return el.contains(document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2));
   });
+  expect(onTop).toBe(true);
+  await goWorld(page, 1);
+  await page.getByRole('button', { name: 'Return to the start' }).click();
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(3);
+});
 
-  // ─────────────────────────────────────────────────────────────
-  // TEST 1: Scroll completo sin errores de consola
-  // ─────────────────────────────────────────────────────────────
-  test('Scroll completo - sin errores JS críticos', async ({ page }) => {
-    /**
-     * @type {string[]}
-     */
-    const consoleErrors = [];
-
-    // Capturar errores de consola
-    page.on('console', (msg) => {
-      if (msg.type() === 'error') {
-        consoleErrors.push(msg.text());
-      }
-    });
-
-    page.on('pageerror', (error) => {
-      consoleErrors.push(`PAGE ERROR: ${error.message}`);
-    });
-
-    const pageHeight = await page.evaluate(() => document.body.scrollHeight);
-    console.log(`\n📏 Altura total de la página: ${pageHeight}px`);
-
-    // Scroll gradual por toda la página
-    const step = 300;
-    for (let y = 0; y < pageHeight; y += step) {
-      await page.evaluate((scrollY) => window.scrollTo({ top: scrollY, behavior: 'instant' }), y);
-      await page.waitForTimeout(80);
-    }
-
-    // Scroll al final
-    await page.evaluate(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' }));
-    await page.waitForTimeout(500);
-
-    if (consoleErrors.length > 0) {
-      console.log('\n❌ Errores encontrados en consola:');
-      consoleErrors.forEach((e) => console.log('  -', e));
-    } else {
-      console.log('\n✅ Sin errores de consola durante el scroll');
-    }
-
-    // No bloqueamos por errores de consola (algunos pueden ser de assets faltantes)
-    // Solo reportamos
-    expect(consoleErrors.filter(e => e.includes('TypeError') || e.includes('ReferenceError'))).toHaveLength(0);
-  });
-
-  // ─────────────────────────────────────────────────────────────
-  // TEST 2: Detección del flash entre Sección 6 y 7
-  // ─────────────────────────────────────────────────────────────
-  test('Transición Sección 6 → Sección 7 - sin flash visual', async ({ page }) => {
-    // Encontrar la sección 6 (wonderpopSection) para posicionarnos
-    const sec6 = page.locator('[class*="wonderpopSection"]').first();
-    await expect(sec6).toBeVisible({ timeout: 10000 });
-
-    // Obtener posición de la sección 6
-    const sec6Box = await sec6.boundingBox();
-    console.log(`\n📍 Sección 6 encontrada en Y: ${sec6Box?.y}`);
-
-    // Scrollear hasta la sección 6
-    await page.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), sec6Box?.y ?? 0);
-    await page.waitForTimeout(1000);
-
-    // ── Monitorear posición del scroll durante el PIN ──────────
-    const scrollLog = [];
-    let screenshotCount = 0;
-
-    // Hacer scroll lento y manual para simular el PIN de la sección 6
-    // Con pasos pequeños para detectar cualquier salto
-    const totalScrollInSec6 = (sec6Box?.height ?? 900) * 6; // ~550% del PIN
-    const startY = sec6Box?.y ?? 0;
-    const endY = startY + totalScrollInSec6;
-
-    console.log(`\n🔍 Monitoreando scroll de ${startY} a ${endY} (zona del PIN de Sección 6)`);
-
-    let previousScrollY = -1;
-    let jumpDetected = false;
-    let jumpDetails = [];
-
-    for (let targetY = startY; targetY <= endY; targetY += 150) {
-      await page.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), targetY);
-      await page.waitForTimeout(50);
-
-      // Leer scroll actual real
-      const currentScrollY = await page.evaluate(() => window.scrollY);
-      const viewportContent = await page.evaluate(() => {
-        // Detectar qué sección está visible en el 50% superior de la viewport
-        const midY = window.scrollY + window.innerHeight * 0.3;
-        const secs = document.querySelectorAll('section');
-        let active = null;
-        secs.forEach((s) => {
-          const rect = s.getBoundingClientRect();
-          const absTop = rect.top + window.scrollY;
-          const absBot = rect.bottom + window.scrollY;
-          if (midY >= absTop && midY <= absBot) active = s.className;
+test('phone compositions fit and remain navigable after resizing', async ({ page }) => {
+  await openLanding(page);
+  for (const viewport of [
+    { width: 390, height: 844 },
+    { width: 360, height: 740 },
+    { width: 1440, height: 900 },
+  ]) {
+    await page.setViewportSize(viewport);
+    for (const progress of [0, 0.45, 0.87]) {
+      await goTo(page, '[data-runway]', progress);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
+      if (progress === 0) {
+        const fits = await page.locator('[data-chapter="0"] h1').evaluate((el) => {
+          const r = document.createRange();
+          r.selectNodeContents(el);
+          const b = r.getBoundingClientRect();
+          return b.left >= 0 && b.right <= innerWidth;
         });
-        return active;
-      });
-
-      // @ts-ignore
-      scrollLog.push({ targetY, currentScrollY, section: viewportContent?.substring(0, 60) });
-
-      // Detectar salto: si el scroll visible "retrocede" más de 200px de golpe
-      if (previousScrollY > 0 && currentScrollY < previousScrollY - 200) {
-        jumpDetected = true;
-        const detail = `⚡ SALTO DETECTADO: scroll fue de ${previousScrollY} → ${currentScrollY} (retroceso de ${previousScrollY - currentScrollY}px) al intentar ir a Y=${targetY}`;
-        jumpDetails.push(detail);
-        console.log('\n' + detail);
-
-        // Screenshot del momento del flash
-        await page.screenshot({
-          path: `tests/results/screenshots/flash_at_${targetY}.png`,
-          fullPage: false
-        });
+        expect(fits).toBe(true);
       }
-
-      previousScrollY = currentScrollY;
     }
+  }
+});
 
-    // ── Reporte final ──────────────────────────────────────────
-    console.log('\n── RESUMEN DEL SCROLL LOG ──');
-    // Mostrar solo los momentos donde la sección cambia
-    let prevSection = '';
-    scrollLog.forEach(({ targetY, currentScrollY, section }) => {
-      if (section !== prevSection) {
-        console.log(`  Y=${currentScrollY} → Sección: ${section}`);
-        prevSection = section;
-      }
-    });
+test('reduced motion exposes the story as ordinary readable sections', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await openLanding(page);
+  await expect(page.locator('[data-journey]')).toHaveAttribute('data-reduced', 'true');
+  for (let i = 0; i < 3; i++) {
+    const section = page.locator(`[data-chapter="${i}"]`);
+    expect(
+      await section.evaluate((el) => !el.inert && getComputedStyle(el).visibility === 'visible'),
+    ).toBe(true);
+  }
+  expect(
+    await page
+      .locator('[data-journey]')
+      .evaluate((el) => el.getAnimations({ subtree: true }).length),
+  ).toBe(0);
+  expect(await page.locator('[data-stage]').evaluate((el) => getComputedStyle(el).position)).toBe(
+    'relative',
+  );
+  for (const name of ['festival', 'plaza', 'interior', 'closing']) {
+    expect(
+      await page
+        .locator(`[data-world-copy="${name}"]`)
+        .evaluate((el) => !el.inert && getComputedStyle(el).visibility === 'visible'),
+    ).toBe(true);
+  }
+});
 
-    if (jumpDetected) {
-      console.log('\n❌ RESULTADO: Se detectaron saltos de scroll (flash visual):');
-      jumpDetails.forEach((d) => console.log(' ', d));
-      console.log('\n📁 Screenshots guardados en: tests/results/screenshots/');
-    } else {
-      console.log('\n✅ RESULTADO: Sin saltos de scroll detectados entre secciones');
-    }
-
-    // El test falla si hay saltos de scroll
-    expect(jumpDetails).toHaveLength(0);
-  });
-
-  // ─────────────────────────────────────────────────────────────
-  // TEST 3: Screenshots de cada sección para verificación visual
-  // ─────────────────────────────────────────────────────────────
-  test('Capturar screenshots de cada sección', async ({ page }) => {
-    const pageHeight = await page.evaluate(() => document.body.scrollHeight);
-    const viewportHeight = 900;
-
-    // Puntos de interés para screenshots
-    const checkpoints = [
-      { name: '01_inicio', y: 0 },
-      { name: '02_seccion2', y: viewportHeight * 1 },
-      { name: '03_seccion3', y: viewportHeight * 2 },
-      { name: '04_seccion4', y: viewportHeight * 3 },
-      { name: '05_seccion5_inicio', y: viewportHeight * 4 },
-      { name: '06_seccion5_mitad', y: viewportHeight * 5.5 },
-      { name: '07_seccion6_inicio', y: viewportHeight * 7 },
-      { name: '08_seccion6_video', y: viewportHeight * 9 },
-      { name: '09_seccion6_highlights', y: viewportHeight * 11 },
-      { name: '10_seccion6_stats', y: viewportHeight * 13 },
-      { name: '11_transicion_6a7', y: viewportHeight * 14 },
-      { name: '12_seccion7_inicio', y: viewportHeight * 15 },
-      { name: '13_seccion7_cards', y: viewportHeight * 16 },
-      { name: '14_final', y: pageHeight - viewportHeight },
-      { name: '15_seccion8_inicio', y: viewportHeight * 17 },
-    ];
-
-    // Asegurar carpeta
-    mkdirSync('tests/results/screenshots', { recursive: true });
-
-    for (const { name, y } of checkpoints) {
-      const scrollTarget = Math.min(y, pageHeight - viewportHeight);
-      await page.evaluate((sy) => window.scrollTo({ top: sy, behavior: 'instant' }), scrollTarget);
-      await page.waitForTimeout(600); // Esperar animaciones CSS
-
-      const realY = await page.evaluate(() => window.scrollY);
-      await page.screenshot({ path: `tests/results/screenshots/${name}_y${realY}.png` });
-      console.log(`📸 Screenshot: ${name} (Y real: ${realY})`);
-    }
-
-    console.log('\n✅ Screenshots guardados en tests/results/screenshots/');
-    
-    // Este test siempre pasa, es solo para inspección visual
-    expect(true).toBe(true);
-  });
-
+test('Hexy deep link opens its scene and the product route offers only Original', async ({
+  page,
+}) => {
+  await openLanding(page, '#hexy');
+  await expect
+    .poll(() => page.locator('[data-journey]').evaluate((el) => Number(el.dataset.progress)))
+    .toBeCloseTo(0.87, 2);
+  await page.goto('/bebidas', { waitUntil: 'networkidle' });
+  await expect(page.locator('main h1')).toContainText('Original');
+  await expect(page.locator('body')).not.toContainText(
+    /Bubble Tape|Dragon Grape|Banana Drama|6 sabores|6 official flavors/,
+  );
+  await expect(page.locator('img[src="/image/journey/original.webp"]')).toBeVisible();
 });

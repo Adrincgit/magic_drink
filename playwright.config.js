@@ -5,16 +5,18 @@ export default defineConfig({
   testDir: './tests',
   timeout: 60000,
   use: {
-    baseURL: 'http://localhost:4321',
-    headless: false,
+    baseURL: process.env.MAGIC_DRINK_TEST_URL || 'http://127.0.0.1:4321',
+    headless: true,
+    channel: 'chrome',
     viewport: { width: 1440, height: 900 },
-    video: 'on',
-    screenshot: 'on',
+    video: 'off',
+    screenshot: 'only-on-failure',
+    trace: 'retain-on-failure',
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'], channel: 'chrome', viewport: { width: 1440, height: 900 } },
     },
   ],
   outputDir: './tests/results',

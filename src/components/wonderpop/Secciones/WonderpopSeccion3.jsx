@@ -12,8 +12,8 @@ const content = {
     zones: [
       {
         icon: '/icons/icono_lata.webp',
-        title: 'Tienda Oficial de Sabores',
-        desc: 'Todos los sabores de Magic Drink disponibles, incluyendo ediciones limitadas exclusivas de cada sucursal. Prueba antes de comprar en las estaciones de degustación.',
+        title: 'Tienda Oficial de Original',
+        desc: 'Magic Drink Original y sus productos oficiales, en el corazón de la plaza. Acércate a las estaciones de degustación y comparte tu momento.',
         tag: 'Flagship',
         color: '#FF6AD7',
         featured: false,
@@ -37,7 +37,7 @@ const content = {
       {
         icon: '/icons/icono_globo.webp',
         title: 'Eventos & Activaciones',
-        desc: 'Lanzamientos de nuevos sabores, meet & greets virtuales con Hexy, pop-ups temáticos y colaboraciones con artistas locales. Siempre hay algo nuevo.',
+        desc: 'Meet & greets virtuales con Hexy, pop-ups temáticos y colaboraciones con artistas locales. Siempre hay algo nuevo alrededor de Original.',
         tag: 'Temporal',
         color: '#F9F871',
         featured: true,
@@ -61,8 +61,8 @@ const content = {
     zones: [
       {
         icon: '/icons/icono_lata.webp',
-        title: 'Official Flavor Store',
-        desc: 'Every Magic Drink flavor available, including limited editions exclusive to each branch. Try before you buy at tasting stations.',
+        title: 'Official Original Store',
+        desc: 'Magic Drink Original and official merchandise, at the heart of the plaza. Visit the tasting stations and share your moment.',
         tag: 'Flagship',
         color: '#FF6AD7',
         featured: false,
@@ -86,7 +86,7 @@ const content = {
       {
         icon: '/icons/icono_globo.webp',
         title: 'Events & Activations',
-        desc: 'New flavor launches, virtual meet & greets with Hexy, themed pop-ups, and collaborations with local artists. There\'s always something new.',
+        desc: 'Virtual meet & greets with Hexy, themed pop-ups, and collaborations with local artists. There\'s always something new around Original.',
         tag: 'Temporary',
         color: '#F9F871',
         featured: true,
