@@ -1,0 +1,30 @@
+.table { position: absolute; width: min(64vw, 104svh); max-width: none; height: auto; left: 74%; top: 74svh; transform: translateX(-50%); }
+.contact { position: absolute; left: 71%; top: 79svh; width: 23svh; height: 2svh; translate: -50% 0; border-radius: 50%; background: #301c448f; filter: blur(7px); }
+.plant { position: absolute; width: 29svh; right: 1.5%; bottom: 19svh; filter: drop-shadow(0 8px 5px #24163066); }
+.plant img { display: block; width: 100%; height: auto; }
+.plant > img:first-child { mask-image: linear-gradient(transparent 35%, #000 63%); }
+.plant .crown { position: absolute; inset: 0; mask-image: linear-gradient(#000 35%, transparent 65%); transform-origin: 50% 78%; animation: foliage 5.7s ease-in-out infinite alternate; }
+.product { position: absolute; left: 71%; bottom: 16svh; height: 65svh; width: calc(65svh * 2 / 3); transform: translateX(-50%); pointer-events: none; }
+.canButton { position: absolute; inset: 0; display: block; padding: 0; background: transparent; border-radius: 30%; pointer-events: auto; transform-origin: 50% 94%; transition: scale .35s cubic-bezier(.2,.8,.2,1); }
+.canButton:disabled { pointer-events: none; }
+.canButton:hover { scale: 1.035; }
+.canButton:active { scale: 1.01; }
+.can { display: block; width: 100%; height: 100%; filter: drop-shadow(9px 5px 5px #220f3540); }
+.drops { position: absolute; left: 19%; right: 19%; top: 11%; height: 74%; overflow: hidden; pointer-events: none; mask-image: linear-gradient(transparent, #000 10% 70%, transparent); }
+.drops i { position: absolute; left: calc(5% + var(--d) * 21%); top: calc(var(--d) * 9%); width: 3px; height: 8px; border-radius: 50% 50% 60% 60%; background: linear-gradient(100deg, #fff5, #f6eeff99 45%, #76529966 70%); box-shadow: -1px 1px 1px #fff8; animation: trickle 7s cubic-bezier(.5,0,.45,1) infinite; animation-delay: calc(var(--d) * -1.7s); }
+.touchHint { position: absolute; bottom: 1%; left: 50%; translate: -50% 0; white-space: nowrap; border: 1px solid #edc088; border-radius: 12px; padding: 6px 12px; color: #ffe4af; background: #422850e8; font-size: 10px; opacity: 0; transition: opacity .2s; box-shadow: 0 2px 0 #21142c; }
+.canButton:hover .touchHint, .canButton:focus-visible .touchHint { opacity: 1; }
+.burst { position: absolute; left: 50%; top: 10%; width: 1px; height: 1px; pointer-events: none; }
+.burst > span { position: absolute; color: #ffadda; font: 700 29px Georgia, serif; text-shadow: 0 1px 1px #4b265e, 0 0 8px #fce395; animation: magicNote 2.7s cubic-bezier(.3,.35,.4,1) both; animation-delay: calc(var(--i) * .035s); filter: hue-rotate(var(--hue)); }
+.vapor { position: absolute; width: 140px; height: 145px; left: -70px; bottom: -20px; filter: blur(12px); }
+.vapor i { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 20deg, #ffa2d9aa, #ffdf8499, #88ece9aa, #b59affaa, #ffa2d9aa); animation: vapor 2.6s ease-out both; mix-blend-mode: screen; }
+.vapor i:nth-child(2) { animation-delay: .13s; scale: .7; rotate: 40deg; }
+.vapor i:nth-child(3) { animation-delay: .25s; scale: .55; rotate: -30deg; }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@keyframes foliage { from { transform: skewX(-.8deg) rotate(-.6deg); } to { transform: skewX(.8deg) rotate(.6deg); } }
+@keyframes trickle { 0%, 12% { translate: 0 -15px; opacity: 0; } 20% { opacity: .7; } 85%,100% { translate: -2px 155px; opacity: 0; } }
+@keyframes magicNote { from { translate: -10px 0; scale: .3; opacity: 0; } 18%, 58% { opacity: .95; } to { translate: var(--x) -160px; rotate: var(--r); scale: 1.2; opacity: 0; } }
+@keyframes vapor { from { transform: translateY(60px) scale(.15); opacity: 0; } 18%, 45% { opacity: .8; } to { transform: translateY(-95px) scale(1.5); opacity: 0; } }
+@media (max-width: 1100px) and (min-width: 701px) { .product { left: 76%; height: 58svh; width: calc(58svh * 2 / 3); } .table { left: 78%; width: 90svh; top: 78svh; } .contact { left: 76%; top: 80svh; } .plant { right: -5%; width: 25svh; bottom: 18svh; } }
+@media (max-width: 700px) { .product { height: 40svh; width: calc(40svh * 2 / 3); left: 50%; bottom: 14svh; } .table { width: 70svh; top: 80svh; left: 50%; } .contact { left: 50%; top: 83svh; width: 16svh; } .plant { width: 22svh; right: -3%; bottom: 16svh; } .touchHint { font-size: 8px; opacity: 1; padding: 4px 8px; } }
+@media (prefers-reduced-motion: reduce) { .canButton { transition: none; } .canButton:hover { scale: none; } .crown, .drops i, .vapor i, .burst > span { animation: none !important; } .vapor { display: none; } .burst > span { position: static; margin: 0 3px; font-size: 16px; } }

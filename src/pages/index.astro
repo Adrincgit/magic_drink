@@ -7,5 +7,20 @@ import IndexExperience from '../components/index/IndexExperience.jsx';
 
 <LayoutBasic title="Magic Drink — La bebida n.º 1 del mundo" description="La bebida n.º 1 del mundo. Conoce Magic Drink, escucha a Hexy y descubre Magic Drink Day y WonderPop Plaza." lang="es" showNavBar={true} showFooter={false}>
     <IndexExperience client:load />
+    <noscript><style>html { overflow: auto !important; } [data-journey-loader] { display: none !important; }</style></noscript>
+    <script is:inline>
+      // Escape hatch also works if the React island itself cannot hydrate.
+      window.setTimeout(() => {
+        if (document.querySelector('[data-journey-loader][data-complete="false"]')) {
+          document.documentElement.setAttribute('data-journey-timeout', '');
+          const stage = document.querySelector('[data-stage]');
+          if (stage) { stage.inert = false; stage.removeAttribute('aria-busy'); }
+        }
+      }, 10000);
+    </script>
 </LayoutBasic>
 
+<style is:global>
+  html:has([data-journey-loader][data-complete="false"]):not([data-journey-timeout]) { overflow: hidden; }
+  html[data-journey-timeout] [data-journey-loader] { display: none !important; }
+</style>

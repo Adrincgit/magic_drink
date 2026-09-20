@@ -122,18 +122,10 @@
 .stars {
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle, #fff6dbaa 1px, transparent 1.5px),
-    radial-gradient(circle, #fcd6ff7a 1px, transparent 1.5px);
-  background-size:
-    87px 81px,
-    151px 139px;
-  background-position:
-    5px 8px,
-    33px 41px;
-  mask-image: linear-gradient(#000, transparent 58%);
-  opacity: 0.7;
+  mask-image: linear-gradient(#000, #0009 28%, transparent 49%);
 }
+.stars i { position: absolute; width: var(--size); height: var(--size); border-radius: 50%; background: #fff1d8; opacity: var(--glow); animation: starTwinkle var(--duration) ease-in-out var(--delay) infinite alternate; }
+@keyframes starTwinkle { to { opacity: calc(var(--glow) * .35); scale: .8; } }
 
 .comet {
   position: absolute;
@@ -216,8 +208,6 @@
   z-index: 4;
   will-change: transform;
 }
-
-
 
 .streetArt {
   display: block;
@@ -348,39 +338,6 @@
 
 .productPlane {
   z-index: 7;
-}
-
-.counter {
-  position: absolute;
-  width: 100vw;
-  height: auto;
-  max-width: none;
-  bottom: -6svh;
-  left: 0;
-}
-
-.can {
-  position: absolute;
-  height: 77svh;
-  width: auto;
-  max-width: none;
-  left: 70%;
-  bottom: 10.5svh;
-  transform: translateX(-50%) rotate(-6deg);
-  filter: drop-shadow(12px 13px 9px #220f3552);
-  transform-origin: 50% 92%;
-}
-
-.contactShadow {
-  position: absolute;
-  left: 70%;
-  bottom: 14svh;
-  width: 18vw;
-  height: 1.8vw;
-  transform: translateX(-50%);
-  background: #1a0c2bba;
-  filter: blur(9px);
-  border-radius: 50%;
 }
 
 .nearPlants {
@@ -579,8 +536,6 @@
   will-change: transform, opacity;
 }
 
-
-
 .heroCopy h1 {
   font-family: BakeSoda, sans-serif !important;
   font-weight: 400;
@@ -591,22 +546,11 @@
   filter: drop-shadow(1px 5px 0 #392048);
 }
 
-
-
-
-
 .actions {
   display: flex;
   align-items: center;
   gap: 27px;
 }
-
-
-
-
-
-
-
 
 .cityCopy,
 .musicCopy {
@@ -635,7 +579,6 @@
   color: var(--pink);
 }
 
-
 .musicCopy {
   left: auto;
   right: 6.3%;
@@ -644,7 +587,6 @@
   max-width: 470px;
 }
 
-
 .musicCopy h2 {
   font-size: clamp(40px, 4.3vw, 66px);
 }
@@ -652,15 +594,6 @@
 .musicCopy h2 em {
   color: var(--yellow);
 }
-
-
-
-
-
-
-
-
-
 
 .textLink {
   display: inline-flex;
@@ -891,13 +824,6 @@
   .musicCopy h2 {
     font-size: 46px;
   }
-  .can {
-    left: 76%;
-  }
-  .counter {
-    width: 115vw;
-    left: -2vw;
-  }
 }
 
 @media (max-width: 700px) {
@@ -967,27 +893,6 @@
     width: 34px;
     height: 34px;
     font-size: 20px;
-  }
-  .can {
-    height: min(400px, 48svh);
-    top: 330px;
-    bottom: auto;
-    left: 50%;
-    transform: translateX(-50%) rotate(-6deg);
-  }
-  .counter {
-    width: 1014px;
-    left: calc(50% - 645px);
-    top: calc(45.1svh - 60px);
-    bottom: auto;
-  }
-  .contactShadow {
-    width: 150px;
-    height: 16px;
-    left: 50%;
-    top: calc(45.1svh + 313px);
-    bottom: auto;
-    filter: blur(8px);
   }
   .windowEdge {
     width: 27px;
@@ -1094,16 +999,6 @@
   .heroCopy .intro {
     margin: 14px 0;
   }
-  .can {
-    top: 290px;
-    height: 44svh;
-  }
-  .counter {
-    top: calc(45.1svh - 85px);
-  }
-  .contactShadow {
-    top: calc(45.1svh + 288px);
-  }
   .musicCopy {
     bottom: 105px;
   }
@@ -1116,7 +1011,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .journey * {
+  .journey *, .journey *:before, .journey *:after {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
@@ -1217,9 +1112,12 @@
   z-index: 2;
 }
 .water img {
-  animation: waterShimmer 9s ease-in-out infinite alternate;
+  animation: waterShimmer 5.5s ease-in-out infinite alternate;
   transform-origin: center bottom;
 }
+.riverGlints { position: absolute; inset: 0; pointer-events: none; mask-image: url('/image/journey/distance-water-v2.webp'); mask-size: 100% 100%; mix-blend-mode: screen; opacity: .36; }
+.riverGlints:before { content: ''; position: absolute; inset: -80px; background: repeating-linear-gradient(177deg, transparent 0 14px, #ffe7ae44 15px, transparent 17px 32px, #ffc7e42b 34px, transparent 35px 49px); animation: riverCurrent 7s linear infinite; }
+@keyframes riverCurrent { to { transform: translate(75px, 45px); } }
 .sunPlane {
   position: absolute;
   inset: 0;
@@ -1237,11 +1135,11 @@
 }
 @keyframes waterShimmer {
   from {
-    transform: scaleX(1.025) translateX(-4px);
+    transform: scaleX(1.028) translateX(-9px) scaleY(1.005);
     opacity: 0.92;
   }
   to {
-    transform: scaleX(1.04) translateX(4px);
+    transform: scaleX(1.045) translateX(9px) scaleY(1.018);
     opacity: 1;
   }
 }

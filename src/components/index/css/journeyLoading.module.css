@@ -1,0 +1,18 @@
+.curtain { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; background: radial-gradient(ellipse at 50% 45%, #755285, #302340 72%); transition: opacity .4s ease, visibility .4s; }
+.curtain[data-complete=true] { opacity: 0; visibility: hidden; pointer-events: none; }
+.ticket { position: relative; width: min(330px, 84vw); text-align: center; padding: 32px 25px 26px; border: 1px solid #e9bc87; border-radius: 90px 90px 12px 12px; box-shadow: 0 0 0 6px #39253f, 0 0 0 7px #c39a75, 0 20px 80px #21112d; color: #fff1cf; background: #4e3359; }
+.eyebrow { font: 650 10px Inter, sans-serif; letter-spacing: .25em; color: #f0c58a; }
+.emblem { position: relative; height: 145px; display: grid; place-items: center; margin: 12px 0; }
+.emblem svg { width: 80px; height: 80px; color: #ffdc76; filter: drop-shadow(0 0 15px #ffcf6266); animation: breathe 2.8s ease-in-out infinite alternate; }
+.emblem i { position: absolute; width: 130px; height: 130px; border: 1px dashed #e9b57780; border-radius: 50%; animation: orbit 20s linear infinite; }
+.emblem i:nth-child(2) { width: 104px; height: 104px; border-style: solid; border-color: #e9b57740; }
+.emblem span { position: absolute; right: 33px; top: 25px; color: #ffa6d8; font-size: 25px; rotate: 12deg; }
+.emblem span:last-child { left: 30px; right: auto; top: 88px; color: #9de8e8; font-size: 17px; }
+.ticket strong { display: block; font: 32px/1.1 BakeSoda, sans-serif; }
+.ticket p { font: 11px/1.5 Inter, sans-serif; color: #ead3da; margin: 12px 0 18px; }
+.meter { height: 5px; border-radius: 5px; overflow: hidden; background: #221630; }
+.meter i { display: block; height: 100%; background: linear-gradient(90deg, #f6bc88, #ffe2a1, #f5a6dc); transform-origin: left; transition: transform .2s; }
+.ticket button { padding: 12px; margin-top: 15px; background: transparent; color: #ffde92; text-decoration: underline; font-size: 12px; }
+@keyframes orbit { to { rotate: 360deg; } }
+@keyframes breathe { to { scale: 1.08; rotate: 8deg; } }
+@media (prefers-reduced-motion: reduce) { .curtain, .meter i { transition: none; } .emblem svg, .emblem i { animation: none; } }

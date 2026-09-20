@@ -26,7 +26,7 @@ export default defineConfig({
       watch: { ignored: ['**/context/**', '**/tests/results/**', '**/dist/**'] },
     },
     optimizeDeps: {
-      include: ['framer-motion', '@nanostores/react', 'nanostores', 'react-router-dom', 'gsap', 'three'],
+      include: ['framer-motion', '@nanostores/react', 'nanostores', 'react-router-dom', 'gsap', 'three', 'lenis'],
     },
   },
 });

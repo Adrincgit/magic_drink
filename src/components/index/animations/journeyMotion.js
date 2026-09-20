@@ -1,4 +1,6 @@
 import { gsap } from 'gsap';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import { createWorldDirector, OPENING_END } from './worldMotion';
 import { mountPointerDepth } from './pointerDepth';
 
@@ -9,7 +11,7 @@ const phase = (p, a, b) => {
   return t * t * (3 - 2 * t);
 };
 
-// Navigation uses native scroll. Ambient motion is CSS and keeps its own clock.
+// Lenis interpolates wheel input; scene and ambient animation keep separate clocks.
 // Geometry never depends on media loading; every chapter shares the same stage.
 export function mountJourney(root, onChapter) {
   if (!root) return () => {};
@@ -36,6 +38,21 @@ export function mountJourney(root, onChapter) {
   let camera = [0, 0, 0];
   let lastOpening = -1;
   let disposed = false;
+  let lenis;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  function configureScroll() {
+    lenis?.destroy();
+    lenis = undefined;
+    if (!reduced.matches && fine.matches) {
+      lenis = new Lenis({
+        autoRaf: true, lerp: .09, smoothWheel: true, syncTouch: false,
+        virtualScroll: () => root.dataset.assetsReady === 'true' && getComputedStyle(document.body).overflow !== 'hidden',
+      });
+      // Render in the same frame as Lenis, without a second smoothing layer.
+      lenis.on('scroll', () => { cancelAnimationFrame(frame); render(); });
+    }
+    root.dataset.scrollEngine = lenis ? 'lenis' : 'native';
+  }
 
   function render() {
     frame = 0;
@@ -77,7 +94,7 @@ export function mountJourney(root, onChapter) {
       gsap.set(layers.product, {
         x: foregroundX,
         y: height * 0.11 * toCity,
-        rotation: -1.4 * toCity,
+        rotation: 0,
         autoAlpha: 1 - phase(p, 0.28, 0.37),
       });
       gsap.set(layers.plants, { x: x * 1.3 - width * 0.2 * toCity, y: height * 0.04 * toCity });
@@ -146,14 +163,14 @@ export function mountJourney(root, onChapter) {
       target.scrollIntoView({ behavior: 'instant', block: 'start' });
       return;
     }
-    window.scrollTo({
-      top: start + p * distance * (isWorld ? 1 : OPENING_END),
-      behavior: 'smooth',
-    });
+    const top = start + p * distance * (isWorld ? 1 : OPENING_END);
+    if (lenis) lenis.scrollTo(top);
+    else window.scrollTo({ top, behavior: 'smooth' });
   }
   function resize() {
     measure();
   }
+  function preference() { configureScroll(); measure(); }
   function visibility() {
     root.dataset.active = String(!document.hidden && runway.getBoundingClientRect().bottom > 0);
   }
@@ -169,12 +186,14 @@ export function mountJourney(root, onChapter) {
   root.addEventListener('click', navigate);
   addEventListener('scroll', schedule, { passive: true });
   addEventListener('resize', resize);
-  reduced.addEventListener('change', resize);
+  reduced.addEventListener('change', preference);
+  fine.addEventListener('change', preference);
   document.addEventListener('visibilitychange', visibility);
   document.fonts.ready.then(() => {
     if (!disposed) resize();
   });
   measure();
+  configureScroll();
   root.dataset.ready = 'true';
   const initialChapter = { '#ciudad': 0.45, '#hexy': 0.87 }[location.hash];
   const initialWorld = { '#festival': 0.49, '#wonderpop': 0.68, '#la-original': 1 }[location.hash];
@@ -198,6 +217,7 @@ export function mountJourney(root, onChapter) {
   }
   return () => {
     disposed = true;
+    lenis?.destroy();
     stopPointer();
     cancelAnimationFrame(frame);
     observer.disconnect();
@@ -205,7 +225,8 @@ export function mountJourney(root, onChapter) {
     root.removeEventListener('click', navigate);
     removeEventListener('scroll', schedule);
     removeEventListener('resize', resize);
-    reduced.removeEventListener('change', resize);
+    reduced.removeEventListener('change', preference);
+    fine.removeEventListener('change', preference);
     document.removeEventListener('visibilitychange', visibility);
   };
 }

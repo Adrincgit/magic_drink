@@ -61,6 +61,32 @@
 .creditCard span { font: 600 9px Inter, sans-serif; margin-bottom: 7px; }
 .creditCard strong { font: italic 700 18px Georgia, serif; }
 .creditCard small { font: 500 8px Inter, sans-serif; margin-top: 9px; }
+.smallButton { flex: 0 0 28px; display: grid; place-items: center; width: 28px; height: 36px; background: transparent; color: #ffdda1; border-radius: 4px; }
+.smallButton svg { width: 17px; height: 17px; fill: currentColor; }
+.smallButton:hover, .listToggle:hover { color: #fff7d8; background: #f2c17a18; }
+.listToggle { min-height: 32px; display: flex; align-items: center; gap: 8px; background: transparent; color: #f6d6a5; font-size: 10px !important; }
+.listToggle span:first-child { font-size: 15px; }
+.playlist { position: absolute; bottom: calc(100% + 14px); left: 0; right: 0; z-index: 8; max-height: min(330px, 42svh); overflow: auto; overscroll-behavior: contain; border: 2px solid #e2b777; border-radius: 5px 15px; background: #402849; box-shadow: 0 5px 0 #26172f, 0 14px 30px #21132d77; scrollbar-width: thin; scrollbar-color: #d3a66f #402849; }
+.playlistHeading { position: sticky; top: 0; background: #38203f; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 4px 10px 4px 14px; z-index: 1; font-size: 8px; letter-spacing: 1px; color: #e8bc86; }
+.playlistHeading button { width: 32px; height: 32px; background: none; font-size: 22px; }
+.playlist ol { list-style: none; margin: 0; padding: 5px; }
+.playlist li button { display: flex; align-items: center; gap: 10px; padding: 8px; width: 100%; text-align: left; background: transparent; border-radius: 6px; }
+.playlist li button:hover, .playlist li button[aria-current=true] { background: #7b4d794d; }
+.playlist li img { width: 36px; height: 36px; flex-shrink: 0; border-radius: 5px; }
+.playlist li span { min-width: 0; }
+.playlist li strong { display: block; font: 600 11px/1.5 Inter, sans-serif; color: #fff1cc; }
+.playlist li small { font: 9px/1.4 Inter, sans-serif; color: #cfb4cd; }
+.playlist li b { margin-left: auto; font-size: 12px; color: #e9ba85; }
+.compact { position: fixed; right: max(22px, env(safe-area-inset-right)); bottom: max(72px, calc(env(safe-area-inset-bottom) + 50px)); z-index: 200; width: min(340px, calc(100vw - 32px)); padding: 4px 10px; border-radius: 8px 17px; }
+.compact .controls { gap: 9px; padding: 4px 0; }
+.compact .record { width: 42px; height: 42px; flex-basis: 42px; }
+.compact .record:before { inset: 9px; }
+.compact .record svg { width: 18px; height: 18px; }
+.compact .track strong { font-size: 11px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.compact .track > span { font-size: 8px; letter-spacing: .12em; margin-top: 2px; }
+.compact .smallButton { width: 25px; flex-basis: 25px; }
+.close { position: absolute; top: -12px; right: -9px; background: #392140; border: 1px solid #d2ae7d !important; border-radius: 50%; width: 24px; height: 24px; font-size: 17px !important; display: grid; place-items: center; line-height: 1; }
+.error { font-size: 10px; line-height: 1.4; color: #ffdfa3; padding: 4px 0; }
 @media (max-width: 700px) {
   .player { padding: 8px 12px 3px; }
   .topline { font-size: 6px; letter-spacing: 1.4px; }
@@ -72,6 +98,8 @@
   .track > span { font-size: 9px; }
   .bottomline > span { font-size: 5px; letter-spacing: .7px; }
   .credits summary { min-height: 36px; }
+  .compact { right: 16px; padding: 4px 10px; bottom: max(66px, calc(env(safe-area-inset-bottom) + 50px)); }
+  .controls { gap: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .record { transition: none; }

@@ -2,6 +2,7 @@
 export async function openLanding(page, suffix = '') {
   await page.goto(`/${suffix}`, { waitUntil: 'domcontentloaded' });
   await expect(page.locator('[data-journey]')).toHaveAttribute('data-ready', 'true');
+  await expect(page.locator('[data-journey]')).toHaveAttribute('data-assets-ready', 'true', { timeout: 10000 });
   await page.evaluate(async () => {
     await document.fonts.ready;
     await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
