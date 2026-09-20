@@ -1,0 +1,12 @@
+﻿{
+  "assets": [
+    {
+      "name": "crowd-far-v2",
+      "prompt": "Create a very distant crowd layer for this warm violet and golden illustrated plaza concert. Wide 3:1 canvas. At the bottom 25% only: a dense low band of approximately 100 tiny audience silhouettes, backs toward the camera, simple heads/shoulders/raised arms and small golden or pink glow sticks. People are small, atmospheric muted violet shapes with amber rimlight, enough soft painted detail to match the reference. DISTINCT composition: no child riding shoulders, no large backpacks, no large foreground heads, no recognizable repeated figures. Upper 70% canvas completely TRUE TRANSPARENT ALPHA. No buildings, no floor, no stage, no backdrop. All audience feet cropped by bottom canvas, as a low distant audience layer.",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\crowd-middle-v2.webp"
+      ],
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-9b0e8369-58e3-4a91-9dfc-6d043d7dca8d.png"
+    }
+  ]
+}

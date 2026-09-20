@@ -1,4 +1,4 @@
-.journey {
+﻿.journey {
   --ink: #21132d;
   --cream: #fff8df;
   --yellow: #ffdc55;
@@ -195,9 +195,7 @@
 
 .distance {
   position: absolute;
-  left: 0;
   top: 0;
-  width: 300svh;
   height: 100%;
   z-index: 3;
   will-change: transform;
@@ -1448,4 +1446,78 @@
   .exitShade {
     display: none;
   }
+}
+.journey [data-look] {
+  --look-depth: 1;
+  translate: calc(var(--look-x, 0px) * var(--look-depth))
+    calc(var(--look-y, 0px) * var(--look-depth)) !important;
+}
+.journey [data-look='sun'] {
+  --look-depth: 0.08;
+}
+.journey [data-look='far'] {
+  --look-depth: 0.24;
+}
+.journey [data-look='city'] {
+  --look-depth: 0.5;
+}
+.journey [data-look='water'] {
+  --look-depth: 0.7;
+}
+.journey [data-look='landmark'] {
+  --look-depth: 0.8;
+}
+.journey [data-look='street'] {
+  --look-depth: 1.2;
+}
+.journey [data-look='near'] {
+  --look-depth: 2;
+}
+.distance {
+  left: -3svh;
+  width: 306svh;
+}
+.hills {
+  z-index: 2;
+}
+.water img {
+  animation: waterShimmer 9s ease-in-out infinite alternate;
+  transform-origin: center bottom;
+}
+.sunPlane {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.sunPlane i {
+  position: absolute;
+  left: 27svh;
+  width: 4.5svh;
+  height: 4.5svh;
+  border-radius: 50%;
+  background: #fff5ba;
+  box-shadow: 0 0 7svh 3svh #ffb46b66;
+}
+@keyframes waterShimmer {
+  from {
+    transform: scaleX(1.025) translateX(-4px);
+    opacity: 0.92;
+  }
+  to {
+    transform: scaleX(1.04) translateX(4px);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .journey [data-look] {
+    translate: none !important;
+  }
+}
+/* Keep water beneath bridge arches; the river never masks the waterfront. */
+.water {
+  z-index: 2;
+}
+.sunPlane i {
+  top: 52%;
 }

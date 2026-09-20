@@ -1,0 +1,216 @@
+{
+  "browser": "153.0.8010.52",
+  "errors": [],
+  "captures": [
+    {
+      "size": "desktop",
+      "label": "hero",
+      "overflow": false,
+      "y": 0,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "city",
+      "overflow": false,
+      "y": 1371,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "hexy",
+      "overflow": false,
+      "y": 2650,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-035",
+      "overflow": false,
+      "y": 2961,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-037",
+      "overflow": false,
+      "y": 3130,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-039",
+      "overflow": false,
+      "y": 3299,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-041",
+      "overflow": false,
+      "y": 3469,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "festival",
+      "overflow": false,
+      "y": 4145,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-060",
+      "overflow": false,
+      "y": 5076,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "join-062",
+      "overflow": false,
+      "y": 5245,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "plaza",
+      "overflow": false,
+      "y": 5753,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "plaza-near",
+      "overflow": false,
+      "y": 6218,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "door",
+      "overflow": false,
+      "y": 6768,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "interior",
+      "overflow": false,
+      "y": 7428,
+      "height": 9360
+    },
+    {
+      "size": "desktop",
+      "label": "original",
+      "overflow": false,
+      "y": 8460,
+      "height": 9360
+    },
+    {
+      "size": "mobile",
+      "label": "hero",
+      "overflow": false,
+      "y": 0,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "city",
+      "overflow": false,
+      "y": 1162,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "hexy",
+      "overflow": false,
+      "y": 2247,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-035",
+      "overflow": false,
+      "y": 2511,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-037",
+      "overflow": false,
+      "y": 2654,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-039",
+      "overflow": false,
+      "y": 2798,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-041",
+      "overflow": false,
+      "y": 2941,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "festival",
+      "overflow": false,
+      "y": 3515,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-060",
+      "overflow": false,
+      "y": 4304,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "join-062",
+      "overflow": false,
+      "y": 4448,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "plaza",
+      "overflow": false,
+      "y": 4878,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "plaza-near",
+      "overflow": false,
+      "y": 5273,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "door",
+      "overflow": false,
+      "y": 5739,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "interior",
+      "overflow": false,
+      "y": 6299,
+      "height": 8018
+    },
+    {
+      "size": "mobile",
+      "label": "original",
+      "overflow": false,
+      "y": 7174,
+      "height": 8018
+    }
+  ]
+}

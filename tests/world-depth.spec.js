@@ -59,7 +59,7 @@ test('late or failed artwork cannot change the scroll distance or skip a chapter
   const gate = new Promise((resolve) => {
     release = resolve;
   });
-  await page.route('**/image/journey/hexy-dj.webp', (route) => route.abort());
+  await page.route('**/image/journey/hexy-dj-v2.webp', (route) => route.abort());
   await page.route('**/image/journey/atrium-distance.webp', async (route) => {
     await gate;
     await route.continue();

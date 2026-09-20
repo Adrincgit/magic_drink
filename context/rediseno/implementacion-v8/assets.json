@@ -1,0 +1,94 @@
+﻿{
+  "assets": [
+    {
+      "name": "hexy-dj-v2",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\hexy-dj.webp",
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\festival-courtyard.webp"
+      ],
+      "prompt": "Edit image 1, the isolated Hexy DJ, using image 2 ONLY as lighting and painterly style reference. Preserve this 14-year-old petite 1.47m youthful anime girl's identity, innocent cheerful face, pink hair, navy wizard hat with gold star, modest sailor uniform and red bow, headphones gesture and mixer booth. Keep original full subject and TRUE transparent alpha background. Change the very bright candy pink/white rim lighting into restrained warm amber illumination from above, violet evening shadows and richer muted midtones matching the painted plaza. Slightly softer painterly edge detail, not flat vector or 3D plastic. Reduce pink saturation and stark white contrast. Booth and character remain one physically coherent isolated group. No backdrop, text, added scene, ground, checkerboard, adult features.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-4884712e-a25a-4566-9585-355430a97080.png"
+    },
+    {
+      "name": "festival-street-v2",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\festival-courtyard.webp"
+      ],
+      "prompt": "Edit this exact panorama into a parallax BACK PLANE. Preserve entire exact 2:1 landscape framing and warm violet golden painting. Remove the whole round performance pavilion on the right including canopy, columns, stage steps and platform. Reconstruct the same continuous flat violet stone square behind it, with small distant storefronts at the perimeter. Keep buildings at the extreme left and right edges but LOWER right background buildings so a distant landmark can be visible above. NO tall building in central-right upper area. Keep TRUE TRANSPARENCY above the roof silhouettes, no replacement sky. No characters or crowd. This is one empty street/square layer with a clear middle, not a mockup.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-f9d891cb-61aa-45ab-9ac8-5419c742eb44.png"
+    },
+    {
+      "name": "festival-stage-v2",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\festival-courtyard.webp"
+      ],
+      "prompt": "Extract ONLY the complete round performance pavilion (gold star, canopy, two columns, glass back wall, round platform and illuminated stairs) from this image. Keep the EXACT original 2:1 landscape canvas, original object's position at right, size and perspective. Remove all surrounding buildings, all plaza paving outside pavilion and sky to TRUE TRANSPARENT ALPHA. Preserve warm painted violet-and-gold artwork, no resizing or centering, no new content, no people. Smooth clean alpha, no painted checkerboard. This layer must align with the supplied original when laid directly over it.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-b7441fb9-4eb4-4614-b46f-b22f6e949d7b.png"
+    },
+    {
+      "name": "crowd-middle-v2",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\festival-courtyard.webp"
+      ],
+      "prompt": "Generate a wide 3:1 transparent parallax sprite for the same warm violet/gold illustrated outdoor music festival. A dense mid-distance audience of about 70 people seen FROM BEHIND, diverse young adults and families wearing casual jackets. Several rows of full-body small people, overlapping naturally, holding yellow and pink glow sticks, facing a stage beyond them. Arranged as a low wide band filling the bottom 45% of canvas, top 50% transparent. Rich painterly detail and restrained amber edge light, violet shadows. Perspective: farther people smaller, near people larger, no enormous heads. The audience fills the width, no square holes, no floor, no architecture, no stage, no text. TRUE transparent alpha around people and between arms.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-07a260f0-74cb-4eee-ba7a-9461428f1f1a.png"
+    },
+    {
+      "name": "boulevard-garden-v2",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\wonderpop-building.webp"
+      ],
+      "prompt": "Create a 3:2 landscape transparent parallax layer matching the warm golden-violet painted architecture in the reference. Frontal perspective looking straight down a magnificent landscaped entrance promenade, vanishing point exactly canvas center at 52% height. TWO symmetrical lines of lush flowering trees, ornate glowing gold lanterns, violet-and-gold banners, low stone planters and garden beds. Confine all objects to leftmost 28% and rightmost 28%, central 44% COMPLETELY TRANSPARENT open corridor. Nearest trees large at outer edges, smaller trees recede toward center. No building, no sky, no ground plane, no people, no roof spanning center. TRUE transparent alpha. Detailed golden leaves, magenta/purple flowers, painterly evening lighting, whole tree trunks rooted in planters, not floating ornaments.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-bcdf5538-ce3d-42af-bf90-2265bd1ab60e.png"
+    },
+    {
+      "name": "wonderpop-front-v2",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\wonderpop-building.webp"
+      ],
+      "prompt": "Repaint this same WonderPop Plaza landmark as an EXACTLY FRONTAL, centered, architecturally symmetric entrance view suitable for a straight camera approach. Preserve identity: lavish violet-and-gold glass building, glowing gold star, large curved center facade with sign EXACTLY 'WonderPop' and below 'PLAZA', warm busy interior windows, tower details, luminous grand central staircase, trees and planters beside stairs. Face the staircase, door and facade squarely toward the viewer; avoid oblique three-quarter perspective. Fill a 2:3 portrait canvas with complete building from tower tips to bottom stair. TRUE transparent alpha around exterior silhouette; no sky, ground, backdrop or shadows outside building. Same beautifully detailed painted illustration style and golden sunset lighting. No new brand or extra text.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-5d37818c-fa58-4911-9022-af8b83b87c15.png"
+    },
+    {
+      "name": "distance-hills-v2",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\distance.webp"
+      ],
+      "prompt": "Derive the FARTHEST landscape plane for this exact ultra-wide 3:1 city panorama. Preserve identical framing and horizon alignment. Remove ALL nearer waterfront buildings, ALL bridges, ALL river water, and the visible sun. Keep only the dreamy far distant mauve/lilac mountains and hilltop distant tiny castle/city silhouettes as a continuous low horizon band at approximately 55%-74% image height. Reconstruct hills where nearer buildings were removed. Everything above the hill silhouettes is TRUE transparent alpha; everything below 78% canvas also alpha. Muted low-contrast lilac atmospheric painting, same twilight art style. Exact aligned panorama, no foreground objects.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-03382142-3c3a-41b5-89b4-14f6c520f1ab.png"
+    },
+    {
+      "name": "distance-city-v2",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\distance.webp"
+      ],
+      "prompt": "Extract the waterfront city and bridges as a precisely aligned parallax layer from the supplied ultra-wide 3:1 panorama. Preserve original canvas, scale, placement and every nearest building and bridge shape. REMOVE distant mountains and hilltop tiny silhouettes behind buildings, REMOVE the sun and all sky. REMOVE all water below bridge shoreline (approximately y=74% down) to TRUE transparent alpha, preserving complete bridge arches and waterfront edge. Keep entire band of detailed violet buildings with warm windows and the bridges, transparent between bridge piers. Everything else transparent. No recentering, no new scene.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-250eb20e-20ff-432d-b30a-90656abc24aa.png"
+    },
+    {
+      "name": "distance-water-v2",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\distance.webp"
+      ],
+      "prompt": "Extract and extend ONLY the river surface of this exact ultra-wide 3:1 reference for a separate animated water plane. Keep the full original framing. All pixels ABOVE 70% image height TRUE transparent alpha. From y=70% through bottom: continuous softly painted violet river with long warm gold, amber and pink vertical reflections in the same original positions; reconstruct water behind old bridge piers. No buildings, no mountains, no bridge, no sun, no horizon backdrop. A delicate irregular soft waterline at y=70%, not a hard colored rectangle. Preserve exact violet-gold color palette and painterly elegance.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-1331ebe0-6e25-484e-b711-01de19b73a29.png"
+    },
+    {
+      "name": "original-dynamic-v2",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\original.webp",
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\atrium-distance.webp"
+      ],
+      "prompt": "Create a new premium illustrated advertising view of the SAME Magic Drink Original can shown in image 1. Image 2 guides warm ambient light/painterly finish only. Can tipped diagonally: silver top visible looking slightly down, upper end leans to the RIGHT 24 degrees, lower end toward left. Show a fresh three-quarter camera angle, readable gold star and exact lettering 'MAGIC' in yellow over 'DRINK' in turquoise, purple sparkling label with small stars/hearts, condensation. Keep entire single can fully inside transparent portrait 2:3 canvas with 10% margin. Warm gold rim light on left, restrained purple shadows, richly painted metallic detail. TRUE transparent alpha, NO counter/pedestal/floor/background, NO attached splash or particles (those will be separate code layers), no extra products, no flavors.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-e76777ec-5704-41d5-bd18-d5af7dade8d4.png"
+    },
+    {
+      "name": "atrium-pendants-v2",
+      "refs": [
+        "G:\\TRABAJO\\ASTRO\\ADRINC_WEBS\\magicdrink\\public\\image\\journey\\atrium-distance.webp"
+      ],
+      "prompt": "Create a transparent 3:2 foreground parallax overlay for the reference golden-violet WonderPop interior. Three elegant hanging pendant clusters descending from the TOP EDGE near left 15%, right 78% and right 94%: small gold metal star frames, glowing opal globes, delicate gold chains, slight trailing ivy. Large near-camera scale, but central 50% unobstructed for text/view. Rich painterly illustration with warm gold light exactly matching reference, realistic coherent chain attachment to top. Upper corners only, bottom 60% completely transparent. No ceiling, backdrop, architecture, counter, people, or text. TRUE transparent alpha, soft localized glow around lamps only.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-f2c67a5a-2b42-4328-9d95-4b8dbe374fd1.png"
+    }
+  ]
+}

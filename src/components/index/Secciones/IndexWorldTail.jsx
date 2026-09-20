@@ -15,27 +15,51 @@ export default function IndexWorldTail({ en = false }) {
         <img
           className={styles.courtyard}
           data-courtyard
-          src={`${art}festival-courtyard.webp`}
+          data-look="far"
+          src={`${art}festival-street-v2.webp`}
           alt=""
           width="1774"
           height="887"
           loading="lazy"
         />
-        <div className={styles.stageLights} data-stage-lights aria-hidden="true">
-          <i />
-          <i />
-          <i />
-        </div>
-        <div className={styles.dj} data-dj>
+        <div className={styles.festivalRig} data-festival-rig data-look="street">
           <img
-            src={`${art}hexy-dj.webp`}
-            alt={en ? 'Hexy playing music at the plaza' : 'Hexy mezclando música en la plaza'}
-            width="1122"
-            height="1402"
+            className={styles.pavilion}
+            data-pavilion
+            src={`${art}festival-stage-v2.webp`}
+            width="1774"
+            height="887"
+            alt=""
             loading="lazy"
           />
+          <div className={styles.stageLights} data-stage-lights aria-hidden="true">
+            {Array.from({ length: 8 }, (_, i) => (
+              <i key={i} style={{ '--i': i }} />
+            ))}
+          </div>
+          <div className={styles.dj} data-dj>
+            <img
+              src={`${art}hexy-dj-v2.webp`}
+              alt={en ? 'Hexy playing music at the plaza' : 'Hexy mezclando música en la plaza'}
+              width="1122"
+              height="1402"
+              loading="lazy"
+            />
+          </div>
+          <div className={styles.stageGlow} aria-hidden="true" />
         </div>
-        <div className={styles.crowd} data-crowd aria-hidden="true">
+        <div
+          className={`${styles.middleCrowd} ${styles.farCrowd}`}
+          data-crowd-far
+          data-look="city"
+          aria-hidden="true"
+        >
+          <img src={`${art}crowd-far-v2.webp`} alt="" width="2172" height="724" loading="lazy" />
+        </div>
+        <div className={styles.middleCrowd} data-crowd-middle data-look="street" aria-hidden="true">
+          <img src={`${art}crowd-middle-v2.webp`} alt="" width="2172" height="724" loading="lazy" />
+        </div>
+        <div className={styles.crowd} data-crowd data-look="near" aria-hidden="true">
           <img src={`${art}festival-crowd.webp`} alt="" width="2172" height="724" loading="lazy" />
         </div>
         <div className={styles.festivalShade} aria-hidden="true" />
@@ -70,9 +94,17 @@ export default function IndexWorldTail({ en = false }) {
             <Arrow />
           </a>
         </div>
-        <div className={styles.confetti} aria-hidden="true">
-          {Array.from({ length: 15 }, (_, i) => (
-            <i key={i} style={{ '--i': i, left: `${(i * 37) % 100}%`, top: `${(i * 23) % 80}%` }} />
+        <div className={styles.confetti} data-look="near" aria-hidden="true">
+          {Array.from({ length: 66 }, (_, i) => (
+            <i
+              key={i}
+              style={{
+                '--i': i,
+                '--size': `${3 + (i % 4)}px`,
+                left: `${(i * 37) % 100}%`,
+                top: `${(i * 23) % 80}%`,
+              }}
+            />
           ))}
         </div>
       </section>
@@ -83,21 +115,63 @@ export default function IndexWorldTail({ en = false }) {
         data-world-scene="plaza"
         aria-label="WonderPop Plaza"
       >
+        <div
+          className={styles.approachGarden}
+          data-approach-garden="far"
+          data-look="city"
+          aria-hidden="true"
+        >
+          <img
+            src={`${art}boulevard-garden-v2.webp`}
+            width="1536"
+            height="1024"
+            alt=""
+            loading="lazy"
+          />
+        </div>
+        <div
+          className={`${styles.approachGarden} ${styles.gardenNear}`}
+          data-approach-garden="near"
+          data-look="near"
+          aria-hidden="true"
+        >
+          <img
+            src={`${art}boulevard-garden-v2.webp`}
+            width="1536"
+            height="1024"
+            alt=""
+            loading="lazy"
+          />
+        </div>
+        <div className={styles.approachArch} data-approach-arch data-look="near" aria-hidden="true">
+          <img
+            src={`${art}plaza-threshold.webp`}
+            width="1536"
+            height="1024"
+            alt=""
+            loading="lazy"
+          />
+        </div>
+        <div className={styles.pathLights} aria-hidden="true">
+          {Array.from({ length: 12 }, (_, i) => (
+            <i key={i} style={{ '--i': i, top: `${45 + (i % 4) * 10}%` }} />
+          ))}
+        </div>
         <div className={styles.plazaShade} aria-hidden="true" />
         <div className={`${styles.copy} ${styles.plazaCopy}`} data-world-copy="plaza">
           <p className={styles.eyebrow}>05 / WONDERPOP PLAZA</p>
           <h2>
             {en ? (
               <>
-                There is a place
+                Follow the lights.
                 <br />
-                <em>for all of this.</em>
+                <em>Come on in.</em>
               </>
             ) : (
               <>
-                Todo esto
+                Sigue las luces.
                 <br />
-                <em>tiene un lugar.</em>
+                <em>Ya estás cerca.</em>
               </>
             )}
           </h2>
@@ -113,37 +187,65 @@ export default function IndexWorldTail({ en = false }) {
       </section>
 
       <div className={styles.interior} data-world-interior aria-hidden="true">
-        <img
-          className={styles.atrium}
-          data-atrium
-          src={`${art}atrium-distance.webp`}
-          alt=""
-          width="1536"
-          height="1024"
-          loading="lazy"
-        />
-        <img
-          className={styles.atrium}
-          data-atrium-garden
-          src={`${art}atrium-garden.webp`}
-          alt=""
-          width="1536"
-          height="1024"
-          loading="lazy"
-        />
-        <img
-          className={styles.atrium}
-          data-atrium-bar
-          src={`${art}atrium-bar.webp`}
-          alt=""
-          width="1536"
-          height="1024"
-          loading="lazy"
-        />
+        <div className={styles.atriumWorld} data-atrium-world>
+          <img
+            className={styles.atrium}
+            data-atrium
+            data-look="far"
+            src={`${art}atrium-distance.webp`}
+            alt=""
+            width="1536"
+            height="1024"
+            loading="lazy"
+          />
+          <img
+            className={styles.atrium}
+            data-atrium-garden
+            data-look="street"
+            src={`${art}atrium-garden.webp`}
+            alt=""
+            width="1536"
+            height="1024"
+            loading="lazy"
+          />
+          <img
+            className={styles.atrium}
+            data-atrium-bar
+            data-look="near"
+            src={`${art}atrium-bar.webp`}
+            alt=""
+            width="1536"
+            height="1024"
+            loading="lazy"
+          />
+        </div>
+        <div className={styles.pendants} data-pendants data-look="near">
+          <img
+            src={`${art}atrium-pendants-v2.webp`}
+            width="1536"
+            height="1024"
+            alt=""
+            loading="lazy"
+          />
+        </div>
+        <div className={styles.interiorRays}>
+          <i />
+          <i />
+          <i />
+        </div>
+        <div className={styles.interiorMotes}>
+          {Array.from({ length: 24 }, (_, i) => (
+            <i
+              key={i}
+              style={{ '--i': i, left: `${(i * 37) % 100}%`, top: `${(i * 29) % 100}%` }}
+            />
+          ))}
+        </div>
         <div className={styles.interiorShade} />
         <img
           className={styles.insideLeaves}
           data-inside-leaves
+          data-look="near"
           src={`${art}foliage.webp`}
           alt=""
           width="1254"
@@ -190,19 +292,24 @@ export default function IndexWorldTail({ en = false }) {
         aria-label="Magic Drink Original"
       >
         <div className={styles.closingShade} aria-hidden="true" />
-        <div className={styles.closingDisplay} data-closing-display>
-          <img
-            className={styles.closingCounter}
-            src={`${art}counter.webp`}
-            alt=""
-            width="1672"
-            height="941"
-            loading="lazy"
-          />
-          <span className={styles.canShadow} aria-hidden="true" />
+        <div className={styles.closingDisplay} data-closing-display data-look="near">
+          <div className={styles.productHalo} aria-hidden="true" />
+          <div className={styles.productOrbit} aria-hidden="true">
+            {Array.from({ length: 22 }, (_, i) => (
+              <i
+                key={i}
+                style={{
+                  '--i': i,
+                  '--size': `${3 + (i % 5) * 2}px`,
+                  left: `${8 + ((i * 37) % 86)}%`,
+                  top: `${8 + ((i * 29) % 84)}%`,
+                }}
+              />
+            ))}
+          </div>
           <img
             className={styles.closingCan}
-            src={`${art}original.webp`}
+            src={`${art}original-dynamic-v2.webp`}
             alt="Magic Drink Original"
             width="1024"
             height="1536"

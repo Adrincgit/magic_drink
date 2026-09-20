@@ -1,0 +1,90 @@
+[
+  {
+    "name": "hexy-dj-v2",
+    "width": 1122,
+    "height": 1402,
+    "alpha": true,
+    "centerAlpha": 253,
+    "bytes": 266204
+  },
+  {
+    "name": "festival-street-v2",
+    "width": 1774,
+    "height": 887,
+    "alpha": true,
+    "centerAlpha": 253,
+    "bytes": 319954
+  },
+  {
+    "name": "festival-stage-v2",
+    "width": 1774,
+    "height": 887,
+    "alpha": true,
+    "centerAlpha": 254,
+    "bytes": 129494
+  },
+  {
+    "name": "crowd-middle-v2",
+    "width": 2172,
+    "height": 724,
+    "alpha": true,
+    "centerAlpha": 252,
+    "bytes": 374666
+  },
+  {
+    "name": "boulevard-garden-v2",
+    "width": 1536,
+    "height": 1024,
+    "alpha": true,
+    "centerAlpha": 0,
+    "bytes": 466860
+  },
+  {
+    "name": "wonderpop-front-v2",
+    "width": 1024,
+    "height": 1536,
+    "alpha": true,
+    "centerAlpha": 252,
+    "bytes": 491260
+  },
+  {
+    "name": "distance-hills-v2",
+    "width": 2172,
+    "height": 724,
+    "alpha": true,
+    "centerAlpha": 0,
+    "bytes": 96762
+  },
+  {
+    "name": "distance-city-v2",
+    "width": 2172,
+    "height": 724,
+    "alpha": true,
+    "centerAlpha": 253,
+    "bytes": 188746
+  },
+  {
+    "name": "distance-water-v2",
+    "width": 2172,
+    "height": 724,
+    "alpha": true,
+    "centerAlpha": 252,
+    "bytes": 107280
+  },
+  {
+    "name": "original-dynamic-v2",
+    "width": 1024,
+    "height": 1536,
+    "alpha": true,
+    "centerAlpha": 253,
+    "bytes": 206594
+  },
+  {
+    "name": "atrium-pendants-v2",
+    "width": 1536,
+    "height": 1024,
+    "alpha": true,
+    "centerAlpha": 0,
+    "bytes": 224206
+  }
+]

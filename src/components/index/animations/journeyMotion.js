@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { createWorldDirector, OPENING_END } from './worldMotion';
+import { mountPointerDepth } from './pointerDepth';
 
 const clamp = (n, a = 0, b = 1) => Math.max(a, Math.min(b, n));
 const mix = (a, b, p) => a + (b - a) * p;
@@ -25,6 +26,7 @@ export function mountJourney(root, onChapter) {
   const exit = query('[data-exit-shade]');
   const progressBar = query('[data-progress-bar]');
   const world = createWorldDirector(root);
+  const stopPointer = mountPointerDepth(root);
   let frame = 0;
   let current = -1;
   let start = 0;
@@ -32,6 +34,7 @@ export function mountJourney(root, onChapter) {
   let width = 0;
   let height = 0;
   let camera = [0, 0, 0];
+  let lastOpening = -1;
   let disposed = false;
 
   function render() {
@@ -51,49 +54,55 @@ export function mountJourney(root, onChapter) {
     }
     const worldProgress = clamp((scrollY - start) / distance);
     const p = clamp(worldProgress / OPENING_END);
-    const toCity = phase(p, 0.06, 0.42);
-    const toMusic = phase(p, 0.53, 0.84);
-    const x = mix(mix(camera[0], camera[1], toCity), camera[2], toMusic);
-    const pullback = 1.045 - 0.045 * toCity;
-    gsap.set(layers.sky, { x: x * 0.025 });
-    gsap.set(layers['cloud-far'], { x: x * 0.075 });
-    gsap.set(layers['cloud-near'], { x: x * 0.13 });
-    gsap.set(layers.distance, { x: x * 0.23, y: -height * 0.012 * toCity });
-    gsap.set(layers.plaza, {
-      x: x * 0.88,
-      y: -height * 0.009 * toMusic,
-      scale: 1.02 - 0.02 * toCity,
-      transformOrigin: '85% 85%',
-      autoAlpha: 1,
-    });
-    gsap.set(layers.street, { x, scale: pullback, transformOrigin: '50% 82%' });
-    gsap.set(layers.furniture, { x: x * 1.12, y: height * 0.015 * toCity });
-    const foregroundX = -width * 1.23 * phase(p, 0.04, 0.35);
-    gsap.set(layers.counter, {
-      x: foregroundX,
-      y: height * 0.11 * toCity,
-      autoAlpha: 1 - phase(p, 0.3, 0.38),
-    });
-    gsap.set(layers.product, {
-      x: foregroundX,
-      y: height * 0.11 * toCity,
-      rotation: -1.4 * toCity,
-      autoAlpha: 1 - phase(p, 0.28, 0.37),
-    });
-    gsap.set(layers.plants, { x: x * 1.3 - width * 0.2 * toCity, y: height * 0.04 * toCity });
-    gsap.set(layers.window, { x: -width * 0.8 * toCity });
-    gsap.set(copies[0], { autoAlpha: 1 - phase(p, 0.035, 0.17), y: -30 * toCity });
-    gsap.set(copies[1], {
-      autoAlpha: phase(p, 0.23, 0.38) * (1 - phase(p, 0.55, 0.67)),
-      y: 22 * (1 - toCity) - 20 * toMusic,
-    });
-    gsap.set(copies[2], {
-      autoAlpha: phase(p, 0.69, 0.83) * (1 - phase(worldProgress, 0.345, 0.373)),
-      y: 28 * (1 - toMusic),
-    });
-    gsap.set(left, { opacity: 1 - toMusic });
-    gsap.set(right, { opacity: toMusic });
-    gsap.set(exit, { opacity: 0 });
+    if (p !== lastOpening || worldProgress < 0.41) {
+      const toCity = phase(p, 0.06, 0.42);
+      const toMusic = phase(p, 0.53, 0.84);
+      const x = mix(mix(camera[0], camera[1], toCity), camera[2], toMusic);
+      const pullback = 1.045 - 0.045 * toCity;
+      gsap.set(layers.sky, { x: x * 0.025 });
+      gsap.set(layers['cloud-far'], { x: x * 0.075 });
+      gsap.set(layers['cloud-near'], { x: x * 0.13 });
+      gsap.set(layers.distance, { x: x * 0.23, y: -height * 0.012 * toCity });
+      gsap.set(layers.hills, { x: x * 0.09, y: -height * 0.004 * toCity });
+      gsap.set(layers.water, { x: x * 0.31, y: -height * 0.015 * toCity });
+      gsap.set(layers.sun, { x: x * 0.035 });
+      gsap.set(layers.plaza, {
+        x: x * 0.88,
+        y: -height * 0.009 * toMusic,
+        scale: 1.02 - 0.02 * toCity,
+        transformOrigin: '85% 85%',
+        autoAlpha: 1,
+      });
+      gsap.set(layers.street, { x, scale: pullback, transformOrigin: '50% 82%' });
+      gsap.set(layers.furniture, { x: x * 1.12, y: height * 0.015 * toCity });
+      const foregroundX = -width * 1.23 * phase(p, 0.04, 0.35);
+      gsap.set(layers.counter, {
+        x: foregroundX,
+        y: height * 0.11 * toCity,
+        autoAlpha: 1 - phase(p, 0.3, 0.38),
+      });
+      gsap.set(layers.product, {
+        x: foregroundX,
+        y: height * 0.11 * toCity,
+        rotation: -1.4 * toCity,
+        autoAlpha: 1 - phase(p, 0.28, 0.37),
+      });
+      gsap.set(layers.plants, { x: x * 1.3 - width * 0.2 * toCity, y: height * 0.04 * toCity });
+      gsap.set(layers.window, { x: -width * 0.8 * toCity });
+      gsap.set(copies[0], { autoAlpha: 1 - phase(p, 0.035, 0.17), y: -30 * toCity });
+      gsap.set(copies[1], {
+        autoAlpha: phase(p, 0.23, 0.38) * (1 - phase(p, 0.55, 0.67)),
+        y: 22 * (1 - toCity) - 20 * toMusic,
+      });
+      gsap.set(copies[2], {
+        autoAlpha: phase(p, 0.69, 0.83) * (1 - phase(worldProgress, 0.345, 0.373)),
+        y: 28 * (1 - toMusic),
+      });
+      gsap.set(left, { opacity: 1 - toMusic });
+      gsap.set(right, { opacity: toMusic });
+      gsap.set(exit, { opacity: 0 });
+      lastOpening = p;
+    }
     world.render(worldProgress, width, height, camera[2], false);
     progressBar.style.transform = `scaleX(${p})`;
     const chapter = worldProgress > 0.36 ? -1 : p < 0.23 ? 0 : p < 0.67 ? 1 : 2;
@@ -110,6 +119,7 @@ export function mountJourney(root, onChapter) {
   }
 
   function measure() {
+    lastOpening = -1;
     width = stage.clientWidth;
     height = stage.clientHeight;
     start = runway.getBoundingClientRect().top + scrollY;
@@ -195,6 +205,7 @@ export function mountJourney(root, onChapter) {
   }
   return () => {
     disposed = true;
+    stopPointer();
     cancelAnimationFrame(frame);
     observer.disconnect();
     resizeObserver.disconnect();

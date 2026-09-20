@@ -182,8 +182,32 @@ export default function IndexJourney({ en = false }) {
           >
             <img src={`${art}clouds.webp`} alt="" width="1536" height="1024" fetchpriority="low" />
           </div>
-          <div className={styles.distance} data-depth="distance" aria-hidden="true">
-            <img src={`${art}distance.webp`} alt="" width="2172" height="724" />
+          <div className={styles.sunPlane} data-depth="sun" data-look="sun" aria-hidden="true">
+            <i />
+          </div>
+          <div
+            className={`${styles.distance} ${styles.hills}`}
+            data-depth="hills"
+            data-look="far"
+            aria-hidden="true"
+          >
+            <img src={`${art}distance-hills-v2.webp`} alt="" width="2172" height="724" />
+          </div>
+          <div
+            className={styles.distance}
+            data-depth="distance"
+            data-look="city"
+            aria-hidden="true"
+          >
+            <img src={`${art}distance-city-v2.webp`} alt="" width="2172" height="724" />
+          </div>
+          <div
+            className={`${styles.distance} ${styles.water}`}
+            data-depth="water"
+            data-look="water"
+            aria-hidden="true"
+          >
+            <img src={`${art}distance-water-v2.webp`} alt="" width="2172" height="724" />
           </div>
           <div className={styles.worldPavement} data-world-ground aria-hidden="true">
             <img
@@ -194,11 +218,21 @@ export default function IndexJourney({ en = false }) {
               loading="lazy"
             />
           </div>
-          <div className={styles.plazaPlane} data-depth="plaza" aria-hidden="true">
-            <img src={`${art}wonderpop-building.webp`} alt="" width="1024" height="1536" />
+          <div
+            className={styles.plazaPlane}
+            data-depth="plaza"
+            data-look="landmark"
+            aria-hidden="true"
+          >
+            <img src={`${art}wonderpop-front-v2.webp`} alt="" width="1024" height="1536" />
           </div>
           <div className={styles.openingScene} data-opening>
-            <div className={styles.street} data-depth="street" aria-hidden="true">
+            <div
+              className={styles.street}
+              data-depth="street"
+              data-look="street"
+              aria-hidden="true"
+            >
               <img
                 className={styles.streetArt}
                 src={`${art}street-separated.webp`}
@@ -214,7 +248,12 @@ export default function IndexJourney({ en = false }) {
               <span className={`${styles.shopLight} ${styles.lightOne}`} />
               <span className={`${styles.shopLight} ${styles.lightTwo}`} />
             </div>
-            <div className={styles.streetFurniture} data-depth="furniture" aria-hidden="true">
+            <div
+              className={styles.streetFurniture}
+              data-depth="furniture"
+              data-look="near"
+              aria-hidden="true"
+            >
               <img
                 className={styles.lampOne}
                 src={`${art}lamp.webp`}
@@ -230,7 +269,12 @@ export default function IndexJourney({ en = false }) {
                 height="1536"
               />
             </div>
-            <div className={styles.foreground} data-depth="counter" aria-hidden="true">
+            <div
+              className={styles.foreground}
+              data-depth="counter"
+              data-look="near"
+              aria-hidden="true"
+            >
               <img
                 className={styles.counter}
                 src={`${art}counter.webp`}
@@ -240,7 +284,12 @@ export default function IndexJourney({ en = false }) {
               />
               <span className={styles.contactShadow} />
             </div>
-            <div className={styles.productPlane} data-depth="product" aria-hidden="true">
+            <div
+              className={styles.productPlane}
+              data-depth="product"
+              data-look="near"
+              aria-hidden="true"
+            >
               <img
                 className={styles.can}
                 src={`${art}original.webp`}
@@ -250,7 +299,12 @@ export default function IndexJourney({ en = false }) {
                 fetchpriority="high"
               />
             </div>
-            <div className={styles.nearPlants} data-depth="plants" aria-hidden="true">
+            <div
+              className={styles.nearPlants}
+              data-depth="plants"
+              data-look="near"
+              aria-hidden="true"
+            >
               <img
                 src={`${art}foliage.webp`}
                 className={styles.leavesRight}
