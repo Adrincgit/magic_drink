@@ -8,7 +8,8 @@
 .airship img {
   width: 100%;
   height: auto;
-  animation: drift 24s ease-in-out infinite alternate;
+  animation: drift 68s linear infinite;
+  animation-delay: -12s;
 }
 .audienceRow {
   position: absolute;
@@ -24,18 +25,14 @@
 .audienceRow[data-audience-row='3'] { --width: 215svh; --bottom: -18svh; --z: 7; }
 .audienceRow[data-audience-row='4'] { --width: 235svh; --bottom: -28svh; --z: 8; }
 @keyframes drift {
-  from { transform: translate3d(1svh, 0, 0) rotate(-1deg); }
-  to { transform: translate3d(-5svh, 1.2svh, 0) rotate(1deg); }
+  from { transform: translate3d(30vw, 0, 0) rotate(-1deg); }
+  50% { transform: translate3d(-55vw, -1.5svh, 0) rotate(1deg); }
+  to { transform: translate3d(-140vw, 0, 0) rotate(-1deg); }
 }
 @media (max-width: 700px) {
   .airship { width: 16svh; left: 63%; top: 25%; }
-  .airship img { animation-name: driftMobile; }
     .audienceRow[data-audience-row='1'] { --width: 120svh; --bottom: 1svh; }
   .audienceRow[data-audience-row='2'] { --width: 136svh; --bottom: -7svh; }
   .audienceRow[data-audience-row='3'] { --width: 145svh; --bottom: -13svh; }
   .audienceRow[data-audience-row='4'] { --width: 154svh; --bottom: -19svh; }
-}
-@keyframes driftMobile {
-  from { transform: translate3d(0, 0, 0) rotate(-1deg); }
-  to { transform: translate3d(-12px, -4px, 0) rotate(1deg); }
 }

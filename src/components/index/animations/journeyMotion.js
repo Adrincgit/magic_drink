@@ -81,10 +81,12 @@ export function mountJourney(root, onChapter) {
       gsap.set(layers['cloud-near'], { x: x * 0.13 });
       gsap.set(layers.distance, { x: x * 0.23, y: -height * 0.012 * toCity });
       gsap.set(layers.hills, { x: x * 0.09, y: -height * 0.004 * toCity });
-      gsap.set(layers.water, { x: x * 0.31, y: -height * 0.015 * toCity });
-      gsap.set(layers.sun, { x: x * 0.035 });
+      // Shoreline, bridge feet and their reflections share one camera plane.
+      gsap.set(layers.water, { x: x * 0.23, y: -height * 0.012 * toCity });
+      gsap.set(layers.sun, { x: x * 0.23, y: -height * 0.012 * toCity });
       gsap.set(layers.street, { x, scale: pullback, transformOrigin: '50% 82%' });
-      gsap.set(layers.furniture, { x: x * 1.12, y: height * 0.015 * toCity });
+      // A grounded lamp follows the paving it stands on, including its pivot.
+      gsap.set(layers.furniture, { x, scale: pullback, transformOrigin: '50% 82%', y: 0 });
       const foregroundX = -width * 1.23 * phase(p, 0.04, 0.35);
       gsap.set(layers.counter, {
         x: foregroundX,

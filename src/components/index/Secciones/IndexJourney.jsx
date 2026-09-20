@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { mountJourney } from '../animations/journeyMotion';
+import { createAudioReaction } from '../animations/audioReaction';
 import styles from '../css/indexJourney.module.css';
 import IndexWorldTail from './IndexWorldTail';
 import BillboardSequence from './BillboardSequence';
@@ -8,6 +9,7 @@ import ScenePlayer from '../../global/ScenePlayer';
 import JourneyLoading from './JourneyLoading';
 import JourneyStars from './JourneyStars';
 import HeroProduct, { HeroTable } from './HeroProduct';
+import WaterSurface from './WaterSurface';
 import { hexyPlaylist } from '../../../data/hexyPlaylist';
 
 const art = '/image/journey/';
@@ -104,6 +106,8 @@ const words = {
 export default function IndexJourney({ en = false }) {
   const root = useRef(null);
   const audioRef = useRef(null);
+  const audioReaction = useRef(null);
+  const continuePlayback = useRef(false);
   const t = words[en ? 'en' : 'es'];
   const [chapter, setChapter] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -144,13 +148,15 @@ export default function IndexJourney({ en = false }) {
   }, []);
   useEffect(() => {
     const pause = () => {
-      if (document.hidden) audioRef.current?.pause();
+      if (document.hidden) { continuePlayback.current = false; audioRef.current?.pause(); }
     };
     document.addEventListener('visibilitychange', pause);
     return () => {
       document.removeEventListener('visibilitychange', pause);
       playRequest.current++;
       audioRef.current?.pause();
+      audioReaction.current?.dispose();
+      audioReaction.current = null;
     };
   }, []);
 
@@ -159,11 +165,14 @@ export default function IndexJourney({ en = false }) {
     if (!audio) return;
     if (!audio.paused) {
       playRequest.current++;
+      continuePlayback.current = false;
       audio.pause();
       return;
     }
     const request = ++playRequest.current;
     try {
+      await prepareAudioReaction(audio);
+      if (request !== playRequest.current) return;
       await audio.play();
       if (request === playRequest.current) setAudioError(false);
     } catch {
@@ -171,18 +180,30 @@ export default function IndexJourney({ en = false }) {
     }
   }
 
+  async function prepareAudioReaction(audio) {
+    try {
+      audioReaction.current ??= createAudioReaction(audio, root.current);
+      await audioReaction.current.resume();
+    } catch { /* Audio playback remains available without visual analysis. */ }
+  }
+
   async function selectTrack(index, shouldPlay = true) {
     const audio = audioRef.current;
     if (!audio) return;
     const request = ++playRequest.current;
     setTrackIndex(index);
+    continuePlayback.current = false;
     setElapsed(0);
     setDuration(0);
     setAudioError(false);
     audio.src = hexyPlaylist[index].src;
     audio.load();
     if (shouldPlay) {
-      try { await audio.play(); }
+      try {
+        await prepareAudioReaction(audio);
+        if (request !== playRequest.current) return;
+        await audio.play();
+      }
       catch { if (request === playRequest.current) setAudioError(true); }
     }
   }
@@ -191,7 +212,13 @@ export default function IndexJourney({ en = false }) {
     onToggle: toggleAudio,
     onSelect: selectTrack,
     onNext: () => selectTrack((trackIndex + 1) % hexyPlaylist.length),
-    onSeek: time => { if (audioRef.current) audioRef.current.currentTime = time; },
+    onSeek: time => {
+      if (!audioRef.current) return;
+      audioRef.current.currentTime = time;
+      // Keep the controlled range in sync with its input event; waiting for
+      // timeupdate lets the following change event restore the old position.
+      setElapsed(time);
+    },
   };
 
   return (
@@ -228,7 +255,7 @@ export default function IndexJourney({ en = false }) {
           >
             <img src={`${art}clouds.webp`} alt="" width="1536" height="1024" fetchpriority="low" />
           </div>
-          <div className={styles.sunPlane} data-depth="sun" data-look="sun" aria-hidden="true">
+          <div className={styles.sunPlane} data-depth="sun" data-look="city" aria-hidden="true">
             <i />
           </div>
           <div
@@ -250,11 +277,10 @@ export default function IndexJourney({ en = false }) {
           <div
             className={`${styles.distance} ${styles.water}`}
             data-depth="water"
-            data-look="water"
+            data-look="city"
             aria-hidden="true"
           >
-            <img data-critical src={`${art}distance-water-v2.webp`} alt="" width="2172" height="724" />
-            <div className={styles.riverGlints} />
+            <WaterSurface />
           </div>
           <div className={styles.worldPavement} data-world-ground aria-hidden="true">
             <img
@@ -288,7 +314,7 @@ export default function IndexJourney({ en = false }) {
             <div
               className={styles.streetFurniture}
               data-depth="furniture"
-              data-look="near"
+              data-look="street"
               aria-hidden="true"
             >
               <div className={`${styles.lamp} ${styles.lampOne}`} data-opening-lamp>
@@ -415,6 +441,7 @@ export default function IndexJourney({ en = false }) {
       </section>
       {hasPlayed && (!playerVisible || (!reducedMotion && chapter !== 2)) && <ScenePlayer {...playerProps} compact onClose={() => {
         playRequest.current++;
+        continuePlayback.current = false;
         audioRef.current?.pause();
         setHasPlayed(false);
       }} />}
@@ -422,10 +449,15 @@ export default function IndexJourney({ en = false }) {
         ref={audioRef}
         preload="none"
         src="/audio/demos/no_brain_just_vibes_demo.mp3"
-        onPlay={() => { setPlaying(true); setHasPlayed(true); }}
-        onPause={() => setPlaying(false)}
-        onEnded={() => selectTrack((trackIndex + 1) % hexyPlaylist.length)}
-        onError={() => { setPlaying(false); setAudioError(true); }}
+        onPlay={() => { continuePlayback.current = true; setPlaying(true); setHasPlayed(true); }}
+        onPause={event => {
+          // Natural completion pauses the media before firing `ended`.
+          // Seeking to the end of an already paused track must stay paused.
+          if (!event.currentTarget.ended) continuePlayback.current = false;
+          setPlaying(false);
+        }}
+        onEnded={() => { if (continuePlayback.current) selectTrack((trackIndex + 1) % hexyPlaylist.length); }}
+        onError={() => { continuePlayback.current = false; setPlaying(false); setAudioError(true); }}
         onTimeUpdate={(e) => setElapsed(e.currentTarget.currentTime)}
         onLoadedMetadata={(e) => setDuration(Number.isFinite(e.currentTarget.duration) ? e.currentTarget.duration : 0)}
       />

@@ -1,0 +1,38 @@
+{
+  "environment": "Headless Google Chrome, 390x844, DPR 2, touch emulation, CPU slowdown 4x, music playing and audio-reactive stage. Local server, warm decoded images and preloaded WebGL water/garden/audience. Not a physical phone or a network benchmark.",
+  "frames": 185,
+  "medianFrameMs": 18.1,
+  "p95FrameMs": 42.4,
+  "framesOver50ms": 4,
+  "phases": {
+    "opening": {
+      "frames": 71,
+      "p95Ms": 36.4
+    },
+    "festival": {
+      "frames": 31,
+      "p95Ms": 60.6
+    },
+    "garden": {
+      "frames": 51,
+      "p95Ms": 36.4
+    },
+    "interior": {
+      "frames": 32,
+      "p95Ms": 30.3
+    }
+  },
+  "longTasks": [
+    {
+      "durationMs": 50,
+      "progress": 0.4730000000001035
+    }
+  ],
+  "horizontalOverflow": false,
+  "mainThreadMs": {
+    "ScriptDuration": 777.77,
+    "LayoutDuration": 49.94,
+    "RecalcStyleDuration": 1378.74,
+    "TaskDuration": 3484.83
+  }
+}

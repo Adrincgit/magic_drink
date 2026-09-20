@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styles from '../css/indexJourney.module.css';
 
 // Fixed seed keeps SSR/hydration identical; no repeating CSS tiles or grid.
@@ -8,6 +9,7 @@ const stars = Array.from({ length: 92 }, () => ({
   '--size': `${.6 + random() * 1.6}px`, '--glow': .2 + random() * .5,
   '--duration': `${3.5 + random() * 7}s`, '--delay': `${-random() * 12}s`,
 }));
-export default function JourneyStars() {
+function JourneyStars() {
   return <div className={styles.stars} data-journey-stars>{stars.map((style, i) => <i key={i} style={style} />)}</div>;
 }
+export default memo(JourneyStars);

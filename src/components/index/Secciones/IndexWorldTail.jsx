@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { SceneButton, SceneLabel, SceneNote } from '../../global/SceneControls';
 import GardenWorld from './GardenWorld';
 import DJSequence from './DJSequence';
@@ -9,7 +10,7 @@ import depth from '../css/festivalDepth.module.css'; // Audience planes and sky 
 const art = '/image/journey/';
 
 
-export default function IndexWorldTail({ en = false }) {
+function IndexWorldTail({ en = false }) {
   return (
     <div className={styles.worldTail} data-continuation>
       <section
@@ -47,6 +48,16 @@ export default function IndexWorldTail({ en = false }) {
             ))}
           </div>
           <div className={styles.djContactShadow} aria-hidden="true" />
+          {['left', 'right'].map(side => (
+            <div key={side} className={styles.speaker} data-speaker={side} aria-hidden="true">
+              <img src={`${art}festival-speaker-v14.webp`} alt="" width="512" height="768" loading="lazy" />
+              {[0, 1].map(cone => <span className={styles.speakerCone} key={cone} style={{ '--cone-y': cone ? '67%' : '34.3%' }}>
+                <img src={`${art}festival-speaker-v14.webp`} alt="" width="512" height="768" loading="lazy" />
+              </span>)}
+              <i className={styles.speakerHalo} />
+            </div>
+          ))}
+          <div className={styles.musicBloom} data-music-bloom aria-hidden="true" />
           <div className={styles.dj} data-dj>
             <DJSequence en={en} />
           </div>
@@ -314,3 +325,6 @@ export default function IndexWorldTail({ en = false }) {
     </div>
   );
 }
+
+// Playback time updates the controls, not the entire illustrated world.
+export default memo(IndexWorldTail);

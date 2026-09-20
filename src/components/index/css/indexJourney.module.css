@@ -1111,13 +1111,6 @@
 .hills {
   z-index: 2;
 }
-.water img {
-  animation: waterShimmer 5.5s ease-in-out infinite alternate;
-  transform-origin: center bottom;
-}
-.riverGlints { position: absolute; inset: 0; pointer-events: none; mask-image: url('/image/journey/distance-water-v2.webp'); mask-size: 100% 100%; mix-blend-mode: screen; opacity: .36; }
-.riverGlints:before { content: ''; position: absolute; inset: -80px; background: repeating-linear-gradient(177deg, transparent 0 14px, #ffe7ae44 15px, transparent 17px 32px, #ffc7e42b 34px, transparent 35px 49px); animation: riverCurrent 7s linear infinite; }
-@keyframes riverCurrent { to { transform: translate(75px, 45px); } }
 .sunPlane {
   position: absolute;
   inset: 0;
@@ -1132,16 +1125,6 @@
   border-radius: 50%;
   background: #fff5ba;
   box-shadow: 0 0 7svh 3svh #ffb46b66;
-}
-@keyframes waterShimmer {
-  from {
-    transform: scaleX(1.028) translateX(-9px) scaleY(1.005);
-    opacity: 0.92;
-  }
-  to {
-    transform: scaleX(1.045) translateX(9px) scaleY(1.018);
-    opacity: 1;
-  }
 }
 @media (prefers-reduced-motion: reduce), (hover: none) {
   .journey [data-look] {

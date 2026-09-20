@@ -28,9 +28,8 @@ test('depth planes move independently and ambient clouds keep moving at rest', a
     Math.abs(after.street - before.street) * 0.5,
   );
   await expect(page.locator('[data-garden-world]')).toBeHidden();
-  expect(Math.abs(after.furniture - before.furniture)).toBeGreaterThan(
-    Math.abs(after.street - before.street),
-  );
+  // A lamp and the pavement supporting it must share their camera transform.
+  expect(after.furniture - before.furniture).toBeCloseTo(after.street - before.street, 2);
   const cloud = page.locator('[data-depth="cloud-near"] img');
   const ambientBefore = await cloud.evaluate((el) => getComputedStyle(el).transform);
   await page.waitForTimeout(300);

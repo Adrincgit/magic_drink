@@ -93,7 +93,8 @@ export async function createCrowdMotion(host) {
         meshes[i].position.set(r.x + r.width / 2 - bounds.x - bounds.width / 2,
           bounds.height / 2 - (r.y + r.height / 2 - bounds.y), i * .01);
         meshes[i].scale.set(r.width, r.height, 1);
-        uniforms[i].amplitude.value = (bounds.width <= 700 ? 5 : 9) / r.width;
+        const energy = host.closest('[data-journey]').audioEnergy || 0;
+        uniforms[i].amplitude.value = (bounds.width <= 700 ? 5 : 9) * (1 + energy * .55) / r.width;
       });
       measured = false;
     }
