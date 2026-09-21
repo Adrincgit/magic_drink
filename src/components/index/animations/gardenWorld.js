@@ -63,6 +63,7 @@ export async function createGardenWorld(host) {
     materials.forEach(m => m.dispose());
     renderer.dispose();
     renderer.domElement.remove();
+    host.style.clipPath = '';
     delete host.gardenDiagnostics;
   }
   try {
@@ -196,6 +197,7 @@ export async function createGardenWorld(host) {
     cancelAnimationFrame(frame);
     frame = 0;
     host.dataset.renderer = 'fallback';
+    host.style.clipPath = '';
   }
   function contextRestored() {
     lost = false;
@@ -206,15 +208,27 @@ export async function createGardenWorld(host) {
   }
   function draw(time) {
     if (!state || disposed || lost) return;
-    const travel = clamp((state.progress - 0.632) / (0.844 - 0.632));
+    const travel = clamp((state.progress - 0.632) / (0.854 - 0.632));
     const approach = clamp((travel - 0.72) / 0.28);
     const lookX = parseFloat(root.style.getPropertyValue('--look-x')) || 0;
     const lookY = parseFloat(root.style.getPropertyValue('--look-y')) || 0;
-    camera.position.set(lookX * 0.012, 2.4 + approach * 3.2 + lookY * 0.009, 22 - 64 * travel);
+    camera.position.set(lookX * 0.012, 2.4 + approach * 3.3 + lookY * 0.009, 22 - 69.8 * travel);
     const pitch = 0.135 * (1 - approach);
     camera.lookAt(camera.position.x * 0.4, camera.position.y + Math.tan(pitch) * 30, camera.position.z - 30);
     trees.forEach((tree, i) => { tree.rotation.z = Math.sin(time / 4300 + i * 1.9) * 0.003; });
     renderer.render(scene, camera);
+    // The doorway removes the entire exterior stack (including meadow/sky),
+    // revealing the real room behind it. Its edges follow the 3D projection.
+    if (state.progress > .795) {
+      const opening = clamp((state.progress - .795) / .02);
+      const projectDoor = (x, y) => {
+        const point = new Vector3(x, y, BUILDING_Z).project(camera);
+        return [(point.x + 1) * state.width / 2, (1 - point.y) * state.height / 2];
+      };
+      const [left, top] = projectDoor(-.78 * opening, 6.43);
+      const [right, bottom] = projectDoor(.84 * opening, 4.92);
+      host.style.clipPath = `path(evenodd, 'M0 0H${state.width}V${state.height}H0Z M${left.toFixed(1)} ${top.toFixed(1)}H${right.toFixed(1)}V${bottom.toFixed(1)}H${left.toFixed(1)}Z')`;
+    } else host.style.clipPath = '';
     hasDrawn = true;
     lastTime = time;
     host.dataset.renderer = state.reduced ? 'fallback' : 'webgl';
@@ -235,6 +249,7 @@ export async function createGardenWorld(host) {
     state = next;
     if (state.reduced) {
       host.dataset.renderer = 'fallback';
+      host.style.clipPath = '';
       resume();
       return;
     }

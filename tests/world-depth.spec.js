@@ -67,7 +67,7 @@ test('late or failed artwork cannot change the scroll distance or skip a chapter
     release = resolve;
   });
   await page.route('**/image/journey/hexy-dj-v2.webp', (route) => route.abort());
-  await page.route('**/image/journey/atrium-distance.webp', async (route) => {
+  await page.route('**/image/journey/wonderpop-atrium-v15.webp', async (route) => {
     await gate;
     await route.continue();
   });

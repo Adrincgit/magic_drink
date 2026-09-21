@@ -3,7 +3,7 @@
 export function createAudioReaction(audio, root) {
   const rig = root.querySelector('[data-festival-rig]');
   const cones = [...rig.querySelectorAll('[data-speaker] span img')];
-  const halos = [...rig.querySelectorAll('[data-speaker] i')];
+  const halos = [...rig.querySelectorAll('[data-speaker-halo]')];
   const lights = rig.querySelector('[data-stage-lights]');
   const bloom = rig.querySelector('[data-music-bloom]');
   function paint(level) {

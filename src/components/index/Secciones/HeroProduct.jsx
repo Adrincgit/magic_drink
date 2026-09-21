@@ -26,7 +26,8 @@ function HeroProduct({ en, active }) {
     timer.current = setTimeout(() => setBurst(0), 7200);
   }
   return <div className={styles.product} data-hero-product>
-    <span className={styles.contact} aria-hidden="true" />
+    <span className={styles.penumbra} aria-hidden="true" />
+    <span className={styles.contact} data-can-contact aria-hidden="true" />
     {burst > 0 && <div key={burst} className={styles.burst} data-can-burst aria-hidden="true">
       <div className={styles.vapor}>{Array.from({ length: 7 }, (_, i) => <i key={i} style={{ '--i': i }} />)}</div>
       {Array.from({ length: 20 }, (_, i) => <span key={i} style={{ '--i': i, '--x': `${Math.sin(i * 2.4) * 130}px`, '--r': `${Math.cos(i) * 32}deg`, '--hue': `${i * 26}deg` }}>{['♪', '♥', '♫', '✦'][i % 4]}</span>)}

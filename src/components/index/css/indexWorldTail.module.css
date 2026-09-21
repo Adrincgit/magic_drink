@@ -44,7 +44,7 @@
   z-index: 4;
 }
 .interior {
-  z-index: 5;
+  z-index: 3;
   overflow: hidden;
 }
 .closing {
@@ -99,8 +99,7 @@
 }
 .festivalShade,
 .plazaShade,
-.interiorShade,
-.closingShade {
+.interiorShade {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -164,16 +163,16 @@
 .atrium {
   max-width: none;
   position: absolute;
-  inset: -5%;
-  width: 110%;
-  height: 110%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   will-change: transform;
 }
 .interiorShade {
   background:
-    linear-gradient(90deg, #271938c9, transparent 80%),
-    linear-gradient(0deg, #21132d80, transparent 40%);
+    linear-gradient(90deg, #27193833, transparent 30%, transparent 80%, #27193826),
+    linear-gradient(0deg, #21132d66, transparent 24%);
 }
 .insideLeaves {
   position: absolute;
@@ -189,55 +188,6 @@
 }
 .interiorCopy h2 {
   font-size: clamp(45px, 5.3vw, 85px);
-}
-.closingShade {
-  background: linear-gradient(90deg, #21132dc9, transparent 85%);
-}
-.closingDisplay {
-  position: absolute;
-  bottom: 0;
-  z-index: 1;
-}
-.closingCounter {
-  position: absolute;
-  max-width: none;
-  width: 150svh;
-  height: auto;
-  right: -34svh;
-  bottom: -10svh;
-}
-.closingCan {
-  position: absolute;
-  width: auto;
-  max-width: none;
-  z-index: 2;
-}
-.canShadow {
-  position: absolute;
-  left: 20%;
-  bottom: 15%;
-  width: 43%;
-  height: 4%;
-  border-radius: 50%;
-  filter: blur(10px);
-  background: #1f102ac7;
-  z-index: 1;
-}
-.closingCopy {
-  top: 27%;
-  width: 47%;
-}
-.closingCopy h2 {
-  font-size: clamp(43px, 5.2vw, 84px);
-}
-.signature {
-  display: block;
-  margin-top: 30px;
-  font:
-    500 10px Inter,
-    sans-serif;
-  letter-spacing: 2px;
-  color: #e6bbd4;
 }
 .footer {
   position: absolute;
@@ -279,6 +229,10 @@
   font-size: 22px !important;
   cursor: pointer;
 }
+@media (prefers-reduced-motion: no-preference) {
+  :global([data-journey][data-world-chapter='atrium']:has([data-compact-player])) .footer { bottom: 25px; }
+  :global([data-journey][data-world-chapter='atrium']:has([data-compact-player])) .worldRail { visibility: hidden !important; }
+}
 .passingLeaves {
   position: absolute;
   inset: -30% -20%;
@@ -301,14 +255,6 @@
   left: -10%;
   scale: -1 1;
   top: 15%;
-}
-.doorLight {
-  position: absolute;
-  inset: 0;
-  z-index: 21;
-  background: radial-gradient(ellipse at 50% 60%, #ffe5ac, #ddad65 70%, #a56d48);
-  pointer-events: none;
-  opacity: 0;
 }
 .worldRail {
   position: absolute;
@@ -386,41 +332,15 @@
     font-size: 39px;
   }
   .atrium {
-    object-position: 64% center;
+    object-position: 50% center;
   }
   .interiorShade {
-    background: linear-gradient(180deg, #21132dba, transparent 75%);
+    background: linear-gradient(180deg, #21132d55, transparent 50%);
   }
   .insideLeaves {
     width: 33svh;
     bottom: -9svh;
     right: -10svh;
-  }
-  .closingShade {
-    background: linear-gradient(180deg, #21132dbb, transparent 75%);
-  }
-  .closingCopy {
-    text-align: center;
-  }
-  .closingCopy > [data-scene-note] {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .signature {
-    font-size: 8px;
-  }
-  .closingCan {
-    left: 50%;
-  }
-  .closingCounter {
-    width: 116svh;
-    right: calc(50% - 58svh);
-    bottom: -3svh;
-  }
-  .canShadow {
-    bottom: 24%;
-    left: 29%;
-    width: 38%;
   }
   .passingLeaves {
     inset: -10% -50%;
@@ -516,7 +436,18 @@
 .speaker:before { content: ''; position: absolute; left: 15%; bottom: 0; width: 70%; height: 4%; background: radial-gradient(ellipse, #21102fd9, transparent 70%); filter: blur(2px); }
 .speaker img { display: block; width: 100%; height: 100%; }
 .speakerCone { position: absolute; inset: 0; clip-path: ellipse(20.5% 13.5% at 50% var(--cone-y)); }
-.speakerCone img { transform-origin: 50% var(--cone-y); }
+.speakerCone img { transform-origin: 50% var(--cone-y); animation: coneBeat 1.05s steps(5, end) infinite; }
+.speaker[data-speaker='right'] .speakerCone img { animation-delay: -.1s; }
+.soundRing { position: absolute; top: 34.3%; left: 50%; width: 47%; aspect-ratio: 1; border: 2px solid #ffcd87; border-radius: 50%; translate: -50% -50%; box-shadow: 0 0 8px #eda1e888; animation: soundWave 2.1s steps(12, end) infinite; animation-delay: calc(var(--ring) * -.7s); pointer-events: none; }
+.musicNotes { position: absolute; left: 50%; top: 26%; width: 1px; height: 1px; pointer-events: none; }
+.musicNotes span { position: absolute; width: clamp(17px, 2.5svh, 32px); color: #ffdc88; filter: drop-shadow(0 1px 1px #542147) drop-shadow(0 0 4px #ffcce266); animation: floatingMusic 4.6s steps(36, end) infinite; animation-delay: calc(var(--note) * -.92s); }
+.musicNotes span:nth-child(even) { color: #ffade3; }
+.musicNotes span:nth-child(3) { color: #98ebe7; }
+.musicNotes svg { width: 100%; height: auto; fill: currentColor; stroke: currentColor; stroke-width: 1.3; stroke-linejoin: round; }
+@keyframes coneBeat { 0%, 48%, 100% { transform: scale(1); } 12% { transform: scale(1.075); } 24% { transform: scale(.975); } 65% { transform: scale(1.055); } 78% { transform: scale(.985); } }
+@keyframes soundWave { from { scale: .85; opacity: .6; } 65% { opacity: .3; } to { scale: 1.8; opacity: 0; } }
+@keyframes floatingMusic { from { translate: -10px 0; rotate: -12deg; opacity: 0; scale: .65; } 12%, 65% { opacity: .82; } to { translate: var(--drift) -27svh; rotate: 15deg; opacity: 0; scale: 1.12; } }
+@media (prefers-reduced-motion: reduce) { .musicNotes, .soundRing { display: none; } }
 .speakerHalo { position: absolute; inset: 16% 14% 12%; border-radius: 50%; background: radial-gradient(ellipse, transparent 40%, #ffc2e866 58%, #ffd48577 63%, transparent 72%); opacity: 0; scale: .8; mix-blend-mode: screen; }
 .musicBloom { position: absolute; inset: 23% 16% 20%; z-index: 3; pointer-events: none; background: radial-gradient(ellipse at 50% 80%, #ffcf9155, #e798fb44 40%, transparent 70%); mix-blend-mode: screen; opacity: 0; scale: .9; }
 .stageLights {
@@ -649,7 +580,7 @@
 .atriumWorld {
   position: absolute;
   inset: 0;
-  transform-origin: 50% 58%;
+  transform-origin: 50% 55%;
 }
 .atrium {
   transform-origin: 50% 58%;
@@ -745,68 +676,6 @@
     opacity: 0.8;
   }
 }
-.closingDisplay {
-  right: 2%;
-  width: 53%;
-  height: 95%;
-  transform-origin: 50% 60%;
-}
-.closingCan {
-  left: 50%;
-  bottom: 9%;
-  height: 84%;
-  max-height: 84%;
-  rotate: 0deg;
-  translate: -50% 0;
-  animation: canBreathe 7s ease-in-out infinite alternate;
-  filter: drop-shadow(15px 22px 28px #24133966);
-}
-.productHalo {
-  position: absolute;
-  inset: 15% 4% 5%;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, #fac1fd55, #ab6aca18 50%, transparent 70%);
-  mix-blend-mode: screen;
-  animation: stagePulse 5s ease-in-out infinite alternate;
-}
-.productOrbit {
-  position: absolute;
-  inset: 5% 0 10%;
-}
-.productOrbit i {
-  position: absolute;
-
-  width: var(--size, 5px);
-  height: var(--size, 5px);
-  border: 1px solid #fff0bba6;
-  border-radius: 50%;
-  background: #ffd9a326;
-  box-shadow: 0 0 8px #fff0b944;
-  animation: productFizz calc(4s + var(--i) * 0.2s) linear infinite;
-  animation-delay: calc(var(--i) * -0.7s);
-}
-@keyframes canBreathe {
-  from {
-    transform: translateY(4px) rotate(-1deg);
-  }
-  to {
-    transform: translateY(-5px) rotate(1deg);
-  }
-}
-@keyframes productFizz {
-  0% {
-    transform: translateY(22px) scale(0.6);
-    opacity: 0;
-  }
-  30%,
-  65% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-50px) scale(1.1);
-    opacity: 0;
-  }
-}
 @media (max-width: 700px) {
   .festivalRig {
     width: 98svh;
@@ -855,29 +724,6 @@
   }
   .pendants {
     inset: -8% -24%;
-  }
-  .closingDisplay {
-    right: 0;
-    width: 100%;
-    height: 58%;
-    bottom: 5%;
-  }
-  .closingCan {
-    height: 100%;
-    max-height: 100%;
-    bottom: 0;
-  }
-  .closingCopy {
-    top: 110px;
-  }
-  .closingCopy h2 {
-    font-size: 33px;
-  }
-  .closingCopy > [data-scene-note] {
-    margin: 12px auto 17px;
-  }
-  .signature {
-    margin-top: 12px;
   }
 }
 
@@ -928,20 +774,17 @@
     width: auto;
     background:
       linear-gradient(90deg, #21132dcc, #21132d55),
-      url('/image/journey/wonderpop-atrium.webp') center / cover;
+      url('/image/journey/wonderpop-atrium-v15.webp') center / cover;
   }
   .passingLeaves,
   .canopyVeil,
-  .doorLight,
   .worldRail,
   .confetti {
     display: none;
   }
   .closing {
-    min-height: 950px;
-  }
-  .closingDisplay {
-    transform: none !important;
+    min-height: 600px;
+    background: linear-gradient(#21132d33, #21132d77), url('/image/journey/wonderpop-atrium-v15.webp') center / cover;
   }
   .footer {
     opacity: 1 !important;
@@ -960,17 +803,15 @@
   }
   .interiorRays i:nth-child(2),
   .interiorRays i:nth-child(3),
-  .interiorMotes i:nth-child(2n),
-  .productOrbit i:nth-child(2n) {
+  .interiorMotes i:nth-child(2n) {
     display: none;
   }
 }
 
 .festivalCopy [data-scene-note] { max-width: 350px; }
 .plazaCopy [data-scene-note] { margin: 16px auto 18px; max-width: 450px; }
-.closingCopy [data-scene-note], .interiorCopy [data-scene-note] { max-width: 390px; }
+.interiorCopy [data-scene-note] { max-width: 390px; }
 @media (max-width: 700px) {
   .festivalCopy [data-scene-note] { max-width: 255px; }
   .plazaCopy [data-scene-note] { max-width: 320px; }
-  .closingCopy [data-scene-note] { margin-left: auto; margin-right: auto; }
 }

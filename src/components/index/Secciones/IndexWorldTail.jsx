@@ -3,7 +3,9 @@ import { SceneButton, SceneLabel, SceneNote } from '../../global/SceneControls';
 import GardenWorld from './GardenWorld';
 import DJSequence from './DJSequence';
 import FestivalCrowdMotion from './FestivalCrowdMotion';
+import AtriumDirectory from './AtriumDirectory';
 import styles from '../css/indexWorldTail.module.css';
+import atriumStyles from '../css/atrium.module.css';
 
 import depth from '../css/festivalDepth.module.css'; // Audience planes and sky animation.
 
@@ -54,7 +56,13 @@ function IndexWorldTail({ en = false }) {
               {[0, 1].map(cone => <span className={styles.speakerCone} key={cone} style={{ '--cone-y': cone ? '67%' : '34.3%' }}>
                 <img src={`${art}festival-speaker-v14.webp`} alt="" width="512" height="768" loading="lazy" />
               </span>)}
-              <i className={styles.speakerHalo} />
+              <i className={styles.speakerHalo} data-speaker-halo />
+              {[0, 1, 2].map(ring => <i key={ring} className={styles.soundRing} style={{ '--ring': ring }} />)}
+              <div className={styles.musicNotes} data-music-notes>
+                {[0, 1, 2, 3, 4].map(note => <span key={note} style={{ '--note': note, '--drift': `${[-32, 23, -9, 46, -44][note]}px` }}>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d={note % 2 ? 'M9 17V5l11-2v12M9 8l11-2M9 17c0 2-2 4-4 4s-3-1-3-2 2-3 4-3 3 0 3 1Zm11-2c0 2-2 4-4 4s-3-1-3-2 2-3 4-3 3 0 3 1Z' : 'M10 17V3c2 3 7 2 7 6 0 2-1 3-2 4M10 17c0 2-2 4-4 4s-3-1-3-2 2-3 4-3 3 0 3 1Z'} /></svg>
+                </span>)}
+              </div>
             </div>
           ))}
           <div className={styles.musicBloom} data-music-bloom aria-hidden="true" />
@@ -142,37 +150,18 @@ function IndexWorldTail({ en = false }) {
         </div>
       </section>
 
-      <div className={styles.interior} data-world-interior aria-hidden="true">
+      <div className={`${styles.interior} ${atriumStyles.room}`} data-world-interior aria-hidden="true">
         <div className={styles.atriumWorld} data-atrium-world>
           <img
             className={styles.atrium}
             data-atrium
-            data-look="far"
-            src={`${art}atrium-distance.webp`}
+            src={`${art}wonderpop-atrium-v15.webp`}
+            onError={event => { const image = event.currentTarget; if (!image.dataset.fallback) { image.dataset.fallback = 'true'; image.src = `${art}wonderpop-atrium.webp`; } }}
             alt=""
             width="1536"
             height="1024"
-            loading="lazy"
-          />
-          <img
-            className={styles.atrium}
-            data-atrium-garden
-            data-look="street"
-            src={`${art}atrium-garden.webp`}
-            alt=""
-            width="1536"
-            height="1024"
-            loading="lazy"
-          />
-          <img
-            className={styles.atrium}
-            data-atrium-bar
-            data-look="near"
-            src={`${art}atrium-bar.webp`}
-            alt=""
-            width="1536"
-            height="1024"
-            loading="lazy"
+            loading="eager"
+            fetchpriority="low"
           />
         </div>
         <div className={styles.pendants} data-pendants data-look="near">
@@ -198,6 +187,7 @@ function IndexWorldTail({ en = false }) {
           ))}
         </div>
         <div className={styles.interiorShade} />
+        <img className={atriumStyles.entrance} data-atrium-entrance src={`${art}wonderpop-entry-v15.webp`} alt="" width="1536" height="1024" loading="eager" fetchpriority="low" />
         <img
           className={styles.insideLeaves}
           data-inside-leaves
@@ -210,85 +200,40 @@ function IndexWorldTail({ en = false }) {
         />
       </div>
       <section
-        className={`${styles.copy} ${styles.interiorCopy}`}
+        className={`${styles.copy} ${styles.interiorCopy} ${atriumStyles.intro}`}
         data-world-copy="interior"
         aria-label={en ? 'Inside WonderPop Plaza' : 'Dentro de WonderPop Plaza'}
       >
-        <SceneLabel>WONDERPOP PLAZA</SceneLabel>
+        <SceneLabel>06 / WONDERPOP PLAZA</SceneLabel>
         <h2>
           {en ? (
             <>
-              Make yourself
+              Welcome to
               <br />
-              <em>at home.</em>
+              <em>WonderPop.</em>
             </>
           ) : (
             <>
-              Quédate.
+              Bienvenido a
               <br />
-              <em>Estás en casa.</em>
+              <em>WonderPop.</em>
             </>
           )}
         </h2>
         <SceneNote>{en
             ? 'Official shops, games, music and Magic Bunnies. Welcome to Magic Drink’s shopping plaza.'
             : 'Tiendas oficiales, juegos, música y Magic Bunnies. Bienvenido al centro comercial de Magic Drink.'}</SceneNote>
-        <SceneButton href="/wonderpop-plaza">{en ? 'Discover WonderPop' : 'Descubre WonderPop'}</SceneButton>
+        <span className={styles.keepGoing}>{en ? 'YOUR VISIT STARTS HERE' : 'TU VISITA EMPIEZA AQUÍ'} <span aria-hidden="true">↓</span></span>
       </section>
 
       <section
         className={styles.closing}
-        id="la-original"
+        id="directorio-wonderpop"
         data-world-scene="closing"
-        aria-label="Magic Drink"
+        aria-label={en ? 'WonderPop Plaza directory' : 'Directorio de WonderPop Plaza'}
       >
-        <div className={styles.closingShade} aria-hidden="true" />
-        <div className={styles.closingDisplay} data-closing-display data-look="near">
-          <div className={styles.productHalo} aria-hidden="true" />
-          <div className={styles.productOrbit} aria-hidden="true">
-            {Array.from({ length: 22 }, (_, i) => (
-              <i
-                key={i}
-                style={{
-                  '--i': i,
-                  '--size': `${3 + (i % 5) * 2}px`,
-                  left: `${8 + ((i * 37) % 86)}%`,
-                  top: `${8 + ((i * 29) % 84)}%`,
-                }}
-              />
-            ))}
-          </div>
-          <img
-            className={styles.closingCan}
-            src={`${art}original-dynamic-v2.webp`}
-            alt="Magic Drink"
-            width="1024"
-            height="1536"
-            loading="lazy"
-          />
-        </div>
-        <div className={`${styles.copy} ${styles.closingCopy}`} data-world-copy="closing">
-          <SceneLabel>06 / MAGIC DRINK</SceneLabel>
-          <h2>
-            {en ? (
-              <>
-                Magic
-                <br />
-                <em>Drink.</em>
-              </>
-            ) : (
-              <>
-                Magic
-                <br />
-                <em>Drink.</em>
-              </>
-            )}
-          </h2>
-          <SceneNote>{en
-              ? 'The world’s favorite drink. Get to know what’s behind the purple can.'
-              : 'La bebida favorita del mundo. Descubre qué hay detrás de la lata morada.'}</SceneNote>
-          <SceneButton href="/bebidas">{en ? 'Discover Magic Drink' : 'Conoce Magic Drink'}</SceneButton>
-          <span className={styles.signature}>Spark more everyday.</span>
+        <div className={atriumStyles.directoryWrap} data-world-copy="closing">
+          <AtriumDirectory en={en} />
         </div>
         <footer className={styles.footer} data-world-footer>
           <a href="/" aria-label="Magic Drink">
@@ -314,7 +259,6 @@ function IndexWorldTail({ en = false }) {
         <img src={`${art}foliage.webp`} alt="" width="1254" height="1254" />
         <img src={`${art}foliage.webp`} alt="" width="1254" height="1254" />
       </div>
-      <div className={styles.doorLight} data-door-light aria-hidden="true" />
       <img className={styles.canopyVeil} data-canopy-veil
         src={`${art}garden-canopy-veil-v3.webp`} width="1536" height="1024" alt="" loading="lazy" />
       <div className={styles.worldRail} data-world-rail aria-hidden="true">

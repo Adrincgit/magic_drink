@@ -1,15 +1,16 @@
 .table { position: absolute; width: min(64vw, 104svh); max-width: none; height: auto; left: 74%; top: 74svh; transform: translateX(-50%); }
-.contact { position: absolute; z-index: 1; left: 50%; top: 93%; width: 62%; height: 4%; translate: -50% 0; border-radius: 50%; background: radial-gradient(ellipse, #29143fba, #29143f77 42%, transparent 72%); filter: blur(2px); }
+.penumbra { position: absolute; z-index: 1; left: 50%; top: 93.5%; width: 76%; height: 4.6%; translate: -50% -42%; border-radius: 50%; background: radial-gradient(ellipse, #30203899, #30203855 42%, transparent 72%); filter: blur(2px); }
+.contact { position: absolute; z-index: 4; left: 50%; top: 93.4%; width: 55%; height: 1.25%; translate: -50% -48%; border-radius: 50%; background: radial-gradient(ellipse, #211224e6 15%, #28152dd6 43%, #28152d80 62%, transparent 78%); filter: blur(.45px); pointer-events: none; }
 .plant { position: absolute; width: 29svh; right: 1.5%; bottom: 19svh; filter: drop-shadow(0 8px 5px #24163066); }
 .plant img { display: block; width: 100%; height: auto; }
 .plant > img:first-child { mask-image: linear-gradient(transparent 35%, #000 63%); }
 .plant .crown { position: absolute; inset: 0; mask-image: linear-gradient(#000 35%, transparent 65%); transform-origin: 50% 78%; animation: foliage 5.7s ease-in-out infinite alternate; }
-.product { --can-height: 45.5svh; --can-foot: 80svh; position: absolute; left: 71%; top: calc(var(--can-foot) - var(--can-height) * .94); height: var(--can-height); width: calc(var(--can-height) * 2 / 3); transform: translateX(-50%); pointer-events: none; isolation: isolate; }
-.canButton { position: absolute; inset: 0; z-index: 3; display: block; padding: 0; background: transparent; border-radius: 30%; pointer-events: auto; transform-origin: 50% 94%; transition: scale .35s cubic-bezier(.2,.8,.2,1); }
+.product { --can-height: 45.5svh; --can-foot: 80.5svh; position: absolute; left: 71%; top: calc(var(--can-foot) - var(--can-height) * .934); height: var(--can-height); width: calc(var(--can-height) * 2 / 3); transform: translateX(-50%); pointer-events: none; isolation: isolate; }
+.canButton { position: absolute; inset: 0; z-index: 3; display: block; padding: 0; background: transparent; border-radius: 30%; pointer-events: auto; transform-origin: 50% 93.4%; transition: scale .35s cubic-bezier(.2,.8,.2,1); }
 .canButton:disabled { pointer-events: none; }
 .canButton:hover { scale: 1.035; }
 .canButton:active { scale: 1.01; }
-.can { display: block; width: 100%; height: 100%; filter: drop-shadow(9px 5px 5px #220f3540); }
+.can { display: block; width: 100%; height: 100%; }
 .condensation { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .touchHint { position: absolute; bottom: 1%; left: 50%; translate: -50% 0; white-space: nowrap; border: 1px solid #edc088; border-radius: 12px; padding: 6px 12px; color: #ffe4af; background: #422850e8; font-size: 10px; opacity: 0; transition: opacity .2s; box-shadow: 0 2px 0 #21142c; }
 .canButton:hover .touchHint, .canButton:focus-visible .touchHint { opacity: 1; }

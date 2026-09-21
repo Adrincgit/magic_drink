@@ -60,6 +60,9 @@ test('navigation, languages and user-initiated audio work; navigation remains ab
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page.locator('[data-chapter="2"] h2')).toContainText('This is Hexy.');
   await expect(page.locator('#festival h2')).toContainText('Magic Drink');
+  // Finish the user-triggered Lenis journey before the test's native scroll jump.
+  // Otherwise its final interpolation frame can overwrite that forced position.
+  await expect(page.locator('html')).not.toHaveClass(/lenis-scrolling/);
   await goWorld(page, 0.49);
   const nav = page.locator('header').getByRole('button', { name: 'EN', exact: true });
   await nav.click({ trial: true });

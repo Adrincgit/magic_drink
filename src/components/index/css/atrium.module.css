@@ -1,0 +1,62 @@
+.room { background: #775269 url('/image/journey/wonderpop-atrium-v15.webp') center / cover; }
+.entrance { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; max-width: none; z-index: 7; transform-origin: 50% 55%; pointer-events: none; }
+.intro.intro { top: 15%; left: 6%; width: min(400px, 28vw); }
+.intro.intro h2 { font-size: clamp(36px, 3.4vw, 56px); text-shadow: 0 2px 0 #503352, 0 4px 14px #301737a8; }
+.directoryWrap { position: absolute; left: 50%; bottom: 145px; translate: -50% 0; width: min(800px, 82vw); z-index: 10; pointer-events: auto; }
+.directory { position: relative; padding: 18px 22px 12px; color: #ffefd2; border: 3px solid #cea053; border-radius: 24px 24px 12px 12px; background: linear-gradient(125deg, #79517d, #51334e 70%); box-shadow: inset 0 0 0 3px #32203f, inset 0 0 0 5px #d6b478, 0 6px 0 #34223c, 0 9px 0 #b18b52, 0 13px 18px #2c173459; isolation: isolate; }
+.directory:before { content: ''; position: absolute; z-index: -1; left: 15%; right: 15%; top: 100%; height: 37px; background: linear-gradient(90deg, #d6ad60 0 2%, #4d3051 2% 4%, transparent 4% 96%, #4d3051 96% 98%, #d6ad60 98%); }
+.directory:after { content: ''; position: absolute; left: 10%; right: 10%; top: calc(100% + 33px); height: 12px; background: radial-gradient(ellipse, #321d3e80, transparent 70%); }
+.directoryHeading { display: flex; justify-content: center; align-items: center; gap: 22px; text-align: center; margin-bottom: 14px; }
+.directoryHeading > span { color: #ffda77; font-size: 30px; text-shadow: 0 2px #392340; }
+.directory small { display: block; font: 500 11px/1.5 Inter, sans-serif; }
+.directoryHeading small { font-size: 8px; letter-spacing: 2.8px; color: #ffe7a8; }
+.directory h2 { font-size: clamp(24px, 2.4vw, 34px); margin-top: 4px; }
+.directory nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.directory nav a { display: flex; align-items: center; gap: 8px; padding: 13px 10px; border: 1px solid #c39163; border-radius: 5px 12px 5px 5px; background: linear-gradient(135deg, #fff1ca, #f4d6ad); color: #533750; box-shadow: 0 3px 0 #301d37; transition: transform .15s, background .15s; }
+.directory nav a:hover { transform: translateY(-3px); background: #fff4d1; }
+.directory nav a strong { font: 700 14px/1.4 Inter, sans-serif; }
+.directory nav a small { font-size: 10px; }
+.directory nav b { margin-left: auto; font-size: 17px; }
+.directory nav img { flex: 0 0 35px; width: 35px; height: 35px; object-fit: contain; }
+.directory > button { display: block; margin: 13px auto 0; padding: 3px 14px; min-height: 30px; background: transparent; color: #ffedcb; border: 0; cursor: pointer; font: 500 11px Inter, sans-serif; text-decoration: underline; text-underline-offset: 4px; }
+.directory > button span { margin-left: 10px; color: #ffcf6a; }
+.guide { padding: 0; border: 0; background: transparent; color: #56394e; width: min(560px, calc(100vw - 30px)); max-height: 85svh; overflow: auto; overscroll-behavior: contain; pointer-events: auto; }
+.guide::backdrop { background: #261731ad; backdrop-filter: blur(4px); }
+.guidePaper { padding: 35px; border: 4px double #8c5968; border-radius: 8px 28px 8px 8px; background: #ffefcf; }
+.guidePaper > small { font: 700 9px Inter, sans-serif; letter-spacing: 2px; }
+.guidePaper h2 { font-size: 36px; margin: 12px 20px 22px 0; color: #57345a; }
+.guide .close { position: absolute; right: 16px; top: 14px; width: 38px; height: 38px; border: 1px solid #926177; border-radius: 50%; background: #634263; color: #ffefcf; font-size: 25px; cursor: pointer; }
+.guide details { border-top: 1px solid #a97f6866; padding: 15px 0; font: 500 13px/1.65 Inter, sans-serif; }
+.guide summary { display: flex; justify-content: space-between; gap: 12px; cursor: pointer; font-weight: 700; list-style: none; }
+.guide summary::-webkit-details-marker { display: none; }
+.guide details[open] summary span { rotate: 45deg; }
+.guide details p { margin: 10px 0 0; }
+.festivalLink { display: inline-block; margin-top: 12px; border-bottom: 1px solid #94667f; font: 700 12px/2 Inter, sans-serif; }
+.guide footer { text-align: right; margin-top: 20px; font: italic 600 15px Georgia, serif; opacity: .65; }
+@media (max-width: 700px) {
+  .intro.intro { left: 25px; top: 125px; width: min(290px, calc(100% - 50px)); }
+  .intro.intro h2 { font-size: 34px; }
+  .directoryWrap { bottom: 145px; width: calc(100% - 36px); }
+  .directory { padding: 14px 16px 8px; }
+  .directoryHeading { gap: 12px; margin-bottom: 10px; }
+  .directory h2 { font-size: 24px; }
+  .directory nav { grid-template-columns: 1fr; gap: 6px; }
+  .directory nav a { padding: 7px 12px; }
+  .directory nav a span { display: flex; flex: 1; justify-content: space-between; gap: 6px; align-items: center; }
+  .directory nav a strong { font-size: 12px; }
+  .directory nav a small { font-size: 9px; max-width: 76px; text-align: right; }
+  .directory nav img { flex-basis: 28px; width: 28px; height: 28px; }
+  .directory > button { margin-top: 8px; }
+  .guidePaper { padding: 27px 22px; }
+  .guidePaper h2 { font-size: 29px; }
+}
+@media (max-height: 650px) and (min-width: 701px) { .directoryWrap { bottom: 115px; } .directory { padding-top: 12px; } }
+@media (prefers-reduced-motion: no-preference) {
+  :global([data-journey]:has([data-compact-player])) .directoryWrap { bottom: 170px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro.intro { position: relative; inset: auto; width: auto; }
+  .directoryWrap { position: relative; inset: auto; translate: none; width: min(800px, calc(100% - 40px)); margin: 70px auto 160px; opacity: 1; visibility: visible; }
+  .directory { transform: none !important; }
+  .entrance { display: none; }
+}

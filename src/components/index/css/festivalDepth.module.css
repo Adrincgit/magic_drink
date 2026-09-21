@@ -3,7 +3,7 @@
   top: 9%;
   left: 82%;
   width: clamp(170px, 26svh, 340px);
-  z-index: 3;
+  z-index: 1;
 }
 .airship img {
   width: 100%;

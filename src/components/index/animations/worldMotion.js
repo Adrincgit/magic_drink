@@ -26,14 +26,12 @@ export function createWorldDirector(root) {
   const interior = query('[data-world-interior]');
   const atriumWorld = query('[data-atrium-world]');
   const atrium = query('[data-atrium]');
-  const atriumGarden = query('[data-atrium-garden]');
-  const atriumBar = query('[data-atrium-bar]');
+  const entrance = query('[data-atrium-entrance]');
   const pendants = query('[data-pendants]');
   const insideLeaves = query('[data-inside-leaves]');
   const closing = query('[data-world-scene="closing"]');
   const display = query('[data-closing-display]');
   const passingLeaves = query('[data-passing-leaves]');
-  const doorLight = query('[data-door-light]');
   const footer = query('[data-world-footer]');
   const rail = query('[data-world-rail]');
   const label = query('[data-world-label]');
@@ -54,14 +52,12 @@ export function createWorldDirector(root) {
     interior,
     atriumWorld,
     atrium,
-    atriumGarden,
-    atriumBar,
+    entrance,
     pendants,
     insideLeaves,
     closing,
     display,
     passingLeaves,
-    doorLight,
     footer,
     rail,
     ...copies,
@@ -149,30 +145,29 @@ export function createWorldDirector(root) {
       // Reveal a new, already centered view under an opaque canopy. Its camera
       // only advances: the building never shrinks or slides in from the concert.
       if (active(0.59, 0.86)) {
-        gsap.set(plaza, { autoAlpha: phase(r, 0.613, 0.619) * (1 - phase(r, 0.815, 0.853)) });
+        const throughDoor = garden.dataset.renderer === 'webgl';
+        gsap.set(plaza, { autoAlpha: phase(r, 0.613, 0.619) * (1 - phase(r, throughDoor ? 0.852 : 0.817, 0.858)) });
         plaza.dataset.worldActive = String(r > 0.6 && r < 0.86 && !document.hidden);
         copy('plaza', phase(r, 0.642, 0.667) * (1 - phase(r, 0.711, 0.742)), -30 * walk);
       }
 
       if (active(0.78, 1)) {
-        const indoors = phase(r, 0.8, 0.858);
-        const indoorTravel = phase(r, 0.811, 1);
+        const indoors = phase(r, 0.785, 0.803);
+        const indoorTravel = phase(r, 0.84, 0.96);
         gsap.set(interior, { autoAlpha: indoors });
         interior.dataset.worldActive = String(r > 0.79 && !document.hidden);
         // Shared zoom and common vanishing point keep every object grounded.
+        const threshold = phase(r, .815, .854);
         gsap.set(atriumWorld, {
-          scale: 1.01 + 0.12 * indoorTravel,
-          x: -width * 0.022 * indoorTravel,
+          scale: .68 + .33 * threshold + 0.075 * indoorTravel,
+          x: 0,
+          y: -height * .16 * (1 - phase(r, .845, .878)),
         });
-        gsap.set(atrium, { scale: 1.03 + 0.025 * indoorTravel });
-        gsap.set(atriumGarden, { scale: 1.03 + 0.065 * indoorTravel });
-        gsap.set(atriumBar, { scale: 1.03 + 0.1 * indoorTravel });
+        gsap.set(atrium, { scale: 1 });
+        gsap.set(entrance, { scale: 1 + 1.35 * phase(r, .85, .903), autoAlpha: 1 - phase(r, .885, .906) });
         gsap.set(pendants, { scale: 1 + 0.23 * indoorTravel, y: -height * 0.045 * indoorTravel });
         gsap.set(insideLeaves, { scale: 1 + 0.34 * indoorTravel, x: width * 0.09 * indoorTravel });
-        copy('interior', phase(r, 0.844, 0.867) * (1 - phase(r, 0.895, 0.92)), 0);
-        // Warm entrance light hides the exterior/interior dissolve at the door.
-        const light = phase(r, 0.8, 0.827) * (1 - phase(r, 0.837, 0.869));
-        gsap.set(doorLight, { opacity: light });
+        copy('interior', phase(r, 0.86, 0.875) * (1 - phase(r, 0.897, 0.925)), 0);
       }
 
       if (active(0.89, 1)) {
@@ -180,8 +175,8 @@ export function createWorldDirector(root) {
         gsap.set(closing, { autoAlpha: finalReveal });
         closing.dataset.worldActive = String(r > 0.89 && !document.hidden);
         gsap.set(display, {
-          scale: 0.82 + 0.18 * finalReveal,
-          y: height * 0.055 * (1 - finalReveal),
+          scale: 1,
+          y: height * 0.025 * (1 - finalReveal),
           x: 0,
         });
         copy('closing', phase(r, 0.922, 0.959), 10 * (1 - finalReveal));
@@ -209,12 +204,12 @@ export function createWorldDirector(root) {
       const nextLabel =
         r < 0.62
           ? '04 / MAGIC DRINK DAY'
-          : r < 0.915
+          : r < 0.86
             ? '05 / WONDERPOP PLAZA'
-            : '06 / MAGIC DRINK';
+            : '06 / WONDERPOP PLAZA';
       if (label.textContent !== nextLabel) label.textContent = nextLabel;
       root.dataset.worldChapter =
-        r < 0.36 ? 'opening' : r < 0.62 ? 'festival' : r < 0.915 ? 'wonderpop' : 'original';
+        r < 0.36 ? 'opening' : r < 0.62 ? 'festival' : r < 0.86 ? 'wonderpop' : 'atrium';
       previous = r;
     },
   };

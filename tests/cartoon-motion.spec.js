@@ -11,15 +11,21 @@ test('smaller can keeps its foot on the table through hover, scroll and viewport
     const geometry = () => page.evaluate(() => {
       const can = document.querySelector('[data-can-button]').getBoundingClientRect();
       const table = document.querySelector('[data-hero-table]').getBoundingClientRect();
-      return { height: can.height, foot: can.y + can.height * .94, tableY: table.y, deltaX: can.x + can.width / 2 - table.x, deltaY: can.y + can.height * .94 - table.y, tableHeight: table.height };
+      const contact = document.querySelector('[data-can-contact]').getBoundingClientRect();
+      const foot = can.y + can.height * .934;
+      return { height: can.height, foot, contactTop: contact.top, contactBottom: contact.bottom, tableY: table.y, deltaX: can.x + can.width / 2 - table.x, deltaY: foot - table.y, tableHeight: table.height };
     });
     const before = await geometry();
     expect(before.height / height).toBeCloseTo(ratio, 2);
     expect(before.deltaY).toBeGreaterThan(0);
     expect(before.deltaY / before.tableHeight).toBeLessThan(.18);
+    expect(before.contactTop).toBeLessThan(before.foot);
+    expect(before.contactBottom).toBeGreaterThan(before.foot);
     await page.locator('[data-can-button]').hover();
     await page.waitForTimeout(400);
     const hovered = await geometry();
+    expect(hovered.contactTop).toBeLessThan(hovered.foot);
+    expect(hovered.contactBottom).toBeGreaterThan(hovered.foot);
     // Pointer parallax moves can and table together; hover grows from the foot.
     expect(hovered.deltaY).toBeCloseTo(before.deltaY, 0);
     expect(hovered.deltaX).toBeCloseTo(before.deltaX, 0);

@@ -198,11 +198,11 @@ export function mountJourney(root, onChapter) {
   configureScroll();
   root.dataset.ready = 'true';
   const initialChapter = { '#ciudad': 0.45, '#hexy': 0.87 }[location.hash];
-  const initialWorld = { '#festival': 0.49, '#wonderpop': 0.68, '#la-original': 1 }[location.hash];
+  const initialWorld = { '#festival': 0.49, '#wonderpop': 0.68, '#directorio-wonderpop': 1, '#la-original': 1 }[location.hash];
   if (initialWorld !== undefined) {
     requestAnimationFrame(() => {
       if (disposed) return;
-      if (reduced.matches) query(location.hash).scrollIntoView();
+      if (reduced.matches) (initialWorld === 1 ? query('[data-world-scene="closing"]') : query(location.hash)).scrollIntoView();
       else window.scrollTo({ top: start + initialWorld * distance, behavior: 'instant' });
     });
   }
