@@ -37,7 +37,7 @@ test('the entrance reveals the atrium through an expanding doorway and reverses 
     await goWorld(page, progress);
     await expect(garden).toHaveAttribute('data-renderer', 'webgl');
     expect(await garden.evaluate(el => getComputedStyle(el).clipPath)).toContain('evenodd');
-    await expect(page.locator('[data-atrium]')).toBeVisible();
+    await expect(page.locator('[data-atrium-engine]')).toBeVisible();
   }
   await goWorld(page, .878);
   await expect(garden).toBeHidden();
@@ -62,16 +62,19 @@ test('the plaza directory, guide and keyboard work on desktop, mobile, English a
     await expect(directory).toBeVisible();
     const links = await directory.getByRole('link').evaluateAll(els => els.map(el => el.getAttribute('href')));
     expect(links).toEqual(['#galeria-wonderpop', '#galeria-wonderpop', '#galeria-wonderpop']);
-    const box = await page.locator('[data-atrium-directory]').boundingBox();
-    expect(box.x).toBeGreaterThanOrEqual(0);
-    expect(box.x + box.width).toBeLessThanOrEqual(width);
-    expect(box.y).toBeGreaterThan(80);
-    expect(box.y + box.height).toBeLessThan(height - 80);
+    for (const control of await page.locator('[data-atrium-anchor]').all()) {
+      const box = await control.boundingBox();
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(width);
+      expect(box.y).toBeGreaterThan(80);
+      expect(box.y + box.height).toBeLessThan(height - 80);
+    }
     const button = page.getByRole('button', { name: 'Preguntas de la plaza' });
     await button.focus();
     await page.keyboard.press('Enter');
     const guide = page.getByRole('dialog');
     await expect(guide).toBeVisible();
+    expect((await page.locator('[data-stage]').boundingBox()).y).toBe(0);
     const musicQuestion = guide.locator('details').filter({ hasText: '¿Dónde puedo escuchar a Hexy?' });
     if (!(await musicQuestion.evaluate(el => el.open))) await musicQuestion.locator('summary').click();
     await expect(guide.getByText(/Su música tiene su propio espacio/)).toBeVisible();
@@ -104,8 +107,10 @@ test('music can continue in the plaza without covering directory or footer contr
       if (await link.isVisible()) await link.click({ trial: true });
     }
     const player = await page.locator('[data-compact-player]').boundingBox();
-    const directory = await page.locator('[data-atrium-directory]').boundingBox();
-    expect(directory.y + directory.height).toBeLessThan(player.y);
+    for (const control of await page.locator('[data-atrium-anchor]').all()) {
+      const box = await control.boundingBox();
+      expect(box.y + box.height).toBeLessThan(player.y);
+    }
     expect(await page.locator('audio').evaluate(el => el.paused)).toBe(false);
   }
 });

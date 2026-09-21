@@ -1,25 +1,41 @@
 .trigger { display: inline-flex; align-items: center; justify-content: center; gap: 8px; color: #fff0cf; border: 1px solid #dfb479 !important; border-radius: 7px 15px 7px 7px; padding: 10px 16px; min-height: 40px; background: #573650; font: 600 11px Inter, sans-serif !important; box-shadow: 0 3px 0 #2e1c37; }
+.physical { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 100%; flex: 1; padding: 0; background: transparent; color: #795368 !important; font: 700 clamp(8px, .7vw, 12px) Inter, sans-serif !important; }
+.physical svg { flex: 1 1 0; min-height: 0; width: 50%; max-height: 40%; }
+.physical { min-height: 0; white-space: nowrap; overflow: hidden; }
 .trigger > span { color: #ffde7e; font-size: 19px; }
 .dialog { padding: 0; width: min(610px, calc(100vw - 24px)); max-height: 88svh; overflow: auto; background: transparent; border: 0; color: #613a58; pointer-events: auto; overscroll-behavior: contain; }
-.dialog::backdrop { background: #251332b8; backdrop-filter: blur(5px); }
-.paper { position: relative; padding: 27px 30px 20px; border: 5px double #9e6c74; border-radius: 12px 28px 10px 10px; background: linear-gradient(130deg, #fff2cd, #eed0a7); box-shadow: inset 0 0 32px #b27b4c26; }
+.dialog::backdrop { background: #25133288; backdrop-filter: blur(3px); }
+.paper { position: relative; padding: 27px 30px 20px; border: 5px double #9e6c74; border-radius: 12px 28px 10px 10px; background: linear-gradient(90deg, transparent 49.7%, #b9937129 50%, #fff3d440 50.3%, transparent 51%), linear-gradient(130deg, #fff2cd, #eed0a7); box-shadow: inset 0 0 32px #b27b4c26; }
 .paper > small { font: 700 9px Inter, sans-serif; letter-spacing: 3px; }
 .paper h2 { margin: 14px 26px 8px 0; font: 32px/1.05 BakeSoda, sans-serif; }
 .paper p { font: 12px/1.6 Inter, sans-serif; }
 .close { position: absolute; right: 12px; top: 12px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid #c0936f !important; color: #ffefd4 !important; background: #62405f; font-size: 24px !important; }
-.plan { position: relative; margin: 18px 0; height: 235px; }
-.plan svg { width: 100%; height: 100%; filter: drop-shadow(0 5px 0 #9f6d794d); }
-.plan button { position: absolute; left: 50%; translate: -50% 0; display: flex; align-items: center; justify-content: center; gap: 8px; background: #765478; color: #ffe7b8; border: 2px solid #a87464 !important; border-radius: 6px; padding: 10px 16px; font: 600 12px Inter, sans-serif; box-shadow: 0 4px 0 #5a3859; min-width: 180px; }
-.plan button:hover { background: #624064; }
-.plan b { color: #ffdf77; font: 20px BakeSoda; }
-.plan small { position: absolute; top: calc(100% + 10px); color: #754b62; font: 800 8px Inter, sans-serif; letter-spacing: 1px; white-space: nowrap; }
-.atrium { bottom: 18px; }
-.gallery { top: 24px; }
-.flowers { position: absolute; left: 12%; top: 52%; color: #be7b86; font-size: 26px; }
-.destinations { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.destinations button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: #f9e4bf; border: 1px solid #b48a70 !important; border-radius: 5px 13px 5px 5px; padding: 10px 5px; font: 600 10px Inter, sans-serif !important; color: #674362; }
-.destinations button:hover { background: #fff3ce; }
-.destinations img { object-fit: contain; }
-.destinations span { color: #8c606f; }
-.note { margin-top: 18px; text-align: center; color: #8a6675; font-size: 10px !important; }
-@media (max-width: 700px) { .paper { padding: 24px 16px 14px; } .paper h2 { font-size: 28px; } .plan { height: 220px; } .flowers { left: 5%; } }
+
+.plan { position: relative; margin: 12px auto 0; width: 100%; aspect-ratio: 500 / 430; }
+.plan > svg { display: block; width: 100%; height: 100%; }
+.plan > button { position: absolute; left: 50%; translate: -50% 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; background: #fff0ce; color: #664459; border: 0 !important; padding: 5px 10px; font: 700 12px Inter, sans-serif; min-width: 120px; }
+.plan > button:hover { color: #a56570; }
+.plan > button[aria-current]::before { content: ''; position: absolute; right: calc(100% - 6px); top: 42%; width: 7px; height: 7px; border-radius: 50%; background: #ae607c; box-shadow: 0 0 0 4px #ae607c20; }
+.plan b { color: #9e735c; font: 18px BakeSoda; }
+.plan small { font: 800 7px Inter, sans-serif; letter-spacing: 1px; white-space: nowrap; }
+.atrium { top: 53%; }
+.gallery { top: 31%; }
+.entry { position: absolute; bottom: 4%; left: 50%; translate: -50% 0; font: 700 8px Inter, sans-serif; letter-spacing: 2px; }
+.destinations { position: absolute; left: 12%; right: 12%; top: 6%; height: 25%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+.destinations button { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: #f9e4bf; border: 2px solid #a78379 !important; border-radius: 35% 35% 2px 2px; padding: 7px 4px; font: 600 10px Inter, sans-serif !important; color: #674362; }
+.destinations button::after { content: ''; position: absolute; width: 20%; height: 5px; bottom: -4px; background: #fff0ce; border: 1px solid #af8976; }
+.destinations button:hover { background: #fff7da; box-shadow: 0 0 0 3px #c8947840; }
+.destinations img { object-fit: contain; width: 23px; height: 23px; }
+.destinations span { display: none; }
+.note { margin-top: 10px; text-align: center; color: #8a6675; font-size: 10px !important; }
+.physical.physical { padding: 0 !important; min-height: 0; border: 0 !important; border-radius: 0; box-shadow: none; background: transparent !important; }
+.physical.physical:hover { background: #cda67622 !important; }
+@media (max-width: 700px) {
+  .paper { padding: 24px 12px 14px; }
+  .paper h2 { font-size: 26px; }
+  .paper p { font-size: 10px; }
+  .plan > button { font-size: 10px; min-width: 92px; gap: 1px; padding: 2px 5px; }
+  .plan b { font-size: 14px; }
+  .destinations button { font-size: 8px !important; gap: 2px; }
+  .destinations img { width: 20px; height: 20px; }
+}

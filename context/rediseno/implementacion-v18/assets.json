@@ -1,0 +1,29 @@
+[
+  {
+    "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-675023d3-ab35-4b1e-a066-99312e7e965a.png",
+    "output": "public/image/journey/atrium-marble-v18.webp",
+    "bytes": 384376
+  },
+  {
+    "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-428e5108-6726-493b-aa81-4217d7badd3f.png",
+    "output": "public/image/journey/atrium-facade-v18.webp",
+    "bytes": 567436
+  },
+  {
+    "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-95f433a5-38e4-4094-9a2a-3ba0ec8f1fe8.png",
+    "output": "public/image/journey/atrium-lectern-v18.webp",
+    "bytes": 199088,
+    "alpha": {
+      "min": 0,
+      "max": 254,
+      "sum": 173624505,
+      "squaresSum": 43609552255,
+      "mean": 110.38748741149902,
+      "stdev": 124.66282175242155,
+      "minX": 0,
+      "minY": 32,
+      "maxX": 499,
+      "maxY": 94
+    }
+  }
+]

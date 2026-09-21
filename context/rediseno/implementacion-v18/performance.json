@@ -1,0 +1,30 @@
+{
+  "environment": "Local Chrome headless, 390x844, DPR2, touch emulation, CPU 4x, decoded architectural textures. Not a physical phone or a cold network test.",
+  "periods": {
+    "walk": {
+      "frames": 267,
+      "medianMs": 24.3,
+      "p95Ms": 36.3,
+      "over50Ms": 2
+    },
+    "rest": {
+      "frames": 116,
+      "medianMs": 18.2,
+      "p95Ms": 24.3,
+      "over50Ms": 0
+    },
+    "reverse": {
+      "frames": 278,
+      "medianMs": 24.3,
+      "p95Ms": 30.9,
+      "over50Ms": 0
+    }
+  },
+  "longTasksMs": [
+    812,
+    53
+  ],
+  "horizontalOverflow": false,
+  "stageScroll": 0,
+  "renderer": "webgl"
+}

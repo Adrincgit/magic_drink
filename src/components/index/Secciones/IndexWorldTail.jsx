@@ -4,7 +4,7 @@ import GardenWorld from './GardenWorld';
 import DJSequence from './DJSequence';
 import FestivalCrowdMotion from './FestivalCrowdMotion';
 import AtriumDirectory from './AtriumDirectory';
-import AtriumLife from './AtriumLife';
+import AtriumWorld from './AtriumWorld';
 import WonderPopGallery from './WonderPopGallery';
 import styles from '../css/indexWorldTail.module.css';
 import atriumStyles from '../css/atrium.module.css';
@@ -154,54 +154,10 @@ function IndexWorldTail({ en = false }) {
 
       <div className={`${styles.interior} ${atriumStyles.room}`} data-world-interior aria-hidden="true">
         <div className={styles.atriumWorld} data-atrium-world>
-          <img
-            className={styles.atrium}
-            data-atrium
-            src={`${art}wonderpop-atrium-v15.webp`}
-            onError={event => { const image = event.currentTarget; if (!image.dataset.fallback) { image.dataset.fallback = 'true'; image.src = `${art}wonderpop-atrium.webp`; } }}
-            alt=""
-            width="1536"
-            height="1024"
-            loading="eager"
-            fetchpriority="low"
-          />
-        </div>
-        <div className={styles.pendants} data-pendants data-look="near">
-          <img
-            src={`${art}atrium-pendants-v2.webp`}
-            width="1536"
-            height="1024"
-            alt=""
-            loading="lazy"
-          />
-        </div>
-        <div className={styles.interiorRays}>
-          <i />
-          <i />
-          <i />
-        </div>
-        <div className={styles.interiorMotes}>
-          {Array.from({ length: 24 }, (_, i) => (
-            <i
-              key={i}
-              style={{ '--i': i, left: `${(i * 37) % 100}%`, top: `${(i * 29) % 100}%` }}
-            />
-          ))}
+          <AtriumWorld />
         </div>
         <div className={styles.interiorShade} />
-        <img className={atriumStyles.entrance} data-atrium-entrance src={`${art}wonderpop-entry-v15.webp`} alt="" width="1536" height="1024" loading="eager" fetchpriority="low" />
-        <img
-          className={styles.insideLeaves}
-          data-inside-leaves
-          data-look="near"
-          src={`${art}foliage.webp`}
-          alt=""
-          width="1254"
-          height="1254"
-          loading="lazy"
-        />
       </div>
-      <AtriumLife en={en} />
       <section
         className={`${styles.copy} ${styles.interiorCopy} ${atriumStyles.intro}`}
         data-world-copy="interior"

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { wonderpopCollection } from '../../../data/wonderpopCollection';
 import { SceneButton, SceneLabel } from '../../global/SceneControls';
 import ExhibitScreen from './ExhibitScreen';
-import MagicBunny from './MagicBunny';
 import PlazaMap from './PlazaMap';
 import usePlazaDialog from './usePlazaDialog';
 import styles from '../css/wonderpopGallery.module.css';
@@ -45,7 +44,6 @@ export default function WonderPopGallery({ en }) {
       <div className={styles.warmGlass} /><div className={styles.shopLight} />
     </div>
     <div className={styles.decor} data-gallery-decor aria-hidden="true">
-      <MagicBunny en={en} className={styles.galleryBunny} from={1.07} to={1.405} offset={5} />
       <img className={styles.leaves} data-gallery-leaves src="/image/journey/potted-jasmine-v13.webp" alt="" width="1024" height="1024" loading="lazy" />
       <div className={styles.notes}>{['♪', '♫', '✦', '♪', '♡'].map((note, i) => <span key={i} style={{ '--i': i }}>{note}</span>)}</div>
     </div>
@@ -82,7 +80,7 @@ export default function WonderPopGallery({ en }) {
         </div>
         <span className={styles.srOnly} role="status">{title}, {index + 1} {en ? 'of' : 'de'} {items.length}</span>
       </div>
-      <div className={styles.actions}><PlazaMap en={en} /><button type="button" data-go-world=".96">{en ? 'Back to the atrium' : 'Volver al atrio'} <span aria-hidden="true">↶</span></button></div>
+      <div className={styles.actions}><PlazaMap en={en} /><button type="button" data-go-world=".99">{en ? 'Back to the atrium' : 'Volver al atrio'} <span aria-hidden="true">↶</span></button></div>
     </div>
     <dialog ref={dialog} className={styles.detail} data-collection-detail data-lenis-prevent aria-labelledby="collection-detail-title" onClick={event => { if (event.target === event.currentTarget) modal.close(); }}>
       <div className={styles.detailPaper}>

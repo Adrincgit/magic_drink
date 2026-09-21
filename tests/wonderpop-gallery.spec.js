@@ -30,29 +30,13 @@ test('the map selects a real showcase, locks its background and returns to the a
   await gallery.getByRole('button', { name: 'Escucha a Hexy' }).click();
   await expect.poll(() => page.locator('audio').evaluate(el => el.paused)).toBe(false);
   await gallery.getByRole('button', { name: 'Volver al atrio' }).click();
-  await arrive(page, .96);
+  await arrive(page, .99);
   await expect(page.locator('[data-atrium-directory]')).toBeVisible();
   expect(await page.locator('audio').evaluate(el => el.paused)).toBe(false);
   await page.getByRole('navigation', { name: 'Directorio de la plaza' }).getByRole('link', { name: /Magic Drink/ }).click();
   await arrive(page, 1.2);
   await expect(gallery.getByRole('button', { name: 'Magic Drink', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await expect(gallery.getByRole('link', { name: 'Conoce Magic Drink' })).toHaveAttribute('href', '/bebidas');
-});
-
-test('the bunny changes real animation cels without scrolling and rests outside its scene', async ({ page }) => {
-  await openLanding(page, '#directorio-wonderpop');
-  const bunny = page.locator('button[data-magic-bunny]');
-  await expect(bunny).toHaveAttribute('data-ready', 'true');
-  const pose = await bunny.getAttribute('data-pose');
-  const scroll = await page.evaluate(() => scrollY);
-  await expect.poll(() => bunny.getAttribute('data-pose')).not.toBe(pose);
-  expect(await page.evaluate(() => scrollY)).toBe(scroll);
-  await bunny.click();
-  await expect(bunny).toHaveAttribute('data-waving', 'true');
-  await goWorld(page, .49);
-  const resting = await bunny.getAttribute('data-pose');
-  await page.waitForTimeout(450);
-  await expect(bunny).toHaveAttribute('data-pose', resting);
 });
 
 test('showcase arrows wrap, details support Escape and WebGL has a working context-loss fallback', async ({ page }) => {
@@ -69,6 +53,7 @@ test('showcase arrows wrap, details support Escape and WebGL has a working conte
   const zoom = gallery.getByRole('button', { name: 'Ver detalle: Siempre cerca' });
   await zoom.click();
   await expect(page.getByRole('dialog')).toContainText('Siempre cerca');
+  expect((await page.locator('[data-stage]').boundingBox()).y).toBe(0);
   await page.keyboard.press('Escape');
   await expect(zoom).toBeFocused();
   await screen.locator('canvas').evaluate(canvas => {
@@ -91,12 +76,16 @@ test('all controls fit with music, short screens scroll the cabinet, and focus c
   await openLanding(page, '#hexy');
   await page.getByRole('button', { name: 'Reproducir No Brain, Just Vibes!' }).click();
   const gallery = page.locator(gallerySelector);
-  for (const [width, height] of [[1440, 900], [800, 900], [390, 844], [360, 740], [390, 640]]) {
+  for (const [width, height] of [[1440, 900], [2559, 1303], [800, 900], [390, 844], [360, 740], [390, 640]]) {
     await page.setViewportSize({ width, height });
     await goWorld(page, 1.4);
     await gallery.getByRole('button', { name: 'Hexy', exact: true }).click();
     const cabinet = gallery.locator('[data-gallery-cabinet]');
     const cabinetBox = await cabinet.boundingBox();
+    if (width > 1100) {
+      const surface = await gallery.evaluate(el => parseFloat(el.style.getPropertyValue('--counter-y')));
+      expect(Math.abs(cabinetBox.y + cabinetBox.height - surface)).toBeLessThan(1);
+    }
     const heading = await gallery.locator('h2').first().boundingBox();
     const map = gallery.getByRole('button', { name: 'Mapa de la plaza' });
     const mapBox = await map.boundingBox();
@@ -111,6 +100,8 @@ test('all controls fit with music, short screens scroll the cabinet, and focus c
     await gallery.getByRole('link', { name: 'Conoce a Hexy' }).click({ trial: true });
     await map.click();
     await expect(page.getByRole('dialog')).toBeVisible();
+    // The fractional runway height can put the final sticky edge < 1px above 0.
+    expect(Math.abs((await page.locator('[data-stage]').boundingBox()).y)).toBeLessThan(1);
     await page.keyboard.press('Escape');
     expect(await page.locator('[data-stage]').evaluate(el => el.scrollTop)).toBe(0);
     await page.locator('[data-world-footer] button').click({ trial: true });

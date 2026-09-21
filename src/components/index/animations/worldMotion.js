@@ -27,17 +27,10 @@ export function createWorldDirector(root) {
   const interior = query('[data-world-interior]');
   const atriumWorld = query('[data-atrium-world]');
   const atrium = query('[data-atrium]');
-  const entrance = query('[data-atrium-entrance]');
-  const pendants = query('[data-pendants]');
-  const insideLeaves = query('[data-inside-leaves]');
   const closing = query('[data-world-scene="closing"]');
   const display = query('[data-closing-display]');
   const passingLeaves = query('[data-passing-leaves]');
   const footer = query('[data-world-footer]');
-  const life = query('[data-atrium-life]');
-  const friends = query('[data-atrium-friends]');
-  const nearFriends = query('[data-atrium-near]');
-  const piers = [...root.querySelectorAll('[data-atrium-pier]')];
   const gallery = query('[data-world-scene="gallery"]');
   const galleryPlane = query('[data-gallery-plane]');
   const galleryDecor = query('[data-gallery-decor]');
@@ -58,14 +51,11 @@ export function createWorldDirector(root) {
     interior,
     atriumWorld,
     atrium,
-    entrance,
-    pendants,
-    insideLeaves,
     closing,
     display,
     passingLeaves,
     footer,
-    life, friends, nearFriends, ...piers, gallery, galleryPlane, galleryDecor, passage,
+    gallery, galleryPlane, galleryDecor, passage,
     ...copies,
   ];
 
@@ -158,29 +148,13 @@ export function createWorldDirector(root) {
 
       if (active(0.78, 1.12)) {
         const indoors = phase(r, 0.785, 0.803);
-        const indoorTravel = phase(r, 0.84, 0.96);
-        const turn = phase(r, 1.01, 1.075);
         gsap.set(interior, { autoAlpha: r < 1.075 ? indoors : 0 });
         interior.dataset.worldActive = String(r > 0.79 && r < 1.075 && !document.hidden);
-        // One room image covers the whole aperture. Its bottom stays beyond the
-        // viewport while approaching, so no second floor/background is exposed.
-        const threshold = phase(r, .815, .854);
-        gsap.set(atriumWorld, {
-          scale: 1 + .085 * threshold + .075 * indoorTravel + .06 * turn,
-          x: -width * .075 * turn,
-          y: -height * .025 * (1 - phase(r, .845, .878)) * threshold,
-        });
+        // The WebGL room (or its still fallback) owns the complete viewport.
+        // Its camera moves internally; the containing canvas must not scale.
+        gsap.set(atriumWorld, { scale: 1, x: 0, y: 0 });
         gsap.set(atrium, { scale: 1 });
-        gsap.set(entrance, { scale: 1 + 1.35 * phase(r, .85, .903), autoAlpha: 1 - phase(r, .885, .906) });
-        gsap.set(pendants, { scale: 1 + 0.23 * indoorTravel, y: -height * 0.045 * indoorTravel });
-        gsap.set(insideLeaves, { scale: 1 + 0.34 * indoorTravel, x: width * 0.09 * indoorTravel });
         copy('interior', phase(r, 0.86, 0.875) * (1 - phase(r, 0.897, 0.925)), 0);
-        gsap.set(life, { autoAlpha: phase(r, .865, .9) * (1 - phase(r, 1.04, 1.073)) });
-        life.inert = r < .88 || r >= 1.065;
-        life.setAttribute('aria-hidden', String(life.inert));
-        gsap.set(friends, { scale: 1 + .05 * indoorTravel, x: -width * .05 * turn, transformOrigin: '50% 60%' });
-        gsap.set(nearFriends, { x: -width * .26 * turn, scale: 1 + .08 * indoorTravel, transformOrigin: '15% 95%' });
-        piers.forEach((pier, i) => gsap.set(pier, { x: (i ? 1 : -1) * width * .07 * indoorTravel - width * .22 * turn, scale: 1 + .12 * indoorTravel }));
       }
 
       if (active(0.89, 1.12)) {
@@ -190,10 +164,10 @@ export function createWorldDirector(root) {
         closing.dataset.worldActive = String(r > 0.89 && r < 1.075 && !document.hidden);
         gsap.set(display, {
           scale: 1,
-          y: height * 0.025 * (1 - finalReveal),
-          x: -width * .06 * leave,
+          y: 0,
+          x: 0,
         });
-        copy('closing', phase(r, 0.922, 0.959) * (1 - leave), 10 * (1 - finalReveal));
+        copy('closing', phase(r, 0.922, 0.959) * (1 - leave), 0);
       }
 
       if (active(1, JOURNEY_END)) {
@@ -204,6 +178,12 @@ export function createWorldDirector(root) {
         gallery.dataset.worldActive = String(r >= 1.075 && !document.hidden);
         const arrive = phase(r, 1.075, 1.2);
         gsap.set(galleryPlane, { scale: 1.035 + .025 * arrive, x: width * .015 * (1 - arrive), transformOrigin: '50% 65%' });
+        // Match the painted marble surface at v=.688, including object-fit:
+        // cover and both image transforms. A viewport percentage alone floats
+        // the display above its counter on ultrawide screens.
+        const artHeight = Math.max(height, width / 1.5);
+        const counterY = height * .65 + (1.035 + .025 * arrive) * 1.19 * (-height * .15 + artHeight * .188);
+        gallery.style.setProperty('--counter-y', `${counterY}px`);
         gsap.set(galleryDecor, { x: -width * .02 * arrive, scale: 1 + .06 * arrive, transformOrigin: '50% 95%' });
         copy('gallery', phase(r, 1.095, 1.145), 14 * (1 - arrive));
         gsap.set(footer, { autoAlpha: phase(r, 1.355, 1.395) });

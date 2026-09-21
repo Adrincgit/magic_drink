@@ -92,8 +92,9 @@ test('new ambient movement continues at rest while depth follows scroll', async 
     );
   expect(new Set(distances.map((x) => Math.round(x))).size).toBe(3);
   await goWorld(page, 0.878);
-  const pendant = page.locator('[data-pendants] img');
-  const before = await pendant.evaluate((el) => getComputedStyle(el).transform);
-  await page.waitForTimeout(350);
-  expect(await pendant.evaluate((el) => getComputedStyle(el).transform)).not.toBe(before);
+  const atrium = page.locator('[data-atrium-engine]');
+  await expect(atrium).toHaveAttribute('data-renderer', 'webgl');
+  const before = await atrium.evaluate(el => el.atriumDiagnostics());
+  await expect.poll(() => atrium.evaluate(el => el.atriumDiagnostics().pendants)).not.toEqual(before.pendants);
+  expect(await atrium.evaluate(el => el.atriumDiagnostics().camera)).toEqual(before.camera);
 });

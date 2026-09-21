@@ -4,15 +4,10 @@ import PlazaMap, { chooseShowcase } from './PlazaMap';
 import usePlazaDialog from './usePlazaDialog';
 
 const destinations = [
-  { section: 'drink', name: 'Magic Drink', es: 'Conoce la bebida', en: 'Meet the drink', icon: 'can' },
-  { section: 'music', name: 'Hexy', es: 'Entra a su música', en: 'Step into her music', icon: 'music' },
-  { section: 'collection', name: 'Colecciones', enName: 'Collections', es: 'Hexy y los Bunnies', en: 'Hexy & the Bunnies', icon: 'bunny' },
+  { section: 'drink', name: 'Magic Drink' },
+  { section: 'music', name: 'Hexy' },
+  { section: 'collection', name: 'Colecciones', enName: 'Collections' },
 ];
-
-function DirectoryIcon({ kind }) {
-  const name = { can: 'lata', music: 'hexy', bunny: 'bolsa' }[kind];
-  return <img src={`/icons/icono_${name}.webp`} width="35" height="35" alt="" />;
-}
 
 export default function AtriumDirectory({ en }) {
   const dialog = useRef(null);
@@ -39,15 +34,13 @@ export default function AtriumDirectory({ en }) {
   ];
   return <>
     <div className={styles.directory} data-closing-display data-atrium-directory>
-      <div className={styles.directoryHeading}><span aria-hidden="true">✦</span><div><small>WONDERPOP PLAZA</small><h2>{en ? 'Pick a window to explore' : 'Elige un escaparate'}</h2></div><span aria-hidden="true">✦</span></div>
+      <div className={styles.directoryHeading}><h2>{en ? 'Explore the shop windows' : 'Acércate a los escaparates'}</h2></div>
       <nav aria-label={en ? 'Plaza directory' : 'Directorio de la plaza'}>
-        {destinations.map(destination => <a href="#galeria-wonderpop" data-go-world="1.2" onClick={event => chooseShowcase(event, destination.section)} key={destination.icon}>
-          <DirectoryIcon kind={destination.icon} />
-          <span><strong>{en && destination.enName ? destination.enName : destination.name}</strong><small>{en ? destination.en : destination.es}</small></span><b aria-hidden="true">→</b>
+        {destinations.map(destination => <a className={styles.storeSign} data-atrium-anchor={`door-${destination.section}`} href="#galeria-wonderpop" data-go-world="1.2" onClick={event => chooseShowcase(event, destination.section)} key={destination.section}>
+          <strong>{en && destination.enName ? destination.enName : destination.name}</strong><span className={styles.openStore}>{en ? 'Explore' : 'Explorar'} ↗</span>
         </a>)}
       </nav>
-      <div className={styles.directoryActions}><PlazaMap en={en} /><button ref={trigger} type="button" onClick={modal.open} aria-haspopup="dialog">{en ? 'Questions about the plaza' : 'Preguntas de la plaza'} <span aria-hidden="true">✧</span></button></div>
-      <span className={styles.nextGallery}>{en ? 'KEEP SCROLLING TO VISIT THE GALLERY' : 'SIGUE BAJANDO PARA RECORRER LA GALERÍA'} <span aria-hidden="true">↓</span></span>
+      <div className={styles.lectern} data-atrium-anchor="lectern"><PlazaMap en={en} physical /><button ref={trigger} type="button" onClick={modal.open} aria-haspopup="dialog">{en ? 'Questions about the plaza' : 'Preguntas de la plaza'} <span aria-hidden="true">✧</span></button></div>
     </div>
     <dialog ref={dialog} className={styles.guide} data-atrium-guide data-lenis-prevent aria-labelledby="atrium-guide-title" onClick={event => { if (event.target === event.currentTarget) modal.close(); }}>
       <div className={styles.guidePaper}>

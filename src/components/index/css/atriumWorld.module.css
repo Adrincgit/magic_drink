@@ -1,0 +1,6 @@
+.world { position: absolute; inset: 0; overflow: clip; background: #765773; }
+.fallback, .world canvas { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.world canvas { visibility: hidden; }
+.world[data-renderer='webgl'] canvas { visibility: visible; }
+.world[data-renderer='webgl'] .fallback { visibility: hidden; }
+@media (prefers-reduced-motion: reduce) { .world canvas { display: none; } .world .fallback { visibility: visible !important; } }

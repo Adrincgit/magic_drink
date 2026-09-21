@@ -5,10 +5,13 @@ export default function usePlazaDialog(ref) {
   const unlock = useCallback(() => { restore.current?.(); restore.current = null; }, []);
   const open = useCallback(() => {
     if (ref.current.open) return;
-    const previous = document.body.style.overflow;
+    // Lock the viewport. Overflow on body creates a new scroll container and
+    // makes the sticky illustrated stage jump above the visible document.
+    const viewport = document.documentElement;
+    const previous = viewport.style.overflow;
     ref.current.showModal();
-    document.body.style.overflow = 'hidden';
-    restore.current = () => { document.body.style.overflow = previous; };
+    viewport.style.overflow = 'hidden';
+    restore.current = () => { viewport.style.overflow = previous; };
   }, [ref]);
   const close = useCallback(() => { ref.current?.close(); unlock(); }, [ref, unlock]);
   useEffect(() => {
