@@ -107,8 +107,10 @@
   .record:hover, .record:active { scale: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  :global([data-journey][data-world-chapter='atrium']) .compact { bottom: 124px; }
+  :global([data-journey][data-world-chapter='atrium']) .compact,
+  :global([data-journey][data-world-chapter='gallery']) .compact { bottom: 124px; }
 }
 @media (prefers-reduced-motion: no-preference) and (max-width: 700px) {
-  :global([data-journey][data-world-chapter='atrium']) .compact { bottom: 104px; }
+  :global([data-journey][data-world-chapter='atrium']) .compact,
+  :global([data-journey][data-world-chapter='gallery']) .compact { bottom: 104px; }
 }

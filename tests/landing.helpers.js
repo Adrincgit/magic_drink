@@ -15,7 +15,7 @@ export async function goWorld(page, progress) {
       top:
         element.getBoundingClientRect().top +
         scrollY +
-        (element.offsetHeight - stage.offsetHeight) * p,
+        (element.offsetHeight - stage.offsetHeight) * p / Number(element.closest('[data-journey]').dataset.worldEnd || 1),
       behavior: 'instant',
     });
   }, progress);

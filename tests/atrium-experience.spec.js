@@ -61,7 +61,7 @@ test('the plaza directory, guide and keyboard work on desktop, mobile, English a
     const directory = page.getByRole('navigation', { name: 'Directorio de la plaza' });
     await expect(directory).toBeVisible();
     const links = await directory.getByRole('link').evaluateAll(els => els.map(el => el.getAttribute('href')));
-    expect(links).toEqual(['/bebidas', '/hexy', '/wonderpop-plaza']);
+    expect(links).toEqual(['#galeria-wonderpop', '#galeria-wonderpop', '#galeria-wonderpop']);
     const box = await page.locator('[data-atrium-directory]').boundingBox();
     expect(box.x).toBeGreaterThanOrEqual(0);
     expect(box.x + box.width).toBeLessThanOrEqual(width);

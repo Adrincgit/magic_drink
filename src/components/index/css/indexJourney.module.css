@@ -59,7 +59,7 @@
 }
 
 .runway {
-  height: 1040svh;
+  height: calc(100svh + 940svh * var(--journey-length, 1));
   position: relative;
 }
 
@@ -93,7 +93,8 @@
   top: 0;
   height: 100svh;
   min-height: 580px;
-  overflow: hidden;
+  /* Focus must never scroll the illustrated viewport independently of its camera. */
+  overflow: clip;
   isolation: isolate;
   background: #5c437b;
 }
@@ -743,7 +744,7 @@
 
 @media (max-width: 700px) {
   .runway {
-    height: 950svh;
+    height: calc(100svh + 850svh * var(--journey-length, 1));
   }
   .stage {
     min-height: 640px;

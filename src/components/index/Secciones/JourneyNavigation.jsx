@@ -1,13 +1,6 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import styles from '../css/journeyNavigation.module.css';
-
-// Arrival points and chapter boundaries share the full journey's 0–1 timeline.
-const stops = [0, .162, .3132, .49, .68, .88];
-const boundaries = [.0828, .2412, .36, .62, .86];
-const labels = {
-  es: ['MAGIC DRINK', 'LA CIUDAD', 'HEXY', 'MAGIC DRINK DAY', 'WONDERPOP PLAZA', 'EL ATRIO'],
-  en: ['MAGIC DRINK', 'THE CITY', 'HEXY', 'MAGIC DRINK DAY', 'WONDERPOP PLAZA', 'THE ATRIUM'],
-};
+import { JOURNEY_END, journeyChapters } from '../../../data/journeyChapters';
 
 function JourneyNavigation({ root, en }) {
   const bar = useRef(null);
@@ -15,14 +8,14 @@ function JourneyNavigation({ root, en }) {
   const finished = useRef(false);
   const [chapter, setChapter] = useState(0);
   const [atEnd, setAtEnd] = useState(false);
-  const names = labels[en ? 'en' : 'es'];
+  const names = journeyChapters.map(scene => scene[en ? 'en' : 'es']);
   useEffect(() => {
     const scene = root.current;
     const update = ({ detail: { progress } }) => {
-      const index = boundaries.filter(boundary => progress >= boundary).length;
-      bar.current.style.transform = `scaleX(${progress})`;
+      const index = journeyChapters.filter(scene => progress >= scene.from).length - 1;
+      bar.current.style.transform = `scaleX(${progress / JOURNEY_END})`;
       if (index !== current.current) { current.current = index; setChapter(index); }
-      const end = progress >= .985;
+      const end = progress >= JOURNEY_END - .015;
       if (end !== finished.current) { finished.current = end; setAtEnd(end); }
     };
     scene.addEventListener('journey:scene', update);
@@ -31,11 +24,11 @@ function JourneyNavigation({ root, en }) {
   }, [root]);
   return <nav className={styles.navigation} data-journey-navigation aria-label={en ? 'Journey scenes' : 'Escenas del recorrido'}>
     <span className={styles.label} data-journey-label>
-      <b>{String(chapter + 1).padStart(2, '0')}<small> / {String(stops.length).padStart(2, '0')}</small></b>
+      <b>{String(chapter + 1).padStart(2, '0')}<small> / {String(journeyChapters.length).padStart(2, '0')}</small></b>
       <span>{names[chapter]}</span>
     </span>
     <div className={styles.dots}>
-      {stops.map((progress, index) => <button key={progress} type="button" data-go-world={progress}
+      {journeyChapters.map(({ at }, index) => <button key={at} type="button" data-go-world={at}
         aria-label={names[index]} title={`${index + 1}. ${names[index]}`}
         aria-pressed={chapter === index} aria-current={chapter === index ? 'step' : undefined}>
         <i aria-hidden="true" />

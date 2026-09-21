@@ -1,0 +1,31 @@
+{
+  "environment": "Local Chrome headless, 390x844, DPR2, touch emulation, CPU 4x, music playing, decoded assets. Not a physical phone or cold network test.",
+  "periods": {
+    "atrium": {
+      "frames": 281,
+      "medianMs": 6.1,
+      "p95Ms": 12.2,
+      "over50Ms": 1
+    },
+    "crossing": {
+      "frames": 333,
+      "medianMs": 12.1,
+      "p95Ms": 30.3,
+      "over50Ms": 1
+    },
+    "gallery": {
+      "frames": 251,
+      "medianMs": 6.1,
+      "p95Ms": 18.2,
+      "over50Ms": 0
+    }
+  },
+  "longTasksMs": [],
+  "horizontalOverflow": false,
+  "stageScroll": 0,
+  "shader": {
+    "frames": 91,
+    "active": true,
+    "transition": 1
+  }
+}

@@ -1,4 +1,10 @@
 .room { background: #775269; }
+.passage { position: absolute; inset: 0; z-index: 11; opacity: 0; visibility: hidden; pointer-events: none; }
+.passage img { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: max(280vw, 280svh); height: auto; max-width: none; filter: blur(2px); }
+.directoryActions { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 17px; }
+.directoryActions > button:last-child { padding: 7px 0; min-height: 35px; color: #fff0cb; background: transparent; font: 500 11px Inter, sans-serif !important; text-decoration: underline; text-underline-offset: 4px; }
+.nextGallery { display: block; margin-top: 15px; text-align: center; font: 600 8px Inter, sans-serif; letter-spacing: 1.5px; color: #eacdab; }
+.nextGallery span { color: #ffdf8c; margin-left: 12px; }
 .entrance { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; max-width: none; z-index: 7; transform-origin: 50% 55%; pointer-events: none; }
 .intro.intro { top: 15%; left: 6%; width: min(400px, 28vw); }
 .intro.intro h2 { font-size: clamp(36px, 3.4vw, 56px); text-shadow: 0 2px 0 #503352, 0 4px 14px #301737a8; }
@@ -34,9 +40,13 @@
 .festivalLink { display: inline-block; margin-top: 12px; border-bottom: 1px solid #94667f; font: 700 12px/2 Inter, sans-serif; }
 .guide footer { text-align: right; margin-top: 20px; font: italic 600 15px Georgia, serif; opacity: .65; }
 @media (max-width: 700px) {
+  .directoryActions { gap: 12px; margin-top: 12px; }
+  .directoryActions > button { font-size: 9px !important; padding: 7px 8px; }
+  .directoryActions > button:last-child { font-size: 9px !important; }
+  .nextGallery { font-size: 6px; letter-spacing: .8px; margin-top: 12px; }
   .intro.intro { left: 25px; top: 125px; width: min(290px, calc(100% - 50px)); }
   .intro.intro h2 { font-size: 34px; }
-  .directoryWrap { bottom: 145px; width: calc(100% - 36px); }
+  .directoryWrap { top: 20%; bottom: auto; width: calc(100% - 36px); }
   .directory { padding: 14px 16px 8px; }
   .directoryHeading { gap: 12px; margin-bottom: 10px; }
   .directory h2 { font-size: 24px; }
@@ -51,10 +61,11 @@
   .guidePaper h2 { font-size: 29px; }
 }
 @media (max-height: 650px) and (min-width: 701px) { .directoryWrap { bottom: 115px; } .directory { padding-top: 12px; } }
-@media (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) and (min-width: 701px) {
   :global([data-journey]:has([data-compact-player])) .directoryWrap { bottom: 220px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .passage { display: none; }
   .intro.intro { position: relative; inset: auto; width: auto; }
   .directoryWrap { position: relative; inset: auto; translate: none; width: min(800px, calc(100% - 40px)); margin: 70px auto 160px; opacity: 1; visibility: visible; }
   .directory { transform: none !important; }

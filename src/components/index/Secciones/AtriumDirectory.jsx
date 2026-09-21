@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
 import styles from '../css/atrium.module.css';
+import PlazaMap, { chooseShowcase } from './PlazaMap';
+import usePlazaDialog from './usePlazaDialog';
 
 const destinations = [
-  { href: '/bebidas', name: 'Magic Drink', es: 'Conoce la bebida', en: 'Meet the drink', icon: 'can' },
-  { href: '/hexy', name: 'Hexy', es: 'Entra a su música', en: 'Step into her music', icon: 'music' },
-  { href: '/wonderpop-plaza', name: 'Magic Bunnies', es: 'Descubre la plaza', en: 'Explore the plaza', icon: 'bunny' },
+  { section: 'drink', name: 'Magic Drink', es: 'Conoce la bebida', en: 'Meet the drink', icon: 'can' },
+  { section: 'music', name: 'Hexy', es: 'Entra a su música', en: 'Step into her music', icon: 'music' },
+  { section: 'collection', name: 'Colecciones', enName: 'Collections', es: 'Hexy y los Bunnies', en: 'Hexy & the Bunnies', icon: 'bunny' },
 ];
 
 function DirectoryIcon({ kind }) {
@@ -15,14 +17,15 @@ function DirectoryIcon({ kind }) {
 export default function AtriumDirectory({ en }) {
   const dialog = useRef(null);
   const trigger = useRef(null);
+  const modal = usePlazaDialog(dialog);
   useEffect(() => {
     const root = trigger.current?.closest('[data-journey]');
     const leave = event => {
-      if (!event.detail.reduced && event.detail.progress < .9) dialog.current?.close();
+      if (!event.detail.reduced && (event.detail.progress < .9 || event.detail.progress > 1.065)) modal.close();
     };
     root?.addEventListener('journey:scene', leave);
     return () => root?.removeEventListener('journey:scene', leave);
-  }, []);
+  }, [modal.close]);
   const questions = en ? [
     ['What is WonderPop Plaza?', 'Magic Drink’s official shopping plaza. A place to explore its shops, music, games and Magic Bunnies.'],
     ['What can I find here?', 'Magic Drink, rabbit plush toys, clothing and accessories, all part of the same world. Choose a destination in the directory to keep exploring.'],
@@ -36,18 +39,19 @@ export default function AtriumDirectory({ en }) {
   ];
   return <>
     <div className={styles.directory} data-closing-display data-atrium-directory>
-      <div className={styles.directoryHeading}><span aria-hidden="true">✦</span><div><small>WONDERPOP PLAZA</small><h2>{en ? 'Where shall we go?' : '¿Por dónde empezamos?'}</h2></div><span aria-hidden="true">✦</span></div>
+      <div className={styles.directoryHeading}><span aria-hidden="true">✦</span><div><small>WONDERPOP PLAZA</small><h2>{en ? 'Pick a window to explore' : 'Elige un escaparate'}</h2></div><span aria-hidden="true">✦</span></div>
       <nav aria-label={en ? 'Plaza directory' : 'Directorio de la plaza'}>
-        {destinations.map(destination => <a href={destination.href} key={destination.icon}>
+        {destinations.map(destination => <a href="#galeria-wonderpop" data-go-world="1.2" onClick={event => chooseShowcase(event, destination.section)} key={destination.icon}>
           <DirectoryIcon kind={destination.icon} />
-          <span><strong>{destination.name}</strong><small>{en ? destination.en : destination.es}</small></span><b aria-hidden="true">↗</b>
+          <span><strong>{en && destination.enName ? destination.enName : destination.name}</strong><small>{en ? destination.en : destination.es}</small></span><b aria-hidden="true">→</b>
         </a>)}
       </nav>
-      <button ref={trigger} type="button" onClick={() => dialog.current.showModal()} aria-haspopup="dialog">{en ? 'Questions about the plaza' : 'Preguntas de la plaza'} <span aria-hidden="true">✧</span></button>
+      <div className={styles.directoryActions}><PlazaMap en={en} /><button ref={trigger} type="button" onClick={modal.open} aria-haspopup="dialog">{en ? 'Questions about the plaza' : 'Preguntas de la plaza'} <span aria-hidden="true">✧</span></button></div>
+      <span className={styles.nextGallery}>{en ? 'KEEP SCROLLING TO VISIT THE GALLERY' : 'SIGUE BAJANDO PARA RECORRER LA GALERÍA'} <span aria-hidden="true">↓</span></span>
     </div>
-    <dialog ref={dialog} className={styles.guide} data-atrium-guide data-lenis-prevent aria-labelledby="atrium-guide-title" onClick={event => { if (event.target === event.currentTarget) event.currentTarget.close(); }}>
+    <dialog ref={dialog} className={styles.guide} data-atrium-guide data-lenis-prevent aria-labelledby="atrium-guide-title" onClick={event => { if (event.target === event.currentTarget) modal.close(); }}>
       <div className={styles.guidePaper}>
-        <button className={styles.close} type="button" onClick={() => dialog.current.close()} aria-label={en ? 'Close plaza guide' : 'Cerrar guía de la plaza'}>×</button>
+        <button className={styles.close} type="button" onClick={modal.close} aria-label={en ? 'Close plaza guide' : 'Cerrar guía de la plaza'}>×</button>
         <small>WONDERPOP PLAZA</small>
         <h2 id="atrium-guide-title">{en ? 'A little guide to the plaza' : 'Una pequeña guía de la plaza'}</h2>
         {questions.map(([question, answer], i) => <details key={question} open={i === 0}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}

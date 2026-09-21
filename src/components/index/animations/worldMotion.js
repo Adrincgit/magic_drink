@@ -1,5 +1,7 @@
 ﻿import { gsap } from 'gsap';
 
+import { JOURNEY_END } from '../../../data/journeyChapters';
+
 export const OPENING_END = 0.36;
 const clamp = (n) => Math.max(0, Math.min(1, n));
 const mix = (a, b, p) => a + (b - a) * p;
@@ -32,6 +34,14 @@ export function createWorldDirector(root) {
   const display = query('[data-closing-display]');
   const passingLeaves = query('[data-passing-leaves]');
   const footer = query('[data-world-footer]');
+  const life = query('[data-atrium-life]');
+  const friends = query('[data-atrium-friends]');
+  const nearFriends = query('[data-atrium-near]');
+  const piers = [...root.querySelectorAll('[data-atrium-pier]')];
+  const gallery = query('[data-world-scene="gallery"]');
+  const galleryPlane = query('[data-gallery-plane]');
+  const galleryDecor = query('[data-gallery-decor]');
+  const passage = query('[data-plaza-passage]');
   const copies = [...root.querySelectorAll('[data-world-copy]')];
   let previous = null;
   let viewport = '';
@@ -55,6 +65,7 @@ export function createWorldDirector(root) {
     display,
     passingLeaves,
     footer,
+    life, friends, nearFriends, ...piers, gallery, galleryPlane, galleryDecor, passage,
     ...copies,
   ];
 
@@ -145,17 +156,18 @@ export function createWorldDirector(root) {
         copy('plaza', phase(r, 0.642, 0.667) * (1 - phase(r, 0.711, 0.742)), -30 * walk);
       }
 
-      if (active(0.78, 1)) {
+      if (active(0.78, 1.12)) {
         const indoors = phase(r, 0.785, 0.803);
         const indoorTravel = phase(r, 0.84, 0.96);
-        gsap.set(interior, { autoAlpha: indoors });
-        interior.dataset.worldActive = String(r > 0.79 && !document.hidden);
+        const turn = phase(r, 1.01, 1.075);
+        gsap.set(interior, { autoAlpha: r < 1.075 ? indoors : 0 });
+        interior.dataset.worldActive = String(r > 0.79 && r < 1.075 && !document.hidden);
         // One room image covers the whole aperture. Its bottom stays beyond the
         // viewport while approaching, so no second floor/background is exposed.
         const threshold = phase(r, .815, .854);
         gsap.set(atriumWorld, {
-          scale: 1 + .085 * threshold + .075 * indoorTravel,
-          x: 0,
+          scale: 1 + .085 * threshold + .075 * indoorTravel + .06 * turn,
+          x: -width * .075 * turn,
           y: -height * .025 * (1 - phase(r, .845, .878)) * threshold,
         });
         gsap.set(atrium, { scale: 1 });
@@ -163,20 +175,39 @@ export function createWorldDirector(root) {
         gsap.set(pendants, { scale: 1 + 0.23 * indoorTravel, y: -height * 0.045 * indoorTravel });
         gsap.set(insideLeaves, { scale: 1 + 0.34 * indoorTravel, x: width * 0.09 * indoorTravel });
         copy('interior', phase(r, 0.86, 0.875) * (1 - phase(r, 0.897, 0.925)), 0);
+        gsap.set(life, { autoAlpha: phase(r, .865, .9) * (1 - phase(r, 1.04, 1.073)) });
+        life.inert = r < .88 || r >= 1.065;
+        life.setAttribute('aria-hidden', String(life.inert));
+        gsap.set(friends, { scale: 1 + .05 * indoorTravel, x: -width * .05 * turn, transformOrigin: '50% 60%' });
+        gsap.set(nearFriends, { x: -width * .26 * turn, scale: 1 + .08 * indoorTravel, transformOrigin: '15% 95%' });
+        piers.forEach((pier, i) => gsap.set(pier, { x: (i ? 1 : -1) * width * .07 * indoorTravel - width * .22 * turn, scale: 1 + .12 * indoorTravel }));
       }
 
-      if (active(0.89, 1)) {
+      if (active(0.89, 1.12)) {
         const finalReveal = phase(r, 0.903, 0.952);
-        gsap.set(closing, { autoAlpha: finalReveal });
-        closing.dataset.worldActive = String(r > 0.89 && !document.hidden);
+        const leave = phase(r, 1.025, 1.065);
+        gsap.set(closing, { autoAlpha: finalReveal * (1 - leave) });
+        closing.dataset.worldActive = String(r > 0.89 && r < 1.075 && !document.hidden);
         gsap.set(display, {
           scale: 1,
           y: height * 0.025 * (1 - finalReveal),
-          x: 0,
+          x: -width * .06 * leave,
         });
-        copy('closing', phase(r, 0.922, 0.959), 10 * (1 - finalReveal));
-        gsap.set(footer, { autoAlpha: phase(r, 0.967, 0.995) });
-        footer.inert = r < 0.977;
+        copy('closing', phase(r, 0.922, 0.959) * (1 - leave), 10 * (1 - finalReveal));
+      }
+
+      if (active(1, JOURNEY_END)) {
+        // The near pier covers the cut; reverse scrolling retraces the crossing.
+        const travel = phase(r, 1.04, 1.11);
+        gsap.set(passage, { x: mix(Math.max(width, height) * 2.3, -Math.max(width, height) * 2.3, travel), autoAlpha: phase(r, 1.025, 1.04) * (1 - phase(r, 1.11, 1.125)) });
+        gsap.set(gallery, { autoAlpha: r >= 1.075 ? 1 : 0 });
+        gallery.dataset.worldActive = String(r >= 1.075 && !document.hidden);
+        const arrive = phase(r, 1.075, 1.2);
+        gsap.set(galleryPlane, { scale: 1.035 + .025 * arrive, x: width * .015 * (1 - arrive), transformOrigin: '50% 65%' });
+        gsap.set(galleryDecor, { x: -width * .02 * arrive, scale: 1 + .06 * arrive, transformOrigin: '50% 95%' });
+        copy('gallery', phase(r, 1.095, 1.145), 14 * (1 - arrive));
+        gsap.set(footer, { autoAlpha: phase(r, 1.355, 1.395) });
+        footer.inert = r < 1.375;
       }
 
       if (active(0.34, 0.69)) {
@@ -196,7 +227,7 @@ export function createWorldDirector(root) {
         });
       }
       root.dataset.worldChapter =
-        r < 0.36 ? 'opening' : r < 0.62 ? 'festival' : r < 0.86 ? 'wonderpop' : 'atrium';
+        r < .36 ? 'opening' : r < .62 ? 'festival' : r < .86 ? 'wonderpop' : r < 1.075 ? 'atrium' : 'gallery';
       previous = r;
     },
   };

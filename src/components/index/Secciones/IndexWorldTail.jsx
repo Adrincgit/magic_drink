@@ -4,6 +4,8 @@ import GardenWorld from './GardenWorld';
 import DJSequence from './DJSequence';
 import FestivalCrowdMotion from './FestivalCrowdMotion';
 import AtriumDirectory from './AtriumDirectory';
+import AtriumLife from './AtriumLife';
+import WonderPopGallery from './WonderPopGallery';
 import styles from '../css/indexWorldTail.module.css';
 import atriumStyles from '../css/atrium.module.css';
 
@@ -199,6 +201,7 @@ function IndexWorldTail({ en = false }) {
           loading="lazy"
         />
       </div>
+      <AtriumLife en={en} />
       <section
         className={`${styles.copy} ${styles.interiorCopy} ${atriumStyles.intro}`}
         data-world-copy="interior"
@@ -235,6 +238,8 @@ function IndexWorldTail({ en = false }) {
         <div className={atriumStyles.directoryWrap} data-world-copy="closing">
           <AtriumDirectory en={en} />
         </div>
+      </section>
+      <WonderPopGallery en={en} />
         <footer className={styles.footer} data-world-footer>
           <a href="/" aria-label="Magic Drink">
             <img src="/logo.webp" width="160" height="70" alt="Magic Drink" />
@@ -253,7 +258,8 @@ function IndexWorldTail({ en = false }) {
             ↑
           </button>
         </footer>
-      </section>
+
+      <div className={atriumStyles.passage} data-plaza-passage aria-hidden="true"><img src={`${art}plaza-pier-v17.webp`} alt="" width="1024" height="1536" loading="lazy" /></div>
 
       <div className={styles.passingLeaves} data-passing-leaves aria-hidden="true">
         <img src={`${art}foliage.webp`} alt="" width="1254" height="1254" />

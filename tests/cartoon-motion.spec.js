@@ -65,7 +65,8 @@ test('water pixels ripple while bridge, sun and floor anchors remain stable; los
   await page.addStyleTag({ content: '* { animation-play-state: paused !important; transition: none !important; }' });
   // Compare real pixels: these clips contain river and an unmoving bridge pier.
   const riverClip = { x: 560, y: 685, width: 85, height: 35 };
-  const bridgeClip = { x: 570, y: 627, width: 38, height: 20 };
+  // Sample solid masonry. The former crop included moving water inside the arch.
+  const bridgeClip = { x: 620, y: 632, width: 15, height: 20 };
   const pixels = async clip => sharp(await page.screenshot({ clip })).raw().toBuffer();
   const riverBefore = await pixels(riverClip), bridgeBefore = await pixels(bridgeClip);
   await page.waitForTimeout(500);

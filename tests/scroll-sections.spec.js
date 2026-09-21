@@ -71,7 +71,7 @@ test('navigation, languages and user-initiated audio work; navigation remains ab
     return el.contains(document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2));
   });
   expect(onTop).toBe(true);
-  await goWorld(page, 1);
+  await goWorld(page, 1.4);
   await page.getByRole('button', { name: 'Return to the start' }).click();
   await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(3);
 });

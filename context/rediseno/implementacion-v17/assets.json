@@ -1,0 +1,57 @@
+[
+  {
+    "source": "src/components/marketplace/figuraa.webp",
+    "output": "public/image/journey/wonderpop-collection/hexy-figure.webp",
+    "bytes": 17200
+  },
+  {
+    "source": "src/components/marketplace/Fullpeluche.webp",
+    "output": "public/image/journey/wonderpop-collection/hexy-plush.webp",
+    "bytes": 22182
+  },
+  {
+    "source": "src/components/marketplace/mochila.webp",
+    "output": "public/image/journey/wonderpop-collection/hexy-backpack.webp",
+    "bytes": 29982
+  },
+  {
+    "source": "src/components/marketplace/camisa.webp",
+    "output": "public/image/journey/wonderpop-collection/hexy-shirt.webp",
+    "bytes": 42058
+  },
+  {
+    "source": "src/components/marketplace/tamago.webp",
+    "output": "public/image/journey/wonderpop-collection/hexy-pocket.webp",
+    "bytes": 21968
+  },
+  {
+    "source": "src/components/marketplace/tenis.webp",
+    "output": "public/image/journey/wonderpop-collection/hexy-sneakers.webp",
+    "bytes": 73754
+  },
+  {
+    "source": "src/components/marketplace/hexq.webp",
+    "output": "public/image/journey/wonderpop-collection/hexy-record.webp",
+    "bytes": 51018
+  },
+  {
+    "source": "src/components/marketplace/Animalitos y victorias en casa.webp",
+    "output": "public/image/journey/wonderpop-collection/hexy-gaming.webp",
+    "bytes": 112142
+  },
+  {
+    "source": "exec-c49be6e0-b5ac-46cd-a259-9e10c75c3531.png",
+    "output": "public/image/journey/bunny-wave-v17.webp",
+    "bytes": 202646
+  },
+  {
+    "source": "exec-c51850c5-c23f-4ba2-868a-a88d0e62509a.png",
+    "output": "public/image/journey/wonderpop-gallery-v17.webp",
+    "bytes": 540658
+  },
+  {
+    "source": "exec-d2f53176-1665-4acf-9089-9706129a93cb.png",
+    "output": "public/image/journey/plaza-pier-v17.webp",
+    "bytes": 215454
+  }
+]

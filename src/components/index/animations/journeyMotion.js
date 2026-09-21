@@ -3,6 +3,7 @@ import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import { createWorldDirector, OPENING_END } from './worldMotion';
 import { mountPointerDepth } from './pointerDepth';
+import { JOURNEY_END } from '../../../data/journeyChapters';
 
 const clamp = (n, a = 0, b = 1) => Math.max(a, Math.min(b, n));
 const mix = (a, b, p) => a + (b - a) * p;
@@ -68,7 +69,7 @@ export function mountJourney(root, onChapter) {
       world.render(0, width, height, true);
       return;
     }
-    const worldProgress = clamp((scrollY - start) / distance);
+    const worldProgress = clamp((scrollY - start) / distance) * JOURNEY_END;
     const p = clamp(worldProgress / OPENING_END);
     if (p !== lastOpening || worldProgress < 0.41) {
       const toCity = phase(p, 0.06, 0.42);
@@ -157,14 +158,15 @@ export function mountJourney(root, onChapter) {
     const isWorld = link.hasAttribute('data-go-world');
     const p = Number(isWorld ? link.dataset.goWorld : link.dataset.go);
     if (reduced.matches) {
+      const openingPosition = isWorld ? p / OPENING_END : p;
       const target =
         isWorld && p >= OPENING_END
-          ? query(`[data-world-copy="${p < .62 ? 'festival' : p < .86 ? 'plaza' : 'interior'}"]`)
-          : copies[(isWorld ? p / OPENING_END : p) < .23 ? 0 : (isWorld ? p / OPENING_END : p) < .67 ? 1 : 2];
+          ? query(`[data-world-copy="${p < .62 ? 'festival' : p < .86 ? 'plaza' : p < 1.075 ? 'closing' : 'gallery'}"]`)
+          : copies[openingPosition < .23 ? 0 : openingPosition < .67 ? 1 : 2];
       target.scrollIntoView({ behavior: 'instant', block: 'start' });
       return;
     }
-    const top = start + p * distance * (isWorld ? 1 : OPENING_END);
+    const top = start + p * distance * (isWorld ? 1 : OPENING_END) / JOURNEY_END;
     if (lenis) lenis.scrollTo(top);
     else window.scrollTo({ top, behavior: 'smooth' });
   }
@@ -197,12 +199,12 @@ export function mountJourney(root, onChapter) {
   configureScroll();
   root.dataset.ready = 'true';
   const initialChapter = { '#ciudad': 0.45, '#hexy': 0.87 }[location.hash];
-  const initialWorld = { '#festival': 0.49, '#wonderpop': 0.68, '#directorio-wonderpop': 1, '#la-original': 1 }[location.hash];
+  const initialWorld = { '#festival': .49, '#wonderpop': .68, '#directorio-wonderpop': .99, '#galeria-wonderpop': 1.2, '#la-original': .99 }[location.hash];
   if (initialWorld !== undefined) {
     requestAnimationFrame(() => {
       if (disposed) return;
-      if (reduced.matches) (initialWorld === 1 ? query('[data-world-scene="closing"]') : query(location.hash)).scrollIntoView();
-      else window.scrollTo({ top: start + initialWorld * distance, behavior: 'instant' });
+      if (reduced.matches) (initialWorld === .99 ? query('[data-world-scene="closing"]') : query(location.hash)).scrollIntoView();
+      else window.scrollTo({ top: start + initialWorld * distance / JOURNEY_END, behavior: 'instant' });
     });
   }
   if (initialChapter !== undefined) {
@@ -211,7 +213,7 @@ export function mountJourney(root, onChapter) {
       if (reduced.matches) copies[initialChapter === 0.45 ? 1 : 2].scrollIntoView();
       else
         window.scrollTo({
-          top: start + initialChapter * distance * OPENING_END,
+          top: start + initialChapter * distance * OPENING_END / JOURNEY_END,
           behavior: 'instant',
         });
     });

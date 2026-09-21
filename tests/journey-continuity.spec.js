@@ -1,29 +1,29 @@
 import { test, expect } from '@playwright/test';
 import { openLanding, goWorld } from './landing.helpers';
 
-test('one navigation spans all six scenes, works backwards and reflects the complete journey', async ({ page }) => {
+test('one navigation spans all seven scenes, works backwards and reflects the complete journey', async ({ page }) => {
   await openLanding(page);
   const nav = page.locator('[data-journey-navigation]');
-  const stops = [0, .162, .3132, .49, .68, .88];
-  await expect(nav.getByRole('button')).toHaveCount(6);
+  const stops = [0, .162, .3132, .49, .68, .96, 1.2];
+  await expect(nav.getByRole('button')).toHaveCount(7);
   for (const [width, height] of [[1440, 900], [390, 844]]) {
     await page.setViewportSize({ width, height });
-    for (const index of [3, 4, 5, 2, 1, 0]) {
+    for (const index of [3, 4, 5, 6, 5, 2, 1, 0]) {
       await nav.getByRole('button').nth(index).click();
       await expect.poll(() => page.locator('[data-journey]').evaluate(el => Number(el.dataset.worldProgress))).toBeCloseTo(stops[index], 2);
       await expect(page.locator('html')).not.toHaveClass(/lenis-scrolling/);
       await expect(nav.locator('[aria-current="step"]')).toHaveCount(1);
       await expect(nav.getByRole('button').nth(index)).toHaveAttribute('aria-pressed', 'true');
-      await expect(nav.locator('[data-journey-label] b')).toHaveText(`${String(index + 1).padStart(2, '0')} / 06`);
+      await expect(nav.locator('[data-journey-label] b')).toHaveText(`${String(index + 1).padStart(2, '0')} / 07`);
     }
-    await goWorld(page, 1);
+    await goWorld(page, 1.4);
     await expect.poll(() => nav.locator('[data-progress-bar]').evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m11)).toBe(1);
   }
   await page.setViewportSize({ width: 1440, height: 900 });
-  await goWorld(page, 1);
+  await goWorld(page, 1.4);
   await page.getByRole('button', { name: 'EN', exact: true }).first().click();
   await expect(nav).toHaveAttribute('aria-label', 'Journey scenes');
-  await expect(nav.locator('[data-journey-label]')).toContainText('THE ATRIUM');
+  await expect(nav.locator('[data-journey-label]')).toContainText('THE GALLERY');
 });
 
 test('a single atrium fills the viewport throughout the doorway, including reverse scrolling', async ({ page }) => {
@@ -67,7 +67,9 @@ test('the compact cover follows next song and playlist selection; artwork cannot
   for (const [width, height] of [[1440, 900], [390, 844]]) {
     await page.setViewportSize({ width, height });
     await goWorld(page, 1);
-    for (const button of await page.locator('[data-journey-navigation] button, [data-world-footer] button, [data-atrium-directory] a').all()) await button.click({ trial: true });
+    for (const button of await page.locator('[data-journey-navigation] button, [data-atrium-directory] a').all()) await button.click({ trial: true });
+    await goWorld(page, 1.4);
+    await page.locator('[data-world-footer] button').click({ trial: true });
     const cover = await player.locator('[data-current-cover]').boundingBox();
     const text = await player.locator('strong').first().boundingBox();
     expect(cover.x + cover.width).toBeLessThan(text.x);

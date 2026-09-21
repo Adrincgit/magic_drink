@@ -12,6 +12,7 @@ import JourneyNavigation from './JourneyNavigation';
 import HeroProduct, { HeroTable } from './HeroProduct';
 import WaterSurface from './WaterSurface';
 import { hexyPlaylist } from '../../../data/hexyPlaylist';
+import { JOURNEY_END } from '../../../data/journeyChapters';
 
 const art = '/image/journey/';
 const words = {
@@ -104,6 +105,7 @@ export default function IndexJourney({ en = false }) {
   const root = useRef(null);
   const audioRef = useRef(null);
   const audioReaction = useRef(null);
+  const audioActions = useRef(null);
   const continuePlayback = useRef(false);
   const t = words[en ? 'en' : 'es'];
   const [chapter, setChapter] = useState(0);
@@ -176,6 +178,16 @@ export default function IndexJourney({ en = false }) {
       if (request === playRequest.current) setAudioError(true);
     }
   }
+  audioActions.current = () => {
+    if (audioRef.current?.paused) toggleAudio();
+    else setHasPlayed(true);
+  };
+  useEffect(() => {
+    const element = root.current;
+    const listen = () => audioActions.current?.();
+    element.addEventListener('journey:listen', listen);
+    return () => element.removeEventListener('journey:listen', listen);
+  }, []);
 
   async function prepareAudioReaction(audio) {
     try {
@@ -221,7 +233,8 @@ export default function IndexJourney({ en = false }) {
   return (
     <>
     <JourneyLoading root={root} en={en} onReady={finishLoading} />
-    <div className={styles.journey} ref={root} data-journey data-active="true" data-assets-ready={assetsReady}
+    <div className={styles.journey} ref={root} data-journey data-world-end={JOURNEY_END} data-music-playing={playing} data-active="true" data-assets-ready={assetsReady}
+      style={{ '--journey-length': JOURNEY_END }}
       onDragStart={event => { if (event.target.tagName === 'IMG') event.preventDefault(); }}>
       <a className={styles.skipLink} href="#festival" data-go-world=".49">
         {t.skip}

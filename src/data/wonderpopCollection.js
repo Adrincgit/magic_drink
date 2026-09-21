@@ -1,0 +1,18 @@
+const art = '/image/journey/wonderpop-collection/';
+export const wonderpopCollection = {
+  drink: [
+    { image: '/image/journey/original.webp', contain: true, name: 'Magic Drink', enName: 'Magic Drink', label: 'LA BEBIDA N.º 1 DEL MUNDO', enLabel: 'THE WORLD’S No. 1 DRINK', description: 'Un sabor que se queda contigo. Saludable, sin cafeína y parte de la vida de toda una ciudad.', enDescription: 'A taste that stays with you. Healthy, caffeine free and part of everyday life across the city.', href: '/bebidas', cta: 'Conoce Magic Drink', enCta: 'Meet Magic Drink' },
+  ],
+  collection: [
+    { image: `${art}hexy-figure.webp`, name: 'Hexy, en miniatura', enName: 'A little Hexy', label: 'FIGURAS Y COLECCIONABLES', enLabel: 'FIGURES & COLLECTIBLES', description: 'Su sombrero, su estrella y una Magic Drink. Un pedacito de su mundo para tu rincón favorito.', enDescription: 'Her hat, her star and a Magic Drink. A little piece of her world for your favorite corner.' },
+    { image: `${art}hexy-plush.webp`, name: 'Siempre cerca', enName: 'Always close', label: 'EL RINCÓN DE LOS PELUCHES', enLabel: 'THE PLUSH CORNER', description: 'Hexy también tiene su versión más abrazable. Los peluches comparten escaparate con los Magic Bunnies.', enDescription: 'Meet Hexy’s most huggable version. The plush collection shares its window with the Magic Bunnies.' },
+    { image: `${art}hexy-backpack.webp`, name: 'Llévala contigo', enName: 'Take her along', label: 'MOCHILAS Y ACCESORIOS', enLabel: 'BAGS & ACCESSORIES', description: 'Para salir a clase, recorrer la ciudad o pasar la tarde en WonderPop.', enDescription: 'For a day at school, a walk through the city or an afternoon at WonderPop.' },
+    { image: `${art}hexy-shirt.webp`, name: 'Parte de tu día', enName: 'Part of your day', label: 'ROPA DE HEXY Y LOS BUNNIES', enLabel: 'HEXY & BUNNIES APPAREL', description: 'Estrellas, conejitos y tu artista favorita también tienen un lugar en tu armario.', enDescription: 'Stars, bunnies and your favorite artist have a place in your wardrobe, too.' },
+    { image: `${art}hexy-pocket.webp`, name: 'Un mundo de bolsillo', enName: 'A pocket-sized world', label: 'PEQUEÑOS TESOROS', enLabel: 'LITTLE TREASURES', description: 'Accesorios para quienes se fijan hasta en el último detalle del universo de Hexy.', enDescription: 'Accessories for everyone who loves the little details in Hexy’s world.' },
+    { image: `${art}hexy-sneakers.webp`, name: 'Nos vemos en la plaza', enName: 'See you at the plaza', label: 'LA COLECCIÓN CONTINÚA', enLabel: 'MORE TO DISCOVER', description: 'Hay mucho más detrás de cada escaparate. Sigue descubriendo las colecciones de WonderPop Plaza.', enDescription: 'There is more behind every window. Keep exploring the collections at WonderPop Plaza.' },
+  ],
+  music: [
+    { image: `${art}hexy-record.webp`, name: 'El rincón de Hexy', enName: 'Hexy’s corner', label: 'MÚSICA, PORTADAS Y RECUERDOS', enLabel: 'MUSIC, COVERS & MEMORIES', description: 'Hay canciones que quieres volver a escuchar. Dale play y deja que Hexy te acompañe por la plaza.', enDescription: 'Some songs make you want to listen again. Press play and let Hexy join your walk through the plaza.' },
+    { image: `${art}hexy-gaming.webp`, name: 'Una tarde con Hexy', enName: 'An afternoon with Hexy', label: 'HEXY + MAGIC BUNNIES', enLabel: 'HEXY + MAGIC BUNNIES', description: 'Música, juegos y conejitos celebrando cada pequeña victoria. También hay sitio para quedarte un rato.', enDescription: 'Music, games and bunnies celebrating every little victory. There is room to stay a while, too.' },
+  ],
+};
