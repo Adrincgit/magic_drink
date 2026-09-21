@@ -28,6 +28,7 @@ export default function ScenePlayer({ en, playing, elapsed, duration, onToggle, 
           {playing ? <path d="M7 5h4v14H7Zm6 0h4v14h-4Z" /> : <path d="m8 5 11 7-11 7Z" />}
         </svg>
       </button>
+      {compact && <img className={styles.cover} data-current-cover src={track.cover} alt="" width="38" height="38" draggable={false} />}
       <div className={styles.track}>
         <strong>{track.title}</strong>
         <span>{compact ? 'HEXY' : (en ? 'Performed by Hexy' : 'Interpretado por Hexy')}</span>
@@ -61,7 +62,7 @@ export default function ScenePlayer({ en, playing, elapsed, duration, onToggle, 
     <div className={styles.playlist} id={listId} hidden={!expanded} data-lenis-prevent>
       <div className={styles.playlistHeading}><span>HEXY · {tracks.length} {en ? 'SONGS' : 'CANCIONES'}</span><button type="button" onClick={closeList} aria-label={en ? 'Close song list' : 'Cerrar lista de canciones'}>×</button></div>
       <ol>{tracks.map((song, index) => <li key={song.id}><button type="button" aria-current={index === trackIndex ? 'true' : undefined} onClick={() => { onSelect(index); closeList(); }}>
-        <img src={song.cover} alt="" width="36" height="36" loading="lazy" /><span><strong>{song.title}</strong><small>{song.artist}</small></span><b aria-hidden="true">{index === trackIndex && playing ? '♫' : String(index + 1).padStart(2, '0')}</b>
+        <img src={song.cover} alt="" width="36" height="36" loading="lazy" draggable={false} /><span><strong>{song.title}</strong><small>{song.artist}</small></span><b aria-hidden="true">{index === trackIndex && playing ? '♫' : String(index + 1).padStart(2, '0')}</b>
       </button></li>)}</ol>
     </div>
     {audioError && <p className={styles.error} role="status">{en ? 'Could not load. Try play or another song.' : 'No se pudo cargar. Prueba de nuevo u otra canción.'}</p>}

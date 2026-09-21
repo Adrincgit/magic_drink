@@ -229,10 +229,6 @@
   font-size: 22px !important;
   cursor: pointer;
 }
-@media (prefers-reduced-motion: no-preference) {
-  :global([data-journey][data-world-chapter='atrium']:has([data-compact-player])) .footer { bottom: 25px; }
-  :global([data-journey][data-world-chapter='atrium']:has([data-compact-player])) .worldRail { visibility: hidden !important; }
-}
 .passingLeaves {
   position: absolute;
   inset: -30% -20%;
@@ -255,27 +251,6 @@
   left: -10%;
   scale: -1 1;
   top: 15%;
-}
-.worldRail {
-  position: absolute;
-  z-index: 24;
-  left: 5%;
-  right: 5%;
-  bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  font:
-    600 8px Inter,
-    sans-serif;
-  letter-spacing: 2px;
-  opacity: 0;
-  visibility: hidden;
-}
-.worldRail i {
-  flex: 1;
-  height: 1px;
-  background: #fff2dc42;
 }
 .worldTail [data-world-active='false'] * {
   animation-play-state: paused !important;
@@ -373,14 +348,6 @@
     width: 32px;
     height: 32px;
     font-size: 18px !important;
-  }
-  .worldRail {
-    left: 25px;
-    right: 25px;
-    bottom: 22px;
-    font-size: 6px;
-    letter-spacing: 1.2px;
-    gap: 12px;
   }
 }
 /* Scene 4: one stage coordinate system; audience rows occupy separate planes. */
@@ -778,7 +745,6 @@
   }
   .passingLeaves,
   .canopyVeil,
-  .worldRail,
   .confetti {
     display: none;
   }

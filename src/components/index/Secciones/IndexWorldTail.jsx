@@ -261,11 +261,6 @@ function IndexWorldTail({ en = false }) {
       </div>
       <img className={styles.canopyVeil} data-canopy-veil
         src={`${art}garden-canopy-veil-v3.webp`} width="1536" height="1024" alt="" loading="lazy" />
-      <div className={styles.worldRail} data-world-rail aria-hidden="true">
-        <span data-world-label>MAGIC DRINK DAY</span>
-        <i />
-        <span>SPARK MORE EVERYDAY</span>
-      </div>
     </div>
   );
 }

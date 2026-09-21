@@ -77,7 +77,14 @@ test('water pixels ripple while bridge, sun and floor anchors remain stable; los
     await goWorld(page, progress);
     const transforms = await page.locator('[data-depth]').evaluateAll(els => Object.fromEntries(els.map(el => [el.dataset.depth, { transform: getComputedStyle(el).transform, pivot: getComputedStyle(el).transformOrigin, look: getComputedStyle(el).translate }])));
     expect(transforms.water.transform).toBe(transforms.distance.transform);
-    expect(transforms.sun.transform).toBe(transforms.distance.transform);
+    // A celestial light travels more slowly than the waterfront and never bobs.
+    const sun = await page.locator('[data-depth="sun"]').evaluate(el => {
+      const matrix = new DOMMatrix(getComputedStyle(el).transform);
+      return { x: matrix.m41, y: matrix.m42 };
+    });
+    const cityX = await page.locator('[data-depth="distance"]').evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m41);
+    expect(Math.abs(sun.x)).toBeLessThan(Math.abs(cityX) * .25);
+    expect(sun.y).toBe(0);
     expect(transforms.furniture).toEqual(transforms.street);
   }
   await water.locator('canvas').evaluate(canvas => { window.riverContext = canvas.getContext('webgl2').getExtension('WEBGL_lose_context'); window.riverContext.loseContext(); });

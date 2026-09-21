@@ -1,4 +1,4 @@
-.room { background: #775269 url('/image/journey/wonderpop-atrium-v15.webp') center / cover; }
+.room { background: #775269; }
 .entrance { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; max-width: none; z-index: 7; transform-origin: 50% 55%; pointer-events: none; }
 .intro.intro { top: 15%; left: 6%; width: min(400px, 28vw); }
 .intro.intro h2 { font-size: clamp(36px, 3.4vw, 56px); text-shadow: 0 2px 0 #503352, 0 4px 14px #301737a8; }
@@ -52,7 +52,7 @@
 }
 @media (max-height: 650px) and (min-width: 701px) { .directoryWrap { bottom: 115px; } .directory { padding-top: 12px; } }
 @media (prefers-reduced-motion: no-preference) {
-  :global([data-journey]:has([data-compact-player])) .directoryWrap { bottom: 170px; }
+  :global([data-journey]:has([data-compact-player])) .directoryWrap { bottom: 220px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .intro.intro { position: relative; inset: auto; width: auto; }

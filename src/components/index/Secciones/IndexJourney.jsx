@@ -8,6 +8,7 @@ import { SceneButton, SceneLabel, SceneNote } from '../../global/SceneControls';
 import ScenePlayer from '../../global/ScenePlayer';
 import JourneyLoading from './JourneyLoading';
 import JourneyStars from './JourneyStars';
+import JourneyNavigation from './JourneyNavigation';
 import HeroProduct, { HeroTable } from './HeroProduct';
 import WaterSurface from './WaterSurface';
 import { hexyPlaylist } from '../../../data/hexyPlaylist';
@@ -51,8 +52,6 @@ const words = {
     ),
     musicBody: 'Sus canciones ya se quedan en tu cabeza. Los fans dicen que, con una Magic Drink, se vuelven todavía más adictivas.',
     meet: 'Conoce a Hexy',
-    scroll: 'DESLIZA Y DESCUBRE',
-    chapters: ['MAGIC DRINK', 'LA CIUDAD', 'HEXY'],
     next: 'LA CELEBRACIÓN CONTINÚA',
     pause: 'Pausar',
     play: 'Reproducir',
@@ -94,8 +93,6 @@ const words = {
     ),
     musicBody: 'Her songs already stay in your head. Fans say they become even more addictive with a Magic Drink.',
     meet: 'Meet Hexy',
-    scroll: 'SCROLL TO DISCOVER',
-    chapters: ['MAGIC DRINK', 'THE CITY', 'HEXY'],
     next: 'THE CELEBRATION CONTINUES',
     pause: 'Pause',
     play: 'Play',
@@ -224,7 +221,8 @@ export default function IndexJourney({ en = false }) {
   return (
     <>
     <JourneyLoading root={root} en={en} onReady={finishLoading} />
-    <div className={styles.journey} ref={root} data-journey data-active="true" data-assets-ready={assetsReady}>
+    <div className={styles.journey} ref={root} data-journey data-active="true" data-assets-ready={assetsReady}
+      onDragStart={event => { if (event.target.tagName === 'IMG') event.preventDefault(); }}>
       <a className={styles.skipLink} href="#festival" data-go-world=".49">
         {t.skip}
       </a>
@@ -413,29 +411,7 @@ export default function IndexJourney({ en = false }) {
             </section>
           </div>
           <IndexWorldTail en={en} />
-          <div className={styles.sceneNavigation} data-opening-navigation>
-            <span className={styles.sceneLabel}>
-              <b>0{Math.max(0, chapter) + 1}</b>
-              {t.chapters[Math.max(0, chapter)]}
-            </span>
-            <div className={styles.sceneDots} role="group" aria-label={en ? 'Scenes' : 'Escenas'}>
-              {[0, 0.45, 0.87].map((p, i) => (
-                <button
-                  key={p}
-                  data-go={p}
-                  aria-label={t.chapters[i]}
-                  aria-pressed={chapter === i}
-                />
-              ))}
-            </div>
-            <span className={styles.scrollHint}>
-              {t.scroll}
-              <span>↓</span>
-            </span>
-            <div className={styles.journeyProgress}>
-              <i data-progress-bar />
-            </div>
-          </div>
+          <JourneyNavigation root={root} en={en} />
           <div className={styles.exitShade} data-exit-shade aria-hidden="true" />
         </div>
       </section>

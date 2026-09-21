@@ -26,7 +26,6 @@ export function mountJourney(root, onChapter) {
   const left = query('[data-shade="left"]');
   const right = query('[data-shade="right"]');
   const exit = query('[data-exit-shade]');
-  const progressBar = query('[data-progress-bar]');
   const world = createWorldDirector(root);
   const stopPointer = mountPointerDepth(root);
   let frame = 0;
@@ -83,7 +82,8 @@ export function mountJourney(root, onChapter) {
       gsap.set(layers.hills, { x: x * 0.09, y: -height * 0.004 * toCity });
       // Shoreline, bridge feet and their reflections share one camera plane.
       gsap.set(layers.water, { x: x * 0.23, y: -height * 0.012 * toCity });
-      gsap.set(layers.sun, { x: x * 0.23, y: -height * 0.012 * toCity });
+      // The sun is much farther away than the waterfront; no vertical bobbing.
+      gsap.set(layers.sun, { x: x * 0.045, y: 0 });
       gsap.set(layers.street, { x, scale: pullback, transformOrigin: '50% 82%' });
       // A grounded lamp follows the paving it stands on, including its pivot.
       gsap.set(layers.furniture, { x, scale: pullback, transformOrigin: '50% 82%', y: 0 });
@@ -116,7 +116,6 @@ export function mountJourney(root, onChapter) {
       lastOpening = p;
     }
     world.render(worldProgress, width, height, false);
-    progressBar.style.transform = `scaleX(${p})`;
     const chapter = worldProgress > 0.36 ? -1 : p < 0.23 ? 0 : p < 0.67 ? 1 : 2;
     if (chapter !== current) {
       current = chapter;
@@ -159,9 +158,9 @@ export function mountJourney(root, onChapter) {
     const p = Number(isWorld ? link.dataset.goWorld : link.dataset.go);
     if (reduced.matches) {
       const target =
-        isWorld && p > 0.36
-          ? query('[data-world-copy="festival"]')
-          : copies[p < 0.23 ? 0 : p < 0.67 ? 1 : 2];
+        isWorld && p >= OPENING_END
+          ? query(`[data-world-copy="${p < .62 ? 'festival' : p < .86 ? 'plaza' : 'interior'}"]`)
+          : copies[(isWorld ? p / OPENING_END : p) < .23 ? 0 : (isWorld ? p / OPENING_END : p) < .67 ? 1 : 2];
       target.scrollIntoView({ behavior: 'instant', block: 'start' });
       return;
     }

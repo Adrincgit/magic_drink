@@ -13,7 +13,6 @@ const phase = (p, a, b) => {
 export function createWorldDirector(root) {
   const query = (selector) => root.querySelector(selector);
   const opening = query('[data-opening]');
-  const openingNav = query('[data-opening-navigation]');
   const ground = query('[data-world-ground]');
   const festival = query('[data-world-scene="festival"]');
   const courtyard = query('[data-courtyard]');
@@ -33,14 +32,11 @@ export function createWorldDirector(root) {
   const display = query('[data-closing-display]');
   const passingLeaves = query('[data-passing-leaves]');
   const footer = query('[data-world-footer]');
-  const rail = query('[data-world-rail]');
-  const label = query('[data-world-label]');
   const copies = [...root.querySelectorAll('[data-world-copy]')];
   let previous = null;
   let viewport = '';
   const animated = [
     opening,
-    openingNav,
     ground,
     festival,
     courtyard,
@@ -59,7 +55,6 @@ export function createWorldDirector(root) {
     display,
     passingLeaves,
     footer,
-    rail,
     ...copies,
   ];
 
@@ -100,7 +95,6 @@ export function createWorldDirector(root) {
           scale: 1 + 0.3 * handoff,
           autoAlpha: 1 - phase(r, 0.38, 0.408),
         });
-        gsap.set(openingNav, { autoAlpha: 1 - phase(r, 0.335, 0.365) });
       }
       const walk = phase(r, 0.635, 0.795);
       if (active(0.34, 0.86)) {
@@ -156,12 +150,13 @@ export function createWorldDirector(root) {
         const indoorTravel = phase(r, 0.84, 0.96);
         gsap.set(interior, { autoAlpha: indoors });
         interior.dataset.worldActive = String(r > 0.79 && !document.hidden);
-        // Shared zoom and common vanishing point keep every object grounded.
+        // One room image covers the whole aperture. Its bottom stays beyond the
+        // viewport while approaching, so no second floor/background is exposed.
         const threshold = phase(r, .815, .854);
         gsap.set(atriumWorld, {
-          scale: .68 + .33 * threshold + 0.075 * indoorTravel,
+          scale: 1 + .085 * threshold + .075 * indoorTravel,
           x: 0,
-          y: -height * .16 * (1 - phase(r, .845, .878)),
+          y: -height * .025 * (1 - phase(r, .845, .878)) * threshold,
         });
         gsap.set(atrium, { scale: 1 });
         gsap.set(entrance, { scale: 1 + 1.35 * phase(r, .85, .903), autoAlpha: 1 - phase(r, .885, .906) });
@@ -199,15 +194,7 @@ export function createWorldDirector(root) {
           xPercent: -50, yPercent: -50,
           autoAlpha: phase(r, 0.56, 0.575) * (1 - phase(r, 0.662, 0.68)),
         });
-        gsap.set(rail, { autoAlpha: phase(r, 0.367, 0.432) });
       }
-      const nextLabel =
-        r < 0.62
-          ? '04 / MAGIC DRINK DAY'
-          : r < 0.86
-            ? '05 / WONDERPOP PLAZA'
-            : '06 / WONDERPOP PLAZA';
-      if (label.textContent !== nextLabel) label.textContent = nextLabel;
       root.dataset.worldChapter =
         r < 0.36 ? 'opening' : r < 0.62 ? 'festival' : r < 0.86 ? 'wonderpop' : 'atrium';
       previous = r;
