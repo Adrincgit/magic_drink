@@ -71,8 +71,8 @@ test('navigation, languages and user-initiated audio work; navigation remains ab
     return el.contains(document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2));
   });
   expect(onTop).toBe(true);
-  await goWorld(page, 1.4);
-  await page.getByRole('button', { name: 'Return to the start' }).click();
+  await goWorld(page, 2.18);
+  await page.getByRole('button', { name: /Experience it again/ }).click();
   await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(3);
 });
 
@@ -120,7 +120,7 @@ test('reduced motion exposes the story as ordinary readable sections', async ({ 
   expect(await page.locator('[data-stage]').evaluate((el) => getComputedStyle(el).position)).toBe(
     'relative',
   );
-  for (const name of ['festival', 'plaza', 'interior', 'closing']) {
+  for (const name of ['festival', 'plaza', 'interior', 'gallery', 'visitors', 'interview']) {
     expect(
       await page
         .locator(`[data-world-copy="${name}"]`)

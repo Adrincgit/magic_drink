@@ -94,7 +94,7 @@ test('new ambient movement continues at rest while depth follows scroll', async 
   await goWorld(page, 0.878);
   const atrium = page.locator('[data-atrium-engine]');
   await expect(atrium).toHaveAttribute('data-renderer', 'webgl');
-  const before = await atrium.evaluate(el => el.atriumDiagnostics());
-  await expect.poll(() => atrium.evaluate(el => el.atriumDiagnostics().pendants)).not.toEqual(before.pendants);
-  expect(await atrium.evaluate(el => el.atriumDiagnostics().camera)).toEqual(before.camera);
+  const before = await atrium.evaluate(el => el.atriumDiagnostics);
+  await expect.poll(() => atrium.evaluate(el => el.atriumDiagnostics.worldTime)).not.toEqual(before.worldTime);
+  expect(await atrium.evaluate(el => el.atriumDiagnostics.camera)).toEqual(before.camera);
 });

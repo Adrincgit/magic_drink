@@ -3,9 +3,8 @@ import { SceneButton, SceneLabel, SceneNote } from '../../global/SceneControls';
 import GardenWorld from './GardenWorld';
 import DJSequence from './DJSequence';
 import FestivalCrowdMotion from './FestivalCrowdMotion';
-import AtriumDirectory from './AtriumDirectory';
+import WonderPopStory from './WonderPopStory';
 import AtriumWorld from './AtriumWorld';
-import WonderPopGallery from './WonderPopGallery';
 import styles from '../css/indexWorldTail.module.css';
 import atriumStyles from '../css/atrium.module.css';
 
@@ -185,37 +184,7 @@ function IndexWorldTail({ en = false }) {
         <span className={styles.keepGoing}>{en ? 'YOUR VISIT STARTS HERE' : 'TU VISITA EMPIEZA AQUÍ'} <span aria-hidden="true">↓</span></span>
       </section>
 
-      <section
-        className={styles.closing}
-        id="directorio-wonderpop"
-        data-world-scene="closing"
-        aria-label={en ? 'WonderPop Plaza directory' : 'Directorio de WonderPop Plaza'}
-      >
-        <div className={atriumStyles.directoryWrap} data-world-copy="closing">
-          <AtriumDirectory en={en} />
-        </div>
-      </section>
-      <WonderPopGallery en={en} />
-        <footer className={styles.footer} data-world-footer>
-          <a href="/" aria-label="Magic Drink">
-            <img src="/logo.webp" width="160" height="70" alt="Magic Drink" />
-          </a>
-          <nav aria-label={en ? 'Footer' : 'Pie de página'}>
-            <a href="/hexy">Hexy</a>
-            <a href="/wonderpop-plaza">WonderPop Plaza</a>
-            <a href="/nosotros">{en ? 'About' : 'Nosotros'}</a>
-            <a href="/contacto">{en ? 'Contact' : 'Contacto'}</a>
-          </nav>
-          <button
-            data-go-world="0"
-            type="button"
-            aria-label={en ? 'Return to the start' : 'Volver al inicio'}
-          >
-            ↑
-          </button>
-        </footer>
-
-      <div className={atriumStyles.passage} data-plaza-passage aria-hidden="true"><img src={`${art}plaza-pier-v17.webp`} alt="" width="1024" height="1536" loading="lazy" /></div>
+      <WonderPopStory en={en} />
 
       <div className={styles.passingLeaves} data-passing-leaves aria-hidden="true">
         <img src={`${art}foliage.webp`} alt="" width="1254" height="1254" />

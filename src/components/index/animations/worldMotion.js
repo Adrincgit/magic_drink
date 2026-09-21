@@ -27,14 +27,12 @@ export function createWorldDirector(root) {
   const interior = query('[data-world-interior]');
   const atriumWorld = query('[data-atrium-world]');
   const atrium = query('[data-atrium]');
-  const closing = query('[data-world-scene="closing"]');
-  const display = query('[data-closing-display]');
   const passingLeaves = query('[data-passing-leaves]');
-  const footer = query('[data-world-footer]');
   const gallery = query('[data-world-scene="gallery"]');
-  const galleryPlane = query('[data-gallery-plane]');
-  const galleryDecor = query('[data-gallery-decor]');
-  const passage = query('[data-plaza-passage]');
+  const passage = query('[data-story-transition]');
+  const visitors = query('[data-world-scene="visitors"]');
+  const interview = query('[data-world-scene="interview"]');
+  const farewell = query('[data-world-farewell]');
   const copies = [...root.querySelectorAll('[data-world-copy]')];
   let previous = null;
   let viewport = '';
@@ -51,16 +49,14 @@ export function createWorldDirector(root) {
     interior,
     atriumWorld,
     atrium,
-    closing,
-    display,
     passingLeaves,
-    footer,
-    gallery, galleryPlane, galleryDecor, passage,
+    gallery, passage, visitors, interview, farewell,
     ...copies,
-  ];
+  ].filter(Boolean);
 
   function copy(name, opacity, y = 0) {
     const element = copies.find((el) => el.dataset.worldCopy === name);
+    if (!element) return;
     gsap.set(element, { autoAlpha: opacity, y });
     const hidden = opacity < 0.35;
     element.inert = hidden;
@@ -78,7 +74,7 @@ export function createWorldDirector(root) {
           element.inert = false;
           element.removeAttribute('aria-hidden');
         });
-        footer.inert = false;
+        [festival, plaza, gallery, visitors, interview, farewell].forEach(el => { el.inert = false; el.removeAttribute('aria-hidden'); });
         previous = null;
         return;
       }
@@ -157,38 +153,28 @@ export function createWorldDirector(root) {
         copy('interior', phase(r, 0.86, 0.875) * (1 - phase(r, 0.897, 0.925)), 0);
       }
 
-      if (active(0.89, 1.12)) {
-        const finalReveal = phase(r, 0.903, 0.952);
-        const leave = phase(r, 1.025, 1.065);
-        gsap.set(closing, { autoAlpha: finalReveal * (1 - leave) });
-        closing.dataset.worldActive = String(r > 0.89 && r < 1.075 && !document.hidden);
-        gsap.set(display, {
-          scale: 1,
-          y: 0,
-          x: 0,
-        });
-        copy('closing', phase(r, 0.922, 0.959) * (1 - leave), 0);
-      }
-
-      if (active(1, JOURNEY_END)) {
-        // The near pier covers the cut; reverse scrolling retraces the crossing.
-        const travel = phase(r, 1.04, 1.11);
-        gsap.set(passage, { x: mix(Math.max(width, height) * 2.3, -Math.max(width, height) * 2.3, travel), autoAlpha: phase(r, 1.025, 1.04) * (1 - phase(r, 1.11, 1.125)) });
-        gsap.set(gallery, { autoAlpha: r >= 1.075 ? 1 : 0 });
-        gallery.dataset.worldActive = String(r >= 1.075 && !document.hidden);
-        const arrive = phase(r, 1.075, 1.2);
-        gsap.set(galleryPlane, { scale: 1.035 + .025 * arrive, x: width * .015 * (1 - arrive), transformOrigin: '50% 65%' });
-        // Match the painted marble surface at v=.688, including object-fit:
-        // cover and both image transforms. A viewport percentage alone floats
-        // the display above its counter on ultrawide screens.
-        const artHeight = Math.max(height, width / 1.5);
-        const counterY = height * .65 + (1.035 + .025 * arrive) * 1.19 * (-height * .15 + artHeight * .188);
-        gallery.style.setProperty('--counter-y', `${counterY}px`);
-        gsap.set(galleryDecor, { x: -width * .02 * arrive, scale: 1 + .06 * arrive, transformOrigin: '50% 95%' });
-        copy('gallery', phase(r, 1.095, 1.145), 14 * (1 - arrive));
-        gsap.set(footer, { autoAlpha: phase(r, 1.355, 1.395) });
-        footer.inert = r < 1.375;
-      }
+      const ending = phase(r, 2.055, 2.135);
+      [[gallery, 1.075, 1.43], [visitors, 1.43, 1.75], [interview, 1.75, JOURNEY_END + .01]].forEach(([element, from, to]) => {
+        const visible = r >= from && r < to;
+        gsap.set(element, { autoAlpha: visible ? 1 : 0 });
+        element.inert = !visible || (element === interview && ending > .5);
+        element.setAttribute('aria-hidden', String(element.inert));
+        element.dataset.worldActive = String(visible && !document.hidden);
+      });
+      copy('gallery', phase(r, 1.095, 1.145) * (r < 1.43 ? 1 : 0));
+      copy('visitors', phase(r, 1.45, 1.495) * (r < 1.75 ? 1 : 0));
+      copy('interview', phase(r, 1.77, 1.81) * (1 - ending));
+      gsap.set(farewell, { autoAlpha: ending, y: 16 * (1 - ending) });
+      farewell.inert = ending < .5;
+      farewell.setAttribute('aria-hidden', String(ending < .5));
+      // A golden shop pendant approaches the lens and fully covers each cut.
+      // The same reversible crossing works when scrolling back to a scene.
+      const cut = [1.075, 1.43, 1.75].find(value => Math.abs(r - value) < .048);
+      if (cut !== undefined) {
+        const p = clamp((r - cut + .048) / .096);
+        const cover = phase(p, 0, .16) * (1 - phase(p, .65, 1));
+        gsap.set(passage, { xPercent: -50, yPercent: -50, x: width * .32 * (1 - phase(p, 0, .45)), y: -height * .32 * (1 - phase(p, 0, .45)), scale: mix(.02, 9, phase(p, 0, .55)), rotation: mix(-12, 20, p), autoAlpha: cover });
+      } else gsap.set(passage, { autoAlpha: 0 });
 
       if (active(0.34, 0.69)) {
         const crossing = phase(r, 0.345, 0.447);
@@ -207,7 +193,7 @@ export function createWorldDirector(root) {
         });
       }
       root.dataset.worldChapter =
-        r < .36 ? 'opening' : r < .62 ? 'festival' : r < .86 ? 'wonderpop' : r < 1.075 ? 'atrium' : 'gallery';
+        r < .36 ? 'opening' : r < .62 ? 'festival' : r < .86 ? 'wonderpop' : r < 1.075 ? 'atrium' : r < 1.43 ? 'gallery' : r < 1.75 ? 'visitors' : r < 2.09 ? 'interview' : 'farewell';
       previous = r;
     },
   };

@@ -1,0 +1,102 @@
+[
+  {
+    "name": "desktop",
+    "scene": "atrium",
+    "errors": [],
+    "state": {
+      "p": "0.9600",
+      "chapter": "atrium",
+      "width": 1440
+    }
+  },
+  {
+    "name": "desktop",
+    "scene": "shop",
+    "errors": [],
+    "state": {
+      "p": "1.2500",
+      "chapter": "gallery",
+      "width": 1440
+    }
+  },
+  {
+    "name": "desktop",
+    "scene": "lounge",
+    "errors": [],
+    "state": {
+      "p": "1.5901",
+      "chapter": "visitors",
+      "width": 1440
+    }
+  },
+  {
+    "name": "desktop",
+    "scene": "faq",
+    "errors": [],
+    "state": {
+      "p": "1.8901",
+      "chapter": "interview",
+      "width": 1440
+    }
+  },
+  {
+    "name": "desktop",
+    "scene": "end",
+    "errors": [],
+    "state": {
+      "p": "2.1800",
+      "chapter": "farewell",
+      "width": 1440
+    }
+  },
+  {
+    "name": "mobile",
+    "scene": "atrium",
+    "errors": [],
+    "state": {
+      "p": "0.9600",
+      "chapter": "atrium",
+      "width": 390
+    }
+  },
+  {
+    "name": "mobile",
+    "scene": "shop",
+    "errors": [],
+    "state": {
+      "p": "1.2500",
+      "chapter": "gallery",
+      "width": 390
+    }
+  },
+  {
+    "name": "mobile",
+    "scene": "lounge",
+    "errors": [],
+    "state": {
+      "p": "1.5899",
+      "chapter": "visitors",
+      "width": 390
+    }
+  },
+  {
+    "name": "mobile",
+    "scene": "faq",
+    "errors": [],
+    "state": {
+      "p": "1.8901",
+      "chapter": "interview",
+      "width": 390
+    }
+  },
+  {
+    "name": "mobile",
+    "scene": "end",
+    "errors": [],
+    "state": {
+      "p": "2.1800",
+      "chapter": "farewell",
+      "width": 390
+    }
+  }
+]

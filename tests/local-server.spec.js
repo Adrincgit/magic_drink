@@ -26,8 +26,8 @@ test('localhost and IPv4 hydrate navigation and the journey after reloads', asyn
       await expect(page.locator('[data-world-scene="festival"]')).toHaveAttribute(
         'data-world-active', 'true',
       );
-      await goWorld(page, 1.4);
-      await page.getByRole('button', { name: 'Volver al inicio' }).click();
+      await goWorld(page, 2.18);
+      await page.getByRole('button', { name: /Vuelve a vivirlo/ }).click();
       await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(3);
     }
   }

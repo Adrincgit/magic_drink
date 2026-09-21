@@ -11,7 +11,12 @@ export default function usePlazaDialog(ref) {
     const previous = viewport.style.overflow;
     ref.current.showModal();
     viewport.style.overflow = 'hidden';
-    restore.current = () => { viewport.style.overflow = previous; };
+    const root = ref.current.closest('[data-journey]');
+    root?.dispatchEvent(new CustomEvent('journey:modal', { detail: { open: true } }));
+    restore.current = () => {
+      viewport.style.overflow = previous;
+      root?.dispatchEvent(new CustomEvent('journey:modal', { detail: { open: false } }));
+    };
   }, [ref]);
   const close = useCallback(() => { ref.current?.close(); unlock(); }, [ref, unlock]);
   useEffect(() => {

@@ -115,12 +115,17 @@ export default function IndexJourney({ en = false }) {
   const [audioError, setAudioError] = useState(false);
   const [trackIndex, setTrackIndex] = useState(0);
   const [hasPlayed, setHasPlayed] = useState(false);
+  const [compactDismissed, setCompactDismissed] = useState(false);
+  const [pastHexyInFlow, setPastHexyInFlow] = useState(false);
   const [assetsReady, setAssetsReady] = useState(false);
   const [playerVisible, setPlayerVisible] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const finishLoading = useCallback(() => setAssetsReady(true), []);
   const playRequest = useRef(0);
   const track = hexyPlaylist[trackIndex];
+  const pastHexy = reducedMotion ? pastHexyInFlow : chapter === -1;
+  const showCompact = assetsReady && !compactDismissed && (hasPlayed || pastHexy)
+    && (!playerVisible || (!reducedMotion && chapter !== 2));
 
   useEffect(() => {
     return mountJourney(root.current, setChapter);
@@ -145,6 +150,19 @@ export default function IndexJourney({ en = false }) {
     observer.observe(player);
     return () => observer.disconnect();
   }, []);
+  useEffect(() => {
+    if (!reducedMotion) return;
+    // Reduced motion uses normal document flow instead of the scroll camera.
+    const festival = root.current.querySelector('[data-world-scene="festival"]');
+    const update = () => setPastHexyInFlow(festival.getBoundingClientRect().top <= innerHeight * .5);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, [reducedMotion]);
   useEffect(() => {
     const pause = () => {
       if (document.hidden) { continuePlayback.current = false; audioRef.current?.pause(); }
@@ -428,17 +446,18 @@ export default function IndexJourney({ en = false }) {
           <div className={styles.exitShade} data-exit-shade aria-hidden="true" />
         </div>
       </section>
-      {hasPlayed && (!playerVisible || (!reducedMotion && chapter !== 2)) && <ScenePlayer {...playerProps} compact onClose={() => {
+      {showCompact && <ScenePlayer {...playerProps} compact onClose={() => {
         playRequest.current++;
         continuePlayback.current = false;
         audioRef.current?.pause();
         setHasPlayed(false);
+        setCompactDismissed(true);
       }} />}
       <audio
         ref={audioRef}
         preload="none"
         src="/audio/demos/no_brain_just_vibes_demo.mp3"
-        onPlay={() => { continuePlayback.current = true; setPlaying(true); setHasPlayed(true); }}
+        onPlay={() => { continuePlayback.current = true; setPlaying(true); setHasPlayed(true); setCompactDismissed(false); }}
         onPause={event => {
           // Natural completion pauses the media before firing `ended`.
           // Seeking to the end of an already paused track must stay paused.

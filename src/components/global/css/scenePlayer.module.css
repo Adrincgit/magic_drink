@@ -86,7 +86,9 @@
 .compact .track strong { font-size: 11px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .compact .track > span { font-size: 8px; letter-spacing: .12em; margin-top: 2px; }
 .compact .smallButton { width: 25px; flex-basis: 25px; }
-.close { position: absolute; top: -12px; right: -9px; background: #392140; border: 1px solid #d2ae7d !important; border-radius: 50%; width: 24px; height: 24px; font-size: 17px !important; display: grid; place-items: center; line-height: 1; }
+.close { position: absolute; top: -12px; right: -9px; background: #392140; border: 1px solid #d2ae7d !important; border-radius: 50%; width: 24px; height: 24px; padding: 0; display: grid; place-items: center; color: #fff1d0; }
+.close svg { display: block; width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; }
+.close:focus-visible { outline: 3px solid #9dedee; outline-offset: 3px; }
 .error { font-size: 10px; line-height: 1.4; color: #ffdfa3; padding: 4px 0; }
 @media (max-width: 700px) {
   .player { padding: 8px 12px 3px; }
@@ -105,12 +107,4 @@
 @media (prefers-reduced-motion: reduce) {
   .record { transition: none; }
   .record:hover, .record:active { scale: none; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  :global([data-journey][data-world-chapter='atrium']) .compact,
-  :global([data-journey][data-world-chapter='gallery']) .compact { bottom: 124px; }
-}
-@media (prefers-reduced-motion: no-preference) and (max-width: 700px) {
-  :global([data-journey][data-world-chapter='atrium']) .compact,
-  :global([data-journey][data-world-chapter='gallery']) .compact { bottom: 104px; }
 }

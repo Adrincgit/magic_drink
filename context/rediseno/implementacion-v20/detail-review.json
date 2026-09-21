@@ -1,0 +1,38 @@
+[
+  {
+    "name": "left",
+    "depth": {
+      "source": "wonderpop-atrium-v15.webp",
+      "kind": "atrium",
+      "depthBands": 12,
+      "camera": [
+        -0.31708800000000004,
+        0.148,
+        12
+      ],
+      "frames": 73,
+      "ambientFrame": 0,
+      "nearShift": -0.04343671232876713,
+      "farShift": -0.02687186440677966,
+      "worldTime": 0.9225999999999999
+    }
+  },
+  {
+    "name": "right",
+    "depth": {
+      "source": "wonderpop-atrium-v15.webp",
+      "kind": "atrium",
+      "depthBands": 12,
+      "camera": [
+        0.316256,
+        -0.147625,
+        12
+      ],
+      "frames": 210,
+      "ambientFrame": 0,
+      "nearShift": 0.0433227397260274,
+      "farShift": 0.026801355932203386,
+      "worldTime": 2.2438000000000047
+    }
+  }
+]

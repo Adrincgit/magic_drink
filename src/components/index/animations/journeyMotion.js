@@ -46,10 +46,11 @@ export function mountJourney(root, onChapter) {
     if (!reduced.matches && fine.matches) {
       lenis = new Lenis({
         autoRaf: true, lerp: .09, smoothWheel: true, syncTouch: false,
-        virtualScroll: () => root.dataset.assetsReady === 'true' && getComputedStyle(document.body).overflow !== 'hidden',
+        virtualScroll: () => root.dataset.assetsReady === 'true' && !root.querySelector('dialog[open]') && getComputedStyle(document.body).overflow !== 'hidden',
       });
       // Render in the same frame as Lenis, without a second smoothing layer.
       lenis.on('scroll', () => { cancelAnimationFrame(frame); render(); });
+      if (root.querySelector('dialog[open]')) lenis.stop();
     }
     root.dataset.scrollEngine = lenis ? 'lenis' : 'native';
   }
@@ -161,7 +162,7 @@ export function mountJourney(root, onChapter) {
       const openingPosition = isWorld ? p / OPENING_END : p;
       const target =
         isWorld && p >= OPENING_END
-          ? query(`[data-world-copy="${p < .62 ? 'festival' : p < .86 ? 'plaza' : p < 1.075 ? 'closing' : 'gallery'}"]`)
+          ? query(`[data-world-copy="${p < .62 ? 'festival' : p < .86 ? 'plaza' : p < 1.075 ? 'interior' : p < 1.43 ? 'gallery' : p < 1.75 ? 'visitors' : 'interview'}"]`)
           : copies[openingPosition < .23 ? 0 : openingPosition < .67 ? 1 : 2];
       target.scrollIntoView({ behavior: 'instant', block: 'start' });
       return;
@@ -174,6 +175,7 @@ export function mountJourney(root, onChapter) {
     measure();
   }
   function preference() { configureScroll(); measure(); }
+  function modal({ detail }) { if (detail.open) lenis?.stop(); else lenis?.start(); }
   function visibility() {
     root.dataset.active = String(!document.hidden && runway.getBoundingClientRect().bottom > 0);
   }
@@ -187,6 +189,7 @@ export function mountJourney(root, onChapter) {
   const resizeObserver = new ResizeObserver(measure);
   resizeObserver.observe(stage);
   root.addEventListener('click', navigate);
+  root.addEventListener('journey:modal', modal);
   addEventListener('scroll', schedule, { passive: true });
   addEventListener('resize', resize);
   reduced.addEventListener('change', preference);
@@ -199,11 +202,11 @@ export function mountJourney(root, onChapter) {
   configureScroll();
   root.dataset.ready = 'true';
   const initialChapter = { '#ciudad': 0.45, '#hexy': 0.87 }[location.hash];
-  const initialWorld = { '#festival': .49, '#wonderpop': .68, '#directorio-wonderpop': .99, '#galeria-wonderpop': 1.2, '#la-original': .99 }[location.hash];
+  const initialWorld = { '#festival': .49, '#wonderpop': .68, '#directorio-wonderpop': .96, '#galeria-wonderpop': 1.25, '#entre-amigos': 1.59, '#preguntas-wonderpop': 1.89, '#la-original': .96 }[location.hash];
   if (initialWorld !== undefined) {
     requestAnimationFrame(() => {
       if (disposed) return;
-      if (reduced.matches) (initialWorld === .99 ? query('[data-world-scene="closing"]') : query(location.hash)).scrollIntoView();
+      if (reduced.matches) (initialWorld === .96 ? query('[data-world-copy="interior"]') : query(location.hash))?.scrollIntoView();
       else window.scrollTo({ top: start + initialWorld * distance / JOURNEY_END, behavior: 'instant' });
     });
   }
@@ -226,6 +229,7 @@ export function mountJourney(root, onChapter) {
     observer.disconnect();
     resizeObserver.disconnect();
     root.removeEventListener('click', navigate);
+    root.removeEventListener('journey:modal', modal);
     removeEventListener('scroll', schedule);
     removeEventListener('resize', resize);
     reduced.removeEventListener('change', preference);

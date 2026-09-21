@@ -47,7 +47,9 @@ export default function ScenePlayer({ en, playing, elapsed, duration, onToggle, 
         <button ref={listToggle} className={styles.smallButton} type="button" onClick={() => setExpanded(!expanded)} aria-expanded={expanded} aria-controls={listId} aria-label={en ? 'Song list' : 'Lista de canciones'}>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v2H4Zm0 6h16v2H4Zm0 6h10v2H4Z" /></svg>
         </button>
-        <button className={styles.close} type="button" onClick={onClose} aria-label={en ? 'Close and stop music' : 'Cerrar y detener la música'}>×</button>
+        <button className={styles.close} type="button" onClick={onClose} aria-label={en ? 'Close and stop music' : 'Cerrar y detener la música'}>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18" /></svg>
+        </button>
       </>}
     </div>
     {!compact && <div className={styles.bottomline}>
