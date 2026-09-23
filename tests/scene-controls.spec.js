@@ -42,7 +42,11 @@ test('Magic Drink is the sole public name across all routes, navigation and meta
     await page.addInitScript(lang => localStorage.setItem('lang', lang), lang);
     for (const route of ['/', '/bebidas', '/hexy', '/wonderpop-plaza', '/nosotros', '/magicdrinkday', '/contacto']) {
       await page.goto(route, { waitUntil: 'networkidle' });
-      await expect(page.locator('header a[href="/bebidas"]').first()).toHaveText('Magic Drink');
+      if (route === '/') {
+        await page.locator('[data-journey-menu-trigger]').click();
+        await expect(page.locator('[data-journey-menu] a[href="/bebidas"]')).toContainText('Magic Drink');
+        await page.keyboard.press('Escape');
+      } else await expect(page.locator('header a[href="/bebidas"]').first()).toHaveText('Magic Drink');
       await expect(page.locator('body')).not.toContainText(/\bOriginal\b|línea de bebidas|drink line/i);
       expect(await page.title()).not.toMatch(/Original/i);
       expect(await page.locator('meta[name="description"]').getAttribute('content')).not.toMatch(/Original/i);

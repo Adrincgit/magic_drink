@@ -9,6 +9,7 @@ import ScenePlayer from '../../global/ScenePlayer';
 import JourneyLoading from './JourneyLoading';
 import JourneyStars from './JourneyStars';
 import JourneyNavigation from './JourneyNavigation';
+import JourneyMenu from './JourneyMenu';
 import HeroProduct, { HeroTable } from './HeroProduct';
 import WaterSurface from './WaterSurface';
 import { hexyPlaylist } from '../../../data/hexyPlaylist';
@@ -257,7 +258,7 @@ export default function IndexJourney({ en = false }) {
       <a className={styles.skipLink} href="#festival" data-go-world=".49">
         {t.skip}
       </a>
-
+      <JourneyMenu en={en} ready={assetsReady} />
       <section
         className={styles.runway}
         id="original"

@@ -22,6 +22,14 @@
   user-select: none;
 }
 
+.journey :global([data-compact-player]) {
+  filter: grayscale(var(--journey-ui-monochrome, 0));
+}
+
+:global(html:has([data-journey])) {
+  scrollbar-color: #9c978e #171719;
+}
+
 .journey a {
   color: inherit;
   text-decoration: none;

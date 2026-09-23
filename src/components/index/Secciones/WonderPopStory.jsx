@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import { SceneButton, SceneLabel } from '../../global/SceneControls';
 import IllustrationWorld from './IllustrationWorld';
+import { FILM_END } from '../../../data/wonderpopFilm';
+import { JOURNEY_END } from '../../../data/journeyChapters';
 import usePlazaDialog from './usePlazaDialog';
 import styles from '../css/wonderpopStory.module.css';
 
@@ -21,13 +23,14 @@ const questions = [
   { es: '¿Se puede comprar aquí?', en: 'Can I shop here?', answer: 'Esta es una experiencia de un universo ficticio. Las tiendas y los objetos muestran lo que imaginamos para WonderPop; las fotografías son conceptos visuales. No se realizan compras ni reservas desde este recorrido.', english: 'This is an experience set in a fictional universe. The shops and objects show what we imagine for WonderPop; the photographs are visual concepts. There are no purchases or bookings in this journey.', href: '/nosotros', link: 'Conoce nuestra historia', enLink: 'Meet the world’s creators' },
 ];
 
-export default function WonderPopStory({ en = false }) {
+export default function WonderPopStory({ en = false, filmMode = false }) {
   const dialog = useRef(null), { open, close } = usePlazaDialog(dialog);
   const [selected, setSelected] = useState(keepsakes[0]);
   const [speaker, setSpeaker] = useState(0), [question, setQuestion] = useState(0);
   const faq = questions[question], visitor = conversations[speaker];
   const show = item => { setSelected(item); open(); };
   return <>
+    {!filmMode && <>
     <section className={`${styles.scene} ${styles.shop}`} data-world-scene="gallery" id="galeria-wonderpop" aria-label={en ? 'The souvenir boutique' : 'La tienda de los recuerdos'}>
       <div className={styles.visual}><IllustrationWorld source="shop-v20.webp" kind="shop" from={1.075} to={1.43} /></div>
       <div className={styles.shade} />
@@ -61,10 +64,12 @@ export default function WonderPopStory({ en = false }) {
       </div>
     </section>
 
+    </>}
+
     <section className={`${styles.scene} ${styles.interview}`} data-world-scene="interview" data-pose={question % 2} id="preguntas-wonderpop" aria-label={en ? 'A few questions before you go' : 'Unas preguntas antes de irte'}>
-      <div className={styles.visual}><IllustrationWorld source="interview-v20.webp" gesture="interview-gesture-v20.webp" kind="interview" from={1.75} to={2.18} /></div>
+      <div className={styles.visual}><IllustrationWorld source="interview-v20.webp" gesture="interview-gesture-v20.webp" kind="interview" from={filmMode ? FILM_END : 1.75} to={filmMode ? JOURNEY_END : 2.18} /></div>
       <div className={styles.interviewCopy} data-world-copy="interview" data-lenis-prevent>
-        <SceneLabel>09 / {en ? 'BEFORE YOU GO' : 'ANTES DE IRTE'}</SceneLabel>
+        <SceneLabel>{filmMode ? '07' : '09'} / {en ? 'BEFORE YOU GO' : 'ANTES DE IRTE'}</SceneLabel>
         <h2>{en ? <>One more<br />{' '}<em>question…</em></> : <>Una última<br />{' '}<em>preguntita…</em></>}</h2>
         <div className={styles.questions} aria-label={en ? 'Choose a question' : 'Elige una pregunta'}>
           {questions.map((item, i) => <button key={item.es} type="button" id={`question-${i}`} aria-controls="wonderpop-answer" aria-expanded={i === question} onClick={() => setQuestion(i)}><span>{String(i + 1).padStart(2, '0')}</span>{en ? item.en : item.es}<b aria-hidden="true">{i === question ? '−' : '+'}</b></button>)}
@@ -95,10 +100,10 @@ export default function WonderPopStory({ en = false }) {
       <svg viewBox="0 0 200 200"><defs><linearGradient id="journey-star-gold" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#fff2bb" /><stop offset=".48" stopColor="#edb84c" /><stop offset="1" stopColor="#a85a30" /></linearGradient></defs><path d="M100 7 125 69 191 76 141 120 155 185 100 150 45 185 59 120 9 76 75 69Z" fill="url(#journey-star-gold)" stroke="#ffedb0" strokeWidth="3" /><path d="m100 7 0 95 25-33Zm91 69-91 26 41 18Zm-36 109-55-83v48ZM45 185l55-83-41 18ZM9 76l91 26-25-33Z" fill="#fff2b7" opacity=".5" /></svg>
     </div>
 
-    <dialog ref={dialog} className={styles.album} aria-labelledby="keepsake-title" data-keepsake-dialog data-lenis-prevent onClick={event => { if (event.target === dialog.current) close(); }}>
+    {!filmMode && <dialog ref={dialog} className={styles.album} aria-labelledby="keepsake-title" data-keepsake-dialog data-lenis-prevent onClick={event => { if (event.target === dialog.current) close(); }}>
       <button className={styles.close} type="button" onClick={close} aria-label={en ? 'Close album' : 'Cerrar álbum'}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" /></svg></button>
       <img src={`/image/journey/photo-${selected.id}-v20.webp`} alt={en ? `Concept photograph: ${selected.en}` : `Fotografía conceptual: ${selected.es}`} width="1536" height="1024" loading="lazy" draggable="false" />
       <div className={styles.albumText}><span>{en ? 'THE WONDERPOP KEEPSAKE ALBUM' : 'EL ÁLBUM DE RECUERDOS DE WONDERPOP'}</span><h2 id="keepsake-title">{en ? selected.en : selected.es}</h2><p>{en ? selected.english : selected.text}</p><SceneButton href="/wonderpop-plaza">{en ? 'Discover WonderPop Plaza' : 'Conoce WonderPop Plaza'}</SceneButton><small>{en ? 'Imagined objects · AI-created concept photography · Not for sale' : 'Objetos imaginados · Fotografía conceptual creada con IA · Sin venta'}</small></div>
-    </dialog>
+    </dialog>}
   </>;
 }

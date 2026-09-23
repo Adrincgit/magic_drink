@@ -3,6 +3,7 @@ import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import { createWorldDirector, OPENING_END } from './worldMotion';
 import { mountPointerDepth } from './pointerDepth';
+import { FILM_END, FILM_REVEAL, filmMoment, filmShots } from '../../../data/wonderpopFilm';
 import { JOURNEY_END } from '../../../data/journeyChapters';
 
 const clamp = (n, a = 0, b = 1) => Math.max(a, Math.min(b, n));
@@ -68,9 +69,25 @@ export function mountJourney(root, onChapter) {
       root.dataset.progress = '0';
       root.dataset.worldProgress = '0';
       world.render(0, width, height, true);
+      // In the linear accessible version, theme the controls from the article
+      // at the viewport's center rather than the cinematic scroll coordinate.
+      const film = query('[data-wonderpop-film]');
+      const bounds = film?.getBoundingClientRect();
+      const center = innerHeight * .45;
+      let monochrome = 0;
+      if (bounds && bounds.top < center && bounds.bottom > center) {
+        const articles = [...film.querySelectorAll('article')];
+        const article = articles.find(el => el.getBoundingClientRect().bottom > center);
+        monochrome = article ? 1 - Number(article.style.getPropertyValue('--color')) : 0;
+      }
+      root.style.setProperty('--journey-ui-monochrome', String(monochrome));
       return;
     }
     const worldProgress = clamp((scrollY - start) / distance) * JOURNEY_END;
+    const monochrome = worldProgress < FILM_END
+      ? (1 - filmShots[filmMoment(worldProgress).index].color) * phase(worldProgress, FILM_REVEAL, .82)
+      : 0;
+    root.style.setProperty('--journey-ui-monochrome', monochrome.toFixed(3));
     const p = clamp(worldProgress / OPENING_END);
     if (p !== lastOpening || worldProgress < 0.41) {
       const toCity = phase(p, 0.06, 0.42);
@@ -162,7 +179,7 @@ export function mountJourney(root, onChapter) {
       const openingPosition = isWorld ? p / OPENING_END : p;
       const target =
         isWorld && p >= OPENING_END
-          ? query(`[data-world-copy="${p < .62 ? 'festival' : p < .86 ? 'plaza' : p < 1.075 ? 'interior' : p < 1.43 ? 'gallery' : p < 1.75 ? 'visitors' : 'interview'}"]`)
+          ? query(`[data-world-copy="${p < .62 ? 'festival' : p < .86 ? 'plaza' : p < FILM_END ? 'interior' : 'interview'}"]`)
           : copies[openingPosition < .23 ? 0 : openingPosition < .67 ? 1 : 2];
       target.scrollIntoView({ behavior: 'instant', block: 'start' });
       return;
@@ -202,11 +219,11 @@ export function mountJourney(root, onChapter) {
   configureScroll();
   root.dataset.ready = 'true';
   const initialChapter = { '#ciudad': 0.45, '#hexy': 0.87 }[location.hash];
-  const initialWorld = { '#festival': .49, '#wonderpop': .68, '#directorio-wonderpop': .96, '#galeria-wonderpop': 1.25, '#entre-amigos': 1.59, '#preguntas-wonderpop': 1.89, '#la-original': .96 }[location.hash];
+  const initialWorld = { '#festival': .49, '#wonderpop': .68, '#directorio-wonderpop': .92, '#galeria-wonderpop': 2.08, '#entre-amigos': 2.31, '#preguntas-wonderpop': 2.64, '#la-original': 1.97 }[location.hash];
   if (initialWorld !== undefined) {
     requestAnimationFrame(() => {
       if (disposed) return;
-      if (reduced.matches) (initialWorld === .96 ? query('[data-world-copy="interior"]') : query(location.hash))?.scrollIntoView();
+      if (reduced.matches) (initialWorld >= .86 && initialWorld < FILM_END ? query('[data-world-copy="interior"]') : query(location.hash))?.scrollIntoView();
       else window.scrollTo({ top: start + initialWorld * distance / JOURNEY_END, behavior: 'instant' });
     });
   }

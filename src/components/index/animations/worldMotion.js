@@ -1,5 +1,6 @@
 ﻿import { gsap } from 'gsap';
 
+import { FILM_END, FILM_REVEAL } from '../../../data/wonderpopFilm';
 import { JOURNEY_END } from '../../../data/journeyChapters';
 
 export const OPENING_END = 0.36;
@@ -74,7 +75,7 @@ export function createWorldDirector(root) {
           element.inert = false;
           element.removeAttribute('aria-hidden');
         });
-        [festival, plaza, gallery, visitors, interview, farewell].forEach(el => { el.inert = false; el.removeAttribute('aria-hidden'); });
+        [festival, plaza, gallery, visitors, interview, farewell].filter(Boolean).forEach(el => { el.inert = false; el.removeAttribute('aria-hidden'); });
         previous = null;
         return;
       }
@@ -142,36 +143,31 @@ export function createWorldDirector(root) {
         copy('plaza', phase(r, 0.642, 0.667) * (1 - phase(r, 0.711, 0.742)), -30 * walk);
       }
 
-      if (active(0.78, 1.12)) {
-        const indoors = phase(r, 0.785, 0.803);
-        gsap.set(interior, { autoAlpha: r < 1.075 ? indoors : 0 });
-        interior.dataset.worldActive = String(r > 0.79 && r < 1.075 && !document.hidden);
-        // The WebGL room (or its still fallback) owns the complete viewport.
-        // Its camera moves internally; the containing canvas must not scale.
-        gsap.set(atriumWorld, { scale: 1, x: 0, y: 0 });
-        gsap.set(atrium, { scale: 1 });
-        copy('interior', phase(r, 0.86, 0.875) * (1 - phase(r, 0.897, 0.925)), 0);
+      if (active(FILM_REVEAL, FILM_END + .05)) {
+        const opacity = r < FILM_END ? phase(r, FILM_REVEAL, .803) : 0;
+        gsap.set(interior, { autoAlpha: opacity });
+        interior.inert = opacity < .5;
+        interior.setAttribute('aria-hidden', String(interior.inert));
+        interior.dataset.worldActive = String(opacity > 0 && !document.hidden);
       }
 
-      const ending = phase(r, 2.055, 2.135);
-      [[gallery, 1.075, 1.43], [visitors, 1.43, 1.75], [interview, 1.75, JOURNEY_END + .01]].forEach(([element, from, to]) => {
+      const ending = phase(r, JOURNEY_END - .125, JOURNEY_END - .045);
+      [[interview, FILM_END, JOURNEY_END + .01]].forEach(([element, from, to]) => {
         const visible = r >= from && r < to;
         gsap.set(element, { autoAlpha: visible ? 1 : 0 });
         element.inert = !visible || (element === interview && ending > .5);
         element.setAttribute('aria-hidden', String(element.inert));
         element.dataset.worldActive = String(visible && !document.hidden);
       });
-      copy('gallery', phase(r, 1.095, 1.145) * (r < 1.43 ? 1 : 0));
-      copy('visitors', phase(r, 1.45, 1.495) * (r < 1.75 ? 1 : 0));
-      copy('interview', phase(r, 1.77, 1.81) * (1 - ending));
+      copy('interview', phase(r, FILM_END + .02, FILM_END + .06) * (1 - ending));
       gsap.set(farewell, { autoAlpha: ending, y: 16 * (1 - ending) });
       farewell.inert = ending < .5;
       farewell.setAttribute('aria-hidden', String(ending < .5));
       // A golden shop pendant approaches the lens and fully covers each cut.
       // The same reversible crossing works when scrolling back to a scene.
-      const cut = [1.075, 1.43, 1.75].find(value => Math.abs(r - value) < .048);
+      const cut = [FILM_END].find(value => Math.abs(r - value) < .024);
       if (cut !== undefined) {
-        const p = clamp((r - cut + .048) / .096);
+        const p = clamp((r - cut + .024) / .048);
         const cover = phase(p, 0, .16) * (1 - phase(p, .65, 1));
         gsap.set(passage, { xPercent: -50, yPercent: -50, x: width * .32 * (1 - phase(p, 0, .45)), y: -height * .32 * (1 - phase(p, 0, .45)), scale: mix(.02, 9, phase(p, 0, .55)), rotation: mix(-12, 20, p), autoAlpha: cover });
       } else gsap.set(passage, { autoAlpha: 0 });
@@ -193,7 +189,7 @@ export function createWorldDirector(root) {
         });
       }
       root.dataset.worldChapter =
-        r < .36 ? 'opening' : r < .62 ? 'festival' : r < .86 ? 'wonderpop' : r < 1.075 ? 'atrium' : r < 1.43 ? 'gallery' : r < 1.75 ? 'visitors' : r < 2.09 ? 'interview' : 'farewell';
+        r < .36 ? 'opening' : r < .62 ? 'festival' : r < .86 ? 'wonderpop' : r < FILM_END ? 'film' : r < JOURNEY_END - .09 ? 'interview' : 'farewell';
       previous = r;
     },
   };

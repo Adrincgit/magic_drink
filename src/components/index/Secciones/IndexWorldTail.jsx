@@ -4,9 +4,8 @@ import GardenWorld from './GardenWorld';
 import DJSequence from './DJSequence';
 import FestivalCrowdMotion from './FestivalCrowdMotion';
 import WonderPopStory from './WonderPopStory';
-import AtriumWorld from './AtriumWorld';
+import WonderpopFilm from './WonderpopFilm';
 import styles from '../css/indexWorldTail.module.css';
-import atriumStyles from '../css/atrium.module.css';
 
 import depth from '../css/festivalDepth.module.css'; // Audience planes and sky animation.
 
@@ -151,40 +150,9 @@ function IndexWorldTail({ en = false }) {
         </div>
       </section>
 
-      <div className={`${styles.interior} ${atriumStyles.room}`} data-world-interior aria-hidden="true">
-        <div className={styles.atriumWorld} data-atrium-world>
-          <AtriumWorld />
-        </div>
-        <div className={styles.interiorShade} />
-      </div>
-      <section
-        className={`${styles.copy} ${styles.interiorCopy} ${atriumStyles.intro}`}
-        data-world-copy="interior"
-        aria-label={en ? 'Inside WonderPop Plaza' : 'Dentro de WonderPop Plaza'}
-      >
-        <SceneLabel>06 / WONDERPOP PLAZA</SceneLabel>
-        <h2>
-          {en ? (
-            <>
-              Welcome to
-              <br />
-              <em>WonderPop.</em>
-            </>
-          ) : (
-            <>
-              Bienvenido a
-              <br />
-              <em>WonderPop.</em>
-            </>
-          )}
-        </h2>
-        <SceneNote>{en
-            ? 'Official shops, games, music and Magic Bunnies. Welcome to Magic Drink’s shopping plaza.'
-            : 'Tiendas oficiales, juegos, música y Magic Bunnies. Bienvenido al centro comercial de Magic Drink.'}</SceneNote>
-        <span className={styles.keepGoing}>{en ? 'YOUR VISIT STARTS HERE' : 'TU VISITA EMPIEZA AQUÍ'} <span aria-hidden="true">↓</span></span>
-      </section>
+      <WonderpopFilm en={en} />
 
-      <WonderPopStory en={en} />
+      <WonderPopStory en={en} filmMode />
 
       <div className={styles.passingLeaves} data-passing-leaves aria-hidden="true">
         <img src={`${art}foliage.webp`} alt="" width="1254" height="1254" />

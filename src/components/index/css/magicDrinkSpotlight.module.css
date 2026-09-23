@@ -1,0 +1,41 @@
+.spotlight {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+  background: #382054;
+  filter: grayscale(calc(1 - var(--color, 1)));
+}
+.backdrop { position: absolute; inset: 0; overflow: hidden; pointer-events: none; background: radial-gradient(ellipse at 50% 46%, #d09dbc, #793e8e 42%, #41235b 74%, #251632); }
+.rays { position: absolute; inset: 0; width: 100%; height: 100%; }
+.spin { transform-origin: 500px 500px; opacity: .6; animation: burstTurn 64s steps(768) infinite; }
+.counterSpin { transform-origin: 500px 500px; opacity: .34; animation: burstTurn 100s steps(1200) infinite reverse; }
+.halftone { position: absolute; inset: 0; background: radial-gradient(circle, #210d3980 1px, transparent 1.6px) 0 0 / 7px 7px; mask-image: radial-gradient(ellipse, transparent 23%, #0009 62%, #000); }
+.halo { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 46%, #ffe7c5e0, #e5a4d26b 25%, transparent 58%); }
+.silhouette { position: absolute; left: var(--x); top: var(--y); width: clamp(52px, 10vw, 150px); aspect-ratio: 1; background: #f7c2df; opacity: .15; transform: translate(-50%, -50%) rotate(var(--turn)); animation: silhouetteDrift 7s steps(84) var(--delay) infinite alternate; }
+.bunny { mask-image: url('/image/journey/bunny-wave-v17.webp'); mask-size: 300% 200%; mask-position: 0 0; mask-repeat: no-repeat; }
+.star { clip-path: polygon(50% 0, 62% 34%, 99% 36%, 70% 58%, 80% 95%, 50% 73%, 20% 95%, 30% 58%, 1% 36%, 38% 34%); }
+.confetti { position: absolute; inset: 0; }
+.confetti i { position: absolute; left: var(--x); top: -10%; width: var(--size); height: calc(var(--size) * .6); background: currentColor; opacity: .8; animation: confettiFall var(--duration) steps(96) var(--delay) infinite; }
+.confetti .star { height: var(--size); }
+.confetti .ribbon { width: calc(var(--size) * .4); height: calc(var(--size) * 1.5); border-radius: 2px; }
+.spotlight .can { position: relative; z-index: 1; height: 78%; width: 78%; object-fit: contain; transform: scale(calc(.94 + var(--shot-p, 0) * .16)); transform-origin: 50% 90%; filter: drop-shadow(0 0 2px #ffe9b8) drop-shadow(12px 18px 12px #26123c99); }
+.seal { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 2; padding: 8px 15px; border: 1px solid #f1cd8880; background: #372340db; color: #fff0bd; font-size: 8px; letter-spacing: .2em; white-space: nowrap; }
+@keyframes burstTurn { to { transform: rotate(360deg); } }
+@keyframes silhouetteDrift { to { transform: translate(-50%, calc(-50% - 10px)) rotate(calc(var(--turn) + 8deg)); } }
+@keyframes confettiFall { from { transform: translate3d(0, -5vh, 0) rotate(0); } to { transform: translate3d(var(--drift), 95vh, 0) rotate(var(--turn)); } }
+@media (max-width: 600px) {
+  .spotlight .can { width: 94%; }
+  .seal { font-size: 6px; letter-spacing: .12em; padding: 6px 8px; bottom: 25px; }
+  .silhouette { width: 68px; opacity: .13; }
+  .confetti i { width: calc(var(--size) * .7); height: calc(var(--size) * .45); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spotlight { height: 450px; }
+  .spotlight .can { height: 78%; transform: none; }
+  .spin, .counterSpin, .silhouette, .confetti i { animation: none; }
+  .confetti i { top: var(--y); transform: rotate(var(--turn)); }
+}

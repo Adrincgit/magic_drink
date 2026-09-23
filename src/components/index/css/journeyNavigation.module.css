@@ -1,4 +1,5 @@
 .navigation {
+  filter: grayscale(var(--journey-ui-monochrome, 0));
   position: absolute;
   z-index: 40;
   bottom: max(12px, env(safe-area-inset-bottom));
