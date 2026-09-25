@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { openLanding, goWorld } from './landing.helpers';
+import { journeyChapters, JOURNEY_END } from '../src/data/journeyChapters';
 
 for (const { name, viewport, reducedMotion } of [
   { name: 'desktop', viewport: { width: 1440, height: 900 }, reducedMotion: 'no-preference' },
@@ -50,7 +51,7 @@ for (const { name, viewport, reducedMotion } of [
 test('one navigation spans all seven chapters, works backwards and reflects the complete journey', async ({ page }) => {
   await openLanding(page);
   const nav = page.locator('[data-journey-navigation]');
-  const stops = [0, .162, .3132, .49, .68, .92, 2.64];
+  const stops = journeyChapters.map(chapter => chapter.at);
   await expect(nav.getByRole('button')).toHaveCount(7);
   for (const [width, height] of [[1440, 900], [390, 844]]) {
     await page.setViewportSize({ width, height });
@@ -62,16 +63,16 @@ test('one navigation spans all seven chapters, works backwards and reflects the 
       await expect(nav.getByRole('button').nth(index)).toHaveAttribute('aria-pressed', 'true');
       await expect(nav.locator('[data-journey-label] b')).toHaveText(`${String(index + 1).padStart(2, '0')} / 07`);
     }
-    await goWorld(page, 2.93);
+    await goWorld(page, JOURNEY_END);
     await expect.poll(() => nav.locator('[data-progress-bar]').evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m11)).toBe(1);
   }
   await page.setViewportSize({ width: 1440, height: 900 });
-  await goWorld(page, 2.93);
+  await goWorld(page, JOURNEY_END);
   await page.locator('[data-journey-menu-trigger]').click();
   await page.getByRole('button', { name: 'EN', exact: true }).first().click();
   await page.keyboard.press('Escape');
   await expect(nav).toHaveAttribute('aria-label', 'Journey scenes');
-  await expect(nav.locator('[data-journey-label]')).toContainText('BEFORE YOU GO');
+  await expect(nav.locator('[data-journey-label]')).toContainText('HEXY ANSWERS');
 });
 
 test('the film fills the doorway throughout the entrance, including reverse scrolling', async ({ page }) => {
@@ -116,7 +117,7 @@ test('the compact cover follows next song and playlist selection; artwork cannot
     await page.setViewportSize({ width, height });
     await goWorld(page, 1);
     for (const button of await page.locator('[data-journey-navigation] button, [data-atrium-directory] a').all()) await button.click({ trial: true });
-    await goWorld(page, 2.93);
+    await goWorld(page, JOURNEY_END);
     await page.locator('[data-world-farewell] button').click({ trial: true });
     const cover = await player.locator('[data-current-cover]').boundingBox();
     const text = await player.locator('strong').first().boundingBox();

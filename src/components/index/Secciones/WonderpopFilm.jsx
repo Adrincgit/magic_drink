@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { FILM_END, filmShots, filmLocations, mapPoint, filmMoment } from '../../../data/wonderpopFilm';
+import { INTERVIEW_ENTRY } from '../../../data/hexyInterviewTiming';
 import land from '../../../data/wonderpopWorldMap.json';
 import styles from '../css/wonderpopFilm.module.css';
 import MagicDrinkSpotlight from './MagicDrinkSpotlight';
@@ -109,7 +110,7 @@ export default function WonderpopFilm({ en = false }) {
         <p key={shot.id}>{shot.caption[en ? 1 : 0]}</p>
       </div>
       <div className={styles.reel} aria-hidden="true">{filmShots.map((item, i) => <i key={item.id} data-current={i === index} data-past={i < index} />)}</div>
-      <a className={styles.skip} href="#preguntas-wonderpop" data-go-world={FILM_END + .12}>{en ? 'Continue the visit' : 'Continuar la visita'} <span aria-hidden="true">↓</span></a>
+      <a className={styles.skip} href="#preguntas-wonderpop" data-go-world={INTERVIEW_ENTRY}>{en ? 'Continue the visit' : 'Continuar la visita'} <span aria-hidden="true">↓</span></a>
     </>}
   </section>;
 }

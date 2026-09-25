@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { SceneButton, SceneLabel } from '../../global/SceneControls';
 import IllustrationWorld from './IllustrationWorld';
+import HexyInterview from './HexyInterview';
 import { FILM_END } from '../../../data/wonderpopFilm';
 import { JOURNEY_END } from '../../../data/journeyChapters';
 import usePlazaDialog from './usePlazaDialog';
@@ -66,7 +67,7 @@ export default function WonderPopStory({ en = false, filmMode = false }) {
 
     </>}
 
-    <section className={`${styles.scene} ${styles.interview}`} data-world-scene="interview" data-pose={question % 2} id="preguntas-wonderpop" aria-label={en ? 'A few questions before you go' : 'Unas preguntas antes de irte'}>
+    {filmMode ? <HexyInterview en={en} /> : <section className={`${styles.scene} ${styles.interview}`} data-world-scene="interview" data-pose={question % 2} id="preguntas-wonderpop" aria-label={en ? 'A few questions before you go' : 'Unas preguntas antes de irte'}>
       <div className={styles.visual}><IllustrationWorld source="interview-v20.webp" gesture="interview-gesture-v20.webp" kind="interview" from={filmMode ? FILM_END : 1.75} to={filmMode ? JOURNEY_END : 2.18} /></div>
       <div className={styles.interviewCopy} data-world-copy="interview" data-lenis-prevent>
         <SceneLabel>{filmMode ? '07' : '09'} / {en ? 'BEFORE YOU GO' : 'ANTES DE IRTE'}</SceneLabel>
@@ -81,7 +82,7 @@ export default function WonderPopStory({ en = false, filmMode = false }) {
         </div>
       </div>
       <span className={styles.employeeLabel}>{en ? 'Ask away. You’re among friends.' : 'Pregunta con confianza. Estás entre amigos.'}</span>
-    </section>
+    </section>}
 
     <section className={styles.farewell} data-world-farewell aria-label={en ? 'The visit ends here' : 'El final del recorrido'}>
       <span className={styles.endStar} aria-hidden="true">✦</span>

@@ -5,6 +5,7 @@ import { createWorldDirector, OPENING_END } from './worldMotion';
 import { mountPointerDepth } from './pointerDepth';
 import { FILM_END, FILM_REVEAL, filmMoment, filmShots } from '../../../data/wonderpopFilm';
 import { JOURNEY_END } from '../../../data/journeyChapters';
+import { INTERVIEW_ENTRY } from '../../../data/hexyInterviewTiming';
 
 const clamp = (n, a = 0, b = 1) => Math.max(a, Math.min(b, n));
 const mix = (a, b, p) => a + (b - a) * p;
@@ -219,7 +220,7 @@ export function mountJourney(root, onChapter) {
   configureScroll();
   root.dataset.ready = 'true';
   const initialChapter = { '#ciudad': 0.45, '#hexy': 0.87 }[location.hash];
-  const initialWorld = { '#festival': .49, '#wonderpop': .68, '#directorio-wonderpop': .92, '#galeria-wonderpop': 2.08, '#entre-amigos': 2.31, '#preguntas-wonderpop': 2.64, '#la-original': 1.97 }[location.hash];
+  const initialWorld = { '#festival': .49, '#wonderpop': .68, '#directorio-wonderpop': .92, '#galeria-wonderpop': 2.08, '#entre-amigos': 2.31, '#preguntas-wonderpop': INTERVIEW_ENTRY, '#la-original': 1.97 }[location.hash];
   if (initialWorld !== undefined) {
     requestAnimationFrame(() => {
       if (disposed) return;

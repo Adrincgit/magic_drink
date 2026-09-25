@@ -2,6 +2,7 @@
 
 import { FILM_END, FILM_REVEAL } from '../../../data/wonderpopFilm';
 import { JOURNEY_END } from '../../../data/journeyChapters';
+import { INTERVIEW_FADE_START, INTERVIEW_READY } from '../../../data/hexyInterviewTiming';
 
 export const OPENING_END = 0.36;
 const clamp = (n) => Math.max(0, Math.min(1, n));
@@ -159,7 +160,7 @@ export function createWorldDirector(root) {
         element.setAttribute('aria-hidden', String(element.inert));
         element.dataset.worldActive = String(visible && !document.hidden);
       });
-      copy('interview', phase(r, FILM_END + .02, FILM_END + .06) * (1 - ending));
+      copy('interview', phase(r, INTERVIEW_FADE_START, INTERVIEW_READY) * (1 - ending));
       gsap.set(farewell, { autoAlpha: ending, y: 16 * (1 - ending) });
       farewell.inert = ending < .5;
       farewell.setAttribute('aria-hidden', String(ending < .5));
