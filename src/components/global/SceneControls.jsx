@@ -21,7 +21,7 @@ export function SceneButton({ children, href, variant = 'gold', icon = 'arrow', 
     <span className={styles.seal} aria-hidden="true"><SceneStar /></span>
     <span className={styles.buttonText}>{children}</span>
     {showArrow && <svg className={styles.arrow} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      {icon === 'play' ? <path d="m8 5 11 7-11 7Z" fill="currentColor" stroke="none" /> : <path d="M5 18 18 5M6 5h12v12" />}
+      {icon === 'play' ? <path d="m8 5 11 7-11 7Z" fill="currentColor" stroke="none" /> : icon === 'pause' ? <path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor" stroke="none" /> : <path d="M5 18 18 5M6 5h12v12" />}
     </svg>}
   </Tag>;
 }
