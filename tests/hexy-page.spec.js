@@ -8,6 +8,28 @@ const audioState = (page) => page.locator('audio').evaluate(audio => ({
   paused: audio.paused, time: audio.currentTime, duration: audio.duration, src: audio.currentSrc, loop: audio.loop,
 }));
 
+for (const width of [320, 390]) {
+  test(`the expanded player scrolls its complete queue inside the phone at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    await openHexy(page);
+    const trigger = page.getByRole('button', { name: 'Explore songs', exact: true });
+    await trigger.click();
+    const room = page.locator('[data-listening-room]');
+    const bounds = await room.boundingBox();
+    expect(bounds.x).toBeGreaterThanOrEqual(0);
+    expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
+    expect(bounds.y + bounds.height).toBeLessThanOrEqual(844);
+    const previousScroll = await page.evaluate(() => scrollY);
+    await room.getByRole('button', { name: 'Play Roundy-Round' }).click();
+    await expect.poll(async () => (await audioState(page)).paused).toBe(false);
+    expect(await page.evaluate(() => scrollY)).toBe(previousScroll);
+    expect(await room.evaluate(el => el.scrollWidth - el.clientWidth)).toBe(0);
+    await page.keyboard.press('Escape');
+    await expect(trigger).toBeFocused();
+    expect((await audioState(page)).paused).toBe(false);
+  });
+}
+
 test('hero playback, pause and keyboard seeking control one real audio element', async ({ page }) => {
   await openHexy(page);
   await expect(page.locator('audio')).toHaveCount(1);
@@ -25,31 +47,43 @@ test('hero playback, pause and keyboard seeking control one real audio element',
   await expect.poll(async () => (await audioState(page)).time).toBeCloseTo(5, 0);
 });
 
-test('explore jumps to playable covers and the mini player follows the same song', async ({ page }) => {
+test('expanded listening room preserves playback, focus and scroll, and shares the mini player', async ({ page }) => {
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await openHexy(page);
-  await page.getByRole('link', { name: 'Explore songs', exact: true }).click();
-  await expect(page.locator('#canciones')).toBeFocused();
-  await expect(page.getByRole('heading', { name: 'Which one stays with you?' })).toBeInViewport();
-  const songs = page.locator('#canciones');
-  await expect(songs.getByRole('button')).toHaveCount(6);
+  const trigger = page.getByRole('button', { name: 'Explore songs', exact: true });
+  const beforeScroll = await page.evaluate(() => scrollY);
+  await trigger.click();
+  const songs = page.locator('[data-listening-room]');
+  await expect(songs).toBeVisible();
+  await expect(songs.getByRole('group', { name: 'Choose a song' }).getByRole('button')).toHaveCount(6);
   await songs.getByRole('button', { name: 'Play Hexy Wow', exact: true }).click();
-  const mini = page.getByRole('complementary', { name: 'Mini player' });
-  await expect(mini).toBeVisible();
-  await expect(mini).toContainText('Hexy Wow');
-  await expect.poll(async () => (await audioState(page)).src).toContain('hexy_wow_demo');
   await expect.poll(async () => (await audioState(page)).time).toBeGreaterThan(.1);
-  await mini.getByRole('button', { name: 'Pause', exact: true }).click();
-  await expect(mini).toContainText('Paused');
-  await songs.getByRole('button', { name: 'Play Hexy Wow', exact: true }).click();
-  await expect(songs.getByRole('button', { name: 'Pause Hexy Wow' })).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('audio').evaluate(audio => { audio.currentTime = 20; });
+  await page.keyboard.press('Escape');
+  await expect(songs).not.toBeVisible();
+  await expect(trigger).toBeFocused();
+  expect(await page.evaluate(() => scrollY)).toBeCloseTo(beforeScroll, 0);
+  expect((await audioState(page)).paused).toBe(false);
+  expect((await audioState(page)).time).toBeGreaterThanOrEqual(20);
+  await page.locator('#estudio').scrollIntoViewIfNeeded();
+  const mini = page.getByRole('complementary', { name: 'Mini player' });
+  await expect(mini).toContainText('Hexy Wow');
+  const expand = mini.getByRole('button', { name: 'Expand player' });
+  await expand.click();
+  await expect(songs.getByRole('heading')).toHaveText('Hexy Wow');
+  await expect(songs.locator('[data-vinyl]')).toHaveCSS('animation-play-state', 'running');
+  await songs.getByRole('button', { name: 'Pause', exact: true }).click();
+  await expect(songs.locator('[data-vinyl]')).toHaveCSS('animation-play-state', 'paused');
+  const slider = songs.getByRole('slider', { name: 'Song position' });
+  await slider.focus(); await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight');
+  expect((await audioState(page)).time).toBeCloseTo(1, 0);
+  await songs.getByRole('button', { name: 'Play Dancing Re-Re' }).click();
+  await songs.getByRole('button', { name: 'Close listening room' }).click();
+  await expect(expand).toBeFocused();
+  await expect(mini).toContainText('Dancing Re-Re');
   await mini.getByRole('button', { name: 'Close player and pause' }).click();
   await expect(mini).toHaveCount(0);
   expect((await audioState(page)).paused).toBe(true);
-  await page.locator('main section').last().scrollIntoViewIfNeeded();
-  await expect(mini).toHaveCount(0);
-  await songs.getByRole('button', { name: 'Play Dancing Re-Re' }).click();
-  await expect(mini).toContainText('Dancing Re-Re');
   await expect(page.locator('audio')).toHaveCount(1);
   expect(errors).toEqual([]);
 });
@@ -96,8 +130,9 @@ test('next, repeat, shuffle and automatic advance stay synchronized', async ({ p
 test('a failed song shows retry and recovers without creating another player', async ({ page }) => {
   await openHexy(page);
   await page.route('**/hexy_wow_demo.mp3', route => route.abort());
+  await page.getByRole('button', { name: 'Explore songs', exact: true }).click();
   await page.locator('#canciones').getByRole('button', { name: 'Play Hexy Wow', exact: true }).click();
-  const mini = page.getByRole('complementary', { name: 'Mini player' });
+  const mini = page.locator('[data-listening-room]');
   await expect(mini.getByRole('status')).toContainText('could not be loaded');
   await page.unroute('**/hexy_wow_demo.mp3');
   await mini.getByRole('button', { name: 'Try again' }).click();
@@ -123,6 +158,7 @@ test('Spanish playback labels and headline follow the language switch', async ({
   await page.getByRole('button', { name: 'Escuchar música' }).click();
   await expect(page.getByRole('button', { name: 'Pausar música' })).toBeVisible();
   await expect(page.getByRole('slider', { name: 'Posición de la canción' })).toBeVisible();
+  await page.getByRole('button', { name: 'Explorar canciones', exact: true }).click();
   await expect(page.locator('#canciones').getByRole('button', { name: 'Pausar No Brain, Just Vibes!' })).toHaveAttribute('aria-pressed', 'true');
 });
 
@@ -132,7 +168,7 @@ for (const width of [320, 390, 768, 1024]) {
     await openHexy(page);
     await page.getByRole('button', { name: 'Listen to music', exact: true }).click();
     await expect.poll(async () => (await audioState(page)).paused).toBe(false);
-    await page.locator('#canciones').scrollIntoViewIfNeeded();
+    await page.locator('#estudio').scrollIntoViewIfNeeded();
     const mini = page.getByRole('complementary', { name: 'Mini player' });
     await expect(mini).toBeVisible();
     const bounds = await mini.boundingBox();

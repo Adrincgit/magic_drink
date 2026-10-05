@@ -23,6 +23,9 @@ export default function HexyAudioProvider({ children }) {
   const [repeat, setRepeat] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [expanded, setExpanded] = useState(false);
+  const openExpanded = useCallback(() => setExpanded(true), []);
+  const closeExpanded = useCallback(() => setExpanded(false), []);
 
   const play = useCallback(() => {
     const audio = audioRef.current;
@@ -123,9 +126,9 @@ export default function HexyAudioProvider({ children }) {
   const playback = useMemo(() => ({
     playlist, track: playlist[trackIndex], trackIndex, isPlaying, hasStarted,
     dismissed, error, shuffle, repeat, play, pause, togglePlay, chooseTrack,
-    next, previous, toggleShuffle, toggleRepeat, dismiss,
+    next, previous, toggleShuffle, toggleRepeat, dismiss, expanded, openExpanded, closeExpanded,
   }), [trackIndex, isPlaying, hasStarted, dismissed, error, shuffle, repeat,
-    play, pause, togglePlay, chooseTrack, next, previous, toggleShuffle, toggleRepeat, dismiss]);
+    play, pause, togglePlay, chooseTrack, next, previous, toggleShuffle, toggleRepeat, dismiss, expanded, openExpanded, closeExpanded]);
   const progress = useMemo(() => ({ currentTime, duration, seek }), [currentTime, duration, seek]);
 
   return (

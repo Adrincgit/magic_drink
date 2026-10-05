@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useStore } from '@nanostores/react';
 import { isEnglish } from '../../../data/variables';
 import HexyPlayer from '../components/HexyPlayer';
+import { useHexyAudio } from '../components/HexyAudioProvider';
+import useReducedMotion from '../components/useReducedMotion';
 import styles from '../css/hexySeccion1.module.css';
 
 const content = {
   es: {
     eyebrow: 'LA IDOL OFICIAL DE MAGIC DRINK',
-    titleSmall: 'Meet',
+    titleSmall: 'Conoce a',
     titleBig: 'Hexy',
     tagline: 'La voz detr\u00E1s de tu sensaci\u00F3n favorita.',
     description:
@@ -40,13 +42,27 @@ const content = {
 export default function HexySeccion1() {
   const ingles = useStore(isEnglish);
   const t = ingles ? content.en : content.es;
+  const { isPlaying, togglePlay } = useHexyAudio();
+  const reducedMotion = useReducedMotion();
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (reducedMotion) { video?.pause(); return; }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) video?.play().catch(() => {});
+      else video?.pause();
+    });
+    if (video) observer.observe(video);
+    return () => { observer.disconnect(); video?.pause(); };
+  }, [reducedMotion]);
 
   return (
     <section className={styles.hero}>
       <video
+        ref={videoRef}
         className={styles.bgVideo}
         poster="/image/backgrounds/hexy_bg1.webp"
-        autoPlay
         muted
         loop
         playsInline
@@ -79,14 +95,19 @@ export default function HexySeccion1() {
         <p className={styles.description}>{t.description}</p>
 
         <div className={styles.actions}>
-          <button className={styles.ctaPrimary}>
-            <span className={styles.playIcon}>{'\u25B6'}</span>
-            {t.ctaPrimary}
+          <button className={styles.ctaPrimary} onClick={togglePlay} type="button">
+            <span className={styles.playIcon} aria-hidden="true">{isPlaying ? 'Ⅱ' : '\u25B6'}</span>
+            {isPlaying ? (ingles ? 'Pause music' : 'Pausar música') : t.ctaPrimary}
           </button>
-          <button className={styles.ctaSecondary}>
-            <span className={styles.globeIcon}>{'\u2726'}</span>
+          <a className={styles.ctaSecondary} href="#canciones" onClick={(event) => {
+            event.preventDefault();
+            const songs = document.getElementById('canciones');
+            songs?.focus({ preventScroll: true });
+            songs?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'start' });
+          }}>
+            <span className={styles.globeIcon} aria-hidden="true">{'\u2726'}</span>
             {t.ctaSecondary}
-          </button>
+          </a>
         </div>
 
         <div className={styles.stats}>

@@ -308,6 +308,7 @@
   position: absolute;
   aspect-ratio: 2 / 3;
 }
+.lookoutPlane { z-index: 5; }
 .lamp img {
   position: relative;
   width: 100%;
@@ -571,6 +572,11 @@
   opacity: 0;
   visibility: hidden;
 }
+/* Empty space between the hero's copy and actions remains part of the scene. */
+.heroCopy { pointer-events: none; }
+.heroCopy > * { pointer-events: auto; }
+.heroCopy [data-hero-actions] { pointer-events: none; }
+.heroCopy [data-hero-actions] > * { pointer-events: auto; }
 
 .cityCopy {
   top: auto;

@@ -51,7 +51,7 @@ test('Magic Drink is the sole public name across all routes, navigation and meta
       expect(await page.title()).not.toMatch(/Original/i);
       expect(await page.locator('meta[name="description"]').getAttribute('content')).not.toMatch(/Original/i);
       if (route === '/bebidas') {
-        await expect(page.locator('main')).toContainText(lang === 'es' ? 'Saludable. Sin cafeína.' : 'Healthy. Caffeine free.');
+        await expect(page.locator('main')).toContainText(lang === 'es' ? 'Sin cafeína' : 'Caffeine free');
       }
     }
   }

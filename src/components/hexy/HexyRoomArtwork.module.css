@@ -1,0 +1,44 @@
+/* One camera for the room, its floor and every floor/desk contact. */
+.ground { position: absolute; inset: -4%; transform: translate3d(calc(var(--scene-x, 0px) * -.3), calc(var(--scene-y, 0px) * -.3 + var(--room-scroll, 0px) * -.065), 0); }
+.composition { position: absolute; width: max(100%, calc(108svh * 1672 / 941)); aspect-ratio: 1672 / 941; top: 50%; left: calc((100% - max(100%, calc(108svh * 1672 / 941))) * var(--room-align, .5)); transform: translateY(-50%); }
+.composition>img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+[data-room-visible=true] .ground { will-change: transform; }
+.drapes { position: absolute; z-index: 3; inset: -9% -5% 0; pointer-events: none; }
+.drapes>img { width: 100%; height: 100%; object-fit: fill; display: block; }
+.lamplight { position: absolute; inset: 0; z-index: 2; background: radial-gradient(ellipse at 30% 8%, #ffe2a417, transparent 50%); pointer-events: none; animation: warmGlow 6s ease-in-out infinite alternate; }
+.foreground { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.foreground img { position: absolute; bottom: -9%; width: 100%; height: 100%; object-fit: fill; }
+.hangingRig { position: absolute; left: 8%; right: 8%; top: 0; height: 235px; z-index: 2; pointer-events: none; }
+.lampRail { position: absolute; left: -10%; right: -10%; top: 0; height: 14px; border-radius: 0 0 8px 8px; background: linear-gradient(#b98250, #ffdfa0 25%, #ad713b 40%, #513039 72%, #e1b971 90%); box-shadow: 0 4px 8px #170b2940; }
+.pendant { position: absolute; top: 10px; left: calc(8% + var(--i) * 39%); width: 52px; height: calc(115px + var(--i) * 32px); transform-origin: 50% 0; animation: pendantSway calc(5s + var(--i) * .6s) ease-in-out infinite alternate; }
+.pendant::before { content: ''; position: absolute; top: -5px; left: calc(50% - 5px); width: 10px; height: 10px; border: 2px solid #efc77c; border-radius: 50%; background: #674138; }
+.cord { position: absolute; left: calc(50% - 1px); top: 2px; bottom: 22px; width: 2px; background: linear-gradient(90deg, #9d703f, #ffe3a1); }
+.pendant svg { position: absolute; bottom: 0; width: 52px; height: 52px; filter: drop-shadow(0 0 14px #ffd789aa); }
+/* The rear edge of the tabletop falls toward the right. Each contact sits
+   inside that surface, not on the same viewport baseline as the other seats. */
+.bunnySeat { position: absolute; z-index: 1; width: 12.5%; aspect-ratio: 519.75 / 756; left: calc(14% + var(--i) * 13%); bottom: calc(21.5% - var(--i) * 1.55%); }
+.bunnySeat::after { content: ''; position: absolute; bottom: 5%; left: 17%; right: 13%; height: 5%; border-radius: 50%; background: #30182966; filter: blur(5px); z-index: -1; }
+.bunnySprite { position: absolute; inset: 0; overflow: hidden; transform-origin: 50% 94%; animation: bunnyBreath calc(3s + var(--i) * .35s) ease-in-out infinite; animation-delay: calc(var(--i) * -.4s); }
+.bunnySprite img { position: absolute; top: 0; left: calc(var(--i) * -100%); width: 400%; height: 100%; max-width: none; }
+.bunnyNotes { position: absolute; top: 20%; right: 1%; color: #ffe697; font: 40px Georgia, serif; opacity: 0; }
+[data-playing=true] .bunnySprite, [data-rehearsing=true] .bunnySprite { animation: bunnySing .65s ease-in-out infinite; animation-delay: calc(var(--i) * -.13s); }
+[data-playing=true] .bunnyNotes, [data-rehearsing=true] .bunnyNotes { animation: bunnyNote 1.8s ease-out infinite; animation-delay: calc(var(--i) * -.4s); }
+[data-room-visible=false] :is(.bunnySprite, .bunnyNotes, .pendant, .lamplight) { animation-play-state: paused; }
+[data-room-backdrop=encore] { --room-align: .66; }
+@keyframes pendantSway { from { rotate: -1.5deg; } to { rotate: 1.5deg; } }
+@keyframes warmGlow { from { opacity: .55; } to { opacity: 1; } }
+@keyframes bunnyBreath { 0%,100% { scale: 1 1; } 50% { scale: 1.005 1.018; } }
+@keyframes bunnySing { 0%,100% { scale: 1 1; } 50% { scale: 1.025 .96; } }
+@keyframes bunnyNote { 0% { opacity: 0; translate: 0 0; } 25% { opacity: .9; } 100% { opacity: 0; translate: 20px -65px; } }
+@media (max-width: 900px) {
+  [data-room-backdrop=backstage] { --room-align: .22; }
+  [data-room-backdrop=studio] { --room-align: .23; }
+  [data-room-backdrop=encore] { --room-align: .72; }
+  .ground { transform: translate3d(calc(var(--scene-x, 0px) * -.15), calc(var(--room-scroll, 0px) * -.0325), 0); }
+  .drapes { inset: -3% -18% 0; }
+  .hangingRig { left: 5%; right: 5%; }
+  .pendant { width: 35px; height: calc(100px + var(--i) * 17px); }
+  .pendant svg { width: 35px; height: 35px; }
+}
+[data-reduced-motion=true] .ground { transform: none; will-change: auto; }
+[data-reduced-motion=true] :is(.bunnySprite, .bunnyNotes, .pendant, .lamplight) { animation: none; }

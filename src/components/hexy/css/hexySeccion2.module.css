@@ -107,7 +107,7 @@
 .storyGrid {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(560px, 1.02fr) minmax(390px, 0.78fr);
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.78fr);
   gap: clamp(2rem, 4vw, 3.4rem);
   align-items: center;
   padding: clamp(1rem, 2vw, 1.35rem);
@@ -345,6 +345,10 @@
     max-width: 760px;
     margin: 0 auto;
   }
+}
+
+@media (min-width: 981px) and (max-width: 1200px) {
+  .coverStrip { display: none; }
 }
 
 @media (max-width: 640px) {

@@ -12,6 +12,20 @@
   color: var(--md-white);
 }
 
+.actions a {
+  text-decoration: none;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .hero .bgVideo { object-position: 64% center; }
+}
+
+.actions :is(button, a):focus-visible {
+  outline: 3px solid var(--md-yellow);
+  outline-offset: 5px;
+}
+
 /* Background */
 .bg,
 .bgVideo {

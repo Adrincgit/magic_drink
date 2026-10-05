@@ -1,8 +1,8 @@
 ---
 import LayoutBasic from '../layouts/LayoutBasic.astro';
-import OriginalProduct from '../components/bebidas/OriginalProduct.jsx';
+import MagicDrinkExperience from '../components/bebidas/MagicDrinkExperience.jsx';
 ---
 
-<LayoutBasic title="Magic Drink" description="Conoce Magic Drink, la bebida n.º 1 del mundo. Su sabor inconfundible, sin cafeína, y todo lo que la rodea." showFooter={true}>
-  <OriginalProduct client:load />
+<LayoutBasic title="Magic Drink — Destapa la magia" description="Dulce, inconfundible y sin cafeína. Descubre Magic Drink y quédate un ratito más en nuestro mundo." lang="es" showNavBar={false} showFooter={false}>
+  <MagicDrinkExperience client:load />
 </LayoutBasic>

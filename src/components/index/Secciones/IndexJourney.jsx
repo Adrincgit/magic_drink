@@ -14,6 +14,11 @@ import HeroProduct, { HeroTable } from './HeroProduct';
 import WaterSurface from './WaterSurface';
 import { hexyPlaylist } from '../../../data/hexyPlaylist';
 import { JOURNEY_END } from '../../../data/journeyChapters';
+import HexyFinish from '../../hexy/HexyFinish';
+import StoryPanel from './StoryPanel';
+import useIllustratedFinish from '../../global/useIllustratedFinish';
+import CityLookout from './CityLookout';
+import { HuntBunny, HuntToast } from '../../arcade/BunnyHunt';
 
 const art = '/image/journey/';
 const words = {
@@ -38,9 +43,9 @@ const words = {
     ),
     cityBody: (
       <>
-        Con Magic Drink, lo cotidiano se siente menos aburrido.
+        Con una Magic Drink, un día cualquiera puede convertirse en una pequeña historia.
         <br />
-        Por algo se ha convertido en la favorita del mundo.
+        Y esta apenas comienza.
       </>
     ),
     follow: 'Sigue la música',
@@ -52,7 +57,7 @@ const words = {
         <em>a Hexy.</em>
       </>
     ),
-    musicBody: 'Sus canciones ya se quedan en tu cabeza. Los fans dicen que, con una Magic Drink, se vuelven todavía más adictivas.',
+    musicBody: 'Y entonces suena Hexy. Una canción se queda contigo… y, casi sin darte cuenta, ya estás tarareando el siguiente coro.',
     meet: 'Conoce a Hexy',
     next: 'LA CELEBRACIÓN CONTINÚA',
     pause: 'Pausar',
@@ -79,9 +84,9 @@ const words = {
     ),
     cityBody: (
       <>
-        With Magic Drink, everyday life feels less ordinary.
+        With a Magic Drink, an ordinary day can become a little story.
         <br />
-        There’s a reason it became the world’s favorite.
+        And this one is just beginning.
       </>
     ),
     follow: 'Follow the music',
@@ -93,7 +98,7 @@ const words = {
         <em>This is Hexy.</em>
       </>
     ),
-    musicBody: 'Her songs already stay in your head. Fans say they become even more addictive with a Magic Drink.',
+    musicBody: 'And then you hear Hexy. A song stays with you… and before you know it, you are humming the next chorus.',
     meet: 'Meet Hexy',
     next: 'THE CELEBRATION CONTINUES',
     pause: 'Pause',
@@ -120,20 +125,35 @@ export default function IndexJourney({ en = false }) {
   const [pastHexyInFlow, setPastHexyInFlow] = useState(false);
   const [assetsReady, setAssetsReady] = useState(false);
   const [playerVisible, setPlayerVisible] = useState(false);
+  const [compactViewport, setCompactViewport] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [finish, setFinish] = useIllustratedFinish();
+  const [finishTarget, setFinishTarget] = useState(null);
   const finishLoading = useCallback(() => setAssetsReady(true), []);
   const playRequest = useRef(0);
   const track = hexyPlaylist[trackIndex];
   const pastHexy = reducedMotion ? pastHexyInFlow : chapter === -1;
-  const showCompact = assetsReady && !compactDismissed && (hasPlayed || pastHexy)
-    && (!playerVisible || (!reducedMotion && chapter !== 2));
+  const showCompact = assetsReady && !compactDismissed && (hasPlayed || pastHexy || (compactViewport && chapter === 2))
+    && ((!reducedMotion && compactViewport) || !playerVisible || (!reducedMotion && chapter !== 2));
 
   useEffect(() => {
     return mountJourney(root.current, setChapter);
   }, []);
   useEffect(() => {
+    const element = root.current;
+    const followDialog = () => setFinishTarget(element.querySelector('dialog[open]'));
+    element.addEventListener('journey:modal', followDialog);
+    return () => element.removeEventListener('journey:modal', followDialog);
+  }, []);
+  useEffect(() => {
     const media = matchMedia('(prefers-reduced-motion: reduce)');
     const update = () => setReducedMotion(media.matches);
+    update(); media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+  useEffect(() => {
+    const media = matchMedia('(max-width: 700px)');
+    const update = () => setCompactViewport(media.matches);
     update(); media.addEventListener('change', update);
     return () => media.removeEventListener('change', update);
   }, []);
@@ -258,7 +278,7 @@ export default function IndexJourney({ en = false }) {
       <a className={styles.skipLink} href="#festival" data-go-world=".49">
         {t.skip}
       </a>
-      <JourneyMenu en={en} ready={assetsReady} />
+      <JourneyMenu en={en} ready={assetsReady} finish={finish} onFinishChange={setFinish} />
       <section
         className={styles.runway}
         id="original"
@@ -353,7 +373,11 @@ export default function IndexJourney({ en = false }) {
               <div className={`${styles.lamp} ${styles.lampTwo}`} data-opening-lamp>
                 <img src={`${art}lamp.webp`} alt="" width="1024" height="1536" />
               </div>
+              <div className={styles.atmosphere} data-world-motes aria-hidden="true">
+                {Array.from({ length: 10 }, (_, i) => <i key={i} style={{ '--i': i }} />)}
+              </div>
             </div>
+            <div className={`${styles.streetFurniture} ${styles.lookoutPlane}`} data-depth="lookout" data-look="street" data-lookout-mount><HuntBunny id="shore" en={en} place="shore" active={assetsReady && chapter < 2 && chapter >= 0} /></div>
             <div
               className={styles.foreground}
               data-depth="counter"
@@ -405,12 +429,6 @@ export default function IndexJourney({ en = false }) {
               data-shade="right"
               aria-hidden="true"
             />
-            <div className={styles.atmosphere} aria-hidden="true">
-              {Array.from({ length: 10 }, (_, i) => (
-                <i key={i} style={{ '--i': i }} />
-              ))}
-            </div>
-
             <div className={`${styles.copy} ${styles.heroCopy}`} data-chapter="0">
               <SceneLabel>{t.claim}</SceneLabel>
               <h1>
@@ -420,26 +438,24 @@ export default function IndexJourney({ en = false }) {
                 </span>
               </h1>
               <SceneNote>{t.world}</SceneNote>
-              <div className={styles.actions}>
+              <div className={styles.actions} data-hero-actions>
                 <SceneButton href="#ciudad" data-go=".45">{t.enter}</SceneButton>
                 <SceneButton className={styles.listenAction} variant="violet" icon="play" href="#hexy" data-go=".87">{t.listen}</SceneButton>
               </div>
             </div>
-            <section id="ciudad" className={`${styles.copy} ${styles.cityCopy}`} data-chapter="1">
-              <SceneLabel>{t.eyebrow}</SceneLabel>
-              <h2>{t.city}</h2>
-              <SceneNote>{t.cityBody}</SceneNote>
-              <SceneButton variant="violet" href="#hexy" data-go=".87">{t.follow}</SceneButton>
+            <section id="ciudad" className={`${styles.copy} ${styles.cityCopy}`} data-chapter="1" data-story-wrapper>
+              <HuntBunny id="shore" en={en} place="cityPerch" />
+              <StoryPanel en={en} number="02" label={t.eyebrow} title={t.city} compactText={en ? 'A sip of Magic Drink, and an ordinary day starts to become a story.' : 'Un sorbo de Magic Drink, y un día cualquiera empieza a convertirse en una historia.'} actions={<SceneButton variant="violet" href="#hexy" data-go=".87">{t.follow}</SceneButton>}>
+                {t.cityBody}
+              </StoryPanel>
             </section>
-            <section id="hexy" className={`${styles.copy} ${styles.musicCopy}`} data-chapter="2">
-              <SceneLabel>{t.voice}</SceneLabel>
-              <h2>{t.music}</h2>
-              <SceneNote>{t.musicBody}</SceneNote>
-              <ScenePlayer {...playerProps} />
-              <a className={styles.textLink} href="/hexy">
-                {t.meet}
-                <span>↗</span>
-              </a>
+            <section id="hexy" className={`${styles.copy} ${styles.musicCopy}`} data-chapter="2" data-story-wrapper>
+              <StoryPanel en={en} music number="03" label={t.voice} title={t.music} compactText={en ? 'Hexy is on. Before you know it, you are humming the next chorus.' : 'Suena Hexy. Y, sin darte cuenta, ya estás tarareando el siguiente coro.'} actions={<>
+                <ScenePlayer {...playerProps} />
+                <a href="/hexy">{t.meet} <span aria-hidden="true">↗</span></a>
+              </>}>
+                {t.musicBody}
+              </StoryPanel>
             </section>
           </div>
           <IndexWorldTail en={en} />
@@ -447,6 +463,8 @@ export default function IndexJourney({ en = false }) {
           <div className={styles.exitShade} data-exit-shade aria-hidden="true" />
         </div>
       </section>
+      <CityLookout root={root} active={assetsReady} en={en} />
+      <HuntToast en={en} />
       {showCompact && <ScenePlayer {...playerProps} compact onClose={() => {
         playRequest.current++;
         continuePlayback.current = false;
@@ -470,6 +488,7 @@ export default function IndexJourney({ en = false }) {
         onTimeUpdate={(e) => setElapsed(e.currentTarget.currentTime)}
         onLoadedMetadata={(e) => setDuration(Number.isFinite(e.currentTarget.duration) ? e.currentTarget.duration : 0)}
       />
+      <HexyFinish enabled={assetsReady && finish.enabled} reduced={reducedMotion} settings={finish} target={finishTarget} monochrome="var(--journey-ui-monochrome, 0)" />
     </div>
     </>
   );

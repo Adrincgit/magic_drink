@@ -6,7 +6,7 @@ test('existing visitors change held drawings without walking or moving the camer
   const world = page.locator('[data-atrium-engine]');
   await expect(world).toHaveAttribute('data-renderer', 'webgl');
   const before = await world.evaluate(el => el.atriumDiagnostics);
-  await expect.poll(() => world.evaluate(el => el.atriumDiagnostics.ambientFrame), { timeout: 9000 }).not.toBe(before.ambientFrame);
+  await expect.poll(() => world.evaluate(el => el.atriumDiagnostics.ambientFrame), { timeout: 9000, intervals: [100] }).not.toBe(before.ambientFrame);
   expect(await world.evaluate(el => el.atriumDiagnostics.camera)).toEqual(before.camera);
   await goWorld(page, 1.89);
   const interview = page.locator('[data-illustration="interview"]');

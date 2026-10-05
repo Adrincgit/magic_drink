@@ -1,0 +1,328 @@
+[
+  {
+    "id": "distance",
+    "file": "atrium-distance-v21.webp",
+    "z": -24,
+    "frame": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "sourceRect": [
+      0,
+      0,
+      1536,
+      1024
+    ]
+  },
+  {
+    "id": "floor",
+    "file": "atrium-floor-v21.webp",
+    "z": -8,
+    "frame": [
+      0,
+      700,
+      1536,
+      324
+    ],
+    "sourceRect": [
+      0,
+      700,
+      1536,
+      324
+    ],
+    "kind": "floor"
+  },
+  {
+    "id": "gallery-left",
+    "file": "atrium-gallery-left-v22.webp",
+    "z": -5,
+    "frame": [
+      0,
+      0,
+      638,
+      836
+    ],
+    "sourceRect": [
+      0,
+      0,
+      638,
+      836
+    ]
+  },
+  {
+    "id": "gallery-right",
+    "file": "atrium-gallery-right-v22.webp",
+    "z": -5,
+    "frame": [
+      850,
+      0,
+      686,
+      850
+    ],
+    "sourceRect": [
+      850,
+      0,
+      686,
+      850
+    ]
+  },
+  {
+    "id": "tree-left",
+    "file": "atrium-tree-left-v21.webp",
+    "z": 0.5,
+    "frame": [
+      497.397,
+      402.492,
+      190.33,
+      325.402
+    ],
+    "sourceRect": [
+      504,
+      375,
+      217,
+      371
+    ],
+    "kind": "tree",
+    "contact": [
+      0.447005,
+      0.969003
+    ]
+  },
+  {
+    "id": "tree-right",
+    "file": "atrium-tree-right-v21.webp",
+    "z": 1.3,
+    "frame": [
+      832.22,
+      408.511,
+      200.305,
+      316.468
+    ],
+    "sourceRect": [
+      811,
+      329,
+      269,
+      425
+    ],
+    "kind": "tree",
+    "contact": [
+      0.520446,
+      0.984706
+    ]
+  },
+  {
+    "id": "middle-visitors",
+    "file": "atrium-middle-visitors-v21.webp",
+    "z": 2.8,
+    "frame": [
+      867.786,
+      603.851,
+      80.735,
+      135.684
+    ],
+    "sourceRect": [
+      632,
+      275,
+      263,
+      442
+    ],
+    "contact": [
+      0.344106,
+      0.983032
+    ]
+  },
+  {
+    "id": "column-left",
+    "file": "atrium-column-left-v22.webp",
+    "z": 5.1,
+    "frame": [
+      183.562,
+      -33,
+      185.124,
+      818.752
+    ],
+    "sourceRect": [
+      344,
+      0,
+      317,
+      1402
+    ],
+    "contact": [
+      0.471609,
+      0.996077
+    ]
+  },
+  {
+    "id": "column-right",
+    "file": "atrium-column-right-v22.webp",
+    "z": 5.15,
+    "frame": [
+      1142.809,
+      -38,
+      197.97,
+      818.794
+    ],
+    "sourceRect": [
+      457,
+      0,
+      331,
+      1369
+    ],
+    "contact": [
+      0.432024,
+      0.995982
+    ]
+  },
+  {
+    "id": "shop-visitor",
+    "file": "atrium-shop-visitor-v22.webp",
+    "z": 5.5,
+    "frame": [
+      236.856,
+      612.732,
+      46.287,
+      173.207
+    ],
+    "sourceRect": [
+      353,
+      94,
+      345,
+      1291
+    ],
+    "contact": [
+      0.378261,
+      0.992641
+    ]
+  },
+  {
+    "id": "visitors-left",
+    "file": "atrium-visitors-left-v21.webp",
+    "z": 5.8,
+    "frame": [
+      46.711,
+      584.555,
+      157.468,
+      258.113
+    ],
+    "sourceRect": [
+      13,
+      424,
+      327,
+      536
+    ],
+    "contact": [
+      0.62844,
+      0.961754
+    ]
+  },
+  {
+    "id": "visitors-right",
+    "file": "atrium-shoppers-v19.webp",
+    "z": 6.2,
+    "frame": [
+      1275.5,
+      581,
+      256,
+      256
+    ],
+    "sourceRect": [
+      0,
+      0,
+      512,
+      512
+    ],
+    "kind": "shoppers"
+  },
+  {
+    "id": "ivy-left",
+    "file": "atrium-ivy-left-v22.webp",
+    "z": 7.1,
+    "frame": [
+      196.314,
+      234.552,
+      147.224,
+      185.597
+    ],
+    "sourceRect": [
+      127,
+      26,
+      986,
+      1243
+    ],
+    "kind": "ivy"
+  },
+  {
+    "id": "ivy-right",
+    "file": "atrium-ivy-right-v22.webp",
+    "z": 7.2,
+    "frame": [
+      1145.705,
+      235.553,
+      178.143,
+      186.044
+    ],
+    "sourceRect": [
+      24,
+      16,
+      1195,
+      1248
+    ],
+    "kind": "ivy"
+  },
+  {
+    "id": "star-left",
+    "file": "atrium-star-left-v21.webp",
+    "z": 7.5,
+    "frame": [
+      621.19,
+      0,
+      83.62,
+      149.48
+    ],
+    "sourceRect": [
+      586,
+      0,
+      113,
+      202
+    ],
+    "kind": "star"
+  },
+  {
+    "id": "star-right",
+    "file": "atrium-star-right-v21.webp",
+    "z": 8,
+    "frame": [
+      830.45,
+      0,
+      85.1,
+      149.48
+    ],
+    "sourceRect": [
+      845,
+      0,
+      115,
+      202
+    ],
+    "kind": "star"
+  },
+  {
+    "id": "star-center",
+    "file": "atrium-star-center-v21.webp",
+    "z": 10.5,
+    "frame": [
+      715.83,
+      0,
+      104.34,
+      205.72
+    ],
+    "sourceRect": [
+      700,
+      0,
+      141,
+      278
+    ],
+    "kind": "star"
+  }
+]

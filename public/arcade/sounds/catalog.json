@@ -1,0 +1,28 @@
+{
+  "format": "procedural-web-audio",
+  "source": "src/components/arcade/audio/sounds.js",
+  "reason": "Real-time chiptune effects retain immediate response and do not require sampled audio downloads.",
+  "events": [
+    "cast",
+    "basicStrong",
+    "dash",
+    "jump",
+    "doubleJump",
+    "glide",
+    "hit",
+    "death",
+    "superCharge",
+    "superCast",
+    "superPulse",
+    "bossHit",
+    "bossHeavyHit",
+    "guardRaise",
+    "guardBlock",
+    "guardBreak",
+    "coin",
+    "rescue",
+    "power",
+    "originalDrink",
+    "cannon"
+  ]
+}

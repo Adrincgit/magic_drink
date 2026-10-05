@@ -1,5 +1,6 @@
 import { memo } from 'react';
-import { SceneButton, SceneLabel, SceneNote } from '../../global/SceneControls';
+import { SceneButton } from '../../global/SceneControls';
+import StoryPanel from './StoryPanel';
 import GardenWorld from './GardenWorld';
 import DJSequence from './DJSequence';
 import FestivalCrowdMotion from './FestivalCrowdMotion';
@@ -79,27 +80,12 @@ function IndexWorldTail({ en = false }) {
         ))}
         <FestivalCrowdMotion />
         <div className={styles.festivalShade} aria-hidden="true" />
-        <div className={`${styles.copy} ${styles.festivalCopy}`} data-world-copy="festival">
-          <SceneLabel>04 / MAGIC DRINK DAY</SceneLabel>
-          <h2>
-            {en ? (
-              <>
-                Magic Drink
-                <br />
-                <em>Day.</em>
-              </>
-            ) : (
-              <>
-                Magic Drink
-                <br />
-                <em>Day.</em>
-              </>
-            )}
-          </h2>
-          <SceneNote>{en
-              ? 'Parades, giant balloons and Hexy on stage. The world celebrates its favorite drink.'
-              : 'Desfiles, globos gigantes y Hexy sobre el escenario. El mundo celebra su bebida favorita.'}</SceneNote>
-          <SceneButton href="/magicdrinkday" variant="ticket">{en ? 'Join the celebration' : 'Vive Magic Drink Day'}</SceneButton>
+        <div className={`${styles.copy} ${styles.festivalCopy}`} data-world-copy="festival" data-story-wrapper>
+          <StoryPanel en={en} number="04" label={en ? 'THE STREETS JOIN THE CHORUS' : 'LAS CALLES SE SUMAN AL CORO'} title={<>Magic Drink<br /><em>Day.</em></>}
+            compactText={en ? 'Music, balloons and parades fill the streets. Hexy is on stage. Coming?' : 'La calle se llena de música, globos y desfiles. Hexy está en el escenario. ¿Vienes?'}
+            actions={<SceneButton href="/magicdrinkday" variant="ticket">{en ? 'Join the celebration' : 'Vive Magic Drink Day'}</SceneButton>}>
+            {en ? 'A little further on, the streets fill with music. Parades, giant balloons, and Hexy on stage. The whole world joins in.' : 'Un poco más adelante, las calles se llenan de música. Desfiles, globos gigantes y Hexy sobre el escenario. Todo el mundo se suma.'}
+          </StoryPanel>
         </div>
         <div className={styles.confetti} data-look="near" aria-hidden="true">
           {Array.from({ length: 66 }, (_, i) => (
@@ -124,29 +110,10 @@ function IndexWorldTail({ en = false }) {
       >
         <GardenWorld />
         <div className={styles.plazaShade} aria-hidden="true" />
-        <div className={`${styles.copy} ${styles.plazaCopy}`} data-world-copy="plaza">
-          <SceneLabel>05 / WONDERPOP PLAZA</SceneLabel>
-          <h2>
-            {en ? (
-              <>
-                Follow the lights.
-                <br />
-                <em>Come on in.</em>
-              </>
-            ) : (
-              <>
-                Sigue las luces.
-                <br />
-                <em>Ya estás cerca.</em>
-              </>
-            )}
-          </h2>
-          <SceneNote>{en
-              ? 'Just a few steps from Magic Drink’s official shopping plaza.'
-              : 'Estás a unos pasos del centro comercial oficial de Magic Drink.'}</SceneNote>
-          <span className={styles.keepGoing}>
-            {en ? 'KEEP SCROLLING' : 'SIGUE EXPLORANDO'} <span aria-hidden="true">↓</span>
-          </span>
+        <div className={`${styles.copy} ${styles.plazaCopy}`} data-world-copy="plaza" data-story-wrapper>
+          <StoryPanel en={en} number="05" label="WONDERPOP PLAZA" title={en ? <>Follow the lights.<br /><em>Come on in.</em></> : <>Sigue las luces.<br /><em>Ya estás cerca.</em></>} actions={<SceneButton href="#directorio-wonderpop" data-go-world=".92">{en ? 'Let’s go inside' : 'Vamos a entrar'}</SceneButton>}>
+            {en ? 'The music leads us to Wonderpop Plaza. Follow the lights: a whole world is waiting behind those doors.' : 'La música nos lleva hasta Wonderpop Plaza. Sigue las luces: hay todo un mundo esperando detrás de esas puertas.'}
+          </StoryPanel>
         </div>
       </section>
 

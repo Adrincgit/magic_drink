@@ -13,7 +13,7 @@ export default function AtriumWorld() {
       if (pending || state.reduced || state.progress < .66 || state.progress > 1.10) return;
       pending = true;
       try {
-        const { createAtriumWorld } = await import('../animations/atriumWorld');
+        const { createAtriumWorld } = await import('../animations/atriumLayers');
         if (disposed) return;
         engine = await createAtriumWorld(el);
         if (disposed) engine.dispose(); else engine.update(state);

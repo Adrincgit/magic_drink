@@ -20,8 +20,22 @@
 .passage { position: absolute; inset: 0; z-index: 11; opacity: 0; visibility: hidden; pointer-events: none; }
 .passage img { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: max(280vw, 280svh); height: auto; max-width: none; filter: blur(2px); }
 
-.intro.intro { top: 15%; left: 6%; width: min(400px, 28vw); }
-.intro.intro h2 { font-size: clamp(36px, 3.4vw, 56px); text-shadow: 0 2px 0 #503352, 0 4px 14px #301737a8; }
+.intro.intro { top: max(105px, 14%); left: 4.5%; width: clamp(290px, 25vw, 380px); }
+.welcomeSign { position: relative; padding: 26px 25px 19px; color: #fff0ca; background: linear-gradient(145deg, #4e2c50, #2f1b37); border: 1px solid #ecc578; border-radius: 5px 24px 5px 5px; box-shadow: 0 5px 0 #332034, 0 8px 0 -1px #c79b59, 0 15px 35px #24102b70; }
+.welcomeSign::before { content: ''; position: absolute; inset: 5px; border: 1px solid #d7ac6259; border-radius: 2px 19px 2px 2px; pointer-events: none; }
+.welcomeSign [data-scene-label] { padding: 0 0 12px; margin: 0; border: 0; background: none; box-shadow: none; font-size: 8px; }
+.intro.intro h2 { font-size: clamp(31px, 2.7vw, 43px); line-height: 1.04; margin: 0 0 17px; text-shadow: 0 2px 0 #25152e; }
+.intro.intro h2 em { color: #ffdd63; }
+.description { font: 400 13px/1.65 Inter, sans-serif; color: #f8e8d2; margin: 0; }
+.mobileDescription { display: none; }
+.discoveries { display: grid; gap: 11px; list-style: none; padding: 17px 0; margin: 17px 0 13px; border-block: 1px solid #d6aa5e4d; font: 500 12px/1.45 Inter, sans-serif; }
+.discoveries li { display: flex; align-items: center; gap: 11px; }
+.discoveries li > span:first-child { width: 17px; text-align: center; flex-shrink: 0; color: #ffdb75; font-size: 20px; line-height: 1; }
+.visitLink { display: flex; align-items: center; justify-content: space-between; min-height: 42px; gap: 12px; font: 700 12px Inter, sans-serif; color: #ffe59e; border-radius: 2px; text-decoration: underline; text-underline-offset: 4px; }
+.visitLink:hover { color: #fffaf0; }
+.visitLink:focus-visible { outline: 2px solid #ffe19b; outline-offset: 4px; }
+.continueHint { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 9px 0 0; color: #d5bbc8; font: 600 8px/1.5 Inter, sans-serif; letter-spacing: 1px; }
+.continueHint span { font-size: 19px; color: #ffdc76; }
 .guide { padding: 0; border: 0; background: transparent; color: #56394e; width: min(560px, calc(100vw - 30px)); max-height: 85svh; overflow: auto; overscroll-behavior: contain; pointer-events: auto; }
 .guide::backdrop { background: #261731ad; backdrop-filter: blur(4px); }
 .guidePaper { padding: 35px; border: 4px double #8c5968; border-radius: 8px 28px 8px 8px; background: #ffefcf; }
@@ -37,15 +51,31 @@
 .guide footer { text-align: right; margin-top: 20px; font: italic 600 15px Georgia, serif; opacity: .65; }
 
 @media (max-width: 700px) {
-  .intro.intro { left: 25px; top: 125px; width: min(290px, calc(100% - 50px)); }
-  .intro.intro h2 { font-size: 34px; }
+  .intro.intro { left: 18px; top: 96px; width: min(315px, calc(100% - 36px)); }
+  .welcomeSign { padding: 19px 21px 13px; }
+  .intro.intro h2 { font-size: 31px; margin-bottom: 12px; }
+  .description { font-size: 12px; line-height: 1.6; }
+  .desktopDescription, .discoveries { display: none; }
+  .mobileDescription { display: inline; }
+  .visitLink { margin-top: 12px; border-top: 1px solid #d6aa5e4d; padding-top: 8px; }
   .guidePaper { padding: 27px 22px; }
   .guidePaper h2 { font-size: 29px; }
   .openStore { font-size: 7px; letter-spacing: 0; }
 }
+@media (max-height: 650px) and (min-width: 701px) {
+  .intro.intro { top: 85px; width: 300px; }
+  .welcomeSign { padding: 16px 20px 12px; }
+  .intro.intro h2 { font-size: 29px; margin-bottom: 9px; }
+  .description { font-size: 12px; line-height: 1.5; }
+  .desktopDescription, .discoveries { display: none; }
+  .mobileDescription { display: inline; }
+  .visitLink { margin-top: 8px; min-height: 36px; }
+  .continueHint { margin-top: 3px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .passage { display: none; }
   .intro.intro { position: relative; inset: auto; width: auto; }
+  .welcomeSign { width: min(380px, 100%); }
   .directoryWrap { position: relative; inset: auto; width: min(800px, calc(100% - 40px)); height: auto; margin: 70px auto 120px; opacity: 1; visibility: visible; }
   .directory { position: relative; inset: auto; transform: none !important; padding: 25px; background: #4b2e49e8; border: 3px double #dec28d; border-radius: 8px; }
   .directoryHeading { position: static; width: auto; height: auto; clip-path: none; text-align: center; margin-bottom: 20px; }

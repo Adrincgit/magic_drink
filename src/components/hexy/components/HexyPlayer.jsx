@@ -1,9 +1,11 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
 import { useStore } from '@nanostores/react';
-import { ChevronUp, ListMusic, Pause, Play, Repeat, Shuffle, SkipBack, SkipForward, X } from 'lucide-react';
+import { ChevronUp, Maximize2, Pause, Play, Repeat, Shuffle, SkipBack, SkipForward, X } from 'lucide-react';
 import { isEnglish } from '../../../data/variables';
 import { useHexyAudio, useHexyProgress } from './HexyAudioProvider';
 import styles from '../css/hexyPlayer.module.css';
+import usePlazaDialog from '../../index/Secciones/usePlazaDialog';
+import { SceneLabel, SceneStar } from '../../global/SceneControls';
 
 const formatTime = (seconds) => {
   if (!Number.isFinite(seconds)) return '0:00';
@@ -55,7 +57,7 @@ function Progress() {
 
 export default function HexyPlayer() {
   const english = useStore(isEnglish);
-  const { playlist, track, trackIndex, isPlaying, shuffle, repeat, toggleShuffle, toggleRepeat, next, previous, chooseTrack } = useHexyAudio();
+  const { playlist, track, trackIndex, isPlaying, shuffle, repeat, toggleShuffle, toggleRepeat, next, previous, chooseTrack, openExpanded } = useHexyAudio();
   const [showPlaylist, setShowPlaylist] = useState(false);
   const wrapperRef = useRef(null);
   const toggleRef = useRef(null);
@@ -115,6 +117,8 @@ export default function HexyPlayer() {
             {english ? 'Full playlist' : 'Ver playlist completa'}
             <ChevronUp size={14} aria-hidden="true" className={showPlaylist ? styles.chevronUp : undefined} />
           </button>
+          <button type="button" className={styles.controlBtn} onClick={openExpanded}
+            aria-label={english ? 'Expand player' : 'Ampliar reproductor'}><Maximize2 size={18} aria-hidden="true" /></button>
         </div>
       </div>
       <PlaybackError />
@@ -138,7 +142,7 @@ export default function HexyPlayer() {
 
 export function HexyMiniPlayer() {
   const english = useStore(isEnglish);
-  const { track, isPlaying, hasStarted, dismissed, dismiss, next } = useHexyAudio();
+  const { track, isPlaying, hasStarted, dismissed, dismiss, next, openExpanded } = useHexyAudio();
   const [pastPlayer, setPastPlayer] = useState(false);
   useEffect(() => {
     const player = document.getElementById('hexy-player');
@@ -175,10 +179,61 @@ export function HexyMiniPlayer() {
       <PlayButton />
       <button type="button" className={styles.controlBtn} onClick={() => next()}
         aria-label={english ? 'Next song' : 'Siguiente canción'}><SkipForward size={18} fill="currentColor" aria-hidden="true" /></button>
-      <a className={styles.controlBtn} href="#canciones" aria-label={english ? 'Explore songs' : 'Explorar canciones'}><ListMusic size={19} aria-hidden="true" /></a>
+      <button type="button" className={styles.controlBtn} onClick={openExpanded} aria-label={english ? 'Expand player' : 'Ampliar reproductor'}><Maximize2 size={19} aria-hidden="true" /></button>
       <button type="button" className={styles.miniClose} onClick={dismiss}
         aria-label={english ? 'Close player and pause' : 'Cerrar reproductor y pausar'}><X size={14} aria-hidden="true" /></button>
     </div>
     <PlaybackError />
   </aside>;
+}
+
+export function HexyListeningRoom() {
+  const english = useStore(isEnglish);
+  const { expanded, openExpanded, closeExpanded, playlist, track, trackIndex, isPlaying,
+    chooseTrack, pause, next, previous, repeat, shuffle, toggleRepeat, toggleShuffle } = useHexyAudio();
+  const dialog = useRef(null);
+  const { open, close } = usePlazaDialog(dialog);
+  useEffect(() => { if (expanded) open(); else close(); }, [expanded, open, close]);
+  useEffect(() => {
+    const followLink = () => { if (location.hash === '#canciones') openExpanded(); };
+    followLink(); window.addEventListener('hashchange', followLink);
+    return () => window.removeEventListener('hashchange', followLink);
+  }, [openExpanded]);
+  return <dialog ref={dialog} id="canciones" className={styles.listeningRoom} data-listening-room
+    aria-labelledby="listening-title" onClose={closeExpanded}
+    onClick={event => { if (event.target === dialog.current) closeExpanded(); }}>
+    <button type="button" className={styles.listeningClose} onClick={closeExpanded} autoFocus
+      aria-label={english ? 'Close listening room' : 'Cerrar sala de escucha'}><X size={21} /></button>
+    <div className={styles.listeningHeader}><SceneLabel>{english ? 'A little louder. A little closer.' : 'Un poquito más fuerte. Un poquito más cerca.'}</SceneLabel>
+      <span>{english ? 'HEXY · THE LISTENING ROOM' : 'HEXY · SALA DE ESCUCHA'}</span></div>
+    <div className={styles.listeningStage}>
+      <div className={styles.albumDisplay}>
+        <div className={styles.largeDisc}><Vinyl track={track} playing={isPlaying} /></div>
+        <img className={styles.largeSleeve} src={track.cover} alt={english ? `${track.title} album artwork` : `Portada de ${track.title}`} width="500" height="500" />
+        <span className={styles.sleeveStamp}><SceneStar /> {String(trackIndex + 1).padStart(2, '0')} / 06</span>
+      </div>
+      <div className={styles.listeningCopy}>
+        <p className={styles.listeningStatus}>{isPlaying ? (english ? 'NOW PLAYING' : 'AHORA SUENA') : (english ? 'READY WHEN YOU ARE' : 'CUANDO TÚ QUIERAS')}</p>
+        <h2 id="listening-title">{track.title}</h2><p>{track.artist}</p>
+        <div className={styles.controls}>
+          <button className={`${styles.controlBtn} ${shuffle ? styles.active : ''}`} type="button" aria-pressed={shuffle} onClick={toggleShuffle} aria-label={english ? 'Shuffle' : 'Aleatorio'}><Shuffle size={19} /></button>
+          <button className={styles.controlBtn} type="button" onClick={previous} aria-label={english ? 'Previous song' : 'Canción anterior'}><SkipBack size={23} fill="currentColor" /></button>
+          <PlayButton />
+          <button className={styles.controlBtn} type="button" onClick={() => next()} aria-label={english ? 'Next song' : 'Siguiente canción'}><SkipForward size={23} fill="currentColor" /></button>
+          <button className={`${styles.controlBtn} ${repeat ? styles.active : ''}`} type="button" aria-pressed={repeat} onClick={toggleRepeat} aria-label={english ? 'Repeat song' : 'Repetir canción'}><Repeat size={19} /></button>
+        </div>
+        <Progress /><PlaybackError />
+        <p className={styles.listeningNote}>{english ? 'Stay for one more chorus.' : 'Quédate un coro más.'}</p>
+      </div>
+    </div>
+    <div className={styles.listeningQueue} role="group" aria-label={english ? 'Choose a song' : 'Elige una canción'}>
+      {playlist.map((song, index) => <button type="button" key={song.id} aria-pressed={trackIndex === index && isPlaying}
+        aria-label={`${trackIndex === index && isPlaying ? (english ? 'Pause' : 'Pausar') : (english ? 'Play' : 'Reproducir')} ${song.title}`}
+        onClick={() => trackIndex === index && isPlaying ? pause() : chooseTrack(index)}>
+        <img src={song.cover} alt="" width="60" height="60" /><span><small>{String(index + 1).padStart(2, '0')}</small>{song.title}</span>
+        {trackIndex === index && isPlaying ? <Pause size={15} /> : <Play size={15} />}
+      </button>)}
+    </div>
+    <small className={styles.listeningCredit}>mix · DJ Sweet Hex</small>
+  </dialog>;
 }

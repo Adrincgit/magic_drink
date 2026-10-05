@@ -26,6 +26,23 @@ export default function HexyInterview({ en = false }) {
   const pose = answerVisible ? question.pose : 'listen';
 
   useEffect(() => {
+    const el = host.current;
+    const copy = el.querySelector('[data-world-copy]');
+    const conversation = copy.firstElementChild;
+    const world = el.firstElementChild;
+    // Seat the bust behind the dialogue's upper edge. Its position must follow
+    // the real text height, including translations and answers chosen by users.
+    const seat = () => world.style.setProperty('--interview-card-top', `${copy.offsetTop + conversation.offsetTop}px`);
+    const observer = new ResizeObserver(seat);
+    observer.observe(el); observer.observe(copy); observer.observe(conversation);
+    seat();
+    // Store the anchor on the unanimated world, so GSAP's reduced-motion
+    // cleanup cannot erase this layout measurement from the scene wrapper.
+    const frame = requestAnimationFrame(seat);
+    return () => { observer.disconnect(); cancelAnimationFrame(frame); };
+  }, []);
+
+  useEffect(() => {
     const el = host.current, root = el.closest('[data-journey]');
     const media = matchMedia('(prefers-reduced-motion: reduce)');
     let progress = Number(root.dataset.worldProgress || 0);

@@ -1,0 +1,72 @@
+{
+  "chorusSupport": [
+    "¡Tu coro responde con magia rápida!",
+    "Your chorus answers with faster magic!"
+  ],
+  "rescueHeart": [
+    "¡Gracias! Dos corazones para el camino.",
+    "Thank you! Two hearts for the road."
+  ],
+  "rescueMagic": [
+    "¡Juntos! Tu coro te ayuda con su magia.",
+    "Together! Your chorus helps with its magic."
+  ],
+  "start": [
+    "Doble salto desde el inicio. Los bunnies son aliados opcionales: cada rescate suma magia de apoyo.",
+    "Double jump from the start. Bunnies are optional allies: every rescue adds supporting fire."
+  ],
+  "power": [
+    "¡Nuevo poder!",
+    "New power!"
+  ],
+  "checkpoint": [
+    "Punto de control · +1 corazón",
+    "Checkpoint · +1 heart"
+  ],
+  "rescue": [
+    "¡Un bunny a salvo!",
+    "A bunny is safe!"
+  ],
+  "boss": [
+    "¡A escena! Esquiva su número y responde cuando brille.",
+    "Showtime! Dodge the act and answer when the boss glows."
+  ],
+  "bossDown": [
+    "¡Se acabó su función! La puerta de estrella está abierta.",
+    "Their show is over! The star door is open."
+  ],
+  "locked": [
+    "Vence al jefe para abrir la puerta. Los rescates son opcionales.",
+    "Defeat the boss to open the door. Rescues are optional."
+  ],
+  "towerTransform": [
+    "¡La torre se despliega! Busca el núcleo brillante.",
+    "The tower unfolds! Look for the glowing core."
+  ],
+  "needDrink": [
+    "Encuentra una Magic Drink para desbloquear su magia fuerte.",
+    "Find a Magic Drink to unlock its strong magic."
+  ],
+  "lowMagic": [
+    "Necesitas 30 de magia para el ataque fuerte.",
+    "You need 30 magic for a strong attack."
+  ],
+  "superLow": [
+    "El súper necesita 90 de magia: los tres indicadores encendidos.",
+    "The super needs 90 magic: all three markers lit."
+  ],
+  "exhausted": [
+    "Recuperación lenta: la magia fuerte volverá al terminar la cuenta.",
+    "Slow recovery: strong magic returns when the countdown ends."
+  ],
+  "superRecharging": ["La estrella del súper sigue recargándose.", "The super star is still recharging."],
+  "powerUp": ["¡Bebida potenciada!", "Powered drink!"],
+  "lootammo": ["¡Caramelos de recarga!", "Fizzy refill candies!"],
+  "lootshield": ["¡Una protección más!", "One more layer of protection!"],
+  "lootoriginal": ["¡Magic Drink Original!", "Magic Drink Original!"],
+  "basicLow": ["La chispa cercana necesita 15 de magia.", "Close spark needs 15 magic."],
+  "lowAmmo": [
+    "La lata casi se termina: usa los disparos que quedan.",
+    "The can is almost empty: use the remaining shots."
+  ]
+}

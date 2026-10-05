@@ -18,6 +18,8 @@ export default function HexyVibeEngine() {
 
     const engine   = engineRef.current;
     const particles = [];
+    const animations = new Set();
+    let disposed = false;
 
     // ── 1. Lluvia de partículas desde el fondo ──────────────────────────
     for (let i = 0; i < COUNT; i++) {
@@ -36,10 +38,11 @@ export default function HexyVibeEngine() {
         willChange:   'transform, opacity',
         fontStyle:    'normal',
       });
-      document.body.appendChild(el);
+      engine.appendChild(el);
       particles.push(el);
 
       const launch = () => {
+        if (disposed) return;
         gsap.set(el, {
           x:        Math.random() * window.innerWidth,
           y:        window.innerHeight + 30,
@@ -48,7 +51,11 @@ export default function HexyVibeEngine() {
           rotation: Math.random() * 360,
         });
 
-        const tl = gsap.timeline({ delay: Math.random() * 5, onComplete: launch });
+        const tl = gsap.timeline({ delay: Math.random() * 5, onComplete: () => {
+          animations.delete(tl);
+          launch();
+        } });
+        animations.add(tl);
 
         tl.to(el, {
           opacity:  0.95,
@@ -78,13 +85,15 @@ export default function HexyVibeEngine() {
       const blobEls = Array.from(engine.querySelectorAll('[data-blob]'));
 
       const driftBlob = (blob) => {
-        gsap.to(blob, {
+        if (disposed) return;
+        const tween = gsap.to(blob, {
           x:        (Math.random() - 0.5) * 640,
           y:        (Math.random() - 0.5) * 420,
           duration: 5 + Math.random() * 6,
           ease:     'sine.inOut',
-          onComplete: () => driftBlob(blob),
+          onComplete: () => { animations.delete(tween); driftBlob(blob); },
         });
+        animations.add(tween);
       };
 
       blobEls.forEach(blob => driftBlob(blob));
@@ -105,6 +114,7 @@ export default function HexyVibeEngine() {
       const flashEl = engine.querySelector('[data-flash]');
       if (flashEl) {
         const flashTl = gsap.timeline({ repeat: -1, delay: 0.9 });
+        animations.add(flashTl);
         flashTl
           .to(flashEl, { opacity: 0.10, duration: 0.07, ease: 'power4.in' })
           .to(flashEl, { opacity: 0,    duration: 0.40, ease: 'power2.out' })
@@ -113,6 +123,9 @@ export default function HexyVibeEngine() {
     }
 
     return () => {
+      disposed = true;
+      animations.forEach(animation => animation.kill());
+      animations.clear();
       document.body.classList.remove('hexy-playing');
 
       // Matar y remover partículas

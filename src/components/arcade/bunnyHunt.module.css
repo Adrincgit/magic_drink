@@ -1,0 +1,60 @@
+.sprite{display:block;width:100%;aspect-ratio:1;background-image:url('/arcade/sprites/bunnies/bunny-atlas.webp');background-size:400% 300%;background-position:0 100%;pointer-events:none}
+.sprite[data-pose=celebrate]{background-position:66.6667% 100%;animation:none}
+.bunny{position:absolute;z-index:9;width:112px;aspect-ratio:1;background:none!important;border:0!important;padding:0!important;cursor:pointer;pointer-events:auto;transform-origin:50% 100%;filter:drop-shadow(0 4px 2px #31163444);touch-action:manipulation}
+.bunny[hidden]{display:none}.bunny:before{content:'';position:absolute;bottom:1%;left:24%;width:52%;height:8%;border-radius:50%;background:#29132d55;filter:blur(3px)}
+.bunny .name{position:absolute;bottom:-11px;left:50%;translate:-50% 0;background:#3a2348;border:1px solid #edc67d;border-radius:8px;padding:4px 9px;font:700 10px Inter,sans-serif;white-space:nowrap;color:#ffe9b7;opacity:0;transition:opacity .15s}
+.bunny:hover .name,.bunny:focus-visible .name{opacity:1}.bunny:hover .sprite{background-position:33.3333% 100%;animation:none}
+.bunny:focus-visible{outline:2px dashed #ffdf8c!important;outline-offset:4px;border-radius:35%}
+.found{position:absolute;right:10%;top:25%;font-size:14px;color:#ffd482;text-shadow:1px 2px #643653}.bunny[data-found=true]{cursor:default}
+.reward{position:absolute;left:38%;top:10%;color:#ffe89e;font:800 24px Inter,sans-serif;text-shadow:2px 2px #6b3752;animation:coinRise 1.8s ease-out both;white-space:nowrap}
+.shore{left:calc(clamp(0px,calc(144svh - 58vw),max(0px,calc(300svh - 100vw))) + 26px);bottom:10%;width:clamp(90px,13svh,140px)}
+.cityPerch{display:none}
+.lookout{left:17.8%;top:calc(68.8% - 30px * var(--zoom,1));width:calc(30px * var(--zoom,1));z-index:2;pointer-events:auto;filter:sepia(.3) saturate(.65);opacity:.88}
+.festival{left:38%;bottom:23%;width:clamp(100px,13svh,145px)}
+.plaza{right:15%;bottom:12%;width:clamp(90px,12svh,130px)}
+.interview{right:3%;top:-76px;width:90px}
+.cabinet{position:absolute;right:7%;bottom:10%;width:clamp(145px,20svh,235px);z-index:7;display:block;pointer-events:auto;filter:drop-shadow(0 9px 4px #281e4155);transform-origin:center bottom}
+.cabinet img{display:block;width:100%;height:auto;max-width:none}.cabinet>span{position:absolute;bottom:27%;left:50%;translate:-50%;padding:7px 12px;color:#ffedb7;background:#3b2144;border:2px solid #efc675;border-radius:8px;box-shadow:0 3px #201329;white-space:nowrap;font:400 18px BakeSoda,sans-serif}
+.cabinet:hover>span{background:#69416e}.cabinet:active{scale:.98}
+.wallet{border:1px solid #cda267;border-radius:8px 17px 7px 16px;background:#2d1b35;margin-top:18px;color:#fce6b7;font:13px Inter,sans-serif}
+.wallet summary{list-style:none;display:flex;align-items:center;gap:11px;cursor:pointer;padding:12px}.wallet summary::-webkit-details-marker{display:none}.wallet summary>span:nth-child(2){flex:1;font-weight:700}.wallet small{display:block;font-size:10px;margin-top:4px;color:#cdaab9}.wallet summary>b{font-size:17px;color:#ffda85}
+.coin{display:grid;place-items:center;flex-shrink:0;width:35px;height:35px;border:2px solid #95603d;border-radius:48% 52% 47% 51%;background:#ffe294;color:#8b503b;box-shadow:inset 0 0 0 2px #ffefb7,0 3px #53313a;font:25px BakeSoda,sans-serif}
+.walletBody{padding:0 16px 17px}.walletBody p{font-size:12px;line-height:1.5}.walletBody ul{list-style:none;padding:0;display:grid;gap:11px}.walletBody li{display:grid;gap:3px;font-size:11px}.walletBody li>b{color:#efbd8f}.walletBody li>span{color:#cab3c5}.walletBody li[data-found=true]>b{color:#ffe19a}.walletBody a{display:block;padding:11px;text-align:center;border:1px solid #d6af73;border-radius:7px;background:#58315d;color:#ffe3a3!important;font-weight:800}
+.toast{position:fixed;z-index:1100;left:50%;bottom:max(85px,env(safe-area-inset-bottom));translate:-50% 15px;display:flex;align-items:center;gap:12px;max-width:calc(100vw - 28px);width:max-content;padding:14px 20px;background:#3b254b;border:2px solid #e9bf76;border-radius:12px 23px 11px 20px;box-shadow:0 5px #21182d,0 10px 40px #1e132957;color:#ffedc7;opacity:0;visibility:hidden;transition:opacity .2s,translate .3s;pointer-events:none}
+.toast[data-open=true]{opacity:1;visibility:visible;translate:-50% 0;pointer-events:none}.toast b{display:block;font-size:13px}.toast small{display:block;font-size:10px;margin-top:4px}.toast>a{font-size:12px;white-space:nowrap;color:#ffdb7c!important;pointer-events:auto}
+@keyframes bunnyBlink{0%,92%,98%{background-position:0 100%}94%,96%{background-position:33.3333% 100%}}
+@keyframes coinRise{0%{opacity:0;transform:translateY(0) scale(.5)}20%{opacity:1;transform:translateY(-25px) scale(1.1)}80%{opacity:1}100%{opacity:0;transform:translateY(-90px) scale(.7)}}
+@media(max-width:700px),(max-width:1000px) and (max-aspect-ratio:1/1){.shore{display:none}.cityPerch{display:block;right:12px;top:-77px;width:90px}.festival{left:43%;bottom:25%;width:100px}.cabinet{right:7%;bottom:43%;width:150px}.plaza{right:44%;bottom:44%;width:90px}.interview{width:65px;top:-54px;right:2%}.toast{padding:11px;gap:9px}.toast b{font-size:12px}.toast small{font-size:9px}.lookout{width:70px}}
+@media(prefers-reduced-motion:reduce){
+  .sprite,.reward{animation:none!important}.shore{display:none}.cityPerch{display:block;right:12px;top:-80px;width:90px}
+  :global([data-audience-row]),:global([data-audience-row]) img{pointer-events:none!important}
+  .cabinet{bottom:8%;right:9%;width:clamp(145px,22svh,235px)}
+  .plaza{bottom:8%;right:65%}
+  .bunny,.cabinet,.toast{transition:none}
+}
+@media(max-width:1300px){.shore{display:none}.cityPerch{display:block;right:12px;top:-77px;width:90px}}
+
+/* Discoveries are quiet until touched. The reward is a little cel sequence. */
+.bunny:not([data-found=true]) .name{opacity:0}.bunny:focus-visible .name{opacity:1}
+.bunny[data-celebrate=true] .sprite{animation:bunnyHello 1.75s steps(1,end) both}
+.reward{width:52px;height:60px;top:0;left:25%;font-size:14px}.reward svg{width:100%;animation:coinTurn .65s steps(8,end) 3}.reward>b{position:absolute;right:-17px;top:22px;font:800 13px Inter,sans-serif}
+.toastCoin{width:42px;height:42px;flex-shrink:0}
+@keyframes bunnyHello{0%{background-position:0 50%;translate:0 0;scale:1.06 .95}15%{background-position:33.333% 50%;translate:0 -8px;scale:.97 1.04}30%{background-position:66.667% 50%;translate:0 -16px;scale:1}45%{background-position:100% 50%;translate:0 0;scale:1.04 .96}58%{background-position:66.667% 100%;scale:1}84%{background-position:33.333% 100%}100%{background-position:0 100%}}
+@keyframes coinTurn{0%,100%{transform:scaleX(1)}25%,75%{transform:scaleX(.16)}50%{transform:scaleX(-1)}}
+.guide{width:min(690px,calc(100vw - 28px));max-height:calc(100svh - 32px);padding:35px;border:4px solid #523050;border-radius:33px 18px 30px 15px;background:#fff0c5;color:#552e53;overflow:auto;box-shadow:inset 0 0 0 3px #dda767,0 10px #24132e;font:14px/1.7 Inter,sans-serif}
+.guide::backdrop{background:#1f143acc;backdrop-filter:blur(7px)}.guide[open]{display:grid;grid-template-columns:155px 1fr;gap:25px;align-items:center;animation:guidePop .35s ease-out}
+.guideClose{position:absolute;right:14px;top:12px;border:2px solid #a16c50;background:#ffe2a1;border-radius:50%;width:35px;height:35px;font-size:25px;color:#583152;cursor:pointer}
+.guideBunny{position:relative}.guideBunny>svg{position:absolute;width:58px;right:-12px;top:25%;rotate:13deg}.speech>span{font-size:9px;font-weight:800;letter-spacing:.14em;color:#ad637e}.speech h2{font:400 35px/1.05 BakeSoda,sans-serif;margin:10px 0 18px}.speech p{margin:12px 0}.speech [data-scene-control]{margin-top:10px;font-size:13px}
+@keyframes guidePop{from{opacity:0;transform:scale(.9) rotate(-2deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+.scrapbookBunny{left:67%;top:-6%;width:78px;z-index:0;rotate:9deg;filter:sepia(.12) saturate(.8)}
+.scrapbookBunny[data-found=true]{clip-path:none;z-index:6}
+.loungeBunny{left:43.5%;top:25%;bottom:auto;width:15%;z-index:0;filter:sepia(.25) saturate(.65) brightness(.85)}
+.loungeBunny[data-found=true]{z-index:3}
+.nook{position:relative;min-height:740px;height:85svh;max-height:1000px;isolation:isolate;overflow:hidden;background:#34213f url('/image/journey/wonderpop-atrium-v15.webp') center/cover;color:#fff0cb}
+.nook:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(#271930b0,transparent 38%,#20152833);z-index:4}
+.nookCaption{position:absolute;top:6%;left:7%;max-width:350px;z-index:5;text-shadow:0 2px 4px #251233}.nookCaption span{font:700 9px Inter,sans-serif;letter-spacing:.2em}.nookCaption h2{font:400 37px/1.1 BakeSoda,sans-serif;margin:13px 0}.nookCaption p{font:13px Inter,sans-serif}
+.nookWorld{position:absolute;inset:0}.nook .cabinet{width:clamp(170px,25svh,255px);right:21%;bottom:12%;z-index:2}.nook .cabinet>span{opacity:0;font-size:13px;transition:opacity .2s}.nook .cabinet:hover>span,.nook .cabinet:focus-visible>span{opacity:1}
+.nookPlant{position:absolute;right:12%;bottom:10%;width:clamp(130px,20svh,210px);z-index:3;pointer-events:none}
+.nookBunny{right:17.5%;bottom:27%;width:70px;z-index:2;filter:sepia(.2) saturate(.75)}
+@media(max-width:700px){.lookout{width:calc(30px * var(--zoom,1))}.guide[open]{grid-template-columns:1fr;gap:0;padding:30px 24px}.guideBunny{width:105px;margin:-3px auto 6px}.speech h2{font-size:29px}.speech p{font-size:12px}.guideBunny>svg{width:44px}.nook{min-height:690px}.nookCaption{max-width:270px;left:8%;top:7%}.nookCaption h2{font-size:31px}.nook .cabinet{right:29%;width:183px;bottom:12%}.nookPlant{width:160px;right:7%}.nookBunny{bottom:26%;right:26%;width:60px}.scrapbookBunny{left:65%;top:-8%;width:68px}}
+@media(prefers-reduced-motion:reduce){.guide,.reward svg,.bunny[data-celebrate=true] .sprite{animation:none!important}}

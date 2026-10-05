@@ -42,7 +42,7 @@ test('Hexy reacts to music and greetings using loaded character frames', async (
   await expect(character).toHaveAttribute('data-pose', 'excited');
   await character.click();
   await expect(character).toHaveAttribute('data-pose', 'explain');
-  await expect(page.locator('[aria-live="polite"]')).toContainText('saved you a spot');
+  await expect(page.locator('[data-hexy-scene="stage"] [aria-live="polite"]')).toContainText('saved you a spot');
   await page.waitForTimeout(3100);
   await expect(character).toHaveAttribute('data-pose', 'excited');
   await page.getByRole('button', { name: 'Pause music' }).click();
@@ -66,7 +66,7 @@ test('the illustrated menu supports navigation, keyboard exit and language persi
   await expect(page.getByRole('button', { name: 'ES', exact: true })).toHaveAttribute('aria-pressed', 'true');
 });
 
-test('backstage notes work by keyboard and the studio has an expressive frame', async ({ page }) => {
+test('backstage notes work by keyboard and visitors can conduct the Bunny choir', async ({ page }) => {
   await openWorld(page);
   const tabs = page.getByRole('tablist', { name: 'Meet Hexy' });
   const first = tabs.getByRole('tab').first();
@@ -78,10 +78,12 @@ test('backstage notes work by keyboard and the studio has an expressive frame', 
   await page.getByRole('button', { name: 'Meet the Magic Bunnies' }).click();
   const studio = page.locator('#estudio');
   await expect(studio).toBeInViewport();
-  await studio.getByRole('button', { name: /A little smile/ }).click();
+  await studio.getByRole('button', { name: /One more take/ }).click();
   await expect(studio).toHaveAttribute('data-take', 'true');
-  await expect(studio.getByRole('button')).toContainText('La-la');
-  await expect(studio.locator('img[src*="studio-blink"]')).toHaveCSS('opacity', '1');
+  await expect(page.locator('[data-hexy-world]')).toHaveAttribute('data-rehearsing', 'true');
+  await expect(studio.locator('[aria-live="polite"]')).toContainText('All together');
+  await expect(page.locator('[data-bunny-performer]')).toHaveCount(4);
+  await expect.poll(() => page.locator('[data-hexy-world]').getAttribute('data-rehearsing')).toBe('false');
 });
 
 test('reduced motion keeps layers still and lets visitors trigger expressions themselves', async ({ page }) => {
@@ -110,7 +112,10 @@ test('vinyl rotates with actual playback and keeps its angle when paused, includ
   const paused = await disc.evaluate(el => getComputedStyle(el).transform);
   await page.waitForTimeout(240);
   expect(await disc.evaluate(el => getComputedStyle(el).transform)).toBe(paused);
+  await page.getByRole('button', { name: 'Explore songs', exact: true }).click();
   await page.locator('#canciones').getByRole('button', { name: 'Play Hexy Wow', exact: true }).click();
+  await page.keyboard.press('Escape');
+  await page.locator('#estudio').scrollIntoViewIfNeeded();
   const miniDisc = page.getByRole('complementary', { name: 'Mini player' }).locator('[data-vinyl]');
   await expect(miniDisc).toHaveCSS('animation-play-state', 'running');
   await page.getByRole('complementary', { name: 'Mini player' }).getByRole('button', { name: 'Pause', exact: true }).click();

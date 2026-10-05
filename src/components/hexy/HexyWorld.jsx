@@ -1,14 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '@nanostores/react';
-import { ArrowDown, ArrowUpRight, Menu, Music2, Pause, Play, X } from 'lucide-react';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { isEnglish } from '../../data/variables';
 import { SceneButton, SceneLabel, SceneStar } from '../global/SceneControls';
 import usePlazaDialog from '../index/Secciones/usePlazaDialog';
-import HexyPlayer, { HexyMiniPlayer } from './components/HexyPlayer';
+import HexyPlayer, { HexyMiniPlayer, HexyListeningRoom } from './components/HexyPlayer';
 import { useHexyAudio } from './components/HexyAudioProvider';
 import useReducedMotion from './components/useReducedMotion';
 import useSceneMotion from './components/useSceneMotion';
-import { PassageScenery, RoomPassage } from './HexyPassages';
+import { RoomScene } from './HexyPassages';
+import IllustratedMenu, { IllustratedMenuTrigger } from '../global/IllustratedMenu';
+import useIllustratedFinish from '../global/useIllustratedFinish';
+import HexyFinish from './HexyFinish';
+import HexyConcert from './HexyConcert';
+import {HuntBunny,HuntToast} from '../arcade/BunnyHunt';
 import styles from './HexyWorld.module.css';
 
 const art = '/image/hexy/world-v34/';
@@ -69,7 +74,8 @@ function StageConfetti({ burst = false }) {
   </div>;
 }
 
-function Navigation({ en }) {
+function Navigation({ en, finish, onFinishChange, onMenuTarget }) {
+  const { openExpanded } = useHexyAudio();
   const dialog = useRef(null);
   const { open, close } = usePlazaDialog(dialog);
   const [opened, setOpened] = useState(false);
@@ -77,8 +83,6 @@ function Navigation({ en }) {
     isEnglish.set(value === 'en');
     try { localStorage.setItem('lang', value); } catch { /* The selection still works for this visit. */ }
   };
-  const destinations = [['/', en ? 'The journey' : 'El recorrido'], ['/bebidas', 'Magic Drink'],
-    ['/hexy', 'Hexy'], ['/wonderpop-plaza', 'Wonderpop Plaza'], ['/nosotros', en ? 'About us' : 'Nosotros']];
   return <>
     <nav className={styles.navigation} aria-label={en ? 'Hexy navigation' : 'Navegación de Hexy'}>
       <a href="/" className={styles.brand} aria-label={en ? 'Magic Drink home' : 'Magic Drink inicio'}>
@@ -87,34 +91,25 @@ function Navigation({ en }) {
       <div className={styles.localLinks}>
         <a href="#hexy-stage">{en ? 'The stage' : 'El escenario'}</a>
         <a href="#camerino">{en ? 'Backstage' : 'Camerino'}</a>
-        <a href="#canciones">{en ? 'Songs' : 'Canciones'}</a>
+        <button type="button" onClick={openExpanded}>{en ? 'Songs' : 'Canciones'}</button>
       </div>
       <div className={styles.navTools}>
         <div className={styles.languages} aria-label={en ? 'Language' : 'Idioma'} role="group">
           <button type="button" aria-pressed={!en} onClick={() => language('es')}>ES</button>
           <button type="button" aria-pressed={en} onClick={() => language('en')}>EN</button>
         </div>
-        <button type="button" className={styles.menuTrigger} aria-haspopup="dialog" aria-controls="hexy-menu" aria-expanded={opened}
-          onClick={() => { open(); setOpened(true); }}><Menu size={18} aria-hidden="true" /><span>{en ? 'Menu' : 'Menú'}</span></button>
+        <IllustratedMenuTrigger en={en} aria-haspopup="dialog" aria-controls="hexy-menu" aria-expanded={opened}
+          onClick={() => { open(); setOpened(true); onMenuTarget(dialog.current); }} />
       </div>
     </nav>
-    <dialog id="hexy-menu" ref={dialog} className={styles.menuDialog} aria-labelledby="hexy-menu-title"
-      onClose={() => setOpened(false)} onClick={event => { if (event.target === dialog.current) close(); }}>
-      <button type="button" className={styles.menuClose} onClick={close} aria-label={en ? 'Close menu' : 'Cerrar menú'} autoFocus><X /></button>
-      <SceneLabel>{en ? 'Your backstage pass' : 'Tu pase a este mundo'}</SceneLabel>
-      <h2 id="hexy-menu-title">{en ? 'Where shall we go?' : '¿A dónde vamos?'}</h2>
-      <nav aria-label={en ? 'Main navigation' : 'Navegación principal'}>
-        {destinations.map(([href, label], i) => <a href={href} key={href} aria-current={href === '/hexy' ? 'page' : undefined}>
-          <small>0{i + 1}</small><span>{label}</span><ArrowUpRight size={20} aria-hidden="true" />
-        </a>)}
-      </nav>
-      <SceneButton onClick={close} variant="violet">{en ? 'Back to Hexy' : 'Volver con Hexy'}</SceneButton>
-    </dialog>
+    <IllustratedMenu dialogRef={dialog} id="hexy-menu" en={en} currentPath="/hexy" data-hexy-menu
+      finish={finish} onFinishChange={onFinishChange} onClose={close}
+      onClosed={() => { setOpened(false); onMenuTarget(null); }} resume={en ? 'Back to Hexy' : 'Volver con Hexy'} />
   </>;
 }
 
 function Hero({ en, reduced }) {
-  const { isPlaying, togglePlay } = useHexyAudio();
+  const { isPlaying, togglePlay, openExpanded } = useHexyAudio();
   const [greeting, setGreeting] = useState(-1);
   const [reacting, setReacting] = useState(false);
   useEffect(() => {
@@ -123,12 +118,6 @@ function Hero({ en, reduced }) {
     return () => clearTimeout(timer);
   }, [reacting, greeting]);
   const hello = () => { setGreeting(previous => (previous + 1) % lines.length); setReacting(true); };
-  const explore = event => {
-    event.preventDefault();
-    const songs = document.getElementById('canciones');
-    songs?.focus({ preventScroll: true });
-    songs?.scrollIntoView({ behavior: reduced ? 'instant' : 'smooth', block: 'start' });
-  };
   return <section id="hexy-stage" className={styles.hero} data-hexy-scene="stage" data-scene-active="true">
     <div className={styles.heroWorld}>
       <Layer className={styles.nightSky} data-scenery="sky" depth={-.65} travel={.3}><Dust /></Layer>
@@ -159,7 +148,7 @@ function Hero({ en, reduced }) {
       <p className={styles.heroDescription}>{en ? 'Come closer. The lights are on, the Bunnies are ready… and this song is for you.' : 'Acércate. Las luces están encendidas, los Bunnies están listos… y esta canción es para ti.'}</p>
       <div className={styles.heroActions}>
         <SceneButton onClick={togglePlay} icon={isPlaying ? 'pause' : 'play'}>{isPlaying ? (en ? 'Pause music' : 'Pausar música') : (en ? 'Listen to music' : 'Escuchar música')}</SceneButton>
-        <a href="#canciones" onClick={explore} className={styles.explore}>{en ? 'Explore songs' : 'Explorar canciones'}<ArrowDown size={16} aria-hidden="true" /></a>
+        <button type="button" onClick={openExpanded} className={styles.explore}>{en ? 'Explore songs' : 'Explorar canciones'}<ArrowUpRight size={16} aria-hidden="true" /></button>
       </div>
       <div className={styles.fameStrip}>
         <div><strong>2.4B+</strong><span>{en ? 'streams' : 'reproducciones'}</span></div>
@@ -198,6 +187,7 @@ function Backstage({ en }) {
     <div className={styles.chapterRail}><span>01 / {en ? 'BACKSTAGE' : 'ENTRE BASTIDORES'}</span><i /><SceneStar /></div>
     <div className={styles.backstageLayout}>
       <div className={styles.scrapbook}>
+        <HuntBunny id="festival" en={en} place="scrapbookBunny" />
         <Layer className={styles.photoBack} depth={.65} travel={-.4}><span>HEXY · MAGIC DRINK</span></Layer>
         <Layer className={styles.photoFront} depth={1.3} travel={-.25}>
           <img src="/image/hexy/hexy-bunnies-concert.webp" alt={en ? 'Hexy singing with the Magic Bunnies' : 'Hexy cantando con los Magic Bunnies'} loading="lazy" />
@@ -232,101 +222,53 @@ function Backstage({ en }) {
   </section>;
 }
 
-function Studio({ en }) {
-  const [take, setTake] = useState(false);
-  useEffect(() => { if (!take) return; const timer = setTimeout(() => setTake(false), 2400); return () => clearTimeout(timer); }, [take]);
-  return <section id="estudio" className={styles.studio} data-hexy-scene="studio" data-take={take}>
+function Studio({ en, rehearsing, onRehearse }) {
+  const { openExpanded } = useHexyAudio();
+  return <section id="estudio" className={`${styles.studio} ${styles.bunnyStudio}`} data-hexy-scene="studio" data-take={rehearsing}>
     <div className={styles.chapterRail}><span>02 / {en ? 'ONE MORE TAKE' : 'UNA TOMA MÁS'}</span><i /><SceneStar /></div>
     <div className={styles.studioLayout}>
-      <div className={styles.recordingFrame}>
-        <Layer className={styles.studioPicture} depth={.9} travel={-.25}>
-          <img src="/image/hexy/hexy-magic-bunnies-studio.webp" alt={en ? 'Hexy and her Magic Bunnies recording in their studio' : 'Hexy y los Magic Bunnies grabando en su estudio'} loading="lazy" width="1672" height="941" />
-          <img className={styles.studioBlink} src={`${art}studio-blink.webp`} alt="" loading="lazy" width="1672" height="941" />
-        </Layer>
-        <Layer className={styles.studioSpark} depth={2.2} travel={-.5}><SceneStar /></Layer>
-        <span className={styles.recordingTag}><i />{en ? 'IN THE STUDIO' : 'EN EL ESTUDIO'} <b>TAKE 03</b></span>
-        <button type="button" className={styles.takeButton} onClick={() => setTake(true)}>{take ? '♪ La-la, la-la… ♫' : (en ? 'A little smile for the photo?' : '¿Una sonrisa para la foto?')}<span aria-hidden="true">✦</span></button>
-      </div>
       <div className={styles.studioCopy}>
         <SceneLabel>{en ? 'Tiny voices. A whole world.' : 'Voces pequeñas. Un mundo entero.'}</SceneLabel>
-        <h2>{en ? 'Hexy sings.' : 'Hexy canta.'}<br /><em>{en ? 'The Bunnies answer.' : 'Los Bunnies responden.'}</em></h2>
+        <h2>{en ? 'A chorus' : 'Un coro'}<br /><em>{en ? 'full of Bunnies.' : 'lleno de Bunnies.'}</em></h2>
         <p>{en ? 'Sweet echoes, mischievous syllables and little melodic laughs. They never steal the spotlight… but try to imagine the chorus without them.' : 'Ecos dulces, sílabas traviesas y pequeñas risas melódicas. Nunca se roban el escenario… pero intenta imaginar el coro sin ellos.'}</p>
-        <blockquote>{en ? '“Some fans say the choruses feel sharper after a Magic Drink. We call it polished pop production.”' : '«Algunos fans dicen que los coros se sienten más nítidos después de una Magic Drink. Nosotros lo llamamos producción pop bien hecha.»'}<cite>— MAGIC DRINK</cite></blockquote>
-        <a href="#canciones" className={styles.explore}>{en ? 'Let me hear those choruses' : 'Quiero escuchar esos coros'}<ArrowDown size={17} aria-hidden="true" /></a>
+        <div className={styles.bunnyActions}>
+          <SceneButton onClick={onRehearse} showArrow={false}>{rehearsing ? '♪ La-la, la-la… ♫' : (en ? 'One more take, Bunnies!' : '¡Otra toma, Bunnies!')}</SceneButton>
+          <button type="button" onClick={openExpanded} className={styles.explore}>{en ? 'Let me hear those choruses' : 'Quiero escuchar esos coros'}<ArrowUpRight size={17} aria-hidden="true" /></button>
+        </div>
+        <span className={styles.bunnyCaption} aria-live="polite">{rehearsing ? (en ? 'All together… one, two, three!' : 'Todos juntos… ¡uno, dos, tres!') : (en ? 'The smallest voices have the biggest plans.' : 'Las voces más pequeñas tienen los planes más grandes.')}</span>
       </div>
     </div>
-  </section>;
-}
-
-function Records({ en }) {
-  const { playlist, trackIndex, isPlaying, chooseTrack, pause } = useHexyAudio();
-  return <section id="canciones" tabIndex={-1} className={styles.records} data-hexy-scene="records" aria-labelledby="hexy-songs-heading">
-    <Layer className={styles.recordLights} depth={1.5} travel={-.3}><FairyLights /></Layer>
-    <div className={styles.chapterRail}><span>03 / {en ? 'THE REPERTOIRE' : 'EL REPERTORIO'}</span><i /><SceneStar /></div>
-    <div className={styles.recordHeading}>
-      <SceneLabel>{en ? 'Your next little obsession' : 'Tu próxima pequeña obsesión'}</SceneLabel>
-      <h2 id="hexy-songs-heading">{en ? 'Which one stays with you?' : '¿Cuál se queda contigo?'}</h2>
-      <p>{en ? 'Pick a cover, turn it up and make yourself at home.' : 'Elige una portada, sube el volumen y quédate un ratito.'}</p>
-    </div>
-    <div className={styles.recordGrid}>
-      {playlist.map((track, index) => <button type="button" key={track.id} className={styles.recordCard} data-playing={index === trackIndex && isPlaying}
-        style={{ '--tilt': `${[-3, 1.5, -1, 2, -2, 2.5][index]}deg` }}
-        aria-pressed={index === trackIndex && isPlaying}
-        aria-label={`${index === trackIndex && isPlaying ? (en ? 'Pause' : 'Pausar') : (en ? 'Play' : 'Reproducir')} ${track.title}`}
-        onClick={() => index === trackIndex && isPlaying ? pause() : chooseTrack(index)}>
-        <span className={styles.recordPin} aria-hidden="true">✦</span>
-        <span className={styles.recordSleeve}>
-          <img src={track.cover} alt="" loading="lazy" width="400" height="400" />
-          <span className={styles.recordPlay} aria-hidden="true">{index === trackIndex && isPlaying ? <Pause fill="currentColor" /> : <Play fill="currentColor" />}</span>
-        </span>
-        <span className={styles.recordLabel}>
-          <small>{index === trackIndex && isPlaying ? (en ? 'NOW PLAYING' : 'AHORA SUENA') : `SIDE ${String(index + 1).padStart(2, '0')}`}<Music2 size={13} aria-hidden="true" /></small>
-          <strong>{track.title}</strong><span>{track.artist}</span>
-        </span>
-      </button>)}
-    </div>
-    <details className={styles.secretCredit}>
-      <summary><span>{en ? 'Psst… did you notice this signature?' : 'Psst… ¿viste esta firma?'}</span><b>DJ Sweet Hex</b><span aria-hidden="true">＋</span></summary>
-      <p>{en ? 'A tiny credit on a sleeve. A name in the corner of a poster. No face, no interviews, no public explanation. Only a signature fans keep collecting. Some things sound better with a little mystery.' : 'Un crédito pequeño en una portada. Un nombre en la esquina de un póster. Sin rostro, sin entrevistas, sin explicación pública. Solo una firma que los fans coleccionan. Algunas cosas suenan mejor con un poquito de misterio.'}</p>
-    </details>
-  </section>;
-}
-
-function Encore({ en }) {
-  return <section className={styles.encore} data-hexy-scene="encore">
-    <div className={styles.encoreCopy}>
-      <SceneLabel>{en ? 'The magic keeps going' : 'La magia sigue por aquí'}</SceneLabel>
-      <h2>{en ? 'This isn’t goodbye.' : 'Esto no es un adiós.'}<br /><em>{en ? 'It’s see you next chorus.' : 'Es un hasta el próximo coro.'}</em></h2>
-      <p>{en ? 'A Magic Drink, a little music, a place to meet again. We’ll save you a spot at Wonderpop Plaza.' : 'Una Magic Drink, un poco de música y un lugar para volver a encontrarnos. Te guardamos un lugar en Wonderpop Plaza.'}</p>
-      <div className={styles.encoreActions}><SceneButton href="/wonderpop-plaza">{en ? 'Visit Wonderpop' : 'Visita Wonderpop'}</SceneButton><SceneButton href="/bebidas" variant="violet">{en ? 'Meet Magic Drink' : 'Conoce Magic Drink'}</SceneButton></div>
-    </div>
-    <footer className={styles.footer}><a href="/">MAGIC DRINK <SceneStar /></a><span>HEXY · MAGIC BUNNIES · WONDERPOP</span><a href="#hexy-stage">{en ? 'One more encore' : 'Otra vez desde el principio'} ↑</a></footer>
   </section>;
 }
 
 export default function HexyWorld() {
   const en = useStore(isEnglish);
-  const { isPlaying } = useHexyAudio();
+  const { isPlaying, expanded } = useHexyAudio();
   const reduced = useReducedMotion();
+  const [finish, setFinish] = useIllustratedFinish();
+  const [finishTarget, setFinishTarget] = useState(null);
+  const [rehearsing, setRehearsing] = useState(false);
+  useEffect(() => {
+    if (!rehearsing) return;
+    const timer = setTimeout(() => setRehearsing(false), 2800);
+    return () => clearTimeout(timer);
+  }, [rehearsing]);
   const root = useRef(null);
   useSceneMotion(root, reduced);
   useEffect(() => {
     try { const lang = localStorage.getItem('lang'); if (lang) isEnglish.set(lang === 'en'); } catch { /* Keep default language. */ }
   }, []);
-  return <div ref={root} className={styles.world} data-hexy-world data-playing={isPlaying} data-reduced-motion={reduced}>
-    <Navigation en={en} />
+  return <div ref={root} className={styles.world} data-hexy-world data-playing={isPlaying} data-rehearsing={rehearsing} data-reduced-motion={reduced}>
+    <Navigation en={en} finish={finish} onFinishChange={setFinish} onMenuTarget={setFinishTarget} />
     <Hero en={en} reduced={reduced} />
     <div className={styles.passages} data-hexy-passages data-hexy-scene="passages">
-      <PassageScenery />
-      <RoomPassage to="backstage" en={en} />
-      <Backstage en={en} />
-      <RoomPassage to="studio" en={en} />
-      <Studio en={en} />
-      <RoomPassage to="records" en={en} />
-      <Records en={en} />
-      <RoomPassage to="encore" en={en} />
-      <Encore en={en} />
+      <RoomScene room="backstage" en={en}><Backstage en={en} /></RoomScene>
+      <RoomScene room="studio" en={en}><Studio en={en} rehearsing={rehearsing} onRehearse={() => setRehearsing(true)} /></RoomScene>
+      <HexyConcert en={en} />
     </div>
     <HexyMiniPlayer />
+    <HexyListeningRoom />
+    <HexyFinish enabled={finish.enabled} reduced={reduced} settings={finish} target={finishTarget} expanded={expanded} />
+    <HuntToast en={en}/>
   </div>;
 }

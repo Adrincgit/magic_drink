@@ -40,7 +40,7 @@ export default function ScenePlayer({ en, playing, elapsed, duration, onToggle, 
           <span>{clock(elapsed)}</span>
         </div>}
       </div>
-      <button className={styles.smallButton} type="button" onClick={onNext} aria-label={en ? 'Next song' : 'Siguiente canción'}>
+      <button className={styles.smallButton} data-player-next type="button" onClick={onNext} aria-label={en ? 'Next song' : 'Siguiente canción'}>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 10 7L5 19Zm11 0h3v14h-3Z" /></svg>
       </button>
       {compact && <>
@@ -61,11 +61,12 @@ export default function ScenePlayer({ en, playing, elapsed, duration, onToggle, 
         <div className={styles.creditCard}><strong>DJ Sweet Hex</strong></div>
       </details>
     </div>}
-    <div className={styles.playlist} id={listId} hidden={!expanded} data-lenis-prevent>
+    <div className={styles.playlist} id={listId} hidden={!expanded} data-song-list data-lenis-prevent>
       <div className={styles.playlistHeading}><span>HEXY · {tracks.length} {en ? 'SONGS' : 'CANCIONES'}</span><button type="button" onClick={closeList} aria-label={en ? 'Close song list' : 'Cerrar lista de canciones'}>×</button></div>
       <ol>{tracks.map((song, index) => <li key={song.id}><button type="button" aria-current={index === trackIndex ? 'true' : undefined} onClick={() => { onSelect(index); closeList(); }}>
         <img src={song.cover} alt="" width="36" height="36" loading="lazy" draggable={false} /><span><strong>{song.title}</strong><small>{song.artist}</small></span><b aria-hidden="true">{index === trackIndex && playing ? '♫' : String(index + 1).padStart(2, '0')}</b>
       </button></li>)}</ol>
+      {compact && <button className={styles.stopMobile} type="button" onClick={onClose}>{en ? 'Close and stop music' : 'Cerrar y detener la música'}</button>}
     </div>
     {audioError && <p className={styles.error} role="status">{en ? 'Could not load. Try play or another song.' : 'No se pudo cargar. Prueba de nuevo u otra canción.'}</p>}
   </div>;

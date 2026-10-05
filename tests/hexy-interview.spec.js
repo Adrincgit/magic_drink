@@ -62,7 +62,7 @@ test('the scenery has independent depth while dialogue stays still and music rem
   await expect(page.locator('[data-compact-player]')).toBeVisible();
 });
 
-test('phone layout keeps answers and controls readable above the mini player', async ({ page }) => {
+test('phone layout keeps answers and controls readable below the top mini player', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await openLanding(page); await goWorld(page, interviewStop(2));
   const scene = page.locator('[data-hexy-interview]');
@@ -72,7 +72,8 @@ test('phone layout keeps answers and controls readable above the mini player', a
   const question = await scene.locator('#hexy-question').boundingBox();
   expect(heading.y + heading.height).toBeLessThan(question.y);
   expect(copy.x).toBeGreaterThanOrEqual(0); expect(copy.x + copy.width).toBeLessThanOrEqual(390);
-  expect(copy.y + copy.height).toBeLessThan(player.y);
+  expect(player.y + player.height).toBeLessThan(heading.y);
+  expect(copy.y + copy.height).toBeLessThan(844 - 65);
   await scene.getByRole('button', { name: 'Hazle otra pregunta' }).click();
   const dialog = scene.locator('dialog');
   await dialog.getByRole('button', { name: 'Su música', exact: true }).click();

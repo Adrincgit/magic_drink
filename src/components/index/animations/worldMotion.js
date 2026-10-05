@@ -3,6 +3,7 @@
 import { FILM_END, FILM_REVEAL } from '../../../data/wonderpopFilm';
 import { JOURNEY_END } from '../../../data/journeyChapters';
 import { INTERVIEW_FADE_START, INTERVIEW_READY } from '../../../data/hexyInterviewTiming';
+import { paintStoryPanel } from './storyPanelMotion';
 
 export const OPENING_END = 0.36;
 const clamp = (n) => Math.max(0, Math.min(1, n));
@@ -59,6 +60,7 @@ export function createWorldDirector(root) {
   function copy(name, opacity, y = 0) {
     const element = copies.find((el) => el.dataset.worldCopy === name);
     if (!element) return;
+    if (element.hasAttribute('data-story-wrapper')) { paintStoryPanel(element, opacity); return; }
     gsap.set(element, { autoAlpha: opacity, y });
     const hidden = opacity < 0.35;
     element.inert = hidden;
@@ -74,6 +76,7 @@ export function createWorldDirector(root) {
         animated.forEach((element) => gsap.set(element, { clearProps: 'all' }));
         copies.forEach((element) => {
           element.inert = false;
+          element.removeAttribute('data-story-active');
           element.removeAttribute('aria-hidden');
         });
         [festival, plaza, gallery, visitors, interview, farewell].filter(Boolean).forEach(el => { el.inert = false; el.removeAttribute('aria-hidden'); });

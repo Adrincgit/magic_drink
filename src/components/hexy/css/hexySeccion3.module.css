@@ -242,13 +242,43 @@
   margin: 0;
 }
 
+.musicShelf {
+  scroll-margin-top: 7rem;
+  padding-bottom: 1.5rem;
+}
+
+.musicHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.musicHeading h3 {
+  font-family: var(--em-font-headline);
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  line-height: 1.15;
+}
+
+.musicHeading p {
+  max-width: 255px;
+  color: var(--em-text-secondary);
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
 .trackGrid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 0.9rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
 .trackCard {
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  color: white;
   position: relative;
   min-width: 0;
   aspect-ratio: 1;
@@ -268,6 +298,47 @@
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
 }
 
+.trackCard:focus-visible,
+.musicShelf:focus-visible {
+  outline: 3px solid var(--md-yellow);
+  outline-offset: 5px;
+}
+
+.trackActive {
+  border-color: var(--md-pink);
+  box-shadow: 0 0 0 2px rgba(255, 106, 215, .35), 0 12px 36px rgba(170, 55, 242, .25);
+}
+
+.trackPlay {
+  position: absolute;
+  top: .9rem;
+  right: .9rem;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .55);
+  border-radius: 50%;
+  background: rgba(26, 12, 43, .85);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .3);
+  transition: transform .2s, background .2s;
+}
+
+.trackCard:hover .trackPlay,
+.trackActive .trackPlay {
+  background: var(--md-purple-dark);
+  transform: scale(1.06);
+}
+
+.trackStatus {
+  color: #ffe898;
+  font-size: .66rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: .2rem;
+}
+
 .trackImage {
   display: block;
   width: 100%;
@@ -280,20 +351,20 @@
   inset: auto 0 0;
   display: grid;
   gap: 0.2rem;
-  padding: 1.8rem 0.72rem 0.72rem;
-  background: linear-gradient(0deg, rgba(9, 5, 18, 0.84), rgba(9, 5, 18, 0));
+  padding: 3.8rem 1.1rem 1.1rem;
+  background: linear-gradient(0deg, rgba(9, 5, 18, .98), rgba(9, 5, 18, .8) 58%, rgba(9, 5, 18, 0));
 }
 
 .trackTitle {
   color: var(--md-white);
-  font-size: 0.78rem;
+  font-size: clamp(.85rem, 1.35vw, 1.15rem);
   font-weight: 800;
   line-height: 1.15;
 }
 
 .trackCredit {
   color: var(--em-text-secondary);
-  font-size: 0.7rem;
+  font-size: .78rem;
   line-height: 1.2;
 }
 
@@ -338,6 +409,16 @@
   .trackGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+@media (max-width: 640px) {
+  .musicHeading { display: block; }
+  .musicHeading p { margin-top: .8rem; max-width: none; }
+  .trackGrid { gap: .85rem; }
+  .trackOverlay { padding: 3.5rem .65rem .7rem; }
+  .trackPlay { width: 36px; height: 36px; top: .6rem; right: .6rem; }
+  .trackStatus { font-size: .57rem; }
+  .trackCredit { font-size: .65rem; }
 }
 
 @media (max-width: 900px) {

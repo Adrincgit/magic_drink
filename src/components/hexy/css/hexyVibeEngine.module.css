@@ -7,8 +7,9 @@
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9990;
-  overflow: visible;
+  z-index: 50;
+  opacity: .42;
+  overflow: hidden;
 }
 
 /* ── Aurora blobs ──────────────────────────────────────────── */

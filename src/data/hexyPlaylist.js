@@ -4,7 +4,7 @@ export const hexyPlaylist = [
     title: 'No Brain, Just Vibes!',
     artist: 'Hexy + Magic Bunnies',
     src: '/audio/demos/no_brain_just_vibes_demo.mp3',
-    cover: '/image/music_covers/nobrain_just_vibes.webp',
+    cover: '/image/music_covers/nobrain_just_vibes-v38.webp',
     badge: 'TOP 1 Global',
   },
   {
@@ -12,7 +12,7 @@ export const hexyPlaylist = [
     title: 'Hexy Wow',
     artist: 'Hexy + Magic Bunnies',
     src: '/audio/demos/hexy_wow_demo.mp3',
-    cover: '/image/music_covers/hexy_wow.webp',
+    cover: '/image/music_covers/hexy_wow-v38.webp',
     badge: null,
   },
   {
@@ -20,7 +20,7 @@ export const hexyPlaylist = [
     title: 'Dancing Re-Re',
     artist: 'Hexy + Magic Bunnies',
     src: '/audio/demos/dancing_rere_demo.mp3',
-    cover: '/image/music_covers/dancing_rere.webp',
+    cover: '/image/music_covers/dancing_rere-v38.webp',
     badge: null,
   },
   {
@@ -36,7 +36,7 @@ export const hexyPlaylist = [
     title: 'Not Today Okay',
     artist: 'Hexy',
     src: '/audio/demos/not_today_demo.mp3',
-    cover: '/image/music_covers/not_today_okay.webp',
+    cover: '/image/music_covers/not_today_okay-v38.webp',
     badge: null,
   },
   {
@@ -44,7 +44,7 @@ export const hexyPlaylist = [
     title: 'Roundy-Round',
     artist: 'Hexy + Magic Bunnies',
     src: '/audio/demos/roundi_round_demo.mp3',
-    cover: '/image/music_covers/roundy_round.webp',
+    cover: '/image/music_covers/roundy_round-v38.webp',
     badge: null,
   },
 ];

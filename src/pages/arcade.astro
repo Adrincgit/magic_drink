@@ -1,0 +1,8 @@
+---
+import LayoutBasic from '../layouts/LayoutBasic.astro';
+import HexyAdventure from '../components/arcade/HexyAdventure.jsx';
+---
+<LayoutBasic title="Hexy & the Lost Chorus — Magic Drink" description="Cinco mundos, un coro robado y una aventura de plataformas con Hexy y los Magic Bunnies." lang="es" showNavBar={false} showFooter={false}>
+  <HexyAdventure client:load />
+  <noscript><p style="padding:40px;color:#ffe8ba">Activa JavaScript para jugar a Bunny Arcade. <a href="/">Volver a Magic Drink</a></p></noscript>
+</LayoutBasic>

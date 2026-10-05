@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useStore } from '@nanostores/react';
 import { isEnglish } from '../../../data/variables';
 import styles from '../css/hexySeccion2.module.css';
+import { useHexyAudio } from '../components/HexyAudioProvider';
 
 const coverHighlights = [
   { src: '/image/music_covers/nobrain_just_vibes.webp', alt: 'No Brain Just Vibes' },
@@ -72,6 +73,7 @@ export default function HexySeccion2() {
   const ingles = useStore(isEnglish);
   const t = ingles ? content.en : content.es;
   const sectionRef = useRef(null);
+  const { track, isPlaying } = useHexyAudio();
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -173,11 +175,13 @@ export default function HexySeccion2() {
               src="/image/hexy/hexy-anime-banner.webp"
               alt="Hexy mixing the Magic Drink sound"
               className={styles.mainVisual}
+              loading="lazy"
+              decoding="async"
             />
             <div className={styles.visualShade} />
             <figcaption className={styles.nowPlaying}>
-              <span>{t.visualKicker}</span>
-              <strong>{t.visualTitle}</strong>
+              <span>{isPlaying ? t.visualKicker : (ingles ? 'The world of Hexy' : 'El mundo de Hexy')}</span>
+              <strong>{isPlaying ? track.title : t.visualTitle}</strong>
             </figcaption>
             <div className={styles.coverStrip} aria-hidden="true">
               {coverHighlights.map((cover) => (

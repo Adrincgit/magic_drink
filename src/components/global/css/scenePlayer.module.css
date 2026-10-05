@@ -77,7 +77,9 @@
 .playlist li strong { display: block; font: 600 11px/1.5 Inter, sans-serif; color: #fff1cc; }
 .playlist li small { font: 9px/1.4 Inter, sans-serif; color: #cfb4cd; }
 .playlist li b { margin-left: auto; font-size: 12px; color: #e9ba85; }
-.compact { position: fixed; right: max(22px, env(safe-area-inset-right)); bottom: max(72px, calc(env(safe-area-inset-bottom) + 50px)); z-index: 200; width: min(340px, calc(100vw - 32px)); padding: 4px 10px; border-radius: 8px 17px; }
+.compact { position: fixed; left: max(24px, env(safe-area-inset-left)); top: max(18px, env(safe-area-inset-top)); z-index: 200; width: min(340px, calc(100vw - 32px)); padding: 4px 10px; border-radius: 8px 17px; }
+.compact .playlist { top:calc(100% + 14px); bottom:auto; max-height:min(330px,calc(100svh - 150px)); }
+.stopMobile { display:none; }
 .compact .controls { gap: 9px; padding: 4px 0; }
 .cover { width: 38px; height: 38px; flex: 0 0 38px; object-fit: cover; border: 1px solid #dfb677; border-radius: 4px; box-shadow: 0 2px 4px #1e122c66; }
 .compact .record { width: 42px; height: 42px; flex-basis: 42px; }
@@ -101,7 +103,14 @@
   .track > span { font-size: 9px; }
   .bottomline > span { font-size: 5px; letter-spacing: .7px; }
   .credits summary { min-height: 36px; }
-  .compact { right: 16px; padding: 4px 10px; bottom: max(66px, calc(env(safe-area-inset-bottom) + 50px)); }
+  .compact { top:max(12px,env(safe-area-inset-top)); left:max(12px,env(safe-area-inset-left)); width:calc(100vw - 140px); max-width:340px; padding:0 6px; border-radius:5px 13px; }
+  .compact .controls { gap:6px; padding:2px 0; }
+  .compact .record { width:40px; height:40px; flex-basis:40px; }
+  .compact .cover,.compact .track>span,.compact [data-player-next],.compact .close { display:none; }
+  .compact .track strong { font-size:10px; }
+  .compact .smallButton { width:36px; height:44px; flex-basis:36px; }
+  .compact .playlist { width:calc(100vw - 24px); max-height:min(370px,calc(100svh - 150px)); }
+  .stopMobile { display:block; width:100%; min-height:44px; padding:10px; border-top:1px solid #d4a78155; color:#ffdfa3; background:#271b32; font-size:11px; }
   .controls { gap: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {

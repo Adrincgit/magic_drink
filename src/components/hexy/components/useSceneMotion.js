@@ -9,7 +9,8 @@ export default function useSceneMotion(rootRef, reduced) {
     const scenes = [...root.querySelectorAll('[data-hexy-scene]')];
     const passages = root.querySelector('[data-hexy-passages]');
     const roomBackdrops = [...root.querySelectorAll('[data-room-backdrop]')];
-    const roomDoors = [...root.querySelectorAll('[data-room-door]')];
+    const roomScenes = [...root.querySelectorAll('[data-room-scene]')];
+    const roomSections = roomBackdrops.map(backdrop => root.querySelector(`[data-hexy-scene="${backdrop.dataset.roomBackdrop}"]`));
     const fine = matchMedia('(pointer: fine)');
     let targetX = 0, targetY = 0, x = 0, y = 0, frame = 0;
     const paint = () => {
@@ -27,22 +28,21 @@ export default function useSceneMotion(rootRef, reduced) {
         scene.style.setProperty('--scene-scroll', `${reduced ? 0 : (progress * 80).toFixed(3)}px`);
       });
       if (passages) {
-        // Blend while crossing a doorway, not when its heading is already on
-        // screen. Deriving this from geometry also handles anchors and resize.
-        let room = 0, blend = 1;
-        roomDoors.forEach((door, i) => {
-          const rect = door.getBoundingClientRect();
-          const t = Math.max(0, Math.min(1, (innerHeight * .9 - rect.top) / (rect.height + innerHeight * .6)));
-          door.style.setProperty('--door-progress', String(reduced ? 1 : t));
-          if (i > 0 && t > 0) { room = i; blend = reduced ? (t >= .5 ? 1 : 0) : t * t * (3 - 2 * t); }
-        });
-        passages.dataset.activeRoom = roomBackdrops[blend < .5 && room > 0 ? room - 1 : room]?.dataset.roomBackdrop || 'backstage';
+        let activeRoom = 'backstage';
         roomBackdrops.forEach((backdrop, i) => {
-          // New room covers the old opaque room: no dark band halfway through.
-          const opacity = i === room ? blend : i === room - 1 && blend < 1 ? 1 : 0;
-          backdrop.style.setProperty('--room-opacity', String(opacity));
-          backdrop.style.setProperty('--room-arrival', String(reduced ? 1 : i === room ? blend : 1));
+          const bounds = roomScenes[i].getBoundingClientRect();
+          // scrollIntoView rounds its destination to device pixels. A leftover
+          // fraction of a pixel must not keep an offscreen room's loops alive.
+          const visible = bounds.bottom > .5 && bounds.top < innerHeight - .5;
+          backdrop.dataset.roomVisible = String(visible);
+          if (bounds.top <= innerHeight * .5 && bounds.bottom > innerHeight * .5) activeRoom = backdrop.dataset.roomBackdrop;
+          // Each room has its own camera travel. Measuring the entire long
+          // passage would make the movement almost imperceptible within a room.
+          const rect = roomSections[i]?.getBoundingClientRect();
+          const progress = rect ? Math.max(-.3, Math.min(1, (innerHeight * .65 - rect.top) / (rect.height + innerHeight * .5))) : 0;
+          backdrop.style.setProperty('--room-scroll', `${reduced ? 0 : (progress * 170).toFixed(3)}px`);
         });
+        passages.dataset.activeRoom = activeRoom;
       }
       if (Math.abs(targetX - x) + Math.abs(targetY - y) > .02) frame = requestAnimationFrame(paint);
     };

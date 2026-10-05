@@ -137,9 +137,9 @@ test('Hexy deep link opens its scene and the product route offers only Magic Dri
     .poll(() => page.locator('[data-journey]').evaluate((el) => Number(el.dataset.progress)))
     .toBeCloseTo(0.87, 2);
   await page.goto('/bebidas', { waitUntil: 'networkidle' });
-  await expect(page.locator('main h1')).toHaveText(/Magic\s*Drink\./);
+  await expect(page.locator('main h1')).toHaveText(/Destapa\s*la magia\./);
   await expect(page.locator('body')).not.toContainText(
     /Original|Bubble Tape|Dragon Grape|Banana Drama|6 sabores|6 official flavors/,
   );
-  await expect(page.locator('img[src="/image/journey/original.webp"]')).toBeVisible();
+  await expect(page.locator('[data-drink-can]')).toBeVisible();
 });

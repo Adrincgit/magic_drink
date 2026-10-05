@@ -6,6 +6,7 @@ import { mountPointerDepth } from './pointerDepth';
 import { FILM_END, FILM_REVEAL, filmMoment, filmShots } from '../../../data/wonderpopFilm';
 import { JOURNEY_END } from '../../../data/journeyChapters';
 import { INTERVIEW_ENTRY } from '../../../data/hexyInterviewTiming';
+import { paintStoryPanel } from './storyPanelMotion';
 
 const clamp = (n, a = 0, b = 1) => Math.max(a, Math.min(b, n));
 const mix = (a, b, p) => a + (b - a) * p;
@@ -63,6 +64,7 @@ export function mountJourney(root, onChapter) {
     if (reduced.matches) {
       copies.forEach((el) => {
         el.inert = false;
+        el.removeAttribute('data-story-active');
         el.removeAttribute('aria-hidden');
         gsap.set(el, { clearProps: 'all' });
       });
@@ -106,7 +108,7 @@ export function mountJourney(root, onChapter) {
       gsap.set(layers.sun, { x: x * 0.045, y: 0 });
       gsap.set(layers.street, { x, scale: pullback, transformOrigin: '50% 82%' });
       // A grounded lamp follows the paving it stands on, including its pivot.
-      gsap.set(layers.furniture, { x, scale: pullback, transformOrigin: '50% 82%', y: 0 });
+      gsap.set([layers.furniture, layers.lookout], { x, scale: pullback, transformOrigin: '50% 82%', y: 0 });
       const foregroundX = -width * 1.23 * phase(p, 0.04, 0.35);
       gsap.set(layers.counter, {
         x: foregroundX,
@@ -122,14 +124,8 @@ export function mountJourney(root, onChapter) {
       gsap.set(layers.plants, { x: x * 1.3 - width * 0.2 * toCity, y: height * 0.04 * toCity });
       gsap.set(layers.window, { x: -width * 0.8 * toCity });
       gsap.set(copies[0], { autoAlpha: 1 - phase(p, 0.035, 0.17), y: -30 * toCity });
-      gsap.set(copies[1], {
-        autoAlpha: phase(p, 0.23, 0.38) * (1 - phase(p, 0.55, 0.67)),
-        y: 22 * (1 - toCity) - 20 * toMusic,
-      });
-      gsap.set(copies[2], {
-        autoAlpha: phase(p, 0.69, 0.83) * (1 - phase(worldProgress, 0.345, 0.373)),
-        y: 28 * (1 - toMusic),
-      });
+      paintStoryPanel(copies[1], phase(p, 0.23, 0.38) * (1 - phase(p, 0.55, 0.67)));
+      paintStoryPanel(copies[2], phase(p, 0.69, 0.83) * (1 - phase(worldProgress, 0.345, 0.373)));
       gsap.set(left, { opacity: 1 - toMusic });
       gsap.set(right, { opacity: toMusic });
       gsap.set(exit, { opacity: 0 });
@@ -141,8 +137,9 @@ export function mountJourney(root, onChapter) {
       current = chapter;
       onChapter(chapter);
       copies.forEach((el, i) => {
-        el.inert = i !== chapter;
-        el.setAttribute('aria-hidden', String(i !== chapter));
+        const hidden = el.hasAttribute('data-story-wrapper') ? el.dataset.storyActive !== 'true' : i !== chapter;
+        el.inert = hidden;
+        el.setAttribute('aria-hidden', String(hidden));
       });
     }
     root.dataset.progress = p.toFixed(4);
@@ -157,11 +154,15 @@ export function mountJourney(root, onChapter) {
     distance = Math.max(1, runway.offsetHeight - height);
     const worldWidth = height * 3;
     const mobile = width <= 700;
+    const narrowPortrait = mobile || (width <= 1000 && height > width);
     const anchor = (position, screen) =>
       -clamp(worldWidth * position - width * screen, 0, Math.max(0, worldWidth - width));
+    const openingCamera = mobile ? anchor(0.15, 0.5) : 0;
     camera = [
-      mobile ? anchor(0.15, 0.5) : 0,
-      anchor(0.48, mobile ? 0.54 : 0.58),
+      openingCamera,
+      // Removing the foreground table reveals the waterfront on phones.
+      // Keep this physical lookout in view before walking towards Hexy's stage.
+      narrowPortrait ? openingCamera : anchor(0.48, 0.58),
       anchor(0.704, mobile ? 0.5 : 0.4),
     ];
     root.dataset.reduced = String(reduced.matches);

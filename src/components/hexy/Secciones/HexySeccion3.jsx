@@ -2,15 +2,8 @@ import React from 'react';
 import { useStore } from '@nanostores/react';
 import { isEnglish } from '../../../data/variables';
 import styles from '../css/hexySeccion3.module.css';
-
-const tracks = [
-  { title: 'No Brain, Just Vibes!', credit: 'Hexy + Magic Bunnies', cover: '/image/music_covers/nobrain_just_vibes.webp' },
-  { title: 'Hexy Wow', credit: 'Hexy + Magic Bunnies', cover: '/image/music_covers/hexy_wow.webp' },
-  { title: 'Dancing Re-Re', credit: 'Hexy + Magic Bunnies', cover: '/image/music_covers/dancing_rere.webp' },
-  { title: 'Munchi-Sip Snacka-Pop', credit: 'Hexy', cover: '/image/music_covers/munchisip.webp' },
-  { title: 'Not Today Okay', credit: 'Hexy', cover: '/image/music_covers/not_today_okay.webp' },
-  { title: 'Roundy-Round', credit: 'Hexy + Magic Bunnies', cover: '/image/music_covers/roundy_round.webp' },
-];
+import { Play, Pause } from 'lucide-react';
+import { useHexyAudio } from '../components/HexyAudioProvider';
 
 const content = {
   es: {
@@ -86,6 +79,7 @@ const content = {
 export default function HexySeccion3() {
   const ingles = useStore(isEnglish);
   const t = ingles ? content.en : content.es;
+  const { playlist: tracks, trackIndex, isPlaying, chooseTrack, pause } = useHexyAudio();
 
   return (
     <section className={styles.section}>
@@ -107,6 +101,8 @@ export default function HexySeccion3() {
               src="/image/hexy/hexy-magic-bunnies-studio.webp"
               alt={t.studioCaption}
               className={styles.studioImage}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption className={styles.studioCaption}>
               <span>{t.studioBadge}</span>
@@ -135,20 +131,39 @@ export default function HexySeccion3() {
           <p>{t.signatureCopy}</p>
         </div>
 
-        <div className={styles.trackGrid} aria-label={ingles ? 'Hexy song cards' : 'Tarjetas de canciones de Hexy'}>
-          {tracks.map((track) => (
-            <div key={track.title} className={styles.trackCard}>
+        <div id="canciones" className={styles.musicShelf} tabIndex={-1} aria-labelledby="hexy-songs-heading">
+          <div className={styles.musicHeading}>
+            <div>
+              <span className={styles.signatureKicker}>{ingles ? 'Hexy on repeat' : 'Hexy en repeat'}</span>
+              <h3 id="hexy-songs-heading">{ingles ? 'Find your next chorus.' : 'Encuentra tu próximo coro.'}</h3>
+            </div>
+            <p>{ingles ? 'Choose a song. Let the music follow you.' : 'Elige una canción. Que la música te acompañe.'}</p>
+          </div>
+          <div className={styles.trackGrid}>
+          {tracks.map((track, index) => (
+            <button type="button" key={track.id}
+              className={`${styles.trackCard} ${index === trackIndex && isPlaying ? styles.trackActive : ''}`}
+              aria-label={`${index === trackIndex && isPlaying ? (ingles ? 'Pause' : 'Pausar') : (ingles ? 'Play' : 'Reproducir')} ${track.title}`}
+              aria-pressed={index === trackIndex && isPlaying}
+              onClick={() => index === trackIndex && isPlaying ? pause() : chooseTrack(index)}>
               <img
                 src={track.cover}
-                alt={track.title}
+                alt=""
                 className={styles.trackImage}
+                loading="lazy"
+                decoding="async"
               />
-              <div className={styles.trackOverlay}>
+              <span className={styles.trackPlay} aria-hidden="true">
+                {index === trackIndex && isPlaying ? <Pause size={22} fill="currentColor" /> : <Play size={22} fill="currentColor" />}
+              </span>
+              <span className={styles.trackOverlay}>
+                <span className={styles.trackStatus}>{index === trackIndex && isPlaying ? (ingles ? 'Now playing' : 'Ahora suena') : `${String(index + 1).padStart(2, '0')} / HEXY`}</span>
                 <span className={styles.trackTitle}>{track.title}</span>
-                <span className={styles.trackCredit}>{track.credit}</span>
-              </div>
-            </div>
+                <span className={styles.trackCredit}>{track.artist}</span>
+              </span>
+            </button>
           ))}
+          </div>
         </div>
 
         <div className={styles.details}>
