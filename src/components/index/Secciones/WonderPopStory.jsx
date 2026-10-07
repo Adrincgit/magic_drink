@@ -20,8 +20,8 @@ const conversations = [
 const questions = [
   { es: '¿Qué es Magic Drink?', en: 'What is Magic Drink?', answer: 'Es la bebida que da vida a este universo: una chispa para imaginar, compartir y convertir un día cualquiera en una pequeña aventura. Puedes conocer su historia y sus sabores en su propia página.', english: 'It’s the drink at the heart of this universe: a spark for imagination, sharing and turning an ordinary day into a little adventure. Explore its story and flavors on its own page.', href: '/bebidas', link: 'Conoce Magic Drink', enLink: 'Meet Magic Drink' },
   { es: '¿Quién es Hexy?', en: 'Who is Hexy?', answer: 'Nuestra estrella de la música. Su mundo mezcla canciones, magia y una personalidad que se siente en cada escenario. El reproductor te acompaña por la visita; tú eliges cuándo darle play.', english: 'Our musical star. Her world brings together songs, magic and a personality that shines on every stage. The player stays with you on your visit; you choose when to press play.', href: '/hexy', link: 'Entra al mundo de Hexy', enLink: 'Enter Hexy’s world' },
-  { es: '¿Qué encuentro en la plaza?', en: 'What can I find at the plaza?', answer: 'Tiendas temáticas, Magic Bunnies, ropa, cosplay, recuerdos y rincones para compartir la música de Hexy. WonderPop reúne todo ese mundo en un mismo lugar. La visita continúa en la página de la plaza.', english: 'Themed shops, Magic Bunnies, clothing, cosplay, souvenirs and corners to share Hexy’s music. WonderPop brings that entire world together. Continue your visit on the plaza page.', href: '/wonderpop-plaza', link: 'Explora WonderPop Plaza', enLink: 'Explore WonderPop Plaza' },
-  { es: '¿Se puede comprar aquí?', en: 'Can I shop here?', answer: 'Esta es una experiencia de un universo ficticio. Las tiendas y los objetos muestran lo que imaginamos para WonderPop; las fotografías son conceptos visuales. No se realizan compras ni reservas desde este recorrido.', english: 'This is an experience set in a fictional universe. The shops and objects show what we imagine for WonderPop; the photographs are visual concepts. There are no purchases or bookings in this journey.', href: '/nosotros', link: 'Conoce nuestra historia', enLink: 'Meet the world’s creators' },
+  { es: '¿Qué encuentro en la plaza?', en: 'What can I find at the plaza?', answer: 'Tiendas temáticas, Magic Bunnies, ropa, cosplay, recuerdos y rincones para compartir la música de Hexy. WonderPop reúne todo ese mundo en un mismo lugar. La visita continúa en la página de la plaza.', english: 'Themed shops, Magic Bunnies, clothing, cosplay, souvenirs and corners to share Hexy’s music. WonderPop brings that entire world together. Continue your visit on the plaza page.', href: '/#directorio-wonderpop', link: 'Explora WonderPop Plaza', enLink: 'Explore WonderPop Plaza' },
+  { es: '¿Se puede comprar aquí?', en: 'Can I shop here?', answer: 'Esta es una experiencia de un universo ficticio. Las tiendas y los objetos muestran lo que imaginamos para WonderPop; las fotografías son conceptos visuales. No se realizan compras ni reservas desde este recorrido.', english: 'This is an experience set in a fictional universe. The shops and objects show what we imagine for WonderPop; the photographs are visual concepts. There are no purchases or bookings in this journey.', href: '/#ciudad', link: 'Conoce nuestra historia', enLink: 'Meet the world’s creators' },
 ];
 
 export default function WonderPopStory({ en = false, filmMode = false }) {
@@ -92,9 +92,9 @@ export default function WonderPopStory({ en = false, filmMode = false }) {
       <nav aria-label={en ? 'Continue discovering' : 'Sigue descubriendo'}>
         <SceneButton href="/bebidas">Magic Drink</SceneButton>
         <SceneButton href="/hexy">Hexy</SceneButton>
-        <SceneButton href="/wonderpop-plaza">WonderPop Plaza</SceneButton>
+        <SceneButton href="/#directorio-wonderpop">WonderPop Plaza</SceneButton>
       </nav>
-      <div className={styles.lastLinks}><a href="/nosotros">{en ? 'Our story' : 'Nuestra historia'}</a><button type="button" data-go-world="0">{en ? 'Experience it again ↑' : 'Vuelve a vivirlo ↑'}</button></div>
+      <div className={styles.lastLinks}><a href="/#ciudad">{en ? 'Our story' : 'Nuestra historia'}</a><button type="button" data-go-world="0">{en ? 'Experience it again ↑' : 'Vuelve a vivirlo ↑'}</button></div>
     </section>
 
     <div className={styles.transition} data-story-transition aria-hidden="true">
@@ -104,7 +104,7 @@ export default function WonderPopStory({ en = false, filmMode = false }) {
     {!filmMode && <dialog ref={dialog} className={styles.album} aria-labelledby="keepsake-title" data-keepsake-dialog data-lenis-prevent onClick={event => { if (event.target === dialog.current) close(); }}>
       <button className={styles.close} type="button" onClick={close} aria-label={en ? 'Close album' : 'Cerrar álbum'}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" /></svg></button>
       <img src={`/image/journey/photo-${selected.id}-v20.webp`} alt={en ? `Concept photograph: ${selected.en}` : `Fotografía conceptual: ${selected.es}`} width="1536" height="1024" loading="lazy" draggable="false" />
-      <div className={styles.albumText}><span>{en ? 'THE WONDERPOP KEEPSAKE ALBUM' : 'EL ÁLBUM DE RECUERDOS DE WONDERPOP'}</span><h2 id="keepsake-title">{en ? selected.en : selected.es}</h2><p>{en ? selected.english : selected.text}</p><SceneButton href="/wonderpop-plaza">{en ? 'Discover WonderPop Plaza' : 'Conoce WonderPop Plaza'}</SceneButton><small>{en ? 'Imagined objects · AI-created concept photography · Not for sale' : 'Objetos imaginados · Fotografía conceptual creada con IA · Sin venta'}</small></div>
+      <div className={styles.albumText}><span>{en ? 'THE WONDERPOP KEEPSAKE ALBUM' : 'EL ÁLBUM DE RECUERDOS DE WONDERPOP'}</span><h2 id="keepsake-title">{en ? selected.en : selected.es}</h2><p>{en ? selected.english : selected.text}</p><SceneButton href="/#directorio-wonderpop">{en ? 'Discover WonderPop Plaza' : 'Conoce WonderPop Plaza'}</SceneButton><small>{en ? 'Imagined objects · AI-created concept photography · Not for sale' : 'Objetos imaginados · Fotografía conceptual creada con IA · Sin venta'}</small></div>
     </dialog>}
   </>;
 }

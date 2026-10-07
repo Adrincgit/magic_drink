@@ -18,7 +18,7 @@ import HexyFinish from '../../hexy/HexyFinish';
 import StoryPanel from './StoryPanel';
 import useIllustratedFinish from '../../global/useIllustratedFinish';
 import CityLookout from './CityLookout';
-import { HuntBunny, HuntToast } from '../../arcade/BunnyHunt';
+import { HuntBunny, HuntToast } from '../../arcade/hunt/BunnyHunt';
 
 const art = '/image/journey/';
 const words = {

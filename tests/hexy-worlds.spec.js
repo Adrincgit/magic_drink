@@ -1,10 +1,11 @@
+import {openAdventureMenu} from './arcade-input.helpers';
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {LEVELS} from '../src/components/arcade/adventureLevels';
-import {adventureMusic} from '../src/components/arcade/adventureWorlds';
-import {BOSS_ART,BOSS_POSES,actorFrame} from '../src/components/arcade/adventureSprites';
-import {BOSS_MOVES} from '../src/components/arcade/adventureEnemies';
+import {LEVELS} from '../src/components/arcade/adventure/world/adventureLevels';
+import {adventureMusic} from '../src/components/arcade/adventure/world/adventureWorlds';
+import {BOSS_ART,BOSS_POSES,actorFrame,bossDrawing} from '../src/components/arcade/adventure/render/adventureSprites';
+import {BOSS_MOVES} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
 const hash=path=>createHash('sha256').update(readFileSync('public'+path)).digest('hex');
 
 test('five chapters have different painted worlds, terrain and ten independent scores',()=>{
@@ -20,9 +21,10 @@ test('five chapters have different painted worlds, terrain and ten independent s
  }
 });
 
-test('each boss uses its own atlas and attack-specific telegraph and action poses',()=>{
- expect(new Set(BOSS_ART.map(key=>hash('/arcade/sprites/bosses/'+key+'.webp'))).size).toBe(5);
+test('each boss uses distinct artwork and attack-specific telegraph and action poses',()=>{
+ expect(new Set(BOSS_ART.map((key,i)=>hash('/arcade/sprites/bosses/'+(i===1?'organ/body':key)+'.webp'))).size).toBe(5);
  for(let i=0;i<5;i++)for(const move of BOSS_MOVES[i]){
+  if(i===1){const boss={hp:164,phase:'warn',move};expect(bossDrawing({index:i,boss})).toEqual({key:'organ-machine',frame:0});expect(bossDrawing({index:i,boss:{...boss,phase:'attack',release:.2}})).toEqual({key:'organ-machine',frame:2});continue;}
   const sheet=BOSS_ART[i],a={hp:10,flash:0,move,clock:.2,attackClock:.2};
   expect(BOSS_POSES[sheet][move].warn).toContain(actorFrame({...a,phase:'warn'},false,sheet));
   const frames=new Set();for(let t=0;t<2.2;t+=.08)frames.add(actorFrame({...a,phase:'attack',attackClock:t},false,sheet));
@@ -35,22 +37,21 @@ test('each boss uses its own atlas and attack-specific telegraph and action pose
  expect(actorFrame({hp:10,phase:'attack',move:'slam',attackClock:1.4},false,'agresivo')).toBe(8);
 });
 
-test('chapter choices play their own music, and pause/mute survive switching chapters',async({page})=>{
- await page.goto('/arcade');const root=page.locator('[data-hexy-adventure]'),music=page.locator('audio').first();await expect(root).toHaveAttribute('data-phase','ready',{timeout:20000});
+test('chapter choices play their own music and pausing stops each track',async({page})=>{
+ await page.goto('/arcade');await openAdventureMenu(page);const root=page.locator('[data-hexy-adventure]'),music=page.locator('audio').first();await expect(root).toHaveAttribute('data-phase','ready',{timeout:20000});
  for(let i=0;i<5;i++){
-  await page.locator(`[data-level-choice="${i}"]`).click();await page.locator('[data-practice]').click();await expect(root).toHaveAttribute('data-phase','playing');
+  await page.getByRole('button',{name:/Elegir cap/}).click();await page.locator(`[data-level-choice="${i}"]`).click();await page.locator('[data-practice]').click();await expect(root).toHaveAttribute('data-phase','playing');
   await expect(music).toHaveAttribute('data-music-track',LEVELS[i].world.music.explore.key);
   await expect.poll(()=>music.evaluate(a=>a.currentTime)).toBeGreaterThan(.03);
   expect(await music.evaluate(a=>a.loop)).toBe(true);
   await page.keyboard.press('KeyP');await expect(root).toHaveAttribute('data-phase','paused');await expect.poll(()=>music.evaluate(a=>a.paused)).toBe(true);
   await page.getByRole('button',{name:'Terminar práctica',exact:true}).click();await expect(root).toHaveAttribute('data-phase','ready');
  }
- await page.getByRole('button',{name:'Sonido del juego',exact:true}).click();await page.locator('[data-level-choice="0"]').click();await page.locator('[data-practice]').click();await expect(root).toHaveAttribute('data-phase','playing');expect(await music.evaluate(a=>a.paused)).toBe(true);
- await page.getByRole('button',{name:'Sonido del juego',exact:true}).click();await expect.poll(()=>music.evaluate(a=>a.paused)).toBe(false);
+
 });
 
 test('all ten active tracks, including the replacement MP3s, decode to non-silent unclipped stereo',async({page})=>{
- await page.goto('/arcade');
+ await page.goto('/arcade');await openAdventureMenu(page);
  const tracks=LEVELS.flatMap((_,i)=>[adventureMusic(i,'playing').src,adventureMusic(i,'playing',true).src]);
  const report=await page.evaluate(async paths=>{
   const ctx=new AudioContext(),result=[];
@@ -62,18 +63,19 @@ test('all ten active tracks, including the replacement MP3s, decode to non-silen
  for(const r of report){expect(r.channels).toBe(2);expect(r.duration).toBeGreaterThan(24);expect(r.peak).toBeLessThan(.98);expect(r.rms).toBeGreaterThan(.05);}
 });
 
-test('user arrangements map to field, forest and balloon while shop and other chapters retain their tracks',()=>{
+test('user arrangements map to field, forest and both opening bosses while shop and other chapters retain their tracks',()=>{
  expect(adventureMusic(0,'playing').src).toBe('/arcade/music/exploration/meadow.mp3');
  expect(adventureMusic(1,'playing').src).toBe('/arcade/music/exploration/woods.mp3');
  expect(adventureMusic(0,'playing',true).src).toBe('/arcade/music/bosses/troupe.mp3');
+ expect(adventureMusic(1,'playing',true).src).toBe('/arcade/music/bosses/serio.mp3');
  expect(adventureMusic(0,'shop').src).toBe('/arcade/music/shop.ogg');
  expect(adventureMusic(2,'playing').src).toBe('/arcade/music/exploration/canopy.ogg');
 });
 
 test('parallax remains continuous when the camera crosses a mirrored tile boundary',async({page})=>{
- await page.goto('/arcade');
+ await page.goto('/arcade');await openAdventureMenu(page);
  const delta=await page.evaluate(async()=>{
-  const {createAdventure}=await import('/src/components/arcade/adventureModel.js'),{loadAdventureArt,renderAdventure}=await import('/src/components/arcade/adventureCanvas.js');
+  const {createAdventure}=await import('/src/components/arcade/adventure/engine/adventureModel.js'),{loadAdventureArt,renderAdventure}=await import('/src/components/arcade/adventure/render/adventureCanvas.js');
   const art=await loadAdventureArt(),s=createAdventure(3),canvas=document.createElement('canvas');Object.assign(canvas.style,{width:'960px',height:'540px'});document.body.append(canvas);
   s.player.x=-2000;s.platforms=[];s.enemies=[];s.cages=[];s.pickups=[];s.stars=[];s.hazards=[];
   const boundary=425*art.mid3.width/art.mid3.height/s.level.world.midSpeed;

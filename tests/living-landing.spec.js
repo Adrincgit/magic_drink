@@ -11,7 +11,7 @@ test('cold entry waits for decoded art and then releases the scene without a tim
   await expect(curtain).toBeVisible();
   await expect(page.locator('[data-journey]')).toHaveAttribute('data-assets-ready', 'false');
   expect(await page.locator('[data-stage]').evaluate(el => el.inert)).toBe(true);
-  await page.screenshot({ path: 'context/rediseno/implementacion-v13/capturas/loading.png' });
+  await page.screenshot({ path: 'tests/artifacts/site/loading.jpg' });
   release();
   await expect(curtain).toBeHidden();
   expect(await page.locator('[data-stage]').evaluate(el => el.inert)).toBe(false);

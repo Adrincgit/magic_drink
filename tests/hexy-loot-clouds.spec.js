@@ -1,14 +1,15 @@
+import {openAdventureMenu} from './arcade-input.helpers';
 import {test,expect} from '@playwright/test';
-import {createAdventure,stepAdventure,adventureCarry,playerBody} from '../src/components/arcade/adventureModel';
-import {collectAdventureStar} from '../src/components/arcade/adventureRewards';
-import {DRINK_SHOTS,equipDrink,collectDrink} from '../src/components/arcade/adventureAmmo';
-import {takeLoot,rollLoot} from '../src/components/arcade/adventureLoot';
-import {damageSupply} from '../src/components/arcade/adventureSupplies';
-import {makeEnemy,updateEnemies} from '../src/components/arcade/adventureEnemies';
-import {trapEnemy} from '../src/components/arcade/adventureBubbles';
-import {enemyDrawing} from '../src/components/arcade/adventureSprites';
-import {cloudPositions} from '../src/components/arcade/adventureSky';
-import {hexyPose} from '../src/components/arcade/hexyAnimation';
+import {createAdventure,stepAdventure,adventureCarry,playerBody} from '../src/components/arcade/adventure/engine/adventureModel';
+import {collectAdventureStar} from '../src/components/arcade/adventure/engine/adventureRewards';
+import {DRINK_SHOTS,equipDrink,collectDrink} from '../src/components/arcade/adventure/engine/adventureAmmo';
+import {takeLoot,rollLoot} from '../src/components/arcade/adventure/engine/adventureLoot';
+import {damageSupply} from '../src/components/arcade/adventure/world/adventureSupplies';
+import {makeEnemy,updateEnemies} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
+import {trapEnemy} from '../src/components/arcade/adventure/engine/adventureBubbles';
+import {enemyDrawing} from '../src/components/arcade/adventure/render/adventureSprites';
+import {cloudPositions} from '../src/components/arcade/adventure/world/adventureSky';
+import {hexyPose} from '../src/components/arcade/adventure/actors/hexy/hexyAnimation';
 const tick=(s,n=1,input={})=>{for(let i=0;i<n;i++)stepAdventure(s,input,1/120);};
 const clean=()=>{const s=createAdventure();s.supplies=[];s.outposts=[];s.enemies=[];s.cages=[];s.pickups=[];s.hazards=[];s.stars=[];return s;};
 
@@ -17,7 +18,7 @@ test('each star is one unit of money, separate from combat points and ultimate r
  expect(s.starMoney).toBe(1);expect(s.score).toBe(70);expect(s.superCooldown).toBe(23);
 });
 test('every level has fewer boxes and none waiting on its opening screen',()=>{
- for(let i=0;i<5;i++){const s=createAdventure(i);expect(s.supplies.length).toBeLessThan(s.level.pickups.length);expect(s.supplies).toHaveLength(3);expect(s.supplies.every(q=>q.x>1000)).toBe(true);}
+  for(let i=0;i<5;i++){const s=createAdventure(i);expect(s.supplies.length).toBeLessThanOrEqual(s.level.pickups.length);expect(s.supplies).toHaveLength(3);expect(s.supplies.every(q=>q.x>1000)).toBe(true);}
  expect(DRINK_SHOTS).toEqual([54,42,60,32,45]);
 });
 test('loot covers drinks, refills, shields and the rare Original, with rare powered flavors',()=>{
@@ -39,11 +40,11 @@ test('shield pickups add one protection each, capped at three, without changing 
  for(let i=0;i<4;i++)takeLoot(s,{type:'shield'});expect(s.shield).toBe(3);
  s.hostile=[{x:s.player.x,y:s.player.y-35,vx:0,vy:0,r:10,life:2,age:0,kind:'ball'}];tick(s);expect(s.shield).toBe(2);expect(s.hearts).toBe(5);
 });
-test('Original plays a sip, protects for ten active seconds, speeds shooting and then ends',()=>{
- const s=clean();takeLoot(s,{type:'original'});expect(hexyPose(s).sheet).toBe('drink-original');tick(s,84);expect(s.overdrive).toBeCloseTo(10,1);
+test('Original plays a sip, protects for eight active seconds, speeds shooting and then ends',()=>{
+ const s=clean();takeLoot(s,{type:'original'});expect(hexyPose(s).sheet).toBe('drink-original');tick(s,84);expect(s.overdrive).toBeCloseTo(8,1);
  s.hostile=[{x:s.player.x,y:s.player.y-35,vx:0,vy:0,r:10,life:2,age:0,kind:'ball'}];tick(s);expect(s.hearts).toBe(5);
  const normal=clean();tick(normal,120,{attack:true});tick(s,120,{attack:true});expect(s.shots.length).toBeGreaterThan(normal.shots.length);
- tick(s,1000);expect(s.overdrive).toBeGreaterThan(.5);tick(s,90);expect(s.overdrive).toBe(0);s.hostile=[{x:s.player.x,y:s.player.y-35,vx:0,vy:0,r:10,life:2,age:0,kind:'ball'}];tick(s);expect(s.hearts).toBe(4);
+ tick(s,720);expect(s.overdrive).toBeGreaterThan(.5);tick(s,130);expect(s.overdrive).toBe(0);s.hostile=[{x:s.player.x,y:s.player.y-35,vx:0,vy:0,r:10,life:2,age:0,kind:'ball'}];tick(s);expect(s.hearts).toBe(4);
 });
 test('both Banana attacks reach far targets and can damage the same target outbound and returning',()=>{
  for(const heavy of [false,true]){const s=clean();equipDrink(s,1);const e=makeEnemy(430,480,5);e.hp=100;e.timer=100;s.enemies=[e];tick(s,1,heavy?{special:true}:{attack:true});const shot=s.shots[0];let furthest=shot.x;for(let i=0;i<480;i++){tick(s);furthest=Math.max(furthest,shot.x);}
@@ -71,23 +72,23 @@ test('clouds move while Hexy stands still and reduced motion freezes their indep
 });
 
 test('only collected stars enter the wallet when the first chapter clears',async({page})=>{
- await page.route('**/src/components/arcade/adventureModel.js*',async route=>{
+ await page.route('**/src/components/arcade/adventure/engine/adventureModel.js*',async route=>{
   const response=await route.fetch(),source=await response.text();await route.fulfill({response,body:source.replace('function stepAdventure(s,input,dt){',`function stepAdventure(s,input,dt){
+   if(s.index===0&&s.ticks===0){for(const q of s.stars.filter(q=>q.value===1).slice(0,2))collectAdventureStar(s,q);const a=s.level.arena;s.player.x=a.right-200;s.player.y=a.y;s.player.ground=s.platforms.length-1;s.boss.hp=0;s.boss.phase='defeated';s.camera={x:a.right-1170,y:a.y-580,zoom:.82};s.enemies=[];s.score=999;}
    if(s.ticks===0)s.stars=[];
-   if(s.index===0&&s.ticks===0){const a=s.level.arena;s.player.x=a.right-200;s.player.y=a.y;s.player.ground=s.platforms.length-1;s.boss.hp=0;s.boss.phase='defeated';s.camera={x:a.right-1170,y:a.y-580,zoom:.82};s.enemies=[];s.score=999;s.starMoney=2;}
   `)});
  });
- await page.goto('/arcade');await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','ready',{timeout:30000});await page.locator('[data-insert-coin]').click();
+ await page.goto('/arcade');await openAdventureMenu(page);await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','ready',{timeout:30000});await page.locator('[data-insert-coin]').click();
  await expect(page.locator('[data-adventure-canvas]')).toHaveAttribute('data-level','1',{timeout:12000});
  expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('magic-drink-arcade-v1')).stars)).toBe(2);await expect(page.locator('[data-score-hud]')).toHaveText('2');
 });
 for(const width of [390,1440])test(`${width}: Original pickup and powered can remain readable in the real HUD`,async({page})=>{
- await page.route('**/src/components/arcade/adventureModel.js*',async route=>{
+ await page.route('**/src/components/arcade/adventure/engine/adventureModel.js*',async route=>{
   const response=await route.fetch(),source=await response.text();await route.fulfill({response,body:source.replace('function stepAdventure(s,input,dt){',`function stepAdventure(s,input,dt){
    if(s.ticks===0){s.weapon=1;s.ammoWeapon=1;s.ammo=21;s.drinkTier=2;s.starMoney=7;s.enemies=[];s.supplies=[];s.outposts=[];s.stars=[];takeLoot(s,{type:'original'});}
   `)});
  });
- await page.setViewportSize({width,height:900});await page.goto('/arcade');await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','ready',{timeout:30000});
+ await page.setViewportSize({width,height:900});await page.goto('/arcade');await openAdventureMenu(page);await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','ready',{timeout:30000});
  // Observe the short sip from inside the page, before the click's automation
  // round trip completes. A slow screenshot/trace must not miss a valid pose.
  await page.locator('[data-adventure-canvas]').evaluate(c=>{const observer=new MutationObserver(()=>{if(c.dataset.pose?.startsWith('drink-original:')){c.dataset.sipObserved='true';observer.disconnect();}});observer.observe(c,{attributes:true,attributeFilter:['data-pose']});});

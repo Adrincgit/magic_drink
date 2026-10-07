@@ -1,14 +1,14 @@
 import {test,expect} from '@playwright/test';
-import {createAdventure,stepAdventure} from '../src/components/arcade/adventureModel';
-import {makeEnemy} from '../src/components/arcade/adventureEnemies';
-import {enemyBody} from '../src/components/arcade/adventureEnemyGeometry';
+import {createAdventure,stepAdventure} from '../src/components/arcade/adventure/engine/adventureModel';
+import {makeEnemy} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
+import {enemyBody} from '../src/components/arcade/adventure/actors/enemies/adventureEnemyGeometry';
 const tick=(s,input={},n=1)=>{for(let i=0;i<n;i++)stepAdventure(s,input,1/120);};
 const clean=()=>{const s=createAdventure();s.enemies=[];s.pickups=[];s.cages=[];s.stars=[];s.hazards=[];return s;};
 
-test('shots hit enlarged enemy heads instead of passing through the visible upper body',()=>{
+test('shots hit enemy heads at each visible body size',()=>{
  for(const type of [0,1,2,3,4,5]){
   const s=clean(),e=makeEnemy(260,480,type);e.timer=100;s.enemies=[e];
-  s.shots=[{x:e.x,y:e.y-80,vx:0,vy:0,r:6,life:1,age:0,kind:-1,damage:2,hits:[]}];
+  s.shots=[{x:e.x,y:enemyBody(e).y+5,vx:0,vy:0,r:6,life:1,age:0,kind:-1,damage:2,hits:[]}];
   tick(s);expect(e.hp).toBe(e.maxHp-2);expect(e.flash).toBeGreaterThan(0);
  }
 });

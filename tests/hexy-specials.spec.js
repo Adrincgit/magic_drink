@@ -1,8 +1,10 @@
+import {openAdventureMenu} from './arcade-input.helpers';
 import {collectStartingDrink,fixtureStartingDrink} from './arcade-input.helpers';
 import {test,expect} from '@playwright/test';
-import {createAdventure,stepAdventure} from '../src/components/arcade/adventureModel';
-import {makeEnemy,updateEnemies} from '../src/components/arcade/adventureEnemies';
-import {SPECIALS,specialShots} from '../src/components/arcade/adventureMagic';
+test.use({hasTouch:true});
+import {createAdventure,stepAdventure} from '../src/components/arcade/adventure/engine/adventureModel';
+import {makeEnemy,updateEnemies} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
+import {SPECIALS,specialShots} from '../src/components/arcade/adventure/engine/adventureMagic';
 const tick=(s,keys={},n=1)=>{for(let i=0;i<n;i++)stepAdventure(s,keys,1/120);};
 function empty(kind){const s=createAdventure();s.enemies=[];s.pickups=[];s.supplies=[];s.stars=[];s.cages=[];s.weapon=kind;return s;}
 
@@ -16,8 +18,8 @@ test('every drink fires immediately once per press and pays the same strong cost
 
 test('strong magic works during a jump and cannot repeat merely by holding the button',()=>{
  for(let kind=0;kind<5;kind++){
-  const s=empty(kind);tick(s,{jump:true},20);tick(s,{special:true});expect(s.shots.every(q=>q.heavy)).toBe(true);expect(s.magic).toBe(70);
-  tick(s,{special:true},30);expect(s.magic).toBe(70);expect(s.player.charge).toBe(0);
+  const s=empty(kind);tick(s,{jump:true},20);tick(s,{special:true});expect(s.shots.every(q=>q.heavy)).toBe(true);expect(s.magic).toBe(65.5);
+  tick(s,{special:true},30);expect(s.magic).toBe(65.5);expect(s.player.charge).toBe(0);
  }
 });
 
@@ -61,12 +63,14 @@ test('new spells respect boss invulnerability and have bounded damage',()=>{
 });
 
 test('mobile offers the special for all drinks and shows each spell and cost',async({page})=>{
- await fixtureStartingDrink(page);await page.setViewportSize({width:390,height:844});await page.goto('/arcade');const root=page.locator('[data-hexy-adventure]');await expect(root).toHaveAttribute('data-phase','ready',{timeout:20000});
+ await fixtureStartingDrink(page);await page.setViewportSize({width:390,height:844});await page.goto('/arcade');await openAdventureMenu(page);const root=page.locator('[data-hexy-adventure]');await expect(root).toHaveAttribute('data-phase','ready',{timeout:20000});
  for(let kind=1;kind<5;kind++){
+  await page.getByRole('button',{name:/Elegir capítulo/}).click();
   await page.locator(`[data-level-choice="${kind}"]`).click();await page.locator('[data-practice]').click();await expect(root).toHaveAttribute('data-phase','playing');
   const canvas=page.locator('[data-adventure-canvas]');await collectStartingDrink(page,kind);
-  const control=page.getByRole('button',{name:'Magia fuerte',exact:true});await expect(control).toBeEnabled();await expect(page.locator('[data-special-tip]')).toContainText(SPECIALS[kind].name[0]);
-  await page.keyboard.press('KeyC');
+  const control=page.getByRole('button',{name:'Magia fuerte',exact:true});await expect(control).toBeEnabled();await expect(control).toHaveAttribute('title',`${SPECIALS[kind].name[0]} · ${SPECIALS[kind].cost} de magia + 5 disparos`);
+  // Changing flavors has a .2s recovery before another strong cast.
+  await page.waitForTimeout(250);await page.keyboard.press('KeyC');
   await expect.poll(async()=>Number(await page.getByRole('meter',{name:'Energía de magia',exact:true}).getAttribute('value'))).toBeLessThan(100-SPECIALS[kind].cost+5);
   await page.keyboard.press('KeyP');await page.getByRole('button',{name:'Terminar práctica',exact:true}).click();
  }
@@ -75,8 +79,8 @@ test('mobile offers the special for all drinks and shows each spell and cost',as
 
 test('cancelling a touch after activation keeps the paid super running without a second charge',async({browser})=>{
  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),page=await context.newPage();
- await fixtureStartingDrink(page);await page.addInitScript(()=>localStorage.setItem('lang','en'));await page.goto('/arcade');const root=page.locator('[data-hexy-adventure]');await expect(root).toHaveAttribute('data-phase','ready',{timeout:20000});
- await page.locator('[data-level-choice="3"]').tap();await page.locator('[data-practice]').tap();await expect(root).toHaveAttribute('data-phase','playing');
+ await fixtureStartingDrink(page);await page.addInitScript(()=>localStorage.setItem('lang','en'));await page.goto('/arcade');await openAdventureMenu(page);const root=page.locator('[data-hexy-adventure]');await expect(root).toHaveAttribute('data-phase','ready',{timeout:20000});
+ await page.getByRole('button',{name:/Choose chapter/}).tap();await page.locator('[data-level-choice="3"]').tap();await page.locator('[data-practice]').tap();await expect(root).toHaveAttribute('data-phase','playing');
  const canvas=page.locator('[data-adventure-canvas]');await collectStartingDrink(page,3);
  const control=page.getByRole('button',{name:'Super attack',exact:true});await control.scrollIntoViewIfNeeded();const r=await control.boundingBox(),session=await context.newCDPSession(page);
  await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:r.x+r.width/2,y:r.y+r.height/2,id:1}]});await expect(control).toHaveAttribute('data-charged','true');

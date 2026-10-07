@@ -1,0 +1,61 @@
+{
+  "tool": "image_gen.imagegen (integrado)",
+  "date": "2026-10-06",
+  "format": "WebP con alfa; PNG generados conservados solo en la carpeta del proveedor, fuera del proyecto",
+  "selected": [
+    {
+      "name": "oak",
+      "prompt": "Use case: style-transfer.\nAsset type: transparent 2D side-scroller tree sprite for Hexy's riverside woodland level.\nInput images: Image 1 is the old tree prop, a style reference only. Image 2 is the existing riverbank ground, a palette reference only.\nReplace the old paired blue trees with ONE distinct mature oak: stout warm brown forked trunk, rounded asymmetric canopy of sage-green and golden olive leaves, clearly drawn roots spreading naturally at the base. Match the hand-painted storybook watercolor/gouache treatment and readable outlined forms of the references. Warm sunlight, shaded teal foliage, no neon colors.\nComposition: one complete tree centered, canopy and roots entirely in frame with small transparent margin. Full height high-resolution portrait asset. Compact root footprint, root flare roughly one third of the canopy width. A few tiny clover leaves at the roots only.\nConstraints: actual transparent background. NO landscape, NO sky, NO rectangle or strip of ground beneath it, NO grass platform, NO flowers carpet or horizontal base slab, NO lanterns, NO second tree, NO characters, NO text. The lower silhouette is organic separated tapering roots, suitable for burying into a sloping leafy bank. Do not crop the tree."
+    },
+    {
+      "name": "willow",
+      "prompt": "Use case: style-transfer.\nAsset type: transparent 2D side-scroller tree sprite for Hexy's riverside woodland.\nInput images: Image 1 is the selected new oak, reference for painted style, outlines, texture and lighting ONLY. Image 2 is riverbank texture, palette reference ONLY.\nCreate ONE very different WEEPING WILLOW. One gracefully curved slim trunk with a few wide branches, long cascading willow fronds, open readable spaces around the trunk, narrower less bulky silhouette than the reference oak. Sage and teal green leaves with soft golden sunlit edges; warm brown lightly mossy bark. Hand-painted storybook watercolor/gouache with crisp readable outlined forms.\nComposition: entire tree and all roots in frame, centered high-resolution portrait cutout with a small transparent margin. Natural compact root flare with several tapering roots, no ground slab. Root base should remain compact, no wider than half of the canopy. Upright side view, modest depth, for scenery directly behind characters in a platformer.\nConstraints: actual transparent background; no background scene, no sky, no ground platform, no rectangular horizontal base, no rocks, no lanterns, no buildings, no characters, no text. Single willow only. Avoid reproducing the oak silhouette."
+    },
+    {
+      "name": "birch",
+      "prompt": "Use case: style-transfer.\nAsset type: transparent tree prop for Hexy's 2D woodland side-scroller.\nInput images: first is a style/lighting reference tree; second is the existing riverbank palette. They are not shapes to copy.\nReplace the subject with a very different slender SILVER BIRCH clump: TWO closely spaced narrow white-and-warm-gray birch trunks, dark bark markings, one taller and one shorter, airy small golden-green leaf clusters with open transparent gaps. Distinct tall narrow silhouette, elegant light branches, sparse teal-green shaded leaves. Hand-painted storybook gouache/watercolor with readable crisp subtle outlines, same finish as references.\nComposition: whole compact birch clump, native high-resolution portrait, roots and all foliage entirely in frame. Trunks form a compact root footprint with natural tapering roots. Tiny clover leaves on a few roots. Canopy lighter and much less dense than an oak.\nConstraints: actual transparent background, organic uneven root base. No scenery/sky, no soil slab or grass strip, no horizontal bottom edge, no lanterns, no extra objects, no text."
+    },
+    {
+      "name": "hawthorn",
+      "prompt": "Use case: style-transfer.\nAsset type: transparent tree scenery for Hexy's painted 2D platform game.\nInput images: image 1 supplies only the illustrated texture/finish; image 2 supplies only the riverside woodland palette.\nCreate a fourth DISTINCT tree: a LOW, WIND-BENT HAWTHORN, with a slender gnarled brown trunk leaning gently to the right and an umbrella-like spreading asymmetric canopy. Small olive/teal leaves with golden highlights, a few pale cream blossom clusters. Lots of open space below the arching branches, compact tapering roots with subtle moss. It must look unlike the stock oak or willow. Hand-painted storybook gouache, clear subtle outlines, warm sunlight.\nComposition: full tree entirely visible with roots, centered high-resolution cutout on actual transparent background. Small transparent margins. Wider than tall silhouette, lower crown, naturally asymmetric branches.\nConstraints: true transparency only outside the tree, no haze/glow/background color/clouds/shadow backdrop, no landscape, no grass strip, no horizontal ground slab, no rocks, no lanterns or extra objects, no characters or text. Root outline organic with separated tapering ends."
+    },
+    {
+      "name": "cartoon-cover",
+      "prompt": "Edit the first image only: this is the removable wooden armor cover of a cute anime circus organ boss. Keep its exact wide rectangular outer silhouette, burgundy wooden panel, thick brass border, corner bolts, centered ROUND medallion, and transparent background. Replace only the overly realistic sculpted face inside the round medallion with a friendly, clearly cartoon anime CLOWN FACE painted as a simple colorful badge, drawing style similar to the cute red clown pilot in the second reference. Large round head, cheerful big oval eyes with a little gleam, round red nose, soft smile, red curly side hair, red and gold two-tip jester cap. Make it playful rather than uncanny: NOT a lifelike human mask, NOT sharp adult facial anatomy, NOT carved stone or photoreal skin. Strong clean colored outlines, soft cel shading, rounded chunky proportions, modest hand-painted texture to match the painted brass machinery. Keep the medallion rim circular and gold. No Hexy stars, no text, no extra characters. Crisp full-resolution sprite, all outer edges and alpha unchanged as much as possible. Keep the cover alone centered with transparent exterior."
+    },
+    {
+      "name": "zeppelin",
+      "prompt": "Use case: style-transfer.\nAsset type: single transparent flying enemy sprite for Hexy's anime/cartoon circus platform game.\nInput images: image 1 is a balloon boss style/palette reference only; image 2 is the established chibi red clown character reference. Do not copy damage or the multi-frame arrangement.\nCreate ONE SMALL CIRCUS ZEPPELIN pointing RIGHT. A horizontal toy airship envelope, rounded yellow/orange stripes, purple tail fins at the LEFT, burgundy-and-gold small OPEN gondola hanging underneath. A clearly visible cute anime/chibi red clown pilots it from the gondola: curly bright red hair, white face, large expressive eyes, round red nose, red polka-dot hat, yellow collar. The clown has exactly two arms and two natural hands resting on the controls; waist hidden behind the gondola rim. A small forward-facing red/gold ball launcher is mounted under the front of the gondola. Small brass propeller at the rear.\nStyle: bright charming anime storybook game art, bold clean outlines, rounded inflated forms and broad readable shading like the balloon boss. No photorealism, no gritty realism or intricate miniature machinery. Clown face must be large and readable.\nComposition: whole airship and gondola in frame, side view, single asset high resolution landscape. Actual transparent background with small clear margins. Hull about twice as wide as tall, total silhouette including gondola about 1.8 times wider than tall.\nConstraints: no extra characters, no scenery, no text, no stars resembling Hexy's wand, no weapons other than the small toy ball launcher, no additional hands/arms. No sprite-sheet grid, no duplicate airships, no flames or damage."
+    },
+    {
+      "name": "hatch",
+      "prompt": "Use case: style-transfer.\nAsset type: separate underside bomb hatch part for a cartoon circus hot-air balloon.\nInput image is ONLY a reference for the painted purple-and-gold gondola design.\nCreate ONE CLOSED DOUBLE-DOOR BOMB HATCH, viewed from the side with a slight view of its underside. Very wide shallow oval silhouette, purple/burgundy curved wood, brass gold outer rim, central vertical seam dividing it into two equal hinged leaves, two small gold hinges on the OUTER left and right ends. The entire oval is made of the two closed doors. Broad clean cartoon shading and bold outlines matching the balloon. Simple part with no tiny details, no emblem.\nComposition: standalone horizontal component, about FOUR TIMES wider than tall, full shape visible with transparent margin, high native resolution. No balloon around it, no black background, no scenery, no bombs or characters, no extra parts, no text. True transparent background outside the hatch."
+    }
+  ],
+  "roofAssembly": {
+    "source": "organ-cover-source.webp",
+    "generatedCrop": {
+      "left": 389,
+      "top": 196,
+      "width": 658,
+      "height": 658
+    },
+    "alpha": "circle cx=329 cy=329 r=326",
+    "nativeTarget": {
+      "left": 560,
+      "top": 114,
+      "width": 125,
+      "height": 126
+    },
+    "body": "../machine-and-grip/organ-body-source.webp"
+  },
+  "outputs": {
+    "oak": "public/arcade/maps/riverwoods/trees/oak.webp",
+    "willow": "public/arcade/maps/riverwoods/trees/willow.webp",
+    "birch": "public/arcade/maps/riverwoods/trees/birch.webp",
+    "hawthorn": "public/arcade/maps/riverwoods/trees/hawthorn.webp",
+    "cartoon-cover": "context/arcade/riverwoods-polish/organ-cover-source.webp",
+    "zeppelin": "context/arcade/riverwoods-polish/clown-zeppelin-source.webp",
+    "hatch": "public/arcade/sprites/bosses/balloon-hatch.webp"
+  }
+}

@@ -13,7 +13,7 @@ import IllustratedMenu, { IllustratedMenuTrigger } from '../global/IllustratedMe
 import useIllustratedFinish from '../global/useIllustratedFinish';
 import HexyFinish from './HexyFinish';
 import HexyConcert from './HexyConcert';
-import {HuntBunny,HuntToast} from '../arcade/BunnyHunt';
+import {HuntBunny,HuntToast} from '../arcade/hunt/BunnyHunt';
 import styles from './HexyWorld.module.css';
 
 const art = '/image/hexy/world-v34/';

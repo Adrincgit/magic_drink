@@ -48,12 +48,12 @@
     "Find a Magic Drink to unlock its strong magic."
   ],
   "lowMagic": [
-    "Necesitas 30 de magia para el ataque fuerte.",
-    "You need 30 magic for a strong attack."
+    "Necesitas 34,5 de magia para el ataque fuerte.",
+    "You need 34.5 magic for a strong attack."
   ],
   "superLow": [
-    "El súper necesita 90 de magia: los tres indicadores encendidos.",
-    "The super needs 90 magic: all three markers lit."
+    "El súper necesita 90 de magia y una estrella de súper lista.",
+    "The super needs 90 magic and a ready super star."
   ],
   "exhausted": [
     "Recuperación lenta: la magia fuerte volverá al terminar la cuenta.",
@@ -64,7 +64,7 @@
   "lootammo": ["¡Caramelos de recarga!", "Fizzy refill candies!"],
   "lootshield": ["¡Una protección más!", "One more layer of protection!"],
   "lootoriginal": ["¡Magic Drink Original!", "Magic Drink Original!"],
-  "basicLow": ["La chispa cercana necesita 15 de magia.", "Close spark needs 15 magic."],
+  "basicLow": ["La chispa cercana necesita 17,25 de magia.", "Close spark needs 17.25 magic."],
   "lowAmmo": [
     "La lata casi se termina: usa los disparos que quedan.",
     "The can is almost empty: use the remaining shots."

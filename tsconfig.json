@@ -7,5 +7,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "exclude": ["tests", "node_modules", "dist"]
+  "exclude": ["tests", "context", "scripts", "node_modules", "dist"]
 }

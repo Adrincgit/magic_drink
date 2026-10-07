@@ -4,7 +4,7 @@ import { SceneButton } from '../../global/SceneControls';
 import usePlazaDialog from './usePlazaDialog';
 import styles from '../css/cityLookout.module.css';
 import waterStyles from '../css/waterSurface.module.css';
-import { HuntBunny } from '../../arcade/BunnyHunt';
+import { HuntBunny } from '../../arcade/hunt/BunnyHunt';
 
 const art = '/image/journey/';
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));

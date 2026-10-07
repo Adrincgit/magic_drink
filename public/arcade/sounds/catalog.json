@@ -1,7 +1,10 @@
 {
   "format": "procedural-web-audio",
-  "source": "src/components/arcade/audio/sounds.js",
-  "reason": "Real-time chiptune effects retain immediate response and do not require sampled audio downloads.",
+  "source": "src/components/arcade/shared/audio/sounds.js",
+  "reason": "Procedural effects respond immediately; Encore layers crystal bells, a rising magical swell and a resonant release without sample downloads.",
+  "encoreSource": "src/components/arcade/shared/audio/encoreSound.js",
+  "mixSource": "src/components/arcade/shared/audio/effectsBus.js",
+  "mix": "Effects receive 2.8x pre-compression gain. The compressor controls overlapping combat peaks before independent master/effects volume and mute. Music keeps its separate volume control and ducks during Encore.",
   "events": [
     "cast",
     "basicStrong",
@@ -23,6 +26,24 @@
     "rescue",
     "power",
     "originalDrink",
-    "cannon"
+    "cannon",
+    "organNotes",
+    "organNotesHigh",
+    "organSteam",
+    "organBreak",
+    "organDestroy",
+    "organBlast",
+    "organClatter",
+    "organFanfare",
+    "organLowWave",
+    "organRev",
+    "organCharge",
+    "organBrake",
+    "zeppelinShot",
+    "zeppelinBreak",
+    "zeppelinBurst",
+    "zeppelinCrash",
+    "balloonLeak",
+    "hatchOpen"
   ]
 }

@@ -1,0 +1,536 @@
+[
+  {
+    "from": "/image/arcade/v53/bunny-atlas.webp",
+    "to": "/arcade/sprites/bunnies/bunny-atlas.webp",
+    "archive": "context/arcade/archive/image/arcade/v53/bunny-atlas.webp",
+    "sha256": "b27847c5c035f9a37ea4aa742b7a37801b9d57534c39d23d6e89b906271dcc8c"
+  },
+  {
+    "from": "/image/arcade/v53/bunny-idle.webp",
+    "to": "/arcade/sprites/bunnies/bunny-idle.webp",
+    "archive": "context/arcade/archive/image/arcade/v53/bunny-idle.webp",
+    "sha256": "11801510ff99e1cbd35aa46b496a5eec55f29248e38cb2768db8b0f6e782ee1c"
+  },
+  {
+    "from": "/image/arcade/v53/cabinet.webp",
+    "to": "/arcade/sprites/props/cabinet.webp",
+    "archive": "context/arcade/archive/image/arcade/v53/cabinet.webp",
+    "sha256": "6be71dddf2308544b8bd66a88d0410f19875aaf705b0396b768d198e8b357ac7"
+  },
+  {
+    "from": "/image/arcade/v53/waterfront.webp",
+    "to": "/arcade/maps/waterfront/background.webp",
+    "archive": "context/arcade/archive/image/arcade/v53/waterfront.webp",
+    "sha256": "0cb5ac7db406cc6203f3bc873fbce92e9b2dc91fe6ffe6be3481644b64a55ff7"
+  },
+  {
+    "from": "/image/arcade/v54/enemies.webp",
+    "to": null,
+    "archive": "context/arcade/archive/image/arcade/v54/enemies.webp",
+    "sha256": "078e2d96dc55df76a18aa77ffecf2b951f107ac2b38a1b8ee69d158d56dd7ef7"
+  },
+  {
+    "from": "/image/arcade/v54/hexy.webp",
+    "to": null,
+    "archive": "context/arcade/archive/image/arcade/v54/hexy.webp",
+    "sha256": "1686090b058bea600d897500bda466cd986733d72dc005cebe592b3755609017"
+  },
+  {
+    "from": "/image/arcade/v55/acrobat.webp",
+    "to": "/arcade/sprites/enemies/acrobat.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/acrobat.webp",
+    "sha256": "0b842bf3ffb2608a221fcc21b5b2ea10fb519a49fabb3332743789d83f15de40"
+  },
+  {
+    "from": "/image/arcade/v55/agresivo.webp",
+    "to": "/arcade/sprites/bosses/agresivo.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/agresivo.webp",
+    "sha256": "2e069da9cf570afebd7d5ce0feff63c46ff2ed181d2f52039d2902d6a2518b04"
+  },
+  {
+    "from": "/image/arcade/v55/alegre.webp",
+    "to": "/arcade/sprites/bosses/alegre.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/alegre.webp",
+    "sha256": "1c588a552e2841ce63ace8bb7f8a253600158717953f987916e8abb82b109b20"
+  },
+  {
+    "from": "/image/arcade/v55/balloon.webp",
+    "to": "/arcade/sprites/enemies/balloon.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/balloon.webp",
+    "sha256": "9584f424a1ab022a41210faa43f67da2ef5dbe0708b18076cb93e1b7c3b44ac8"
+  },
+  {
+    "from": "/image/arcade/v55/boss-balloon.webp",
+    "to": "/arcade/sprites/bosses/boss-balloon.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/boss-balloon.webp",
+    "sha256": "6374d3ef8a80d429e89386811626436190b3ca067d53e2e8d19a9f07f03c7929"
+  },
+  {
+    "from": "/image/arcade/v55/cannon.webp",
+    "to": "/arcade/sprites/enemies/cannon.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/cannon.webp",
+    "sha256": "641104b6000166046bb787158b57dad94f721688ebaa3641c963ddd05860914c"
+  },
+  {
+    "from": "/image/arcade/v55/circus.webp",
+    "to": "/arcade/maps/circus/background.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/circus.webp",
+    "sha256": "306358ac426f05fcfed3402b2ba8ba55c3b30318f5fdcad80e396c9dadba4ff5"
+  },
+  {
+    "from": "/image/arcade/v55/clown.webp",
+    "to": "/arcade/sprites/enemies/clown.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/clown.webp",
+    "sha256": "911d67aecf853e96e3ad48716d08bcc5b45c11ec103665daaa867125aeb6f36c"
+  },
+  {
+    "from": "/image/arcade/v55/forest.webp",
+    "to": "/arcade/maps/forest/background.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/forest.webp",
+    "sha256": "da1cdf1a8054c806ebba79499f6afdec9d642e1ccef7b38888d08aaef7f98a3e"
+  },
+  {
+    "from": "/image/arcade/v55/ground.webp",
+    "to": "/arcade/maps/meadow/ground.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/ground.webp",
+    "sha256": "88ce039fbe4aa81443718aff1c1acc4c00e5d6e901b5892e973f7b10f1d1c944"
+  },
+  {
+    "from": "/image/arcade/v55/hexy.webp",
+    "to": null,
+    "archive": "context/arcade/archive/image/arcade/v55/hexy.webp",
+    "sha256": "25a6082efdbd1ffa878983d21c92b08099e26b4c8a26712a1642e8e2f3596bf8"
+  },
+  {
+    "from": "/image/arcade/v55/hostile.webp",
+    "to": "/arcade/sprites/effects/hostile.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/hostile.webp",
+    "sha256": "099053a7effe5e4b14f5f73751635c7ed6e634fd4bb8d188269433e3fc6bf472"
+  },
+  {
+    "from": "/image/arcade/v55/impacts.webp",
+    "to": "/arcade/sprites/effects/impacts.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/impacts.webp",
+    "sha256": "75b5d1c9379830dcb894c1fac4bdc67e0116d5cc189da51148a25e9b3885d707"
+  },
+  {
+    "from": "/image/arcade/v55/juggler.webp",
+    "to": "/arcade/sprites/enemies/juggler.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/juggler.webp",
+    "sha256": "be2dec7e77003853da04efb756f0111892da097927fdefb6a43cff24b7b6fd89"
+  },
+  {
+    "from": "/image/arcade/v55/magic.webp",
+    "to": "/arcade/sprites/effects/magic.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/magic.webp",
+    "sha256": "e8d7c38674a044da317d9e941dfbd3b5c4dafce5e99f6adb3e5a963d6c08e034"
+  },
+  {
+    "from": "/image/arcade/v55/meadow.webp",
+    "to": "/arcade/maps/meadow/background.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/meadow.webp",
+    "sha256": "f5e277461a42946f169984c96775e94015ebe4bd97f96295213ba4d1db3ccf70"
+  },
+  {
+    "from": "/image/arcade/v55/muta.webp",
+    "to": "/arcade/sprites/bosses/muta.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/muta.webp",
+    "sha256": "f188a66920395c6fe463b450b4a817faff47b5215f174025c0698d0f1bd0e893"
+  },
+  {
+    "from": "/image/arcade/v55/serio.webp",
+    "to": "/arcade/sprites/bosses/serio.webp",
+    "archive": "context/arcade/archive/image/arcade/v55/serio.webp",
+    "sha256": "aeb55afee6ec5cb55093c50af7a4c73674659f66140ce9dc3b761a96a3d129fb"
+  },
+  {
+    "from": "/image/arcade/v57/dragon.webp",
+    "to": "/arcade/sprites/effects/dragon.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/dragon.webp",
+    "sha256": "afda6ea8c46a82f19260ab6153b1204cb5d91efb6da162e36165766f6a3480d8"
+  },
+  {
+    "from": "/image/arcade/v57/hexy/aim.webp",
+    "to": "/arcade/sprites/hexy/aim.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/hexy/aim.webp",
+    "sha256": "60d8fed0e44c487fd7b7f9e23b902017b43e9c8f91723ab73d29d8525af73a8e"
+  },
+  {
+    "from": "/image/arcade/v57/hexy/cast.webp",
+    "to": "/arcade/sprites/hexy/cast.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/hexy/cast.webp",
+    "sha256": "0e7e73bfbcc011f71885e9b75b24878b8c4273fb641aaabd298cd4e745392194"
+  },
+  {
+    "from": "/image/arcade/v57/hexy/crouch-walk.webp",
+    "to": "/arcade/sprites/hexy/crouch-walk.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/hexy/crouch-walk.webp",
+    "sha256": "b9bfad5d7fdd0e84ba865c30c23831acd12542cf59f1ed9b88869c77f6b6a9d9"
+  },
+  {
+    "from": "/image/arcade/v57/hexy/heavy.webp",
+    "to": "/arcade/sprites/hexy/heavy.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/hexy/heavy.webp",
+    "sha256": "16f06a7595e31efa477e7b3d764e745e5fe3b9bd2780bdef5dda5e5087d98f16"
+  },
+  {
+    "from": "/image/arcade/v57/hexy/jump.webp",
+    "to": "/arcade/sprites/hexy/jump.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/hexy/jump.webp",
+    "sha256": "13e271e0ad7c7e67d6e955fb113d4568342b9aee1a1729a27f697395f106c460"
+  },
+  {
+    "from": "/image/arcade/v57/hexy/reactions.webp",
+    "to": "/arcade/sprites/hexy/reactions.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/hexy/reactions.webp",
+    "sha256": "a43665c717754dbf3c6f772d147c9ec70a85ae317e7a69956297fd7d96b4bd6b"
+  },
+  {
+    "from": "/image/arcade/v57/hexy/roll.webp",
+    "to": "/arcade/sprites/hexy/roll.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/hexy/roll.webp",
+    "sha256": "c7c903368da774af3d3f6ae3720442928b446fdf59e4784e6e6f85c84bd1e96d"
+  },
+  {
+    "from": "/image/arcade/v57/hexy/run.webp",
+    "to": "/arcade/sprites/hexy/run.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/hexy/run.webp",
+    "sha256": "0086106678a375a150008d62ec85a6c96a077f77e0880524a42968deacb84092"
+  },
+  {
+    "from": "/image/arcade/v57/log.webp",
+    "to": "/arcade/sprites/props/log.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/log.webp",
+    "sha256": "d792d046289a4f1aa0812abe4691b8c8aff272dcee1ba6543bd685a0ed40a4b3"
+  },
+  {
+    "from": "/image/arcade/v57/tent.webp",
+    "to": "/arcade/sprites/props/tent.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/tent.webp",
+    "sha256": "f1ef975a4cac6700e9e3696ba03c070ff42938173fd9bbcdfd80db0bb69f8ef1"
+  },
+  {
+    "from": "/image/arcade/v57/trees.webp",
+    "to": "/arcade/sprites/props/trees.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/trees.webp",
+    "sha256": "5ca5df82ed8c2e303834c8b5c65e93323297b4857d36ea9a03125c2a19b39b4d"
+  },
+  {
+    "from": "/image/arcade/v57/wagon.webp",
+    "to": "/arcade/sprites/props/wagon.webp",
+    "archive": "context/arcade/archive/image/arcade/v57/wagon.webp",
+    "sha256": "308d78582d417830fb7fd5f071e918373a06fdd68ee0c7fd3b005a50ddb5216a"
+  },
+  {
+    "from": "/image/arcade/v58/banana.webp",
+    "to": "/arcade/sprites/effects/banana.webp",
+    "archive": "context/arcade/archive/image/arcade/v58/banana.webp",
+    "sha256": "f4f9cb4a4d35bba290bba9961546defd3257500f48d18fd72f893b305078855d"
+  },
+  {
+    "from": "/image/arcade/v58/bubble.webp",
+    "to": "/arcade/sprites/effects/bubble.webp",
+    "archive": "context/arcade/archive/image/arcade/v58/bubble.webp",
+    "sha256": "4e1cea073c208d46e384820f21f5393a8a7eba188966dbd2780ed9c5fd69fde4"
+  },
+  {
+    "from": "/image/arcade/v58/kiwi.webp",
+    "to": "/arcade/sprites/effects/kiwi.webp",
+    "archive": "context/arcade/archive/image/arcade/v58/kiwi.webp",
+    "sha256": "413411bd00d0846ee8d3de125a94ff8a6cf67139a0f1feb0d99119afae8817c1"
+  },
+  {
+    "from": "/image/arcade/v58/sparkle.webp",
+    "to": "/arcade/sprites/effects/sparkle.webp",
+    "archive": "context/arcade/archive/image/arcade/v58/sparkle.webp",
+    "sha256": "4118b359be21e94395e9989cd0b70539d40d9f1637fbfaddbf31fab962543cc7"
+  },
+  {
+    "from": "/image/arcade/v59/canopy-ground.webp",
+    "to": "/arcade/maps/canopy/ground.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/canopy-ground.webp",
+    "sha256": "13ed58b697cc9a16949ba1ae03dd714e66b316e3e3afdc0e3960690282b18aa4"
+  },
+  {
+    "from": "/image/arcade/v59/canopy-mid.webp",
+    "to": "/arcade/maps/canopy/midground.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/canopy-mid.webp",
+    "sha256": "bdb454d4a95c81628632c3c572604f634d2d85fe41b36330c226418661ab1c8f"
+  },
+  {
+    "from": "/image/arcade/v59/canopy.webp",
+    "to": "/arcade/maps/canopy/background.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/canopy.webp",
+    "sha256": "e6a1cec37205e37016fcedeb8989b59424f032ee40bcc2a8552588c7fb2ae58c"
+  },
+  {
+    "from": "/image/arcade/v59/ring-ground.webp",
+    "to": "/arcade/maps/ring/ground.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/ring-ground.webp",
+    "sha256": "daac8f0e5565fb82b6ec6260e94c1339b5ac8e62c13745211d042ba59201524e"
+  },
+  {
+    "from": "/image/arcade/v59/ring-mid.webp",
+    "to": "/arcade/maps/ring/midground.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/ring-mid.webp",
+    "sha256": "c1c37fa0975e9288f1ceac6d7e8f98c8923d05467a534f98d9adbb7d46a626a4"
+  },
+  {
+    "from": "/image/arcade/v59/ring.webp",
+    "to": "/arcade/maps/ring/background.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/ring.webp",
+    "sha256": "24d7a957c0765aae525121e83ed0d335ce9b52d1216f367ba8e2ff70133e40a1"
+  },
+  {
+    "from": "/image/arcade/v59/silence-ground.webp",
+    "to": "/arcade/maps/silence/ground.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/silence-ground.webp",
+    "sha256": "60e7dfa594f3d33879183ef5473eacb304ae56c6564084244e66e4b2943a0fe9"
+  },
+  {
+    "from": "/image/arcade/v59/silence-mid.webp",
+    "to": "/arcade/maps/silence/midground.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/silence-mid.webp",
+    "sha256": "90b15473a90b2d9a7e55239cd2319dfd619083a40a27bd1214e706ee2c7c916b"
+  },
+  {
+    "from": "/image/arcade/v59/silence.webp",
+    "to": "/arcade/maps/silence/background.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/silence.webp",
+    "sha256": "8c154e9f25308f0e6b8afe4dadd3036a406c728cd023b2db848cf6ec5fe759d9"
+  },
+  {
+    "from": "/image/arcade/v59/woods-ground.webp",
+    "to": "/arcade/maps/woods/ground.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/woods-ground.webp",
+    "sha256": "828a11ea439a03713354e8ce78318f91c4bf25dcb1dcf22c4be585a445a23351"
+  },
+  {
+    "from": "/image/arcade/v59/woods-mid.webp",
+    "to": "/arcade/maps/woods/midground.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/woods-mid.webp",
+    "sha256": "c91ae886b62fc32580db15da92a558172ce00e4e1735f732aace048a2837660c"
+  },
+  {
+    "from": "/image/arcade/v59/woods.webp",
+    "to": "/arcade/maps/woods/background.webp",
+    "archive": "context/arcade/archive/image/arcade/v59/woods.webp",
+    "sha256": "7e0d4f2e6e24df34d9db04571360b8ab784aead7222cfd47852ecaa036b8faf5"
+  },
+  {
+    "from": "/image/arcade/v60/agresivo-actions.webp",
+    "to": "/arcade/sprites/bosses/agresivo-actions.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/agresivo-actions.webp",
+    "sha256": "3a807dec7a410fdb854d4e2c5d380ec120d70aa71dcad38e900691ad64263afb"
+  },
+  {
+    "from": "/image/arcade/v60/air-dash.webp",
+    "to": "/arcade/sprites/hexy/air-dash.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/air-dash.webp",
+    "sha256": "8a568a042068ee2130a344cd2cf9ea765b8b445bf9d3603d3ff96c1e37b2e7b7"
+  },
+  {
+    "from": "/image/arcade/v60/alegre-actions.webp",
+    "to": "/arcade/sprites/bosses/alegre-actions.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/alegre-actions.webp",
+    "sha256": "043fb80d19f7253088e6d57479b9c94fb705030aaa7acd01e756dd4c627910b5"
+  },
+  {
+    "from": "/image/arcade/v60/bunny-cast.webp",
+    "to": "/arcade/sprites/bunnies/cast.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/bunny-cast.webp",
+    "sha256": "e63fed06096451f758333e1e7a13bb09cd260824253f4cef37589da010117be3"
+  },
+  {
+    "from": "/image/arcade/v60/bunny-shield.webp",
+    "to": "/arcade/sprites/effects/bunny-shield.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/bunny-shield.webp",
+    "sha256": "44f5e6016669dcbf13b36d7edee4980004ef5e411c92c21538895e3f4115b91f"
+  },
+  {
+    "from": "/image/arcade/v60/can-0.webp",
+    "to": "/arcade/sprites/pickups/dragon-grape.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/can-0.webp",
+    "sha256": "8123b43eb055a5d6d365342ea7f49c73e6522768dbd0c5498c718a7e5d7dc4c8"
+  },
+  {
+    "from": "/image/arcade/v60/can-1.webp",
+    "to": "/arcade/sprites/pickups/banna-drama.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/can-1.webp",
+    "sha256": "5a1d0c36ae47e31970a328204aea1dcebbdca78b8d84d4f577fc3f089a66359b"
+  },
+  {
+    "from": "/image/arcade/v60/can-2.webp",
+    "to": "/arcade/sprites/pickups/witchy-kiwii.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/can-2.webp",
+    "sha256": "2f29a546e3d04effca3eb48de723aa77d0f58d6ac3b91daad066acb0785a8ca4"
+  },
+  {
+    "from": "/image/arcade/v60/can-3.webp",
+    "to": "/arcade/sprites/pickups/bubble-tape.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/can-3.webp",
+    "sha256": "2c49a1acac319a8925cc67724c84587f8c58b4079ba0e21d06e5075894cee3d6"
+  },
+  {
+    "from": "/image/arcade/v60/can-4.webp",
+    "to": "/arcade/sprites/pickups/sparkle-soda.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/can-4.webp",
+    "sha256": "fa835ad5fd7b341d2b8aeec48da44ee7638c48a891be553fdb486b66479b961b"
+  },
+  {
+    "from": "/image/arcade/v60/cannon-tower.webp",
+    "to": "/arcade/sprites/props/cannon-tower.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/cannon-tower.webp",
+    "sha256": "a1c4398228e57aec29c347ee1d8a56671c829a6340bbe2063024d4e3a5e8df14"
+  },
+  {
+    "from": "/image/arcade/v60/cans.webp",
+    "to": "/arcade/sprites/pickups/drinks-atlas.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/cans.webp",
+    "sha256": "d5a47c80b0b5a8199747389cb5eabc478165daeb7435fc143a79cce1d4c43ca8"
+  },
+  {
+    "from": "/image/arcade/v60/guard-pose.webp",
+    "to": "/arcade/sprites/hexy/guard-pose.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/guard-pose.webp",
+    "sha256": "1c1098361f423bdf57c3aa7f1071272d32b9cd3df0d7c11ee94e0df796389f45"
+  },
+  {
+    "from": "/image/arcade/v60/music-guard.webp",
+    "to": "/arcade/sprites/effects/music-guard.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/music-guard.webp",
+    "sha256": "796e9ab595212a804fcf7088f80f130d7f3268059a2bcd5cd3ea5605e01bc735"
+  },
+  {
+    "from": "/image/arcade/v60/muta-actions.webp",
+    "to": "/arcade/sprites/bosses/muta-actions.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/muta-actions.webp",
+    "sha256": "3dded700b57ca02cbeb8b8ecaf71e43d3f492a1200f4e6c716e3d67e23db3dac"
+  },
+  {
+    "from": "/image/arcade/v60/run-fire.webp",
+    "to": "/arcade/sprites/hexy/run-fire.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/run-fire.webp",
+    "sha256": "8e1c9bab645f0b2f768278a4e3353373ee49e37b8f22fe499e79e4f2525845ba"
+  },
+  {
+    "from": "/image/arcade/v60/serio-actions.webp",
+    "to": "/arcade/sprites/bosses/serio-actions.webp",
+    "archive": "context/arcade/archive/image/arcade/v60/serio-actions.webp",
+    "sha256": "22026b800b04e54c7fed7b5a367a84d55f300ddf9a24050caf991b86ee1525d2"
+  },
+  {
+    "from": "/audio/arcade/v55/boss.ogg",
+    "to": null,
+    "archive": "context/arcade/archive/audio/arcade/v55/boss.ogg",
+    "sha256": "58a9a9eefe5449cfc3d799c54c39530d4a1b98860fbb635f134f40b955e2af06"
+  },
+  {
+    "from": "/audio/arcade/v55/gameover.ogg",
+    "to": "/arcade/music/jingles/gameover.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v55/gameover.ogg",
+    "sha256": "dd572c6bb55ee4fd43324c0a0c0856395ec82d81d1aae9ba388ff79327ef7133"
+  },
+  {
+    "from": "/audio/arcade/v55/meadow.ogg",
+    "to": null,
+    "archive": "context/arcade/archive/audio/arcade/v55/meadow.ogg",
+    "sha256": "ef61bbe0a69536003a91c52661d81d2ccd79d0ebf47f8681d4219ed67318de58"
+  },
+  {
+    "from": "/audio/arcade/v55/victory.ogg",
+    "to": "/arcade/music/jingles/victory.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v55/victory.ogg",
+    "sha256": "dc7b10eaaa6f79a5afaeb8d28a78fd7d596454343a32cba00839fd03f75b6f51"
+  },
+  {
+    "from": "/audio/arcade/v59/agresivo.ogg",
+    "to": null,
+    "archive": "context/arcade/archive/audio/arcade/v59/agresivo.ogg",
+    "sha256": "2ec49ad8c3809e8d522018308f431520c3b6debf3f51c52b0cbab48b0b0d3d99"
+  },
+  {
+    "from": "/audio/arcade/v59/alegre.ogg",
+    "to": null,
+    "archive": "context/arcade/archive/audio/arcade/v59/alegre.ogg",
+    "sha256": "f79ab6b1c9ff91a91a56dbcaaba7144deb75ff236957811c4834f256d5b560bd"
+  },
+  {
+    "from": "/audio/arcade/v59/canopy.ogg",
+    "to": "/arcade/music/exploration/canopy.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v59/canopy.ogg",
+    "sha256": "ec18995db66caa4513c2494ff8da49bfeae99167dba6214866108fe0adfd3197"
+  },
+  {
+    "from": "/audio/arcade/v59/meadow.ogg",
+    "to": "/arcade/music/exploration/meadow.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v59/meadow.ogg",
+    "sha256": "582849e1c13e2776bd3412ef51b50cccead5b1d2da4e8f97d0db8348b53e06ab"
+  },
+  {
+    "from": "/audio/arcade/v59/muta.ogg",
+    "to": null,
+    "archive": "context/arcade/archive/audio/arcade/v59/muta.ogg",
+    "sha256": "01acdc8d5e346168625f8cef607e72d6d6907503ae47434e18f890ffc7a0b747"
+  },
+  {
+    "from": "/audio/arcade/v59/ring.ogg",
+    "to": "/arcade/music/exploration/ring.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v59/ring.ogg",
+    "sha256": "e200db77aad6d6e0062612af37289e88b0896e1ea95b08e8b8ee668c1ff37404"
+  },
+  {
+    "from": "/audio/arcade/v59/serio.ogg",
+    "to": null,
+    "archive": "context/arcade/archive/audio/arcade/v59/serio.ogg",
+    "sha256": "f2ace774f9b8d8b81c0ca9e020f0f5205416080f26e4b4fa1587a9075923cf17"
+  },
+  {
+    "from": "/audio/arcade/v59/silence.ogg",
+    "to": "/arcade/music/exploration/silence.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v59/silence.ogg",
+    "sha256": "d439def04da8248846da8c433171c1c2e9a9d4a62a85a5a1c06e599f9df10b7e"
+  },
+  {
+    "from": "/audio/arcade/v59/troupe.ogg",
+    "to": null,
+    "archive": "context/arcade/archive/audio/arcade/v59/troupe.ogg",
+    "sha256": "935518c69fdd6e704f5069e5a8b642e954ff596ec1a33f71e4b45a0dc4a4e863"
+  },
+  {
+    "from": "/audio/arcade/v59/woods.ogg",
+    "to": "/arcade/music/exploration/woods.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v59/woods.ogg",
+    "sha256": "38947cb8a3a9ad80bda2e6b2412ad957b3f135927d3b135fc727ff0eeda933da"
+  },
+  {
+    "from": "/audio/arcade/v60/agresivo.ogg",
+    "to": "/arcade/music/bosses/agresivo.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v60/agresivo.ogg",
+    "sha256": "5091713e375d04d8e3efca8b8da89f9784bd56f4163b98c0c6af1767628e8d63"
+  },
+  {
+    "from": "/audio/arcade/v60/alegre.ogg",
+    "to": "/arcade/music/bosses/alegre.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v60/alegre.ogg",
+    "sha256": "28e4d97dc4610bbc705cce42466edb5fb37373159a829871b8a1ec1e85c7862e"
+  },
+  {
+    "from": "/audio/arcade/v60/muta.ogg",
+    "to": "/arcade/music/bosses/muta.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v60/muta.ogg",
+    "sha256": "d7e001c0ebefc7a1755c3d244c788a57d705a21e4dceb942e43d53a6b2017715"
+  },
+  {
+    "from": "/audio/arcade/v60/serio.ogg",
+    "to": "/arcade/music/bosses/serio.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v60/serio.ogg",
+    "sha256": "78129e409a02d2e57c03925dd9151167b5c91d1c7d02b9eaa9c08856ee852093"
+  },
+  {
+    "from": "/audio/arcade/v60/troupe.ogg",
+    "to": "/arcade/music/bosses/troupe.ogg",
+    "archive": "context/arcade/archive/audio/arcade/v60/troupe.ogg",
+    "sha256": "efd195c92ff7d544fc7db1957e095e19aeef83ce9392c0577324b58007dfbfe5"
+  }
+]

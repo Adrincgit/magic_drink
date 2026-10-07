@@ -1,0 +1,6 @@
+{
+  "tool": "built-in imagegen",
+  "transparent_background": true,
+  "asset": "public/arcade/sprites/effects/armor-ricochet.webp",
+  "prompt": "Create a production 2D anime cartoon game VFX sprite sheet on a genuinely transparent background: exactly FOUR equal square cells in ONE horizontal row, 4 columns x 1 row. Each cell has the same centered impact point and generous clear transparent margins, with no overlap between cells. Four consecutive frames of a harmless hard metal ricochet: frame 1 tiny sharp yellow-white contact flash and two short orange sparks; frame 2 crisp gold and cream angular spark chips scattering left and right, a few tiny cyan streaks; frame 3 sparks separate and arc downward; frame 4 only four fading tiny chips. Bright cel-painted storybook anime circus game style, hand-drawn dark wine outlines, compact readable at 40-50 screen pixels. These indicate a projectile bouncing off armor WITHOUT dealing damage. NO bubbles, circles, ring halos, smoke, explosion fireballs, pink magic stars, characters, armor plate, text, labels, grid lines, background scenery or checkerboard. Keep the impact point perfectly registered across frames. Target sheet aspect ratio 4:1."
+}

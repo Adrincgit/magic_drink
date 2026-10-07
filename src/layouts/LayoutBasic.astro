@@ -1,9 +1,4 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-
-import RouterLinks from '../components/react_components/RouterLinks.jsx';
-
-import FootNetHive from '../components/global/FootNetHive';
 
 // Importar fuentes desde Fontsource (sistema Cine-Data Multicultural)
 import '@fontsource/poppins/700.css';  // Bold para headlines
@@ -23,7 +18,7 @@ interface Props {
 	lang?: string;
 }
 
-const {title, showNavBar=true, showFooter=true, dataLayout, seoData, description='Magic Drink. Hexy, Magic Drink Day y WonderPop Plaza.', lang='en' } = Astro.props;
+const {title, description='Magic Drink. Hexy y una aventura llena de magia.', lang='es' } = Astro.props;
 ---
 
 <!doctype html>
@@ -41,13 +36,6 @@ const {title, showNavBar=true, showFooter=true, dataLayout, seoData, description
 		<!-- <ViewTransitions /> -->
 	
 	</head>
-	<header>
-
-		{showNavBar &&  <RouterLinks  transition:persist client:only />}
-
-	
-		
-	</header>
 	<body style="background: #2C2633;">	
 	<div id="top"></div>
 
@@ -58,7 +46,6 @@ const {title, showNavBar=true, showFooter=true, dataLayout, seoData, description
 
 	</main>
 
-	{showFooter && <FootNetHive client:only />}
 	</body>
 
 </html>

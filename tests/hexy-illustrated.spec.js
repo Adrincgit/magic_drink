@@ -1,5 +1,6 @@
+import {openAdventureMenu} from './arcade-input.helpers';
 import {test,expect} from '@playwright/test';
-import {MEADOW_PLANES,meadowPlanePlacement} from '../src/components/arcade/adventureParallax';
+import {MEADOW_PLANES,meadowPlanePlacement} from '../src/components/arcade/adventure/world/adventureParallax';
 
 test('opaque meadow panoramas cover the whole chapter and retain distinct depth speeds',()=>{
  const image={width:2172,height:724},end=4400-960;
@@ -10,9 +11,9 @@ test('opaque meadow panoramas cover the whole chapter and retain distinct depth 
  expect(MEADOW_PLANES[1].speed).toBeGreaterThan(MEADOW_PLANES[0].speed);
 });
 test('Original colors and painted stars cover the game screen, clear on expiry, and stay still with reduced motion',async({page})=>{
- await page.goto('/arcade');
+ await page.goto('/arcade');await openAdventureMenu(page);
  const result=await page.evaluate(async()=>{
-  const {paintOriginalScreen}=await import('/src/components/arcade/adventureOriginal.js');
+  const {paintOriginalScreen}=await import('/src/components/arcade/adventure/engine/adventureOriginal.js');
   const img=new Image();img.src='/arcade/sprites/props/collectible-star.webp';await img.decode();
   // Keep pixel comparisons on one renderer; repeated readback can otherwise
   // switch Chrome from GPU to CPU halfway through the identical drawings.

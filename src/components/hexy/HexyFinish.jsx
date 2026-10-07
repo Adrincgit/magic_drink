@@ -5,7 +5,7 @@ import styles from './HexyFinish.module.css';
 
 // One optical pass above both the artwork and the UI. Filtering an ancestor of
 // the page would change the containing block of its fixed navigation/player.
-export default function HexyFinish({ enabled, reduced, intensity = 60, expanded = false, target = null, monochrome = 0, chromatic = 1, settings = null }) {
+export default function HexyFinish({ enabled, reduced, intensity = 60, expanded = false, target = null, monochrome = 0, chromatic = 1, settings = null, arcade = false }) {
   const canvas = useRef(null);
   const renderer = useRef(null);
   const [lensMap, setLensMap] = useState('');
@@ -14,10 +14,11 @@ export default function HexyFinish({ enabled, reduced, intensity = 60, expanded 
   const [clip, setClip] = useState('none');
   const amount = intensity / 100;
   const grainOpacity = settings ? settings.grain / 100 * .35 : .08 + amount * .25;
-  const vignetteOpacity = settings ? settings.vignette / 100 : .35 + amount * .4;
-  const lensOpacity = settings ? (settings.chromatic > 0 ? .2275 : 0) : .14 + amount * .25;
-  const registration = settings ? settings.chromatic / 100 * 4.1 : (1.2 + amount) * chromatic;
-  const dispersion = settings ? settings.chromatic / 100 * 3.6 : (.8 + amount * 1.6) * chromatic;
+  const vignetteOpacity = settings ? Math.pow(settings.vignette / 100,arcade?1.35:1) : .35 + amount * .4;
+  const lensOpacity = settings ? (settings.chromatic > 0 ? (arcade?1:.2275) : 0) : .14 + amount * .25;
+  const strength=(settings?.chromatic||0)/100,opticalScale=Math.max(.5,viewport.width/1440);
+  const registration = arcade ? (strength*.6+strength*strength*3.4)*opticalScale : settings ? settings.chromatic / 100 * 4.1 : (1.2 + amount) * chromatic;
+  const dispersion = arcade ? strength*strength*8*opticalScale : settings ? settings.chromatic / 100 * 3.6 : (.8 + amount * 1.6) * chromatic;
   const verticalShift = settings ? settings.chromatic / 100 * .28 : amount * .3 * chromatic;
   // Native dialogs live above the page. Move the same optical pass into the
   // active dialog so its controls receive the common finish, too.
@@ -45,11 +46,12 @@ export default function HexyFinish({ enabled, reduced, intensity = 60, expanded 
     return () => { observer.disconnect(); renderer.current?.dispose(); renderer.current = null; };
   }, [surface]);
   useEffect(() => { renderer.current?.update({ enabled: enabled && grainOpacity > 0, reduced }); }, [enabled, reduced, surface, grainOpacity]);
-  const finish = <div className={styles.finish} data-hexy-finish data-enabled={enabled} aria-hidden="true"
+  const finish = <div className={styles.finish} data-hexy-finish data-enabled={enabled} data-arcade-optics={arcade} aria-hidden="true"
     style={{ '--finish-clip': clip, '--finish-monochrome': monochrome, '--grain-opacity': grainOpacity, '--lens-opacity': lensOpacity, '--vignette-opacity': vignetteOpacity }}>
     <div className={styles.lens} data-finish-lens data-ready={Boolean(lensMap)} style={{ display: lensOpacity === 0 ? 'none' : undefined }} />
     <canvas ref={canvas} className={styles.grain} data-finish-grain />
     <div className={styles.vignette} data-finish-vignette />
+    <div className={styles.monochrome} data-finish-monochrome style={{display:monochrome?'block':'none'}} />
   </div>;
   return <>
     <svg className={styles.definitions} aria-hidden="true" focusable="false">

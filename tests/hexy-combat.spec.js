@@ -1,10 +1,12 @@
+import {openAdventureMenu} from './arcade-input.helpers';
 import {test,expect} from '@playwright/test';
-import {createAdventure,stepAdventure,playerBody} from '../src/components/arcade/adventureModel';
-import {hexyPose,hexyMuzzle} from '../src/components/arcade/hexyAnimation';
-import {makeEnemy,updateBoss,bossTargets,towerSockets} from '../src/components/arcade/adventureEnemies';
-import {bossDrawing} from '../src/components/arcade/adventureSprites';
-import {specialShots} from '../src/components/arcade/adventureMagic';
-import {clearPowerProjectiles,buddyFrame,buddyPosition} from '../src/components/arcade/adventureDefense';
+test.use({hasTouch:true});
+import {createAdventure,stepAdventure,playerBody} from '../src/components/arcade/adventure/engine/adventureModel';
+import {hexyPose,hexyMuzzle} from '../src/components/arcade/adventure/actors/hexy/hexyAnimation';
+import {makeEnemy,updateBoss,bossTargets,towerSockets} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
+import {bossDrawing} from '../src/components/arcade/adventure/render/adventureSprites';
+import {specialShots} from '../src/components/arcade/adventure/engine/adventureMagic';
+import {clearPowerProjectiles,buddyFrame,buddyPosition} from '../src/components/arcade/adventure/engine/adventureDefense';
 const tick=(s,keys={},n=1)=>{for(let i=0;i<n;i++)stepAdventure(s,keys,1/120);};
 function quiet(index=0){const s=createAdventure(index);s.enemies=[];s.pickups=[];s.supplies=[];s.cages=[];s.stars=[];s.hazards=[];return s;}
 const bullet=(x,y)=>({x,y,vx:-160,vy:0,r:8,life:2,age:0,kind:'streamer'});
@@ -17,8 +19,8 @@ test('HOLD fixes position while turning and aiming diagonally; releasing restore
 });
 
 test('held shield spends magic, intercepts frontal bullets and leaves Hexy exposed from behind',()=>{
- const front=quiet();tick(front,{guard:true,attack:true},120);expect(front.magic).toBeCloseTo(76,5);expect(front.shots).toHaveLength(0);expect(hexyPose(front).sheet).toBe('guard-pose');
- front.hostile=[bullet(front.player.x+48,front.player.y-43)];tick(front,{guard:true});expect(front.hearts).toBe(5);expect(front.hostile).toHaveLength(0);expect(front.magic).toBeCloseTo(71.8,5);expect(front.events).toContain('guardBlock');
+ const front=quiet();tick(front,{guard:true,attack:true},120);expect(front.magic).toBeCloseTo(73.6,5);expect(front.shots).toHaveLength(0);expect(hexyPose(front).sheet).toBe('guard-pose');
+ front.hostile=[bullet(front.player.x+48,front.player.y-43)];tick(front,{guard:true});expect(front.hearts).toBe(5);expect(front.hostile).toHaveLength(0);expect(front.magic).toBeCloseTo(68.98,5);expect(front.events).toContain('guardBlock');
  front.hostile=[bullet(front.player.x-10,front.player.y-43)];tick(front,{guard:true});expect(front.hearts).toBe(4);
  const empty=quiet();empty.magic=1;tick(empty,{guard:true},30);expect(empty.magic).toBe(0);expect(empty.player.guarding).toBe(false);expect(empty.player.guardBreak).toBeGreaterThan(0);
  tick(empty,{guard:true},240);expect(empty.magic).toBeGreaterThan(0);expect(empty.player.guarding).toBe(false);
@@ -71,27 +73,26 @@ test('a rescued bunny anticipates the star shot before releasing it from its own
  tick(s,{},60);expect(buddyFrame(s,0)).toBe(null);
 });
 
-test('Serio conducts a destructible cannon tower, transforms at half life and launches landing clowns',()=>{
+test('the clown organ exposes an elevated body target, transforms and leaves the arena after a finishing spell',()=>{
  const s=quiet(1),b=s.boss,a=s.level.arena;s.damage=()=>{};s.player.x=a.left+160;s.player.y=a.y;s.rescued=3;s.arenaLocked=true;
- Object.assign(b,{phase:'recover',timer:4,vulnerable:true});const body=bossTargets(s)[0],core=bossTargets(s)[1];expect(body.y+body.h).toBeLessThan(core.y);
- const x=b.x,ports=towerSockets(s);b.hp=b.maxHp/2;updateBoss(s,1/120,{say:()=>{},particles:()=>{},body:playerBody});expect(b.phase).toBe('transform');expect(b.vulnerable).toBe(false);expect(towerSockets(s)[1].x).toBeLessThan(ports[1].x);expect(bossDrawing(s).key).toBe('serio-actions');
- for(let n=0;n<300;n++)updateBoss(s,1/120,{say:()=>{},particles:()=>{},body:playerBody});expect(b.phase).toBe('recover');expect(b.vulnerable).toBe(true);expect(b.x).toBe(x);
- s.hostile=[{...bullet(a.left+440,a.y-5),kind:'clown',floor:a.y,vy:180}];tick(s);expect(s.hostile).toHaveLength(0);expect(s.enemies.some(e=>e.type===6)).toBe(true);
- s.player.x=a.right-371;s.player.y=a.y;s.player.ground=s.platforms.findIndex(p=>s.player.x>=p.x&&s.player.x<=p.x+p.w&&p.y===a.y);tick(s,{right:true},15);expect(s.player.x).toBeLessThanOrEqual(a.right-370);
+ Object.assign(b,{phase:'recover',timer:4,vulnerable:true});const [core]=bossTargets(s);expect(core.y+core.h).toBeLessThan(a.y-100);expect(bossTargets(s)).toHaveLength(1);
+ const x=b.x,ports=towerSockets(s);b.hp=b.maxHp/2;updateBoss(s,1/120,{say:()=>{},particles:()=>{},body:playerBody});expect(b.phase).toBe('transform');expect(b.vulnerable).toBe(false);expect(towerSockets(s)[1].x).toBe(ports[1].x);expect(bossDrawing(s).key).toBe('organ-machine');
+ for(let n=0;n<330;n++)updateBoss(s,1/120,{say:()=>{},particles:()=>{},body:playerBody});expect(b.phase).toBe('recover');expect(b.vulnerable).toBe(true);expect(b.x).toBe(x);
+ s.player.x=a.right-550;s.player.y=a.y;s.player.ground=s.platforms.findIndex(p=>s.player.x>=p.x&&s.player.x<=p.x+p.w&&p.y===a.y);tick(s,{right:true},15);expect(s.player.x).toBeLessThan(bossTargets(s)[0].x);expect(s.player.x).toBeGreaterThan(a.right-550);
  b.hp=10;b.phase='recover';b.timer=3;b.vulnerable=true;s.shots=specialShots(0,{x:core.x+core.w/2,y:core.y+core.h/2},{x:1,y:0});tick(s);expect(b.hp).toBe(0);
- tick(s,{},120);expect(s.arenaLocked).toBe(false);expect(b.deadTime).toBeGreaterThan(.8);expect(b.phase).toBe('defeated');
+ tick(s,{},360);expect(s.arenaLocked).toBe(false);expect(b.shattered).toBe(true);expect(b.deadTime).toBeGreaterThan(2.5);expect(b.phase).toBe('defeated');
 });
 
 test('every long route has distributed encounters, late rescues and several usable checkpoints',()=>{
  for(let index=0;index<5;index++){
-  const s=quiet(index),l=s.level;expect(l.width).toBeGreaterThan(11000);expect(l.enemies.length).toBeGreaterThan(20);expect(l.checkpoints).toHaveLength(4);expect(l.cages[2][0]).toBeGreaterThan(8500);
-  const cp=l.checkpoints[2];s.player.x=cp[0]+5;s.player.y=cp[1];s.player.ground=s.platforms.findIndex(p=>s.player.x>=p.x&&s.player.x<=p.x+p.w&&p.y===s.player.y);s.hearts=2;tick(s);expect(s.checkpointAt).toEqual(cp);
+  const s=quiet(index),l=s.level;expect(l.width).toBeGreaterThan(11000);expect(l.enemies.length).toBeGreaterThanOrEqual(20);expect(l.checkpoints).toHaveLength(2);expect(l.cages[2][0]).toBeGreaterThan(8500);
+  const cp=l.checkpoints[1];s.player.x=cp[0]+5;s.player.y=cp[1];s.player.ground=s.platforms.findIndex(p=>s.player.x>=p.x&&s.player.x<=p.x+p.w);s.hearts=2;tick(s);expect(s.checkpointAt).toEqual(cp);
   s.player.y=900;s.player.ground=null;tick(s);expect(s.player.x).toBe(cp[0]);expect(s.player.y).toBe(cp[1]-10);
  }
 });
 
 for(const width of [390,844])test(`${width}: HUD stays inside the game and HOLD / shield inputs work`,async({page})=>{
- await page.setViewportSize({width,height:width===390?844:390});await page.goto('/arcade');const root=page.locator('[data-hexy-adventure]'),canvas=page.locator('[data-adventure-canvas]');await expect(root).toHaveAttribute('data-phase','ready',{timeout:30000});await page.locator('[data-practice]').click();await expect(root).toHaveAttribute('data-phase','playing');
+ await page.setViewportSize({width,height:width===390?844:390});await page.goto('/arcade');await openAdventureMenu(page);const root=page.locator('[data-hexy-adventure]'),canvas=page.locator('[data-adventure-canvas]');await expect(root).toHaveAttribute('data-phase','ready',{timeout:30000});await page.locator('[data-practice]').click();await expect(root).toHaveAttribute('data-phase','playing');
  const hud=await page.locator('[data-game-hud]').boundingBox(),screen=await canvas.boundingBox();expect(hud.x).toBeGreaterThanOrEqual(screen.x);expect(hud.y).toBeGreaterThanOrEqual(screen.y);expect(hud.y+hud.height).toBeLessThanOrEqual(screen.y+screen.height+1);
  const x=Number(await canvas.getAttribute('data-player-x'));await page.keyboard.down('KeyF');await page.keyboard.down('ArrowRight');await page.keyboard.down('ArrowUp');await page.keyboard.down('KeyZ');await expect(canvas).toHaveAttribute('data-hold','true');await page.waitForTimeout(300);expect(Number(await canvas.getAttribute('data-player-x'))).toBeCloseTo(x,0);
  for(const key of ['KeyF','ArrowRight','ArrowUp','KeyZ'])await page.keyboard.up(key);

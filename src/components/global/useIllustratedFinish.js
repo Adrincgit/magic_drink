@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 
 const key = 'magic-drink:illustrated-finish:v1';
-const defaults = { enabled: true, chromatic: 55, grain: 50, vignette: 50 };
+const defaults = { enabled: true, chromatic: 55, grain: 50, vignette: 50, monochrome: false };
 const normalize = value => ({
+  monochrome: value?.monochrome === true,
   enabled: typeof value?.enabled === 'boolean' ? value.enabled : defaults.enabled,
   ...Object.fromEntries(['chromatic', 'grain', 'vignette'].map(name => [name,
     typeof value?.[name] === 'number' && Number.isFinite(value[name]) ? Math.max(0, Math.min(100, value[name])) : defaults[name],

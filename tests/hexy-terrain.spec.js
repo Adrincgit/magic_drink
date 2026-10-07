@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
-import {createAdventure,stepAdventure} from '../src/components/arcade/adventureModel';
-import {groundY,groundAt,sceneryPlacement} from '../src/components/arcade/adventureTerrain';
-import {buddyPosition} from '../src/components/arcade/adventureDefense';
+import {createAdventure,stepAdventure} from '../src/components/arcade/adventure/engine/adventureModel';
+import {groundY,groundAt,sceneryPlacement} from '../src/components/arcade/adventure/world/adventureTerrain';
+import {buddyPosition} from '../src/components/arcade/adventure/engine/adventureDefense';
 const clean=()=>{const s=createAdventure();s.enemies=[];s.outposts=[];s.hazards=[];s.pickups=[];s.supplies=[];s.boss.hp=0;s.level={...s.level,arena:{...s.level.arena,entry:Infinity}};return s;};
 const tick=(s,input,n=1)=>{for(let i=0;i<n;i++)stepAdventure(s,input,1/120);};
 

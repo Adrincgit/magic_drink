@@ -1,0 +1,54 @@
+.title{position:absolute;inset:0;z-index:6;overflow:hidden;background:#111726;color:#fff0bc;text-align:center;container-type:inline-size;isolation:isolate}
+.landscape{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 36%,transparent 38%,#080c2044 90%),linear-gradient(0deg,#0d152877,transparent 30%);pointer-events:none}
+.emblem{position:absolute;top:4%;left:50%;width:57%;transform:translateX(-50%);transition:width .65s cubic-bezier(.2,.7,.2,1),top .65s;pointer-events:none;filter:drop-shadow(0 .6cqw 1cqw #10132b88)}
+.emblem img{width:100%;height:auto;display:block}
+.title[data-menu-open=true] .emblem{top:-1%;width:39%}
+.title[data-entrance=waiting] .landscape,.title[data-entrance=waiting] .emblem,.title[data-entrance=waiting] .fireflies{opacity:0}
+.title[data-entrance=entering] .landscape{animation:landscapeEntry 2.8s cubic-bezier(.12,.55,.3,1) both}
+.title[data-entrance=entering] .emblem img{animation:emblemEntry 1.9s .45s cubic-bezier(.19,.7,.25,1) both}
+.title[data-entrance=entering] .fireflies{animation:appear 1s 1.8s both}
+.pressStart{position:absolute;top:81%;left:24%;width:52%;padding:1cqw 0;cursor:pointer;border:0;background:none;color:#fff0c6;font:400 2.1cqw BakeSoda,serif;letter-spacing:.15em;text-shadow:0 .18cqw #683e6c,0 .3cqw .5cqw #070c22;outline-offset:.4cqw}
+.pressStart span{animation:startGlow 2.7s ease-in-out infinite}
+.pressStart:hover,.pressStart:focus-visible{color:#fffadf;filter:drop-shadow(0 0 .5cqw #ffe498)}
+.pressStart:focus:not(:focus-visible){outline:none}
+.title:not([data-entrance=settled]) .pressStart{inset:0;width:100%;height:100%;font:500 .85cqw Inter,sans-serif;letter-spacing:.07em;outline:none}
+.title:not([data-entrance=settled]) .pressStart span{position:absolute;bottom:7%;left:0;width:100%;opacity:.7;animation:none}
+.menu{position:absolute;top:49%;left:30%;width:40%;display:grid;justify-items:center;gap:.2cqw;animation:menuEntry .45s both}
+.menu button{position:relative;border:0;background:none;color:#fff0d0;font:400 1.85cqw/1.3 BakeSoda,serif;padding:.35cqw 2.6cqw;cursor:pointer;text-shadow:0 .18cqw #552d59,0 .3cqw .4cqw #111827;outline:none;transition:color .15s,filter .15s}
+.menu button::before{content:'✦';position:absolute;left:.5cqw;top:50%;transform:translateY(-50%);color:#ffdf83;opacity:0}
+.menu button:hover,.menu button:focus-visible{color:#ffe9a0;filter:drop-shadow(0 0 .3cqw #ecb981)}
+.menu button:hover::before,.menu button:focus::before{opacity:1}
+.menu button:disabled{opacity:.45;cursor:default}
+.menu small{font-size:1.1cqw;margin-left:.4cqw;color:#edca97}
+.menu .practice{font-size:1.3cqw;margin-top:.15cqw;color:#d6c8cb}
+.wallet{position:absolute;left:3%;top:4%;display:flex;align-items:center;gap:.6cqw;font:400 1.7cqw BakeSoda,serif;text-shadow:0 2px 4px #121228;animation:appear .4s both}.wallet img{width:2.6cqw}
+.exit{position:absolute;bottom:3.5%;left:3%;font:400 1.1cqw BakeSoda,serif;color:#e8d1b0!important;text-shadow:0 2px #141627}
+.signature{position:absolute;bottom:3.5%;left:38%;width:24%;font:500 .7cqw Inter,sans-serif;letter-spacing:.25em;color:#ddc6b2}
+.srOnly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.fireflies{position:absolute;inset:0;pointer-events:none}.fireflies i{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);width:.22cqw;height:.22cqw;border-radius:50%;background:#fff0ac;box-shadow:0 0 .6cqw .15cqw #facb5a77;animation:firefly 5s calc(var(--i)*-.73s) ease-in-out infinite}
+.comet{display:none;position:absolute;top:50%;left:0;width:2cqw;height:2cqw;pointer-events:none}.comet img{position:relative;width:100%;filter:drop-shadow(0 0 .5cqw #fff1a3)}.comet::before{content:'';position:absolute;right:50%;top:45%;width:15cqw;height:.2cqw;background:linear-gradient(90deg,transparent,#c2bcff88,#fff9c9);box-shadow:0 0 .5cqw #ffd776;transform-origin:right;transform:rotate(-20deg)}
+.title[data-entrance=entering] .comet{display:block;animation:cometEntry 1s .25s both}
+.chapterPicker>button,.tutorial button{border:0;color:#fff1c9;background:url('/arcade/shop/ui/button-plum.webp') center/100% 100% no-repeat;font:400 1.5cqw/1.1 BakeSoda,serif;padding:1.05cqw 1.5cqw;min-height:3.8cqw;cursor:pointer;filter:drop-shadow(0 .2cqw .12cqw #30203590)}
+.chapterPicker button:focus-visible,.tutorial button:focus-visible{outline:2px solid #fff0bd;outline-offset:2px}
+@keyframes landscapeEntry{from{opacity:0;transform:scale(1.09)}35%{opacity:1}to{opacity:1;transform:scale(1)}}
+@keyframes emblemEntry{0%{opacity:0;transform:translateY(-16%) scale(1.16) rotate(-3deg)}55%{opacity:1;transform:translateY(1.5%) scale(.99) rotate(.6deg)}78%{transform:translateY(-.6%) scale(1.006) rotate(-.2deg)}100%{opacity:1;transform:none}}
+@keyframes cometEntry{0%{opacity:0;transform:translate(-5cqw,8cqw) scale(.3)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translate(82cqw,-30cqw) scale(1.3)}}
+@keyframes firefly{0%,100%{opacity:.12;transform:translateY(.4cqw)}50%{opacity:.75;transform:translateY(-.4cqw)}}
+@keyframes startGlow{0%,100%{opacity:1}50%{opacity:.58}}
+@keyframes appear{from{opacity:0}to{opacity:1}}
+@keyframes menuEntry{from{opacity:0;transform:translateY(.8cqw)}to{opacity:1;transform:none}}
+
+.presentation{position:absolute;inset:0;width:100%;height:100%;z-index:14;display:flex;flex-direction:column;justify-content:center;align-items:center;border:0;background:radial-gradient(ellipse at center,#67416e,#211731 70%);color:#fff0bc;cursor:pointer}.presentation img{width:15%;filter:drop-shadow(0 0 25px #e8ac6c);animation:float 2s ease-in-out infinite}.presentation b{font:400 5cqw BakeSoda,serif}.presentation span{font:400 1.8cqw BakeSoda,serif}.presentation small{position:absolute;bottom:8%;font:600 1cqw Inter,sans-serif;opacity:.7}
+.chapterCard{position:absolute;inset:0;z-index:10;background:#241c34;overflow:hidden;display:grid;place-items:center;color:#fff0bd;text-align:center}.chapterCard>div{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.5;animation:arrive 1.2s both}.chapterCard section{position:relative;width:85%;padding:2cqw;background:linear-gradient(100deg,transparent,#392642ed 18% 82%,transparent);transform:rotate(-3deg);animation:arrive .6s both}.chapterCard b{display:block;font:400 7cqw BakeSoda,serif;color:#ffd877;text-shadow:.2cqw .25cqw #85587b}.chapterCard h2{font:400 3.6cqw BakeSoda,serif;margin:0 0 1cqw}.chapterCard span,.chapterCard small{font:700 1cqw Inter,sans-serif;letter-spacing:.15em}
+.chapterPicker,.tutorial{position:absolute;inset:0;z-index:12;display:grid;align-content:center;justify-items:center;background:#20152deb;color:#fff0c4}.chapterPicker h2,.tutorial h2{font:400 3cqw BakeSoda,serif;margin:0 0 1.5cqw}.chapterPicker>div{display:flex;gap:1cqw;width:91%}.chapterPicker>div button{width:20%;padding:1cqw .5cqw;background:url('/arcade/shop/ui/price-tag.webp') center/100% 100%;border:0;color:#452844;cursor:pointer}.chapterPicker img{width:95%;aspect-ratio:16/9;object-fit:cover;border-radius:1cqw}.chapterPicker b{font:400 1.3cqw BakeSoda,serif;display:block;padding:.7cqw}.chapterPicker small{font:700 .8cqw Inter,sans-serif;display:block}.chapterPicker label{margin:1.5cqw;font:600 1cqw Inter,sans-serif}.chapterPicker input{margin-right:.5cqw;accent-color:#e9b775}.chapterPicker [aria-pressed=true]{filter:drop-shadow(0 0 .5cqw #ffe67a)}
+.tutorial section{width:86%;padding:3cqw 4cqw;background:url('/arcade/shop/ui/paper.webp') center/100% 100%;color:#48273f}.tutorial h2{text-align:center}.bindings{display:grid;grid-template-columns:1fr 1fr;gap:1cqw 2cqw}.bindings>div{display:flex;align-items:center;gap:1cqw;font:600 1.1cqw/1.35 Inter,sans-serif}.bindings b{flex:none;text-align:center;min-width:9cqw;padding:.6cqw;background:url('/arcade/shop/ui/button-plum.webp') center/100% 100%;color:#fff0bd;font:400 1.2cqw BakeSoda,serif}.bindings small{display:block;font:600 .9cqw Inter,sans-serif;color:#eec38e}.tutorial p{font:600 1cqw/1.5 Inter,sans-serif;margin:1.5cqw 0}.tutorial button{display:block;margin:auto}
+@keyframes float{50%{transform:translateY(-.6cqw) rotate(1deg)}}@keyframes clouds{to{transform:translateX(-12%)}}@keyframes shine{50%{opacity:.4}}@keyframes arrive{from{opacity:0;translate:15% 0}to{translate:0 0}}
+@media(prefers-reduced-motion:reduce){.title *,.presentation *,.chapterCard *{animation:none!important}}
+
+.bindings b{min-width:11cqw;font-size:1.05cqw}
+.title .pressStart{outline:none!important}.pressStart:focus-visible span{filter:drop-shadow(0 0 .4cqw #ffe395)}
+.title[data-menu-open=true] .emblem{top:1%}
+.wallet i,.comet i{display:block;width:2.6cqw;height:2.6cqw;background:url('/arcade/sprites/props/collectible-star.webp') 0 0/400% 100%;filter:drop-shadow(0 0 .4cqw #ffe6a366)}
+.comet i{position:relative;width:2cqw;height:2cqw}
+@media(prefers-reduced-motion:reduce){.emblem{transition:none}.title[data-entrance=entering] .comet{display:none}}

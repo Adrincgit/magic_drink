@@ -1,18 +1,18 @@
+import {openAdventureMenu} from './arcade-input.helpers';
 import {test,expect} from '@playwright/test';
-import {createAdventure,stepAdventure,adventureCarry,playerBody} from '../src/components/arcade/adventureModel';
-import {collectAdventureStar,SUPER_RECHARGE} from '../src/components/arcade/adventureRewards';
-import {BASIC_SPECIAL,SPECIALS,SUPER_EXHAUSTION} from '../src/components/arcade/adventureMagic';
-import {damageSupply,supplyFrame} from '../src/components/arcade/adventureSupplies';
-import {MEADOW_FOREGROUND,foregroundPlacement} from '../src/components/arcade/adventureForeground';
-import {makeEnemy,updateEnemies} from '../src/components/arcade/adventureEnemies';
-import {enemyDrawing} from '../src/components/arcade/adventureSprites';
+import {createAdventure,stepAdventure,adventureCarry,playerBody} from '../src/components/arcade/adventure/engine/adventureModel';
+import {collectAdventureStar,SUPER_RECHARGE} from '../src/components/arcade/adventure/engine/adventureRewards';
+import {BASIC_SPECIAL,SPECIALS,SUPER_EXHAUSTION} from '../src/components/arcade/adventure/engine/adventureMagic';
+import {damageSupply,supplyFrame} from '../src/components/arcade/adventure/world/adventureSupplies';
+import {makeEnemy,updateEnemies} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
+import {enemyDrawing} from '../src/components/arcade/adventure/render/adventureSprites';
 const tick=(s,n=1,input={})=>{for(let i=0;i<n;i++)stepAdventure(s,input,1/120);};
 const clean=()=>{const s=createAdventure();s.supplies=[];s.enemies=[];s.pickups=[];s.outposts=[];s.stars=[];s.hazards=[];s.cages=[];return s;};
 
-test('a full mana bar cannot bypass the one-charge 40-second super recharge',()=>{
+test('a full mana bar cannot bypass the one-charge 80-second super recharge',()=>{
  const s=clean();tick(s,1,{super:true});while(s.superCinematic)tick(s);expect(s.superCooldown).toBe(SUPER_RECHARGE);expect(s.exhaustion).toBe(8);
  tick(s,1200);expect(s.magic).toBeGreaterThan(50);s.magic=100;tick(s,1,{super:true});expect(s.superCinematic).toBeNull();expect(s.notice).toBe('superRecharging');
- tick(s,3598);expect(s.superCooldown).toBeGreaterThan(0);tick(s,3);expect(s.superCooldown).toBe(0);
+ tick(s,SUPER_RECHARGE*120-1202);expect(s.superCooldown).toBeGreaterThan(0);tick(s,3);expect(s.superCooldown).toBe(0);
  s.magic=80;tick(s,1,{super:true});expect(s.superCinematic).toBeNull();expect(s.notice).toBe('superLow');tick(s);s.magic=100;tick(s,1,{super:true});expect(s.superCinematic).toBeTruthy();
 });
 test('stars grant money once without affecting or banking super charges',()=>{
@@ -30,7 +30,7 @@ test('walking into a star and retrieving one by boomerang both award one unit of
 });
 test('basic strong magic is available without a drink, directional, brief and less powerful',()=>{
  for(const keys of [{},{down:true},{up:true},{right:true,up:true}]){
-  const s=clean();tick(s,1,{special:true,...keys});expect(s.shots).toHaveLength(1);const shot=s.shots[0];expect(shot.kind).toBe(-1);expect(shot.heavy).toBe(true);expect(s.magic).toBe(85);expect(s.weapon).toBe(-1);expect(s.ammo).toBe(0);
+  const s=clean();tick(s,1,{special:true,...keys});expect(s.shots).toHaveLength(1);const shot=s.shots[0];expect(shot.kind).toBe(-1);expect(shot.heavy).toBe(true);expect(s.magic).toBe(82.75);expect(s.weapon).toBe(-1);expect(s.ammo).toBe(0);
   expect(shot.damage).toBeLessThan(SPECIALS[0].damage);expect(BASIC_SPECIAL.speed*BASIC_SPECIAL.life).toBeLessThan(65);tick(s,32,{special:true});expect(s.shots).toHaveLength(0);
  }
  const s=clean();Object.assign(s.player,{ground:null,y:200,vy:0});tick(s,1,{special:true,down:true,left:true});expect(s.shots[0].vx).toBeLessThan(0);expect(s.shots[0].vy).toBeGreaterThan(0);
@@ -54,13 +54,6 @@ test('basic shots, basic strong magic and super can break crates',()=>{
   expect(q.hp).toBe(0);expect(s.pickups.filter(p=>p.kind===q.kind)).toHaveLength(1);
  }
 });
-test('near scenery has empty stretches, passes fully out of view and returns when backtracking',()=>{
- const q=MEADOW_FOREGROUND[0],positions=[-1200,-100,0,100,1200].map(offset=>foregroundPlacement(q,{x:q.x+offset,zoom:1}));
- expect(positions[0].x-positions[0].w/2).toBeGreaterThan(960);expect(positions[4].x+positions[4].w/2).toBeLessThan(0);
- expect(foregroundPlacement(q,{x:q.x,zoom:1})).toEqual(positions[2]);
- let empty=0;for(let x=0;x<12500;x+=50)if(!MEADOW_FOREGROUND.some(p=>{const v=foregroundPlacement(p,{x,zoom:1});return v.x+v.w/2>0&&v.x-v.w/2<960;}))empty++;
- expect(empty).toBeGreaterThan(100);
-});
 test('green harlequins release 15-percent larger curved rings with dedicated throw art',()=>{
  for(const type of [1,4]){const s=clean(),e=makeEnemy(330,480,type);s.enemies=[e];s.damage=()=>{};e.timer=.4;updateEnemies(s,1/120,playerBody,()=>{});expect(enemyDrawing(e).key).toBe('acrobat-rings');expect(enemyDrawing(e).frame).toBeLessThan(4);
   e.timer=0;updateEnemies(s,1/120,playerBody,()=>{});expect(s.hostile[0].r).toBeCloseTo(16.1);expect(s.hostile[0].kind).toBe('ring');expect(s.hostile[0].arc).toBeDefined();expect(enemyDrawing(e).frame).toBe(4);
@@ -69,13 +62,13 @@ test('green harlequins release 15-percent larger curved rings with dedicated thr
 });
 
 for(const width of [390,1440])test(`${width}: can fill reflects ammunition, super ignores full mana and pause freezes its recharge`,async({page})=>{
- await page.route('**/src/components/arcade/adventureModel.js*',async route=>{
+ await page.route('**/src/components/arcade/adventure/engine/adventureModel.js*',async route=>{
   const response=await route.fetch(),source=await response.text();
   await route.fulfill({response,body:source.replace('function stepAdventure(s,input,dt){',`function stepAdventure(s,input,dt){
    if(s.ticks===0){s.weapon=0;s.ammoWeapon=0;s.ammo=27;s.superCooldown=20;s.magic=100;s.starMoney=120;s.enemies=[];s.supplies=[];s.outposts=[];s.stars=[];}
   `)});
  });
- await page.setViewportSize({width,height:900});await page.goto('/arcade');const root=page.locator('[data-hexy-adventure]'),canvas=page.locator('[data-adventure-canvas]');
+ await page.setViewportSize({width,height:900});await page.goto('/arcade');await openAdventureMenu(page);const root=page.locator('[data-hexy-adventure]'),canvas=page.locator('[data-adventure-canvas]');
  await expect(root).toHaveAttribute('data-phase','ready',{timeout:30000});await page.locator('[data-practice]').click();
  await expect(page.locator('[data-drink-charge]')).toHaveAttribute('data-drink-charge','0.500');
  expect(await page.locator('[data-drink-charge] img').last().evaluate(e=>getComputedStyle(e).clipPath)).toBe('inset(50% 0px 0px)');

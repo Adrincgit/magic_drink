@@ -1,0 +1,1230 @@
+{
+  "root": "public/arcade",
+  "files": [
+    {
+      "path": "public/arcade/maps/canopy/background.webp",
+      "bytes": 464658,
+      "sha256": "e6a1cec37205e37016fcedeb8989b59424f032ee40bcc2a8552588c7fb2ae58c",
+      "width": 1920,
+      "height": 640,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/canopy/ground.webp",
+      "bytes": 489288,
+      "sha256": "13ed58b697cc9a16949ba1ae03dd714e66b316e3e3afdc0e3960690282b18aa4",
+      "width": 1920,
+      "height": 640,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/canopy/midground.webp",
+      "bytes": 535750,
+      "sha256": "bdb454d4a95c81628632c3c572604f634d2d85fe41b36330c226418661ab1c8f",
+      "width": 1920,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/circus/background.webp",
+      "bytes": 308922,
+      "sha256": "306358ac426f05fcfed3402b2ba8ba55c3b30318f5fdcad80e396c9dadba4ff5",
+      "width": 1916,
+      "height": 821,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/forest/background.webp",
+      "bytes": 589032,
+      "sha256": "da1cdf1a8054c806ebba79499f6afdec9d642e1ccef7b38888d08aaef7f98a3e",
+      "width": 1920,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/meadow/background.webp",
+      "bytes": 229320,
+      "sha256": "282476ff1a4b7c11562445a13f61d88152fddec39d816bba68f5bbc17a586038",
+      "width": 1920,
+      "height": 640,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/meadow/distant-valley.webp",
+      "bytes": 417732,
+      "sha256": "4625996ecb32f446e2122363c0a51da47b58c17203de686dd7efa295bcf901e1",
+      "width": 2172,
+      "height": 724,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/meadow/forest-distance.webp",
+      "bytes": 376354,
+      "sha256": "3c99bac521cab0487a6e7253db0b313f485e418fe009cfa9307d3366c818d245",
+      "width": 1920,
+      "height": 640,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/meadow/forest-edge.webp",
+      "bytes": 573488,
+      "sha256": "47318e10c976d29ae83c7adc161c71a124da333af5ce85307f4f27ec59d89096",
+      "width": 1920,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/meadow/ground.webp",
+      "bytes": 372732,
+      "sha256": "88ce039fbe4aa81443718aff1c1acc4c00e5d6e901b5892e973f7b10f1d1c944",
+      "width": 1920,
+      "height": 410,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/meadow/meadow-horizon.webp",
+      "bytes": 273558,
+      "sha256": "7837edd873c6df7215905ecdb18e35f0162abc5e5ba510ed187b572b288d2ce3",
+      "width": 1920,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/meadow/midground.webp",
+      "bytes": 224650,
+      "sha256": "cefb7836eaf60341dd4de9f19a58e124ef3712ec97738366050721928b50f3c1",
+      "width": 1920,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/meadow/near-clumps.webp",
+      "bytes": 106456,
+      "sha256": "c15e12ac2c302f1c59ce249d31c289bd6f4c5d2525f9f7463f55fd741b5f3b92",
+      "width": 1024,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/meadow/near-foliage.webp",
+      "bytes": 178910,
+      "sha256": "77d395e39451f53ec62481007dc7db968f1277568133a0474fb77b5cd449f04e",
+      "width": 1920,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/meadow/rolling-hills.webp",
+      "bytes": 304842,
+      "sha256": "24050ed60a7a1b54015eac043bcf05f554f82d893bda58d264dc73cec60a5bc3",
+      "width": 2172,
+      "height": 724,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/meadow/sunset-clouds.webp",
+      "bytes": 175034,
+      "sha256": "284396a36e05fece001c9322ed44421b427e648921af3b007f7cc5d897f579f8",
+      "width": 2048,
+      "height": 512,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/meadow/sunset-sky.webp",
+      "bytes": 89468,
+      "sha256": "c1d87db6946c1abb3ba475670b12df87781c21907748f2ac481372a0fff1025b",
+      "width": 1920,
+      "height": 640,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/ring/background.webp",
+      "bytes": 282062,
+      "sha256": "24d7a957c0765aae525121e83ed0d335ce9b52d1216f367ba8e2ff70133e40a1",
+      "width": 1920,
+      "height": 640,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/ring/ground.webp",
+      "bytes": 146072,
+      "sha256": "daac8f0e5565fb82b6ec6260e94c1339b5ac8e62c13745211d042ba59201524e",
+      "width": 1920,
+      "height": 640,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/ring/midground.webp",
+      "bytes": 350756,
+      "sha256": "c1c37fa0975e9288f1ceac6d7e8f98c8923d05467a534f98d9adbb7d46a626a4",
+      "width": 1920,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/silence/background.webp",
+      "bytes": 289306,
+      "sha256": "8c154e9f25308f0e6b8afe4dadd3036a406c728cd023b2db848cf6ec5fe759d9",
+      "width": 1920,
+      "height": 640,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/silence/ground.webp",
+      "bytes": 227208,
+      "sha256": "60e7dfa594f3d33879183ef5473eacb304ae56c6564084244e66e4b2943a0fe9",
+      "width": 1920,
+      "height": 640,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/silence/midground.webp",
+      "bytes": 393904,
+      "sha256": "90b15473a90b2d9a7e55239cd2319dfd619083a40a27bd1214e706ee2c7c916b",
+      "width": 1920,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/maps/waterfront/background.webp",
+      "bytes": 344242,
+      "sha256": "0cb5ac7db406cc6203f3bc873fbce92e9b2dc91fe6ffe6be3481644b64a55ff7",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/woods/background.webp",
+      "bytes": 457268,
+      "sha256": "7e0d4f2e6e24df34d9db04571360b8ab784aead7222cfd47852ecaa036b8faf5",
+      "width": 1920,
+      "height": 640,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/woods/ground.webp",
+      "bytes": 425942,
+      "sha256": "828a11ea439a03713354e8ce78318f91c4bf25dcb1dcf22c4be585a445a23351",
+      "width": 1920,
+      "height": 640,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/maps/woods/midground.webp",
+      "bytes": 586380,
+      "sha256": "c91ae886b62fc32580db15da92a558172ce00e4e1735f732aace048a2837660c",
+      "width": 1920,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/music/bosses/agresivo.ogg",
+      "bytes": 511589,
+      "sha256": "5091713e375d04d8e3efca8b8da89f9784bd56f4163b98c0c6af1767628e8d63"
+    },
+    {
+      "path": "public/arcade/music/bosses/alegre.ogg",
+      "bytes": 376863,
+      "sha256": "28e4d97dc4610bbc705cce42466edb5fb37373159a829871b8a1ec1e85c7862e"
+    },
+    {
+      "path": "public/arcade/music/bosses/muta.ogg",
+      "bytes": 543609,
+      "sha256": "d7e001c0ebefc7a1755c3d244c788a57d705a21e4dceb942e43d53a6b2017715"
+    },
+    {
+      "path": "public/arcade/music/bosses/serio.ogg",
+      "bytes": 528007,
+      "sha256": "78129e409a02d2e57c03925dd9151167b5c91d1c7d02b9eaa9c08856ee852093"
+    },
+    {
+      "path": "public/arcade/music/bosses/troupe.mp3",
+      "bytes": 4187595,
+      "sha256": "56f9256fcd1976d7f9ff72abbf960d41effdc35cd0e02984101178f814469358"
+    },
+    {
+      "path": "public/arcade/music/bosses/troupe.ogg",
+      "bytes": 511552,
+      "sha256": "efd195c92ff7d544fc7db1957e095e19aeef83ce9392c0577324b58007dfbfe5"
+    },
+    {
+      "path": "public/arcade/music/exploration/canopy.ogg",
+      "bytes": 467420,
+      "sha256": "ec18995db66caa4513c2494ff8da49bfeae99167dba6214866108fe0adfd3197"
+    },
+    {
+      "path": "public/arcade/music/exploration/meadow.mp3",
+      "bytes": 3309082,
+      "sha256": "d1b4f6984e888e892eb2ca49ec778a10028fc3e0af44aca75dd884ccbd555b27"
+    },
+    {
+      "path": "public/arcade/music/exploration/meadow.ogg",
+      "bytes": 431570,
+      "sha256": "582849e1c13e2776bd3412ef51b50cccead5b1d2da4e8f97d0db8348b53e06ab"
+    },
+    {
+      "path": "public/arcade/music/exploration/ring.ogg",
+      "bytes": 406647,
+      "sha256": "e200db77aad6d6e0062612af37289e88b0896e1ea95b08e8b8ee668c1ff37404"
+    },
+    {
+      "path": "public/arcade/music/exploration/silence.ogg",
+      "bytes": 548147,
+      "sha256": "d439def04da8248846da8c433171c1c2e9a9d4a62a85a5a1c06e599f9df10b7e"
+    },
+    {
+      "path": "public/arcade/music/exploration/woods.mp3",
+      "bytes": 1228533,
+      "sha256": "feef0f2059b4238e0c992f5fa285226539ca0492fa0dea4a3cd3a562d0f4c311"
+    },
+    {
+      "path": "public/arcade/music/exploration/woods.ogg",
+      "bytes": 519714,
+      "sha256": "38947cb8a3a9ad80bda2e6b2412ad957b3f135927d3b135fc727ff0eeda933da"
+    },
+    {
+      "path": "public/arcade/music/for replace/meadown.mp3",
+      "bytes": 3309082,
+      "sha256": "d1b4f6984e888e892eb2ca49ec778a10028fc3e0af44aca75dd884ccbd555b27"
+    },
+    {
+      "path": "public/arcade/music/for replace/troupe.mp3",
+      "bytes": 4187595,
+      "sha256": "56f9256fcd1976d7f9ff72abbf960d41effdc35cd0e02984101178f814469358"
+    },
+    {
+      "path": "public/arcade/music/for replace/woods.mp3",
+      "bytes": 1228533,
+      "sha256": "feef0f2059b4238e0c992f5fa285226539ca0492fa0dea4a3cd3a562d0f4c311"
+    },
+    {
+      "path": "public/arcade/music/jingles/gameover.ogg",
+      "bytes": 15590,
+      "sha256": "dd572c6bb55ee4fd43324c0a0c0856395ec82d81d1aae9ba388ff79327ef7133"
+    },
+    {
+      "path": "public/arcade/music/jingles/victory.ogg",
+      "bytes": 15086,
+      "sha256": "dc7b10eaaa6f79a5afaeb8d28a78fd7d596454343a32cba00839fd03f75b6f51"
+    },
+    {
+      "path": "public/arcade/music/shop.ogg",
+      "bytes": 453154,
+      "sha256": "ef2998852bab4fed0e6c931abf31a8d9dd166d2d44d220fab729bf2ec7538779"
+    },
+    {
+      "path": "public/arcade/shop/counter-scene.webp",
+      "bytes": 718074,
+      "sha256": "49416f4ca3551926aca96468e77e8a7f80054e2ac5d63129e44cd20851a01f6a",
+      "width": 1920,
+      "height": 1081,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/shop/interior.webp",
+      "bytes": 511028,
+      "sha256": "70716e64f717fe4cd6e04933bacee132824ade492b381272efb47ea6f1bed04b",
+      "width": 1600,
+      "height": 900,
+      "alpha": false
+    },
+    {
+      "path": "public/arcade/shop/merchant-cat.webp",
+      "bytes": 117748,
+      "sha256": "f13efcae48c45f98d2255c6dd6e0b8f7c272ac6e95f89bb22c22c80f8e92d006",
+      "width": 1024,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/shop/miso-counter.webp",
+      "bytes": 1110556,
+      "sha256": "03bdab3693f5d4fcdce8ad5635753715ee96475fd119803e7e676cade8cfddc7",
+      "width": 2048,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/shop/miso-expressions-v2.webp",
+      "bytes": 540308,
+      "sha256": "b6de6f356e231b4e02ac045e07dedb73bab1030fd539026a7dca5a02c92999fe",
+      "width": 1536,
+      "height": 1024,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/shop/ui/button-plum.webp",
+      "bytes": 42368,
+      "sha256": "841ad5570899154f739e5647d2aaf75968fff2d00e93f94397c9f25119be78dd",
+      "width": 506,
+      "height": 169,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/shop/ui/button-teal.webp",
+      "bytes": 41480,
+      "sha256": "efde9743f5cdf50de647d45be0b21251b02355901bdaa9581606c44dbb2466c4",
+      "width": 486,
+      "height": 169,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/shop/ui/case.webp",
+      "bytes": 64600,
+      "sha256": "ce714d76cbb4d2a29edbda792498d2e8f990866d0c25072b545aa966b760aeba",
+      "width": 493,
+      "height": 280,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/shop/ui/paper.webp",
+      "bytes": 83406,
+      "sha256": "7f9a00b204cec1648415e157fe1293c4ce8bbe8037cd0f8e52ae416628a01399",
+      "width": 494,
+      "height": 415,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/shop/ui/price-tag.webp",
+      "bytes": 59282,
+      "sha256": "a95970a912d3a9dd96dd63ed9351a2d85858c6c7da9dc237142f33ea52fc00e9",
+      "width": 460,
+      "height": 333,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/shop/ui/speech.webp",
+      "bytes": 56828,
+      "sha256": "8987e5ced99808c6ce51d885b970fd42ffd034f53b92592ae65d1d4cf3c64fb3",
+      "width": 523,
+      "height": 347,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sounds/catalog.json",
+      "bytes": 549,
+      "sha256": "3b0542836f4b4b0171e5ab026efd8e1f21b6fd44138c6b4ef1183583c89936f9"
+    },
+    {
+      "path": "public/arcade/sprites/bosses/agresivo-actions.webp",
+      "bytes": 281610,
+      "sha256": "3a807dec7a410fdb854d4e2c5d380ec120d70aa71dcad38e900691ad64263afb",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/agresivo.webp",
+      "bytes": 333222,
+      "sha256": "2e069da9cf570afebd7d5ce0feff63c46ff2ed181d2f52039d2902d6a2518b04",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/alegre-actions.webp",
+      "bytes": 254742,
+      "sha256": "043fb80d19f7253088e6d57479b9c94fb705030aaa7acd01e756dd4c627910b5",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/alegre.webp",
+      "bytes": 318968,
+      "sha256": "1c588a552e2841ce63ace8bb7f8a253600158717953f987916e8abb82b109b20",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/balloon-crash.webp",
+      "bytes": 215346,
+      "sha256": "52a2ec79542a46a43e4c2ca7ff44dfcfe5cc26bc60277fbc6a595c431e3814e5",
+      "width": 1024,
+      "height": 512,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/balloon-damaged-hd.webp",
+      "bytes": 1400722,
+      "sha256": "0e263b206e33aa8be43ef6e8d13ec611cea0ca8ecd14c33937fe4d3ba3e8e5d1",
+      "width": 2048,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/balloon-damaged.webp",
+      "bytes": 451846,
+      "sha256": "83fd3a5017b447c32122d4b52d5a0fffdf1ed5d5b65c4615bc984210239ce0a6",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/balloon-hd.webp",
+      "bytes": 1199836,
+      "sha256": "6c9515f4330b461371b472be6b1448205fb0622e549159f0651b38ef3c0dfa6c",
+      "width": 2048,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/boss-balloon.webp",
+      "bytes": 388694,
+      "sha256": "b3c45a9870a466241d2903eb013aa83133bf550147195c76f7fa1be4e5cd6aea",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/muta-actions.webp",
+      "bytes": 244268,
+      "sha256": "3dded700b57ca02cbeb8b8ecaf71e43d3f492a1200f4e6c716e3d67e23db3dac",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/muta.webp",
+      "bytes": 302884,
+      "sha256": "f188a66920395c6fe463b450b4a817faff47b5215f174025c0698d0f1bd0e893",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/serio-actions.webp",
+      "bytes": 268848,
+      "sha256": "22026b800b04e54c7fed7b5a367a84d55f300ddf9a24050caf991b86ee1525d2",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bosses/serio.webp",
+      "bytes": 262874,
+      "sha256": "aeb55afee6ec5cb55093c50af7a4c73674659f66140ce9dc3b761a96a3d129fb",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bunnies/bunny-atlas.webp",
+      "bytes": 199778,
+      "sha256": "b27847c5c035f9a37ea4aa742b7a37801b9d57534c39d23d6e89b906271dcc8c",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bunnies/bunny-idle.webp",
+      "bytes": 16950,
+      "sha256": "11801510ff99e1cbd35aa46b496a5eec55f29248e38cb2768db8b0f6e782ee1c",
+      "width": 256,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bunnies/cast.webp",
+      "bytes": 194098,
+      "sha256": "e63fed06096451f758333e1e7a13bb09cd260824253f4cef37589da010117be3",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bunnies/movement.webp",
+      "bytes": 208558,
+      "sha256": "f94cf76f60b5e9442e9c72eabf6a9deb60877a859d3e05949e673f622b3f6dbf",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/bunnies/roll.webp",
+      "bytes": 143478,
+      "sha256": "5802788fc59bc293a6578032a267c1822c71ab002a47ca8874c24d35733d397c",
+      "width": 1024,
+      "height": 512,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/banana.webp",
+      "bytes": 328458,
+      "sha256": "f4f9cb4a4d35bba290bba9961546defd3257500f48d18fd72f893b305078855d",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/bubble.webp",
+      "bytes": 307526,
+      "sha256": "4e1cea073c208d46e384820f21f5393a8a7eba188966dbd2780ed9c5fd69fde4",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/bunny-shield.webp",
+      "bytes": 459308,
+      "sha256": "1f35cc3c6c5681b40418324efec7bc33c50f62af06aa9d78fcdd8647819768a7",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/circus-projectiles.webp",
+      "bytes": 77692,
+      "sha256": "9ea26d627cd1c36a52345b243e1da714d9a13b2b3f6d495f95eebae203301213",
+      "width": 1024,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/dragon.webp",
+      "bytes": 319768,
+      "sha256": "afda6ea8c46a82f19260ab6153b1204cb5d91efb6da162e36165766f6a3480d8",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/hostile.webp",
+      "bytes": 435074,
+      "sha256": "099053a7effe5e4b14f5f73751635c7ed6e634fd4bb8d188269433e3fc6bf472",
+      "width": 1024,
+      "height": 1792,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/impacts.webp",
+      "bytes": 203800,
+      "sha256": "75b5d1c9379830dcb894c1fac4bdc67e0116d5cc189da51148a25e9b3885d707",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/juggler-balls.webp",
+      "bytes": 306858,
+      "sha256": "09477c756160c26785d041cadb28fe1bc8127a1642c934efe7a6d34b1105e509",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/kiwi.webp",
+      "bytes": 387038,
+      "sha256": "413411bd00d0846ee8d3de125a94ff8a6cf67139a0f1feb0d99119afae8817c1",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/magic.webp",
+      "bytes": 377104,
+      "sha256": "e8d7c38674a044da317d9e941dfbd3b5c4dafce5e99f6adb3e5a963d6c08e034",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/music-guard.webp",
+      "bytes": 304032,
+      "sha256": "796e9ab595212a804fcf7088f80f130d7f3268059a2bcd5cd3ea5605e01bc735",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/sparkle.webp",
+      "bytes": 324782,
+      "sha256": "4118b359be21e94395e9989cd0b70539d40d9f1637fbfaddbf31fab962543cc7",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/super-beam.webp",
+      "bytes": 311094,
+      "sha256": "962f7a0ccc96cbb04fbebd3d2f5d5c19f7538e872fca565c8c972c4008673a47",
+      "width": 1024,
+      "height": 1024,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/super-star.webp",
+      "bytes": 315442,
+      "sha256": "c1d0e0c2ae32cd72356a7e8cffe2b8a922fb995b65273b2410ed8b06d5e35afe",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/effects/wand-burst.webp",
+      "bytes": 174616,
+      "sha256": "2306bed29ea49484e9a866c468f4247dce062c03513ea9346ff103d0e4921e37",
+      "width": 1024,
+      "height": 512,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/acrobat-motion.webp",
+      "bytes": 154510,
+      "sha256": "2e86d85092f6ae150a9ced8f26836d85fdb693d1702539924d112a07f3e36586",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/acrobat-rings.webp",
+      "bytes": 191142,
+      "sha256": "97548dbea5a09d3585199e4ab1ad033c7a104a38f02ef50c034ff24f126e64ac",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/acrobat.webp",
+      "bytes": 187100,
+      "sha256": "0b842bf3ffb2608a221fcc21b5b2ea10fb519a49fabb3332743789d83f15de40",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/balloon.webp",
+      "bytes": 210718,
+      "sha256": "9584f424a1ab022a41210faa43f67da2ef5dbe0708b18076cb93e1b7c3b44ac8",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/cannon-clown.webp",
+      "bytes": 78096,
+      "sha256": "be808bdf043d1adaf581d962a2c416de05c00ae89302f764bd69a8468758dd2f",
+      "width": 1024,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/cannon.webp",
+      "bytes": 220626,
+      "sha256": "641104b6000166046bb787158b57dad94f721688ebaa3641c963ddd05860914c",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/clown.webp",
+      "bytes": 202310,
+      "sha256": "911d67aecf853e96e3ad48716d08bcc5b45c11ec103665daaa867125aeb6f36c",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/juggler-actions.webp",
+      "bytes": 227748,
+      "sha256": "928747a11049d20436e94ec9182d86b2d796163c9156eb0546558dc2de08484c",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/juggler.webp",
+      "bytes": 247632,
+      "sha256": "be2dec7e77003853da04efb756f0111892da097927fdefb6a43cff24b7b6fd89",
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/aim-down-diagonal.webp",
+      "bytes": 84224,
+      "sha256": "4eb667c39e9d6300e0774f0bed1e5b2491095f8c542926963b876778e880e59a",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/aim-down.webp",
+      "bytes": 72496,
+      "sha256": "7e31643dd4cfa9da59030f213ab69fa9ae0b6a7c2deb8440b3399ef0a4ab5488",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/aim.webp",
+      "bytes": 272184,
+      "sha256": "53208b231a783b53404917ad91dd30fbf57e0722fbc11edf8eff095abd7d3b83",
+      "width": 1280,
+      "height": 960,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/air-dash.webp",
+      "bytes": 182344,
+      "sha256": "8a568a042068ee2130a344cd2cf9ea765b8b445bf9d3603d3ff96c1e37b2e7b7",
+      "width": 1280,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/air-heavy.webp",
+      "bytes": 88956,
+      "sha256": "0639b9df4daa314d6b98b47a4213797cba3a7ab9c021bb511f1fd4abcc606962",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/air-super.webp",
+      "bytes": 165286,
+      "sha256": "885089b0eefba65c2b1306083cd1fa6ad09433160d44ac95fa1929c7ac013457",
+      "width": 1280,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/cast.webp",
+      "bytes": 175080,
+      "sha256": "66d8a437c6db090a48bf5287b9bd6f95e0f5238290044d7d7fc1008e3611f9b0",
+      "width": 1280,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/celebrate.webp",
+      "bytes": 86706,
+      "sha256": "6f4e2c043120ab3c6a1cc825cbcf212029e0b293c1c11daea473f8fae8a9a4a0",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/crouch-fire.webp",
+      "bytes": 92244,
+      "sha256": "de1c63d868f6e5c8c9c86ba7ad9a97485a480e48cdcdc720327addfeae662b69",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/crouch-heavy.webp",
+      "bytes": 84444,
+      "sha256": "2decf301f2aa6ffddde6b2da843cfc9d9c3562e4df430ed6506cf4d6b28c3388",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/crouch-walk.webp",
+      "bytes": 409400,
+      "sha256": "b9bfad5d7fdd0e84ba865c30c23831acd12542cf59f1ed9b88869c77f6b6a9d9",
+      "width": 1280,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/drink-original.webp",
+      "bytes": 95806,
+      "sha256": "b330ee107a506d9ab8c095a96a24df57ac76490a58483e9acffeb7490eee465e",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/flag-plant.webp",
+      "bytes": 92762,
+      "sha256": "16fdd95574803ef8980cc699f2bfc9cc0fa1a660a7efb760fcf786028eaec089",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/glide.webp",
+      "bytes": 85398,
+      "sha256": "c4c8f360a0d9db6a6ad0ba4fba9080d8f8b71586d36b53dc43dc54271c0ed41e",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/guard-pose.webp",
+      "bytes": 197998,
+      "sha256": "1c1098361f423bdf57c3aa7f1071272d32b9cd3df0d7c11ee94e0df796389f45",
+      "width": 1280,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/heavy.webp",
+      "bytes": 733538,
+      "sha256": "16f06a7595e31efa477e7b3d764e745e5fe3b9bd2780bdef5dda5e5087d98f16",
+      "width": 1280,
+      "height": 960,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/jump.webp",
+      "bytes": 393248,
+      "sha256": "13e271e0ad7c7e67d6e955fb113d4568342b9aee1a1729a27f697395f106c460",
+      "width": 1280,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/reactions.webp",
+      "bytes": 489298,
+      "sha256": "a43665c717754dbf3c6f772d147c9ec70a85ae317e7a69956297fd7d96b4bd6b",
+      "width": 1280,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/roll.webp",
+      "bytes": 426234,
+      "sha256": "c7c903368da774af3d3f6ae3720442928b446fdf59e4784e6e6f85c84bd1e96d",
+      "width": 1280,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/run-diagonal-up.webp",
+      "bytes": 325638,
+      "sha256": "486e115aab9e44390a0620d06089da81fe2e0fae1ee4cdfafcff8c540339a92b",
+      "width": 1280,
+      "height": 960,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/run-fire.webp",
+      "bytes": 323538,
+      "sha256": "8fe0884843bdeb7a887816e7777482e474d722280ea643ce6ad7de0c00b46cd1",
+      "width": 1280,
+      "height": 960,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/run.webp",
+      "bytes": 315308,
+      "sha256": "fcc2f205f44f4e4d7479db7a6a2785926e4cc3ac22d7c1b5522288986d77e597",
+      "width": 1280,
+      "height": 960,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/shop-enter.webp",
+      "bytes": 174786,
+      "sha256": "299529fe66790811643001ff939fba41fce16193cf1a4add6e9c030514abd7fa",
+      "width": 1280,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/shop-exit.webp",
+      "bytes": 218712,
+      "sha256": "b55ec91befd0beb4a0c8fc12ba422847d4694c89560d1b893f0bd2ddceba032b",
+      "width": 1280,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/somersault.webp",
+      "bytes": 129092,
+      "sha256": "4c2578bfbde171f61e501cd9ff1653e2e073ee9feb9eb92af36aa8a0350b2eb1",
+      "width": 1280,
+      "height": 640,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/stand-fire.webp",
+      "bytes": 108656,
+      "sha256": "d65b05870e772e1412a10d98fcd1ce1c0505e05d0bcba9a67727dbbc63ddca63",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/super-charge.webp",
+      "bytes": 120644,
+      "sha256": "ae8bf272512e515398143fec4badedd73d584674b193bcacd4e2af468e8c1624",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/hexy/super-release.webp",
+      "bytes": 94858,
+      "sha256": "65c81f55323cb444a43230771b3a575a7dcc19a0a1d872ee0bff85b329461dd6",
+      "width": 1280,
+      "height": 320,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/pickups/banna-drama.webp",
+      "bytes": 20308,
+      "sha256": "5a1d0c36ae47e31970a328204aea1dcebbdca78b8d84d4f577fc3f089a66359b",
+      "width": 123,
+      "height": 229,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/pickups/bubble-tape.webp",
+      "bytes": 18474,
+      "sha256": "2c49a1acac319a8925cc67724c84587f8c58b4079ba0e21d06e5075894cee3d6",
+      "width": 124,
+      "height": 230,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/pickups/dragon-grape.webp",
+      "bytes": 20222,
+      "sha256": "8123b43eb055a5d6d365342ea7f49c73e6522768dbd0c5498c718a7e5d7dc4c8",
+      "width": 124,
+      "height": 229,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/pickups/drinks-atlas.webp",
+      "bytes": 95102,
+      "sha256": "d5a47c80b0b5a8199747389cb5eabc478165daeb7435fc143a79cce1d4c43ca8",
+      "width": 1280,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/pickups/loot-items.webp",
+      "bytes": 190568,
+      "sha256": "d52f6c1b20a9a0e47c824665f1d9aeb9ae1b45bd6b0015413c26aa7ccaf5bdf5",
+      "width": 1024,
+      "height": 512,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/pickups/original.webp",
+      "bytes": 20320,
+      "sha256": "4bd34b1cc886f97fc7883704a67603722a11fe704bbc623b74c8716f6dc364c6",
+      "width": 137,
+      "height": 224,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/pickups/sparkle-soda.webp",
+      "bytes": 20064,
+      "sha256": "fa835ad5fd7b341d2b8aeec48da44ee7638c48a891be553fdb486b66479b961b",
+      "width": 124,
+      "height": 230,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/pickups/witchy-kiwii.webp",
+      "bytes": 21252,
+      "sha256": "2f29a546e3d04effca3eb48de723aa77d0f58d6ac3b91daad066acb0785a8ca4",
+      "width": 124,
+      "height": 230,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/cabinet.webp",
+      "bytes": 165926,
+      "sha256": "6be71dddf2308544b8bd66a88d0410f19875aaf705b0396b768d198e8b357ac7",
+      "width": 506,
+      "height": 900,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/cannon-tower.webp",
+      "bytes": 431534,
+      "sha256": "a1c4398228e57aec29c347ee1d8a56671c829a6340bbe2063024d4e3a5e8df14",
+      "width": 1024,
+      "height": 1024,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/circus-supply.webp",
+      "bytes": 157260,
+      "sha256": "b68ef2ad64bbbdcc52103c13eb67f27813b12966f1aa550acf777197c7788d95",
+      "width": 1024,
+      "height": 512,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/clown-outpost.webp",
+      "bytes": 199194,
+      "sha256": "938bae4a22795643c1bce42b1b5a008f99666ca2405b03e03a5b749f8c1a7d3c",
+      "width": 1024,
+      "height": 512,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/collectible-star.webp",
+      "bytes": 83380,
+      "sha256": "44f7dd019fef7364204ac7eae7fb52fcb220507dffec83bacba4dfe95bf90dd3",
+      "width": 1024,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/log.webp",
+      "bytes": 95802,
+      "sha256": "d792d046289a4f1aa0812abe4691b8c8aff272dcee1ba6543bd685a0ed40a4b3",
+      "width": 650,
+      "height": 240,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/rescue-cage.webp",
+      "bytes": 103866,
+      "sha256": "c4600bdd64bd35da0d97745c9918d9c4945b81fec7e9e1d6cb2795f37b6d2942",
+      "width": 1024,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/tent.webp",
+      "bytes": 130772,
+      "sha256": "f1ef975a4cac6700e9e3696ba03c070ff42938173fd9bbcdfd80db0bb69f8ef1",
+      "width": 650,
+      "height": 482,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/thorn-spikes.webp",
+      "bytes": 99062,
+      "sha256": "4407ed0d4d45f30aebcb947095a60b10a821bae46671640a1fba70e1d5aadc36",
+      "width": 1024,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/trap-bubble.webp",
+      "bytes": 88250,
+      "sha256": "0dcc4e90a08e09f2c911cb1c47794b2726b80b1921e083d8a118a4f903a086dc",
+      "width": 1024,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/trees.webp",
+      "bytes": 160130,
+      "sha256": "5ca5df82ed8c2e303834c8b5c65e93323297b4857d36ea9a03125c2a19b39b4d",
+      "width": 650,
+      "height": 354,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/victory-flag.webp",
+      "bytes": 76310,
+      "sha256": "e9de3965ff9814a1a6e525767d43eb5893a0f1ac682157705a2c64c7cd0fb1ad",
+      "width": 1024,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/wagon-open.webp",
+      "bytes": 130904,
+      "sha256": "69c2318b780e1541e03286c4594e08e2286ec7399a4087cba30801f051dc1fb1",
+      "width": 650,
+      "height": 476,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/props/wagon.webp",
+      "bytes": 123228,
+      "sha256": "308d78582d417830fb7fd5f071e918373a06fdd68ee0c7fd3b005a50ddb5216a",
+      "width": 650,
+      "height": 476,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/ui/bunny-face.webp",
+      "bytes": 6388,
+      "sha256": "5d5e8e36703919eb88bf43de05fe7f9d1bf263acf7f61c3c4469e35d135878db",
+      "width": 96,
+      "height": 96,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/ui/charm-empty.webp",
+      "bytes": 5824,
+      "sha256": "99a62c89f8e12a784129e73b05846372007c1cfc25bdc4d8c1e21b42bc59001b",
+      "width": 96,
+      "height": 96,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/ui/charm-full.webp",
+      "bytes": 6038,
+      "sha256": "5ebcbc2976f9758f4e6a8049769729850b2152453df7b696b816bfb472e102ea",
+      "width": 96,
+      "height": 96,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/ui/full-bubble.webp",
+      "bytes": 29094,
+      "sha256": "1e366e852bf7dd1c1419cfa33676e05ace74ad0797a1c0b0ef46d63f0548070d",
+      "width": 256,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/ui/heart-empty.webp",
+      "bytes": 4894,
+      "sha256": "80afa02b089dc198d25e673d39c5aa7de5e1c9e85dec88c267a153a5f3188675",
+      "width": 96,
+      "height": 96,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/ui/heart-full.webp",
+      "bytes": 4712,
+      "sha256": "6243b6d22bb53ee1958f2b8a8a0f7514e719eff1a354023d0431b621e41eedeb",
+      "width": 96,
+      "height": 96,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/ui/magic-gem.webp",
+      "bytes": 6788,
+      "sha256": "42f591efcbab84c01fb9d417f5e822e52e02d040d27ffbfd5f4d88fc3631819e",
+      "width": 96,
+      "height": 96,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/ui/mod-charms.webp",
+      "bytes": 100398,
+      "sha256": "3d299516532120a99ad66ff1f4ba2583467a12c142772d02f2c769a1de2319c5",
+      "width": 1024,
+      "height": 256,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/ui/super-empty.webp",
+      "bytes": 6032,
+      "sha256": "60713dcc78f08ac781b3c24cc83a30bc9efb52b7f4cde03bd43c059c29ace9f3",
+      "width": 96,
+      "height": 96,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/sprites/ui/super-ready.webp",
+      "bytes": 6386,
+      "sha256": "3e80c873f2622984516b9417e103828451bfe989a73854561222381f21459e7e",
+      "width": 96,
+      "height": 96,
+      "alpha": true
+    },
+    {
+      "path": "public/arcade/texts/adventure.json",
+      "bytes": 2552,
+      "sha256": "2fe1b2a61e5f614c4dc4c7e5d17de20b5b12e1fd8efc746a63af53cb7ffa46b1"
+    }
+  ]
+}

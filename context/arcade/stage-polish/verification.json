@@ -1,0 +1,78 @@
+{
+  "revision": "Dash damage, removed blurred foreground, buried-root arena trees and stable boss camera",
+  "distinctPassingTests": 37,
+  "artifactDirectory": "tests/artifacts/arcade/dash-camera",
+  "runs": [
+    {
+      "log": "regression.log",
+      "passed": 19,
+      "scope": "Dash/camera, stage polish, river depth; before final larger arena tree placement"
+    },
+    {
+      "log": "trees-final.log",
+      "passed": 12,
+      "scope": "Repeat affected dash/camera and river depth tests after final tree placement"
+    },
+    {
+      "log": "movement-combat.log",
+      "passed": 16,
+      "failed": 1,
+      "scope": "Combat and motion, excluding unrelated mobile-super UI test"
+    },
+    {
+      "log": "boss-feedback.log",
+      "passed": 1,
+      "scope": "Rerun corrected old boss fixture: exposed body takes damage while firing; wheels block without flash"
+    },
+    {
+      "log": "hitbox.log",
+      "passed": 1,
+      "scope": "Existing actual-player-hitbox regression, updated dash expectation"
+    }
+  ],
+  "build": {
+    "log": "build.log",
+    "exit": 0
+  },
+  "foreground": {
+    "loadedRejectedAssets": [],
+    "blurredBanks": false,
+    "closeTreeOverlays": false
+  },
+  "woodland": {
+    "arenaTrees": 2,
+    "arenaTreeHeights": [
+      560,
+      520
+    ],
+    "horizontalDepths": [
+      0.26,
+      0.42,
+      0.58
+    ],
+    "placement": "Lower forty percent behind opaque ground; no combat zoom influence on scale or elevation; native palette without blur"
+  },
+  "camera": {
+    "frameRatesChecked": [
+      30,
+      60,
+      120
+    ],
+    "maxMapOverrun": 0,
+    "floor": "Monotonic eased arrival into the combat floor position, with zoom pivoting around it",
+    "backdrop": "Follows smoothed route elevation rather than zoom-adjusted camera y"
+  },
+  "dash": "Ground and air projectile hits lose health and interrupt dash. Actual shields and post-hit grace are preserved; shots above the low roll body can miss.",
+  "browserErrors": [],
+  "motionPreview": "boss-camera.webm",
+  "reviewedCaptures": [
+    "boss-2-0.jpg",
+    "boss-2-8.jpg",
+    "boss-2-48.jpg",
+    "organ-charge-wide.jpg",
+    "organ-right-boundary.jpg"
+  ],
+  "visualReview": "Inspected sampled simulation frames with large arena trees and hidden roots, wide charge view and right boundary. Recorded both boss entrances. No user approval inferred.",
+  "unchanged": "Airborne ultimate artwork, boss mechanics, bridge water assets and user save data",
+  "resolvedTestFailure": "Old boss fixture targeted y = boss.y - 55 at wheel height and expected vulnerable damage. Updated fixture targets the current body while firing and separately verifies armor sparks with zero flash on wheels. No boss runtime behavior changed to satisfy this test."
+}

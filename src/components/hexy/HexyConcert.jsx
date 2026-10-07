@@ -78,7 +78,7 @@ export default function HexyConcert({ en }) {
         <h2 id="hexy-farewell-title">{en ? 'See you in the' : 'Nos vemos en el'}<br /><em>{en ? 'next chorus.' : 'próximo coro.'}</em></h2>
         <div className={styles.actions}>
           <SceneButton size="sm" onClick={openExpanded} showArrow={false}>{en ? 'One more song' : 'Una canción más'} ♪</SceneButton>
-          <SceneButton size="sm" variant="violet" href="/wonderpop-plaza">Wonderpop</SceneButton>
+          <SceneButton size="sm" variant="violet" href="/#directorio-wonderpop">Wonderpop</SceneButton>
         </div>
         </div>
       </div>

@@ -1,0 +1,322 @@
+[
+  {
+    "sheet": "air-aim",
+    "frame": 0,
+    "scale": 0.8,
+    "bodyHeight": 226.4,
+    "faceWidth": 56,
+    "faceX": 177,
+    "faceY": 153.2,
+    "sourceFrame": 0
+  },
+  {
+    "sheet": "air-aim",
+    "frame": 1,
+    "scale": 0.8,
+    "bodyHeight": 226.4,
+    "faceWidth": 56,
+    "faceX": 177,
+    "faceY": 152.2,
+    "sourceFrame": 3
+  },
+  {
+    "sheet": "air-aim",
+    "frame": 2,
+    "scale": 0.8,
+    "bodyHeight": 224,
+    "faceWidth": 54.400000000000006,
+    "faceX": 177,
+    "faceY": 154.4,
+    "sourceFrame": 2
+  },
+  {
+    "sheet": "air-aim",
+    "frame": 3,
+    "scale": 0.8,
+    "bodyHeight": 226.4,
+    "faceWidth": 56,
+    "faceX": 177,
+    "faceY": 153.2,
+    "sourceFrame": 0
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 0,
+    "scale": 0.4689922480620155,
+    "bodyHeight": 242.93798449612405,
+    "faceWidth": 53.46511627906977,
+    "faceX": 169.49669010895335,
+    "faceY": 130.33527131782944,
+    "sourceFrame": 0
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 1,
+    "scale": 0.4689922480620155,
+    "bodyHeight": 242,
+    "faceWidth": 52.52713178294574,
+    "faceX": 171.9956896551724,
+    "faceY": 128.52131782945736,
+    "sourceFrame": 1
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 2,
+    "scale": 0.4689922480620155,
+    "bodyHeight": 242,
+    "faceWidth": 52.99612403100775,
+    "faceX": 168.90965833563655,
+    "faceY": 127.81782945736433,
+    "sourceFrame": 2
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 3,
+    "scale": 0.4689922480620155,
+    "bodyHeight": 242,
+    "faceWidth": 52.52713178294574,
+    "faceX": 172.1607594768108,
+    "faceY": 128.28682170542635,
+    "sourceFrame": 3
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 4,
+    "scale": 0.4424131627056673,
+    "bodyHeight": 242,
+    "faceWidth": 41.144424131627055,
+    "faceX": 160.37278546439683,
+    "faceY": 121.5371065764119,
+    "sourceFrame": 0
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 5,
+    "scale": 0.4424131627056673,
+    "bodyHeight": 242,
+    "faceWidth": 40.70201096892139,
+    "faceX": 160.98367613288235,
+    "faceY": 121.7074954296161,
+    "sourceFrame": 1
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 6,
+    "scale": 0.4424131627056673,
+    "bodyHeight": 240.23034734917732,
+    "faceWidth": 39.81718464351005,
+    "faceX": 156.99011986812985,
+    "faceY": 123.99130391817778,
+    "sourceFrame": 2
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 7,
+    "scale": 0.4424131627056673,
+    "bodyHeight": 242.44241316270566,
+    "faceWidth": 40.25959780621572,
+    "faceX": 159.1913267599724,
+    "faceY": 121.59390286081327,
+    "sourceFrame": 3
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 8,
+    "scale": 0.4666666666666667,
+    "bodyHeight": 200.66666666666666,
+    "faceWidth": 55.53333333333333,
+    "faceX": 194.28565799842394,
+    "faceY": 180.3,
+    "sourceFrame": 0
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 9,
+    "scale": 0.4666666666666667,
+    "bodyHeight": 200.66666666666666,
+    "faceWidth": 56.46666666666667,
+    "faceX": 192.26222222222222,
+    "faceY": 180.3,
+    "sourceFrame": 1
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 10,
+    "scale": 0.4666666666666667,
+    "bodyHeight": 201.13333333333333,
+    "faceWidth": 56,
+    "faceX": 194.0411111111111,
+    "faceY": 179.76666666666665,
+    "sourceFrame": 2
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 11,
+    "scale": 0.4666666666666667,
+    "bodyHeight": 200.66666666666666,
+    "faceWidth": 56,
+    "faceX": 193.65300411522634,
+    "faceY": 180.3,
+    "sourceFrame": 3
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 12,
+    "scale": 0.38785834738617203,
+    "bodyHeight": 230.00000000000003,
+    "faceWidth": 57.79089376053963,
+    "faceX": 186.8423127615123,
+    "faceY": 155.62563237774032,
+    "sourceFrame": 0
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 13,
+    "scale": 0.38785834738617203,
+    "bodyHeight": 230.00000000000003,
+    "faceWidth": 60.118043844856665,
+    "faceX": 186.42836586523413,
+    "faceY": 156.04384485666105,
+    "sourceFrame": 3
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 14,
+    "scale": 0.38785834738617203,
+    "bodyHeight": 229.61214165261384,
+    "faceWidth": 60.118043844856665,
+    "faceX": 182.06747771621295,
+    "faceY": 155.62563237774032,
+    "sourceFrame": 2
+  },
+  {
+    "sheet": "ground-aim",
+    "frame": 15,
+    "scale": 0.38785834738617203,
+    "bodyHeight": 230.00000000000003,
+    "faceWidth": 57.79089376053963,
+    "faceX": 186.8423127615123,
+    "faceY": 155.62563237774032,
+    "sourceFrame": 0
+  },
+  {
+    "sheet": "air-aim",
+    "frame": 4,
+    "scale": 0.45901639344262296,
+    "bodyHeight": 228.59016393442624,
+    "faceWidth": 56.459016393442624,
+    "faceX": 177,
+    "faceY": 149.60655737704917,
+    "sourceFrame": 0
+  },
+  {
+    "sheet": "air-aim",
+    "frame": 5,
+    "scale": 0.45901639344262296,
+    "bodyHeight": 229.04918032786887,
+    "faceWidth": 55.540983606557376,
+    "faceX": 177,
+    "faceY": 148.60655737704917,
+    "sourceFrame": 1
+  },
+  {
+    "sheet": "air-aim",
+    "frame": 6,
+    "scale": 0.45901639344262296,
+    "bodyHeight": 228.59016393442624,
+    "faceWidth": 56,
+    "faceX": 177,
+    "faceY": 149.24590163934425,
+    "sourceFrame": 2
+  },
+  {
+    "sheet": "air-aim",
+    "frame": 7,
+    "scale": 0.45901639344262296,
+    "bodyHeight": 229.04918032786887,
+    "faceWidth": 56,
+    "faceX": 177,
+    "faceY": 147.31147540983608,
+    "sourceFrame": 3
+  },
+  {
+    "sheet": "air-aim",
+    "frame": 8,
+    "scale": 0.4274952919020716,
+    "bodyHeight": 227,
+    "faceWidth": 47.024482109227876,
+    "faceX": 177,
+    "faceY": 139.24105461393597,
+    "sourceFrame": 0
+  },
+  {
+    "sheet": "air-aim",
+    "frame": 9,
+    "scale": 0.4274952919020716,
+    "bodyHeight": 227,
+    "faceWidth": 47.451977401129945,
+    "faceX": 177,
+    "faceY": 139.66854990583803,
+    "sourceFrame": 1
+  },
+  {
+    "sheet": "air-aim",
+    "frame": 10,
+    "scale": 0.4274952919020716,
+    "bodyHeight": 227,
+    "faceWidth": 47.024482109227876,
+    "faceX": 177,
+    "faceY": 140.09604519774012,
+    "sourceFrame": 2
+  },
+  {
+    "sheet": "air-aim",
+    "frame": 11,
+    "scale": 0.4274952919020716,
+    "bodyHeight": 227.4274952919021,
+    "faceWidth": 47.879472693032014,
+    "faceX": 177,
+    "faceY": 139.8822975517891,
+    "sourceFrame": 3
+  },
+  {
+    "sheet": "stand-fire",
+    "frame": 0,
+    "scale": 0.5413870246085011,
+    "bodyHeight": 241.99999999999997,
+    "faceWidth": 44.93512304250559,
+    "faceX": 175.44892316938797,
+    "faceY": 136.3131991051454,
+    "sourceFrame": 0
+  },
+  {
+    "sheet": "stand-fire",
+    "frame": 1,
+    "scale": 0.5413870246085011,
+    "bodyHeight": 243.082774049217,
+    "faceWidth": 43.85234899328859,
+    "faceX": 176.78248605490074,
+    "faceY": 136.39597315436242,
+    "sourceFrame": 3
+  },
+  {
+    "sheet": "stand-fire",
+    "frame": 2,
+    "scale": 0.5413870246085011,
+    "bodyHeight": 241.99999999999997,
+    "faceWidth": 44.93512304250559,
+    "faceX": 175.44892316938797,
+    "faceY": 136.3131991051454,
+    "sourceFrame": 0
+  },
+  {
+    "sheet": "stand-fire",
+    "frame": 3,
+    "scale": 0.5413870246085011,
+    "bodyHeight": 241.99999999999997,
+    "faceWidth": 44.93512304250559,
+    "faceX": 175.44892316938797,
+    "faceY": 136.3131991051454,
+    "sourceFrame": 0
+  }
+]

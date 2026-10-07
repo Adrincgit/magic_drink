@@ -1,0 +1,14 @@
+/* The browser viewport is the cabinet. Keep the 16:9 playfield intact and put
+   menus, controls and shop inside it; wide displays receive quiet side bars. */
+html:has([data-hexy-adventure]),body:has([data-hexy-adventure]){margin:0;overflow:hidden;width:100%;height:100%}
+[data-hexy-adventure]{position:fixed;inset:0;padding:0!important;min-height:0!important;background:#171121!important;display:grid;place-items:center;overflow:hidden}
+[data-hexy-adventure]>section{position:relative;width:100vw!important;height:100dvh!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;display:grid!important;place-items:center!important;overflow:hidden!important}
+[data-hexy-adventure] [data-game-frame]{width:min(100vw,177.7778dvh)!important;max-height:100dvh;padding:0!important;border:0!important;border-radius:0!important;margin:0!important;box-shadow:none!important;flex:none!important}
+[data-hexy-adventure] [data-game-screen]{border-radius:0!important;aspect-ratio:16/9!important;width:100%;max-height:100dvh}
+[data-hexy-adventure] [data-adventure-overlay]{z-index:7}
+[data-hexy-adventure] [data-touch-controls]{display:none}
+[data-hexy-adventure] [data-controller-hint]{display:none}
+@media(pointer:coarse){
+ [data-hexy-adventure] [data-touch-controls]{display:flex;position:absolute;bottom:1%;left:3%;right:3%;width:auto!important;min-width:0;box-sizing:border-box;z-index:5;opacity:.75;padding:0;pointer-events:none}
+ [data-hexy-adventure] [data-touch-controls] button{pointer-events:auto}
+}

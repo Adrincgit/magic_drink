@@ -1,0 +1,20 @@
+{
+  "tool": "builtin imagegen",
+  "date": "2026-10-06",
+  "prompts": [
+    {
+      "name": "horizontal",
+      "prompt": "Use case: precise-object-edit. This is an enlarged crop of a 2D anime game sprite. REPAINT ONLY THE WAND-HOLDING HAND and the short wrist join, keeping the wand shaft, forearm direction and all surrounding crop artwork/framing unchanged. The current hand is DEFORMED: it has an upper row of curled fingers plus an extra lower row of finger blobs. Replace it with ONE small anatomically correct hand holding the thin horizontal wand firmly. Show four curled fingers in ONE coherent row around the cylindrical handle, and ONE separate thumb resting diagonally across the upper side of the index finger. No second row of knuckles or extra digits below. The handle passes THROUGH the palm and the fingers overlap the handle; a short grip end shows on the left below the palm, the long shaft continues horizontally right. A smooth natural wrist runs straight into the forearm on the left. Small elegant hand proportionate to this young chibi witch, narrow palm, simple clean readable contour, NOT a bulky boxing fist. Match skin color, clean dark ink outline, softly painted shading from this exact reference. Transparent background, preserve the existing cut off surrounding face/clothing, exact crop composition, no extra objects or effects. Treat the image as a CLOSE-UP HAND ANATOMY REPAIR, not a new character drawing."
+    },
+    {
+      "name": "vertical",
+      "prompt": "Use case: precise-object-edit. This is an enlarged crop of a 2D anime game sprite raised hand holding a thin vertical wand. REPAINT ONLY THE HAND and a short wrist join. The current hand is DEFORMED: disconnected swollen finger blobs and an elongated malformed thumb. Replace with ONE SMALL ANATOMICALLY CORRECT precision grip. Four naturally curled fingers wrap around the vertical cylindrical shaft, a SINGLE short thumb crosses DIAGONALLY over the bent index finger and rests against it, forming a compact smooth fist. The thumb must NOT stick upward alongside the shaft, and the fingers must NOT be three detached sausage bulges. Show clear but simple fingers in one continuous hand; five digits total; no extras or duplicated fingers. The black handle passes through the palm with long shaft visible above and short end below. Keep forearm vertical, wrist straight continuous with forearm; small slender palm proportionate to a young chibi girl, NOT bulky boxing glove. Preserve wand position, angle, raised forearm size, skin tone, surrounding blue hat at lower left, exact crop framing. Match clean dark ink outline and softly painted skin shading of the reference. Transparent background, no new objects, no full character, no text, no extra effects."
+    }
+  ],
+  "outputs": [
+    "context/arcade/animation-refinement/air-horizontal-source.webp",
+    "context/arcade/animation-refinement/air-up-vertical-source.webp",
+    "public/arcade/sprites/hexy/air-aim.webp"
+  ],
+  "integration": "Generated close-up hand repairs replace only each hand and wrist region in all four source frames. Source sheets saved losslessly so pixels outside repaired regions and body-registration measurements stay identical."
+}

@@ -13,3 +13,7 @@
   .grain { opacity: calc(var(--grain-opacity) * .8); }
   .vignette { opacity: calc(var(--vignette-opacity) * .7); }
 }
+
+.monochrome { z-index:10003; backdrop-filter:grayscale(1); -webkit-backdrop-filter:grayscale(1); }
+.finish[data-arcade-optics=true] .vignette{opacity:var(--vignette-opacity);background:radial-gradient(ellipse at 50% 48%,transparent 32%,#10071e30 55%,#0b061887 76%,#080311eb 100%)}
+.finish[data-arcade-optics=true] .lens{opacity:var(--lens-opacity)}

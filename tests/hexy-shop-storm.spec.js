@@ -1,21 +1,22 @@
+import {openAdventureMenu} from './arcade-input.helpers';
 import {test,expect} from '@playwright/test';
-import {createAdventure,stepAdventure,adventureCarry} from '../src/components/arcade/adventureModel';
-import {takeLoot,rollLoot} from '../src/components/arcade/adventureLoot';
-import {equipDrink,DRINK_SHOTS} from '../src/components/arcade/adventureAmmo';
-import {modShotScale,modFireRate,modPrice,MODS,updateMods} from '../src/components/arcade/adventureMods';
-import {sanitizeSave} from '../src/components/arcade/arcadeStore';
-import {beginShopTransition,stepShopTransition} from '../src/components/arcade/adventureShop';
-import {hexyPose} from '../src/components/arcade/hexyAnimation';
-import {prepareBombardment,stepBombardment} from '../src/components/arcade/adventureBombardment';
-import {updateBoss,enemyShot} from '../src/components/arcade/adventureEnemies';
+import {createAdventure,stepAdventure,adventureCarry} from '../src/components/arcade/adventure/engine/adventureModel';
+import {takeLoot,rollLoot} from '../src/components/arcade/adventure/engine/adventureLoot';
+import {equipDrink,DRINK_SHOTS} from '../src/components/arcade/adventure/engine/adventureAmmo';
+import {modShotScale,modFireRate,modPrice,MODS,updateMods,maxModLevel} from '../src/components/arcade/adventure/engine/adventureMods';
+import {sanitizeSave} from '../src/components/arcade/shared/arcadeStore';
+import {beginShopTransition,stepShopTransition} from '../src/components/arcade/adventure/engine/adventureShop';
+import {hexyPose} from '../src/components/arcade/adventure/actors/hexy/hexyAnimation';
+import {prepareBombardment,stepBombardment} from '../src/components/arcade/adventure/actors/bosses/adventureBombardment';
+import {updateBoss,enemyShot} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
 const tick=(s,n=1,input={})=>{for(let i=0;i<n;i++)stepAdventure(s,input,1/120);};
-const clean=(carry={})=>{const s=createAdventure(0,false,carry);for(const key of ['enemies','cages','pickups','supplies','outposts','stars','hazards'])s[key]=[];return s;};
+const clean=(carry={})=>{const s=createAdventure(0,false,{modSlots:3,...carry});for(const key of ['enemies','cages','pickups','supplies','outposts','stars','hazards'])s[key]=[];return s;};
 
 test('legacy ownership starts at level one; corrupt levels never escape the three tiers',()=>{
  const save=sanitizeSave({version:1,stars:220,modsOwned:['bright-spark','quick-cast','full-bubble'],modLevels:{'bright-spark':55,'quick-cast':-8,'full-bubble':'invalid','unknown':3}});
  expect(save.stars).toBe(220);expect(save.modLevels).toEqual({'bright-spark':3,'quick-cast':1,'full-bubble':1});
  expect(sanitizeSave({version:1,modsOwned:['bright-spark']}).modLevels).toEqual({'bright-spark':1});
- for(const mod of MODS){expect([0,1,2].map(l=>modPrice(mod,l))).toEqual([mod.price,Math.ceil(mod.price*1.5),mod.price*2]);expect(modPrice(mod,3)).toBeNull();}
+ for(const mod of MODS){expect([0,1,2].map(l=>modPrice(mod,l))).toEqual([mod.price,Math.ceil(mod.price*2.5),mod.price*4]);expect(modPrice(mod,maxModLevel(mod))).toBeNull();}
 });
 test('all enlargement tiers affect normal and strong projectiles and persist between chapters',()=>{
  for(let level=1;level<=3;level++){
@@ -59,21 +60,21 @@ test('balloon enters its bombardment only after transformation, rises and altern
  for(let pass=0;pass<2;pass++){
   if(pass){b.phase='warn';prepareBombardment(s);}dirs.push(b.bombRun.dir);const positions=[];s.hostile=[];
   for(let i=0;i<760;i++){stepBombardment(s,1/120,enemyShot);positions.push(b.y);}
-  expect(Math.min(...positions)).toBeLessThan(a.y-230);expect(s.hostile.length).toBeGreaterThan(12);expect(s.hostile.length).toBeLessThan(22);
+  expect(Math.min(...positions)).toBeLessThan(a.y-230);expect(s.hostile.length).toBeGreaterThan(22);expect(s.hostile.length).toBeLessThan(34);
   expect(s.hostile.every(q=>q.carpet&&q.vx===0&&Math.abs(q.x-b.bombRun.gap)>=b.bombRun.gapWidth/2)).toBe(true);
-  expect(Math.sign(s.hostile.at(-1).x-s.hostile[0].x)).toBe(b.bombRun.dir);expect(b.phase).toBe('recover');
+  expect(b.bombRun.pass).toBe(1);expect(b.phase).toBe('recover');
  }
  expect(dirs).toEqual([-1,1]);
 });
-test('the bombing gap remains survivable through landing explosions without ground waves',()=>{
+test('the bombing gap remains survivable while the bombs release short ground flames',()=>{
  const s=clean(),a=s.level.arena;s.player.x=a.left+450;s.player.y=a.y;s.camera.x=a.left;Object.assign(s.boss,{phase:'warn',move:'bombing-run',transformed:true,hp:50,engaged:true});s.arenaLocked=true;prepareBombardment(s);
- s.player.x=s.boss.bombRun.gap;const hearts=s.hearts;tick(s,740);expect(s.hearts).toBe(hearts);expect(s.hostile.some(q=>q.kind==='wave')).toBe(false);
+ s.player.x=s.boss.bombRun.gap;const hearts=s.hearts;let sawFire=false;for(let i=0;i<740;i++){tick(s);sawFire ||=s.hostile.some(q=>q.kind==='wave'&&q.carpetFire);}expect(s.hearts).toBe(hearts);expect(sawFire).toBe(true);
 });
 
 test('upgrade transactions charge once per expected level across tabs and survive reload',async({page,context})=>{
- await page.goto('/arcade');const other=await context.newPage();await other.goto('/arcade');
- await page.evaluate(async()=>{const m=await import('/src/components/arcade/arcadeStore.js');localStorage.setItem(m.SAVE_KEY,JSON.stringify(m.sanitizeSave({version:1,stars:500,modsOwned:['bright-spark']})));});
- const calls=await Promise.all([page,other].map(p=>p.evaluate(async()=>{const m=await import('/src/components/arcade/arcadeStore.js');return m.upgradeAdventureMod('bright-spark',1);})));expect(calls.sort()).toEqual([false,true]);
- const result=await page.evaluate(async()=>{const m=await import('/src/components/arcade/arcadeStore.js');const next=await m.upgradeAdventureMod('bright-spark',2),max=await m.upgradeAdventureMod('bright-spark',3);return{next,max,save:JSON.parse(localStorage.getItem(m.SAVE_KEY))};});
- expect(result.next).toBe(true);expect(result.max).toBe(false);expect(result.save.stars).toBe(377);expect(result.save.modLevels['bright-spark']).toBe(3);await other.close();
+ await page.goto('/arcade');await openAdventureMenu(page);const other=await context.newPage();await other.goto('/arcade');
+ await page.evaluate(async()=>{const m=await import('/src/components/arcade/shared/arcadeStore.js');localStorage.setItem(m.SAVE_KEY,JSON.stringify(m.sanitizeSave({version:1,stars:1000,adventureUnlocked:2,modsOwned:['bright-spark']})));});
+ const calls=await Promise.all([page,other].map(p=>p.evaluate(async()=>{const m=await import('/src/components/arcade/shared/arcadeStore.js');return m.upgradeAdventureMod('bright-spark',1);})));expect(calls.sort()).toEqual([false,true]);
+ const result=await page.evaluate(async()=>{const m=await import('/src/components/arcade/shared/arcadeStore.js');const next=await m.upgradeAdventureMod('bright-spark',2),max=await m.upgradeAdventureMod('bright-spark',3);return{next,max,save:JSON.parse(localStorage.getItem(m.SAVE_KEY))};});
+ expect(result.next).toBe(true);expect(result.max).toBe(false);expect(result.save.stars).toBe(480);expect(result.save.modLevels['bright-spark']).toBe(3);await other.close();
 });

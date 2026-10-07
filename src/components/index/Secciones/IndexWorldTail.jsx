@@ -83,7 +83,7 @@ function IndexWorldTail({ en = false }) {
         <div className={`${styles.copy} ${styles.festivalCopy}`} data-world-copy="festival" data-story-wrapper>
           <StoryPanel en={en} number="04" label={en ? 'THE STREETS JOIN THE CHORUS' : 'LAS CALLES SE SUMAN AL CORO'} title={<>Magic Drink<br /><em>Day.</em></>}
             compactText={en ? 'Music, balloons and parades fill the streets. Hexy is on stage. Coming?' : 'La calle se llena de música, globos y desfiles. Hexy está en el escenario. ¿Vienes?'}
-            actions={<SceneButton href="/magicdrinkday" variant="ticket">{en ? 'Join the celebration' : 'Vive Magic Drink Day'}</SceneButton>}>
+            actions={<SceneButton href="/#festival" variant="ticket">{en ? 'Join the celebration' : 'Vive Magic Drink Day'}</SceneButton>}>
             {en ? 'A little further on, the streets fill with music. Parades, giant balloons, and Hexy on stage. The whole world joins in.' : 'Un poco más adelante, las calles se llenan de música. Desfiles, globos gigantes y Hexy sobre el escenario. Todo el mundo se suma.'}
           </StoryPanel>
         </div>

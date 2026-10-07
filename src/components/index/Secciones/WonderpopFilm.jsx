@@ -38,7 +38,7 @@ function ShotContent({ shot, en }) {
   if (shot.kind === 'final') return <div className={styles.finalTitle}>
     <span>{en ? 'THE NEXT CHAPTER IS YOURS' : 'EL SIGUIENTE CAPÍTULO ES TUYO'}</span>
     <h2>Wonderpop<br /><em>Plaza</em></h2>
-    <a href="/wonderpop-plaza">{en ? 'Come visit us' : 'Ven a visitarnos'} <span aria-hidden="true">↗</span></a>
+    <a href="/#directorio-wonderpop">{en ? 'Come visit us' : 'Ven a visitarnos'} <span aria-hidden="true">↗</span></a>
   </div>;
   return null;
 }

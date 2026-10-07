@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-07",
+  "revision": "Full-body shouting Hexy on the left with raised wand and two short diagonal ribbons; replaces rejected wide banner",
+  "distinctPassingTests": 7,
+  "logs": [
+    "fullbody-final.log",
+    "fullbody-recording.log"
+  ],
+  "build": {
+    "log": "fullbody-build.log",
+    "exit": 0
+  },
+  "artifacts": "tests/artifacts/arcade/super-cutin",
+  "video": "ultimate-left.webm",
+  "timing": {
+    "enterSeconds": 0.2,
+    "holdUntilSeconds": 0.66,
+    "fadeEndsSeconds": 0.9,
+    "beamStartsSeconds": 0.9
+  },
+  "composition": {
+    "rightmostAllowedPixel": 370,
+    "logicalWidth": 960,
+    "pixelsDrawnBeyondLimit": 0,
+    "characterHeight": 426,
+    "fullBody": true,
+    "exitsBy": "Fade in place at the left side"
+  },
+  "browserErrors": [],
+  "variants": [
+    "desktop",
+    "mobile",
+    "left-air",
+    "reduced",
+    "english"
+  ],
+  "liveUI": "Pause and resume during preparation at 390px and 1280px; charge remains frozen during pause and resumed ultimate spends once",
+  "visualReview": [
+    "desktop-hold.jpg",
+    "mobile-hold.jpg",
+    "left-air-hold.jpg",
+    "live-1280-portrait.jpg",
+    "live-390-portrait.jpg",
+    "desktop-beam.jpg"
+  ],
+  "limitations": "Sampled frames inspected and full simulation recorded; subjective visual approval remains with the user."
+}

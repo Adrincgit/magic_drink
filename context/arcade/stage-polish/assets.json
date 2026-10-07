@@ -1,0 +1,60 @@
+[
+  {
+    "path": "public/arcade/sprites/hexy/air-super-release.webp",
+    "bytes": 103032,
+    "width": 1280,
+    "height": 320,
+    "alpha": true,
+    "sha256": "41a918610151687bfd4e19ca6724dfc0847b7a4a36a8c7d21ccf6876a98c55b4",
+    "active": true
+  },
+  {
+    "path": "public/arcade/maps/meadow/foreground-bank.webp",
+    "bytes": 353846,
+    "width": 2172,
+    "height": 724,
+    "alpha": true,
+    "sha256": "28b463efeac31dc50b04a996eb88e12c6c241f50da752e50203a9fb5779f98de",
+    "active": false,
+    "status": "Retained as historical artwork; removed from runtime loading and rendering after user rejection."
+  },
+  {
+    "path": "public/arcade/maps/riverwoods/foreground-bank.webp",
+    "bytes": 396904,
+    "width": 2172,
+    "height": 724,
+    "alpha": true,
+    "sha256": "fe29a1993a8052b3ef9139d5bf99b539cfc9095fc7e9b6414b40cc48e8000d37",
+    "active": false,
+    "status": "Retained as historical artwork; removed from runtime loading and rendering after user rejection."
+  },
+  {
+    "path": "public/arcade/maps/meadow/near-tree.webp",
+    "bytes": 205300,
+    "width": 1024,
+    "height": 1536,
+    "alpha": true,
+    "sha256": "d8f182847d5b6887865a4179dac5b8b70b05e5e8b3e1243364e3432cc0b50b15",
+    "active": false,
+    "status": "Retained as historical artwork; removed from runtime loading and rendering after user rejection."
+  },
+  {
+    "path": "public/arcade/maps/riverwoods/near-tree.webp",
+    "bytes": 235106,
+    "width": 1024,
+    "height": 1536,
+    "alpha": true,
+    "sha256": "e0e19ff221bf976aa2ec9f4163a2a150e4c403eefe067e6eb0976cf4d2b30c70",
+    "active": false,
+    "status": "Retained as historical artwork; removed from runtime loading and rendering after user rejection."
+  },
+  {
+    "path": "public/arcade/sprites/effects/pier-foam.webp",
+    "bytes": 210712,
+    "width": 2048,
+    "height": 512,
+    "alpha": true,
+    "sha256": "074ed68b8f36c3bdf2c0ee5a0de46f559c73fb12d7eb543597f9cd0de611f43b",
+    "active": true
+  }
+]
