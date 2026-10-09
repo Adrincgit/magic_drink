@@ -40,7 +40,7 @@ function waterPlane(c,s,img,river,flow,reduced,near=false){
  }c.restore();
 }
 export function drawRiverWater(c,s,art,reduced=false){
- const img=art['river-water'],h=300;
+ const img=art[s.level.harborRoute?'harbor-water':'river-water'],h=300;
  for(const river of s.level.rivers){
   if(river.x+river.w<s.camera.x-150||river.x>s.camera.x+960/(s.camera.zoom||1)+150)continue;
   const flow=riverFlow(s,river,reduced),time=flow.time;
@@ -51,7 +51,7 @@ export function drawRiverWater(c,s,art,reduced=false){
    const t=reduced?.4:((time*.32+i*.24)%1);c.globalAlpha=(1-t)*.3;
    c.beginPath();c.ellipse(river.x+90+i*180+t*45,river.y+40+i%2*43,16+t*32,3+t*6,-.05,0,Math.PI*2);c.stroke();
   }c.restore();
-  c.fillStyle='#245758';c.fillRect(river.x-32,river.y+h*.75,river.w+64,600);c.restore();
+  c.fillStyle=s.level.harborRoute?'#1c405d':'#245758';c.fillRect(river.x-32,river.y+h*.75,river.w+64,600);c.restore();
  }
 }
 export function riverBridgeSegments(q,img){

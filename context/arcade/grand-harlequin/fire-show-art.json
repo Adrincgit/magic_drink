@@ -1,0 +1,953 @@
+{
+  "created": "2026-10-08",
+  "mode": "built-in image_gen",
+  "assets": {
+    "sprint": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-f857c4a9-8cd9-4c0b-88fc-180fc6949bc3.png",
+      "prompt": "Create a production 2D game sprite animation sheet using the EXACT harlequin character design and simple clean anime cartoon cel shading of the reference: pale white evil clown face, red nose, short black hair, single red cone hat with gold bell, white ruff, red/black diamond suit, gold cuffs, long RED cape, black pointed curled boots. Twelve full-body consecutive SPRINT animation drawings, EXACTLY 4 columns by 3 rows, generous transparent gutters. Facing LEFT in every frame. A forceful LOW forward sprint, knees and arms pumping, torso leaning left at 45 degrees, alternating planted feet and airborne passing poses, twelve genuinely different frames forming one smooth complete run cycle, weight shifting naturally. Cape whips FAR behind to the right with changing S curves and rippling hem; hat and bell trail behind. No speed lines, no dust, no fire, no ground, no repeated identical pose. Consistent same body size and baseline, entire boots and cape in every cell. Clear ink outline and broad cel shadows, not photorealistic, no intricate engraving. Native transparent background.",
+      "registration": [
+        {
+          "crop": [
+            28,
+            127,
+            340,
+            239
+          ],
+          "anchor": 189.5,
+          "scale": 1.01,
+          "destination": [
+            93,
+            249
+          ]
+        },
+        {
+          "crop": [
+            389,
+            127,
+            337,
+            242
+          ],
+          "anchor": 562.5,
+          "scale": 1.01,
+          "destination": [
+            81,
+            246
+          ]
+        },
+        {
+          "crop": [
+            754,
+            103,
+            338,
+            250
+          ],
+          "anchor": 931,
+          "scale": 1.01,
+          "destination": [
+            77,
+            237
+          ]
+        },
+        {
+          "crop": [
+            1113,
+            117,
+            318,
+            255
+          ],
+          "anchor": 1301.5,
+          "scale": 1.01,
+          "destination": [
+            66,
+            232
+          ]
+        },
+        {
+          "crop": [
+            38,
+            438,
+            322,
+            254
+          ],
+          "anchor": 189.5,
+          "scale": 1.01,
+          "destination": [
+            103,
+            233
+          ]
+        },
+        {
+          "crop": [
+            391,
+            437,
+            333,
+            256
+          ],
+          "anchor": 587.5,
+          "scale": 1.01,
+          "destination": [
+            58,
+            231
+          ]
+        },
+        {
+          "crop": [
+            754,
+            438,
+            338,
+            254
+          ],
+          "anchor": 951,
+          "scale": 1.01,
+          "destination": [
+            57,
+            233
+          ]
+        },
+        {
+          "crop": [
+            1117,
+            443,
+            316,
+            251
+          ],
+          "anchor": 1252.5,
+          "scale": 1.01,
+          "destination": [
+            119,
+            236
+          ]
+        },
+        {
+          "crop": [
+            40,
+            760,
+            334,
+            243
+          ],
+          "anchor": 226,
+          "scale": 1.01,
+          "destination": [
+            68,
+            245
+          ]
+        },
+        {
+          "crop": [
+            403,
+            752,
+            328,
+            257
+          ],
+          "anchor": 540.5,
+          "scale": 1.01,
+          "destination": [
+            117,
+            230
+          ]
+        },
+        {
+          "crop": [
+            755,
+            746,
+            335,
+            256
+          ],
+          "anchor": 951.5,
+          "scale": 1.01,
+          "destination": [
+            58,
+            231
+          ]
+        },
+        {
+          "crop": [
+            1112,
+            758,
+            328,
+            253
+          ],
+          "anchor": 1274,
+          "scale": 1.01,
+          "destination": [
+            92,
+            234
+          ]
+        }
+      ],
+      "output": "public/arcade/sprites/bosses/harlequin/sprint.webp"
+    },
+    "sprintMid": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-21750b3b-0931-4d0b-a84f-355c08cd44c7.png",
+      "prompt": "Edit the supplied TWELVE FRAME RUN ANIMATION sheet. Preserve precisely the same four columns by three rows, all twelve different running poses, orientation facing LEFT, character proportions, head and boot locations, scale, black ink and clean cartoon anime cel style. Only change the character to his moderately battle damaged: cape has several torn holes, singed irregular edges and two split tails, suit has light scorch patches. Keep red black diamond suit, ONE red hat with gold bell, white ruff, gold cuffs, pale clown face red nose black curly hair, black curled boots. Every cell matches the corresponding running pose of the reference. Keep the same natural cape motion but damaged. FULL body no cropped parts, no new effects, no symbols, no text, native transparent background.",
+      "registration": [
+        {
+          "crop": [
+            28,
+            120,
+            344,
+            250
+          ],
+          "anchor": 192.5,
+          "scale": 1.01,
+          "destination": [
+            90,
+            237
+          ]
+        },
+        {
+          "crop": [
+            397,
+            118,
+            341,
+            255
+          ],
+          "anchor": 579,
+          "scale": 1.01,
+          "destination": [
+            72,
+            232
+          ]
+        },
+        {
+          "crop": [
+            774,
+            100,
+            332,
+            260
+          ],
+          "anchor": 960,
+          "scale": 1.01,
+          "destination": [
+            68,
+            227
+          ]
+        },
+        {
+          "crop": [
+            1128,
+            111,
+            309,
+            261
+          ],
+          "anchor": 1322,
+          "scale": 1.01,
+          "destination": [
+            60,
+            226
+          ]
+        },
+        {
+          "crop": [
+            35,
+            431,
+            335,
+            262
+          ],
+          "anchor": 195.5,
+          "scale": 1.01,
+          "destination": [
+            94,
+            225
+          ]
+        },
+        {
+          "crop": [
+            401,
+            432,
+            340,
+            265
+          ],
+          "anchor": 604,
+          "scale": 1.01,
+          "destination": [
+            51,
+            222
+          ]
+        },
+        {
+          "crop": [
+            773,
+            431,
+            336,
+            266
+          ],
+          "anchor": 978.5,
+          "scale": 1.01,
+          "destination": [
+            48,
+            221
+          ]
+        },
+        {
+          "crop": [
+            1120,
+            438,
+            315,
+            259
+          ],
+          "anchor": 1264,
+          "scale": 1.01,
+          "destination": [
+            111,
+            228
+          ]
+        },
+        {
+          "crop": [
+            40,
+            755,
+            341,
+            252
+          ],
+          "anchor": 230,
+          "scale": 1.01,
+          "destination": [
+            64,
+            235
+          ]
+        },
+        {
+          "crop": [
+            412,
+            748,
+            333,
+            269
+          ],
+          "anchor": 552.5,
+          "scale": 1.01,
+          "destination": [
+            114,
+            218
+          ]
+        },
+        {
+          "crop": [
+            775,
+            744,
+            333,
+            263
+          ],
+          "anchor": 979.5,
+          "scale": 1.01,
+          "destination": [
+            49,
+            224
+          ]
+        },
+        {
+          "crop": [
+            1123,
+            755,
+            316,
+            263
+          ],
+          "anchor": 1288,
+          "scale": 1.01,
+          "destination": [
+            89,
+            224
+          ]
+        }
+      ],
+      "output": "public/arcade/sprites/bosses/harlequin/sprint-mid.webp"
+    },
+    "sprintFinal": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-6c85216c-051c-4ec7-af25-0b427d6f2864.png",
+      "prompt": "Edit the supplied TWELVE FRAME RUN ANIMATION sheet. Preserve precisely the same four columns by three rows, all twelve different running poses, orientation facing LEFT, character proportions, head and boot locations, scale, black ink and clean cartoon anime cel style. Only change the character to his heavily battle damaged: cape shredded into long narrow fluttering torn ribbons with multiple holes, scorched ragged hem, slightly torn suit and hat, fierce angry expression. Keep red black diamond suit, ONE red hat with gold bell, white ruff, gold cuffs, pale clown face red nose black curly hair, black curled boots. Every cell matches the corresponding running pose of the reference. Keep the same natural cape motion but damaged. FULL body no cropped parts, no new effects, no symbols, no text, native transparent background.",
+      "registration": [
+        {
+          "crop": [
+            26,
+            123,
+            339,
+            244
+          ],
+          "anchor": 189.5,
+          "scale": 1.01,
+          "destination": [
+            91,
+            244
+          ]
+        },
+        {
+          "crop": [
+            387,
+            124,
+            337,
+            246
+          ],
+          "anchor": 562.5,
+          "scale": 1.01,
+          "destination": [
+            79,
+            242
+          ]
+        },
+        {
+          "crop": [
+            751,
+            101,
+            337,
+            254
+          ],
+          "anchor": 930.5,
+          "scale": 1.01,
+          "destination": [
+            75,
+            233
+          ]
+        },
+        {
+          "crop": [
+            1111,
+            113,
+            325,
+            260
+          ],
+          "anchor": 1302,
+          "scale": 1.01,
+          "destination": [
+            63,
+            227
+          ]
+        },
+        {
+          "crop": [
+            35,
+            437,
+            324,
+            256
+          ],
+          "anchor": 190,
+          "scale": 1.01,
+          "destination": [
+            99,
+            231
+          ]
+        },
+        {
+          "crop": [
+            389,
+            435,
+            335,
+            260
+          ],
+          "anchor": 587.5,
+          "scale": 1.01,
+          "destination": [
+            56,
+            227
+          ]
+        },
+        {
+          "crop": [
+            751,
+            435,
+            334,
+            259
+          ],
+          "anchor": 950,
+          "scale": 1.01,
+          "destination": [
+            55,
+            228
+          ]
+        },
+        {
+          "crop": [
+            1113,
+            440,
+            319,
+            254
+          ],
+          "anchor": 1253,
+          "scale": 1.01,
+          "destination": [
+            115,
+            233
+          ]
+        },
+        {
+          "crop": [
+            39,
+            758,
+            330,
+            247
+          ],
+          "anchor": 225.5,
+          "scale": 1.01,
+          "destination": [
+            68,
+            241
+          ]
+        },
+        {
+          "crop": [
+            401,
+            749,
+            323,
+            260
+          ],
+          "anchor": 540,
+          "scale": 1.01,
+          "destination": [
+            116,
+            227
+          ]
+        },
+        {
+          "crop": [
+            753,
+            744,
+            331,
+            260
+          ],
+          "anchor": 951,
+          "scale": 1.01,
+          "destination": [
+            56,
+            227
+          ]
+        },
+        {
+          "crop": [
+            1111,
+            756,
+            322,
+            256
+          ],
+          "anchor": 1274.5,
+          "scale": 1.01,
+          "destination": [
+            91,
+            231
+          ]
+        }
+      ],
+      "output": "public/arcade/sprites/bosses/harlequin/sprint-final.webp"
+    },
+    "arrival": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-1523c931-6a33-4c67-ab3c-8fe5c8605bf1.png",
+      "prompt": "Create a 12 frame 2D game dramatic entrance animation sprite sheet for the EXACT fire harlequin character in the reference. EXACT 4 columns 3 rows, twelve FULL BODY distinct consecutive poses, facing LEFT or 3/4 LEFT. Same pale evil clown red nose single red cone hat gold bell white ruff red/black diamond leotard gold cuffs long red cape black curled boots; clean cartoon anime cel shading matching reference, moderate simple detail. Read frames left to right then next row: 0 dramatic diving down feet first cape flared upward, 1 twisting torso in a midair acrobatic turn cape spiraling, 2 strong downward diving pose right fist overhead, 3 legs uncurl preparing landing, 4 deep three-point landing left-facing with one fist on ground cape still high, 5 impact compression and cape snapping overhead, 6 raising body one knee down cape falling, 7 rising with chin lowered and shoulders up, 8 standing tall sinister grin arms lowered cape unfurling, 9 lift one palm displaying a small fiery orange diamond jewel, 10 theatrical open-armed taunt chest out cape spreads behind, 11 settled battle-ready pose looking LEFT. No rope, no harness, never seated, no throne, no scenery, no glyphs, no text, no ground effects or explosions; those are added separately. Keep scale and full silhouettes consistent, airy gutters, native transparency.",
+      "registration": [
+        {
+          "crop": [
+            39,
+            27,
+            261,
+            443
+          ],
+          "anchor": 170.5,
+          "scale": 1.045,
+          "destination": [
+            119,
+            27
+          ]
+        },
+        {
+          "crop": [
+            362,
+            89,
+            248,
+            410
+          ],
+          "anchor": 419,
+          "scale": 1.045,
+          "destination": [
+            196,
+            62
+          ]
+        },
+        {
+          "crop": [
+            669,
+            94,
+            227,
+            402
+          ],
+          "anchor": 809,
+          "scale": 1.045,
+          "destination": [
+            110,
+            70
+          ]
+        },
+        {
+          "crop": [
+            946,
+            113,
+            284,
+            357
+          ],
+          "anchor": 1085,
+          "scale": 1.045,
+          "destination": [
+            111,
+            117
+          ]
+        },
+        {
+          "crop": [
+            26,
+            533,
+            283,
+            301
+          ],
+          "anchor": 197,
+          "scale": 1.045,
+          "destination": [
+            77,
+            175
+          ]
+        },
+        {
+          "crop": [
+            357,
+            533,
+            259,
+            302
+          ],
+          "anchor": 493.5,
+          "scale": 1.045,
+          "destination": [
+            113,
+            174
+          ]
+        },
+        {
+          "crop": [
+            679,
+            615,
+            245,
+            225
+          ],
+          "anchor": 786.5,
+          "scale": 1.045,
+          "destination": [
+            144,
+            255
+          ]
+        },
+        {
+          "crop": [
+            981,
+            558,
+            248,
+            281
+          ],
+          "anchor": 1094.5,
+          "scale": 1.045,
+          "destination": [
+            137,
+            196
+          ]
+        },
+        {
+          "crop": [
+            48,
+            877,
+            276,
+            319
+          ],
+          "anchor": 171.5,
+          "scale": 1.045,
+          "destination": [
+            127,
+            157
+          ]
+        },
+        {
+          "crop": [
+            337,
+            872,
+            284,
+            321
+          ],
+          "anchor": 480.5,
+          "scale": 1.045,
+          "destination": [
+            106,
+            155
+          ]
+        },
+        {
+          "crop": [
+            624,
+            906,
+            322,
+            289
+          ],
+          "anchor": 797,
+          "scale": 1.045,
+          "destination": [
+            75,
+            188
+          ]
+        },
+        {
+          "crop": [
+            954,
+            913,
+            280,
+            278
+          ],
+          "anchor": 1071.5,
+          "scale": 1.045,
+          "destination": [
+            133,
+            199
+          ]
+        }
+      ],
+      "output": "public/arcade/sprites/bosses/harlequin/arrival.webp"
+    },
+    "flameShow": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-c0aabd2f-1670-4f71-8cb2-3db613e5e988.png",
+      "prompt": "Transparent production sprite atlas of hand painted CARTOON ANIME FIRE effects, clean irregular ink/cel shapes, orange yellow white flame cores with deep red and charcoal smoke, NO green, confetti, musical notes, letters, rings, arrows or ground indicators. EXACTLY 4 columns and 6 rows, 24 complete distinct effects with generous gutters. Rows1-2: EIGHT consecutive fireball impact explosion frames, small bright ignition, expanding flame flower blast, large billowing orange fire blast with black smoke curls, then breaking embers and dissipating charcoal smoke. Same center and common reference scale, NOT eight identical explosions. Rows3-4: EIGHT looping frames of a low ground fire PATCH burning wooden floor: tongues rise up from a common low wide base, flames leaning slightly right, changing lively flame shapes and embers, very low height relative to width, no visible floor drawing. Rows5-6: EIGHT consecutive ground HEAT GLOW frames: organic irregular soft pool of red then orange incandescent light, subtle painted heated wood grain cracks through it and small rising heat haze wisps, grows hotter in brightness but no flame column yet; no geometric circle border no arrow no icon. These are natural red-orange glowing scorched patches, not UI markers. All native transparent background with soft light fade to zero alpha. No backdrop.",
+      "registration": [
+        {
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 384,
+            "height": 193
+          },
+          "base": 175,
+          "dy": 30
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 0,
+            "width": 384,
+            "height": 193
+          },
+          "base": 175,
+          "dy": 30
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 0,
+            "width": 384,
+            "height": 193
+          },
+          "base": 175,
+          "dy": 30
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 0,
+            "width": 384,
+            "height": 193
+          },
+          "base": 175,
+          "dy": 30
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 193,
+            "width": 384,
+            "height": 191
+          },
+          "base": 162,
+          "dy": 43
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 193,
+            "width": 384,
+            "height": 191
+          },
+          "base": 162,
+          "dy": 43
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 193,
+            "width": 384,
+            "height": 191
+          },
+          "base": 162,
+          "dy": 43
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 193,
+            "width": 384,
+            "height": 191
+          },
+          "base": 162,
+          "dy": 43
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 384,
+            "width": 384,
+            "height": 161
+          },
+          "base": 129,
+          "dy": 76
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 384,
+            "width": 384,
+            "height": 161
+          },
+          "base": 129,
+          "dy": 76
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 384,
+            "width": 384,
+            "height": 161
+          },
+          "base": 129,
+          "dy": 76
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 384,
+            "width": 384,
+            "height": 161
+          },
+          "base": 129,
+          "dy": 76
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 545,
+            "width": 384,
+            "height": 170
+          },
+          "base": 125,
+          "dy": 80
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 545,
+            "width": 384,
+            "height": 170
+          },
+          "base": 125,
+          "dy": 80
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 545,
+            "width": 384,
+            "height": 170
+          },
+          "base": 125,
+          "dy": 80
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 545,
+            "width": 384,
+            "height": 170
+          },
+          "base": 125,
+          "dy": 80
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 715,
+            "width": 384,
+            "height": 145
+          },
+          "base": 84,
+          "dy": 121
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 715,
+            "width": 384,
+            "height": 145
+          },
+          "base": 84,
+          "dy": 121
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 715,
+            "width": 384,
+            "height": 145
+          },
+          "base": 84,
+          "dy": 121
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 715,
+            "width": 384,
+            "height": 145
+          },
+          "base": 84,
+          "dy": 121
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 860,
+            "width": 384,
+            "height": 164
+          },
+          "base": 92,
+          "dy": 113
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 860,
+            "width": 384,
+            "height": 164
+          },
+          "base": 92,
+          "dy": 113
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 860,
+            "width": 384,
+            "height": 164
+          },
+          "base": 92,
+          "dy": 113
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 860,
+            "width": 384,
+            "height": 164
+          },
+          "base": 92,
+          "dy": 113
+        }
+      ],
+      "output": "public/arcade/sprites/effects/painted-duel/fire-show.webp"
+    }
+  }
+}

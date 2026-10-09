@@ -1,3 +1,4 @@
+import {playEnergyAccent} from './energyVoice';
 // Crystal partials, a filtered swell and a resonant release. Scheduled on the
 // same charge/cast/pulse events as the visual; no downloaded samples or voices.
 export function playEncoreSound(context,output,kind,at){
@@ -23,6 +24,7 @@ export function playEncoreSound(context,output,kind,at){
   [523.25,659.25,783.99,1046.5,1318.5,1568,2093].forEach((hz,i)=>bell(hz,.036+i*.002,.38,[0,.08,.17,.28,.4,.54,.69][i]));
   tone(196,392,.85,.03);swell(.86,.07,420,3600);
  }else if(kind==='superCast'){
+  playEnergyAccent(context,output,kind,at);
   tone(130.81,55,.42,.105);[261.63,392,523.25,783.99].forEach((hz,i)=>tone(hz,hz,.7,.022,i*.014));
   bell(1568,.062,.75);bell(2093,.035,.55,.075);bell(2637,.022,.45,.15);swell(.4,.1,3400,650);
  }else{

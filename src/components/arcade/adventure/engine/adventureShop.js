@@ -1,9 +1,9 @@
-// The five current prototypes are grouped as meadow/woods/canopy, ring,
+// The five current prototypes are grouped as meadow/woods/harbor, ring,
 // and silence. Future campaign levels should provide their own themeStart.
 export const THEME_STARTS=new Set([0,3,4]);
 export const SHOP_EXIT_DURATION=1.72;
-export const shopForLevel=level=>level.themeStart||THEME_STARTS.has(level.id)?{x:370,y:level.platforms[0].y}:null;
-export function canEnterShop(s){const shop=shopForLevel(s.level),p=s.player;return !!shop&&!s.done&&!s.clear&&!s.arenaLocked&&!s.superCinematic&&p.ground!==null&&!p.drinkCast&&Math.abs(p.x-shop.x)<85&&Math.abs(p.y-shop.y)<30;}
+export const shopForLevel=level=>level.shop||(level.themeStart||THEME_STARTS.has(level.id)?{x:370,y:level.platforms[0].y}:null);
+export function canEnterShop(s){const shop=shopForLevel(s.level),p=s.player;return !!shop&&!s.done&&!s.clear&&!s.arenaLocked&&!s.superCinematic&&!s.circusEntry&&p.ground!==null&&!p.drinkCast&&Math.abs(p.x-shop.x)<85&&Math.abs(p.y-shop.y)<30;}
 export function beginShopTransition(s,leaving=false){
  const door=shopForLevel(s.level),p=s.player;
  s.shopTransition={age:0,leaving,fromX:p.x,walk:Math.max(.3,Math.abs(p.x-door.x)/150),door,alpha:leaving?1:0,ready:leaving};

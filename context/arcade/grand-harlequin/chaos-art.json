@@ -1,0 +1,513 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "prompt": "Use case: illustration-story. Asset type: production 2D anime-cartoon game VFX animation sprite atlas. Create exactly TWENTY FOUR isolated paintings in FOUR columns by SIX rows of equal square cells. Portrait atlas aspect ratio 2:3. Transparent background, no text, no grid, generous clear gutters. Clean hand-inked outlines and rich red-orange-yellow cel-painted flames, charcoal smoke, golden glowing embers; crisp organic cartoon energy, not flat geometric vector shapes. ROWS 1 AND 2, first 8 consecutive drawings: one torn piece of deep burgundy circus curtain with a short gold tasselled hem, blackened holes and burning orange ragged edges. It tumbles and flutters in the air in 8 DISTINCT smooth consecutive poses, changing folds, twisting and curling; actual deep red fabric visibly survives in the center, glowing burning ragged edges with a few detached embers. No ground underneath. ROWS 3 AND 4, next 8 consecutive drawings: the same burning fabric lands as a curled cloth heap on a floor baseline near the bottom of its cell and then rapidly disintegrates into ashes. First drawing has a folded substantial cloth heap, next frames the cloth burns away through frayed holes into orange charcoal, scattered glowing threads, then drifting dark smoke, last frame only a handful of ashes and golden embers. Animate a real dissolving silhouette, not a scaled-down identical picture. ROWS 5 AND 6, final 8 consecutive drawings: a powerful FIRE AURA / sheath for a full-body cartoon fire harlequin, ONLY the fire aura without any character. Tall asymmetrical flame tongues surrounding a mostly EMPTY transparent central space so the character remains readable. Red-black outer curling tongues with glowing orange-yellow inner streaks, hooked wisps and sparks; fire starts near a fixed bottom baseline, curls up both sides, and whips above the invisible character's shoulders, every frame has a visibly different organic wind-swept outline. Full-height personal fiery heat sheath, not a fireball, no circle, no geometric ring. All effects fully contained in their cells with transparent corners. Natural flame painting, bold cartoon silhouette, no photoreal fire textures, no background or decorative border.",
+  "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-6708d1f9-44e8-45dd-b653-ace4353f528b.png",
+  "output": "public/arcade/sprites/effects/painted-duel/circus-chaos.webp",
+  "rows": [
+    0,
+    256,
+    512,
+    724,
+    932,
+    1208,
+    1536
+  ],
+  "sequence": {
+    "fall": [
+      0,
+      7
+    ],
+    "burn": [
+      8,
+      15
+    ],
+    "aura": [
+      16,
+      23
+    ]
+  },
+  "registration": [
+    {
+      "frame": 0,
+      "sourceFrame": 0,
+      "crop": {
+        "left": 17,
+        "top": 17,
+        "width": 220,
+        "height": 220,
+        "offsetTop": 17,
+        "row": 0
+      },
+      "scale": 1.3524590163934427,
+      "destination": [
+        43,
+        43,
+        298,
+        298
+      ]
+    },
+    {
+      "frame": 1,
+      "sourceFrame": 1,
+      "crop": {
+        "left": 275,
+        "top": 18,
+        "width": 222,
+        "height": 214,
+        "offsetTop": 18,
+        "row": 0
+      },
+      "scale": 1.3524590163934427,
+      "destination": [
+        42,
+        48,
+        300,
+        289
+      ]
+    },
+    {
+      "frame": 2,
+      "sourceFrame": 2,
+      "crop": {
+        "left": 545,
+        "top": 23,
+        "width": 208,
+        "height": 213,
+        "offsetTop": 23,
+        "row": 0
+      },
+      "scale": 1.3524590163934427,
+      "destination": [
+        52,
+        48,
+        281,
+        288
+      ]
+    },
+    {
+      "frame": 3,
+      "sourceFrame": 3,
+      "crop": {
+        "left": 800,
+        "top": 22,
+        "width": 203,
+        "height": 216,
+        "offsetTop": 22,
+        "row": 0
+      },
+      "scale": 1.3524590163934427,
+      "destination": [
+        55,
+        46,
+        275,
+        292
+      ]
+    },
+    {
+      "frame": 4,
+      "sourceFrame": 4,
+      "crop": {
+        "left": 22,
+        "top": 265,
+        "width": 215,
+        "height": 219,
+        "offsetTop": 9,
+        "row": 1
+      },
+      "scale": 1.3524590163934427,
+      "destination": [
+        47,
+        44,
+        291,
+        296
+      ]
+    },
+    {
+      "frame": 5,
+      "sourceFrame": 5,
+      "crop": {
+        "left": 297,
+        "top": 262,
+        "width": 199,
+        "height": 223,
+        "offsetTop": 6,
+        "row": 1
+      },
+      "scale": 1.3524590163934427,
+      "destination": [
+        58,
+        41,
+        269,
+        302
+      ]
+    },
+    {
+      "frame": 6,
+      "sourceFrame": 6,
+      "crop": {
+        "left": 562,
+        "top": 268,
+        "width": 174,
+        "height": 244,
+        "offsetTop": 12,
+        "row": 1
+      },
+      "scale": 1.3524590163934427,
+      "destination": [
+        75,
+        27,
+        235,
+        330
+      ]
+    },
+    {
+      "frame": 7,
+      "sourceFrame": 7,
+      "crop": {
+        "left": 831,
+        "top": 267,
+        "width": 160,
+        "height": 224,
+        "offsetTop": 11,
+        "row": 1
+      },
+      "scale": 1.3524590163934427,
+      "destination": [
+        84,
+        41,
+        216,
+        303
+      ]
+    },
+    {
+      "frame": 8,
+      "sourceFrame": 8,
+      "crop": {
+        "left": 11,
+        "top": 532,
+        "width": 236,
+        "height": 192,
+        "offsetTop": 20,
+        "row": 2
+      },
+      "scale": 1.4728033472803348,
+      "destination": [
+        18,
+        98,
+        348,
+        283
+      ]
+    },
+    {
+      "frame": 9,
+      "sourceFrame": 9,
+      "crop": {
+        "left": 265,
+        "top": 512,
+        "width": 239,
+        "height": 212,
+        "offsetTop": 0,
+        "row": 2
+      },
+      "scale": 1.4728033472803348,
+      "destination": [
+        16,
+        69,
+        352,
+        312
+      ]
+    },
+    {
+      "frame": 10,
+      "sourceFrame": 12,
+      "crop": {
+        "left": 13,
+        "top": 724,
+        "width": 234,
+        "height": 197,
+        "offsetTop": 0,
+        "row": 3
+      },
+      "scale": 1.4728033472803348,
+      "destination": [
+        20,
+        64,
+        345,
+        290
+      ]
+    },
+    {
+      "frame": 11,
+      "sourceFrame": 10,
+      "crop": {
+        "left": 522,
+        "top": 512,
+        "width": 237,
+        "height": 212,
+        "offsetTop": 0,
+        "row": 2
+      },
+      "scale": 1.4728033472803348,
+      "destination": [
+        18,
+        69,
+        349,
+        312
+      ]
+    },
+    {
+      "frame": 12,
+      "sourceFrame": 13,
+      "crop": {
+        "left": 271,
+        "top": 724,
+        "width": 230,
+        "height": 192,
+        "offsetTop": 0,
+        "row": 3
+      },
+      "scale": 1.4728033472803348,
+      "destination": [
+        23,
+        64,
+        339,
+        283
+      ]
+    },
+    {
+      "frame": 13,
+      "sourceFrame": 11,
+      "crop": {
+        "left": 782,
+        "top": 517,
+        "width": 227,
+        "height": 183,
+        "offsetTop": 5,
+        "row": 2
+      },
+      "scale": 1.4728033472803348,
+      "destination": [
+        25,
+        76,
+        334,
+        270
+      ]
+    },
+    {
+      "frame": 14,
+      "sourceFrame": 14,
+      "crop": {
+        "left": 533,
+        "top": 724,
+        "width": 219,
+        "height": 194,
+        "offsetTop": 0,
+        "row": 3
+      },
+      "scale": 1.4728033472803348,
+      "destination": [
+        31,
+        64,
+        323,
+        286
+      ]
+    },
+    {
+      "frame": 15,
+      "sourceFrame": 15,
+      "crop": {
+        "left": 795,
+        "top": 734,
+        "width": 195,
+        "height": 182,
+        "offsetTop": 10,
+        "row": 3
+      },
+      "scale": 1.4728033472803348,
+      "destination": [
+        49,
+        79,
+        287,
+        268
+      ]
+    },
+    {
+      "frame": 16,
+      "sourceFrame": 16,
+      "crop": {
+        "left": 13,
+        "top": 938,
+        "width": 225,
+        "height": 262,
+        "offsetTop": 6,
+        "row": 4
+      },
+      "scale": 1.0963455149501662,
+      "destination": [
+        69,
+        64,
+        247,
+        287
+      ]
+    },
+    {
+      "frame": 17,
+      "sourceFrame": 17,
+      "crop": {
+        "left": 263,
+        "top": 941,
+        "width": 239,
+        "height": 259,
+        "offsetTop": 9,
+        "row": 4
+      },
+      "scale": 1.0963455149501662,
+      "destination": [
+        61,
+        67,
+        262,
+        284
+      ]
+    },
+    {
+      "frame": 18,
+      "sourceFrame": 18,
+      "crop": {
+        "left": 526,
+        "top": 933,
+        "width": 238,
+        "height": 267,
+        "offsetTop": 1,
+        "row": 4
+      },
+      "scale": 1.0963455149501662,
+      "destination": [
+        62,
+        58,
+        261,
+        293
+      ]
+    },
+    {
+      "frame": 19,
+      "sourceFrame": 19,
+      "crop": {
+        "left": 779,
+        "top": 934,
+        "width": 232,
+        "height": 266,
+        "offsetTop": 2,
+        "row": 4
+      },
+      "scale": 1.0963455149501662,
+      "destination": [
+        65,
+        59,
+        254,
+        292
+      ]
+    },
+    {
+      "frame": 20,
+      "sourceFrame": 20,
+      "crop": {
+        "left": 12,
+        "top": 1218,
+        "width": 240,
+        "height": 299,
+        "offsetTop": 10,
+        "row": 5
+      },
+      "scale": 1.0963455149501662,
+      "destination": [
+        61,
+        25,
+        263,
+        328
+      ]
+    },
+    {
+      "frame": 21,
+      "sourceFrame": 21,
+      "crop": {
+        "left": 268,
+        "top": 1218,
+        "width": 235,
+        "height": 299,
+        "offsetTop": 10,
+        "row": 5
+      },
+      "scale": 1.0963455149501662,
+      "destination": [
+        63,
+        25,
+        258,
+        328
+      ]
+    },
+    {
+      "frame": 22,
+      "sourceFrame": 22,
+      "crop": {
+        "left": 522,
+        "top": 1218,
+        "width": 235,
+        "height": 299,
+        "offsetTop": 10,
+        "row": 5
+      },
+      "scale": 1.0963455149501662,
+      "destination": [
+        63,
+        25,
+        258,
+        328
+      ]
+    },
+    {
+      "frame": 23,
+      "sourceFrame": 23,
+      "crop": {
+        "left": 778,
+        "top": 1216,
+        "width": 234,
+        "height": 301,
+        "offsetTop": 8,
+        "row": 5
+      },
+      "scale": 1.0963455149501662,
+      "destination": [
+        64,
+        23,
+        257,
+        330
+      ]
+    }
+  ],
+  "drawingOrder": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    12,
+    10,
+    13,
+    11,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ]
+}

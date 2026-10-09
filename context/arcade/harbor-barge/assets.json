@@ -1,0 +1,114 @@
+[
+  {
+    "path": "public/arcade/sprites/bosses/barge/body.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 471172,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/maps/harbor/panorama.webp",
+    "width": 2172,
+    "height": 724,
+    "bytes": 466272,
+    "alpha": false
+  },
+  {
+    "path": "public/arcade/sprites/bosses/barge/damaged.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 474890,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/maps/harbor/distant.webp",
+    "width": 2172,
+    "height": 724,
+    "bytes": 347996,
+    "alpha": false
+  },
+  {
+    "path": "public/arcade/maps/harbor/fair.webp",
+    "width": 2172,
+    "height": 724,
+    "bytes": 438052,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/maps/harbor/water.webp",
+    "width": 2172,
+    "height": 202,
+    "bytes": 110396,
+    "alpha": false
+  },
+  {
+    "path": "public/arcade/sprites/bosses/barge/shield.webp",
+    "width": 468,
+    "height": 475,
+    "bytes": 82448,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/barge/cannon.webp",
+    "width": 513,
+    "height": 319,
+    "bytes": 63438,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/barge/wheel.webp",
+    "width": 462,
+    "height": 446,
+    "bytes": 100378,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/barge/mallet.webp",
+    "width": 442,
+    "height": 465,
+    "bytes": 30642,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/maps/harbor/grove.webp",
+    "width": 640,
+    "height": 610,
+    "bytes": 202790,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/maps/harbor/reeds.webp",
+    "width": 572,
+    "height": 575,
+    "bytes": 198290,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/maps/harbor/boat.webp",
+    "width": 662,
+    "height": 435,
+    "bytes": 86772,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/maps/harbor/lantern.webp",
+    "width": 333,
+    "height": 596,
+    "bytes": 69574,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/enemies/river-diver.webp",
+    "width": 1024,
+    "height": 256,
+    "bytes": 78824,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/effects/harbor-effects.webp",
+    "width": 1024,
+    "height": 768,
+    "bytes": 288848,
+    "alpha": true
+  }
+]

@@ -11,7 +11,7 @@ const hash=path=>createHash('sha256').update(readFileSync('public'+path)).digest
 test('five chapters have different painted worlds, terrain and ten independent scores',()=>{
  expect(new Set(LEVELS.map(l=>hash(l.background))).size).toBe(5);
  expect(new Set(LEVELS.map(l=>hash(l.world.ground))).size).toBe(5);
- expect(new Set(LEVELS.map(l=>l.world.terrain)).size).toBe(5);
+ expect(new Set(LEVELS.map(l=>l.world.terrain)).size).toBe(4); // Both river stages share physical bank behavior, with different artwork.
  const songs=LEVELS.flatMap((_,i)=>[adventureMusic(i,'playing'),adventureMusic(i,'playing',true)]);
  expect(new Set(songs.map(s=>hash(s.src))).size).toBe(10);
  for(let i=0;i<5;i++){
@@ -22,8 +22,10 @@ test('five chapters have different painted worlds, terrain and ten independent s
 });
 
 test('each boss uses distinct artwork and attack-specific telegraph and action poses',()=>{
- expect(new Set(BOSS_ART.map((key,i)=>hash('/arcade/sprites/bosses/'+(i===1?'organ/body':key)+'.webp'))).size).toBe(5);
+ expect(new Set(BOSS_ART.map((key,i)=>hash('/arcade/sprites/bosses/'+(i===1?'organ/body':i===2?'barge/body':key)+'.webp'))).size).toBe(5);
  for(let i=0;i<5;i++)for(const move of BOSS_MOVES[i]){
+  if(i===3){const boss={hp:720,stage:1,phase:'warn',move,clock:0,timer:1,warnDuration:1,attackClock:.8,duration:2,shotClock:.1,sprintDistance:34};const a=bossDrawing({index:i,boss}),b=bossDrawing({index:i,boss:{...boss,phase:'attack',release:.2}});expect(a.key).toMatch(/^harlequin-(motion|inferno|fire-actions)/);expect(b.key).toMatch(/^harlequin-(motion|inferno|fire-actions|sprint)/);expect([b.key,b.frame]).not.toEqual([a.key,a.frame]);continue;}
+  if(i===2){const boss={hp:320,phase:'warn',move};expect(bossDrawing({index:i,boss})).toEqual({key:'barge-body',frame:2});expect(bossDrawing({index:i,boss:{...boss,phase:'attack'}})).toEqual({key:'barge-body',frame:3});continue;}
   if(i===1){const boss={hp:164,phase:'warn',move};expect(bossDrawing({index:i,boss})).toEqual({key:'organ-machine',frame:0});expect(bossDrawing({index:i,boss:{...boss,phase:'attack',release:.2}})).toEqual({key:'organ-machine',frame:2});continue;}
   const sheet=BOSS_ART[i],a={hp:10,flash:0,move,clock:.2,attackClock:.2};
   expect(BOSS_POSES[sheet][move].warn).toContain(actorFrame({...a,phase:'warn'},false,sheet));
@@ -76,9 +78,11 @@ test('parallax remains continuous when the camera crosses a mirrored tile bounda
  await page.goto('/arcade');await openAdventureMenu(page);
  const delta=await page.evaluate(async()=>{
   const {createAdventure}=await import('/src/components/arcade/adventure/engine/adventureModel.js'),{loadAdventureArt,renderAdventure}=await import('/src/components/arcade/adventure/render/adventureCanvas.js');
-  const art=await loadAdventureArt(),s=createAdventure(3),canvas=document.createElement('canvas');Object.assign(canvas.style,{width:'960px',height:'540px'});document.body.append(canvas);
+  // The Grand Ring no longer has a foreground tile. Exercise the remaining
+  // mirrored midground in the fifth chapter rather than the removed curtain.
+  const art=await loadAdventureArt(),s=createAdventure(4),canvas=document.createElement('canvas');Object.assign(canvas.style,{width:'960px',height:'540px'});document.body.append(canvas);
   s.player.x=-2000;s.platforms=[];s.enemies=[];s.cages=[];s.pickups=[];s.stars=[];s.hazards=[];
-  const boundary=425*art.mid3.width/art.mid3.height/s.level.world.midSpeed;
+  const boundary=425*art.mid4.width/art.mid4.height/s.level.world.midSpeed;
   const capture=x=>{s.camera.x=x;renderAdventure(canvas,s,art,{reduced:true});return canvas.getContext('2d').getImageData(0,120,960,230).data;};
   const before=capture(boundary-.05),after=capture(boundary+.05);let sum=0;for(let i=0;i<before.length;i+=4)for(let ch=0;ch<3;ch++)sum+=Math.abs(before[i+ch]-after[i+ch]);canvas.remove();return sum/(before.length/4*3);
  });

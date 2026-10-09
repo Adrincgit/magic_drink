@@ -32,7 +32,7 @@ export default function useAdventureGamepad(options){
    if(mode==='playing'){
     if(edges.includes('pause')){latest.current.onInput({},[]);latest.current.onAction('pause');}
     else if(edges.includes('interact')){latest.current.onInput({},[]);latest.current.onAction('interact');}
-    else latest.current.onInput(keys,edges);
+    else latest.current.onInput(keys,edges,pad.id);
    }else{
     latest.current.onInput({},[]);
     if(!mode.startsWith('shop-')&&!['loading','settling','between'].includes(mode)){

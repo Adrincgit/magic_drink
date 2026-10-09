@@ -1,0 +1,32 @@
+[
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/mid.webp",
+    "width": 2048,
+    "height": 1024,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/ultimate-portrait.webp",
+    "width": 800,
+    "height": 1200,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/ultimate.webp",
+    "width": 2048,
+    "height": 1024,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/ultimate-effects.webp",
+    "width": 1024,
+    "height": 768,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/ultimate-beam.webp",
+    "width": 1024,
+    "height": 1024,
+    "alpha": true
+  }
+]

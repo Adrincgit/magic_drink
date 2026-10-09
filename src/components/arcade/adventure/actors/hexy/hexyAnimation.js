@@ -6,24 +6,31 @@ import airSuperAtlas from './hexyAirSuperAtlas';
 import standingDownAtlas from './hexyStandingDownAtlas';
 import crouchRestAtlas from './hexyCrouchRestAtlas';
 import actionAtlas from './hexyActionAtlas';
+import superCastAtlas from './hexySuperCastAtlas';
+import {clashPortraitFrames,castingWindFrame} from '../../engine/clashActing';
 import {hexyRegistration} from './hexyPoseRegistration';
 import {shopEntryPose} from '../../engine/adventureShop';
+import {circusEntryPose} from '../../engine/adventureCircusEntrance';
 const atlas={...originalAtlas,...combatAtlas,...movementAtlas,...handAtlas,...airSuperAtlas,...standingDownAtlas,...crouchRestAtlas,...actionAtlas};
 atlas['drink-original']=Array.from({length:4},()=>({tip:[236,250]}));
+atlas['clash-fall']=Array.from({length:8},()=>({tip:[220,215]}));
+atlas['super-cast']=superCastAtlas;
 for(const sheet of ['shop-enter','shop-exit'])atlas[sheet]=Array.from({length:8},()=>({tip:[236,250]}));
 
 export const HEXY_SHEETS=['air-aim','ground-aim','run','jump','crouch-walk','roll','cast','heavy','reactions','run-fire','run-diagonal-up','stand-fire','air-dash','guard-pose','somersault','glide','air-heavy','aim-down-diagonal','aim-down','crouch-heavy','super-charge','super-release','celebrate','flag-plant','drink-original','air-super','air-super-release','shop-enter','shop-exit'];
 export const HEXY_SIZE=116;
+HEXY_SHEETS.push('clash-fall','super-cast');
 export const HEXY_RUN_FRAMES=atlas.run.length;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
 // Select drawings from physical state; jump poses never loop on a wall clock.
 export function hexyPose(s){
  const p=s.player,cast=p.cast>0,castFrame=[1,2,0,3][clamp(Math.floor((.24-p.cast)/.06),0,3)];
- const entering=shopEntryPose(s);if(entering)return entering;
+ if(p.clashFlight)return{sheet:'clash-fall',frame:p.clashFlight.frame};
+ const entering=circusEntryPose(s)||shopEntryPose(s);if(entering)return entering;
  if(s.clear){
   if(s.clear.stage==='land')return{sheet:'jump',frame:5};
-  if(s.clear.stage==='leave')return{sheet:'run',frame:Math.floor(p.stride*HEXY_RUN_FRAMES)%HEXY_RUN_FRAMES};
+  if(s.clear.stage==='leave')return Math.abs(p.vx)>1?{sheet:'run',frame:Math.floor(p.stride*HEXY_RUN_FRAMES)%HEXY_RUN_FRAMES}:{sheet:'reactions',frame:0};
   return{sheet:'flag-plant',frame:clamp(Math.floor(s.clear.age/.4),0,3)};
  }
  // Recoil follows each actual shot, not a separate looping wall clock. Between
@@ -34,11 +41,10 @@ export function hexyPose(s){
  if(p.dash>0)return {sheet:p.dashAir?'air-dash':'roll',frame:clamp(Math.floor((1-p.dash/p.dashDuration)*8),0,7)};
  if(p.hitReact>0)return {sheet:'reactions',frame:4+clamp(Math.floor((.32-p.hitReact)*12.5),0,3)};
  if(p.guarding)return {sheet:'guard-pose',frame:p.guardHit>0?4:2+Math.floor(s.time*5)%2};
+ if(p.superCast>0)return {sheet:'super-cast',frame:(s.powerClash?clashPortraitFrames(s.powerClash).hexy:3)*3+castingWindFrame(s.fxTime)};
  if(s.superCinematic?.airborne){
-  if(p.superCast>0)return {sheet:'air-super-release',frame:Math.floor(s.superCinematic.age*10)%4};
   if(p.charge>0)return {sheet:'air-super',frame:clamp(Math.floor(p.charge/.225),0,3)};
  }
- if(p.superCast>0)return {sheet:'super-release',frame:s.superCinematic?.age>2.95?3:1+Math.floor((s.superCinematic?.age||s.fxTime)*10)%2};
  if(p.charge>0)return {sheet:'super-charge',frame:clamp(Math.floor(p.charge/.225),0,3)};
  if(p.specialCast>0){
   const frame=[1,2,2,3][clamp(Math.floor((.36-p.specialCast)/.09),0,3)];

@@ -1,4 +1,5 @@
 import {SUPER_WINDUP} from '../engine/adventureMagic';
+import {drawDuelCharge} from './duelCutinCanvas';
 
 const clamp=n=>Math.max(0,Math.min(1,n));
 export function superCutinState(s,reduced=false){
@@ -23,6 +24,7 @@ function ribbon(c,y,width,height){
 // A screen-space illustration, independent of world zoom and Hexy's facing.
 // Confined to the left side. It fades there instead of crossing the battlefield.
 export function drawSuperCutin(c,s,art,reduced=false,en=false){
+ if(s.powerClash)return drawDuelCharge(c,s,art,false,reduced);
  const q=superCutinState(s,reduced),portrait=art['hexy-encore-portrait'];
  if(!q||!portrait)return false;
  c.save();c.translate(q.x,0);c.globalAlpha=q.alpha;

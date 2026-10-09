@@ -1,0 +1,2 @@
+// Measured release-flame centers; logical 320px actor size, facing left.
+export const fluidSockets=[{"vault":{"x":-189.45,"y":-168.17},"fan":{"x":-157.13,"y":-172.05},"ribbon":{"x":-156.3,"y":-74.47}},{"vault":{"x":-190.75,"y":-170.19},"fan":{"x":-160.95,"y":-173.85},"ribbon":{"x":-158.25,"y":-74.04}},{"vault":{"x":-190.1,"y":-171.05},"fan":{"x":-158.06,"y":-175.07},"ribbon":{"x":-158.25,"y":-73.67}}];

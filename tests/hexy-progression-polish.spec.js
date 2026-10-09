@@ -12,13 +12,17 @@ import {organPipes,stepOrganRain} from '../src/components/arcade/adventure/actor
 import {stepWorldEffects} from '../src/components/arcade/adventure/engine/adventureEffects';
 import {sanitizeSave} from '../src/components/arcade/shared/arcadeStore';
 import {openAdventureMenu} from './arcade-input.helpers';
+import {LOCAL_RESET_KEY} from '../src/components/arcade/shared/arcadeLocalReset';
+// These tests seed a wallet deliberately; the owner's one-time local reset
+// must not erase that fixture during initial store hydration.
+test.beforeEach(async({page})=>{await page.addInitScript(key=>localStorage.setItem(key,'done'),LOCAL_RESET_KEY);});
 
 const quiet=(index=0,carry={})=>{const s=createAdventure(index,false,carry);for(const k of ['enemies','outposts','supplies','pickups','hazards','cages'])s[k]=[];return s;};
 const tick=(s,keys={},n=1)=>{for(let i=0;i<n;i++)stepAdventure(s,keys,1/120);};
-test('five permanent ten-star treasures per chapter; tents reveal them only once',()=>{
+test('five permanent treasures per exploration chapter; dedicated bosses have no rescue hunt',()=>{
  const ids=COLLECTIBLES.flat().map(q=>q.id);expect(new Set(ids).size).toBe(ids.length);
  for(let index=0;index<5;index++){
-  const s=createAdventure(index),treasures=s.stars.filter(q=>q.value===10);expect(treasures).toHaveLength(5);
+  const s=createAdventure(index),treasures=s.stars.filter(q=>q.value===10);if(s.level.bossOnly){expect(treasures).toHaveLength(0);continue;}expect(treasures).toHaveLength(5);
   for(const q of treasures){if(q.hidden){expect(collectAdventureStar(s,q)).toBe(false);damageOutpost(s,s.outposts[q.outpost],99);expect(q.hidden).toBe(false);}expect(collectAdventureStar(s,q)).toBe(true);expect(collectAdventureStar(s,q)).toBe(false);}
   expect(s.starMoney).toBe(50);retryAdventure(s);expect(s.stars.filter(q=>q.value===10&&q.taken)).toHaveLength(5);
   const again=createAdventure(index,false,{collectedStars:treasures.map(q=>q.id)});expect(again.stars.filter(q=>q.value===10&&!q.taken)).toHaveLength(0);expect(again.stars.some(q=>q.value===1&&!q.taken)).toBe(true);

@@ -21,4 +21,4 @@ export function updateArcadeAudioSettings(patch){
  try{localStorage.setItem(AUDIO_SETTINGS_KEY,JSON.stringify(current));}catch{/* Keep the preferences for this visit. */}
  listeners.forEach(fn=>fn());
 }
-export function adventureMusicVolume(settings,sceneGain){return settings.muted?0:sceneGain*settings.master/100*settings.music/100;}
+export function adventureMusicVolume(settings,sceneGain=1){return settings.muted?0:Math.max(0,Math.min(1,sceneGain))*settings.master/100*settings.music/100;}

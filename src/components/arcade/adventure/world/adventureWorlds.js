@@ -8,12 +8,12 @@ export const WORLDS=[
  {key:'riverwoods',background:'/arcade/maps/riverwoods/valley.webp',midground:null,ground:art('riverwoods-ground'),groundInset:.055,groundFillInset:.15,farSpeed:.045,midSpeed:.145,
   terrain:'riverbank',surface:'#96ad71',edge:'#4a644e',soil:['#90714f','#3b5149'],accent:'#ffe0a3',ambient:'leaves',
   music:theme('woods','Faroles a contratiempo','serio','La orden del director')},
- {key:'woods',background:art('woods'),midground:art('woods-mid'),farSpeed:.11,midSpeed:.32,
-  terrain:'roots',surface:'#6b9978',edge:'#314f56',soil:['#726e56','#303948'],accent:'#ffcd77',ambient:'fireflies',
-  music:theme('canopy','Un vals entre las hojas','alegre','Malabares sin red')},
- {key:'ring',background:art('ring'),midground:art('ring-mid'),farSpeed:.15,midSpeed:.42,
+ {key:'harbor',background:'/arcade/maps/harbor/panorama.webp',midground:null,ground:art('woods-ground'),groundInset:.04,groundFillInset:.08,farSpeed:.022,midSpeed:.18,
+  terrain:'riverbank',surface:'#6b9978',edge:'#314f56',soil:['#726e56','#303948'],accent:'#ffd290',ambient:'fireflies',
+  music:theme('canopy','Faroles sobre el agua','alegre','La barcaza del redoble')},
+ {key:'grand-ring',background:'/arcade/maps/grand-ring/background.webp',midground:null,ground:art('ring-ground'),groundInset:.067,groundFillInset:.067,farSpeed:.12,midSpeed:1,
   terrain:'boards',surface:'#f9c16f',edge:'#71384c',soil:['#bc6c57','#67394b'],accent:'#ffdf9a',ambient:'bulbs',
-  music:theme('ring','Tres pistas y una sonrisa','agresivo','¡Tiembla la pista!')},
+  music:theme('ring','Entre bastidores','arlequin_fuego','El arlequín del Gran Telón')},
  {key:'silence',background:art('silence'),midground:art('silence-mid'),farSpeed:.1,midSpeed:.3,
   terrain:'enchanted',surface:'#d6bcea',edge:'#665089',soil:['#66628f','#302740'],accent:'#b9ecff',ambient:'crystals',
   music:theme('silence','El secreto de las jaulas','muta','Que vuelva a cantar la noche')},
@@ -29,6 +29,6 @@ export function adventureMusic(index,phase,boss=false,won=false){
  const track=WORLDS[index].music[boss?'boss':'explore'];
  // User-supplied, livelier arrangements. Original Oggs remain alongside them
  // for comparison; keep the logical track keys and all pause/mute behavior.
- const extension=['meadow','woods','troupe','serio'].includes(track.key)?'mp3':'ogg';
+ const extension=['meadow','woods','troupe','serio','arlequin_fuego'].includes(track.key)?'mp3':'ogg';
  return {...track,src:'/arcade/music/'+(boss?'bosses/':'exploration/')+track.key+'.'+extension,loop:true};
 }

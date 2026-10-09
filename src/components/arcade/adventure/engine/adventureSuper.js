@@ -1,4 +1,4 @@
-import {SUPER_COST,SUPER_EXHAUSTION,SUPER_WINDUP,SUPER_DURATION} from './adventureMagic';
+import {SUPER_COST,SUPER_EXHAUSTION,SUPER_WINDUP,SUPER_DURATION,SUPER_BOSS_DAMAGE} from './adventureMagic';
 import {hexyMuzzle} from '../actors/hexy/hexyAnimation';
 import {bossTargets} from '../actors/enemies/adventureEnemies';
 import {damageOutpost} from '../actors/enemies/adventureOutposts';
@@ -47,9 +47,12 @@ export function stepSuper(s,dt,{defeat,particles,burst,say}){
   }
   const b=s.boss;
   if(b.hp>0&&!['sleep','intro','transform','defeated'].includes(b.phase)&&bossTargets(s).some(t=>s.index===1?bodyInBeam(t):inBeam(t.x+t.w/2,t.y+t.h/2,Math.max(t.w,t.h)/2))){
-   b.trailHp=Math.max(b.trailHp||b.hp,b.hp);b.hp=Math.max(0,b.hp-8);bossHitFeedback(s,true);b.recoil=q.dir;
+   b.trailHp=Math.max(b.trailHp||b.hp,b.hp);b.hp=Math.max(0,b.hp-SUPER_BOSS_DAMAGE/8);bossHitFeedback(s,true);b.recoil=q.dir;
    burst(s,b.x,b.y-(s.index===1?204:55),0,150);particles(s,b.x,b.y-(s.index===1?204:50),'#fff1a4',6);
-   if(!b.hp){b.phase='defeated';s.arenaLocked=false;s.hearts=Math.min(s.maxHearts,s.hearts+2);s.score+=60;s.events.push('bossDown');say(s,'bossDown');s.hostile=[];s.enemies=s.enemies.filter(e=>e.x<s.level.arena.left);}
+   if(!b.hp){
+    if(s.index===3){b.phase='dying';b.defeatPending=true;s.hostile=[];}
+    else{b.phase='defeated';s.arenaLocked=false;s.hearts=Math.min(s.maxHearts,s.hearts+2);s.score+=60;s.events.push('bossDown');say(s,'bossDown');s.hostile=[];s.enemies=s.enemies.filter(e=>e.x<s.level.arena.left);}
+   }
   }
  }
  if(q.age>=SUPER_DURATION){

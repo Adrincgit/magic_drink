@@ -1,0 +1,1301 @@
+{
+  "created": "2026-10-08",
+  "mode": "built-in image_gen",
+  "assets": {
+    "normal": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-05c98e36-4ee7-483e-adab-78ccc0d54ae2.png",
+      "prompt": "Use case: illustration-story. Asset type: production 2D game animation atlas. Use the reference only for the exact harlequin identity and clean ink/cel-shaded anime-cartoon style. Create EXACTLY 24 full-body consecutive animation drawings, FOUR columns by SIX rows, generous transparent gutters, native transparent background. The character faces LEFT in EVERY cell: pale evil clown face, red nose, black hair, a SINGLE red cone hat and golden bell, ivory ruff, red-and-black diamond suit, gold wrist cuffs, long red cape, curled black boots. First THREE rows (12 drawings): smoothly flowing anticipation before a powerful running charge. Standing tense, shoulders and cape gather, bends knees progressively, plants one boot, crouches forward, shifts weight, one hand briefly grazes the floor, cape rises, hat and bell drag, pushes off into first running stride. ALL 12 poses distinct, no long static hold, no cloned poses. Last THREE rows (12 drawings): dramatic ground SLAM casting animation. Raises one fist high behind his head; twists with cape sweeping; bends down hard; fist drives down; fist contacts ground on frame 7 of this sequence with compressed body; cape flares upward; recoils; slowly pulls fist up and rises to ready. One fist striking the floor, no weapon. Entire body, fingers, both boots and cape visible in every cell. Consistent anatomy and size; changing cape silhouette every drawing. Simple broad flat cel shadows and crisp clean outlines matching Hexy's game aesthetic, no realistic texture, no overly intricate detail. NO flames, NO dust, NO terrain, NO decorative background, NO numbers or labels. Each sprite isolated and no overlapping neighboring cells.",
+      "registration": [
+        {
+          "crop": [
+            60,
+            16,
+            182,
+            237
+          ],
+          "anchor": 146.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            142,
+            177
+          ]
+        },
+        {
+          "crop": [
+            297,
+            40,
+            198,
+            213
+          ],
+          "anchor": 394,
+          "scale": 1.3191489361702127,
+          "destination": [
+            128,
+            209
+          ]
+        },
+        {
+          "crop": [
+            536,
+            70,
+            206,
+            180
+          ],
+          "anchor": 626,
+          "scale": 1.3191489361702127,
+          "destination": [
+            137,
+            253
+          ]
+        },
+        {
+          "crop": [
+            778,
+            86,
+            228,
+            165
+          ],
+          "anchor": 877,
+          "scale": 1.3191489361702127,
+          "destination": [
+            125,
+            272
+          ]
+        },
+        {
+          "crop": [
+            29,
+            334,
+            228,
+            168
+          ],
+          "anchor": 116.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            141,
+            268
+          ]
+        },
+        {
+          "crop": [
+            285,
+            336,
+            228,
+            180
+          ],
+          "anchor": 382.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            127,
+            253
+          ]
+        },
+        {
+          "crop": [
+            529,
+            324,
+            225,
+            188
+          ],
+          "anchor": 629.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            123,
+            242
+          ]
+        },
+        {
+          "crop": [
+            773,
+            335,
+            239,
+            173
+          ],
+          "anchor": 924,
+          "scale": 1.3191489361702127,
+          "destination": [
+            57,
+            262
+          ]
+        },
+        {
+          "crop": [
+            26,
+            577,
+            228,
+            184
+          ],
+          "anchor": 172.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            63,
+            247
+          ]
+        },
+        {
+          "crop": [
+            280,
+            572,
+            211,
+            187
+          ],
+          "anchor": 418,
+          "scale": 1.3191489361702127,
+          "destination": [
+            74,
+            243
+          ]
+        },
+        {
+          "crop": [
+            515,
+            579,
+            233,
+            182
+          ],
+          "anchor": 667,
+          "scale": 1.3191489361702127,
+          "destination": [
+            55,
+            250
+          ]
+        },
+        {
+          "crop": [
+            770,
+            588,
+            238,
+            164
+          ],
+          "anchor": 949,
+          "scale": 1.3191489361702127,
+          "destination": [
+            20,
+            274
+          ]
+        },
+        {
+          "crop": [
+            33,
+            784,
+            221,
+            233
+          ],
+          "anchor": 136,
+          "scale": 1.3191489361702127,
+          "destination": [
+            120,
+            183
+          ]
+        },
+        {
+          "crop": [
+            277,
+            783,
+            236,
+            232
+          ],
+          "anchor": 384,
+          "scale": 1.3191489361702127,
+          "destination": [
+            115,
+            184
+          ]
+        },
+        {
+          "crop": [
+            540,
+            780,
+            219,
+            237
+          ],
+          "anchor": 646.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            116,
+            177
+          ]
+        },
+        {
+          "crop": [
+            792,
+            824,
+            214,
+            193
+          ],
+          "anchor": 895,
+          "scale": 1.3191489361702127,
+          "destination": [
+            120,
+            235
+          ]
+        },
+        {
+          "crop": [
+            49,
+            1047,
+            203,
+            219
+          ],
+          "anchor": 131.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            147,
+            201
+          ]
+        },
+        {
+          "crop": [
+            307,
+            1068,
+            200,
+            197
+          ],
+          "anchor": 388.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            148,
+            230
+          ]
+        },
+        {
+          "crop": [
+            542,
+            1057,
+            186,
+            211
+          ],
+          "anchor": 623.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            148,
+            212
+          ]
+        },
+        {
+          "crop": [
+            790,
+            1097,
+            213,
+            170
+          ],
+          "anchor": 886.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            129,
+            266
+          ]
+        },
+        {
+          "crop": [
+            40,
+            1329,
+            217,
+            177
+          ],
+          "anchor": 137.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            127,
+            257
+          ]
+        },
+        {
+          "crop": [
+            299,
+            1305,
+            208,
+            201
+          ],
+          "anchor": 383.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            145,
+            225
+          ]
+        },
+        {
+          "crop": [
+            543,
+            1297,
+            205,
+            209
+          ],
+          "anchor": 617,
+          "scale": 1.3191489361702127,
+          "destination": [
+            158,
+            214
+          ]
+        },
+        {
+          "crop": [
+            789,
+            1290,
+            199,
+            217
+          ],
+          "anchor": 880.5,
+          "scale": 1.3191489361702127,
+          "destination": [
+            135,
+            204
+          ]
+        }
+      ],
+      "output": "public/arcade/sprites/bosses/harlequin/inferno.webp"
+    },
+    "mid": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-a6621e86-2fe4-4faf-acd7-5077eec81122.png",
+      "prompt": "Edit the exact reference sprite sheet, preserving all TWENTY-FOUR full-body poses, four columns and six rows, facial identity, clean ink/cel shading, individual character sizes, position, cape movement and generous transparent gutters. Keep every limb, single cone hat, white ruff, golden cuffs and both boots. Change ONLY the costume wear: mid-battle damage: several torn red cape hems, some scorched dark red cloth edges and modest scuffs on suit and hat. The red and black diamonds remain readable. No blood, no wounds, no new particles, no terrain, no labels. Native transparent background everywhere outside the silhouettes.",
+      "registration": [
+        {
+          "crop": [
+            58,
+            17,
+            187,
+            237
+          ],
+          "anchor": 148,
+          "scale": 1.3135593220338984,
+          "destination": [
+            138,
+            179
+          ]
+        },
+        {
+          "crop": [
+            296,
+            35,
+            201,
+            218
+          ],
+          "anchor": 395.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            125,
+            204
+          ]
+        },
+        {
+          "crop": [
+            537,
+            69,
+            209,
+            182
+          ],
+          "anchor": 627,
+          "scale": 1.3135593220338984,
+          "destination": [
+            138,
+            251
+          ]
+        },
+        {
+          "crop": [
+            779,
+            86,
+            220,
+            166
+          ],
+          "anchor": 877,
+          "scale": 1.3135593220338984,
+          "destination": [
+            127,
+            272
+          ]
+        },
+        {
+          "crop": [
+            28,
+            333,
+            232,
+            170
+          ],
+          "anchor": 116.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            140,
+            267
+          ]
+        },
+        {
+          "crop": [
+            285,
+            335,
+            227,
+            181
+          ],
+          "anchor": 382.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            128,
+            252
+          ]
+        },
+        {
+          "crop": [
+            529,
+            323,
+            225,
+            189
+          ],
+          "anchor": 630,
+          "scale": 1.3135593220338984,
+          "destination": [
+            123,
+            242
+          ]
+        },
+        {
+          "crop": [
+            774,
+            336,
+            238,
+            173
+          ],
+          "anchor": 926.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            56,
+            263
+          ]
+        },
+        {
+          "crop": [
+            26,
+            571,
+            232,
+            191
+          ],
+          "anchor": 172.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            64,
+            239
+          ]
+        },
+        {
+          "crop": [
+            280,
+            563,
+            216,
+            198
+          ],
+          "anchor": 418.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            74,
+            230
+          ]
+        },
+        {
+          "crop": [
+            517,
+            577,
+            236,
+            185
+          ],
+          "anchor": 667.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            58,
+            247
+          ]
+        },
+        {
+          "crop": [
+            770,
+            579,
+            238,
+            174
+          ],
+          "anchor": 933.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            41,
+            261
+          ]
+        },
+        {
+          "crop": [
+            32,
+            784,
+            227,
+            233
+          ],
+          "anchor": 138,
+          "scale": 1.3135593220338984,
+          "destination": [
+            117,
+            184
+          ]
+        },
+        {
+          "crop": [
+            276,
+            783,
+            243,
+            233
+          ],
+          "anchor": 387.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            110,
+            184
+          ]
+        },
+        {
+          "crop": [
+            538,
+            779,
+            221,
+            239
+          ],
+          "anchor": 645.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            115,
+            176
+          ]
+        },
+        {
+          "crop": [
+            791,
+            823,
+            211,
+            195
+          ],
+          "anchor": 894.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            120,
+            234
+          ]
+        },
+        {
+          "crop": [
+            48,
+            1046,
+            205,
+            221
+          ],
+          "anchor": 131.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            146,
+            200
+          ]
+        },
+        {
+          "crop": [
+            307,
+            1067,
+            203,
+            199
+          ],
+          "anchor": 389,
+          "scale": 1.3135593220338984,
+          "destination": [
+            148,
+            229
+          ]
+        },
+        {
+          "crop": [
+            542,
+            1058,
+            190,
+            212
+          ],
+          "anchor": 623.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            149,
+            212
+          ]
+        },
+        {
+          "crop": [
+            790,
+            1098,
+            211,
+            170
+          ],
+          "anchor": 885,
+          "scale": 1.3135593220338984,
+          "destination": [
+            131,
+            267
+          ]
+        },
+        {
+          "crop": [
+            39,
+            1328,
+            215,
+            179
+          ],
+          "anchor": 137,
+          "scale": 1.3135593220338984,
+          "destination": [
+            127,
+            255
+          ]
+        },
+        {
+          "crop": [
+            298,
+            1302,
+            211,
+            206
+          ],
+          "anchor": 371.5,
+          "scale": 1.3135593220338984,
+          "destination": [
+            159,
+            219
+          ]
+        },
+        {
+          "crop": [
+            542,
+            1294,
+            208,
+            214
+          ],
+          "anchor": 617,
+          "scale": 1.3135593220338984,
+          "destination": [
+            157,
+            209
+          ]
+        },
+        {
+          "crop": [
+            787,
+            1290,
+            203,
+            219
+          ],
+          "anchor": 884,
+          "scale": 1.3135593220338984,
+          "destination": [
+            129,
+            202
+          ]
+        }
+      ],
+      "output": "public/arcade/sprites/bosses/harlequin/inferno-mid.webp"
+    },
+    "final": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-a7f43e85-6b37-4c0d-893c-83d3627d1b59.png",
+      "prompt": "Edit the exact reference sprite sheet, preserving all TWENTY-FOUR full-body poses, four columns and six rows, facial identity, clean ink/cel shading, individual character sizes, position, cape movement and generous transparent gutters. Keep every limb, single cone hat, white ruff, golden cuffs and both boots. Change ONLY the costume wear: final-battle damage: dramatically ragged red cape split into long trailing ribbons, frayed hat hem, scorched costume edges and scuffed charcoal patches over suit, while still red and black diamonds, not a different outfit. Fierce face, no blood, no wounds, no new particles, no terrain, no labels. Native transparent background everywhere outside the silhouettes.",
+      "registration": [
+        {
+          "crop": [
+            58,
+            13,
+            197,
+            241
+          ],
+          "anchor": 149,
+          "scale": 1.297071129707113,
+          "destination": [
+            138,
+            177
+          ]
+        },
+        {
+          "crop": [
+            296,
+            35,
+            208,
+            219
+          ],
+          "anchor": 399.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            122,
+            206
+          ]
+        },
+        {
+          "crop": [
+            537,
+            67,
+            215,
+            185
+          ],
+          "anchor": 646.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            114,
+            250
+          ]
+        },
+        {
+          "crop": [
+            778,
+            83,
+            230,
+            170
+          ],
+          "anchor": 877,
+          "scale": 1.297071129707113,
+          "destination": [
+            128,
+            269
+          ]
+        },
+        {
+          "crop": [
+            29,
+            336,
+            233,
+            168
+          ],
+          "anchor": 117,
+          "scale": 1.297071129707113,
+          "destination": [
+            142,
+            272
+          ]
+        },
+        {
+          "crop": [
+            285,
+            337,
+            231,
+            180
+          ],
+          "anchor": 382.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            130,
+            257
+          ]
+        },
+        {
+          "crop": [
+            529,
+            328,
+            227,
+            185
+          ],
+          "anchor": 630,
+          "scale": 1.297071129707113,
+          "destination": [
+            125,
+            250
+          ]
+        },
+        {
+          "crop": [
+            773,
+            334,
+            235,
+            175
+          ],
+          "anchor": 925.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            58,
+            263
+          ]
+        },
+        {
+          "crop": [
+            26,
+            572,
+            228,
+            192
+          ],
+          "anchor": 173,
+          "scale": 1.297071129707113,
+          "destination": [
+            65,
+            241
+          ]
+        },
+        {
+          "crop": [
+            280,
+            569,
+            217,
+            191
+          ],
+          "anchor": 419,
+          "scale": 1.297071129707113,
+          "destination": [
+            76,
+            242
+          ]
+        },
+        {
+          "crop": [
+            516,
+            577,
+            234,
+            187
+          ],
+          "anchor": 667,
+          "scale": 1.297071129707113,
+          "destination": [
+            60,
+            247
+          ]
+        },
+        {
+          "crop": [
+            769,
+            583,
+            238,
+            170
+          ],
+          "anchor": 933.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            43,
+            269
+          ]
+        },
+        {
+          "crop": [
+            32,
+            784,
+            227,
+            234
+          ],
+          "anchor": 141.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            114,
+            186
+          ]
+        },
+        {
+          "crop": [
+            276,
+            783,
+            241,
+            233
+          ],
+          "anchor": 391,
+          "scale": 1.297071129707113,
+          "destination": [
+            107,
+            188
+          ]
+        },
+        {
+          "crop": [
+            539,
+            779,
+            227,
+            239
+          ],
+          "anchor": 650.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            111,
+            180
+          ]
+        },
+        {
+          "crop": [
+            792,
+            833,
+            216,
+            186
+          ],
+          "anchor": 894.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            123,
+            249
+          ]
+        },
+        {
+          "crop": [
+            48,
+            1053,
+            208,
+            214
+          ],
+          "anchor": 131.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            148,
+            212
+          ]
+        },
+        {
+          "crop": [
+            306,
+            1072,
+            201,
+            195
+          ],
+          "anchor": 389.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            148,
+            237
+          ]
+        },
+        {
+          "crop": [
+            542,
+            1060,
+            209,
+            209
+          ],
+          "anchor": 624.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            149,
+            219
+          ]
+        },
+        {
+          "crop": [
+            790,
+            1097,
+            215,
+            171
+          ],
+          "anchor": 883.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            135,
+            268
+          ]
+        },
+        {
+          "crop": [
+            38,
+            1328,
+            227,
+            179
+          ],
+          "anchor": 138,
+          "scale": 1.297071129707113,
+          "destination": [
+            126,
+            258
+          ]
+        },
+        {
+          "crop": [
+            298,
+            1304,
+            217,
+            203
+          ],
+          "anchor": 391.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            135,
+            227
+          ]
+        },
+        {
+          "crop": [
+            542,
+            1295,
+            220,
+            213
+          ],
+          "anchor": 646,
+          "scale": 1.297071129707113,
+          "destination": [
+            121,
+            214
+          ]
+        },
+        {
+          "crop": [
+            787,
+            1293,
+            210,
+            216
+          ],
+          "anchor": 885.5,
+          "scale": 1.297071129707113,
+          "destination": [
+            128,
+            210
+          ]
+        }
+      ],
+      "output": "public/arcade/sprites/bosses/harlequin/inferno-final.webp"
+    },
+    "scene": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-6153d1f8-7d9c-41b6-8a70-cecd78b140b8.png",
+      "prompt": "Use case: illustration-story. Asset type: transparent 2D circus-game environmental decoration atlas. Create SIXTEEN hand-painted anime-cartoon illustration cells arranged FOUR columns by FOUR rows, generous empty transparent gutters, native transparent background. First row FOUR consecutive animated drawings of one LEFT stage boundary: a solid burgundy wood circus barricade 1.5 times as tall as wide, chunky gold scrollwork, red/black diamond motif, heavy upright post and rigid narrow velvet drape, fully opaque physical-looking foot at bottom, tiny warm lamp atop, same structure in each frame, lamp and tassel subtly sway. Side-on view, clean bold outline and cel shadows, NO arrow NO sign NO text; intended as readable wall at edge of boss arena, not foreground screen overlay. Rows 2 and 3 EIGHT animated drawings of low background fire burning a theatrical timber pile: orange yellow tongues, red edges, dark charcoal curls, flying painted embers; broader than tall, wide horizontal fire silhouette, all flames grow/sway between frames, sits on a consistent baseline, no checkerboard baked in. Last row FOUR animated flame aura wisps: tall narrow S-shaped orange/red translucent flame ribbons curling upward, several separated wisps in each cell, flame and heat only without character, ground or geometric outlines. All art clean 2D ink and cel shading, consistent flat game lighting, no photorealism, no lens flare, no SVG-looking arrows or circles.",
+      "registration": [
+        {
+          "source": [
+            0,
+            0,
+            328,
+            384
+          ],
+          "destination": [
+            121,
+            10,
+            142,
+            340
+          ]
+        },
+        {
+          "source": [
+            328,
+            0,
+            328,
+            384
+          ],
+          "destination": [
+            118,
+            10,
+            149,
+            340
+          ]
+        },
+        {
+          "source": [
+            656,
+            0,
+            328,
+            384
+          ],
+          "destination": [
+            117,
+            10,
+            150,
+            340
+          ]
+        },
+        {
+          "source": [
+            984,
+            0,
+            328,
+            384
+          ],
+          "destination": [
+            114,
+            10,
+            156,
+            340
+          ]
+        },
+        {
+          "source": [
+            0,
+            384,
+            328,
+            257
+          ],
+          "destination": [
+            16,
+            189,
+            352,
+            161
+          ]
+        },
+        {
+          "source": [
+            328,
+            384,
+            328,
+            257
+          ],
+          "destination": [
+            16,
+            152,
+            352,
+            198
+          ]
+        },
+        {
+          "source": [
+            656,
+            384,
+            328,
+            257
+          ],
+          "destination": [
+            16,
+            110,
+            352,
+            240
+          ]
+        },
+        {
+          "source": [
+            984,
+            384,
+            328,
+            257
+          ],
+          "destination": [
+            16,
+            76,
+            352,
+            274
+          ]
+        },
+        {
+          "source": [
+            0,
+            641,
+            328,
+            268
+          ],
+          "destination": [
+            16,
+            160,
+            352,
+            190
+          ]
+        },
+        {
+          "source": [
+            328,
+            641,
+            328,
+            268
+          ],
+          "destination": [
+            16,
+            123,
+            352,
+            227
+          ]
+        },
+        {
+          "source": [
+            656,
+            641,
+            328,
+            268
+          ],
+          "destination": [
+            16,
+            80,
+            352,
+            270
+          ]
+        },
+        {
+          "source": [
+            984,
+            641,
+            328,
+            268
+          ],
+          "destination": [
+            16,
+            61,
+            352,
+            289
+          ]
+        },
+        {
+          "source": [
+            0,
+            909,
+            328,
+            290
+          ],
+          "destination": [
+            63,
+            10,
+            259,
+            340
+          ]
+        },
+        {
+          "source": [
+            328,
+            909,
+            328,
+            290
+          ],
+          "destination": [
+            55,
+            10,
+            274,
+            340
+          ]
+        },
+        {
+          "source": [
+            656,
+            909,
+            328,
+            290
+          ],
+          "destination": [
+            46,
+            10,
+            292,
+            340
+          ]
+        },
+        {
+          "source": [
+            984,
+            909,
+            328,
+            290
+          ],
+          "destination": [
+            49,
+            10,
+            287,
+            340
+          ]
+        }
+      ],
+      "output": "public/arcade/sprites/effects/painted-duel/inferno-scene.webp"
+    }
+  },
+  "backgrounds": [
+    {
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-448e12de-74b4-41c8-85e3-52e1092adb09.png",
+      "prompt": "Use case: lighting-weather. Edit target: the exact circus interior panorama reference. Preserve EXACT panorama composition, viewpoint, architectural positions, stage perspective, hanging drape shapes, ornate diamond crest, bleachers, pillars, and original wide aspect ratio. Hand-painted clean anime-cartoon game backdrop. NO characters, NO HUD, NO words, NO new objects. Change only the state of the existing circus interior to a fire spreading during a fire-harlequin boss fight. SECOND PHASE: early fire spreading: small bright orange flames licking bleacher upholstery and the lower borders of burgundy drapes, amber reflected heat on existing gilded edges, slight scorch marks and a few ascending charcoal wisps near the pillars. Add scattered painted embers in the upper interior. Keep the big central curtain mostly intact and dark, keep the stage floor dark and unobstructed so game actors and fire attacks read clearly. No full-screen fog, no bloom blur, no realistic photographic smoke, no complete destruction. Opaque background.",
+      "output": "public/arcade/maps/grand-ring/background-burning.webp"
+    },
+    {
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-d35946d1-053b-4314-aded-45f150dd08aa.png",
+      "prompt": "Use case: lighting-weather. Edit target: the exact circus interior panorama reference. Preserve EXACT panorama composition, viewpoint, architectural positions, stage perspective, hanging drape shapes, ornate diamond crest, bleachers, pillars, and original wide aspect ratio. Hand-painted clean anime-cartoon game backdrop. NO characters, NO HUD, NO words, NO new objects. Change only the state of the existing circus interior to a fire spreading during a fire-harlequin boss fight. THIRD PHASE: intensifying inferno. More orange-red flames climbing the SIDE drapes, the bleachers, and the edges of the overhead decorative fabric, with charred ragged borders and lit ember pockets; ember sparks rise throughout the upper interior. The ornate golden circus crest and central curtain remain recognizable in exactly their existing positions, with red/amber reflected light and limited scorching. Keep the central play area and bottom floor dark and clear, dark charcoal smoke stays behind the architecture, no fog over the whole frame, no photorealism, no blur. Opaque background.",
+      "output": "public/arcade/maps/grand-ring/background-inferno.webp"
+    }
+  ],
+  "backgroundRegistration": {
+    "width": 2172,
+    "height": 724,
+    "placement": "shared original panorama transform; crossfade 1.4 seconds per stage",
+    "processing": "mechanical format conversion only, native painted color"
+  },
+  "backgroundCorrection": {
+    "reason": "remove artificial pillar fire jets; organic cloth and bleacher fire",
+    "mode": "built-in image_gen",
+    "assets": [
+      {
+        "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-1dd667ca-c909-4731-8954-553e1504c537.png",
+        "prompt": "Edit target: the exact provided wide painted circus panorama. Preserve the EXACT camera viewpoint, all pillars and architecture, dark floor, curtains, bleachers, hanging chandeliers and golden center crest positions. Keep 2172:724 wide aspect. Hand-painted anime-cartoon game backdrop. Correction: remove every tall straight vertical flame or orange pinstripe running along a structural pillar or flagpole; the pillars must remain dark solid supports, not burning fire columns. Early fire must hug ONLY the irregular lower edges and folds of the overhead cloth and curtain drapery, plus a few low, spreading flame patches seated on the bleacher upholstery. Flames have organic short asymmetrical licking shapes, naturally connected to the cloth or seat surface, never evenly spaced columns, never long straight vertical streaks. Slight orange light bounced onto dark posts is okay; no post engulfed in flame. Second phase: small but clearly visible spreading fire. Keep the central curtain mostly intact, the architecture recognizable, and the full dark center-stage floor exactly unchanged and clear. No characters, no HUD, no text, no foreground or floor fire columns, no fog veil, no photorealism, no blur. Keep same ink lines and painterly colored artwork.",
+        "output": "public/arcade/maps/grand-ring/background-burning-v2.webp"
+      },
+      {
+        "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-e12950ec-698e-42d9-a40b-b9202247fb4c.png",
+        "prompt": "Edit target: the exact provided wide painted circus panorama. Preserve the EXACT camera viewpoint, all pillars and architecture, dark floor, curtains, bleachers, hanging chandeliers and golden center crest positions. Keep 2172:724 wide aspect. Hand-painted anime-cartoon game backdrop. Correction: remove EVERY tall straight vertical flame or orange pinstripe running along a structural pillar or flagpole. All vertical structural pillars must remain dark solid supports; NEVER look like a tall fire column. Intense third-phase fire should be a continuous ORGANIC creeping irregular glow and short broad curling flames connected to the irregular folds and torn edges of hanging cloth and low spreading bands on the BLEACHER upholstery, with dark charred patches. NO evenly spaced vertical flame jets anywhere. NO long straight flame strips. Burnt torn cloth above and glowing smoldering seats, with red/orange bounce light and little embers; strong but coherent with the actual objects burning. Keep central curtain readable and mostly closed, and preserve the entire dark floor EXACTLY as-is, wide unobstructed center-stage floor for game characters. No characters, no HUD, no words, no foreground flames, no fire columns from the floor, no fog over central field, no realism, no blur. Same painterly anime-cartoon ink style.",
+        "output": "public/arcade/maps/grand-ring/background-inferno-v2.webp"
+      }
+    ],
+    "animation": "runtime glow and convection on the native painted fire pixels; architecture registration preserved"
+  }
+}

@@ -1,4 +1,4 @@
-import {cameraView} from '../render/adventureCamera';
+import {cameraView,followAdventureCamera} from '../render/adventureCamera';
 import {stepWorldEffects} from './adventureEffects';
 // Completion is part of the world: land, plant, salute and leave the frame.
 // It starts after victory even if the player did not rescue a single bunny.
@@ -6,6 +6,8 @@ export function beginCompletion(s){
  if(s.clear||s.superCinematic||s.boss.hp>0||(!s.boss.engaged&&!s.boss.defeat&&s.player.x<s.level.arena.entry))return;
  if(s.index===0&&!s.boss.defeat?.ready)return;
  if(s.index===1&&!s.boss.defeat?.ready)return;
+ if(s.index===2&&!s.boss.defeat?.ready)return;
+ if(s.index===3&&!s.boss.defeat?.ready)return;
  const p=s.player,a=s.level.arena;
  s.clear={age:0,stage:'land',flagX:p.x+51,flagY:a.y};
  s.hostile=[];s.shots=[];s.noticeTime=0;s.arenaLocked=false;
@@ -24,6 +26,15 @@ export function stepCompletion(s,dt){
  q.age+=dt;
  if(q.age<1.9){p.vx=0;return;}
  q.stage='leave';p.vx=255;p.x+=p.vx*dt;p.stride+=p.vx*dt/151.2;
+ if(s.level.circusArrival){
+  const arrival=s.level.circusArrival;
+  p.x=Math.min(p.x,arrival.stopX);followAdventureCamera(s,dt);
+  if(p.x>=arrival.stopX){
+   p.vx=0;q.arrivalAge=(q.arrivalAge||0)+dt;q.arrivalFade=Math.max(0,Math.min(1,(q.arrivalAge-1.1)/.65));
+   if(q.arrivalAge>=1.75){s.done=true;s.won=true;}
+  }
+  return;
+ }
  // The camera deliberately stays at the clearing while Hexy exits it.
  if(p.x>s.camera.x+cameraView(s).width+85){s.done=true;s.won=true;}
 }

@@ -1,0 +1,16 @@
+{
+  "distance": {
+    "transparent_background": false,
+    "referenced_image_paths": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/maps/harbor/panorama.webp"
+    ],
+    "prompt": "Edit this panoramic game painting into the clean DISTANT BACKGROUND PLATE for a layered parallax scene. Preserve the exact gorgeous original hand-painted anime storybook style, coral and lavender sunset clouds, blue starry upper sky, tiny crescent moon right, distant purple mountains, sunset sun on left, distant hilltop towns and right aqueduct, and blue river lower half. Same wide 3:1 composition and same horizon height. REMOVE the entire nearer dark treeline along the opposite bank AND all nearer circus tents, lamps and ferris wheel and their specific golden reflections. Seamlessly paint behind the removed objects with distant misty purple foothills ending in a thin far shore and a broad calm open blue river. Keep only the sun's warm water reflections at left. Nothing close, no trees with visible roots, no foreground props. The result is one continuous beautiful sunset mountain and water background, no flat fill band or seam. Wide landscape image, 2172x724 or higher same3:1. Opaque complete painting."
+  },
+  "fair": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/maps/harbor/panorama.webp"
+    ],
+    "prompt": "Create an isolated alpha parallax-layer extraction inspired by this exact wide hand-painted anime storybook sunset circus waterfront. Only paint the far-bank CIRCUS FAIR and its dark blue-green treeline behind it, lit by warm little lanterns. A broad low continuous strip: small varied trees, three different little circus tents toward left, a few more tents toward right, ONE large warmly illuminated ferris wheel at x70 percent, slender bunting and tiny docks. Upper half of canvas genuinely transparent; treetops and wheel silhouette organically rise into transparent air, no backdrop visible between spokes. Ground shore is a narrow irregular slate blue bank running horizontally across the strip at 68 percent image height. BELOW shore include only delicate broken thin gold reflections of the lamps and tents fading progressively to full transparency by image bottom. Transparent gaps between all little reflection strokes. No solid water or opaque blue underlay. Left and right ends are quiet short treeline only at identical shoreline height, allowing continuous tiling. Keep the dense tree band varied in height with open sightlines; not a big forest wall. Crucial: no sky, mountains, hills, sun, moon, town or aqueduct, no background rectangle, no checkerboard. Full true transparent RGBA cutout. Palette dark desaturated navy and teal foliage, jewel red tent stripes, cream highlights and amber lamps. The fair occupies lower-middle band; preserve expansive width. Canvas 2172x724 wide3:1."
+  }
+}

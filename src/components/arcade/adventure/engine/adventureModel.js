@@ -1,13 +1,17 @@
 import {stepOriginalTrail} from './adventureOriginal';
+import {beginPlayerDefeat,stepPlayerDefeat} from './playerDefeat';
 import {BOMB_SCALE,bombFlames,limitBombFire} from '../actors/bosses/adventureBombs';
 import {LEVELS,DRINKS} from '../world/adventureLevels';
-import {makeEnemy,updateEnemies,updateBoss,bossTargets} from '../actors/enemies/adventureEnemies';
+import {makeEnemy,updateEnemies,updateBoss,bossTargets,enemyShot} from '../actors/enemies/adventureEnemies';
 import {enemyBody} from '../actors/enemies/adventureEnemyGeometry';
 import {updateGuard,guardBlocks,clearPowerProjectiles,buddyPosition} from './adventureDefense';
 import {hexyMuzzle} from '../actors/hexy/hexyAnimation';
 import {surfaceY,groundAt,groundY} from '../world/adventureTerrain';
 import {followAdventureCamera,adventureBounds} from '../render/adventureCamera';
 import {beginCompletion,stepCompletion} from './adventureCompletion';
+import {stepCircusEntrance} from './adventureCircusEntrance';
+import {beginPowerClash,stepPowerClash} from './adventurePowerClash';
+import {stepHarlequinUltimate,harlequinUltimateScale,checkUltimateHit} from '../actors/bosses/harlequinUltimate';
 import {DRINK_SHOTS,STRONG_SHOTS,syncDrink,spendDrink,drinkScale,grantStartingDrink} from './adventureAmmo';
 import {validMods,equippedMods,modFireRate,modShotScale,validModLevels,shieldGrace} from './adventureMods';
 import {takeLoot,ORIGINAL_FIRE_RATE,ORIGINAL_SPEED} from './adventureLoot';
@@ -15,6 +19,13 @@ import {trapEnemy,burstBubble,burstTrappedEnemy} from './adventureBubbles';
 import {createOutposts,updateOutposts,damageOutpost,outpostBody} from '../actors/enemies/adventureOutposts';
 import {stepBalloonDefeat} from '../actors/bosses/adventureBalloon';
 import {stepOrganDefeat} from '../actors/bosses/organDestruction';
+import {stepBargeDefeat} from '../actors/bosses/bargeDestruction';
+import {HARLEQUIN_HEALTH,stepHarlequinProjectile} from '../actors/bosses/adventureHarlequin';
+import {harlequinFireHitbox,fireImpact,isHarlequinFireHazard} from '../actors/bosses/harlequinFire';
+import {stepHarlequinChaos} from '../actors/bosses/harlequinChaos';
+import {stepHarlequinDefeat} from '../actors/bosses/harlequinDefeat';
+import {stepHarlequinScorch} from './cinematicImpact';
+import {BARGE_HEALTH,bargeArmor,stepBargeProjectile} from '../actors/bosses/adventureBarge';
 import {stepWorldEffects} from './adventureEffects';
 import {beginSuper,stepSuper} from './adventureSuper';
 import {spellFor,specialShots,updateSpecialShot,canSpecialHit,rememberSpecialHit,specialImpact} from './adventureMagic';
@@ -27,51 +38,59 @@ import {stepOrganRain,stepOrganWave,organCollision,organShotScale} from '../acto
 import {bindCarriedBunnies,stepFreedBunnies} from './adventureRescues';
 import {bossHitFeedback} from '../actors/bosses/bossFeedback';
 import {ZEPPELIN_TYPE,beginZeppelinDefeat} from '../actors/enemies/adventureZeppelin';
+import {DIVER_TYPE,beginDiverDefeat} from '../actors/enemies/adventureDiver';
 
 export const playerBody=p=>({x:p.x-15,y:p.y-(p.dash>0&&!p.dashAir?39:p.crouch?31:59),w:30,h:p.dash>0&&!p.dashAir?38:p.crouch?30:58});
 export function createAdventure(index=0,gentle=false,carry={}){
  const level=LEVELS[index],platforms=level.platforms.map(p=>({...p,baseX:p.x,baseY:p.y,dx:0,dy:0})),maxHearts=gentle?7:5;
+ const spawn=level.circusEntrance&&carry.arrivalFromHarbor?[level.circusEntrance.arrivalX,level.circusEntrance.floor]:level.spawn||[85,platforms[0].y];
  const stars=createCollectibles(index,carry.collectedStars);
- const maxHp=Math.round(((gentle?92:140)+index*(gentle?18:24))*(index===0?1.15:1)*(index<2?1.44*1.15:1)*100)/100;
+ const maxHp=index===3?HARLEQUIN_HEALTH[gentle?'gentle':'normal']:index===2?BARGE_HEALTH[gentle?'gentle':'normal']:Math.round(((gentle?92:140)+index*(gentle?18:24))*(index===0?1.15:1)*(index<2?1.44*1.15:1)*100)/100;
  const weapon=carry.ammo===0?-1:carry.weapon??-1;
  const mods=equippedMods(carry.mods,validMods(carry.mods),carry.modSlots??1);
  const s={level,index,gentle,mods,modSlots:carry.modSlots??1,pendingStars:[],modLevels:validModLevels(carry.modLevels,mods),starterClaimed:!!carry.starterClaimed,superReserve:carry.superReserve??(mods.includes('encore-pocket')?1:0),reserveCooldown:carry.reserveCooldown||0,platforms,enemies:level.enemies.map(([x,y,t],i)=>makeEnemy(x,y,t,i)),stars,outposts:createOutposts(level),
  cages:level.cages.map(([x,y,carrier],i)=>({x,y,hp:2,open:false,rescued:false,reward:i,...(carrier===undefined?{}:{carrier,carried:true})})),pickups:[],supplies:createSupplies(level),
  hazards:level.hazards.map(([x,y,w])=>({x,y,w,h:22})),
- player:{x:85,y:platforms[0].y,vx:0,vy:0,dir:1,ground:0,coyote:.1,jumps:0,jumpBuffer:0,hurt:0,hitReact:0,cast:0,land:0,dash:0,dashDuration:.34,dashDir:1,dashWait:0,crouch:false,aimX:1,aimY:0,aimAge:0,stride:0,jumpAge:0,charge:0,specialCast:0,specialWait:0,pendingSpecial:null,spin:0,superCast:0,gliding:false},
+ player:{x:spawn[0],y:spawn[1],vx:0,vy:0,dir:1,ground:0,coyote:.1,jumps:0,jumpBuffer:0,hurt:0,hitReact:0,cast:0,land:0,dash:0,dashDuration:.34,dashDir:1,dashWait:0,crouch:false,aimX:1,aimY:0,aimAge:0,stride:0,jumpAge:0,charge:0,specialCast:0,specialWait:0,pendingSpecial:null,spin:0,superCast:0,gliding:false},
  boss:{x:level.boss[0],y:level.boss[1],home:level.boss[0],floor:level.boss[1],hp:maxHp,maxHp,clock:0,phase:'sleep',timer:1,flash:0,dir:-1,turn:0,stage:1,move:'',vulnerable:false},
- arenaLocked:false,time:0,ticks:0,fxTime:0,hitStop:0,shake:0,camera:{x:0,y:level.groundRoute?40:0,backdropY:level.groundRoute?40:0,zoom:1},hearts:clamp(carry.hearts??maxHearts,1,maxHearts),maxHearts,
+ arenaLocked:false,time:0,ticks:0,fxTime:0,hitStop:0,shake:0,camera:{x:level.circusEntrance?Math.max(-1400,spawn[0]-375):0,y:level.circusEntrance?-70:level.groundRoute?40:0,backdropY:level.groundRoute?40:0,zoom:level.circusEntrance?.8:1},hearts:clamp(carry.hearts??maxHearts,1,maxHearts),maxHearts,
  magic:clamp(carry.magic??100,0,100),exhaustion:carry.exhaustion||0,superCooldown:clamp(carry.superCooldown||0,0,SUPER_RECHARGE),starPulse:0,buddyCast:[0,0,0],buddyNext:0,shieldHit:0,shieldBreak:0,checkpointAt:null,
  weapon,ammoWeapon:weapon,ammoCapacity:weapon>=0?Math.min(DRINK_SHOTS[weapon]*3,carry.ammoCapacity||DRINK_SHOTS[weapon]):0,ammo:weapon>=0?Math.min(carry.ammoCapacity||DRINK_SHOTS[weapon],carry.ammo??DRINK_SHOTS[weapon]):0,drinkTier:weapon>=0&&carry.drinkTier===2?2:1,overdrive:carry.overdrive||0,overdriveDuration:carry.overdriveDuration||8,lootSeed:(Math.random()*4294967296)>>>0,power:weapon>=0,doubleJump:true,shield:clamp(carry.shield||0,0,3),buff:0,buddyWait:2,
  shotWait:0,shots:[],hostile:[],particles:[],effects:[],score:0,starMoney:0,rescued:0,checkpoint:false,done:false,won:false,combo:0,comboTime:0,events:[],lastInput:{},notice:'start',noticeTime:5};
  bindCarriedBunnies(s);grantStartingDrink(s);return s;
 }
-export function adventureCarry(s){return {mods:s.mods,modSlots:s.modSlots,overdriveDuration:s.overdriveDuration,modLevels:s.modLevels,starterClaimed:s.starterClaimed,ammoCapacity:s.ammoCapacity,superReserve:s.superReserve,reserveCooldown:s.reserveCooldown,hearts:s.hearts,weapon:s.weapon,ammo:s.ammo,drinkTier:s.drinkTier,overdrive:s.overdrive,shield:s.shield,doubleJump:s.doubleJump,magic:s.magic,superCooldown:s.superCooldown,exhaustion:s.exhaustion};}
+export function adventureCarry(s){return {arrivalFromHarbor:s.index===2&&s.won,mods:s.mods,modSlots:s.modSlots,overdriveDuration:s.overdriveDuration,modLevels:s.modLevels,starterClaimed:s.starterClaimed,ammoCapacity:s.ammoCapacity,superReserve:s.superReserve,reserveCooldown:s.reserveCooldown,hearts:s.hearts,weapon:s.weapon,ammo:s.ammo,drinkTier:s.drinkTier,overdrive:s.overdrive,shield:s.shield,doubleJump:s.doubleJump,magic:s.magic,superCooldown:s.superCooldown,exhaustion:s.exhaustion};}
 // Retry the encounter, keeping collected rewards and the same bank receipt.
 // Pickups, opened crates and cages stay claimed, so dying cannot mint money.
 export function retryAdventure(s){
- const fresh=createAdventure(s.index,s.gentle,adventureCarry(s)),at=s.checkpointAt||[85,s.platforms[0].y];
+ const fresh=createAdventure(s.index,s.gentle,adventureCarry(s)),at=(s.index===3?null:s.checkpointAt)||s.level.spawn||[85,s.platforms[0].y];
+ if(s.index===3){s.checkpointAt=null;s.checkpoint=false;}
  Object.assign(s.player,fresh.player,{x:at[0],y:at[1]-2,hurt:2,ground:null});
+ delete s.player.clashFlight;
  s.enemies=fresh.enemies.filter(e=>e.x>=at[0]-120);s.boss=fresh.boss;
  for(const e of s.enemies)e.captive=null;bindCarriedBunnies(s);
- Object.assign(s,{hearts:s.maxHearts,magic:100,done:false,won:false,arenaLocked:false,shots:[],hostile:[],effects:[],particles:[],organDust:[],lastInput:{},events:[],hitStop:0,shake:0,combo:0,notice:'checkpoint',noticeTime:2});
- delete s.clear;delete s.superCinematic;
- s.camera={x:Math.max(0,Math.min(s.level.width-960,at[0]-300)),y:at[1]-440,zoom:1};
+ Object.assign(s,{hearts:s.maxHearts,magic:100,done:false,won:false,arenaLocked:false,shots:[],hostile:[],effects:[],particles:[],organDust:[],organDebris:[],lastInput:{},events:[],hitStop:0,shake:0,combo:0,notice:s.index===3?'start':'checkpoint',noticeTime:s.index===3?0:2});
+ delete s.clear;delete s.superCinematic;delete s.circusEntry;delete s.powerClash;delete s.clashRetreatBounds;delete s.playerDefeat;
+ delete s.harlequinAidStages;s.supplies=s.supplies.filter(q=>!q.phaseAid);s.pickups=s.pickups.filter(q=>!q.phaseAid);
+ s.camera=at[0]<0?{...fresh.camera}:{x:Math.max(0,Math.min(s.level.width-960,at[0]-300)),y:at[1]-440,backdropY:s.level.groundRoute?40:0,zoom:1};
  return s;
 }
 function particles(s,x,y,color,n=8){for(let i=0;i<n;i++)s.particles.push({x,y,vx:Math.cos(i*2.4)*90,vy:-70-Math.sin(i)*65,life:.55,color});}
 function say(s,n){s.notice=n;s.noticeTime=4;}
-function hurt(s,fall=false){
- const p=s.player;if(s.done||s.superCinematic||(!fall&&(p.hurt>0||s.overdrive>0)))return;
- if(!fall&&s.shield>0){s.shield--;s.shieldHit=.3;if(!s.shield)s.shieldBreak=.4;p.hurt=shieldGrace(s);s.events.push('shield');particles(s,p.x,p.y-30,'#b4ecff',15);return;}
- s.hearts--;p.hurt=s.gentle?2.1:1.5;p.hitReact=.32;p.charge=0;p.pendingSpecial=null;p.specialCast=0;p.superCast=0;p.spin=0;p.vx=-p.dir*160;p.vy=-220;p.ground=null;s.combo=0;s.events.push('hit');particles(s,p.x,p.y-30,'#ffa6bf');
+function hurt(s,fall=false,amount=1,clashLoss=false){
+ const p=s.player;if(s.done||s.playerDefeat||s.superCinematic||(!clashLoss&&!fall&&(p.hurt>0||s.overdrive>0)))return;
+ if(!clashLoss&&!fall&&s.shield>0){s.shield--;s.shieldHit=.3;if(!s.shield)s.shieldBreak=.4;p.hurt=shieldGrace(s);s.events.push('shield');particles(s,p.x,p.y-30,'#b4ecff',15);return;}
+ s.hearts=Math.max(0,s.hearts-amount);p.hurt=s.gentle?2.1:1.5;p.hitReact=.32;p.charge=0;p.pendingSpecial=null;p.specialCast=0;p.superCast=0;p.spin=0;p.vx=-p.dir*160;p.vy=-220;p.ground=null;s.combo=0;s.events.push('hit');particles(s,p.x,p.y-30,'#ffa6bf');
  p.guarding=false;p.dash=0;p.dashAir=false;
+ if(s.hearts<=0&&!clashLoss){s.events=s.events.filter(e=>e!=='hit');beginPlayerDefeat(s,fall);return;}
  if(fall){const at=s.arenaLocked?[s.level.arena.left+75,s.level.arena.y]:s.checkpointAt||(s.checkpoint?s.level.checkpoint:[85,s.level.platforms[0].y]);p.x=at[0];p.y=at[1]-10;p.vy=0;p.vx=0;p.dash=0;s.hostile=[];}
  if(s.hearts<=0){s.done=true;s.won=false;s.events.push('death');}
 }
 function burst(s,x,y,row=0,size=52){s.effects.push({x,y,row,size,age:0,life:.32});}
-function defeat(s,e){if(e.defeated)return;e.defeated=true;e.hp=0;e.flash=0;e.deadTime=.55;if(e.type===ZEPPELIN_TYPE)beginZeppelinDefeat(s,e);s.combo++;s.comboTime=3;s.score+=3+Math.min(5,s.combo);particles(s,e.x,e.y-30,'#ffdda0',12);burst(s,e.x,e.y-30,e.trap?2:1,72);s.events.push('pop');burstTrappedEnemy(s,e,defeat);}
-function finishBoss(s){const b=s.boss;if(b.hp>0||b.phase==='defeated')return;b.hp=0;b.phase='defeated';s.arenaLocked=false;s.hearts=Math.min(s.maxHearts,s.hearts+2);s.score+=60;s.events.push('bossDown');say(s,'bossDown');particles(s,b.x,b.y-50,'#ffcce8',38);s.hostile=[];s.enemies=s.enemies.filter(e=>e.x<s.level.arena.left);}
+function defeat(s,e){if(e.defeated)return;e.defeated=true;e.hp=0;e.flash=0;e.deadTime=.55;if(e.type===ZEPPELIN_TYPE)beginZeppelinDefeat(s,e);if(e.type===DIVER_TYPE)beginDiverDefeat(e);s.combo++;s.comboTime=3;s.score+=3+Math.min(5,s.combo);particles(s,e.x,e.y-30,'#ffdda0',12);burst(s,e.x,e.y-30,e.trap?2:1,72);s.events.push('pop');burstTrappedEnemy(s,e,defeat);}
+function finishBoss(s){const b=s.boss;if(b.hp>0||b.phase==='defeated')return;
+ if(s.index===3){b.hp=0;b.phase='dying';b.defeatPending=true;s.hostile=[];return;}
+ b.hp=0;b.phase='defeated';s.arenaLocked=false;s.hearts=Math.min(s.maxHearts,s.hearts+2);s.score+=60;s.events.push('bossDown');say(s,'bossDown');particles(s,b.x,b.y-50,'#ffcce8',38);s.hostile=[];s.enemies=s.enemies.filter(e=>e.x<s.level.arena.left);}
 function fire(s,buddy=false,index=0){
  const p=s.player,kind=buddy?-1:s.weapon,angle=Math.atan2(p.aimY,p.aimX),angles=kind===4?[-.23,0,.23]:kind===2?[-.08,.08]:[0];
  if(!buddy){s.shotWait=(kind===1?.36:kind===3?.34:.25)*(s.buff>0?.72:1)/(s.overdrive>0?ORIGINAL_FIRE_RATE:1)/modFireRate(s);p.cast=.24;s.events.push('cast');}
@@ -95,14 +114,22 @@ function rescue(s,c){
 }
 export function stepAdventure(s,input,dt){
  if(s.done)return;s.events=[];s.ticks++;s.fxTime+=dt;s.shake=Math.max(0,s.shake-dt);
+ stepHarlequinScorch(s,dt);
+ if(stepPlayerDefeat(s,dt)){s.lastInput={};return;}
  if(s.player.drinkCast>0)input={};
  syncDrink(s);s.ammoEmpty=Math.max(0,(s.ammoEmpty||0)-dt);
+ if(s.powerClash){stepPowerClash(s,input,dt,{hurt:()=>hurt(s,false,4,true),finishBoss});s.lastInput={...input};return;}
  if(stepBalloonDefeat(s,dt)){s.lastInput={...input};return;}
  if(stepOrganDefeat(s,dt)){s.lastInput={...input};return;}
+ if(stepBargeDefeat(s,dt)){s.lastInput={...input};return;}
+ if(stepHarlequinDefeat(s,dt)){s.lastInput={...input};return;}
  beginCompletion(s);if(s.clear){stepCompletion(s,dt);s.lastInput={...input};return;}
+ if(!s.superCinematic&&stepCircusEntrance(s,dt)){s.lastInput={...input};return;}
  if(s.superCinematic||beginSuper(s,input)){
+  if(beginPowerClash(s)){stepPowerClash(s,input,dt,{hurt:()=>hurt(s,false,4,true),finishBoss});s.lastInput={...input};return;}
   stepSuper(s,dt,{defeat,particles,burst,say});s.lastInput={...input};return;
  }
+ stepHarlequinUltimate(s,dt);dt*=harlequinUltimateScale(s);
  if(s.hitStop>0){s.hitStop=Math.max(0,s.hitStop-dt);return;}
  tickRewards(s,dt);updateSupplies(s,dt);
  if(!(s.player.drinkCast>0))s.overdrive=Math.max(0,(s.overdrive||0)-dt);
@@ -159,15 +186,20 @@ export function stepAdventure(s,input,dt){
   }
  }
  stepOriginalTrail(s,dt);
- if(p.y>850)hurt(s,true);if(s.done)return;
+ const fatalPit=s.hearts===1&&p.vy>0&&p.y>s.camera.y+540/(s.camera.zoom||1)-65&&!s.platforms.some(q=>p.x>=q.x&&p.x<=q.x+q.w&&surfaceY(q,p.x)>p.y);
+ if(p.y>850||fatalPit)hurt(s,true);if(s.done||s.playerDefeat)return;
  if(p.pendingSip&&p.ground!==null){p.pendingSip=false;p.drinkCast=.7;}
  for(const q of s.pickups)if(!q.taken&&!(q.collectWait>0)&&Math.hypot(p.x-q.x,p.y-28-q.y)<38){const type=takeLoot(s,q);say(s,type==='drink'?(s.drinkTier===2?'powerUp':'power'):'loot'+type);particles(s,p.x,p.y-35,DRINKS[q.kind]?.color||'#ffe4a3',15);}
  for(const cp of s.level.checkpoints||[s.level.checkpoint])if(p.x>=cp[0]&&p.ground!==null&&(!s.checkpointAt||cp[0]>s.checkpointAt[0])){s.checkpoint=true;s.checkpointAt=cp;s.hearts=Math.min(s.maxHearts,s.hearts+1);say(s,'checkpoint');s.events.push('coin');}
  for(const h of s.hazards)if(overlap(playerBody(p),h))hurt(s);
+ if(s.playerDefeat)return;
  for(const star of s.stars)if(!star.taken&&!star.hidden&&Math.hypot(p.x-star.x,p.y-35-star.y)<39){collectAdventureStar(s,star);particles(s,star.x,star.y,'#ffe49e',3);}
  stepFreedBunnies(s,dt);
  for(const c of s.cages)if(c.open&&!c.rescued&&!c.carried&&!c.lost&&Math.hypot(p.x-c.x,p.y-c.y)<62)rescue(s,c);
  updateOutposts(s,dt);updateEnemies(s,dt,playerBody,defeat);updateBoss(s,dt,{say,particles,body:playerBody});
+ stepHarlequinChaos(s,dt,enemyShot);
+ checkUltimateHit(s,playerBody,()=>hurt(s,false,2));
+ if(s.playerDefeat)return;
  if(s.rescued>0){s.buddyWait-=dt;if(s.buddyWait<=0){s.buddyCast[s.buddyNext%s.rescued]=.6;s.buddyNext++;s.buddyWait=(s.buff>0?.8:1.7)/s.rescued;}}
  for(let i=0;i<3;i++){const previous=s.buddyCast[i];s.buddyCast[i]=Math.max(0,previous-dt);if(previous>.4&&s.buddyCast[i]<=.4)fire(s,true,i);}
  const b=s.boss;
@@ -211,7 +243,7 @@ export function stepAdventure(s,input,dt){
    if(shot.life<=0)break;
   }
   const target=bossTargets(s).find(t=>shot.x+radius>t.x&&shot.x-radius<t.x+t.w&&shot.y+radius>t.y&&shot.y-radius<t.y+t.h);
-  const shell=s.index===1&&overlap(organCollision(s),{x:shot.x-radius,y:shot.y-radius,w:radius*2,h:radius*2});
+  const shell=(s.index===1||s.index===2)&&overlap(s.index===2?bargeArmor(s):organCollision(s),{x:shot.x-radius,y:shot.y-radius,w:radius*2,h:radius*2});
   if((target||shell)&&shot.life>0&&b.hp>0&&b.phase!=='sleep'&&canSpecialHit(shot,b)){
    if(shot.heavy?[0,3,4].includes(shot.kind):shot.kind!==1)shot.life=0;rememberSpecialHit(shot,b);
    if(b.vulnerable&&target){
@@ -232,17 +264,18 @@ export function stepAdventure(s,input,dt){
   shot.life-=dt;shot.age+=dt;
   if(shot.organ&&shot.growthTime)shot.r=shot.fullRadius*organShotScale(shot);
   if(shot.kind==='ring'&&shot.arc!==undefined){const angle=shot.launchAngle+shot.arc*Math.sin(shot.age*3.7)*.68;shot.vx=Math.cos(angle)*shot.speed;shot.vy=Math.sin(angle)*shot.speed;}
-  if(shot.kind==='sound-wave')stepOrganWave(shot,dt);else if(shot.rain)stepOrganRain(shot,s,dt);else{shot.vy+=(shot.gravity||0)*dt;shot.x+=shot.vx*dt;shot.y+=shot.vy*dt;}
+  if(stepHarlequinProjectile(s,shot,dt,additions)||stepBargeProjectile(s,shot,dt,additions)){/* Dedicated encounter projectiles own their motion. */}else if(shot.kind==='sound-wave')stepOrganWave(shot,dt);else if(shot.rain)stepOrganRain(shot,s,dt);else{shot.vy+=(shot.gravity||0)*dt;shot.x+=shot.vx*dt;shot.y+=shot.vy*dt;}
   if(shot.organ&&(shot.x<s.level.arena.left-60||shot.x>s.level.arena.right+60)){shot.life=0;continue;}
   limitBombFire(shot);if(shot.life<=0)continue;
+  if(isHarlequinFireHazard(shot)&&!shot.damaging)continue;
   if(shot.rain&&shot.rain!=='fall')continue;
   if(shot.rain&&shot.y>shot.floor){shot.life=0;burst(s,shot.x,shot.floor-8,1,38);continue;}
   if(shot.organ&&shot.kind==='note'&&!shot.rain&&shot.y>shot.floor){shot.life=0;burst(s,shot.x,shot.floor-8,1,38);continue;}
-  if(guardBlocks(s,shot))continue;
+  if(!isHarlequinFireHazard(shot)&&guardBlocks(s,shot))continue;
   if(shot.kind==='clown'&&shot.floor!==undefined&&shot.y>=shot.floor-8&&shot.vy>0){shot.life=0;if(s.enemies.filter(e=>e.hp>0&&e.x>=s.level.arena.left).length<8){const e=makeEnemy(shot.x,shot.floor,6,s.boss.turn);e.y=shot.floor-12;s.enemies.push(e);}burst(s,shot.x,shot.floor-10,1,44);}
   else if(shot.kind==='bomb'&&shot.y>shot.floor-12){shot.life=0;if(shot.carpet&&Math.hypot(p.x-shot.x,p.y-20-shot.floor+12)<52*BOMB_SCALE)hurt(s);const fire=bombFlames(shot);fire.forEach(limitBombFire);additions.push(...fire.filter(q=>q.life>0));particles(s,shot.x,shot.y,'#ffb674',10);burst(s,shot.x,shot.y,1,(shot.carpet?110:145)*BOMB_SCALE);s.events.push('impact');}
   else if(shot.bounce&&shot.y>shot.floor-12){shot.y=shot.floor-12;shot.vy=-190;shot.bounce--;}
-  if(shot.life>0&&overlap(playerBody(p),{x:shot.x-shot.r,y:shot.y-shot.r,w:shot.r*2,h:shot.r*2})){hurt(s);shot.life=0;}
+  if(shot.life>0&&overlap(playerBody(p),harlequinFireHitbox(shot)||{x:shot.x-shot.r,y:shot.y-shot.r,w:shot.r*2,h:shot.r*2})){hurt(s);if(!isHarlequinFireHazard(shot)){shot.life=0;if(shot.harlequin)fireImpact(s,shot.x,shot.y,.65);}}
  }
  s.shots=s.shots.filter(q=>q.life>0);s.hostile=[...s.hostile.filter(q=>q.life>0),...additions].slice(-140);
  stepWorldEffects(s,dt);

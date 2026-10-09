@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-const key = 'magic-drink:illustrated-finish:v1';
+const siteKey = 'magic-drink:illustrated-finish:v1';
+const arcadeKey = 'magic-drink:arcade:illustrated-finish:v1';
 const defaults = { enabled: true, chromatic: 55, grain: 50, vignette: 50, monochrome: false };
 const normalize = value => ({
   monochrome: value?.monochrome === true,
@@ -10,19 +11,21 @@ const normalize = value => ({
   ])),
 });
 
-// One preference across the journey, Hexy and the drink page. Read after
-// hydration; only explicit changes write to storage, including an all-off state.
-export default function useIllustratedFinish() {
+// The journey, Hexy and drinks share their finish. Arcade has its own saved
+// preference and storage events, so its image controls cannot alter the site.
+// Read after hydration; only explicit changes write, including an all-off state.
+export default function useIllustratedFinish(scope = 'site') {
+  const key = scope === 'arcade' ? arcadeKey : siteKey;
   const [finish, setFinish] = useState(defaults);
   useEffect(() => {
-    try { const saved = localStorage.getItem(key); if (saved) setFinish(normalize(JSON.parse(saved))); } catch { /* Use the illustrated default. */ }
+    try { const saved = localStorage.getItem(key); setFinish(saved ? normalize(JSON.parse(saved)) : defaults); } catch { setFinish(defaults); }
     const sync = event => {
       if (event.key !== key) return;
       try { setFinish(normalize(JSON.parse(event.newValue))); } catch { /* Ignore a malformed external preference. */ }
     };
     window.addEventListener('storage', sync);
     return () => window.removeEventListener('storage', sync);
-  }, []);
+  }, [key]);
   const updateFinish = patch => setFinish(previous => {
     const next = normalize({ ...previous, ...patch });
     try { localStorage.setItem(key, JSON.stringify(next)); } catch { /* Controls still work for this visit. */ }

@@ -55,3 +55,4 @@ export function specialImpact(s,q,size=95){
 // Run after enemies fire, before hostile projectiles move or hurt the player.
 // A cleared bomb must never reach its normal floor-explosion branch.
 export {clearPowerProjectiles as clearBubbleProjectiles} from './adventureDefense';
+export const SUPER_BOSS_DAMAGE=8*8;

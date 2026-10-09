@@ -23,7 +23,7 @@ test('Miso is at the safe opening and both riverside checkpoints survive a full 
  expect(s.level.scenery.some(q=>q.kind==='wagon')).toBe(false);
  expect(s.level.enemies.every(([x])=>x>900)).toBe(true);expect(s.level.checkpoints).toHaveLength(2);
  for(const cp of s.level.checkpoints){Object.assign(s.player,{x:cp[0],y:cp[1],ground:s.platforms.findIndex(q=>cp[0]>=q.x&&cp[0]<=q.x+q.w)});tick(s);expect(s.checkpointAt).toEqual(cp);s.hearts=0;s.done=true;retryAdventure(s);expect(s.player.x).toBe(cp[0]);expect(s.player.y).toBeLessThanOrEqual(cp[1]);expect(s.player.y).toBeGreaterThan(cp[1]-60);}
- expect(createAdventure(2).level.world.key).toBe('woods');expect(s.level.world.key).toBe('riverwoods');
+ expect(createAdventure(2).level.world.key).toBe('harbor');expect(s.level.world.key).toBe('riverwoods');
 });
 
 test('organ attacks start at the drawn horns, animate mechanical attacks and reach ground-level Hexy',()=>{

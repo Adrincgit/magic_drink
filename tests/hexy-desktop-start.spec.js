@@ -19,7 +19,7 @@ test('two authored flags, three spaced supply chests and no opening obstruction'
 test('death retry returns to the flag, resets the boss and preserves claimed rewards and recharge',()=>{
  const s=createAdventure(0);s.checkpointAt=s.level.checkpoints[1];s.checkpoint=true;s.player.x=s.level.arena.entry+10;s.player.y=1200;s.player.ground=null;s.hearts=1;
  s.stars[0].taken=true;s.supplies[0].hp=0;s.cages[0].rescued=true;s.rescued=1;s.starMoney=17;s.bankedStars=12;s.superCooldown=29;
- stepAdventure(s,{},1/120);expect(s.done).toBe(true);s.boss.hp=5;
+ stepAdventure(s,{},1/120);expect(s.done).toBe(false);expect(s.playerDefeat).toBeTruthy();for(let i=0;i<650&&!s.done;i++)stepAdventure(s,{},1/120);expect(s.done).toBe(true);s.boss.hp=5;
  retryAdventure(s);expect(s.done).toBe(false);expect(s.player.x).toBe(s.checkpointAt[0]);expect(s.hearts).toBe(5);expect(s.boss.hp).toBe(s.boss.maxHp);expect(s.boss.phase).toBe('sleep');
  expect(s.starMoney).toBe(17);expect(s.bankedStars).toBe(12);expect(s.stars[0].taken).toBe(true);expect(s.supplies[0].hp).toBe(0);expect(s.rescued).toBe(1);expect(s.superCooldown).toBeGreaterThan(28);
  for(let i=0;i<120;i++)stepAdventure(s,{},1/120);expect(s.done).toBe(false);expect(s.player.x).toBeGreaterThan(10000);

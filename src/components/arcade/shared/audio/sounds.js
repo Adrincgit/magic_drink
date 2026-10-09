@@ -1,7 +1,9 @@
 import {createEffectsBus} from './effectsBus';
 import {playEncoreSound} from './encoreSound';
+import {playPowerClashSound} from './powerClashSound';
+import {adventureEnergyProfile,createEnergyVoice} from './energyVoice';
 export {EFFECTS_BOOST} from './effectsBus';
-let context,master,effectsInput,muted=false,volume=1;const last=new Map();
+let context,master,effectsInput,energyVoice,muted=false,volume=1;const last=new Map();
 // The user's controls follow compression, so zero and mute remain absolute
 // and changing volume does not change the balance between quiet/loud effects.
 const outputGain=()=>muted?0:.7*volume;
@@ -14,10 +16,20 @@ export function setArcadeSoundsVolume(general=1,effects=1){
  const clamp=n=>Number.isFinite(n)?Math.max(0,Math.min(1,n)):1;
  volume=clamp(general)*clamp(effects);if(master)master.gain.setTargetAtTime(outputGain(),context.currentTime,.025);
 }
+export function stopArcadeEnergy(atImpact=false){energyVoice?.stop(atImpact);energyVoice=null;}
+export function syncArcadeEnergy(s,enabled=true){
+ const profile=enabled?adventureEnergyProfile(s):null;
+ if(!profile){stopArcadeEnergy();return;}
+ unlockArcadeAudio();if(!context||!effectsInput)return;
+ energyVoice??=createEnergyVoice(context,effectsInput);energyVoice.update(profile);
+}
 export function arcadeSound(kind,enabled=true){
  if(!enabled||typeof window==='undefined')return;unlockArcadeAudio();if(!context||!master)return;
  const now=context.currentTime;if(now-(last.get(kind)??-10)<(kind==='bossHit'?.09:.035))return;last.set(kind,now);
+ if(kind==='clashExplosion')stopArcadeEnergy(true);
+ else energyVoice?.accent(kind);
  if(playEncoreSound(context,effectsInput,kind,now))return;
+ if(playPowerClashSound(context,effectsInput,kind,now))return;
  const tone=(from,to,duration,type='square',gain=.06,delay=0)=>{
   const osc=context.createOscillator(),volume=context.createGain(),at=now+delay;
   osc.type=type;osc.frequency.setValueAtTime(from,at);osc.frequency.exponentialRampToValueAtTime(Math.max(20,to),at+duration);
@@ -30,6 +42,21 @@ export function arcadeSound(kind,enabled=true){
   const src=context.createBufferSource(),volume=context.createGain();src.buffer=buffer;volume.gain.value=gain;src.connect(volume);volume.connect(effectsInput);src.start(now);
  };
  switch(kind){
+  case 'harlequinReady':[622,932].forEach((hz,i)=>tone(hz,hz*.98,.18,'triangle',.065,i*.13));break;
+  case 'harlequinCast':noise(.065,.037);tone(1245,740,.16,'triangle',.065);tone(2489,1865,.12,'sine',.035);break;
+  case 'harlequinSilk':noise(.2,.05);tone(415,104,.25,'triangle',.065);break;
+  case 'harlequinRush':noise(.28,.065);tone(466,117,.27,'triangle',.075);break;
+  case 'harlequinLeap':tone(233,932,.32,'triangle',.06);tone(932,1245,.24,'sine',.035,.08);break;
+  case 'harlequinLand':noise(.1,.055);tone(110,42,.23,'sine',.12);break;
+  case 'harlequinPhase':[311,466,622,932].forEach((hz,i)=>tone(hz,hz*1.06,.38,'triangle',.058,i*.11));noise(.35,.045);break;
+  case 'bargeReady':tone(130,110,.12,'triangle',.055);tone(175,150,.13,'triangle',.045,.12);break;
+  case 'bargeBeat':tone(118,48,.28,'sine',.15);tone(233,116,.14,'triangle',.047);noise(.065,.04);tone(2093,1976,.18,'sine',.018);break;
+  case 'bargeCannon':tone(92,29,.35,'sine',.14);noise(.13,.065);tone(350,105,.21,'triangle',.035);break;
+  case 'bargeSplash':noise(.23,.036);tone(420,145,.23,'sine',.026);tone(740,280,.16,'sine',.018,.07);break;
+  case 'bargeRev':tone(82,190,1.2,'triangle',.048);tone(164,380,1.1,'sawtooth',.013);noise(.18,.022);break;
+  case 'bargeBreak':noise(.34,.073);tone(180,48,.38,'triangle',.088);[932,622,466].forEach((hz,i)=>tone(hz,hz*.8,.22,'sine',.038,i*.09));break;
+  case 'bargeDestroy':noise(.8,.11);tone(85,26,.9,'sine',.16);[466,349,233,116].forEach((hz,i)=>tone(hz,hz*.7,.25,'triangle',.043,i*.16));break;
+  case 'diverThrow':tone(680,260,.15,'sine',.057);tone(1320,680,.12,'triangle',.022);noise(.05,.016);break;
   case 'pause':[784,659,523].forEach((hz,i)=>tone(hz,hz,.2,'triangle',.09,i*.08));break;
   case 'resume':[523,659,784].forEach((hz,i)=>tone(hz,hz,.17,'triangle',.075,i*.07));break;
   case 'doorOpen':noise(.12,.035);tone(165,245,.38,'triangle',.06);tone(1175,1175,.65,'sine',.09,.14);tone(1568,1568,.5,'sine',.05,.23);break;
@@ -42,7 +69,6 @@ export function arcadeSound(kind,enabled=true){
   case 'doubleJump':tone(523,1568,.2,'triangle',.065);tone(784,2093,.18,'square',.025,.04);break;
   case 'glide':noise(.18,.025);tone(1047,784,.3,'sine',.035);break;
   case 'hit':noise(.14,.055);tone(185,55,.25,'sawtooth',.04);break;
-  case 'death':tone(430,65,.6,'triangle',.07);noise(.23,.04);break;
   case 'bossHit':noise(.022,.035);tone(2150,1280,.09,'square',.027);tone(3260,2420,.14,'sine',.047);tone(1580,970,.11,'triangle',.047);break;
   case 'bossHeavyHit':noise(.045,.052);tone(1870,1050,.14,'square',.035);tone(2980,1970,.22,'sine',.063);tone(1430,820,.16,'triangle',.061);tone(130,70,.16,'sine',.045);break;
   case 'bossBlock':tone(1700,950,.055,'sine',.03);break;

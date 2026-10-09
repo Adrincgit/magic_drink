@@ -1,0 +1,37 @@
+[
+  {
+    "path": "public/arcade/maps/grand-ring/background.webp",
+    "width": 2172,
+    "height": 724,
+    "alpha": false,
+    "bytes": 306956
+  },
+  {
+    "path": "public/arcade/maps/grand-ring/arch.webp",
+    "width": 2172,
+    "height": 724,
+    "alpha": true,
+    "bytes": 226980
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/poses.webp",
+    "width": 2048,
+    "height": 1024,
+    "alpha": true,
+    "bytes": 376276
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/final.webp",
+    "width": 2048,
+    "height": 1024,
+    "alpha": true,
+    "bytes": 418306
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/effects.webp",
+    "width": 1024,
+    "height": 768,
+    "alpha": true,
+    "bytes": 288228
+  }
+]

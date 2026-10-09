@@ -1,9 +1,13 @@
 import {balloonShellDrawing,redClownDrawing} from '../actors/bosses/adventureBalloonCrew';
 import {organShellDrawing} from '../actors/bosses/adventureOrganFortress';
+import {bargeDrawing} from '../actors/bosses/adventureBarge';
+import {diverDrawing} from '../actors/enemies/adventureDiver';
+import {harlequinDrawing} from '../actors/bosses/adventureHarlequin';
 // Each actor owns a 12-frame sheet. Frames follow gameplay states, not a global pose loop.
 export const ACTOR_SHEETS=['clown','balloon','juggler','acrobat','cannon','boss-balloon','serio','alegre','agresivo','muta'];
 export const ENEMY_ART=['clown','acrobat','balloon','juggler','acrobat','cannon','clown'];
 export function enemyDrawing(e,reduced=false){
+ if(e.type===8)return diverDrawing(e);
  if(e.type===7)return{key:'clown-zeppelin',frame:0};
  if(e.balloonCrew||e.type===0)return redClownDrawing(e,reduced);
  if(e.type===6)return{key:'cannon-clown',frame:reduced?0:Math.min(3,Math.floor(e.clock*6)%4)};
@@ -23,11 +27,13 @@ export function enemyDrawing(e,reduced=false){
  if(e.phase==='patrol')return motion(reduced?0:Math.floor((e.gait||0)*8)%8);
  return rings(reduced?8:8+Math.floor(e.clock*2)%2);
 }
-export const BOSS_ART=['boss-balloon','organ-machine','alegre','agresivo','muta'];
+export const BOSS_ART=['boss-balloon','organ-machine','barge-body','harlequin/poses','muta'];
 export function bossDrawing(s,reduced=false){
  const b=s.boss,key=BOSS_ART[s.index];
  if(s.index===0)return balloonShellDrawing(s);
  if(s.index===1)return organShellDrawing(s);
+ if(s.index===2)return bargeDrawing(s);
+ if(s.index===3)return harlequinDrawing(s);
  if(!s.index||b.hp<=0||b.flash>0||!['warn','attack','transform'].includes(b.phase))return {key,frame:actorFrame(b,reduced,key)};
  if(b.phase==='transform')return {key:key+'-actions',frame:b.timer>1.2?8:9};
  const row={serio:{cannons:0,crossfire:1,charge:1},alegre:{juggle:0,rings:1,mirrors:2},agresivo:{slam:0,charge:1,clowns:2},muta:{spiral:0,rain:1,silence:2}}[key][b.move]||0;

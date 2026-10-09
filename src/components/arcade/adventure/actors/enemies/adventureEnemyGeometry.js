@@ -11,6 +11,7 @@ const profiles=[
  {size:164,w:105,h:101,muzzle:[34,-63]},
  {size:148,w:64,h:91,muzzle:[53,-57]},
  {size:228,w:206,h:153,muzzle:[88.92,-41.52]},
+ {size:136,w:61,h:95,muzzle:[49,-60]},
 ];
 const scaledProfiles=profiles.map((g,i)=>{const scale=[0,6].includes(i)?RED_CLOWN_SCALE:[2,7].includes(i)?AIR_ENEMY_SCALE:1;return{size:g.size*scale,w:g.w*scale,h:g.h*scale,muzzle:g.muzzle.map(v=>v*scale)};});
 export const enemyGeometry=e=>scaledProfiles[e.type]||scaledProfiles[0];

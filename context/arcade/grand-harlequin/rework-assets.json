@@ -1,0 +1,50 @@
+[
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/motion.webp",
+    "width": 2048,
+    "height": 3072,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/motion-mid.webp",
+    "width": 2048,
+    "height": 3072,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/motion-final.webp",
+    "width": 2048,
+    "height": 3072,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/clash-fall.webp",
+    "width": 2048,
+    "height": 1024,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/hexy/clash-fall.webp",
+    "width": 1280,
+    "height": 640,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/ui/hexy-clash-portraits.webp",
+    "width": 1024,
+    "height": 1024,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/clash-portraits.webp",
+    "width": 1024,
+    "height": 1024,
+    "alpha": true
+  },
+  {
+    "path": "public/arcade/sprites/bosses/harlequin/clash-effects.webp",
+    "width": 1024,
+    "height": 768,
+    "alpha": true
+  }
+]

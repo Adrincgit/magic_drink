@@ -1,0 +1,10 @@
+.button{position:absolute;z-index:7;left:50%;bottom:1%;transform:translateX(-50%);width:clamp(75px,10cqw,120px);aspect-ratio:256/320;border:0;padding:0;background:transparent;color:#fff8d1;cursor:pointer;touch-action:none;user-select:none;font:900 clamp(16px,2.1cqw,25px) sans-serif}
+.illustration{display:block;position:absolute;inset:0;pointer-events:none;background:url('/arcade/sprites/effects/painted-duel/tap.webp') 0 0/800% 100% no-repeat;animation:tap-sprite .22s steps(8) infinite,tap-kick .22s linear infinite}
+.key{position:absolute;left:25%;width:50%;top:32%;line-height:1.2;text-align:center;transform:rotate(-7deg);text-shadow:0 2px 1px #5f1525;animation:tap-label .22s steps(1) infinite;pointer-events:none}
+.button:active .illustration,.button[data-pressed=true] .illustration{animation:none;background-position:42.857% 0}
+.button:active .key,.button[data-pressed=true] .key{animation:none;top:47%}
+.button:focus-visible{outline:3px solid #b8fbff;outline-offset:3px;border-radius:16%}
+@keyframes tap-sprite{to{background-position:114.285714% 0}}
+@keyframes tap-kick{0%,100%{transform:rotate(-3deg) scale(1)}37.5%{transform:translateY(4px) rotate(2deg) scale(.95,.91)}62.5%{transform:translateY(-3px) rotate(-2deg) scale(1.06,1.08)}}
+@keyframes tap-label{0%,100%{top:32%}12.5%{top:35%}25%{top:40%}37.5%{top:47%}50%{top:44%}62.5%{top:21%}75%{top:30%}87.5%{top:34%}}
+@media(prefers-reduced-motion:reduce){.illustration,.key{animation:none}}

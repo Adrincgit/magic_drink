@@ -1,0 +1,7 @@
+{
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/bosses/barge/body.webp"
+  ],
+  "prompt": "Edit this exact side-view circus paddleboat boss sprite into its battle-damaged second phase, for a 2D hand-painted anime-cartoon game. Preserve EXACTLY its silhouette, placement, proportions, side-view camera, pixel composition and transparent canvas padding. This must be a drop-in replacement, same 1536 by 1024 canvas. Keep same red/gold circus boat, cream/purple drapes and turquoise brass boiler. DAMAGE: rip an irregular jagged opening through the left large bass drum's cream membrane, showing dark interior and a few torn curling cream scraps; dent its brass rim. Break one small upper panel on the turquoise boiler, exposing a hot amber-orange core and bent metal teeth; no emitted smoke on the asset, smoke is animated separately. Tear two of the red/cream drapes on the front hull, scuff and dent some red planks and gold trim. One tip of the right chimney is chipped and bent but stays within original bounds. The hull must remain intact enough to keep battling. Do not add crew, weapons, paddle wheels, shields, loose debris, effects, text, water, scenery, checkerboard or opaque black background. The empty circular stern wheel socket stays empty. Keep full illustrated high-quality bold outlined playful circus visual style matching the input, no realistic photo textures. Full true transparent alpha background, clean edges without colored halos or rectangular haze."
+}

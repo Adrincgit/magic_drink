@@ -1,0 +1,1221 @@
+{
+  "created": "2026-10-08",
+  "mode": "built-in image_gen",
+  "assets": {
+    "duelHeads": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-da8468ad-180c-4124-878e-fbe2cb7ce9c8.png",
+      "prompt": "Generate a transparent 2D game effect sprite atlas EXACTLY four columns and eight rows, 32 separate full drawings, spacious gutters. Hand painted clean cartoon anime cel effects with inked irregular contours, lively organic shapes, subtle painted glow. Each row pair is an eight frame animation, read left to right then next row. Rows1-2: a LARGE prominent five pointed GOLD STAR with rose pink and golden radiant aura, luminous white yellow center, three small trailing pink wisps behind to its LEFT, travelling to RIGHT; keep star recognizable, eight distinct fluid flame-like aura shapes around SAME star. Rows3-4: a round incandescent orange red FIREBALL flying RIGHT with short black-red flame curls trailing LEFT, eight distinct animated turbulent shapes, yellow white core. Rows5-6: one thick incomplete irregular sweeping crescent shockwave of PINK WHITE GOLD magic, thick hand painted tapered swoosh, eight distinct curling expanding shapes, NOT a geometrical ellipse or line. Rows7-8 same thick irregular crescent shockwaves in orange fire gold and charcoal red. Each effect contained in its cell. No backgrounds, no labels, no diagram lines, no vector appearance, no scenery. Native transparency including glows.",
+      "output": "public/arcade/sprites/effects/painted-duel/heads.webp",
+      "layout": {
+        "columns": 4,
+        "frames": 32,
+        "cell": [
+          256,
+          224
+        ]
+      },
+      "registration": [
+        {
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 221,
+            "height": 194
+          },
+          "dx": 5,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 221,
+            "top": 0,
+            "width": 222,
+            "height": 194
+          },
+          "dx": 5,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 443,
+            "top": 0,
+            "width": 222,
+            "height": 194
+          },
+          "dx": 5,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 665,
+            "top": 0,
+            "width": 222,
+            "height": 194
+          },
+          "dx": 5,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 194,
+            "width": 221,
+            "height": 185
+          },
+          "dx": 4,
+          "dy": 8
+        },
+        {
+          "crop": {
+            "left": 221,
+            "top": 194,
+            "width": 222,
+            "height": 185
+          },
+          "dx": 4,
+          "dy": 9
+        },
+        {
+          "crop": {
+            "left": 443,
+            "top": 194,
+            "width": 222,
+            "height": 185
+          },
+          "dx": 4,
+          "dy": 9
+        },
+        {
+          "crop": {
+            "left": 665,
+            "top": 194,
+            "width": 222,
+            "height": 185
+          },
+          "dx": 4,
+          "dy": 9
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 379,
+            "width": 221,
+            "height": 174
+          },
+          "dx": 4,
+          "dy": 15
+        },
+        {
+          "crop": {
+            "left": 221,
+            "top": 379,
+            "width": 222,
+            "height": 174
+          },
+          "dx": 4,
+          "dy": 15
+        },
+        {
+          "crop": {
+            "left": 443,
+            "top": 379,
+            "width": 222,
+            "height": 174
+          },
+          "dx": 4,
+          "dy": 15
+        },
+        {
+          "crop": {
+            "left": 665,
+            "top": 379,
+            "width": 222,
+            "height": 174
+          },
+          "dx": 4,
+          "dy": 15
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 553,
+            "width": 221,
+            "height": 169
+          },
+          "dx": 4,
+          "dy": 17
+        },
+        {
+          "crop": {
+            "left": 221,
+            "top": 553,
+            "width": 222,
+            "height": 169
+          },
+          "dx": 4,
+          "dy": 18
+        },
+        {
+          "crop": {
+            "left": 443,
+            "top": 553,
+            "width": 222,
+            "height": 169
+          },
+          "dx": 4,
+          "dy": 18
+        },
+        {
+          "crop": {
+            "left": 665,
+            "top": 553,
+            "width": 222,
+            "height": 169
+          },
+          "dx": 4,
+          "dy": 18
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 722,
+            "width": 221,
+            "height": 198
+          },
+          "dx": 8,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 221,
+            "top": 722,
+            "width": 222,
+            "height": 198
+          },
+          "dx": 7,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 443,
+            "top": 722,
+            "width": 222,
+            "height": 198
+          },
+          "dx": 7,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 665,
+            "top": 722,
+            "width": 222,
+            "height": 198
+          },
+          "dx": 7,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 920,
+            "width": 221,
+            "height": 214
+          },
+          "dx": 17,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 221,
+            "top": 920,
+            "width": 222,
+            "height": 214
+          },
+          "dx": 16,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 443,
+            "top": 920,
+            "width": 222,
+            "height": 214
+          },
+          "dx": 16,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 665,
+            "top": 920,
+            "width": 222,
+            "height": 214
+          },
+          "dx": 16,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 1134,
+            "width": 221,
+            "height": 198
+          },
+          "dx": 8,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 221,
+            "top": 1134,
+            "width": 222,
+            "height": 198
+          },
+          "dx": 7,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 443,
+            "top": 1134,
+            "width": 222,
+            "height": 198
+          },
+          "dx": 7,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 665,
+            "top": 1134,
+            "width": 222,
+            "height": 198
+          },
+          "dx": 7,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 1332,
+            "width": 221,
+            "height": 222
+          },
+          "dx": 21,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 221,
+            "top": 1332,
+            "width": 222,
+            "height": 222
+          },
+          "dx": 20,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 443,
+            "top": 1332,
+            "width": 222,
+            "height": 222
+          },
+          "dx": 20,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 665,
+            "top": 1332,
+            "width": 222,
+            "height": 222
+          },
+          "dx": 20,
+          "dy": 4
+        }
+      ]
+    },
+    "duelParticles": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-13b7d1b1-4721-4762-a7ea-c18390763da5.png",
+      "prompt": "Create an exactly 4 columns by 6 rows game sprite atlas on transparent background: 24 isolated hand painted cartoon anime particle drawings. Thick clean slightly irregular ink outlines, cel shaded, luminous soft painted edge glows, strong readable silhouettes for use at 20 to 35 pixels. Each row one FOUR frame lively flutter/tumble loop. Row1 golden five pointed stars, pink glint highlights, shapes of a cute magical star. Row2 pink and gold eighth musical NOTES, four orientations with bouncy motion. Row3 bright ivory gold four pointed irregular sparkle with short pink painted brush tails, four twinkling frames. Row4 red orange charcoal EMBERS: burning jagged cinders with small flame tongues, four tumbles. Row5 small ivory PLAYING CARDS with red diamond suit, burning corners and orange flames, four tumble rotations but readable cards. Row6 chunky brown WOOD SPLINTERS from a circus stage, four angular painted pieces with light brown highlights. Widely spaced transparent gutters, every entire figure inside equal cell, consistent scale within row, no grid lines or labels, no other background. Do not draw mathematical vector diamonds or clean SVG icons. Native transparent alpha.",
+      "output": "public/arcade/sprites/effects/painted-duel/particles.webp",
+      "layout": {
+        "columns": 4,
+        "frames": 24,
+        "cell": [
+          128,
+          128
+        ]
+      },
+      "registration": [
+        {
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 256,
+            "top": 0,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 512,
+            "top": 0,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 0,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 256,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 256,
+            "top": 256,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 512,
+            "top": 256,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 256,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 512,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 256,
+            "top": 512,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 512,
+            "top": 512,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 512,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 768,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 256,
+            "top": 768,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 512,
+            "top": 768,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 768,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 1024,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 256,
+            "top": 1024,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 512,
+            "top": 1024,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 1024,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 1280,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 256,
+            "top": 1280,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 512,
+            "top": 1280,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 1280,
+            "width": 256,
+            "height": 256
+          },
+          "dx": 4,
+          "dy": 4
+        }
+      ]
+    },
+    "tapButton": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-416ae20b-5271-4437-9e67-c2bc7e8dc058.png",
+      "prompt": "Create a game UI animation sprite sheet, EXACTLY four columns by two rows, 8 full frames of the SAME big chunky round RED ARCADE PUSH BUTTON on a dark blue metal base with golden trim. Hand painted cartoon anime cel shaded glossy plastic, bold irregular dark ink outline, 3/4 overhead front view with clearly visible top face; playful dimensional object, not flat icon or SVG. Top face has a blank clean center reserved for dynamic keyboard/controller letter, ABSOLUTELY NO text or symbols inside. No hands, NO fingers, no people. Eight sequential frames:1 plunger raised,2 beginning to press,3 lower compressed plunger,4 FULLY pressed with large hand drawn yellow white jagged comic impact burst behind button,5 pressed with orange sparks and impact burst,6 spring rebound tall plunger and little momentum streaks,7 returning raised,8 settled raised. Same center and base baseline across each cell, varying only plunger and genuine drawn impact effects; ample transparent margins around all effects, same button scale across all frames. Transparent background, no grid, no labels. High quality readable cartoon game UI.",
+      "output": "public/arcade/sprites/effects/painted-duel/tap.webp",
+      "layout": {
+        "columns": 8,
+        "frames": 8,
+        "cell": [
+          256,
+          320
+        ]
+      },
+      "registration": [
+        {
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 0,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 0,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 0,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 512,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 512,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 512,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 512,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        }
+      ]
+    },
+    "pyreLife": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-557c34d8-ad59-4ce6-b2fe-fbebd9f48025.png",
+      "prompt": "Make a transparent sprite sheet EXACTLY FOUR columns and FOUR rows, SIXTEEN frames of one cartoon anime pillar of fire erupting vertically from the floor then burning then dissipating. Hand painted cel fire: strong orange red tongues, luminous yellow core, charcoal ember contours, readable large shapes, not photorealistic. Each equal size cell has an invisible common baseline at 92 percent of cell height, no visible floor line, no circular base, no ring, no ellipse, no symbol or marker. Row1 actual eruption drawings at that same baseline: frame1 small flaring fire burst height20percent,2 branching flames height45percent,3 vigorous flames height75percent,4 full tall fire column height85percent. Rows2 and3: EIGHT full height fire column frames looping turbulent tongues and core curls, narrow base 20percent cell width and maximum flame spread45percent; each genuinely different drawn shape. Row4: FOUR dissipation drawings at the SAME full height and baseline coordinate: fire breaks at bottom with large transparent gaps; tongues detach rising upward; separated wisps higher and little embers; final mostly floating embers. Do NOT shrink the fire to extinguish, draw disconnected dying flame tongues across its original height instead. All figures wholly contained in cells, wide transparent gutters, no labels, no grid, native transparent alpha, no scenery, no background. Whole sheet portrait proportion.",
+      "output": "public/arcade/sprites/effects/painted-duel/pyres.webp",
+      "layout": {
+        "columns": 4,
+        "frames": 16,
+        "cell": [
+          256,
+          416
+        ]
+      },
+      "registration": [
+        {
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 256,
+            "height": 365
+          },
+          "dx": 0,
+          "dy": 35
+        },
+        {
+          "crop": {
+            "left": 256,
+            "top": 0,
+            "width": 256,
+            "height": 365
+          },
+          "dx": 0,
+          "dy": 35
+        },
+        {
+          "crop": {
+            "left": 512,
+            "top": 0,
+            "width": 256,
+            "height": 365
+          },
+          "dx": 0,
+          "dy": 35
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 0,
+            "width": 256,
+            "height": 365
+          },
+          "dx": 0,
+          "dy": 35
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 365,
+            "width": 256,
+            "height": 399
+          },
+          "dx": 0,
+          "dy": 2
+        },
+        {
+          "crop": {
+            "left": 256,
+            "top": 365,
+            "width": 256,
+            "height": 399
+          },
+          "dx": 0,
+          "dy": 2
+        },
+        {
+          "crop": {
+            "left": 512,
+            "top": 365,
+            "width": 256,
+            "height": 399
+          },
+          "dx": 0,
+          "dy": 2
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 365,
+            "width": 256,
+            "height": 399
+          },
+          "dx": 0,
+          "dy": 2
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 764,
+            "width": 256,
+            "height": 381
+          },
+          "dx": 0,
+          "dy": 18
+        },
+        {
+          "crop": {
+            "left": 256,
+            "top": 764,
+            "width": 256,
+            "height": 381
+          },
+          "dx": 0,
+          "dy": 18
+        },
+        {
+          "crop": {
+            "left": 512,
+            "top": 764,
+            "width": 256,
+            "height": 381
+          },
+          "dx": 0,
+          "dy": 18
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 764,
+            "width": 256,
+            "height": 381
+          },
+          "dx": 0,
+          "dy": 18
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 1145,
+            "width": 256,
+            "height": 391
+          },
+          "dx": 0,
+          "dy": 16
+        },
+        {
+          "crop": {
+            "left": 256,
+            "top": 1145,
+            "width": 256,
+            "height": 391
+          },
+          "dx": 0,
+          "dy": 16
+        },
+        {
+          "crop": {
+            "left": 512,
+            "top": 1145,
+            "width": 256,
+            "height": 391
+          },
+          "dx": 0,
+          "dy": 16
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 1145,
+            "width": 256,
+            "height": 391
+          },
+          "dx": 0,
+          "dy": 16
+        }
+      ]
+    },
+    "duelDust": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-5e73c236-4b3d-4fdc-a66b-debc7847f306.png",
+      "prompt": "Create EXACTLY EIGHT drawings in FOUR columns and TWO rows, transparent sprite animation sheet of a CARTOON ANIME DUST JET. The dust source is consistently at bottom LEFT of each cell at x15% y85%. Dust shoots rightward along the floor briefly, then curls upward and backward to the RIGHT like a rolling breaking wave of air pressure. A hand painted warm pale tan dust plume with inked soft irregular contours and three cel shades. Frames1 small puff at lower-left origin;2 jet widening to right;3 curls upward middle-right;4 large arch rolling up and right;5 large curling billows further up and right with a thinner tail toward origin;6 billows separate and rise toward top-right;7 dissipating broken round clouds high right;8 last little wisps high right. This must be EIGHT different drawings of continuous ASCENDING AND BACKWARD motion, not eight copies of a ball of dust. Common scale and coordinate system, ample cell gutters. No flat base, no ground line, no shadow, no scenery, no text, no grid. Clean hand painted cel cartoon game style, NOT geometric SVG.",
+      "output": "public/arcade/sprites/effects/painted-duel/dust.webp",
+      "layout": {
+        "columns": 4,
+        "frames": 8,
+        "cell": [
+          256,
+          320
+        ]
+      },
+      "registration": [
+        {
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 0,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 0,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 0,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 512,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 512,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 512,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 512,
+            "width": 384,
+            "height": 512
+          },
+          "dx": 11,
+          "dy": 4
+        }
+      ]
+    },
+    "fireProjectiles": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-29fa18e2-e671-456d-a541-fa36cfc2339e.png",
+      "prompt": "Transparent 2D game effect sprite atlas EXACTLY FOUR columns by SIX rows, 24 distinct drawings, equal spaced cells with wide transparent margins. Hand drawn cartoon anime cel magic, richly orange red and gold fire with charcoal contour, organic curling flame shapes, no geometric vector style. Each two rows make one EIGHT frame loop, moving RIGHT. Rows1-2: a small IVORY PLAYING CARD with red diamond suit flying to right and tumbling slightly in 3D, eight visibly different tilts, flames at burning corners stream left. Keep card readable, no letters or numbers. Rows3-4: long low fiery whip coil or serpentine flame travelling right, wide silhouette with fireball-like bright leading tip on right, trailing curling flames to left, eight different flowing shapes. Rows5-6: a pure fire tongue gust blowing RIGHT, long billowing organic flame tongues, luminous core with red orange curled outer edges and a little charcoal smoke, eight distinctly animated windblown flame shapes, no card, no flat base or cut edge. Keep every complete object in its own cell, no overlap, no labels, no scenery, no floor, transparent native alpha.",
+      "output": "public/arcade/sprites/effects/painted-duel/fire.webp",
+      "layout": {
+        "columns": 4,
+        "frames": 24,
+        "cell": [
+          256,
+          128
+        ]
+      },
+      "registration": [
+        {
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 384,
+            "height": 189
+          },
+          "dx": 6,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 0,
+            "width": 384,
+            "height": 189
+          },
+          "dx": 6,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 0,
+            "width": 384,
+            "height": 189
+          },
+          "dx": 6,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 0,
+            "width": 384,
+            "height": 189
+          },
+          "dx": 6,
+          "dy": 4
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 189,
+            "width": 384,
+            "height": 165
+          },
+          "dx": 4,
+          "dy": 11
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 189,
+            "width": 384,
+            "height": 165
+          },
+          "dx": 4,
+          "dy": 11
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 189,
+            "width": 384,
+            "height": 165
+          },
+          "dx": 4,
+          "dy": 11
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 189,
+            "width": 384,
+            "height": 165
+          },
+          "dx": 4,
+          "dy": 11
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 354,
+            "width": 384,
+            "height": 165
+          },
+          "dx": 4,
+          "dy": 11
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 354,
+            "width": 384,
+            "height": 165
+          },
+          "dx": 4,
+          "dy": 11
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 354,
+            "width": 384,
+            "height": 165
+          },
+          "dx": 4,
+          "dy": 11
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 354,
+            "width": 384,
+            "height": 165
+          },
+          "dx": 4,
+          "dy": 11
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 519,
+            "width": 384,
+            "height": 155
+          },
+          "dx": 4,
+          "dy": 14
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 519,
+            "width": 384,
+            "height": 155
+          },
+          "dx": 4,
+          "dy": 14
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 519,
+            "width": 384,
+            "height": 155
+          },
+          "dx": 4,
+          "dy": 14
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 519,
+            "width": 384,
+            "height": 155
+          },
+          "dx": 4,
+          "dy": 14
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 674,
+            "width": 384,
+            "height": 169
+          },
+          "dx": 4,
+          "dy": 10
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 674,
+            "width": 384,
+            "height": 169
+          },
+          "dx": 4,
+          "dy": 10
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 674,
+            "width": 384,
+            "height": 169
+          },
+          "dx": 4,
+          "dy": 10
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 674,
+            "width": 384,
+            "height": 169
+          },
+          "dx": 4,
+          "dy": 10
+        },
+        {
+          "crop": {
+            "left": 0,
+            "top": 843,
+            "width": 384,
+            "height": 181
+          },
+          "dx": 4,
+          "dy": 6
+        },
+        {
+          "crop": {
+            "left": 384,
+            "top": 843,
+            "width": 384,
+            "height": 181
+          },
+          "dx": 4,
+          "dy": 6
+        },
+        {
+          "crop": {
+            "left": 768,
+            "top": 843,
+            "width": 384,
+            "height": 181
+          },
+          "dx": 4,
+          "dy": 6
+        },
+        {
+          "crop": {
+            "left": 1152,
+            "top": 843,
+            "width": 384,
+            "height": 181
+          },
+          "dx": 4,
+          "dy": 6
+        }
+      ]
+    },
+    "duelMeter": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-cf09dfec-67f5-4e8d-a29f-f0f3f3b83197.png",
+      "prompt": "Create ONE single hand painted cartoon anime videogame HUD meter FRAME, extremely wide and shallow horizontal silhouette 8:1 overall aspect, on transparent background. Elegant whimsical circus woodwork and folded burgundy velvet ribbon, chunky irregular warm GOLD ink outline with cel highlights, small curled golden caps on far ends; left cap decorated with tiny golden FIVE POINT STAR, right cap tiny orange red flame and diamond. The long central horizontal window is COMPLETELY EMPTY TRANSPARENT ALPHA so game code can put animated energy behind it. Window occupies 85% width and 40% height of frame. Gold top and bottom edges gently hand curved but not wavy enough to obstruct reading. Burgundy accents narrow. Entire frame fits with generous transparent outer margin. No text, no lettering, no numbers, no solid panel or background inside or outside, no drop-shadow rectangle. Painted cartoon UI prop rather than a sleek SVG bar. Do not include sample fills, characters or extra frames.",
+      "output": "public/arcade/sprites/effects/painted-duel/meter.webp"
+    }
+  }
+}

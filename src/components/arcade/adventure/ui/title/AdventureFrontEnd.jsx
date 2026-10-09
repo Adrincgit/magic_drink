@@ -2,7 +2,7 @@ import {useEffect,useRef,useState} from 'react';
 import {LEVELS} from '../../world/adventureLevels';
 import css from './adventureFrontEnd.module.css';
 
-export const chapterNumber=index=>`${Math.floor(index/3)+1}-${index%3+1}`;
+export const chapterNumber=index=>LEVELS[index]?.chapter??`${Math.floor(index/3)+1}-${index%3+1}`;
 export default function AdventureFrontEnd({en,save,selected,onChoose,onStart,onSettings,onTutorial,onEngage,busy,gentle,onGentle,reduced,active=true,interactive=true,returning=false}){
  const [chapters,setChapters]=useState(false),[menu,setMenu]=useState(returning),[entrance,setEntrance]=useState(returning?'settled':'waiting'),[loaded,setLoaded]=useState(0);
  const root=useRef(null),skipRequested=useRef(false);

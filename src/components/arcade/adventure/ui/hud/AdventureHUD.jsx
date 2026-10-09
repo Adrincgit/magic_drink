@@ -32,9 +32,9 @@ export default function AdventureHUD({hud,en,playing,inRun,onPause,hidden=false}
    </div>}
    {!!hud.mods?.length&&<div className={css.mods} aria-label={en?'Equipped Mods':'Mods equipados'}>{hud.mods.map(id=>{const mod=MODS.find(m=>m.id===id);if(!mod)return null;const level=hud.modLevels?.[id]||1;return <div key={id} data-hud-mod={id} data-mod-level={level} role="img" aria-label={`${mod.name[en?1:0]} · ${en?'level':'nivel'} ${level}`} title={`${mod.name[en?1:0]} · ${level}`}><AdventureModIcon mod={mod} className={css.modIcon}/><small aria-hidden="true">{'•'.repeat(level)}</small></div>;})}</div>}
   </div>
-  <div className={css.companions} role="img" aria-label={`${en?'Bunnies rescued':'Bunnies rescatados'}: ${hud.rescued} / 3`} data-bunny-hud>
+  {!hud.bossOnly&&<div className={css.companions} role="img" aria-label={`${en?'Bunnies rescued':'Bunnies rescatados'}: ${hud.rescued} / 3`} data-bunny-hud>
    {Array.from({length:3},(_,i)=><Icon key={i} name="bunny-face" data-rescued={i<hud.rescued}/>)}
-  </div>
+  </div>}
   <div className={css.tools}>
    {hud.overdrive>0&&<div className={css.drinkCharge} data-original-buff role="img" aria-label={en?'Original: invincible and rapid fire':'Original: invencible y disparo rápido'}>
     <img className={`${css.drink} ${css.drinkEmpty}`} src="/arcade/sprites/pickups/original.webp" alt=""/>
@@ -48,7 +48,7 @@ export default function AdventureHUD({hud,en,playing,inRun,onPause,hidden=false}
    </div>}
    {inRun&&<button className={css.pause} aria-label={en?'Pause or resume':'Pausar o continuar'} onClick={onPause}>{playing?'Ⅱ':'▶'}</button>}
   </div>
-  <div className={css.treasures} data-treasure-hud aria-label={(en?'Special stars: ':'Estrellas especiales: ')+(hud.treasures||0)+' / 5'}><Icon name="treasure-star"/>{hud.treasures||0} / 5</div>
+  {!hud.bossOnly&&<div className={css.treasures} data-treasure-hud aria-label={(en?'Special stars: ':'Estrellas especiales: ')+(hud.treasures||0)+' / 5'}><Icon name="treasure-star"/>{hud.treasures||0} / 5</div>}
   <div className={css.score} data-score-hud data-star-pulse={hud.starPulse>0} aria-label={`${en?'Star money':'Dinero en estrellas'}: ${hud.money||0}`}><i aria-hidden="true"/>{hud.money||0}</div>
  </div>;
 }

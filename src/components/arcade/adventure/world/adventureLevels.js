@@ -2,6 +2,8 @@ import {WORLDS} from './adventureWorlds';
 import {extendAdventureRoutes} from './adventureRoutes';
 import {shapeMeadowRoute} from './adventureTerrain';
 import {shapeRiverRoute} from './adventureRiverRoute';
+import {shapeHarborRoute} from './adventureHarborRoute';
+import {shapeGrandRing} from './adventureGrandRing';
 const p=(x,y,w,kind='stone',extra={})=>({x,y,w,h:24,kind,...extra});
 export const LEVELS=[
  {id:0,name:['El puente de las luces','The bridge of lights'],subtitle:['Rescata al coro antes de que zarpe la feria.','Rescue the chorus before the fair sets sail.'],power:'Dragon Grape',tip:['Tu magia atraviesa enemigos. Mantén pulsado atacar.','Your magic pierces enemies. Hold attack.'],color:'#eeaa66',sky:['#7963a0','#f7b6ab'],background:'/arcade/maps/waterfront/background.webp',width:3100,bossName:['Don Cascabel','Mr. Jingle'],bossType:0,
@@ -37,7 +39,7 @@ export const DRINKS=[
 const chapters=[
  ['El campo de los globos','The balloon meadow','La comparsa voladora','The flying troupe'],
  ['El bosque del compás','The marching woods','Arlequín Serio','The Serious Harlequin'],
- ['Un juego entre las copas','Games in the canopy','Arlequina Alegre','The Joyful Harlequin'],
+ ['La ribera de los redobles','The drumroll waterfront','La Barcaza del Redoble','The Drumroll Dreadnought'],
  ['La pista de los tres conos','The three-cone ring','Arlequín Agresivo','The Fierce Harlequin'],
  ['El Circo del Silencio','The Circus of Silence','Madame Muta','Madame Muta'],
 ];
@@ -91,4 +93,5 @@ extendAdventureRoutes(LEVELS);
 shapeMeadowRoute(LEVELS[0]);
 Object.assign(LEVELS[1],{name:['El río del organillo','The barrel-organ river'],bossName:['Fortaleza Organillo','The Barrel-Organ Fortress'],sky:['#b9d5c2','#edbc92'],subtitle:['Miso te espera entre los árboles. Sigue el río hasta la fortaleza de los payasos.','Miso awaits among the trees. Follow the river to the clowns’ fortress.']});
 shapeRiverRoute(LEVELS[1]);
-LEVELS[2].name=['El bosque de los faroles','The lantern woods'];
+shapeHarborRoute(LEVELS[2]);
+shapeGrandRing(LEVELS[3]);

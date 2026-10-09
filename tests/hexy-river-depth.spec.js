@@ -37,7 +37,7 @@ test('both bosses gain another fifteen percent of health in both modes and prese
   const s=createAdventure(index,gentle),previous=((gentle?92:140)+index*(gentle?18:24))*(index===0?1.15:1)*1.44;
   expect(s.boss.maxHp).toBe(Math.round(previous*1.15*100)/100);s.boss.hp=1;retryAdventure(s);expect(s.boss.hp).toBe(s.boss.maxHp);
  }
- expect(createAdventure(2).boss.maxHp).toBe(188);
+ expect(createAdventure(2).boss.maxHp).toBe(320);
 });
 
 test('distant planes move at distinct speeds; bridge water remains anchored when the camera moves',()=>{

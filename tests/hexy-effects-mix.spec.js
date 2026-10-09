@@ -73,3 +73,29 @@ test('dense boss combat and simultaneous explosions stay below digital clipping'
  const result=await render(page,events,{export:true});expect(result.nonFinite).toBe(0);expect(result.peak).toBeLessThan(.9);expect(result.rms).toBeGreaterThan(.01);
  writeFileSync(`${folder}/combat.wav`,Buffer.from(result.wav,'base64'));delete result.wav;writeFileSync(`${folder}/combat.json`,JSON.stringify(result,null,2));
 });
+
+test('harbor percussion, water and destruction have audible unclipped effects',async({page})=>{
+ await page.goto('/arcade');const report={};
+ for(const name of ['bargeReady','bargeBeat','bargeCannon','bargeSplash','bargeRev','bargeBreak','bargeDestroy','diverThrow']){
+  const r=await render(page,[[.1,name]]);expect(r.nonFinite).toBe(0);expect(r.peak).toBeGreaterThan(.02);expect(r.peak).toBeLessThan(.9);report[name]=r;
+ }
+ const mix=await render(page,[[0,'bargeRev'],[.3,'bargeBeat'],[.7,'bargeCannon'],[1,'bargeSplash'],[1.2,'bargeBeat'],[1.9,'bargeBreak'],[2.2,'bargeDestroy'],[2.2,'bargeSplash']],{export:true});expect(mix.peak).toBeLessThan(.9);writeFileSync(`${folder}/harbor.wav`,Buffer.from(mix.wav,'base64'));delete mix.wav;report.mix=mix;writeFileSync(`${folder}/harbor.json`,JSON.stringify(report,null,2));
+});
+
+test('harlequin bells, silk, phases and vanish have audible unclipped effects',async({page})=>{
+ await page.goto('/arcade');const report={};
+ for(const name of ['harlequinReady','harlequinCast','harlequinSilk','harlequinRush','harlequinLeap','harlequinLand','harlequinPhase','harlequinDown','harlequinVanish','harlequinFireImpact','harlequinEntrance','harlequinEntranceLand']){
+  const r=await render(page,[[.1,name]]);expect(r.nonFinite).toBe(0);expect(r.peak).toBeGreaterThan(.02);expect(r.peak).toBeLessThan(.9);report[name]=r;
+ }
+ const mix=await render(page,[[0,'harlequinEntrance'],[1.6,'harlequinFireImpact'],[1.6,'harlequinEntranceLand'],[2.3,'harlequinFireImpact'],[2.35,'harlequinFireImpact'],[.7,'harlequinCast'],[.7,'bossHit'],[1,'harlequinSilk'],[1.5,'harlequinRush'],[1.8,'harlequinLand'],[2.2,'harlequinDown'],[3.4,'harlequinVanish']],{export:true});expect(mix.peak).toBeLessThan(.9);writeFileSync(`${folder}/harlequin.wav`,Buffer.from(mix.wav,'base64'));delete mix.wav;report.mix=mix;writeFileSync(`${folder}/harlequin.json`,JSON.stringify(report,null,2));
+});
+
+test('ultimate charge and colourful clash have audible impact without clipping the shared mix',async({page})=>{
+ await page.goto('/arcade');const report={};
+ for(const name of ['harlequinPower','harlequinPowerPulse','harlequinRelease','clashImpact','clashTap','clashPulse','clashWin','clashLose','clashExplosion','clashLand','hexyDefeatLaunch','hexyDefeatLand','harlequinEruption','death']){
+  const r=await render(page,[[.1,name]]);expect(r.nonFinite).toBe(0);expect(r.peak).toBeGreaterThan(.02);expect(r.peak).toBeLessThan(.9);report[name]=r;
+ }
+ const events=[[0,'harlequinPower'],[.5,'superCharge'],[.5,'harlequinPowerPulse'],[1,'harlequinPowerPulse'],[1.4,'superCast'],[1.4,'harlequinRelease'],[1.74,'clashImpact'],[4,'clashWin'],[4.15,'clashExplosion'],[4.4,'clashLand']];
+ for(let at=1.5;at<4;at+=.2)events.push([at,'clashTap']);for(let at=1.6;at<4;at+=.4)events.push([at,'clashPulse']);events.sort((a,b)=>a[0]-b[0]);
+ const mix=await render(page,events,{export:true});expect(mix.peak).toBeLessThan(.9);expect(mix.rms).toBeGreaterThan(.015);writeFileSync(`${folder}/power-clash.wav`,Buffer.from(mix.wav,'base64'));delete mix.wav;report.mix=mix;writeFileSync(`${folder}/power-clash.json`,JSON.stringify(report,null,2));
+});

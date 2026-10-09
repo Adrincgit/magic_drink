@@ -18,6 +18,8 @@ La interfaz usa React y CSS Modules. La simulación y el dibujo de la aventura s
 
 Los recursos que se descargan están en `public/arcade`, en WebP. Las pruebas y sus capturas están en `tests` y `tests/artifacts`; las capturas no se versionan. Los scripts de preparación de arte están en `scripts/arcade`.
 
+`HexyAdventure` usa `useIllustratedFinish('arcade')`: los ajustes de imagen se guardan y sincronizan únicamente entre instancias del juego. La llamada sin ámbito conserva el acabado compartido de inicio, Hexy y bebidas. No reutilizar la preferencia visual de la web para los controles del arcade.
+
 Cambiar nombres de carpetas requiere actualizar también las importaciones de las pruebas y sus interceptores de módulos. Las poses aéreas se seleccionan antes que el apuntado de pie. La punta de la varita se mide sobre el sprite definitivo, después de normalizar su cuerpo.
 
 El runner antiguo y las pantallas retiradas ya no pertenecen al árbol de módulos activo. Consulta `context/arcade/README.md` para recursos y respaldos.

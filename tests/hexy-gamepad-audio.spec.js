@@ -82,13 +82,14 @@ for(const width of [1440,390])test(width+': audio mixer remains inside the game,
  await page.keyboard.press('KeyP');await page.locator('[data-open-settings]').click();await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','paused');
  const frozen=await page.locator('[data-adventure-canvas]').getAttribute('data-sim-frame');await page.waitForTimeout(100);expect(await page.locator('[data-adventure-canvas]').getAttribute('data-sim-frame')).toBe(frozen);
  const bounds=await page.evaluate(()=>['[data-adventure-canvas]','[data-adventure-settings]'].map(s=>{const r=document.querySelector(s).getBoundingClientRect();return{x:r.x,y:r.y,width:r.width,height:r.height};}));for(const key of ['x','y','width','height'])expect(Math.abs(bounds[0][key]-bounds[1][key])).toBeLessThan(1);
+ await range(page,'master',100);await range(page,'music',100);await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBe(1);
  await range(page,'master',40);await range(page,'music',60);await range(page,'effects',25);
- await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBeCloseTo(.1152,5);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(.07,3);
+ await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBeCloseTo(.24,5);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(.07,3);
  await range(page,'music',0);await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBe(0);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(.07,3);await range(page,'music',60);
- await range(page,'effects',0);await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBeCloseTo(.1152,5);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(0,3);await range(page,'effects',25);
+ await range(page,'effects',0);await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBeCloseTo(.24,5);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(0,3);await range(page,'effects',25);
  await page.getByRole('button',{name:'Probar sonido'}).click();await expect.poll(()=>page.evaluate(()=>window.arcadeGains.length)).toBeGreaterThan(1);
  await page.getByRole('button',{name:'Silenciar todo'}).click();await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBe(0);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(0,3);
- await page.getByRole('button',{name:'Activar sonido'}).click();await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBeCloseTo(.1152,5);
+ await page.getByRole('button',{name:'Activar sonido'}).click();await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBeCloseTo(.24,5);
  await page.getByRole('region',{name:'Aventura de Hexy',exact:true}).screenshot({path:folder+'audio-'+width+'.jpg'});
  await page.getByRole('button',{name:'Mando',exact:false}).filter({hasText:'Mando'}).click();await expect(page.locator('[data-controller-status]')).toHaveAttribute('data-controller-status','waiting');await page.getByRole('region',{name:'Aventura de Hexy',exact:true}).screenshot({path:folder+'controller-'+width+'.jpg'});
  await page.keyboard.press('Escape');await expect(page.locator('[data-adventure-settings]')).toHaveCount(0);await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','paused');

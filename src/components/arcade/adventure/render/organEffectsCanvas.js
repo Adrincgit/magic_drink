@@ -56,7 +56,9 @@ export function drawOrganDebris(c,s,art,reduced=false){
  for(const q of s.organDebris||[]){
   const img=art[q.art];if(!img)continue;
   const [x,y,w,h]=q.crop;
-  c.save();c.globalAlpha=Math.min(1,q.life/.7);c.translate(q.x,q.y);c.rotate(reduced?0:q.rotation);
+  c.save();c.globalAlpha=Math.min(1,q.life/.7);
+  if(q.water){c.beginPath();c.rect(q.x-q.w-q.h,q.floor-2000,(q.w+q.h)*2,2000);c.clip();}
+  c.translate(q.x,q.y);c.rotate(reduced?0:q.rotation);
   if(q.jagged){
    const edge=[[-.5,-.47],[-.1,-.5],[.12,-.43],[.48,-.5],[.44,-.1],[.5,.19],[.43,.5],[-.13,.45],[-.5,.5],[-.44,.13],[-.5,-.1]];
    c.beginPath();edge.forEach(([px,py])=>c.lineTo(px*q.w,py*q.h));c.closePath();c.clip();

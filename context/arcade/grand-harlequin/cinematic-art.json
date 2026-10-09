@@ -1,0 +1,465 @@
+{
+  "tool": "built-in image_gen",
+  "layout": {
+    "columns": 3,
+    "rows": 4,
+    "cellWidth": 384,
+    "cellHeight": 448,
+    "states": [
+      "effort",
+      "worried",
+      "rally",
+      "advantage"
+    ],
+    "animationFps": 9,
+    "registration": "Alpha-connected complete silhouettes; measured row/column gutters; feet at y=432 and shoe midpoint x=192. No uniform-grid slicing of native source."
+  },
+  "hexy": {
+    "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-8e1bf80c-09f3-42dd-9a74-2a46c33da63e.png",
+    "reference": "public/arcade/sprites/ui/hexy-encore-full.webp",
+    "output": "public/arcade/sprites/ui/hexy-clash-full.webp",
+    "prompt": "Use case: illustration-story. Production transparent sprite sheet for Hexy's anime cartoon magic duel. Reference is the exact character design and beautiful full-body finish to preserve. Create a NEW full-body casting animation sheet, 3 columns by 4 rows, 12 separate complete figures, tall canvas 2048x3072. Every cell equally sized; ample transparent gutter; entire hat, hair, wand and both shoes visible, no cropping, no panels, no text, no background.\nAll figures face RIGHT in a braced side-on heroic stance: right foot planted forward, left leg back, torso leaning into powerful recoil. ONLY HER RIGHT HAND grips the black gold-star wand and extends it horizontally forward at shoulder height. Left arm pulled back into a clenched fist, NEVER touching wand/right wrist/right arm. Short concentrated pink and pale gold magical flare streams from the star tip to the right, stays within cell. Preserve reference navy witch hat with gold star, long flowing bright pink hair, white sailor blouse with navy trim, red chest bow, navy pleated skirt, navy knee socks, black buckle shoes, purple eyes, same youthful cute face and body proportions. She is a determined hero, NEVER smiling or smirking.\nEach row is one expression, three columns are successive smoothly consistent wind-blown hair/skirt animation drawings, stable feet/body/wand alignment. Row1 intense gritted teeth, furrowed brows exerting power. Row2 alarm under pressure, strain, worried brows but still pushing forward. Row3 fierce rally, open mouth heroic shout HAAA without any text. Row4 maximum heroic finishing shout, stronger determined eyes, brighter short gold-pink flare, absolutely no smile. Hair blows rapidly BACKWARD to the left with visible different locks waves in the three columns. Bold clean anime ink, polished cel shading, luminous rim light matching reference, detailed hands, consistent anatomy, use entire cell height with 8% clear gutter. Real transparent alpha background.",
+    "registration": [
+      {
+        "row": 0,
+        "col": 0,
+        "crop": {
+          "left": 11,
+          "top": 16,
+          "width": 325,
+          "height": 358
+        },
+        "anchor": [
+          158.5,
+          367
+        ],
+        "destination": [
+          45,
+          81
+        ]
+      },
+      {
+        "row": 0,
+        "col": 1,
+        "crop": {
+          "left": 342,
+          "top": 11,
+          "width": 326,
+          "height": 364
+        },
+        "anchor": [
+          492.5,
+          368
+        ],
+        "destination": [
+          42,
+          75
+        ]
+      },
+      {
+        "row": 0,
+        "col": 2,
+        "crop": {
+          "left": 668,
+          "top": 9,
+          "width": 356,
+          "height": 365
+        },
+        "anchor": [
+          847.5,
+          367
+        ],
+        "destination": [
+          13,
+          74
+        ]
+      },
+      {
+        "row": 1,
+        "col": 0,
+        "crop": {
+          "left": 10,
+          "top": 383,
+          "width": 327,
+          "height": 363
+        },
+        "anchor": [
+          159,
+          739
+        ],
+        "destination": [
+          43,
+          76
+        ]
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "crop": {
+          "left": 339,
+          "top": 376,
+          "width": 327,
+          "height": 370
+        },
+        "anchor": [
+          492.5,
+          739
+        ],
+        "destination": [
+          39,
+          69
+        ]
+      },
+      {
+        "row": 1,
+        "col": 2,
+        "crop": {
+          "left": 666,
+          "top": 377,
+          "width": 358,
+          "height": 367
+        },
+        "anchor": [
+          848,
+          737
+        ],
+        "destination": [
+          10,
+          72
+        ]
+      },
+      {
+        "row": 2,
+        "col": 0,
+        "crop": {
+          "left": 9,
+          "top": 756,
+          "width": 324,
+          "height": 364
+        },
+        "anchor": [
+          160,
+          1113
+        ],
+        "destination": [
+          41,
+          75
+        ]
+      },
+      {
+        "row": 2,
+        "col": 1,
+        "crop": {
+          "left": 334,
+          "top": 750,
+          "width": 331,
+          "height": 370
+        },
+        "anchor": [
+          492,
+          1113
+        ],
+        "destination": [
+          34,
+          69
+        ]
+      },
+      {
+        "row": 2,
+        "col": 2,
+        "crop": {
+          "left": 665,
+          "top": 750,
+          "width": 359,
+          "height": 370
+        },
+        "anchor": [
+          849.5,
+          1113
+        ],
+        "destination": [
+          8,
+          69
+        ]
+      },
+      {
+        "row": 3,
+        "col": 0,
+        "crop": {
+          "left": 8,
+          "top": 1136,
+          "width": 322,
+          "height": 368
+        },
+        "anchor": [
+          159.5,
+          1497
+        ],
+        "destination": [
+          41,
+          71
+        ]
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "crop": {
+          "left": 330,
+          "top": 1130,
+          "width": 335,
+          "height": 373
+        },
+        "anchor": [
+          493,
+          1496
+        ],
+        "destination": [
+          29,
+          66
+        ]
+      },
+      {
+        "row": 3,
+        "col": 2,
+        "crop": {
+          "left": 665,
+          "top": 1123,
+          "width": 359,
+          "height": 380
+        },
+        "anchor": [
+          849,
+          1496
+        ],
+        "destination": [
+          8,
+          59
+        ]
+      }
+    ]
+  },
+  "boss": {
+    "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-e10854fa-e856-4705-a269-3ddc6c606b55.png",
+    "reference": "public/arcade/sprites/bosses/harlequin/ultimate-portrait.webp",
+    "output": "public/arcade/sprites/bosses/harlequin/clash-full.webp",
+    "prompt": "Use case: illustration-story. Production game transparent full-body casting animation sprite sheet. Reference is exact villain design, preserve that polished ink and painted anime cartoon quality. NEW poses of same red black diamond harlequin projecting his ultimate, always facing LEFT. 3 columns by 4 rows, 12 equally sized cells, tall canvas 2048x3072, generous clear gutters. Each cell a COMPLETE figure from single-cone jester cap to both curled shoes, no cropping, no panels, text or background. A braced forceful stance with left foot forward, torso leaning left, BOTH gloved hands extended to LEFT projecting a short fiery orange-red and black magical flare, within cell, fingers anatomically correct. Ragged crimson cape whips BACKWARDS to RIGHT, clear successive billowing wave changes across each row's three frames. Preserve original costume, white ruff, pale clown face/red nose/black hair, one-cone bell hat, gold cuffs and diamond pattern.\nEach row fixed identical body anchor and pose; columns three subtle animation frames of cape/hat flame/hair movement. Row1 angry teeth-bared effort. Row2 worried shocked exertion while losing, brows raised but still forcefully casting. Row3 enraged open-mouth yell, doubling effort. Row4 wicked confident toothy villain grin, narrowed triumphant eyes while casting. Short flame from palms clearly visible, orange rim lighting, cohesive drawn shadows, same proportions. Entire shoes/hat/cape/hands in every cell, clear margins. Actual transparent alpha background, no opaque fog fill.",
+    "registration": [
+      {
+        "row": 0,
+        "col": 0,
+        "crop": {
+          "left": 5,
+          "top": 32,
+          "width": 341,
+          "height": 353
+        },
+        "anchor": [
+          196,
+          378
+        ],
+        "destination": [
+          1,
+          86
+        ]
+      },
+      {
+        "row": 0,
+        "col": 1,
+        "crop": {
+          "left": 346,
+          "top": 30,
+          "width": 326,
+          "height": 355
+        },
+        "anchor": [
+          522,
+          378
+        ],
+        "destination": [
+          16,
+          84
+        ]
+      },
+      {
+        "row": 0,
+        "col": 2,
+        "crop": {
+          "left": 672,
+          "top": 32,
+          "width": 352,
+          "height": 353
+        },
+        "anchor": [
+          841,
+          378
+        ],
+        "destination": [
+          23,
+          86
+        ]
+      },
+      {
+        "row": 1,
+        "col": 0,
+        "crop": {
+          "left": 8,
+          "top": 402,
+          "width": 338,
+          "height": 360
+        },
+        "anchor": [
+          196,
+          755
+        ],
+        "destination": [
+          4,
+          79
+        ]
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "crop": {
+          "left": 346,
+          "top": 411,
+          "width": 327,
+          "height": 351
+        },
+        "anchor": [
+          522,
+          755
+        ],
+        "destination": [
+          16,
+          88
+        ]
+      },
+      {
+        "row": 1,
+        "col": 2,
+        "crop": {
+          "left": 673,
+          "top": 405,
+          "width": 351,
+          "height": 357
+        },
+        "anchor": [
+          841.5,
+          755
+        ],
+        "destination": [
+          24,
+          82
+        ]
+      },
+      {
+        "row": 2,
+        "col": 0,
+        "crop": {
+          "left": 5,
+          "top": 783,
+          "width": 342,
+          "height": 360
+        },
+        "anchor": [
+          196,
+          1136
+        ],
+        "destination": [
+          1,
+          79
+        ]
+      },
+      {
+        "row": 2,
+        "col": 1,
+        "crop": {
+          "left": 347,
+          "top": 781,
+          "width": 324,
+          "height": 362
+        },
+        "anchor": [
+          522,
+          1136
+        ],
+        "destination": [
+          17,
+          77
+        ]
+      },
+      {
+        "row": 2,
+        "col": 2,
+        "crop": {
+          "left": 671,
+          "top": 778,
+          "width": 353,
+          "height": 365
+        },
+        "anchor": [
+          841.5,
+          1136
+        ],
+        "destination": [
+          22,
+          74
+        ]
+      },
+      {
+        "row": 3,
+        "col": 0,
+        "crop": {
+          "left": 5,
+          "top": 1162,
+          "width": 340,
+          "height": 362
+        },
+        "anchor": [
+          196.5,
+          1517
+        ],
+        "destination": [
+          1,
+          77
+        ]
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "crop": {
+          "left": 345,
+          "top": 1166,
+          "width": 326,
+          "height": 358
+        },
+        "anchor": [
+          521.5,
+          1517
+        ],
+        "destination": [
+          16,
+          81
+        ]
+      },
+      {
+        "row": 3,
+        "col": 2,
+        "crop": {
+          "left": 671,
+          "top": 1157,
+          "width": 353,
+          "height": 367
+        },
+        "anchor": [
+          841,
+          1517
+        ],
+        "destination": [
+          22,
+          72
+        ]
+      }
+    ]
+  }
+}

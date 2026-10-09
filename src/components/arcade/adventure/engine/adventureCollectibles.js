@@ -9,7 +9,7 @@ export const COLLECTIBLES=LEVELS.map(level=>{
  });
  const stars=normal.map(([x,y])=>({id:`${level.id}:star:${x}:${y}`,x,y,value:1}));
  const tents=(level.outposts||[]).slice(0,2);
- const count=5-tents.length;
+ const count=level.bossOnly?0:5-tents.length;
  for(let i=0;i<count;i++){
   const target=level.arena.left*(.17+i*.23);
   const platform=level.platforms.filter(p=>p.x+p.w/2<level.arena.left).reduce((a,b)=>Math.abs(b.x+b.w/2-target)<Math.abs(a.x+a.w/2-target)?b:a);

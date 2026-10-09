@@ -1,0 +1,2404 @@
+{
+  "tool": "built-in image_gen",
+  "actionsMid": {
+    "source": "exec-d13f3f08-3cea-40b4-b142-ef45ba42cc1c.png",
+    "prompt": "Use case: identity-preserve. Edit ONLY the clothing damage in this 20-frame FOUR columns FIVE rows harlequin sprite atlas to create its PHASE TWO variant. Keep exactly the same clean cartoon lines, pose, body/head/hand positions, proportions, size, all fire effects and every frame registration. Preserve all twenty complete figures and transparent alpha. Change ONLY the costume: close all holes in the diamond suit and restore an intact white ruff and intact red single-cone cap. Crimson cape has only moderate wear: keep long flowing cape with a FEW small ragged tears at lower edge, not the deeply shredded thin strips shown here. A few dark singe marks on red diamonds, no exposed skin through clothes. Still battle worn but clearly less than phase three. Do not move or redraw the stance. True transparent background around the sprites.",
+    "output": "public/arcade/sprites/bosses/harlequin/fire-actions-mid.webp",
+    "registration": [
+      {
+        "row": 0,
+        "col": 0,
+        "crop": {
+          "left": 14,
+          "top": 37,
+          "width": 263,
+          "height": 262
+        },
+        "anchor": [
+          126,
+          293
+        ],
+        "destination": [
+          99,
+          132
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 0,
+        "col": 1,
+        "crop": {
+          "left": 279,
+          "top": 46,
+          "width": 251,
+          "height": 252
+        },
+        "anchor": [
+          390,
+          292
+        ],
+        "destination": [
+          101,
+          146
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 0,
+        "col": 2,
+        "crop": {
+          "left": 543,
+          "top": 38,
+          "width": 230,
+          "height": 260
+        },
+        "anchor": [
+          647,
+          292
+        ],
+        "destination": [
+          110,
+          134
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 0,
+        "col": 3,
+        "crop": {
+          "left": 784,
+          "top": 25,
+          "width": 237,
+          "height": 274
+        },
+        "anchor": [
+          898,
+          293
+        ],
+        "destination": [
+          96,
+          115
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 1,
+        "col": 0,
+        "crop": {
+          "left": 8,
+          "top": 345,
+          "width": 258,
+          "height": 274
+        },
+        "anchor": [
+          115,
+          613
+        ],
+        "destination": [
+          106,
+          115
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "crop": {
+          "left": 246,
+          "top": 300,
+          "width": 271,
+          "height": 320
+        },
+        "anchor": [
+          365,
+          614
+        ],
+        "destination": [
+          89,
+          50
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 1,
+        "col": 2,
+        "crop": {
+          "left": 518,
+          "top": 354,
+          "width": 272,
+          "height": 266
+        },
+        "anchor": [
+          651,
+          614
+        ],
+        "destination": [
+          70,
+          126
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 1,
+        "col": 3,
+        "crop": {
+          "left": 781,
+          "top": 350,
+          "width": 243,
+          "height": 269
+        },
+        "anchor": [
+          899,
+          613
+        ],
+        "destination": [
+          91,
+          122
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 2,
+        "col": 0,
+        "crop": {
+          "left": 8,
+          "top": 628,
+          "width": 250,
+          "height": 283
+        },
+        "anchor": [
+          111,
+          905
+        ],
+        "destination": [
+          112,
+          102
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 2,
+        "col": 1,
+        "crop": {
+          "left": 289,
+          "top": 699,
+          "width": 226,
+          "height": 213
+        },
+        "anchor": [
+          397,
+          906
+        ],
+        "destination": [
+          105,
+          200
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 2,
+        "col": 2,
+        "crop": {
+          "left": 515,
+          "top": 719,
+          "width": 261,
+          "height": 191
+        },
+        "anchor": [
+          647,
+          904
+        ],
+        "destination": [
+          71,
+          231
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 2,
+        "col": 3,
+        "crop": {
+          "left": 761,
+          "top": 671,
+          "width": 257,
+          "height": 240
+        },
+        "anchor": [
+          901,
+          905
+        ],
+        "destination": [
+          60,
+          162
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 3,
+        "col": 0,
+        "crop": {
+          "left": 17,
+          "top": 965,
+          "width": 240,
+          "height": 255
+        },
+        "anchor": [
+          139,
+          1214
+        ],
+        "destination": [
+          85,
+          141
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "crop": {
+          "left": 245,
+          "top": 947,
+          "width": 268,
+          "height": 268
+        },
+        "anchor": [
+          378,
+          1209
+        ],
+        "destination": [
+          70,
+          123
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 3,
+        "col": 2,
+        "crop": {
+          "left": 517,
+          "top": 941,
+          "width": 252,
+          "height": 262
+        },
+        "anchor": [
+          644,
+          1197
+        ],
+        "destination": [
+          78,
+          132
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 3,
+        "col": 3,
+        "crop": {
+          "left": 761,
+          "top": 999,
+          "width": 262,
+          "height": 195
+        },
+        "anchor": [
+          891,
+          1188
+        ],
+        "destination": [
+          74,
+          225
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "crop": {
+          "left": 7,
+          "top": 1359,
+          "width": 274,
+          "height": 118
+        },
+        "anchor": [
+          145,
+          1471
+        ],
+        "destination": [
+          63,
+          333
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 4,
+        "col": 1,
+        "crop": {
+          "left": 288,
+          "top": 1272,
+          "width": 252,
+          "height": 206
+        },
+        "anchor": [
+          410,
+          1472
+        ],
+        "destination": [
+          85,
+          210
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 4,
+        "col": 2,
+        "crop": {
+          "left": 542,
+          "top": 1272,
+          "width": 234,
+          "height": 206
+        },
+        "anchor": [
+          653,
+          1472
+        ],
+        "destination": [
+          101,
+          210
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 4,
+        "col": 3,
+        "crop": {
+          "left": 793,
+          "top": 1211,
+          "width": 218,
+          "height": 267
+        },
+        "anchor": [
+          901,
+          1472
+        ],
+        "destination": [
+          105,
+          125
+        ],
+        "scale": 1.4
+      }
+    ]
+  },
+  "date": "2026-10-08",
+  "hexy": {
+    "source": "exec-b4af3b2e-47d0-4ed3-887e-fc329b29cccc.png",
+    "prompt": "Use case: identity-preserve. Edit this Hexy full-body sprite sheet to improve the actual animation and facial acting, preserving the exact reference character, clean anime cel style, costume, one-handed horizontal wand grip, free clenched fist behind, stance, anatomy and overall proportions. Deliver a transparent 3-column by 4-row sheet with 12 COMPLETE figures. Ample transparent gutters separating all figures and all rows; no clipping of hat, hair, skirt, shoes, wand or glow. Real transparent background.\nThe row meanings MUST change: row1 = determined gritted teeth, steady effort at an even duel; row2 = MUCH stronger teeth-clenching effort, furrowed eyebrows, cheek tension, leaning harder into the spell, mouth CLOSED except visible tightly clenched teeth, NOT fear; row3 = near-defeat concern with tense worried eyes and clenched teeth, still fighting, NEVER smiling; row4 = winning heroic open-mouth shout, fierce courage, NO smile.\nEvery row has THREE DISTINCT animation drawings of fast wind: frame1 hair sweeping back in a low broad wave, skirt pleats swept back; frame2 hair thrown in a high wave with loose locks flying, pleated skirt rippling strongly backward; frame3 hair wave falling with separate locks streaming, skirt pleats curling back differently. Feet, head base and wand stay consistently registered. The skirt retains full modest coverage, never a revealing upskirt pose. ONLY ONE HAND HOLDS THE WAND in every frame. Short pink/gold energy at the star tip. Clean flat shadows, bold controlled ink, no added texture. No background, panels, text, particles drifting into adjacent cells. Layout cells tall enough for complete figures.",
+    "output": "public/arcade/sprites/ui/hexy-clash-full.webp",
+    "registration": [
+      {
+        "row": 0,
+        "col": 0,
+        "crop": {
+          "left": 10,
+          "top": 37,
+          "width": 327,
+          "height": 347
+        },
+        "anchor": [
+          172.5,
+          378
+        ],
+        "destination": [
+          30,
+          91
+        ],
+        "scale": 1
+      },
+      {
+        "row": 0,
+        "col": 1,
+        "crop": {
+          "left": 350,
+          "top": 35,
+          "width": 321,
+          "height": 349
+        },
+        "anchor": [
+          511,
+          378
+        ],
+        "destination": [
+          31,
+          89
+        ],
+        "scale": 1
+      },
+      {
+        "row": 0,
+        "col": 2,
+        "crop": {
+          "left": 676,
+          "top": 38,
+          "width": 329,
+          "height": 346
+        },
+        "anchor": [
+          846.5,
+          378
+        ],
+        "destination": [
+          22,
+          92
+        ],
+        "scale": 1
+      },
+      {
+        "row": 1,
+        "col": 0,
+        "crop": {
+          "left": 9,
+          "top": 416,
+          "width": 332,
+          "height": 349
+        },
+        "anchor": [
+          172,
+          759
+        ],
+        "destination": [
+          29,
+          89
+        ],
+        "scale": 1
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "crop": {
+          "left": 347,
+          "top": 408,
+          "width": 327,
+          "height": 357
+        },
+        "anchor": [
+          510,
+          759
+        ],
+        "destination": [
+          29,
+          81
+        ],
+        "scale": 1
+      },
+      {
+        "row": 1,
+        "col": 2,
+        "crop": {
+          "left": 675,
+          "top": 417,
+          "width": 330,
+          "height": 349
+        },
+        "anchor": [
+          846,
+          760
+        ],
+        "destination": [
+          21,
+          89
+        ],
+        "scale": 1
+      },
+      {
+        "row": 2,
+        "col": 0,
+        "crop": {
+          "left": 10,
+          "top": 803,
+          "width": 327,
+          "height": 349
+        },
+        "anchor": [
+          172.5,
+          1146
+        ],
+        "destination": [
+          30,
+          89
+        ],
+        "scale": 1
+      },
+      {
+        "row": 2,
+        "col": 1,
+        "crop": {
+          "left": 351,
+          "top": 800,
+          "width": 320,
+          "height": 352
+        },
+        "anchor": [
+          510.5,
+          1146
+        ],
+        "destination": [
+          33,
+          86
+        ],
+        "scale": 1
+      },
+      {
+        "row": 2,
+        "col": 2,
+        "crop": {
+          "left": 677,
+          "top": 800,
+          "width": 328,
+          "height": 352
+        },
+        "anchor": [
+          846,
+          1146
+        ],
+        "destination": [
+          23,
+          86
+        ],
+        "scale": 1
+      },
+      {
+        "row": 3,
+        "col": 0,
+        "crop": {
+          "left": 9,
+          "top": 1183,
+          "width": 327,
+          "height": 348
+        },
+        "anchor": [
+          172.5,
+          1525
+        ],
+        "destination": [
+          29,
+          90
+        ],
+        "scale": 1
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "crop": {
+          "left": 347,
+          "top": 1166,
+          "width": 325,
+          "height": 365
+        },
+        "anchor": [
+          510.5,
+          1525
+        ],
+        "destination": [
+          29,
+          73
+        ],
+        "scale": 1
+      },
+      {
+        "row": 3,
+        "col": 2,
+        "crop": {
+          "left": 672,
+          "top": 1176,
+          "width": 333,
+          "height": 356
+        },
+        "anchor": [
+          847,
+          1526
+        ],
+        "destination": [
+          17,
+          82
+        ],
+        "scale": 1
+      }
+    ]
+  },
+  "boss": {
+    "source": "exec-7094b252-4457-41ac-87bb-6d8809214c7f.png",
+    "prompt": "Use case: illustration-story. GAMEPLAY animation atlas for the same fire harlequin. Input1 is authoritative character design and CLEAN anime cartoon style; input2 supplies ONLY the action sequence and grid structure, do NOT inherit its overly detailed painted texture. Re-draw all 24 full-body poses in FOUR columns by SIX rows. Output transparent PNG, large portrait sheet 2048x3072 suggested, complete figures within separated cells with generous gutters. Every figure faces LEFT. Same character: ONE red cone jester cap with single gold bell, ivory ruff, white face/red nose/dark hair, red and dark teal diamond suit, gold cuffs, curled black shoes, crimson cape. Phase1 costume intact, no holes. Bolder simplified ink, 2-3 flat cel shades, larger readable eyes and shapes, NO etched fabric, fine texture or realistic skin. Match the polished new casting reference. Keep body size, head size and feet registration consistent across frames.\nRow1 four idle frames, breathing and cape swaying.\nRow2 FOUR sequential fiery card casts: draw cards to chest; twist shoulder pull arm back; fully extend LEFT throwing hand releasing small red/gold burning cards; follow-through empty extended hand, cape whipped backward. Clear shoulder/arm motion, never a static crouch emitting projectiles.\nRow3 low flaming ribbon cast: gather ribbon near waist; wind up to right; sweeping low LEFT arm releasing orange-red silk flame; recover.\nRow4 four-frame low running cycle LEFT, opposing legs change correctly, cape trails right.\nRow5 acrobatic jump: crouched takeoff; airborne left-hand throwing gesture; airborne tucked turn; low landing with right knee bent.\nRow6 conjuring rain: gather hands at chest; raise both hands overhead; fully extended overhead throwing sparks; arms release outwards recover.\nSmall flames may remain attached to hands/cards but no detached projectiles across gutters. Exactly 24 complete figures, no extra panels, labels, text, scenery, floor or shadows. Real transparent alpha.",
+    "alphaPrompt": "Use case: background-extraction. Remove ONLY the entire brown/red smoky background from this 4-column 6-row animation sprite sheet. Keep all 24 harlequin figures and their small attached fire effects exactly intact, same pixel registration, poses, cape, lines, colors and sizes. Output real transparent alpha between and around every figure. No colored backdrop, no floor, no shadows, no gradient. Transparent isolated sprites. Do not redesign or rearrange.",
+    "output": "public/arcade/sprites/bosses/harlequin/motion.webp",
+    "registration": [
+      {
+        "row": 0,
+        "col": 0,
+        "crop": {
+          "left": 47,
+          "top": 16,
+          "width": 193,
+          "height": 258
+        },
+        "anchor": [
+          118,
+          268
+        ],
+        "destination": [
+          150,
+          112
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 0,
+        "col": 1,
+        "crop": {
+          "left": 304,
+          "top": 15,
+          "width": 212,
+          "height": 258
+        },
+        "anchor": [
+          377,
+          267
+        ],
+        "destination": [
+          147,
+          112
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 0,
+        "col": 2,
+        "crop": {
+          "left": 556,
+          "top": 18,
+          "width": 215,
+          "height": 256
+        },
+        "anchor": [
+          634,
+          268
+        ],
+        "destination": [
+          139,
+          115
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 0,
+        "col": 3,
+        "crop": {
+          "left": 808,
+          "top": 21,
+          "width": 203,
+          "height": 252
+        },
+        "anchor": [
+          888,
+          267
+        ],
+        "destination": [
+          136,
+          121
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 0,
+        "crop": {
+          "left": 33,
+          "top": 287,
+          "width": 212,
+          "height": 245
+        },
+        "anchor": [
+          107,
+          526
+        ],
+        "destination": [
+          145,
+          132
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "crop": {
+          "left": 286,
+          "top": 284,
+          "width": 220,
+          "height": 248
+        },
+        "anchor": [
+          384,
+          526
+        ],
+        "destination": [
+          109,
+          127
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 2,
+        "crop": {
+          "left": 506,
+          "top": 295,
+          "width": 275,
+          "height": 237
+        },
+        "anchor": [
+          655,
+          526
+        ],
+        "destination": [
+          33,
+          144
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 3,
+        "crop": {
+          "left": 777,
+          "top": 299,
+          "width": 246,
+          "height": 233
+        },
+        "anchor": [
+          920,
+          526
+        ],
+        "destination": [
+          42,
+          150
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 0,
+        "crop": {
+          "left": 25,
+          "top": 543,
+          "width": 217,
+          "height": 237
+        },
+        "anchor": [
+          103,
+          774
+        ],
+        "destination": [
+          139,
+          144
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 1,
+        "crop": {
+          "left": 287,
+          "top": 539,
+          "width": 209,
+          "height": 241
+        },
+        "anchor": [
+          390,
+          774
+        ],
+        "destination": [
+          102,
+          138
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 2,
+        "crop": {
+          "left": 498,
+          "top": 548,
+          "width": 299,
+          "height": 232
+        },
+        "anchor": [
+          644,
+          774
+        ],
+        "destination": [
+          37,
+          151
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 3,
+        "crop": {
+          "left": 804,
+          "top": 539,
+          "width": 199,
+          "height": 241
+        },
+        "anchor": [
+          918,
+          774
+        ],
+        "destination": [
+          85,
+          138
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 0,
+        "crop": {
+          "left": 15,
+          "top": 797,
+          "width": 240,
+          "height": 231
+        },
+        "anchor": [
+          134,
+          1022
+        ],
+        "destination": [
+          78,
+          153
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "crop": {
+          "left": 271,
+          "top": 794,
+          "width": 239,
+          "height": 233
+        },
+        "anchor": [
+          388,
+          1021
+        ],
+        "destination": [
+          81,
+          150
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 2,
+        "crop": {
+          "left": 543,
+          "top": 785,
+          "width": 233,
+          "height": 235
+        },
+        "anchor": [
+          642,
+          1014
+        ],
+        "destination": [
+          108,
+          147
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 3,
+        "crop": {
+          "left": 808,
+          "top": 792,
+          "width": 208,
+          "height": 234
+        },
+        "anchor": [
+          912,
+          1020
+        ],
+        "destination": [
+          100,
+          148
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "crop": {
+          "left": 41,
+          "top": 1072,
+          "width": 207,
+          "height": 185
+        },
+        "anchor": [
+          120,
+          1251
+        ],
+        "destination": [
+          138,
+          222
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 1,
+        "crop": {
+          "left": 269,
+          "top": 1030,
+          "width": 259,
+          "height": 233
+        },
+        "anchor": [
+          393,
+          1257
+        ],
+        "destination": [
+          70,
+          150
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 2,
+        "crop": {
+          "left": 569,
+          "top": 1019,
+          "width": 182,
+          "height": 211
+        },
+        "anchor": [
+          657,
+          1224
+        ],
+        "destination": [
+          124,
+          183
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 3,
+        "crop": {
+          "left": 804,
+          "top": 1093,
+          "width": 208,
+          "height": 165
+        },
+        "anchor": [
+          909,
+          1252
+        ],
+        "destination": [
+          99,
+          252
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 0,
+        "crop": {
+          "left": 39,
+          "top": 1262,
+          "width": 186,
+          "height": 261
+        },
+        "anchor": [
+          109,
+          1517
+        ],
+        "destination": [
+          151,
+          108
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 1,
+        "crop": {
+          "left": 300,
+          "top": 1246,
+          "width": 206,
+          "height": 277
+        },
+        "anchor": [
+          391,
+          1517
+        ],
+        "destination": [
+          120,
+          84
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 2,
+        "crop": {
+          "left": 555,
+          "top": 1240,
+          "width": 195,
+          "height": 283
+        },
+        "anchor": [
+          639,
+          1517
+        ],
+        "destination": [
+          130,
+          75
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 3,
+        "crop": {
+          "left": 783,
+          "top": 1269,
+          "width": 223,
+          "height": 254
+        },
+        "anchor": [
+          904,
+          1517
+        ],
+        "destination": [
+          75,
+          118
+        ],
+        "scale": 1.5
+      }
+    ]
+  },
+  "mid": {
+    "source": "exec-474bb099-7e08-40b9-bf2d-21d689af342b.png",
+    "prompt": "Use case: identity-preserve. Edit this exact 24-frame 4-column 6-row harlequin gameplay atlas for PHASE TWO battle damage. Preserve EVERY pose, face proportions, clean cel-shaded style, size, alignment, hand position, frame layout and transparent alpha. ONLY modify costume wear: cape now has several ragged tears at edges and a few small holes; some dark singe marks on red diamond cloth; gold cuffs scratched. Same recognizable character, no gore, no bodily injury. Keep figures complete and separated. DO NOT add scenery or background. Output genuinely transparent cutout sprite sheet, no brown backdrop or haze.",
+    "output": "public/arcade/sprites/bosses/harlequin/motion-mid.webp",
+    "registration": [
+      {
+        "row": 0,
+        "col": 0,
+        "crop": {
+          "left": 46,
+          "top": 15,
+          "width": 201,
+          "height": 259
+        },
+        "anchor": [
+          118,
+          268
+        ],
+        "destination": [
+          148,
+          111
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 0,
+        "col": 1,
+        "crop": {
+          "left": 303,
+          "top": 14,
+          "width": 213,
+          "height": 260
+        },
+        "anchor": [
+          377,
+          268
+        ],
+        "destination": [
+          145,
+          109
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 0,
+        "col": 2,
+        "crop": {
+          "left": 556,
+          "top": 17,
+          "width": 211,
+          "height": 257
+        },
+        "anchor": [
+          634,
+          268
+        ],
+        "destination": [
+          139,
+          114
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 0,
+        "col": 3,
+        "crop": {
+          "left": 807,
+          "top": 19,
+          "width": 206,
+          "height": 255
+        },
+        "anchor": [
+          888,
+          268
+        ],
+        "destination": [
+          135,
+          117
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 0,
+        "crop": {
+          "left": 33,
+          "top": 287,
+          "width": 218,
+          "height": 245
+        },
+        "anchor": [
+          107,
+          526
+        ],
+        "destination": [
+          145,
+          132
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "crop": {
+          "left": 289,
+          "top": 284,
+          "width": 219,
+          "height": 248
+        },
+        "anchor": [
+          384,
+          526
+        ],
+        "destination": [
+          114,
+          127
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 2,
+        "crop": {
+          "left": 510,
+          "top": 295,
+          "width": 273,
+          "height": 237
+        },
+        "anchor": [
+          655,
+          526
+        ],
+        "destination": [
+          39,
+          144
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 3,
+        "crop": {
+          "left": 778,
+          "top": 299,
+          "width": 245,
+          "height": 233
+        },
+        "anchor": [
+          920,
+          526
+        ],
+        "destination": [
+          43,
+          150
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 0,
+        "crop": {
+          "left": 25,
+          "top": 543,
+          "width": 227,
+          "height": 237
+        },
+        "anchor": [
+          103,
+          774
+        ],
+        "destination": [
+          139,
+          144
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 1,
+        "crop": {
+          "left": 287,
+          "top": 538,
+          "width": 210,
+          "height": 242
+        },
+        "anchor": [
+          390,
+          774
+        ],
+        "destination": [
+          102,
+          136
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 2,
+        "crop": {
+          "left": 500,
+          "top": 547,
+          "width": 292,
+          "height": 233
+        },
+        "anchor": [
+          644,
+          774
+        ],
+        "destination": [
+          40,
+          150
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 3,
+        "crop": {
+          "left": 804,
+          "top": 539,
+          "width": 210,
+          "height": 241
+        },
+        "anchor": [
+          918,
+          774
+        ],
+        "destination": [
+          85,
+          138
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 0,
+        "crop": {
+          "left": 15,
+          "top": 796,
+          "width": 232,
+          "height": 233
+        },
+        "anchor": [
+          134,
+          1023
+        ],
+        "destination": [
+          78,
+          150
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "crop": {
+          "left": 271,
+          "top": 794,
+          "width": 241,
+          "height": 233
+        },
+        "anchor": [
+          388,
+          1021
+        ],
+        "destination": [
+          81,
+          150
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 2,
+        "crop": {
+          "left": 543,
+          "top": 785,
+          "width": 231,
+          "height": 235
+        },
+        "anchor": [
+          642,
+          1014
+        ],
+        "destination": [
+          108,
+          147
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 3,
+        "crop": {
+          "left": 808,
+          "top": 792,
+          "width": 207,
+          "height": 235
+        },
+        "anchor": [
+          912,
+          1021
+        ],
+        "destination": [
+          100,
+          147
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "crop": {
+          "left": 41,
+          "top": 1072,
+          "width": 204,
+          "height": 186
+        },
+        "anchor": [
+          120,
+          1252
+        ],
+        "destination": [
+          138,
+          220
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 1,
+        "crop": {
+          "left": 269,
+          "top": 1029,
+          "width": 257,
+          "height": 235
+        },
+        "anchor": [
+          393,
+          1258
+        ],
+        "destination": [
+          70,
+          147
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 2,
+        "crop": {
+          "left": 569,
+          "top": 1020,
+          "width": 184,
+          "height": 210
+        },
+        "anchor": [
+          657,
+          1224
+        ],
+        "destination": [
+          124,
+          184
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 3,
+        "crop": {
+          "left": 804,
+          "top": 1093,
+          "width": 204,
+          "height": 165
+        },
+        "anchor": [
+          909,
+          1252
+        ],
+        "destination": [
+          99,
+          252
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 0,
+        "crop": {
+          "left": 38,
+          "top": 1262,
+          "width": 197,
+          "height": 261
+        },
+        "anchor": [
+          109,
+          1517
+        ],
+        "destination": [
+          150,
+          108
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 1,
+        "crop": {
+          "left": 300,
+          "top": 1247,
+          "width": 211,
+          "height": 276
+        },
+        "anchor": [
+          391,
+          1517
+        ],
+        "destination": [
+          120,
+          85
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 2,
+        "crop": {
+          "left": 555,
+          "top": 1240,
+          "width": 206,
+          "height": 283
+        },
+        "anchor": [
+          639,
+          1517
+        ],
+        "destination": [
+          130,
+          75
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 3,
+        "crop": {
+          "left": 783,
+          "top": 1269,
+          "width": 232,
+          "height": 254
+        },
+        "anchor": [
+          904,
+          1517
+        ],
+        "destination": [
+          75,
+          118
+        ],
+        "scale": 1.5
+      }
+    ]
+  },
+  "final": {
+    "source": "exec-a7eda3c2-be0a-456a-9ea4-00eb1c89a370.png",
+    "prompt": "Use case: identity-preserve. This exact 24-frame 4-column 6-row fire harlequin animation sheet must become PHASE THREE battle damage. Preserve EVERY action, face proportions, clean anime cel-shaded style, size, feet alignment, hand position and grid. ONLY edit costume wear: crimson cape is now severely shredded into long separate fluttering strips, some holes and singed dark edges; diamond suit visibly scorched with few small tears; white ruff dirty and tattered; red cap tip slightly torn. Angry determined faces, no gore or injury. Same simplified character, not realistic. Real transparent alpha between and around all complete sprites, absolutely no background haze. Preserve the 24 different poses from reference.",
+    "output": "public/arcade/sprites/bosses/harlequin/motion-final.webp",
+    "registration": [
+      {
+        "row": 0,
+        "col": 0,
+        "crop": {
+          "left": 44,
+          "top": 15,
+          "width": 215,
+          "height": 260
+        },
+        "anchor": [
+          118,
+          269
+        ],
+        "destination": [
+          145,
+          109
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 0,
+        "col": 1,
+        "crop": {
+          "left": 302,
+          "top": 15,
+          "width": 219,
+          "height": 260
+        },
+        "anchor": [
+          377,
+          269
+        ],
+        "destination": [
+          144,
+          109
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 0,
+        "col": 2,
+        "crop": {
+          "left": 554,
+          "top": 16,
+          "width": 223,
+          "height": 259
+        },
+        "anchor": [
+          634,
+          269
+        ],
+        "destination": [
+          136,
+          111
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 0,
+        "col": 3,
+        "crop": {
+          "left": 805,
+          "top": 19,
+          "width": 212,
+          "height": 256
+        },
+        "anchor": [
+          888,
+          269
+        ],
+        "destination": [
+          132,
+          115
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 0,
+        "crop": {
+          "left": 30,
+          "top": 286,
+          "width": 224,
+          "height": 247
+        },
+        "anchor": [
+          107,
+          527
+        ],
+        "destination": [
+          141,
+          129
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "crop": {
+          "left": 287,
+          "top": 284,
+          "width": 230,
+          "height": 249
+        },
+        "anchor": [
+          384,
+          527
+        ],
+        "destination": [
+          111,
+          126
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 2,
+        "crop": {
+          "left": 512,
+          "top": 294,
+          "width": 284,
+          "height": 239
+        },
+        "anchor": [
+          655,
+          527
+        ],
+        "destination": [
+          42,
+          141
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 1,
+        "col": 3,
+        "crop": {
+          "left": 776,
+          "top": 299,
+          "width": 246,
+          "height": 234
+        },
+        "anchor": [
+          920,
+          527
+        ],
+        "destination": [
+          40,
+          148
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 0,
+        "crop": {
+          "left": 22,
+          "top": 543,
+          "width": 234,
+          "height": 238
+        },
+        "anchor": [
+          103,
+          775
+        ],
+        "destination": [
+          135,
+          142
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 1,
+        "crop": {
+          "left": 284,
+          "top": 537,
+          "width": 215,
+          "height": 244
+        },
+        "anchor": [
+          390,
+          775
+        ],
+        "destination": [
+          97,
+          133
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 2,
+        "crop": {
+          "left": 499,
+          "top": 547,
+          "width": 297,
+          "height": 234
+        },
+        "anchor": [
+          644,
+          775
+        ],
+        "destination": [
+          39,
+          148
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 2,
+        "col": 3,
+        "crop": {
+          "left": 801,
+          "top": 539,
+          "width": 218,
+          "height": 242
+        },
+        "anchor": [
+          918,
+          775
+        ],
+        "destination": [
+          81,
+          136
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 0,
+        "crop": {
+          "left": 13,
+          "top": 796,
+          "width": 243,
+          "height": 234
+        },
+        "anchor": [
+          134,
+          1024
+        ],
+        "destination": [
+          75,
+          148
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "crop": {
+          "left": 271,
+          "top": 793,
+          "width": 242,
+          "height": 236
+        },
+        "anchor": [
+          388,
+          1023
+        ],
+        "destination": [
+          81,
+          145
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 2,
+        "crop": {
+          "left": 542,
+          "top": 785,
+          "width": 236,
+          "height": 237
+        },
+        "anchor": [
+          642,
+          1016
+        ],
+        "destination": [
+          106,
+          144
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 3,
+        "col": 3,
+        "crop": {
+          "left": 806,
+          "top": 791,
+          "width": 217,
+          "height": 237
+        },
+        "anchor": [
+          912,
+          1022
+        ],
+        "destination": [
+          97,
+          144
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "crop": {
+          "left": 39,
+          "top": 1071,
+          "width": 217,
+          "height": 188
+        },
+        "anchor": [
+          120,
+          1253
+        ],
+        "destination": [
+          135,
+          217
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 1,
+        "crop": {
+          "left": 268,
+          "top": 1029,
+          "width": 268,
+          "height": 236
+        },
+        "anchor": [
+          393,
+          1259
+        ],
+        "destination": [
+          69,
+          145
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 2,
+        "crop": {
+          "left": 564,
+          "top": 1020,
+          "width": 202,
+          "height": 216
+        },
+        "anchor": [
+          657,
+          1230
+        ],
+        "destination": [
+          117,
+          175
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 4,
+        "col": 3,
+        "crop": {
+          "left": 803,
+          "top": 1092,
+          "width": 214,
+          "height": 168
+        },
+        "anchor": [
+          909,
+          1254
+        ],
+        "destination": [
+          97,
+          247
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 0,
+        "crop": {
+          "left": 35,
+          "top": 1264,
+          "width": 205,
+          "height": 260
+        },
+        "anchor": [
+          109,
+          1518
+        ],
+        "destination": [
+          145,
+          109
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 1,
+        "crop": {
+          "left": 297,
+          "top": 1247,
+          "width": 216,
+          "height": 277
+        },
+        "anchor": [
+          391,
+          1518
+        ],
+        "destination": [
+          115,
+          84
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 2,
+        "crop": {
+          "left": 541,
+          "top": 1241,
+          "width": 227,
+          "height": 283
+        },
+        "anchor": [
+          639,
+          1518
+        ],
+        "destination": [
+          109,
+          75
+        ],
+        "scale": 1.5
+      },
+      {
+        "row": 5,
+        "col": 3,
+        "crop": {
+          "left": 781,
+          "top": 1269,
+          "width": 237,
+          "height": 256
+        },
+        "anchor": [
+          904,
+          1519
+        ],
+        "destination": [
+          72,
+          115
+        ],
+        "scale": 1.5
+      }
+    ]
+  },
+  "actions": {
+    "source": "exec-de3b7a89-aa64-4b5d-a539-291899c91e76.png",
+    "prompt": "Use case: illustration-story. NEW animation sheet of the SAME fire harlequin in this reference, same clean bold anime cartoon cel shading, simplified readable shapes, red/black diamond suit, ONE cone cap, white ruff, pale face red nose, curled shoes, gold cuffs. Ragged torn crimson cape of late battle. Exactly FOUR columns by FIVE rows =20 complete LEFT-facing figures, transparent alpha, generous gaps. No background, haze, floor, panels or text. Every figure full body including all extremities. Consistent body scale, each cell taller than wide.\nRow1 ULTIMATE CHARGE 4 frames: wide planted stance, both hands gather a small orange diamond flame near chest; palms cupped pulling it closer; head down teeth clenched with cape lifted; straighten leaning forward holding concentrated flame ready to push. Cape and cap flutter differently each frame.\nRow2 EMBER LOB 4 frames: gather glowing fire orb at chest; raise throwing LEFT arm far above head with torso twisted; throw overhead forward LEFT, extended arm fingers release orange ember; arm follows through low and cape whips right. Clearly distinct throwing action.\nRow3 GROUND FIRE 4 frames: raise one fist above head; crouch rapidly winding up; slam gloved palm against ground at left foot, orange flame attached to palm; rise from low crouch with hand extended. Dynamic cape.\nRow4 KNOCKBACK 4 frames: recoil backward facing left arms shielding face; airborne flung backward to right torso tilted; tumbling sideways cape whipping; almost horizontal falling with limbs extended. Do not shrink character relative to standing poses.\nRow5 RECOVERY 4 frames: lying prone fully on side, still, defeated; sitting propped on one elbow; pushing up with one knee planted; standing hunched tired. 20 figures only. Preserve tasteful costume and no gore. True transparency not a painted checkerboard.",
+    "output": "public/arcade/sprites/bosses/harlequin/fire-actions.webp",
+    "registration": [
+      {
+        "row": 0,
+        "col": 0,
+        "crop": {
+          "left": 14,
+          "top": 38,
+          "width": 258,
+          "height": 259
+        },
+        "anchor": [
+          126,
+          291
+        ],
+        "destination": [
+          99,
+          136
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 0,
+        "col": 1,
+        "crop": {
+          "left": 280,
+          "top": 48,
+          "width": 248,
+          "height": 249
+        },
+        "anchor": [
+          390,
+          291
+        ],
+        "destination": [
+          102,
+          150
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 0,
+        "col": 2,
+        "crop": {
+          "left": 543,
+          "top": 39,
+          "width": 231,
+          "height": 258
+        },
+        "anchor": [
+          647,
+          291
+        ],
+        "destination": [
+          110,
+          137
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 0,
+        "col": 3,
+        "crop": {
+          "left": 782,
+          "top": 26,
+          "width": 236,
+          "height": 271
+        },
+        "anchor": [
+          898,
+          291
+        ],
+        "destination": [
+          94,
+          119
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 1,
+        "col": 0,
+        "crop": {
+          "left": 9,
+          "top": 345,
+          "width": 253,
+          "height": 273
+        },
+        "anchor": [
+          115,
+          612
+        ],
+        "destination": [
+          108,
+          116
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "crop": {
+          "left": 246,
+          "top": 301,
+          "width": 274,
+          "height": 317
+        },
+        "anchor": [
+          365,
+          612
+        ],
+        "destination": [
+          89,
+          55
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 1,
+        "col": 2,
+        "crop": {
+          "left": 518,
+          "top": 354,
+          "width": 269,
+          "height": 264
+        },
+        "anchor": [
+          651,
+          612
+        ],
+        "destination": [
+          70,
+          129
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 1,
+        "col": 3,
+        "crop": {
+          "left": 781,
+          "top": 351,
+          "width": 241,
+          "height": 266
+        },
+        "anchor": [
+          899,
+          611
+        ],
+        "destination": [
+          91,
+          126
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 2,
+        "col": 0,
+        "crop": {
+          "left": 8,
+          "top": 628,
+          "width": 249,
+          "height": 282
+        },
+        "anchor": [
+          111,
+          904
+        ],
+        "destination": [
+          112,
+          104
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 2,
+        "col": 1,
+        "crop": {
+          "left": 290,
+          "top": 700,
+          "width": 221,
+          "height": 210
+        },
+        "anchor": [
+          397,
+          904
+        ],
+        "destination": [
+          106,
+          204
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 2,
+        "col": 2,
+        "crop": {
+          "left": 515,
+          "top": 720,
+          "width": 259,
+          "height": 188
+        },
+        "anchor": [
+          647,
+          902
+        ],
+        "destination": [
+          71,
+          235
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 2,
+        "col": 3,
+        "crop": {
+          "left": 756,
+          "top": 672,
+          "width": 261,
+          "height": 237
+        },
+        "anchor": [
+          901,
+          903
+        ],
+        "destination": [
+          53,
+          167
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 3,
+        "col": 0,
+        "crop": {
+          "left": 16,
+          "top": 967,
+          "width": 244,
+          "height": 251
+        },
+        "anchor": [
+          139,
+          1212
+        ],
+        "destination": [
+          84,
+          147
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "crop": {
+          "left": 245,
+          "top": 948,
+          "width": 265,
+          "height": 265
+        },
+        "anchor": [
+          378,
+          1207
+        ],
+        "destination": [
+          70,
+          127
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 3,
+        "col": 2,
+        "crop": {
+          "left": 517,
+          "top": 932,
+          "width": 250,
+          "height": 268
+        },
+        "anchor": [
+          644,
+          1194
+        ],
+        "destination": [
+          78,
+          123
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 3,
+        "col": 3,
+        "crop": {
+          "left": 760,
+          "top": 985,
+          "width": 262,
+          "height": 204
+        },
+        "anchor": [
+          891,
+          1183
+        ],
+        "destination": [
+          73,
+          213
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "crop": {
+          "left": 7,
+          "top": 1360,
+          "width": 276,
+          "height": 114
+        },
+        "anchor": [
+          145,
+          1468
+        ],
+        "destination": [
+          63,
+          339
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 4,
+        "col": 1,
+        "crop": {
+          "left": 288,
+          "top": 1274,
+          "width": 251,
+          "height": 202
+        },
+        "anchor": [
+          410,
+          1470
+        ],
+        "destination": [
+          85,
+          216
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 4,
+        "col": 2,
+        "crop": {
+          "left": 543,
+          "top": 1273,
+          "width": 231,
+          "height": 204
+        },
+        "anchor": [
+          653,
+          1471
+        ],
+        "destination": [
+          102,
+          213
+        ],
+        "scale": 1.4
+      },
+      {
+        "row": 4,
+        "col": 3,
+        "crop": {
+          "left": 793,
+          "top": 1211,
+          "width": 213,
+          "height": 266
+        },
+        "anchor": [
+          901,
+          1471
+        ],
+        "destination": [
+          105,
+          126
+        ],
+        "scale": 1.4
+      }
+    ]
+  },
+  "sourceDirectory": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646"
+}

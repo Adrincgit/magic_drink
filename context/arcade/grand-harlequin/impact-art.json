@@ -1,0 +1,1485 @@
+{
+  "tool": "image_gen.imagegen",
+  "mode": "reference edit with transparent background",
+  "sourceDirectory": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646",
+  "assets": [
+    {
+      "name": "motion-fluid",
+      "source": "exec-a99c7917-2747-4050-9b52-821935097637.png",
+      "prompt": "Create a production 2D hand drawn game sprite atlas of EXACTLY 32 isolated full body drawings in EXACTLY 4 columns by 8 rows on fully transparent background. Use the attached harlequin as exact character design: one red cone hat with gold bell, white face black hair red eye makeup, ivory ruff, red and charcoal diamond suit, gold cuffs, curled black shoes, broad flowing red cape. Clean simplified cel illustration, expressive cartoon, same proportions and line weight as reference, no realistic texture. All figures face LEFT, same physical scale, each contained in its own cell with wide transparent gutters, no overlaps, no ground shadows, no text, no grid. Rows 1 and 2 together: an EIGHT frame full sprint cycle: left heel contact, compression, passing leg, airborne, opposite heel contact, compression, opposite passing, airborne; visibly alternating legs and arms, dramatically billowing cape and hat with follow-through. Rows 3 and 4 together: EIGHT jump action frames: deep crouch arms back; spring up; rising knees folding cape trailing down; air windup one hand flaming diamond by face; arm throwing left with fingers out and flaming diamond at fingertips; airborne follow-through cape flying high; descending legs extend; deep landing one hand low cape draping forward. Rows 5 and 6 together: EIGHT standing fire volley animation: gather at waist, hand rising, hand by face holding flame, elbow winding back, explosive arm extension toward left releasing orange flame diamond, follow through, recoiling arm, returning to ready. Rows 7 and 8: EIGHT low flame whip throw animation: crouch gathering, windup hand behind, flame arc over shoulder, sweeping arm down, long left arm releasing fire ribbon low toward left, follow through body twisting, recovering, ready crouch. Maintain grounded feet at common baseline within all running and standing cells. Every frame must be an actually different drawing of continuous fluid motion; no clones. Exactly32 bodies, full character including cap and boots, uniform scale.",
+      "registration": [
+        {
+          "crop": [
+            53,
+            34,
+            174,
+            162
+          ],
+          "anchor": 131.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            147,
+            265
+          ]
+        },
+        {
+          "crop": [
+            329,
+            41,
+            161,
+            157
+          ],
+          "anchor": 408.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            146,
+            272
+          ]
+        },
+        {
+          "crop": [
+            555,
+            37,
+            181,
+            161
+          ],
+          "anchor": 642,
+          "scale": 1.3866666666666667,
+          "destination": [
+            135,
+            267
+          ]
+        },
+        {
+          "crop": [
+            808,
+            24,
+            194,
+            160
+          ],
+          "anchor": 938,
+          "scale": 1.3866666666666667,
+          "destination": [
+            76,
+            268
+          ]
+        },
+        {
+          "crop": [
+            54,
+            225,
+            189,
+            162
+          ],
+          "anchor": 137.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            140,
+            265
+          ]
+        },
+        {
+          "crop": [
+            312,
+            236,
+            163,
+            152
+          ],
+          "anchor": 395,
+          "scale": 1.3866666666666667,
+          "destination": [
+            141,
+            279
+          ]
+        },
+        {
+          "crop": [
+            553,
+            218,
+            190,
+            169
+          ],
+          "anchor": 638.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            137,
+            256
+          ]
+        },
+        {
+          "crop": [
+            809,
+            218,
+            191,
+            162
+          ],
+          "anchor": 943.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            69,
+            265
+          ]
+        },
+        {
+          "crop": [
+            63,
+            460,
+            178,
+            129
+          ],
+          "anchor": 137,
+          "scale": 1.3866666666666667,
+          "destination": [
+            153,
+            311
+          ]
+        },
+        {
+          "crop": [
+            315,
+            430,
+            179,
+            157
+          ],
+          "anchor": 392.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            149,
+            272
+          ]
+        },
+        {
+          "crop": [
+            565,
+            401,
+            167,
+            181
+          ],
+          "anchor": 653,
+          "scale": 1.3866666666666667,
+          "destination": [
+            134,
+            239
+          ]
+        },
+        {
+          "crop": [
+            818,
+            400,
+            175,
+            189
+          ],
+          "anchor": 935,
+          "scale": 1.3866666666666667,
+          "destination": [
+            94,
+            228
+          ]
+        },
+        {
+          "crop": [
+            15,
+            619,
+            280,
+            166
+          ],
+          "anchor": 221,
+          "scale": 1.3866666666666667,
+          "destination": [
+            4,
+            260
+          ]
+        },
+        {
+          "crop": [
+            313,
+            598,
+            217,
+            167
+          ],
+          "anchor": 427,
+          "scale": 1.3866666666666667,
+          "destination": [
+            98,
+            258
+          ]
+        },
+        {
+          "crop": [
+            558,
+            605,
+            195,
+            184
+          ],
+          "anchor": 646.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            133,
+            235
+          ]
+        },
+        {
+          "crop": [
+            824,
+            656,
+            183,
+            140
+          ],
+          "anchor": 906.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            142,
+            296
+          ]
+        },
+        {
+          "crop": [
+            62,
+            801,
+            161,
+            189
+          ],
+          "anchor": 136.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            153,
+            228
+          ]
+        },
+        {
+          "crop": [
+            315,
+            806,
+            185,
+            184
+          ],
+          "anchor": 409.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            125,
+            235
+          ]
+        },
+        {
+          "crop": [
+            573,
+            807,
+            165,
+            183
+          ],
+          "anchor": 654,
+          "scale": 1.3866666666666667,
+          "destination": [
+            144,
+            236
+          ]
+        },
+        {
+          "crop": [
+            829,
+            809,
+            162,
+            181
+          ],
+          "anchor": 897.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            161,
+            239
+          ]
+        },
+        {
+          "crop": [
+            17,
+            1002,
+            266,
+            179
+          ],
+          "anchor": 183,
+          "scale": 1.3866666666666667,
+          "destination": [
+            26,
+            242
+          ]
+        },
+        {
+          "crop": [
+            297,
+            1005,
+            220,
+            177
+          ],
+          "anchor": 407.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            103,
+            245
+          ]
+        },
+        {
+          "crop": [
+            576,
+            1008,
+            173,
+            174
+          ],
+          "anchor": 653.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            149,
+            249
+          ]
+        },
+        {
+          "crop": [
+            828,
+            1006,
+            160,
+            176
+          ],
+          "anchor": 897,
+          "scale": 1.3866666666666667,
+          "destination": [
+            160,
+            246
+          ]
+        },
+        {
+          "crop": [
+            35,
+            1240,
+            198,
+            117
+          ],
+          "anchor": 143,
+          "scale": 1.3866666666666667,
+          "destination": [
+            106,
+            328
+          ]
+        },
+        {
+          "crop": [
+            300,
+            1196,
+            161,
+            162
+          ],
+          "anchor": 384.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            139,
+            265
+          ]
+        },
+        {
+          "crop": [
+            540,
+            1184,
+            198,
+            175
+          ],
+          "anchor": 659.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            90,
+            247
+          ]
+        },
+        {
+          "crop": [
+            776,
+            1205,
+            212,
+            154
+          ],
+          "anchor": 913.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            65,
+            276
+          ]
+        },
+        {
+          "crop": [
+            29,
+            1384,
+            282,
+            143
+          ],
+          "anchor": 216,
+          "scale": 1.3866666666666667,
+          "destination": [
+            4,
+            292
+          ]
+        },
+        {
+          "crop": [
+            335,
+            1382,
+            193,
+            145
+          ],
+          "anchor": 427.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            128,
+            289
+          ]
+        },
+        {
+          "crop": [
+            584,
+            1392,
+            182,
+            134
+          ],
+          "anchor": 671,
+          "scale": 1.3866666666666667,
+          "destination": [
+            135,
+            304
+          ]
+        },
+        {
+          "crop": [
+            827,
+            1396,
+            168,
+            130
+          ],
+          "anchor": 894,
+          "scale": 1.3866666666666667,
+          "destination": [
+            163,
+            310
+          ]
+        }
+      ],
+      "output": "public/arcade/sprites/bosses/harlequin/motion-fluid.webp"
+    },
+    {
+      "name": "motion-fluid-mid",
+      "source": "exec-5a287cd0-930c-4496-9809-d75c1875c6c1.png",
+      "prompt": "Edit only the character damage appearance in this exact 4 column 8 row sprite atlas. Preserve ALL 32 poses and their exact locations, scale, outlines, hand and foot positions, flames and animation movement. This is phase TWO of the same boss: add several moderate tears to cape edges, some soot to red cape and diamond suit, slightly bent hat, irritated face. Keep the original saturated red, charcoal and ivory palette and clean cartoon cel style. No new props or bodies. Background transparent; no background shadows, gradient or floor.",
+      "registration": [
+        {
+          "crop": [
+            53,
+            31,
+            190,
+            166
+          ],
+          "anchor": 132.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            146,
+            260
+          ]
+        },
+        {
+          "crop": [
+            329,
+            37,
+            174,
+            163
+          ],
+          "anchor": 409.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            144,
+            264
+          ]
+        },
+        {
+          "crop": [
+            555,
+            32,
+            204,
+            166
+          ],
+          "anchor": 643,
+          "scale": 1.3866666666666667,
+          "destination": [
+            134,
+            260
+          ]
+        },
+        {
+          "crop": [
+            808,
+            22,
+            197,
+            163
+          ],
+          "anchor": 937,
+          "scale": 1.3866666666666667,
+          "destination": [
+            77,
+            264
+          ]
+        },
+        {
+          "crop": [
+            54,
+            223,
+            201,
+            165
+          ],
+          "anchor": 138,
+          "scale": 1.3866666666666667,
+          "destination": [
+            140,
+            261
+          ]
+        },
+        {
+          "crop": [
+            312,
+            233,
+            169,
+            157
+          ],
+          "anchor": 395.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            140,
+            272
+          ]
+        },
+        {
+          "crop": [
+            552,
+            216,
+            200,
+            172
+          ],
+          "anchor": 639.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            135,
+            251
+          ]
+        },
+        {
+          "crop": [
+            808,
+            217,
+            199,
+            163
+          ],
+          "anchor": 944.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            67,
+            264
+          ]
+        },
+        {
+          "crop": [
+            62,
+            457,
+            189,
+            133
+          ],
+          "anchor": 137.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            151,
+            306
+          ]
+        },
+        {
+          "crop": [
+            314,
+            426,
+            187,
+            162
+          ],
+          "anchor": 392.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            147,
+            265
+          ]
+        },
+        {
+          "crop": [
+            566,
+            401,
+            174,
+            182
+          ],
+          "anchor": 641,
+          "scale": 1.3866666666666667,
+          "destination": [
+            152,
+            238
+          ]
+        },
+        {
+          "crop": [
+            816,
+            399,
+            188,
+            191
+          ],
+          "anchor": 935.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            90,
+            225
+          ]
+        },
+        {
+          "crop": [
+            14,
+            615,
+            291,
+            171
+          ],
+          "anchor": 221.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            4,
+            253
+          ]
+        },
+        {
+          "crop": [
+            312,
+            595,
+            220,
+            171
+          ],
+          "anchor": 427.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            96,
+            253
+          ]
+        },
+        {
+          "crop": [
+            558,
+            605,
+            197,
+            184
+          ],
+          "anchor": 646.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            133,
+            235
+          ]
+        },
+        {
+          "crop": [
+            823,
+            657,
+            185,
+            140
+          ],
+          "anchor": 907.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            139,
+            296
+          ]
+        },
+        {
+          "crop": [
+            61,
+            800,
+            177,
+            191
+          ],
+          "anchor": 140.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            146,
+            225
+          ]
+        },
+        {
+          "crop": [
+            315,
+            804,
+            196,
+            188
+          ],
+          "anchor": 413,
+          "scale": 1.3866666666666667,
+          "destination": [
+            120,
+            229
+          ]
+        },
+        {
+          "crop": [
+            571,
+            805,
+            172,
+            186
+          ],
+          "anchor": 654,
+          "scale": 1.3866666666666667,
+          "destination": [
+            141,
+            232
+          ]
+        },
+        {
+          "crop": [
+            828,
+            808,
+            164,
+            183
+          ],
+          "anchor": 898.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            158,
+            236
+          ]
+        },
+        {
+          "crop": [
+            16,
+            1001,
+            274,
+            182
+          ],
+          "anchor": 183,
+          "scale": 1.3866666666666667,
+          "destination": [
+            24,
+            238
+          ]
+        },
+        {
+          "crop": [
+            296,
+            1004,
+            231,
+            178
+          ],
+          "anchor": 408,
+          "scale": 1.3866666666666667,
+          "destination": [
+            101,
+            243
+          ]
+        },
+        {
+          "crop": [
+            576,
+            1006,
+            181,
+            177
+          ],
+          "anchor": 654,
+          "scale": 1.3866666666666667,
+          "destination": [
+            148,
+            245
+          ]
+        },
+        {
+          "crop": [
+            828,
+            1005,
+            169,
+            177
+          ],
+          "anchor": 897.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            160,
+            245
+          ]
+        },
+        {
+          "crop": [
+            34,
+            1239,
+            211,
+            119
+          ],
+          "anchor": 142.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            106,
+            325
+          ]
+        },
+        {
+          "crop": [
+            299,
+            1195,
+            169,
+            163
+          ],
+          "anchor": 385,
+          "scale": 1.3866666666666667,
+          "destination": [
+            137,
+            264
+          ]
+        },
+        {
+          "crop": [
+            539,
+            1183,
+            207,
+            177
+          ],
+          "anchor": 662,
+          "scale": 1.3866666666666667,
+          "destination": [
+            85,
+            245
+          ]
+        },
+        {
+          "crop": [
+            775,
+            1208,
+            222,
+            151
+          ],
+          "anchor": 913.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            64,
+            281
+          ]
+        },
+        {
+          "crop": [
+            29,
+            1382,
+            293,
+            145
+          ],
+          "anchor": 216,
+          "scale": 1.3866666666666667,
+          "destination": [
+            4,
+            289
+          ]
+        },
+        {
+          "crop": [
+            335,
+            1381,
+            194,
+            147
+          ],
+          "anchor": 427.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            128,
+            286
+          ]
+        },
+        {
+          "crop": [
+            584,
+            1390,
+            185,
+            136
+          ],
+          "anchor": 672,
+          "scale": 1.3866666666666667,
+          "destination": [
+            134,
+            301
+          ]
+        },
+        {
+          "crop": [
+            827,
+            1394,
+            172,
+            133
+          ],
+          "anchor": 894.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            162,
+            306
+          ]
+        }
+      ],
+      "output": "public/arcade/sprites/bosses/harlequin/motion-fluid-mid.webp"
+    },
+    {
+      "name": "motion-fluid-final",
+      "source": "exec-942ca0e2-dd5f-4825-a635-397d19d76ecf.png",
+      "prompt": "Edit only the character damage appearance in this exact 4 column 8 row sprite atlas. Preserve ALL 32 poses and their exact locations, scale, hand and foot positions, flames and animation movement. This is phase THREE of the same boss: cape torn into several long ragged streamers but still broad red flowing silhouette, soot on clothing, torn cuffs, bent red cone hat still with gold bell, furious face. No blood. Keep saturated red, charcoal and ivory palette and simplified cartoon cel style. No new props or bodies. Background transparent; no background shadows, gradient or floor.",
+      "registration": [
+        {
+          "crop": [
+            51,
+            30,
+            200,
+            167
+          ],
+          "anchor": 131,
+          "scale": 1.3866666666666667,
+          "destination": [
+            145,
+            258
+          ]
+        },
+        {
+          "crop": [
+            327,
+            33,
+            180,
+            167
+          ],
+          "anchor": 409.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            142,
+            258
+          ]
+        },
+        {
+          "crop": [
+            555,
+            31,
+            202,
+            168
+          ],
+          "anchor": 642.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            135,
+            257
+          ]
+        },
+        {
+          "crop": [
+            806,
+            19,
+            204,
+            168
+          ],
+          "anchor": 935.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            76,
+            257
+          ]
+        },
+        {
+          "crop": [
+            53,
+            220,
+            212,
+            168
+          ],
+          "anchor": 137.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            139,
+            257
+          ]
+        },
+        {
+          "crop": [
+            312,
+            232,
+            182,
+            157
+          ],
+          "anchor": 395,
+          "scale": 1.3866666666666667,
+          "destination": [
+            141,
+            272
+          ]
+        },
+        {
+          "crop": [
+            552,
+            215,
+            204,
+            173
+          ],
+          "anchor": 639,
+          "scale": 1.3866666666666667,
+          "destination": [
+            135,
+            250
+          ]
+        },
+        {
+          "crop": [
+            808,
+            218,
+            202,
+            163
+          ],
+          "anchor": 944.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            67,
+            264
+          ]
+        },
+        {
+          "crop": [
+            62,
+            457,
+            198,
+            134
+          ],
+          "anchor": 170.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            106,
+            304
+          ]
+        },
+        {
+          "crop": [
+            314,
+            427,
+            205,
+            163
+          ],
+          "anchor": 391,
+          "scale": 1.3866666666666667,
+          "destination": [
+            149,
+            264
+          ]
+        },
+        {
+          "crop": [
+            565,
+            399,
+            178,
+            185
+          ],
+          "anchor": 662,
+          "scale": 1.3866666666666667,
+          "destination": [
+            121,
+            233
+          ]
+        },
+        {
+          "crop": [
+            816,
+            397,
+            191,
+            194
+          ],
+          "anchor": 936.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            89,
+            221
+          ]
+        },
+        {
+          "crop": [
+            14,
+            614,
+            297,
+            173
+          ],
+          "anchor": 221.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            4,
+            250
+          ]
+        },
+        {
+          "crop": [
+            312,
+            593,
+            225,
+            173
+          ],
+          "anchor": 428,
+          "scale": 1.3866666666666667,
+          "destination": [
+            95,
+            250
+          ]
+        },
+        {
+          "crop": [
+            557,
+            601,
+            207,
+            189
+          ],
+          "anchor": 646.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            132,
+            228
+          ]
+        },
+        {
+          "crop": [
+            824,
+            652,
+            184,
+            145
+          ],
+          "anchor": 907.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            140,
+            289
+          ]
+        },
+        {
+          "crop": [
+            60,
+            799,
+            192,
+            192
+          ],
+          "anchor": 154,
+          "scale": 1.3866666666666667,
+          "destination": [
+            126,
+            224
+          ]
+        },
+        {
+          "crop": [
+            314,
+            801,
+            214,
+            191
+          ],
+          "anchor": 428.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            97,
+            225
+          ]
+        },
+        {
+          "crop": [
+            572,
+            806,
+            191,
+            185
+          ],
+          "anchor": 670,
+          "scale": 1.3866666666666667,
+          "destination": [
+            120,
+            233
+          ]
+        },
+        {
+          "crop": [
+            827,
+            806,
+            182,
+            185
+          ],
+          "anchor": 897.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            158,
+            233
+          ]
+        },
+        {
+          "crop": [
+            16,
+            1000,
+            275,
+            183
+          ],
+          "anchor": 182.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            25,
+            236
+          ]
+        },
+        {
+          "crop": [
+            295,
+            1002,
+            242,
+            181
+          ],
+          "anchor": 407.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            100,
+            239
+          ]
+        },
+        {
+          "crop": [
+            576,
+            1007,
+            197,
+            177
+          ],
+          "anchor": 666.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            131,
+            245
+          ]
+        },
+        {
+          "crop": [
+            827,
+            1005,
+            180,
+            178
+          ],
+          "anchor": 907,
+          "scale": 1.3866666666666667,
+          "destination": [
+            145,
+            243
+          ]
+        },
+        {
+          "crop": [
+            34,
+            1236,
+            217,
+            123
+          ],
+          "anchor": 144,
+          "scale": 1.3866666666666667,
+          "destination": [
+            103,
+            319
+          ]
+        },
+        {
+          "crop": [
+            299,
+            1196,
+            183,
+            162
+          ],
+          "anchor": 396,
+          "scale": 1.3866666666666667,
+          "destination": [
+            121,
+            265
+          ]
+        },
+        {
+          "crop": [
+            540,
+            1179,
+            217,
+            181
+          ],
+          "anchor": 664.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            83,
+            239
+          ]
+        },
+        {
+          "crop": [
+            775,
+            1202,
+            219,
+            158
+          ],
+          "anchor": 913.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            64,
+            271
+          ]
+        },
+        {
+          "crop": [
+            29,
+            1381,
+            293,
+            146
+          ],
+          "anchor": 215.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            4,
+            288
+          ]
+        },
+        {
+          "crop": [
+            335,
+            1381,
+            199,
+            147
+          ],
+          "anchor": 427.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            128,
+            286
+          ]
+        },
+        {
+          "crop": [
+            583,
+            1393,
+            193,
+            134
+          ],
+          "anchor": 671.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            133,
+            304
+          ]
+        },
+        {
+          "crop": [
+            826,
+            1394,
+            182,
+            133
+          ],
+          "anchor": 894.5,
+          "scale": 1.3866666666666667,
+          "destination": [
+            161,
+            306
+          ]
+        }
+      ],
+      "output": "public/arcade/sprites/bosses/harlequin/motion-fluid-final.webp"
+    }
+  ],
+  "pyres": {
+    "source": "exec-2c95c3e7-dcf5-4a45-af96-1fa0d4544446.png",
+    "prompt": "Transparent game effects sprite atlas, EXACTLY eight separate vertical fire pillars in 4 columns and 2 rows, equal cell sizes and even wide transparent gutters. Each flame is tall, narrow, stylized fluid hand drawn anime cartoon orange/red fire with yellow white core, strong dark red outline on curling tips, tiny sparks connected close to flame, subtle red orange rim glow. Every pillar grows out of a small horizontal orange ellipse at the same foot baseline within its cell and reaches nearly the cell top; no ground or scenery. These eight frames form a looping turbulent eruption animation: tips and internal flame curls whip upward changing shape in every frame. Maintain same overall height and width across loop. 3:1 tall slender shape per individual flame with natural branching licks, large readable cartoon shapes. No text, no grid, no black or colored background. This is physical fire exploding from a circus stage, NOT a tornado, NOT a laser, NOT magic ribbons. Full transparency between and around the eight effects.",
+    "registration": [
+      {
+        "left": 156,
+        "top": 10,
+        "width": 152,
+        "height": 513
+      },
+      {
+        "left": 487,
+        "top": 11,
+        "width": 164,
+        "height": 511
+      },
+      {
+        "left": 814,
+        "top": 11,
+        "width": 152,
+        "height": 511
+      },
+      {
+        "left": 1144,
+        "top": 12,
+        "width": 164,
+        "height": 510
+      },
+      {
+        "left": 146,
+        "top": 549,
+        "width": 164,
+        "height": 513
+      },
+      {
+        "left": 487,
+        "top": 549,
+        "width": 178,
+        "height": 514
+      },
+      {
+        "left": 813,
+        "top": 550,
+        "width": 160,
+        "height": 513
+      },
+      {
+        "left": 1159,
+        "top": 549,
+        "width": 153,
+        "height": 513
+      }
+    ],
+    "output": "public/arcade/sprites/bosses/harlequin/pyres.webp"
+  },
+  "smoke": {
+    "source": "exec-69427371-4b75-4a0d-95f4-5e4807d37b8f.png",
+    "prompt": "Game effect sprite atlas, exactly 8 isolated smoke cloud drawings in a strict 4 column 2 row grid, transparent background. A single warm ivory and muted tan smoke puff animated expanding and dissipating, classic hand inked anime cartoon impact smoke with round scalloped billows and subtle internal curls. Flat cel shading with three warm gray beige tones, fine dark tan outlines, no texture. Frames 1 and 2 compact dense rounded puff, 3 and 4 large billowing cloud, 5 and 6 looser swelling cloud with small detached round lobes nearby, 7 and 8 dissipating thin broken puffs with transparent holes. All centered with wide clear gutters, no overlap. Every cloud must be floating and roughly circular organic shape, NOT grounded dust splash. Absolutely no floor, no flat bottom edge, no vertical launch column, no stones, no fire, no stars, no background, no shadows, no text. Native transparent alpha. Each cloud same maximum bounding size; no cropping of any cloud.",
+    "output": "public/arcade/sprites/effects/impact-smoke.webp",
+    "registration": [
+      {
+        "left": 8,
+        "top": 8,
+        "width": 427,
+        "height": 427
+      },
+      {
+        "left": 451,
+        "top": 8,
+        "width": 427,
+        "height": 427
+      },
+      {
+        "left": 895,
+        "top": 8,
+        "width": 427,
+        "height": 427
+      },
+      {
+        "left": 1338,
+        "top": 8,
+        "width": 427,
+        "height": 427
+      },
+      {
+        "left": 8,
+        "top": 451,
+        "width": 427,
+        "height": 427
+      },
+      {
+        "left": 451,
+        "top": 451,
+        "width": 427,
+        "height": 427
+      },
+      {
+        "left": 895,
+        "top": 451,
+        "width": 427,
+        "height": 427
+      },
+      {
+        "left": 1338,
+        "top": 451,
+        "width": 427,
+        "height": 427
+      }
+    ]
+  }
+}

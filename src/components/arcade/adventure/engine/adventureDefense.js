@@ -1,3 +1,4 @@
+import {fireImpact} from '../actors/bosses/harlequinFire';
 import {groundY} from '../world/adventureTerrain';
 import {captureInBubble} from './adventureBubbles';
 import {guardEfficiency} from './adventureMods';
@@ -23,6 +24,7 @@ export function guardBlocks(s,shot){
  const dx=(shot.x-p.x)*p.dir,dy=Math.abs(shot.y-(p.y-43));
  if(dx<18-shot.r||dx>66+shot.r||dy>54+shot.r)return false;
  shot.life=0;p.guardHit=.22;s.magic=Math.max(0,s.magic-GUARD_HIT_COST*guardEfficiency(s));s.events.push('guardBlock');
+ if(shot.harlequin)fireImpact(s,shot.x,shot.y,.45);
  s.effects.push({x:shot.x,y:shot.y,defense:true,size:54,age:0,life:.25});
  if(!s.magic)breakGuard(s);return true;
 }
@@ -37,7 +39,7 @@ export function clearPowerProjectiles(s,shots=s.shots){
    const t=Math.max(0,Math.min(1,((h.x-x0)*dx+(h.y-y0)*dy)/(dx*dx+dy*dy||1)));
    if(Math.hypot(h.x-x0-dx*t,h.y-y0-dy*t)>q.r+h.r)continue;
    if(q.kind===3){if(captureInBubble(q,h))cleared=true;continue;}
-   h.life=0;cleared=true;s.effects.push({x:h.x,y:h.y,spell:q.super?undefined:q.kind,super:!!q.super,size:46,age:0,life:.28});
+   h.life=0;cleared=true;if(h.harlequin){fireImpact(s,h.x,h.y,.5,h.kind==='harlequin-groundfire'||h.kind==='harlequin-pyre');continue;}s.effects.push({x:h.x,y:h.y,spell:q.super?undefined:q.kind,super:!!q.super,size:46,age:0,life:.28});
   }
   if(cleared)s.events.push('bulletClear');
  }

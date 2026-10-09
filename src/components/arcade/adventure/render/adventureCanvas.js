@@ -1,3 +1,4 @@
+import {drawFireImpact} from './harlequinFireCanvas';
 import {buddyFrame,buddyPosition,buddyRollFrame} from '../engine/adventureDefense';
 import {shopForLevel} from '../engine/adventureShop';
 import {shieldCharges} from '../engine/adventureLoot';
@@ -5,6 +6,17 @@ import {paintOriginalTrail,paintOriginalScreen} from '../engine/adventureOrigina
 import {MEADOW_PLANES,paintMeadowPlane} from '../world/adventureParallax';
 import {superBackdrop,superBeam,superCaption,superCameraOffset} from './adventureSuperCanvas';
 import {drawSuperCutin} from './adventureSuperCutin';
+import {drawBarge,drawBargeProjectile,drawHarborFX} from './bargeCanvas';
+import {drawHarborBackdrop,drawHarborProps,drawHarborDock} from './adventureHarborCanvas';
+import {drawGrandRingBackdrop,drawGrandRingStage,drawHarlequin,drawHarlequinProjectile,drawHarlequinFX,drawHarlequinMeter} from './harlequinCanvas';
+import {drawInfernoBarriers} from './infernoStageCanvas';
+import {drawInfernoForeground} from './infernoBackdropCanvas';
+import {drawInfernoFloorLights} from './infernoLightCanvas';
+import {GRAND_RING_FLOOR,grandRingFloorView,drawRingContactShadow} from './grandRingFloor';
+import {drawCircusFacade,drawCircusOutsideBackdrop,drawCircusForecourt,drawCircusWalkway,drawCircusTransition,outsideCircus} from './circusEntranceCanvas';
+import {circusEntryFigure} from '../engine/adventureCircusEntrance';
+import {drawPowerBackdrop,drawPowerWorld,drawHarlequinCutin,drawClashMeter} from './powerClashCanvas';
+import {drawClashDust,drawClashPortraits,drawClashScreenFlash,drawCinematicSmoke} from './clashSpectacleCanvas';
 import {drawOrgan} from './organCanvas';
 import {drawOrganDebris,drawOrganRedNote,drawOrganWave} from './organEffectsCanvas';
 import {bossHitFilter} from '../actors/bosses/bossFeedback';
@@ -31,6 +43,23 @@ export async function loadAdventureArt(){
  const paths={bunny:'/arcade/sprites/bunnies/bunny-atlas.webp',ground:'/arcade/maps/meadow/ground.webp',magic:'/arcade/sprites/effects/magic.webp',hostile:'/arcade/sprites/effects/hostile.webp',impacts:'/arcade/sprites/effects/impacts.webp'};
  paths['treasure-star']='/arcade/sprites/ui/treasure-star.webp';
  paths['hexy-encore-portrait']='/arcade/sprites/ui/hexy-encore-full.webp';
+ paths['hexy-clash-portraits']='/arcade/sprites/ui/hexy-clash-full.webp?v=20261008-fire-acting';
+ for(const name of ['poses','mid','final','effects','ultimate','ultimate-portrait','ultimate-effects','ultimate-beam','motion','motion-mid','motion-final','clash-fall','clash-portraits','clash-effects'])paths['harlequin-'+name]='/arcade/sprites/bosses/harlequin/'+name+'.webp';
+ paths['harlequin-clash-portraits']='/arcade/sprites/bosses/harlequin/clash-full.webp?v=20261008-cinematic';
+ for(const name of ['motion','motion-mid','motion-final','fire-actions','fire-actions-mid','super-cast'])paths['harlequin-'+name]='/arcade/sprites/bosses/harlequin/'+name+'.webp?v=20261008-fire-acting';
+ paths['grand-ring-exterior']='/arcade/maps/grand-ring/exterior.webp';
+ for(const name of ['burning','inferno'])paths['grand-ring-'+name]='/arcade/maps/grand-ring/background-'+name+'-v2.webp?v=20261008-inferno';
+ paths['harlequin-pyres']='/arcade/sprites/bosses/harlequin/pyres.webp?v=20261008-impact';
+ for(const name of ['heads','particles','dust','fire','pyres','meter','fire-show'])paths['duel-'+name]='/arcade/sprites/effects/painted-duel/'+name+'.webp?v=20261008-painted';
+ paths['impact-smoke']='/arcade/sprites/effects/impact-smoke.webp?v=20261008-impact';
+ for(const name of ['sprint','sprint-mid','sprint-final','arrival'])paths['harlequin-'+name]='/arcade/sprites/bosses/harlequin/'+name+'.webp?v=20261008-fire-show';
+ for(const name of ['inferno','inferno-mid','inferno-final'])paths['harlequin-'+name]='/arcade/sprites/bosses/harlequin/'+name+'.webp?v=20261008-inferno';
+ paths['inferno-scene']='/arcade/sprites/effects/painted-duel/inferno-scene.webp?v=20261008-inferno';
+ paths['circus-chaos']='/arcade/sprites/effects/painted-duel/circus-chaos.webp?v=20261008-chaos';
+ for(const name of ['motion-fluid','motion-fluid-mid','motion-fluid-final'])paths['harlequin-'+name]='/arcade/sprites/bosses/harlequin/'+name+'.webp?v=20261008-impact';
+ for(const name of ['body','damaged','wheel','mallet','shield','cannon'])paths['barge-'+name]='/arcade/sprites/bosses/barge/'+name+'.webp';
+ for(const name of ['water','lantern','boat','reeds','grove','distant','fair'])paths['harbor-'+name]='/arcade/maps/harbor/'+name+'.webp';
+ paths['river-diver']='/arcade/sprites/enemies/river-diver.webp';paths['harbor-effects']='/arcade/sprites/effects/harbor-effects.webp';
  paths['forest-edge']='/arcade/maps/meadow/forest-edge.webp';
  for(const name of ['sunset-sky','meadow-horizon','sunset-clouds'])paths[name]='/arcade/maps/meadow/'+name+'.webp';
  for(const {key} of MEADOW_PLANES)paths[key]='/arcade/maps/meadow/'+key+'.webp';
@@ -83,12 +112,13 @@ function sprite(c,img,frame,x,y,size,flip=false,center=false,rotation=0){
  const cell=img.width/4;c.drawImage(img,frame%4*cell,Math.floor(frame/4)*cell,cell,cell,-size/2,center?-size/2:-size*250/256,size,size);c.restore();
 }
 function round(c,x,y,w,h,r,fill,stroke='#482f54'){c.beginPath();c.roundRect(x,y,w,h,r);c.fillStyle=fill;c.fill();c.strokeStyle=stroke;c.lineWidth=3;c.stroke();}
-function shadow(c,x,y,w=25,alpha=.2){c.fillStyle='rgba(38,24,47,'+alpha+')';c.beginPath();c.ellipse(x,y+2,w,Math.max(3,w*.18),0,0,Math.PI*2);c.fill();}
+function shadow(c,x,y,w=25,alpha=.2,ring=false){if(ring){drawRingContactShadow(c,x,y,w,alpha);return;}c.fillStyle='rgba(38,24,47,'+alpha+')';c.beginPath();c.ellipse(x,y+2,w,Math.max(3,w*.18),0,0,Math.PI*2);c.fill();}
 function layer(c,img,camera,factor,y,height,alpha=1){
  const w=height*img.width/img.height,offset=((camera*factor)%w+w)%w,tile=Math.floor(camera*factor/w);c.globalAlpha=alpha;
  for(let i=-1;i<Math.ceil(960/w)+1;i++){c.save();c.translate(i*w-offset,y);if((tile+i)%2){c.translate(w,0);c.scale(-1,1);}c.drawImage(img,0,0,w,height);c.restore();}c.globalAlpha=1;
 }
 function terrain(c,q,world,art){
+ if(q.kind==='dock'){drawHarborDock(c,q,art);return;}
  if(q.bridge){drawRiverBridge(c,q,art);return;}
  if(q.kind==='earth'){
   const slope=((q.yEnd??q.y)-q.y)/q.w,img=art[world.key+'-ground'],tileH=270,tileW=tileH*img.width/img.height,inset=world.groundInset??.22;
@@ -145,18 +175,24 @@ function atmosphere(c,s,reduced){
  }
  c.restore();
 }
-export function renderAdventure(canvas,s,art,{reduced=false,en=false}={}){
+export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor=GRAND_RING_FLOOR}={}){
  const cw=canvas.clientWidth,ch=canvas.clientHeight,dpr=Math.min(globalThis.devicePixelRatio||1,2);if(!cw||!ch)return;
  if(canvas.width!==Math.round(cw*dpr)||canvas.height!==Math.round(ch*dpr)){canvas.width=Math.round(cw*dpr);canvas.height=Math.round(ch*dpr);}
+ // Use one projected camera for the room, feet, fire, beams and portraits.
+ // This is a render-only comparison; the physical arena and wood view remain.
+ s=grandRingFloorView(s,circusFloor);
  const c=canvas.getContext('2d'),W=960,H=540;c.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);c.clearRect(0,0,W,H);
  c.save();if(s.superCinematic){const offset=superCameraOffset(s,reduced);c.translate(offset.x,offset.y);}
  else if(!reduced&&s.shake>0){const force=Math.min(1,s.shake/.12);c.translate(Math.sin(s.fxTime*137)*3*force,Math.cos(s.fxTime*113)*2*force);}
- const world=s.level.world,bg=art['world'+s.index],view=cameraView(s);
+ const world=s.level.world,bg=art['world'+s.index],view=cameraView(s),outside=outsideCircus(s);
  c.fillStyle=s.level.sky[0];c.fillRect(0,0,W,H);
- if(s.level.riverRoute)drawRiverBackdrop(c,s,art,reduced);
+ if(outside)drawCircusOutsideBackdrop(c,s,art,reduced);
+ else if(s.level.grandRing)drawGrandRingBackdrop(c,s,art,reduced);
+ else if(s.level.harborRoute)drawHarborBackdrop(c,s,art,reduced);
+ else if(s.level.riverRoute)drawRiverBackdrop(c,s,art,reduced);
  else if(s.level.groundRoute){drawMeadowSky(c,s,art,reduced);for(const plane of MEADOW_PLANES)paintMeadowPlane(c,art[plane.key],s.camera,plane,s.level.width);}
  else layer(c,bg,s.camera.x,world.farSpeed,-70-s.camera.y*.12,610);
- if(s.level.groundRoute&&!s.level.riverRoute){
+ if(s.level.groundRoute&&!s.level.riverRoute&&!s.level.grandRing){
   // The forest enters from the right as solid cutouts. Crossfading entire
   // panoramas made trunks transparent against the hills behind them.
   const edge=s.level.forestEdge,img=art['forest-edge'],height=610,width=height*img.width/img.height;
@@ -173,19 +209,30 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false}={}){
    if(x+width/2< -50||x-width/2>view.width+50)continue;
    c.save();c.translate(x,y);if(prop.flip)c.scale(-1,1);c.drawImage(img,-width/2,-prop.h,width,prop.h);c.restore();
   }c.restore();
- }else if(!s.level.riverRoute)layer(c,art['mid'+s.index],s.camera.x,world.midSpeed,55-s.camera.y*.35,425);
- atmosphere(c,s,reduced);
+ }else if(!s.level.riverRoute&&!s.level.grandRing)layer(c,art['mid'+s.index],s.camera.x,world.midSpeed,55-s.camera.y*.35,425);
+ if(!s.level.grandRing)atmosphere(c,s,reduced);
  c.save();c.scale(view.zoom,view.zoom);c.translate(-s.camera.x,-s.camera.y);
+ if(outside)drawCircusForecourt(c,s,art,reduced);
+ else if(s.level.grandRing)drawGrandRingStage(c,s,art,reduced);
  if(s.level.riverRoute){
   drawRiverWater(c,s,art,reduced);
+  if(s.level.harborRoute)drawHarborProps(c,s,art,reduced);
+  if(s.level.circusArrival)drawCircusFacade(c,s,art);
+  if(s.index===2)drawBarge(c,s,art,reduced);
   for(const prop of s.level.scenery){
    const img=art[prop.kind],q=rootedSceneryPlacement(prop,s.platforms,img);
    if(q.x+q.w<s.camera.x||q.x>s.camera.x+view.width)continue;
    c.save();c.translate(q.x,q.y);if(prop.flip){c.translate(q.w,0);c.scale(-1,1);}c.drawImage(img,0,0,q.w,q.h);c.restore();
   }
  }
- for(const q of s.platforms)if(q.x+q.w>s.camera.x-100&&q.x<s.camera.x+view.width+100)terrain(c,q,world,art);
+ if(!outside&&!(s.level.grandRing&&circusFloor==='dark'))for(const q of s.platforms)if(q.x+q.w>s.camera.x-100&&q.x<s.camera.x+view.width+100){
+  if(q.bridge&&s.level.circusArrival&&q.x>=s.level.arena.right)drawCircusWalkway(c,q,art,s.level.circusArrival.doorX);
+  else terrain(c,q,world,art);
+ }
  if(s.level.riverRoute)drawRiverPierWater(c,s,art,reduced);
+ if(s.level.grandRing&&!outside)drawInfernoBarriers(c,s,art,reduced);
+ drawPowerBackdrop(c,s,reduced);
+ if(s.level.grandRing&&!outside)drawInfernoFloorLights(c,s,reduced);
  const shop=shopForLevel(s.level);if(shop){const h=180,w=h*art.wagon.width/art.wagon.height,q=s.shopTransition,open=q&&(q.leaving?q.age<1.35:q.age>q.walk+.35);c.drawImage(open?art['wagon-open']:art.wagon,shop.x-w/2,shop.y-h,w,h);sprite(c,art['mod-charms'],0,shop.x+62,shop.y-138,30,false,true);}
  for(const q of s.outposts){
   if(q.x<s.camera.x-220||q.x>s.camera.x+view.width+220)continue;
@@ -194,13 +241,13 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false}={}){
  }
  for(const q of s.supplies){
   if(q.x<s.camera.x-100||q.x>s.camera.x+view.width+100)continue;
-  shadow(c,q.x,q.y,32,.16);c.save();if(q.flash>0)c.filter='brightness(1.7)';sprite(c,art['circus-supply'],supplyFrame(q),q.x,q.y,SUPPLY_SIZE);c.restore();
+  shadow(c,q.x,q.landingY??q.y,32,q.falling?.08:.16,s.ringPerspective);c.save();if(q.flash>0)c.filter='brightness(1.7)';sprite(c,art['circus-supply'],supplyFrame(q),q.x,q.y,SUPPLY_SIZE);c.restore();
  }
  for(const h of s.hazards){
   const frame=reduced?0:Math.floor(s.time*4+h.x)%4;
   c.drawImage(art['thorn-spikes'],frame*256,0,256,256,h.x-3,h.y-8,h.w+6,h.h+13);
  }
- for(const q of s.stars)if(!q.taken&&!q.hidden){
+ for(const q of s.stars)if(!outside&&!q.taken&&!q.hidden){
   if(q.value===10){
    const pulse=reduced?1:1+Math.sin(s.time*2.5+q.x)*.06,size=52*pulse,img=art['treasure-star'];
    c.save();c.shadowColor='#ffe191';c.shadowBlur=reduced?10:18;c.drawImage(img,q.x-size/2,q.y-size/2,size,size);c.restore();
@@ -231,7 +278,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false}={}){
   c.restore();sprite(c,art['collectible-star'],reduced?0:Math.floor(s.time*5)%4,q.x,q.y-38+bob,18,false,true);
   if(q.boosted)for(let i=0;i<3;i++){const angle=i*Math.PI*2/3+(reduced?0:s.time*1.6);sprite(c,art['collectible-star'],0,q.x+Math.cos(angle)*31,q.y+Math.sin(angle)*38,18,false,true);}
  }
- for(const cp of s.level.checkpoints||[s.level.checkpoint]){
+ for(const cp of outside?[]:s.level.checkpoints||[s.level.checkpoint]){
   const active=s.checkpointAt&&cp[0]<=s.checkpointAt[0];c.save();if(!active)c.filter='saturate(.4) brightness(.8)';
   sprite(c,art['victory-flag'],reduced||!active?0:Math.floor(s.time*7)%4,cp[0]+23,cp[1],96);c.restore();
  }
@@ -242,7 +289,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false}={}){
   shadow(c,e.x,e.type===2?e.baseY+120:e.type===7?groundY(s.platforms,e.x):e.baseY,w*.55,e.type===7?.06*(e.landed?e.deadTime/ZEPPELIN_DUST_DURATION:1):.15);
   c.save();if(e.hp<=0&&!e.landed)c.globalAlpha=Math.min(1,e.deadTime*3);
   if(e.emerging>0)c.globalAlpha=Math.max(.2,1-e.emerging/.8);
-  if((e.flash>0&&(reduced||Math.floor(e.flash*25)%2===0))||(e.type===7?e.hp<=0&&(e.deathAge||0)<.12:e.deadTime>.47))c.filter='brightness(2.8) saturate(.15)';
+  if((e.flash>0&&(reduced||Math.floor(e.flash*25)%2===0))||([7,8].includes(e.type)?e.hp<=0&&(e.deathAge||0)<.12:e.deadTime>.47))c.filter='brightness(2.8) saturate(.15)';
   const drawing=enemyDrawing(e,reduced);
   if(e.type===7)drawZeppelin(c,e,art,reduced);else sprite(c,art[drawing.key],drawing.frame,e.x,e.y,size,e.dir>0);c.restore();
   if(e.trap){const frame=reduced?0:Math.floor(s.time*7)%4,bw=Math.max(w*1.65,h*1.35),bh=h*1.35;c.save();c.globalAlpha=.65;c.drawImage(art['trap-bubble'],frame*256,0,256,256,e.x-bw/2,e.y-h/2-bh/2,bw,bh);c.restore();}
@@ -251,14 +298,12 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false}={}){
  const b=s.boss;
  if(s.index===1&&b.phase!=='sleep')drawOrgan(c,s,art,reduced);
  if(b.phase!=='sleep'&&(b.hp>0||b.defeat||(b.deadTime||0)<1.8)){
-  if(!b.shattered)shadow(c,b.x,s.level.arena.y,s.index===0?85:40,.22);
+  if(!b.shattered&&s.index!==2)shadow(c,b.x,s.level.arena.y,s.index===0?85:40,.22,s.ringPerspective);
   c.save();if(b.hp<=0&&!b.defeat)c.globalAlpha=Math.max(0,1-(b.deadTime||0)/1.8);
   c.filter=bossHitFilter(b,reduced);
   const drawing=bossDrawing(s,reduced);
-  if(s.index===2&&b.move==='mirrors'&&['warn','attack'].includes(b.phase)){
-   c.save();c.globalAlpha=.62;c.filter='hue-rotate(45deg)';for(const x of [s.level.arena.left+140,s.level.arena.right-140])sprite(c,art[drawing.key],drawing.frame,x,s.level.arena.y-65,164,x<s.player.x);c.restore();
-  }
-  if(s.index!==1)sprite(c,art[drawing.key],drawing.frame,b.x,b.y,s.index===0?BALLOON_SIZE:164,s.index===0?false:b.dir>0);
+  if(s.index===3)drawHarlequin(c,s,art,reduced);
+  else if(s.index!==1&&s.index!==2)sprite(c,art[drawing.key],drawing.frame,b.x,b.y,s.index===0?BALLOON_SIZE:164,s.index===0?false:b.dir>0);
   if(s.index===0)drawBalloonDetails(c,s,art,reduced);
   if(s.index===0&&!b.defeat){
    const crew=balloonCrewDrawing(s,reduced);
@@ -292,6 +337,8 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false}={}){
  }
  for(const q of s.hostile){
   if(q.life<=0||q.rain==='wait')continue;
+  if(q.harlequin){drawHarlequinProjectile(c,q,art,reduced);continue;}
+  if(q.barge||q.kind==='diver-hoop'){drawBargeProjectile(c,q,art,reduced);continue;}
   if(q.kind==='red-pellet'){drawRedPellet(c,q);continue;}
   if(q.kind==='sound-wave'){drawOrganWave(c,q,art,reduced);continue;}
   if(q.organ&&q.kind==='note'&&q.voice==='red'){drawOrganRedNote(c,q,art,reduced);continue;}
@@ -305,12 +352,12 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false}={}){
   sprite(c,circus?art['circus-projectiles']:clown?art['cannon-clown']:art.hostile,frame,q.x,q.y,size,clown&&q.vx<0,true,rotation);c.restore();
  }
  drawOrganDebris(c,s,art,reduced);
- superBackdrop(c,s,reduced);
+ if(!s.powerClash)superBackdrop(c,s,art,reduced);
  const p=s.player,shadowFloor=s.platforms.find(q=>p.x>=q.x&&p.x<=q.x+q.w&&surfaceY(q,p.x)>=p.y);
  paintOriginalTrail(c,s,reduced);
  if(s.overdrive>0&&!p.drinkCast){c.save();const aura=c.createRadialGradient(p.x,p.y-43,12,p.x,p.y-43,83);aura.addColorStop(0,'#fff9be66');aura.addColorStop(.55,'#ffd78d40');aura.addColorStop(1,'#ec97ff00');c.fillStyle=aura;c.fillRect(p.x-85,p.y-128,170,170);c.restore();}
- shadow(c,p.x,p.ground!==null?p.y:shadowFloor?surfaceY(shadowFloor,p.x):p.y,24,p.ground!==null?.22:.1);
- c.save();if(p.hurt&&!s.superCinematic&&!s.clear&&!b.defeat&&Math.floor(s.time*12)%2&&!reduced)c.globalAlpha=.4;
+ shadow(c,p.x,p.ground!==null?p.y:shadowFloor?surfaceY(shadowFloor,p.x):p.y,24,p.ground!==null?.22:.1,s.ringPerspective);
+ c.save();if(p.hurt&&!s.playerDefeat&&!s.superCinematic&&!s.clear&&!b.defeat&&Math.floor(s.time*12)%2&&!reduced)c.globalAlpha=.4;
  const pose=hexyPose(s);
  if(s.overdrive>0){c.shadowColor='#fff4af';c.shadowBlur=reduced?10:20+Math.sin(s.time*8)*4;c.filter=reduced?'brightness(1.16) saturate(1.25)':`hue-rotate(${s.time*160%360}deg) brightness(${1.14+Math.sin(s.time*Math.PI*3)*.09}) saturate(1.35)`;}
  if(p.charge>0){
@@ -319,12 +366,16 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false}={}){
   c.shadowColor='#ffe9a0';c.shadowBlur=6+amount*15;c.filter='brightness('+(1+amount*.3)+')';
  }
  if(p.dash>0&&!reduced){c.globalAlpha=.13;hexy(c,art,pose,p.x-p.dashDir*30,p.y,p.dir<0);c.globalAlpha=.23;hexy(c,art,pose,p.x-p.dashDir*15,p.y,p.dir<0);c.globalAlpha=1;}
- if(s.shopTransition&&['shop-enter','shop-exit'].includes(pose.sheet)){
+ if(s.circusEntry&&!s.circusEntry.inside){
+  const progress=circusEntryFigure(s);c.globalAlpha*=1-progress;
+  c.translate(p.x,p.y-progress*12);c.scale(1-progress*.15,1-progress*.15);hexy(c,art,pose,0,0,false);
+ }else if(s.shopTransition&&['shop-enter','shop-exit'].includes(pose.sheet)){
   const q=s.shopTransition,progress=q.leaving?Math.max(0,1-q.age/.75):Math.max(0,Math.min(1,(q.age-q.walk-.4)/.6));
   c.globalAlpha*=1-progress*.85;c.translate(p.x+progress*12,p.y-progress*20);c.scale(1-progress*.12,1-progress*.12);hexy(c,art,pose,0,0,false);
  }else hexy(c,art,pose,p.x,p.y,p.dir<0);c.restore();
  if(s.overdrive>0&&!p.drinkCast)for(let i=0;i<6;i++){const a=i*Math.PI/3+(reduced?0:s.time*2);c.save();c.globalAlpha=.75;sprite(c,art['collectible-star'],0,p.x+Math.cos(a)*55,p.y-43+Math.sin(a)*46,i%2?13:20,false,true);c.restore();}
- superBeam(c,s,art,reduced);
+ if(!s.powerClash)superBeam(c,s,art,reduced);
+ drawPowerWorld(c,s,art,reduced);
  if(p.charge>0){const tip=hexyMuzzle(s);drawWandGlow(c,tip.x,tip.y,.65,16+Math.min(1,p.charge/SUPER_WINDUP)*14);
   // Automatic anticipation: R has already committed the spell.
   c.beginPath();c.strokeStyle=p.charge>=SUPER_WINDUP?'#fff1a4':'#d3a8fa';c.lineWidth=2;c.arc(tip.x,tip.y,18,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.min(1,p.charge/SUPER_WINDUP));c.stroke();
@@ -349,16 +400,22 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false}={}){
   if(p.ground!==null)shadow(c,pet.x,pet.y,12,.13);
   sprite(c,drawing,pose,pet.x,pet.y-2,40,p.dir<0);
  }
- for(const q of s.effects)if(!q.defense)sprite(c,q.armor?art['armor-ricochet']:q.super?art['super-star']:q.spell!==undefined?art[specialArt(q.spell)]:q.dragon?art.dragon:art.impacts,(q.armor?0:q.super?8:q.spell!==undefined||q.dragon?4:q.row*4)+Math.min(3,Math.floor(q.age/.08)),q.x,q.y,q.size,false,true);
+ for(const q of s.effects)if(q.fireBurst)drawFireImpact(c,art,q,reduced);else if(q.cinematicSmoke)drawCinematicSmoke(c,art,q);else if(q.clashDust)drawClashDust(c,art,q);else if(q.harlequin)drawHarlequinFX(c,art,2,Math.min(3,Math.floor(q.age/.14)),q.x,q.y,q.size);else if(q.bargeSplash)drawHarborFX(c,art,2,Math.min(3,Math.floor(q.age/.12)),q.x,q.y,q.size,q.size*.72);else if(!q.defense)sprite(c,q.armor?art['armor-ricochet']:q.super?art['super-star']:q.spell!==undefined?art[specialArt(q.spell)]:q.dragon?art.dragon:art.impacts,(q.armor?0:q.super?8:q.spell!==undefined||q.dragon?4:q.row*4)+Math.min(3,Math.floor(q.age/.08)),q.x,q.y,q.size,false,true);
  for(const q of s.particles){c.globalAlpha=Math.min(1,q.life*3);sprite(c,art['collectible-star'],0,q.x,q.y,11,false,true);}c.globalAlpha=1;c.restore();
  c.restore();
+ drawClashScreenFlash(c,s,reduced);
+ drawInfernoForeground(c,s,art,reduced);
  if(b.phase!=='sleep'&&b.hp>0){
-  if(b.phase==='intro'&&s.index<2){c.save();c.globalAlpha=Math.min(1,Math.max(0,(b.arrival?.age||0)-1.8));c.textAlign='center';c.font='bold 22px sans-serif';c.lineWidth=5;c.strokeStyle='#382440';c.fillStyle='#fff0c7';c.strokeText(s.level.bossName[en?1:0],480,120);c.fillText(s.level.bossName[en?1:0],480,120);c.restore();}
+  if(b.phase==='intro'&&s.index<=3){c.save();c.globalAlpha=Math.min(1,Math.max(0,(b.arrival?.age||0)-1.8));c.textAlign='center';c.font='bold 22px sans-serif';c.lineWidth=5;c.strokeStyle='#382440';c.fillStyle='#fff0c7';c.strokeText(s.level.bossName[en?1:0],480,120);c.fillText(s.level.bossName[en?1:0],480,120);c.restore();}
   else if(b.phase==='intro'){round(c,180,150,600,120,22,'#382440ed','#f2c187');c.textAlign='center';c.fillStyle='#ffdd97';c.font='bold 19px sans-serif';c.fillText(en?'THE NEXT ACT…':'EL SIGUIENTE NÚMERO…',480,186);c.fillStyle='#fff0c7';c.font='bold 28px sans-serif';c.fillText(s.level.bossName[en?1:0],480,227);}
  }
+ if(s.index===3)drawHarlequinMeter(c,s,art,en);
  paintOriginalScreen(c,s,art,reduced);
  const cutin=drawSuperCutin(c,s,art,reduced,en);
- superCaption(c,s,en,cutin);
+ if(!s.powerClash)superCaption(c,s,en,cutin);
+ drawHarlequinCutin(c,s,art,reduced,en);drawClashMeter(c,s,art,en,reduced);
+ drawClashPortraits(c,s,art,reduced);
  c.strokeStyle='#fff0c133';c.lineWidth=2;c.strokeRect(6,6,W-12,H-12);
  if(s.shopTransition?.alpha>0){c.save();c.globalAlpha=s.shopTransition.alpha;c.fillStyle='#000';c.fillRect(0,0,W,H);c.restore();}
+ drawCircusTransition(c,s);
 }
