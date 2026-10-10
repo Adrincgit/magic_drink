@@ -92,10 +92,13 @@ test('the sustained super clears front bullets, hits active armored bosses eight
  }
 });
 
-test('a super boss defeat awards the encounter once and never kills off-screen sleepers',()=>{
- const s=quiet(3);Object.assign(s.boss,{x:350,y:500,phase:'attack',hp:16});s.arenaLocked=true;let wins=0;
+test('a super barge defeat awards the encounter once and never kills off-screen sleepers',()=>{
+ const s=quiet(2);Object.assign(s.boss,{x:350,y:500,phase:'attack',hp:16,engaged:true});s.arenaLocked=true;let wins=0;
  tick(s,{super:true});while(s.superCinematic){tick(s);wins+=s.events.filter(e=>e==='bossDown').length;}
+ expect(s.boss.hp).toBe(0);expect(wins).toBe(0);expect(s.arenaLocked).toBe(true);
+ for(let i=0;i<600;i++){tick(s);wins+=s.events.filter(e=>e==='bossDown').length;}
  expect(s.boss.hp).toBe(0);expect(wins).toBe(1);expect(s.score).toBe(60);expect(s.arenaLocked).toBe(false);
+ const sleeping=quiet(2),hp=sleeping.boss.hp;tick(sleeping,{super:true});while(sleeping.superCinematic)tick(sleeping);expect(sleeping.boss.hp).toBe(hp);expect(sleeping.score).toBe(0);
 });
 
 test('diagonal run shooting has twelve dedicated drawings, a raised muzzle and preserves the stride phase',()=>{
@@ -112,7 +115,7 @@ test('zero rescues allows every boss and the exit; rescuing more bunnies adds mo
   tick(s);expect(s.boss.phase).toBe('intro');expect(s.rescued).toBe(0);
   s.boss.hp=0;s.boss.phase='defeated';s.arenaLocked=false;s.player.x=s.level.exit[0];s.player.y=s.level.exit[1];s.player.ground=null;tick(s);expect(s.clear||s.boss.defeat).toBeTruthy();tick(s,{},1800);expect(s.won).toBe(true);
  }
- const counts=[];for(const rescued of [1,2,3]){const s=quiet();s.rescued=rescued;s.buddyWait=0;let fired=0;for(let i=0;i<500;i++){tick(s);fired+=s.shots.length;s.shots=[];}counts.push(fired);}
+ const counts=[];for(const rescued of [1,2,3]){const s=quiet();s.enemies=[makeEnemy(s.player.x+320,s.player.y,0,0)];s.enemies[0].timer=100;s.enemies[0].hp=10000;s.rescued=rescued;s.buddyWait=0;let fired=0;for(let i=0;i<500;i++){tick(s);fired+=s.shots.length;s.shots=[];}counts.push(fired);}
  expect(counts[1]).toBeGreaterThan(counts[0]);expect(counts[2]).toBeGreaterThan(counts[1]);
 });
 

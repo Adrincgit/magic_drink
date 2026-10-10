@@ -1,3 +1,5 @@
+import {fortPartHit} from '../actors/bosses/adventureEmberFort';
+import {bargePartHit} from '../actors/bosses/bargeSystems';
 import {SUPER_COST,SUPER_EXHAUSTION,SUPER_WINDUP,SUPER_DURATION,SUPER_BOSS_DAMAGE} from './adventureMagic';
 import {hexyMuzzle} from '../actors/hexy/hexyAnimation';
 import {bossTargets} from '../actors/enemies/adventureEnemies';
@@ -46,11 +48,13 @@ export function stepSuper(s,dt,{defeat,particles,burst,say}){
    enemy.hp-=8;enemy.flash=.18;burst(s,enemy.x,enemy.y-32,0,85);if(enemy.hp<=0)defeat(s,enemy);
   }
   const b=s.boss;
-  if(b.hp>0&&!['sleep','intro','transform','defeated'].includes(b.phase)&&bossTargets(s).some(t=>s.index===1?bodyInBeam(t):inBeam(t.x+t.w/2,t.y+t.h/2,Math.max(t.w,t.h)/2))){
-   b.trailHp=Math.max(b.trailHp||b.hp,b.hp);b.hp=Math.max(0,b.hp-SUPER_BOSS_DAMAGE/8);bossHitFeedback(s,true);b.recoil=q.dir;
+  const hitTargets=bossTargets(s).filter(t=>s.index===1?bodyInBeam(t):inBeam(t.x+t.w/2,t.y+t.h/2,Math.max(t.w,t.h)/2));
+  if(b.hp>0&&!['sleep','intro','transform','defeated'].includes(b.phase)&&hitTargets.length){
+   b.trailHp=Math.max(b.trailHp||b.hp,b.hp);const damage=s.index===5?hitTargets.reduce((n,t)=>n+fortPartHit(s,t.part,SUPER_BOSS_DAMAGE/8/hitTargets.length),0):SUPER_BOSS_DAMAGE/8;b.hp=Math.max(0,b.hp-damage);if(s.index===2)for(const target of hitTargets)bargePartHit(s,target.part,SUPER_BOSS_DAMAGE/8/hitTargets.length);bossHitFeedback(s,true);b.recoil=q.dir;
    burst(s,b.x,b.y-(s.index===1?204:55),0,150);particles(s,b.x,b.y-(s.index===1?204:50),'#fff1a4',6);
    if(!b.hp){
-    if(s.index===3){b.phase='dying';b.defeatPending=true;s.hostile=[];}
+    if(s.index===2||s.index===5){b.phase='defeated';s.hostile=[];}
+    else if(s.index===3){b.phase='dying';b.defeatPending=true;s.hostile=[];}
     else{b.phase='defeated';s.arenaLocked=false;s.hearts=Math.min(s.maxHearts,s.hearts+2);s.score+=60;s.events.push('bossDown');say(s,'bossDown');s.hostile=[];s.enemies=s.enemies.filter(e=>e.x<s.level.arena.left);}
    }
   }

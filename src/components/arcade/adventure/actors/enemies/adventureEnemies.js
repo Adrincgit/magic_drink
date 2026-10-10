@@ -1,3 +1,7 @@
+import {updateEmberBalloon,stepEmberBalloonDefeat} from './adventureEmberBalloon';
+import {fortTargets,updateEmberFort} from '../bosses/adventureEmberFort';
+import {updateFireJuggler} from './adventureFireJuggler';
+import {updateEmberTroop,TORCH_CLOWN,FIRE_WAGON} from './adventureEmberTroops';
 import {guardBlocks} from '../../engine/adventureDefense';
 import {groundY} from '../../world/adventureTerrain';
 import {enemyBody,enemyMuzzle} from './adventureEnemyGeometry';
@@ -9,25 +13,30 @@ import {ZEPPELIN_TYPE,ZEPPELIN_HEALTH,updateZeppelin,stepZeppelinDefeat} from '.
 import {updateBalloonHatch} from '../bosses/balloonHatch';
 import {BARGE_MOVES,bargeTargets,bargeCollision,updateBarge,resolveBargeContact} from '../bosses/adventureBarge';
 import {DIVER_TYPE,updateDiver,stepDiverDefeat} from './adventureDiver';
+import {RIVER_BOAT_TYPE,updateRiverBoat,stepRiverBoatDefeat} from './adventureRiverBoat';
 import {HARLEQUIN_MOVES,harlequinBody,updateHarlequin} from '../bosses/adventureHarlequin';
 const TAU=Math.PI*2;
 export const ENEMY_HEALTH_MULTIPLIER=1.15;
-export function makeEnemy(x,y,type=0,seed=0){const hp=Math.round((type===ZEPPELIN_TYPE?ZEPPELIN_HEALTH:type===5?9:type===1||type===4?9:type===2?5:4)*ENEMY_HEALTH_MULTIPLIER*100)/100;return {x,y,home:x,baseY:y,type,dir:type===ZEPPELIN_TYPE?1:seed%2?1:-1,hp,maxHp:hp,clock:seed*.37,timer:1+seed*.23,phase:'patrol',action:0,deadTime:0,trap:0,flash:0,vy:0};}
+export function makeEnemy(x,y,type=0,seed=0){const hp=Math.round((type===ZEPPELIN_TYPE?ZEPPELIN_HEALTH:type===RIVER_BOAT_TYPE?8:type===FIRE_WAGON?18:[10,11,13].includes(type)?4.4:type===5?9:type===1||type===4?9:type===2?5:4)*ENEMY_HEALTH_MULTIPLIER*100)/100;return {x,y,home:x,baseY:y,type,dir:type===ZEPPELIN_TYPE?1:seed%2?1:-1,hp,maxHp:hp,clock:seed*.37,timer:1+seed*.23,phase:'patrol',action:0,deadTime:0,trap:0,flash:0,vy:0};}
 export function enemyShot(s,x,y,angle,speed,kind='ball',extra={}){s.hostile.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,r:kind==='bomb'?15:kind==='ring'?17:10,life:5,age:0,kind,...extra});}
 export function updateEnemies(s,dt,hit,defeat){
  const p=s.player;
  for(const e of s.enemies){
-  if(e.hp<=0){if(e.type===ZEPPELIN_TYPE&&e.defeated)stepZeppelinDefeat(s,e,dt);else if(e.type===DIVER_TYPE&&e.defeated)stepDiverDefeat(s,e,dt);else e.deadTime=Math.max(0,e.deadTime-dt);continue;}
+  if(e.hp<=0){if(e.type===13&&e.defeated)stepEmberBalloonDefeat(s,e,dt);else if(e.type===ZEPPELIN_TYPE&&e.defeated)stepZeppelinDefeat(s,e,dt);else if(e.type===DIVER_TYPE&&e.defeated)stepDiverDefeat(s,e,dt);else if(e.type===RIVER_BOAT_TYPE&&e.defeated)stepRiverBoatDefeat(s,e,dt);else{e.deadTime=Math.max(0,e.deadTime-dt);e.deathAge=(e.deathAge||0)+dt;}continue;}
   const previousX=e.x;e.previousY=e.y;const step=dt*(e.snare>0?.28:1);e.snare=Math.max(0,(e.snare||0)-dt);
   e.clock+=step;e.timer-=step;e.flash=Math.max(0,e.flash-dt);const wasAttacking=e.action>0;e.action=Math.max(0,e.action-step);e.recovery=Math.max(0,(e.recovery||0)-step);if(wasAttacking&&!e.action&&e.type!==3)e.recovery=.45;
   if(e.emerging>0&&!(e.trap>0)){e.emerging=Math.max(0,e.emerging-step);e.x+=e.dir*55*step;e.gait=(e.gait||0)+Math.abs(e.x-previousX)/95;e.phase='emerge';continue;}
   const trapped=e.trap>0;if(trapped){e.trap=Math.max(0,e.trap-dt);e.trapX??=e.x;e.trapY??=e.y;e.x=e.trapX;e.y=e.trapY;}else{e.trapX=null;e.trapY=null;}
   if(e.landing>0){e.landing=Math.max(0,e.landing-dt);continue;}
   const floor=s.level.groundRoute?null:s.platforms.find(q=>e.x>=q.x&&e.x<=q.x+q.w&&Math.abs(q.baseY-e.baseY)<8);
-  if(s.level.groundRoute&&e.type!==2&&e.type!==ZEPPELIN_TYPE)e.baseY=groundY(s.platforms,e.x,e.baseY);
+  if(s.level.groundRoute&&e.type!==2&&e.type!==13&&e.type!==ZEPPELIN_TYPE&&e.type!==RIVER_BOAT_TYPE)e.baseY=groundY(s.platforms,e.x,e.baseY);
   const near=Math.abs(e.x-p.x)<650;
   if(e.type===ZEPPELIN_TYPE)updateZeppelin(s,e,step,enemyShot);
   else if(e.type===DIVER_TYPE)updateDiver(s,e,step,enemyShot);
+  else if(e.type===RIVER_BOAT_TYPE)updateRiverBoat(s,e,step,enemyShot);
+  else if(e.type===13)updateEmberBalloon(s,e,step,enemyShot);
+  else if(e.type===10)updateFireJuggler(s,e,step,enemyShot);
+  else if(e.type===TORCH_CLOWN||e.type===FIRE_WAGON)updateEmberTroop(s,e,step,enemyShot);
   else if(e.type===2){ // Balloon clown: drifting flight, then a visible breath before the streamer.
    if(!trapped){e.x=e.home+Math.sin(e.clock*.75)*75;e.y=e.baseY+Math.sin(e.clock*1.7)*22;}
    if(e.timer<.65)e.phase='windup';
@@ -59,6 +68,7 @@ export function updateEnemies(s,dt,hit,defeat){
    if(near&&e.phase==='windup'&&(e.type===1||e.type===4))e.dir=Math.sign(p.x-e.x)||e.dir;
    if(!trapped&&e.phase==='patrol'&&e.action<=0&&e.recovery<=0)e.x+=e.dir*(e.type===4?100:e.type===1?66:40)*step;
    if(floor){if(e.x<floor.x+24){e.x=floor.x+24;e.dir=1;}if(e.x>floor.x+floor.w-24){e.x=floor.x+floor.w-24;e.dir=-1;}}
+   if(s.level.emberTrail&&s.level.emberPits.some(q=>e.x>q.x-26&&e.x<q.x+q.w+26)){e.x=previousX;e.dir*=-1;}
    if(s.level.groundRoute){e.x=Math.max(24,Math.min(s.level.width-24,e.x));if(Math.abs(e.x-e.home)>160)e.dir=e.x>e.home?-1:1;e.baseY=groundY(s.platforms,e.x,e.baseY);}
    if(!trapped)e.y=e.baseY-(e.type===4?Math.max(0,Math.sin(e.clock*2.7))*112:e.type===1?Math.max(0,Math.sin(e.clock*2.1))*42:0);
    if(e.timer<=0){
@@ -71,20 +81,20 @@ export function updateEnemies(s,dt,hit,defeat){
     if(near)e.action=.32;e.timer=(s.gentle?3.4:2.5)+e.type*.18;
    }
   }
-  if(e.recovery>0)e.phase='recover';
-  e.gait=(e.gait||0)+Math.abs(e.x-previousX)/95;
+  if(e.recovery>0&&e.type!==DIVER_TYPE)e.phase='recover';
+  e.gait=(e.gait||0)+Math.abs(e.x-previousX)/([10,11].includes(e.type)?64:95);
   const a=hit(p),b=enemyBody(e);
   if(a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y&&p.dash<=0){
-   if(p.vy>130&&p.y-p.vy*dt<b.y+9&&e.type!==5){defeat(s,e);p.vy=-390;p.ground=null;}
+   if(p.vy>130&&p.y-p.vy*dt<b.y+9&&e.type!==5&&e.type!==FIRE_WAGON){defeat(s,e);p.vy=-390;p.ground=null;}
    else if(guardBlocks(s,{x:e.x,y:e.y-30,r:23,life:1})){if(!trapped)e.x=p.x+p.dir*67;e.timer=Math.max(e.timer,.7);}
-   else s.damage();
+   else s.damage({x:e.x});
   }
  }
  s.enemies=s.enemies.filter(e=>e.hp>0||e.deadTime>0);
 }
 export const BOSS_MOVES=[['streamers','balls','bombs','drop'],ORGAN_MOVES,BARGE_MOVES,HARLEQUIN_MOVES,['spiral','rain','silence']];
 export const towerSockets=organMouths;
-export function bossTargets(s){return s.index===2?bargeTargets(s):s.index===1?organTargets(s):[bossHitbox(s)];}
+export function bossTargets(s){return s.index===5?fortTargets(s):s.index===2?bargeTargets(s):s.index===1?organTargets(s):[bossHitbox(s)];}
 export function updateBoss(s,dt,helpers){
  const {say,particles}=helpers,b=s.boss,p=s.player,a=s.level.arena,center=(a.left+a.right)/2;
  b.flash=Math.max(0,b.flash-dt);
@@ -92,19 +102,20 @@ export function updateBoss(s,dt,helpers){
  if(b.phase==='sleep'){
   if(p.x<a.entry+(s.index<=2?140:0))return;
   b.engaged=true;
-  s.arenaLocked=true;s.hostile=[];s.enemies=s.enemies.filter(e=>e.x<a.left);s.hearts=Math.min(s.maxHearts,s.hearts+(s.gentle?2:1));b.phase='intro';b.timer=2.2;say(s,'boss');s.events.push('boss');
+  s.arenaLocked=true;s.hostile=[];s.enemies=s.enemies.filter(e=>e.x<a.left||s.index===5&&e.x>a.right);s.hearts=Math.min(s.maxHearts,s.hearts+(s.gentle?2:1));b.phase='intro';b.timer=2.2;say(s,'boss');s.events.push('boss');
   if(s.index<=3)beginBossArrival(s);
  }
  if(s.index<=3&&stepBossArrival(s,dt)){if(s.index===2)resolveBargeContact(s,helpers.body,false);return;}
  if(s.index===3)return updateHarlequin(s,dt,helpers,enemyShot);
  b.clock+=dt;b.timer-=dt;b.release=Math.max(0,(b.release||0)-dt);if(b.phase!=='attack'){b.dir=Math.sign(p.x-b.x)||-1;b.crewDir=b.dir;}
- b.stage=s.index<=2?(b.hp<=b.maxHp*.5?2:1):b.hp/b.maxHp<.32?3:b.hp/b.maxHp<.64?2:1;
+ b.stage=s.index===5?(b.coreOpened?2:1):s.index<=2?(b.hp<=b.maxHp*.5?2:1):b.hp/b.maxHp<.32?3:b.hp/b.maxHp<.64?2:1;
  if(b.stage>(b.lastStage||1)){
   b.lastStage=b.stage;
   if(s.rescued===3){s.buff=Math.max(s.buff,5);if(s.gentle)s.hearts=Math.min(s.maxHearts,s.hearts+1);say(s,'chorusSupport');s.events.push('rescue');particles(s,p.x,p.y-30,'#b7f1de',12);}
  }
+ if(s.index===5)return updateEmberFort(s,dt,{...helpers,makeEnemy},enemyShot);
  if(s.index===1)return updateOrganFortress(s,dt,helpers,enemyShot);
- if(s.index===2)return updateBarge(s,dt,helpers,enemyShot);
+ if(s.index===2)return updateBarge(s,dt,{...helpers,makeEnemy},enemyShot);
  if(s.index===0){
   updateBalloonHatch(s,dt);
   if(b.hp<=b.maxHp*.5&&!b.transformed&&!['intro','sleep'].includes(b.phase)){
@@ -160,7 +171,7 @@ export function updateBoss(s,dt,helpers){
   if(b.timer<=0){b.phase='recover';b.timer=(s.gentle?2.6:1.8)-(b.stage-1)*.12;b.vulnerable=true;b.slammed=false;}
  }else if(b.timer<=0){const moves=s.index===0&&b.transformed?['bombing-run','swoop','balls','drop','bombs','streamers']:BOSS_MOVES[s.index];b.phase='warn';b.timer=(s.gentle?1.3:1.05)-(b.stage-1)*.1;b.move=moves[b.turn++%moves.length];b.targetX=p.x;b.vulnerable=true;if(b.move==='bombing-run')prepareBombardment(s);s.events.push('warning');}
  const target=bossHitbox(s),player=helpers.body(p);
- if(player.x<target.x+target.w&&player.x+player.w>target.x&&player.y<target.y+target.h&&player.y+player.h>target.y)s.damage();
+ if(player.x<target.x+target.w&&player.x+player.w>target.x&&player.y<target.y+target.h&&player.y+player.h>target.y)s.damage({x:b.x,heavyImpact:b.move==='slam'&&b.phase==='attack'});
 }
 export function bossHitbox(s){const b=s.boss;return s.index===3?harlequinBody(s):s.index===2?bargeCollision(s):s.index===1?organCollision(s):s.index===0?{x:b.x-BALLOON_SIZE*.39,y:b.y-BALLOON_SIZE*.85,w:BALLOON_SIZE*.78,h:BALLOON_SIZE*.85}: {x:b.x-43,y:b.y-108,w:86,h:108};}
 import {beginBossArrival,stepBossArrival} from '../bosses/adventureArrival';

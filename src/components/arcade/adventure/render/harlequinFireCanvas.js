@@ -1,8 +1,9 @@
-import {painted,paintedParticle} from './paintedDuelCanvas';
+import {painted,paintedParticle,energyGlow} from './paintedDuelCanvas';
 import {rushFireScale} from '../actors/bosses/harlequinFire';
 const clamp=n=>Math.max(0,Math.min(1,n));
 export function drawFireImpact(c,art,q,reduced){
  const progress=clamp(q.age/q.duration),frame=Math.min(7,Math.floor(progress*8)),fade=clamp(q.life/.16);
+ energyGlow(c,{stage:2},q.x,q.y-q.size*.2,q.size*.65,fade*.5);
  // Fixed scale: the actual paintings expand and then break into charcoal smoke.
  painted(c,art,'fire-show',frame,q.x,q.y,q.size,q.size*2/3,0,fade,.5,q.grounded?205/256:.55);
  for(let i=0;i<(reduced?3:10);i++){
@@ -25,6 +26,7 @@ export function drawGroundFire(c,art,q,reduced=false){
  // Rush flames are born tall, then consume themselves. Column bases retain
  // their own fixed size and continuity as the tall column dissipates.
  const rush=q.source==='rush'&&q.stage>=2,scale=rushFireScale(q);
+ if(q.source==='forest'){energyGlow(c,{stage:2},q.x,q.floor-40,150,fade*.6);painted(c,art,'fire-show',frame,q.x,q.floor,210,q.age<.6?190:140,0,fade,.5,205/256);return;}
  painted(c,art,'fire-show',frame,q.x,q.floor,rush?122*(.55+.45*scale):122,rush?260*scale:82,0,fade,.5,205/256);
  if(dying)for(let i=0;i<3;i++){const t=1-q.life/.45;paintedParticle(c,art,3,q.age+i,q.x+(i-1)*22,q.floor-15-t*35,11,0,fade);}
 }

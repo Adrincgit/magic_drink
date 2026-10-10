@@ -51,6 +51,13 @@ test('ordinary shots gain audible headroom; master, effects and mute still silen
  writeFileSync(`${folder}/gain.json`,JSON.stringify({before,after,gainDb},null,2));
 });
 
+test('special coin uses a longer bell arpeggio distinct from the ordinary pickup and respects mute',async({page})=>{
+ await page.goto('/arcade');const coin=await render(page,[[.1,'coin']]),treasure=await render(page,[[.1,'treasureCoin']],{export:true});
+ expect(treasure.last).toBeGreaterThan(coin.last+.15);expect(treasure.rms).toBeGreaterThan(.003);expect(treasure.peak).toBeLessThan(.9);expect(treasure.nonFinite).toBe(0);
+ expect((await render(page,[[.1,'treasureCoin']],{muted:true})).peak).toBe(0);
+ writeFileSync(`${folder}/treasure-coin.wav`,Buffer.from(treasure.wav,'base64'));delete treasure.wav;writeFileSync(`${folder}/treasure-coin.json`,JSON.stringify({coin,treasure},null,2));
+});
+
 test('encore charge, release and beam have a complete audible envelope',async({page})=>{
  await page.goto('/arcade');
  const state=createAdventure(),events=[];
@@ -76,7 +83,7 @@ test('dense boss combat and simultaneous explosions stay below digital clipping'
 
 test('harbor percussion, water and destruction have audible unclipped effects',async({page})=>{
  await page.goto('/arcade');const report={};
- for(const name of ['bargeReady','bargeBeat','bargeCannon','bargeSplash','bargeRev','bargeBreak','bargeDestroy','diverThrow']){
+ for(const name of ['bargeReady','bargeBeat','bargeCannon','bargeSplash','bargeRev','bargeBreak','bargeDestroy','diverThrow','bargeJet','bargePump','bargeTankBreak','bargeDrumBreak','bargePressureJam','hitWater','hitFire','hitSound','hitLanding']){
   const r=await render(page,[[.1,name]]);expect(r.nonFinite).toBe(0);expect(r.peak).toBeGreaterThan(.02);expect(r.peak).toBeLessThan(.9);report[name]=r;
  }
  const mix=await render(page,[[0,'bargeRev'],[.3,'bargeBeat'],[.7,'bargeCannon'],[1,'bargeSplash'],[1.2,'bargeBeat'],[1.9,'bargeBreak'],[2.2,'bargeDestroy'],[2.2,'bargeSplash']],{export:true});expect(mix.peak).toBeLessThan(.9);writeFileSync(`${folder}/harbor.wav`,Buffer.from(mix.wav,'base64'));delete mix.wav;report.mix=mix;writeFileSync(`${folder}/harbor.json`,JSON.stringify(report,null,2));

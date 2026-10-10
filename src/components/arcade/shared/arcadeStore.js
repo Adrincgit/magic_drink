@@ -1,3 +1,4 @@
+import {chapterRank,nextAdventureChapter,lastChapterRank,CHAPTER_ORDER} from './adventureProgression';
 import { useSyncExternalStore } from 'react';
 import {MODS,MOD_SLOTS,validMods,equippedMods,validModLevels,modPrice,modSlots,slotPrice,availableMod,canUpgradeMod} from '../adventure/engine/adventureMods';
 
@@ -18,7 +19,7 @@ export const ACCESSORIES = [
   { id: 'crown', cost: 25, es: 'Estrella del show', en: 'Star of the show', icon: '♛' },
   { id: 'comet', cost: 40, es: 'Pasos de cometa', en: 'Comet footsteps', icon: '✦' },
 ];
-const fresh = () => ({ version: 1, economy:2, coins: 0, stars: 0, found: [], owned: ['plain'], equipped: 'plain', modSlots:1,collectedStars:[],modsOwned:[],modsEquipped:[],best: 0, wins: 0, run: null, guideSeen:false, arcadeFound:false, adventureUnlocked:0, adventureCleared:[] });
+const fresh = () => ({ version: 1, campaign:2, economy:2, coins: 0, stars: 0, found: [], owned: ['plain'], equipped: 'plain', modSlots:1,collectedStars:[],modsOwned:[],modsEquipped:[],best: 0, wins: 0, run: null, guideSeen:false, arcadeFound:false, adventureUnlocked:0, adventureCleared:[] });
 const server = fresh();
 let state = server, loaded = false, queue = Promise.resolve();
 const listeners = new Set();
@@ -29,10 +30,10 @@ export function sanitizeSave(raw) {
   const modsOwned=validMods(raw.modsOwned);
   const slots=modSlots(raw.modSlots??Math.max(1,Math.min(3,equippedMods(raw.modsEquipped,modsOwned).length)));
   const found=[...new Set((Array.isArray(raw.found)?raw.found:[]).filter(id=>BUNNIES.some(b=>b.id===id)))];
-  return { version:1, economy:2, coins:number(raw.coins,999), stars:number(number(raw.stars)+(raw.economy===2?0:found.length*50)), found, owned,
+  return { version:1, campaign:2, economy:2, coins:number(raw.coins,999), stars:number(number(raw.stars)+(raw.economy===2?0:found.length*50)), found, owned,
     equipped:owned.includes(raw.equipped)?raw.equipped:'plain',modsOwned,modSlots:slots,collectedStars:validCollectedStars(raw.collectedStars),modsEquipped:equippedMods(raw.modsEquipped,modsOwned,slots),modLevels:validModLevels(raw.modLevels,modsOwned), best:number(raw.best), wins:number(raw.wins), guideSeen:raw.guideSeen===true,arcadeFound:raw.arcadeFound===true,
-    adventureUnlocked:number(raw.adventureUnlocked,4),adventureCleared:[...new Set((Array.isArray(raw.adventureCleared)?raw.adventureCleared:[]).filter(n=>Number.isInteger(n)&&n>=0&&n<5))],
-    run:raw.run && typeof raw.run.id==='string' && typeof raw.run.practice==='boolean' ? {id:raw.run.id,practice:raw.run.practice,collectibles:raw.run.collectibles===true,chapter:number(raw.run.chapter,4),earned:number(raw.run.earned,1000),banked:number(raw.run.banked,200)} : null };
+    adventureUnlocked:raw.campaign===2?number(raw.adventureUnlocked,lastChapterRank):chapterRank(number(raw.adventureUnlocked,4)),adventureCleared:[...new Set((Array.isArray(raw.adventureCleared)?raw.adventureCleared:[]).filter(n=>Number.isInteger(n)&&CHAPTER_ORDER.includes(n)))],
+    run:raw.run && typeof raw.run.id==='string' && typeof raw.run.practice==='boolean' ? {id:raw.run.id,practice:raw.run.practice,collectibles:raw.run.collectibles===true,chapter:number(raw.run.chapter,5),earned:number(raw.run.earned,1000),banked:number(raw.run.banked,200)} : null };
 }
 function read() { try { const value=localStorage.getItem(SAVE_KEY); return value ? sanitizeSave(JSON.parse(value)) : fresh(); } catch { return state; } }
 function publish(next) { state=next; try { localStorage.setItem(SAVE_KEY,JSON.stringify(next)); } catch { /* Still playable for this visit. */ } listeners.forEach(fn=>fn()); }
@@ -57,18 +58,18 @@ export function collectBunny(id) { return mutate(s=>{
 }); }
 export function beginRun(practice=false,chapter=0,collectibles=false) { return mutate(s=>{
   if(s.run)return {value:null};
-  const run={id:crypto.randomUUID(),practice,collectibles,chapter:number(chapter,4),earned:0,banked:0};return {next:{...s,run},value:run};
+  const run={id:crypto.randomUUID(),practice,collectibles,chapter:number(chapter,5),earned:0,banked:0};return {next:{...s,run},value:run};
 }); }
 // Chapter receipts settle earnings; entering or continuing never costs coins.
 export function advanceAdventure(id,{level,stars}) { return mutate(s=>{
-  if(s.run?.id!==id||s.run.chapter!==level||level<0||level>=4)return {value:false};
+  if(s.run?.id!==id||s.run.chapter!==level||nextAdventureChapter(level)===null||!CHAPTER_ORDER.includes(level))return {value:false};
   const paid=!s.run.practice,earned=paid&&!s.run.collectibles?Math.max(0,number(stars,200)-(s.run.banked||0)):0;
-  return {next:{...s,run:{...s.run,chapter:level+1,banked:0,earned:(s.run.earned||0)+earned},stars:Math.min(99999,s.stars+earned),adventureUnlocked:paid?Math.max(s.adventureUnlocked,level+1):s.adventureUnlocked,adventureCleared:paid?[...new Set([...s.adventureCleared,level])]:s.adventureCleared},value:true};
+  return {next:{...s,run:{...s.run,chapter:nextAdventureChapter(level),banked:0,earned:(s.run.earned||0)+earned},stars:Math.min(99999,s.stars+earned),adventureUnlocked:paid?Math.max(s.adventureUnlocked,chapterRank(level)+1):s.adventureUnlocked,adventureCleared:paid?[...new Set([...s.adventureCleared,level])]:s.adventureCleared},value:true};
 }); }
 export function finishRun(id,{stars,won,level}) { return mutate(s=>{
   if(s.run?.id!==id)return {value:false};
-  const earned=s.run.practice||s.run.collectibles?0:Math.max(0,number(stars,200)-(s.run.banked||0)),cleared=!s.run.practice&&won&&Number.isInteger(level)&&level>=0&&level<5;
-  return {next:{...s,run:null,stars:Math.min(99999,s.stars+earned),best:s.run.practice?s.best:Math.max(s.best,number(stars,200)),wins:s.wins+(!s.run.practice&&won?1:0),coins:s.coins,adventureUnlocked:cleared?Math.max(s.adventureUnlocked,Math.min(4,level+1)):s.adventureUnlocked,adventureCleared:cleared?[...new Set([...s.adventureCleared,level])]:s.adventureCleared},value:true};
+  const earned=s.run.practice||s.run.collectibles?0:Math.max(0,number(stars,200)-(s.run.banked||0)),cleared=!s.run.practice&&won&&Number.isInteger(level)&&CHAPTER_ORDER.includes(level);
+  return {next:{...s,run:null,stars:Math.min(99999,s.stars+earned),best:s.run.practice?s.best:Math.max(s.best,number(stars,200)),wins:s.wins+(!s.run.practice&&won?1:0),coins:s.coins,adventureUnlocked:cleared?Math.max(s.adventureUnlocked,Math.min(lastChapterRank,chapterRank(level)+1)):s.adventureUnlocked,adventureCleared:cleared?[...new Set([...s.adventureCleared,level])]:s.adventureCleared},value:true};
 }); }
 export const seeBunnyGuide=()=>mutate(s=>({next:{...s,guideSeen:true},value:true}));
 export const discoverArcade=()=>mutate(s=>({next:{...s,arcadeFound:true},value:true}));

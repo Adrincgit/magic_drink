@@ -9,8 +9,9 @@ export function drawZeppelin(c,e,art,reduced=false){
   c.drawImage(art['zeppelin-dust'],frame*256,0,256,256,e.x-size/2,e.y-size*.85,size,size);c.restore();return;
  }
  const frame=zeppelinFrame(e,reduced),fieldWidth=w*466/429.25,cellHeight=fieldWidth*ZEPPELIN_CELL_ASPECT;
+ c.save();if(e.dir<0){c.translate(e.x*2,0);c.scale(-1,1);}
  c.drawImage(art['zeppelin-actions'],frame%4*512,Math.floor(frame/4)*384,512,384,e.x-fieldWidth/2,e.y-cellHeight*.848,fieldWidth,cellHeight);
- if(e.hp<=0)return;
+ if(e.hp<=0){c.restore();return;}
  const scale=w/1512,scaleY=h/805,pivot={x:left+31*scale,y:top+258*scaleY};
  c.save();c.translate(pivot.x,pivot.y);c.rotate(reduced?0:e.clock*29);
  c.drawImage(art['zeppelin-propeller'],-31*scale,-151*scaleY,80*scale,298*scaleY);c.restore();
@@ -19,6 +20,7 @@ export function drawZeppelin(c,e,art,reduced=false){
   for(const x of [-16,16]){c.beginPath();c.moveTo(e.x+x*AIR_ENEMY_SCALE,e.y-8*AIR_ENEMY_SCALE);c.lineTo(e.x+x*AIR_ENEMY_SCALE,e.y+12*AIR_ENEMY_SCALE);c.stroke();}
   c.drawImage(art['rescue-cage'],0,0,256,256,e.x-35*AIR_ENEMY_SCALE,e.y-5*AIR_ENEMY_SCALE,70*AIR_ENEMY_SCALE,70*AIR_ENEMY_SCALE);c.restore();
  }
+ c.restore();
  if(e.hp>0&&(e.phase==='windup'||e.action>0)){
   const q=zeppelinMuzzle(e),r=e.action>0?16:10,g=c.createRadialGradient(q.x,q.y,1,q.x,q.y,r);
   g.addColorStop(0,'#fff0c7cc');g.addColorStop(.35,'#ff655977');g.addColorStop(1,'#f92c4100');

@@ -158,7 +158,7 @@ export function updateHarlequin(s,dt,helpers,shoot){
   s.events.push('harlequinReady');
  }
  const body=harlequinBody(s),player=helpers.body(p);
- if(player.x<body.x+body.w&&player.x+player.w>body.x&&player.y<body.y+body.h&&player.y+player.h>body.y)s.damage();
+ if(player.x<body.x+body.w&&player.x+player.w>body.x&&player.y<body.y+body.h&&player.y+player.h>body.y)s.damage({x:b.x,element:b.stage>=2?'fire':'physical',heavyImpact:b.phase==='attack'&&b.move==='dash'});
 }
 export function stepHarlequinProjectile(s,q,dt,additions=[]){
  if(!q.harlequin)return false;

@@ -1,0 +1,47 @@
+{
+  "tool": "built-in image_gen",
+  "jobs": [
+    {
+      "name": "balloonDefeat",
+      "prompt": "Create an animation sprite sheet for this exact upside-down red clown suspended from three red/gold balloons. Reference image is the existing alive animation; preserve same small head and body proportions, face, red curls, red white-dot costume, golden handheld fire nozzle, thick black 2D cartoon ink and flat cel colors (not 3D). Transparent PNG, 4 equal columns and 2 equal rows, 8 chronological defeat drawings read left to right top to bottom. No text, no dividers. Row1: balloon hit start eyes shocked; first balloon pops rubber scraps, clown recoils; all balloons popped, strings slack, falling upside down; clown rotates sideways tumbling with nozzle falling. Row2: clown now near upright falling feet-down arms flailing; comic landing seated on bottom eyes squeezed shut no blood; seated dizzy rubbing sore head; slumped exhausted dazed eyes and tiny circling stars. Entire subject incl strings, stars and scraps inside each cell with ample transparent gutters. Each clown has the SAME head diameter and body scale in EVERY cell including landing, same facing left, no re-scaling to fill cell. No big blast, no repeated unchanged poses. Reference only for character design; output a brand new eight-frame DEFEAT animation.",
+      "referenced_image_paths": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/enemies/ember-balloon.webp"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-f81a3188-62dc-46a3-828d-49cffa553ecf.png",
+      "output": "public/arcade/sprites/enemies/ember-balloon-defeat.webp"
+    },
+    {
+      "name": "fortWindows",
+      "prompt": "Game sprite animation sheet on transparent background, 4 equal columns by 2 equal rows (8 frames), no text no divider lines. Reference is the fortress facade: isolate and animate ONE of its brass-rimmed circular red wooden cannon-port windows. Match exact golden riveted rim, red dark wood shutter, thick illustrated 2D ink, antique carnival red/brass palette. Window circular rim same size and center fixed in every cell, occupying 65 percent cell width. Framesequence: 1 fully closed red wooden shutter with brass horizontal bar; 2 shutter opening upwards halfway dark hole behind; 3 fully open dark round hole; 4 little flat anime cartoon red curly-haired red-nosed clown in red costume peers from hole looking LEFT; 5 that same small clown leaning out with small brass fire nozzle held LEFT; 6 same aiming with bright orange glow INSIDE nozzle mouth before firing, no projectile visible; 7 recoil firing SHORT orange flame flash toward LEFT (contained in cell), clown eyes shut; 8 permanently destroyed port, cracked scorched brass frame, broken splintered red shutter, empty black hole, no clown. No environment, no ground shadows outside, no rectangles backing art, no writing. Maintain registration and same scale. Every entire frame inside own cell with wide gutters. Reference fortress used only for style and window design.",
+      "referenced_image_paths": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/bosses/ember-fort/body.webp"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-901eea68-39e9-4137-8783-571e4f4001e6.png",
+      "output": "public/arcade/sprites/bosses/ember-fort/windows.webp"
+    },
+    {
+      "name": "torchAttack",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-6b9f06f1-70f2-401f-b8fc-799331e7505f.png",
+      "transparent_background": true,
+      "referenced_image_paths": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/enemies/ember-torchwalk.webp",
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/enemies/torch-clown.webp"
+      ],
+      "prompt": "Generate a transparent 4-column 4-row game sprite sheet, 16 distinct LEFT-facing poses. Character anatomy MUST match reference ONE (the WALK cycle): big round red curly head, white face, red long-point gold-diamond hat, short rounded body, yellow collar, RED diamonds outfit, oversized round red boots; precisely same relative head/torso/legs size as reference ONE. Reference TWO is ONLY to explain the torch-throw action, NEVER copy its smaller head/body proportions. Thick ink, totally flat cel colors, cheerful 2D anime cartoon, no render shading. Every frame exact same physical character scale, face diameter and boot baseline, all fully inside cell with generous margin. Row1 four windup drawings holding two burning torches: idle intent, plant feet, lift rear arm high, lean back rear hand raised with torch. Row2 four throwing drawings: rear arm swings over head STILL holding torch; torso forward arm in front releasing (do not depict departing torch); empty throwing hand extended; followthrough empty hand while OTHER hand retains burning torch. Row3 four recovery drawings: hand reaches belt, draws new unlit torch, lights it with other torch, two torches ready. Row4 four defeated drawings: recoils hurt; kneels flames dying; seated torches extinguished; seated dizzy eyes closed. Do not resize the character between poses to fit the box, same large round head proportions in all 16. No duplicate walk frames, no backgrounds, no ground, no text, no cell borders.",
+      "output": "public/arcade/sprites/enemies/ember-torch-attack.webp"
+    },
+    {
+      "name": "floorFine",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-bdad1f24-72aa-4e5c-a9f4-26d560695e8d.png",
+      "transparent_background": false,
+      "prompt": "Game environment texture atlas, TWO seamless horizontal forest FLOOR strips stacked, equal height, 2 rows x1 column, each extremely wide. Flat hand painted 2D anime cartoon background style, gentle thin dark ink details, matte natural colors. This is ONLY the ground surface of a walkable forest clearing viewed at a very low gentle three-quarter angle, no cliffs, NO root wall, no large tree roots, no trees, NO horizon, NO grass border, no central path edges, no perspective vanishing point. Continuous evenly detailed earth filling every pixel edge to edge. TOP HALF: dry tan ochre sandy forest earth with very SMALL scattered pebbles, sparse tiny ochre fallen leaves, a few thin twigs and very low tiny tufts of dry grass; plenty of calm clear dirt, details no larger than 1 percent of whole width. BOTTOM HALF: exactly the same layout but scorched ash charcoal dark brown forest earth, tiny carbonized leaves, tiny charcoal splinters, very subtle scattered red embers (NOT large flames). Tiny details keep actors readable. NO enormous logs, NO massive rocks or leaves. Both strips seamlessly tile left/right without obvious boundaries, no text/labels/grid/gutters. Consistent material matching fairy tale painted forest backgrounds. No photorealism, no 3D rendering, no fake depth shadows, no black outlines around panels.",
+      "outputs": [
+        "public/arcade/maps/ember-trail/floor-fine-0.webp",
+        "public/arcade/maps/ember-trail/floor-fine-1.webp"
+      ]
+    }
+  ],
+  "notes": "October 9 corrections: register all artwork to physical anchors. No machinery in bubbles."
+}

@@ -7,6 +7,7 @@ import {ZEPPELIN_HEIGHT,ZEPPELIN_WIDTH} from '../src/components/arcade/adventure
 import {groundY} from '../src/components/arcade/adventure/world/adventureTerrain';
 import {burstBubble} from '../src/components/arcade/adventure/engine/adventureBubbles';
 import {stepSuper} from '../src/components/arcade/adventure/engine/adventureSuper';
+import {hexyMuzzle} from '../src/components/arcade/adventure/actors/hexy/hexyAnimation';
 const helpers={say:()=>{},particles:()=>{},body:playerBody};
 const artifacts='tests/artifacts/arcade/armor-rescue/';
 function clean(){const s=createAdventure(1);for(const k of ['enemies','outposts','supplies','pickups','hazards','stars'])s[k]=[];return s;}
@@ -77,8 +78,11 @@ test('bubble and super effects cannot damage the organ through a wheel-only inte
  const core=bossTargets(s)[0],high={x:b.x,y:core.y+core.h/2,captured:[{kind:'note'}]};burstBubble(s,high,()=>{});expect(b.hp).toBe(b.maxHp-2);
  b.hp=b.maxHp;b.flash=0;
  // Commit a low horizontal beam whose upper edge stops beneath the body.
- s.player.y=b.y+60;s.player.ground=null;
- s.superCinematic={age:.91,pulses:0,origin:{x:s.player.x,y:b.y+60},dir:1};
+ s.player.y=b.y+60;s.player.ground=null;s.player.superCast=.32;
+ // The live super now follows the wand, so place that muzzle, not a stale origin.
+ s.player.y+=b.y+60-hexyMuzzle(s).y;
+ s.superCinematic={age:.91,pulses:0,origin:hexyMuzzle(s),dir:1,airborne:true};
+ expect(s.superCinematic.origin.y-110).toBeGreaterThan(core.y+core.h);
  stepSuper(s,1/120,{defeat:()=>{},particles:()=>{},burst:()=>{},say:()=>{}});expect(b.hp).toBe(b.maxHp);expect(b.flash).toBe(0);
 });
 

@@ -1,5 +1,7 @@
 # Del embarcadero al Gran Telón
 
+> Historical implementation, superseded on 2026-10-09 by [the current boat and land approach revision](../ember-fort/README.md). The tent is now on land in 1-4; the Arlequin battle is 1-5. No barge ram or hull contact damage remains.
+
 Revisión del 7 de octubre de 2026. Petición: ver cómo termina 1-3, llegar a la gran carpa, entrar y avanzar brevemente antes de la aparición del arlequín.
 
 ## Secuencia implementada
@@ -17,12 +19,12 @@ La fachada, sus faroles, las tablas y los apoyos usan coordenadas del mundo. No 
 
 | Momento | Título de interfaz | Archivo activo |
 | --- | --- | --- |
-| Recorrido 1-3 | Faroles sobre el agua | `public/arcade/music/exploration/canopy.ogg` |
-| Barcaza de 1-3 | La barcaza del redoble | `public/arcade/music/bosses/alegre.ogg` |
+| Recorrido 1-3 | La ribera de los redobles | `public/arcade/music/exploration/harbor.mp3`, copia del `1-3.mp3` entregado por el usuario el 9 de octubre |
+| Barcaza de 1-3 | La ribera de los redobles | La misma pista del recorrido; continúa sin reiniciarse |
 | Acceso de 1-4 | Entre bastidores | `public/arcade/music/exploration/ring.ogg` |
 | Arlequín de 1-4 | El arlequín del Gran Telón | `public/arcade/music/bosses/arlequin_fuego.mp3`, suministrado por el usuario el 8 de octubre |
 
-Los tres temas de exploración y barcaza ya estaban en el proyecto; el de esta batalla es el MP3 entregado por el usuario. Los encuentros tienen efectos propios de combate, sin atribuir esas grabaciones como melodías nuevas compuestas aquí. El cruce aprovecha los sonidos existentes de apertura/cierre. Se conservan los controles de volumen y la selección automática de música al comenzar la presentación del jefe.
+El acceso de 1-4 conserva su grabación anterior. El recorrido y la batalla de 1-3 comparten el MP3 entregado por el usuario; la batalla de 1-4 utiliza su MP3 de fuego. Los encuentros tienen efectos propios de combate, sin atribuir esas grabaciones como melodías nuevas compuestas aquí. El cruce aprovecha los sonidos existentes de apertura/cierre. Se conservan los controles de volumen y la selección automática de música; en 1-3 la pista continúa al comenzar la presentación del jefe.
 
 ## Arte y comprobación
 

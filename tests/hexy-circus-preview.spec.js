@@ -4,7 +4,7 @@ import {LOCAL_RESET_KEY} from '../src/components/arcade/shared/arcadeLocalReset'
 import {openAdventureMenu} from './arcade-input.helpers';
 
 for(const [width,practice] of [[1280,false],[390,false],[1280,true]]){
- test(`normal 1-4 entry uses the definitive dark floor: ${practice?'practice':'adventure'}, ${width}px`,async({page})=>{
+ test(`normal 1-5 entry uses the definitive dark floor: ${practice?'practice':'adventure'}, ${width}px`,async({page})=>{
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
   await page.setViewportSize({width,height:800});
   const saved=sanitizeSave({version:1,economy:2,coins:7,stars:43,adventureUnlocked:practice?0:3});
@@ -27,10 +27,11 @@ for(const [width,practice] of [[1280,false],[390,false],[1280,true]]){
   await expect(canvas).toHaveAttribute('data-circus-floor','dark');
   await expect(page.locator('[data-title-screen]')).toHaveCount(0);
   await expect(page.locator('[data-presentation]')).toHaveCount(0);
-  expect(Number(await canvas.getAttribute('data-player-x'))).toBeLessThan(0);
+  expect(Number(await canvas.getAttribute('data-player-x'))).toBeGreaterThan(600);
   const running=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),SAVE_KEY);
   expect(running.run).toMatchObject({practice,chapter:3});
-  expect({...running,run:null}).toEqual({...saved,run:null});
+  expect({...running,run:null,stars:saved.stars,collectedStars:saved.collectedStars}).toEqual({...saved,run:null});
+  expect(running.stars-saved.stars).toBe(running.collectedStars.length-saved.collectedStars.length);
 
   await page.keyboard.down('ArrowRight');
   await expect.poll(async()=>Number(await canvas.getAttribute('data-player-x')),{timeout:12000}).toBeGreaterThan(650);

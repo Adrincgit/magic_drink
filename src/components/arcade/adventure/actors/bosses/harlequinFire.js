@@ -61,6 +61,7 @@ export function castHarlequinFire(s,b,shoot){
 export function harlequinFireHitbox(q){
  if(q.kind==='harlequin-cloth')return q.state==='burn'?{x:q.x-32,y:q.floor-22,w:64,h:22}:{x:q.x-25,y:q.y-17,w:50,h:34};
  if(q.kind==='harlequin-groundfire'){
+  if(q.source==='forest')return{x:q.x-58,y:q.floor-52,w:116,h:52};
   const h=q.source==='rush'&&q.stage>=2?88*rushFireScale(q):28;
   return{x:q.x-34,y:q.floor-h,w:68,h};
  }

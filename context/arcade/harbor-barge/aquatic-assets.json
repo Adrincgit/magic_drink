@@ -1,0 +1,30 @@
+[
+  {
+    "path": "public/arcade/sprites/enemies/river-diver-aquatic.webp",
+    "width": 1536,
+    "height": 1024,
+    "alpha": true,
+    "bytes": 538996
+  },
+  {
+    "path": "public/arcade/sprites/enemies/river-boat-actions.webp",
+    "width": 1536,
+    "height": 256,
+    "alpha": true,
+    "bytes": 196102
+  },
+  {
+    "path": "public/arcade/sprites/effects/harbor-aquatic.webp",
+    "width": 1024,
+    "height": 1024,
+    "alpha": true,
+    "bytes": 443702
+  },
+  {
+    "path": "public/arcade/maps/harbor/ground-v2.webp",
+    "width": 2172,
+    "height": 724,
+    "alpha": true,
+    "bytes": 706832
+  }
+]

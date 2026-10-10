@@ -1,3 +1,6 @@
+import {emberBalloonDefeatFrame} from '../actors/enemies/adventureEmberBalloon';
+import {fireBreatherFrame} from '../actors/enemies/adventureFireJuggler';
+import {emberTroopDrawing} from '../actors/enemies/adventureEmberTroops';
 import {balloonShellDrawing,redClownDrawing} from '../actors/bosses/adventureBalloonCrew';
 import {organShellDrawing} from '../actors/bosses/adventureOrganFortress';
 import {bargeDrawing} from '../actors/bosses/adventureBarge';
@@ -7,7 +10,16 @@ import {harlequinDrawing} from '../actors/bosses/adventureHarlequin';
 export const ACTOR_SHEETS=['clown','balloon','juggler','acrobat','cannon','boss-balloon','serio','alegre','agresivo','muta'];
 export const ENEMY_ART=['clown','acrobat','balloon','juggler','acrobat','cannon','clown'];
 export function enemyDrawing(e,reduced=false){
- if(e.type===8)return diverDrawing(e);
+ if(e.type===13&&e.hp<=0)return{key:'ember-balloon-defeat',frame:emberBalloonDefeatFrame(e)};
+ if(e.type===13)return{key:'ember-balloon',frame:e.phase==='windup'?4+Math.min(3,Math.floor((e.fireAge||0)*3)):e.phase==='attack'?8+(reduced?0:Math.floor((e.fireAge||0)*8)%4):reduced?0:Math.floor(e.clock*6)%4};
+ if(e.type===11||e.type===12)return emberTroopDrawing(e,reduced);
+ if(e.type===10){
+  if(e.hp<=0)return{key:'ember-motion',frame:8+Math.min(7,Math.floor((e.deathAge||0)*7))};
+  if(['patrol','emerge'].includes(e.phase))return{key:'ember-motion',frame:reduced?0:Math.floor((e.gait||0)*8)%8};
+  return{key:'fire-breather-flat',frame:fireBreatherFrame(e,reduced)};
+ }
+ if(e.type===8)return diverDrawing(e,reduced);
+ if(e.type===9)return{key:'river-boat-crew',frame:e.hp<=0?(e.deathAge<.35?4:5):e.action>0?2+(reduced?0:Math.floor(e.clock*14)%2):e.phase==='windup'?1:0,columns:3};
  if(e.type===7)return{key:'clown-zeppelin',frame:0};
  if(e.balloonCrew||e.type===0)return redClownDrawing(e,reduced);
  if(e.type===6)return{key:'cannon-clown',frame:reduced?0:Math.min(3,Math.floor(e.clock*6)%4)};

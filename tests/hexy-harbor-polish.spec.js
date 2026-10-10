@@ -2,7 +2,6 @@ import {test,expect} from '@playwright/test';
 import {createAdventure,stepAdventure,playerBody} from '../src/components/arcade/adventure/engine/adventureModel';
 import {bargeCollision,bargeFragments,bargeRig} from '../src/components/arcade/adventure/actors/bosses/adventureBarge';
 import {stepWorldEffects} from '../src/components/arcade/adventure/engine/adventureEffects';
-import {harborMooring} from '../src/components/arcade/adventure/render/adventureHarborCanvas';
 import {riverBridgePiers} from '../src/components/arcade/adventure/render/adventureRiverCanvas';
 
 test('running and dashing into the arriving barge cannot cross its hull or cause an intro hit',()=>{
@@ -52,12 +51,7 @@ test('cannon recoils backwards and tilts towards the visible launch direction',(
  s.boss.move='tidal';const low=bargeRig(s);expect(low.muzzle.y).toBeGreaterThan(low.cannon.y);
 });
 
-test('moored boats attach to real painted piers independently of camera movement',()=>{
- const s=createAdventure(2),img={width:2172,height:724};
- for(const q of s.level.harborProps.filter(q=>q.kind==='harbor-boat')){
-  const tie=harborMooring(s,q,img),bridge=s.platforms.find(p=>p.bridge&&q.x>=p.x&&q.x<p.x+p.w);
-  expect(riverBridgePiers(bridge,img).some(p=>p.x===tie.x)).toBe(true);
-  Object.assign(s.camera,{x:q.x+300,y:-300,backdropY:100,zoom:.52});s.time+=10;
-  expect(harborMooring(s,q,img)).toEqual(tie);
- }
+test('the decorative moored boats are removed while the four combat boats remain',()=>{
+ const s=createAdventure(2);expect(s.level.harborProps.some(q=>q.kind==='harbor-boat')).toBe(false);
+ expect(s.enemies.filter(q=>q.type===9)).toHaveLength(2);expect(s.level.harborAmbush.waves.flat().filter(q=>q.type===9)).toHaveLength(2);
 });

@@ -1,0 +1,36 @@
+{
+  "mode": "built-in image_gen",
+  "outputs": [
+    "public/arcade/maps/ember-trail/smoke.webp",
+    "public/arcade/maps/ember-trail/birds.webp",
+    "public/arcade/sprites/hexy/heat.webp"
+  ],
+  "jobs": [
+    {
+      "key": "smoke",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-6a8fe59d-8a46-4497-ae00-9ec98c68ed30.png",
+      "columns": 2,
+      "rows": 2,
+      "prompt": "Game animation asset atlas of FOUR separate self-contained forest-fire SMOKE PLUMES on genuine transparent alpha. STRICT GRID: TWO COLUMNS, TWO ROWS, exactly four cells. Each whole smoke plume fully INSIDE its own cell with minimum 100 pixels EMPTY TRANSPARENT margin on all FOUR sides. No smoke, haze, glow or colored pixel can reach any cell boundary, never crop any plume. Shapes: tall organic curling billows narrow bottom and rounded irregular top, ash gray/dusky plum with very subtle warm dusty orange underside. Hand-painted detailed texture, soft naturally wispy alpha edge, variable semitransparency. Four phases of SAME smoke column changing its curl slightly for slow crossfade animation. The column ends/fades invisibly at its top and bottom, no flat edges. Background must be TOTALLY transparent, no ground, sky, fire, box, checkerboard, shadows, scenery, labels or text. This asset will be cropped into its four square cells and composited over a sunset forest; every crop edge needs at least 100px zero alpha so rectangular panels NEVER appear. 1536x1536."
+    },
+    {
+      "key": "birds",
+      "prompt": "Production game sprite animation sheet on genuinely transparent background: exactly EIGHT frames of the SAME small distant wild forest bird in flight, facing LEFT. Four columns two rows strict equal grid, generous transparent margins, all frames centered identically and same scale. Pure dark muted plum charcoal silhouette, anatomically plausible bird with tiny body, tapered tail, slender curved feathered wings. Eight successive wing beats: wings high up, three-quarter raised, spread level, lowered, low down, lifting, flat glide, rising. Side three-quarter view silhouette appropriate for a distant flock fleeing a forest fire across sunset sky. Hand-painted slightly soft antialiased edges, no strokes or white outlines, no circles, no V-shaped icon, no vectors, no text, no scenery. Each whole wing contained in frame. 1536x1024 sprite atlas.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-c30e6c0b-9635-4a64-aec6-fe6fbc55caa6.png"
+    },
+    {
+      "key": "hexy-heat-fixed",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-144d8daa-7075-435c-9dd5-b000b54da31e.png",
+      "columnCuts": [
+        0,
+        407,
+        795,
+        1172,
+        1536
+      ],
+      "prompt": "CREATE A NEW SPRITE SHEET using only the attached original Hexy atlas as reference. Exactly 4 full-body poses, 4 columns ONE row, transparent alpha. Same character costume proportions and painterly linework. ALL FOUR POSES MUST HOLD THE STAR WAND EXACTLY LIKE FRAME 0 OF THE REFERENCE: HAND ON THE IMAGE-RIGHT SIDE grips its black handle at her outer hip, GOLD STAR POINTS DOWN-RIGHT INTO EMPTY SPACE OUTSIDE HER SILHOUETTE. Wand is a SHORT rigid straight stick only between THAT hand and the star, no stick across legs, no stick across skirt, no wand on opposite hand. KEEP THIS HAND AND WAND IDENTICAL IN ALL 4 FRAMES. Keep the IMAGE-RIGHT ARM down, visible, straight beside hip. Animate ONLY her IMAGE-LEFT ARM and her face feeling summer heat: 1 cheeks flushed and sweat, image-left hand rises toward chest; 2 image-left hand raised outward to LEFT of her face fanning herself with palm; 3 image-left hand touching the LEFT side of her forehead (not right side), wiping sweat; 4 image-left hand lowered outward to LEFT, sigh with slightly open mouth. This is crucial: fanning/wiping hand MUST REMAIN ON THE LEFT SIDE of the drawing, while wand-holding hand stays on the RIGHT SIDE. No crossed arms. No arm crosses body midline. Preserve blue hat yellow star, pink long hair, white sailor shirt red bow, blue pleated skirt, black boots. Every pose feet at same baseline, consistent size, no white clouds, no text or effect symbols, soft painted sweat bead allowed. Generous clear transparent spacing between all frames. 1536x1024 output.",
+      "cleanupPrompt": "Finalize this sprite sheet for actual game use. PRESERVE these exact four poses and correct hands, wand on image-right hand outside body in every frame. ONLY CLEAN THE TRANSPARENCY AND PADDING. Remove ALL the diffuse pink, blue, yellow, gray glow haze surrounding each character. There must be absolutely zero colored cloud or shadow outside the hard-painted character contour, wand and small sweat beads. Clean transparent alpha cutout all the way up to the crisp antialiased outline, no outer glow. Black shown here is transparent; preserve real alpha, no solid background of any color. Shrink the four drawings uniformly together enough to leave 30px fully transparent space on either side inside EACH of the four equal columns. The last gold star tip currently hits the right edge: restore its full point and add transparent margin. Keep the same baseline and size for every figure. Four columns ONE row, same costume, same correct grip and same left-arm heat gestures, don't redesign the anatomy, don't add elements. Result must be clean animation artwork ready for compositing over a detailed game background.",
+      "reference": "public/arcade/sprites/hexy/reactions.webp"
+    }
+  ]
+}

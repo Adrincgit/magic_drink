@@ -1,6 +1,8 @@
 import {groundY} from '../world/adventureTerrain';
 import {drawMeadowSky} from '../world/adventureSky';
 import {RIVER_PLANES,riverPlanePlacement,riverWaterfallPlacement,riverWoodlandPlacement} from '../world/adventureRiverDepth';
+import {drawWaterArc} from './paintedWaterCanvas';
+import {drawHarborSurface} from './harborSurfaceCanvas';
 
 export function drawRiverBackdrop(c,s,art,reduced=false){
  drawMeadowSky(c,{...s,time:s.time*1.5},art,reduced);
@@ -40,7 +42,8 @@ function waterPlane(c,s,img,river,flow,reduced,near=false){
  }c.restore();
 }
 export function drawRiverWater(c,s,art,reduced=false){
- const img=art[s.level.harborRoute?'harbor-water':'river-water'],h=300;
+ if(s.level.harborRoute){drawHarborSurface(c,s,art,reduced);return;}
+ const img=art['river-water'],h=300;
  for(const river of s.level.rivers){
   if(river.x+river.w<s.camera.x-150||river.x>s.camera.x+960/(s.camera.zoom||1)+150)continue;
   const flow=riverFlow(s,river,reduced),time=flow.time;
@@ -73,21 +76,11 @@ export function riverBridgePiers(q,img){
   piers.push({x:part.x+(x-part.sx)/part.sw*part.w,y:part.y+part.h*.86,w:part.w/part.sw*img.width*.047});
  }return piers;
 }
-export function drawRiverPierWater(c,s,art,reduced=false){
- const img=art['river-bridge'],foam=art['pier-foam'],time=reduced?0:s.time;
+export function drawRiverPierWater(c,s,art,reduced=false,side='front'){
+ const img=art['river-bridge'],time=reduced?0:s.time;
  for(const bridge of s.platforms.filter(q=>q.bridge))for(const [i,q] of riverBridgePiers(bridge,img).entries()){
   if(q.x<s.camera.x-100||q.x>s.camera.x+960/(s.camera.zoom||1)+100)continue;
   const frame=reduced?1:Math.floor(time*9+i)%4,w=Math.max(100,q.w*2.5),h=62;
-  c.save();
-  c.fillStyle='#164c4c';c.globalAlpha=.38;c.beginPath();c.ellipse(q.x,q.y+1,q.w*.7,5,0,0,Math.PI*2);c.fill();
-  c.globalAlpha=.86;
-  // Ignore empty atlas padding and stray marks above the actual splash.
-  c.drawImage(foam,frame*512,210,512,302,q.x-w*.45,q.y-h*.65+h*210/512,w,h*302/512);
-  // Broken pale arcs carry the wake downstream past the wooden base.
-  c.strokeStyle='#e7f9de';c.lineWidth=1.6;
-  for(let n=0;n<3;n++){
-   const t=reduced?.45:(time*.6+n*.33+i*.2)%1;c.globalAlpha=(1-t)*.45;
-   c.beginPath();c.ellipse(q.x+18+t*65,q.y+5+t*8,28+t*35,4+t*7,0,-.1,Math.PI*.85);c.stroke();
-  }c.restore();
+  c.save();c.globalAlpha=.86;drawWaterArc(c,art,frame,q.x,q.y,w,h,side);c.restore();
  }
 }

@@ -1,0 +1,13 @@
+{
+  "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-37da833c-7322-48fd-8cae-f504c8e4fcde.png",
+  "output": "public/arcade/maps/ember-trail/grass-floor.webp",
+  "operation": "Uniform resize to 1200 wide, crop middle 200px; no vertical stretch.",
+  "reference": "public/arcade/maps/ember-trail/canopy-healthy.webp",
+  "purpose": "Lush grass and a small earthen footpath at the beginning, blending gradually into dry and charred ground.",
+  "panoramaSource": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-c5183036-173e-431d-8aa7-c882c39a50af.png",
+  "panoramas": [
+    "public/arcade/maps/ember-trail/vista-healthy.webp",
+    "public/arcade/maps/ember-trail/vista-burned.webp"
+  ],
+  "panoramaOperation": "Two equal panels, native resolution, preserve aspect ratio. Smaller distant trees; filled canopy avoids a cropped-trunk skyline."
+}

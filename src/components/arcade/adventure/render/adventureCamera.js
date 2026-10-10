@@ -4,6 +4,7 @@ import {balloonVolleySockets} from '../actors/bosses/adventureBalloonCrew';
 export {BALLOON_SIZE} from '../actors/bosses/adventureBalloonCrew';
 export const cameraView=s=>({zoom:s.camera.zoom||1,width:960/(s.camera.zoom||1),height:540/(s.camera.zoom||1)});
 export function adventureBounds(s){
+ if(s.harborAmbush?.state==='active'){const a=s.level.harborAmbush;return{left:a.left+24,right:a.right-24};}
  if(s.level.circusEntrance&&s.player.x<0)return{left:-1382,right:s.level.circusEntrance.doorX+18};
  if(!s.arenaLocked)return{left:18,right:s.level.width-18};
  const a=s.level.arena,view=cameraView(s);
@@ -13,11 +14,19 @@ export function adventureBounds(s){
  }
  if(s.index<=3&&s.boss.phase==='intro')return{left:a.left+24,right:a.right-24};
  if(s.index===0)return{left:Math.max(a.left+16,s.camera.x+16),right:Math.min(a.right-16,s.camera.x+view.width-16)};
- if(s.index===1||s.index===2||s.index===3)return{left:a.left+24,right:a.right-24};
+ if(s.index===1||s.index===2||s.index===3||s.index===5)return{left:a.left+24,right:a.right-24};
  const center=(a.left+a.right)/2;
  return{left:center-450,right:center+450};
 }
 export function followAdventureCamera(s,dt){
+ if(s.harborAmbush?.state==='active'){
+  const a=s.level.harborAmbush,target=960/(a.right-a.left),ease=1-Math.exp(-dt*5);
+  const floor=(a.y-s.camera.y)*(s.camera.zoom||1);
+  const approach=(v,to)=>Math.abs(v-to)<.001?to:v+(to-v)*ease;
+  s.camera.zoom=approach(s.camera.zoom||1,target);s.camera.x=approach(s.camera.x,a.left);
+  s.camera.y=a.y-approach(floor,385)/s.camera.zoom;
+  s.camera.backdropY=approach(s.camera.backdropY??75,a.y-385);return;
+ }
  const afterClash=s.index===3&&(s.clashRetreatBounds||s.arenaLocked&&(s.boss.x>s.level.arena.right-24||s.boss.x<s.level.arena.left+24));
  if(afterClash||s.powerClash&&['resolve','flight','land'].includes(s.powerClash.state)){
   const a=s.level.arena,q=s.powerClash,previousFloor=(a.y-s.camera.y)*s.camera.zoom;
@@ -53,16 +62,21 @@ export function followAdventureCamera(s,dt){
  const previousFloor=(a.y-s.camera.y)*(s.camera.zoom||1);
  const rushing=organ&&s.boss.move==='organ-charge'&&['warn','attack'].includes(s.boss.phase);
  const organZoom=Math.max(.62,Math.min(rushing?.72:s.boss.transformed?.8:.82,960/(Math.abs(s.boss.x-s.player.x)+440)));
- const zoom=harlequin?Math.max(.56,Math.min(1.08,960/(Math.abs(s.boss.x-s.player.x)+420))):barge?Math.max(.52,Math.min(.8,960/(Math.abs(s.boss.x-s.player.x)+590))):balloon ? (s.boss.move==='bombing-run'&&['warn','attack'].includes(s.boss.phase)?.72:.82) : organ?organZoom:1;
+ const fort=s.index===5&&s.arenaLocked;
+ const zoom=fort?.5:harlequin?Math.max(.56,Math.min(1.08,960/(Math.abs(s.boss.x-s.player.x)+420))):barge?Math.max(.52,Math.min(.8,960/(Math.abs(s.boss.x-s.player.x)+650))):balloon ? (s.boss.move==='bombing-run'&&['warn','attack'].includes(s.boss.phase)?.72:.82) : organ?organZoom:1;
  s.camera.zoom=(s.camera.zoom??1)+(zoom-(s.camera.zoom??1))*Math.min(1,dt*3.4);
  if(harlequin)s.camera.zoom=Math.min(s.camera.zoom,960/(Math.abs(s.boss.x-s.player.x)+270),430/Math.max(300,a.y-Math.min(s.boss.y-205,s.player.y-110)));
  const view=cameraView(s),center=(a.left+a.right)/2;
  const organCenter=(Math.min(s.player.x,s.boss.x-204)+Math.max(s.player.x,s.boss.x+170))/2;
- const bargeCenter=(Math.min(s.player.x-70,s.boss.x-335)+s.boss.x+340)/2;
- const battleX=harlequin?(s.player.x+s.boss.x)/2-view.width/2:barge?Math.max(a.left,Math.min(a.right-view.width,bargeCenter-view.width/2)):s.index===0?Math.max(a.left,Math.min(a.right-view.width,s.player.x-view.width*.42)):s.index===1?Math.max(a.left,Math.min(a.right-view.width,organCenter-view.width/2)):center-view.width/2;
+ const bargeCenter=(Math.min(s.player.x-70,s.boss.x-370)+s.boss.x+375)/2;
+ const battleX=fort?Math.max(a.left,Math.min(a.right-view.width,(s.player.x-80+s.boss.x+390)/2-view.width/2)):harlequin?(s.player.x+s.boss.x)/2-view.width/2:barge?Math.max(a.left,Math.min(a.right-view.width,bargeCenter-view.width/2)):s.index===0?Math.max(a.left,Math.min(a.right-view.width,s.player.x-view.width*.42)):s.index===1?Math.max(a.left,Math.min(a.right-view.width,organCenter-view.width/2)):center-view.width/2;
  const x=s.arenaLocked?battleX:Math.max(0,Math.min(s.level.width-view.width,s.player.x-view.width*.3125));
  // A zoomed battle keeps the floor visible and opens room above the balloon.
- const y=barge?a.y-440/view.zoom:balloon?a.y-475/view.zoom:organ?a.y-470/view.zoom:s.level.groundRoute?groundY(s.platforms,s.player.x)-(s.level.cameraFloor||440):s.arenaLocked?a.y-420:Math.max(-190,Math.min(150,s.player.y-380));
+ // Collision gaps have no earth platform. The continuous route still has an
+ // elevation there; sampling a missing collider used to fall back to y=480.
+ const routeY=groundY(s.level.route||s.platforms,s.player.x);
+ const pitLook=s.level.emberTrail?Math.min(20,Math.max(0,s.player.y-routeY-40)*.35):0;
+ const y=fort?a.y-440/view.zoom:barge?a.y-440/view.zoom:balloon?a.y-475/view.zoom:organ?a.y-470/view.zoom:s.level.groundRoute?routeY-(s.level.cameraFloor||440)+pitLook:s.arenaLocked?a.y-420:Math.max(-190,Math.min(150,s.player.y-380));
  s.camera.x+=(x-s.camera.x)*Math.min(1,dt*7);
  // Zoom widens the viewport immediately; the eased x must respect the NEW
  // width on this same frame, including the boss arrival and retreat.
@@ -71,7 +85,17 @@ export function followAdventureCamera(s,dt){
   const near=Math.max(0,Math.max(s.player.x+75,s.boss.x+130)-view.width),far=Math.min(s.level.width-view.width,Math.min(s.player.x-75,s.boss.x-130));
   if(near<=far)s.camera.x=Math.max(near,Math.min(far,s.camera.x));
  }
- if(s.index>=4){s.camera.y+=(y-s.camera.y)*Math.min(1,dt*5);return;}
+ if(s.index>=4){
+  if(fort||s.level.emberTrail&&Math.abs(view.zoom-1)>.001){
+   const targetFloor=fort?440:s.level.cameraFloor||440;
+   const floor=previousFloor+(targetFloor-previousFloor)*(1-Math.exp(-dt*3));
+   s.camera.y=routeY-floor/view.zoom;return;
+  }
+  const shift=(y-s.camera.y)*(1-Math.exp(-dt*5));
+  s.camera.y+=Math.max(-180*dt,Math.min(180*dt,shift));
+  const elevation=routeY-(s.level.cameraFloor||440),back=s.camera.backdropY??elevation;
+  s.camera.backdropY=back+(elevation-back)*(1-Math.exp(-dt*1.25));return;
+ }
  if(balloon||organ||barge||harlequin){
   // Pull back around the arena floor. Easing zoom and world y independently
   // made the entire stage jump upwards before the camera caught up.

@@ -1,0 +1,84 @@
+{
+  "method": "Built-in image_gen; original alpha retained; atlas registration with Sharp",
+  "jobs": [
+    {
+      "key": "drummer",
+      "ref": "public/arcade/sprites/bosses/barge/crew.webp",
+      "prompt": "Use case identity-preserve. Production game sprite atlas transparent alpha. Recreate ONLY the little red polka-dot clown from reference, same painted fairy-tale game identity and proportions, facing LEFT. Exactly 4 columns by 3 rows, 12 separate full-body poses. Each cell 384 square, atlas1536x1152. EVERY frame has same body scale, feet at bottom of cell, body on RIGHT half to leave room for a long wooden percussion mallet swinging to LEFT. Mallet is DRAWN TOGETHER with hands, both hands firmly gripping lower handle at all times, cream cylindrical head with red/gold ends. Frame0 relaxed ready leaning forward with mallet diagonal left;1 poised adjusting two-handed grip;2 quiet anticipation;3 poised breath. Second row coherent strike cycle:4 two-handed lift high left,5 downswing toward low left,6 decisive strike far lower left at boot height,7 rebound left. Last row BROKEN DRUM REPAIR animation NO MALLET:8 crouch reaching low left with wrench,9 tug stubborn handle,10 wrench twist with frustrated gritted teeth,11 shake loose lever and look down angry. NO smiling salute, NO hand on forehead, no arm waving, no detached props, no drum or machine drawn. Clear readable expressions of effort. Each mallet entirely inside cell, wide transparent gaps, all body/hat/feet included, no text, ground, shadows or background. Exact identity reference, richly shaded raster illustration, not SVG.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-d78993d0-b195-49b8-aba5-071362e7e6a1.png"
+    },
+    {
+      "key": "gunner",
+      "ref": "public/arcade/sprites/bosses/barge/crew.webp",
+      "prompt": "Use case identity-preserve. Transparent production sprite atlas SAME little red polka dot clown, facing LEFT, same body proportions and painted style as reference. 4 columns by 4 rows=16 animation drawings, consistent scale and boots aligned at bottom each cell. Row1 four ACTIVE IDLE poses: leaning over controls, inspect pressure gauge below hands, grasp lever, glance left while adjusting grip. NEVER stand upright saluting or hand on forehead. Row2 four consecutive manual pumping frames: both hands on a brass vertical piston handle directly in front at left, full extension, press half down, crouch full compression, rise pulling it up. Row3 four consecutive FIRING/bracing poses: hold two small grips at waist to left, aim, recoil leaning back, lean in to steady grip. NO GUN drawn except grips; actual gun is separate. Row4 four BROKEN PUMP repair poses: crouch with spanner, pull a loose hose end, frustrated tug with eyes squinting, lean down vigorously tightening bolt. No smiling static gestures. Alpha transparent background, no walls floor scenery labels or cast shadows. Entire characters inside cells, dark ink outlines, warm detailed painted texture. Sprite atlas1536x1536.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-b5f2723c-449c-4e9c-85c7-24fd9f5a7497.png"
+    },
+    {
+      "key": "diver-water",
+      "ref": "public/arcade/sprites/enemies/river-diver-aquatic.webp",
+      "prompt": "Use case identity-preserve. Transparent sprite atlas for same tiny clown diver in reference: curly orange red hair, brass teal goggles, little red cap, teal/red striped suit, cream red life ring, yellow flippers, brass teal water pistol. Exactly12 frames in4columns3rows evenly spaced. Faces LEFT. Row1 emerging from water sequentially: frame0 ONLY top of cap goggles and eyes above a small ring of water;1 head exposed looking left;2 shoulders and pistol emerge;3 upper body in swim posture. Row2 diving sequentially:4 forward tuck head down,5 head and shoulders sinking with flippers lifting,6 only cap tip flippers and bubbles,7 small water ripple with cap almost gone. Row3 four SURFACE SHOOTING frames: chest-deep clown aims pistol diagonally UP LEFT, releases narrow water spurt, recoils, recovers. Scale of head identical in every frame, surface water line at same baseline of each cell, shapes stay inside cell with broad alpha gaps. Fully submerged body not shown through water, no big lake background. Painterly illustrated game style exactly reference, genuine transparent alpha, no text, no border, no ground. Atlas1536x1152.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-6e2782bc-4a86-482b-90d4-3482d79502fb.png"
+    },
+    {
+      "key": "boat-crew",
+      "ref": "public/arcade/sprites/enemies/river-boat-actions.webp",
+      "prompt": "Use case identity-preserve. Replace single giant clown boat with production sprite sheet of a SMALL wooden red/gold skiff carrying exactly THREE SMALL identical clown divers (same goggles red cap curly orange hair teal red striped suit life rings as reference). One helmsman at rear right steering tiller, TWO smaller gunners at middle and front aiming brass teal water pistols UP LEFT. All three have same small head/body scale; together fit in the skiff, no oversized head filling whole boat. Long low hull, red panels gold stars, flat side view bow LEFT. Exactly6 frames in3 columns2rows, generous transparent gaps: frame0 sailing hands steady;1 gunners raising pistols;2 both fire short water spurts upperleft;3 gunners recoil as helmsman braces;4 hull damaged taking water tilted slightly, all three clinging;5 skiff nearly sunk, all three divers chest deep next to sinking gunwale distressed and paddling. Consistent hull length and character size. No standing giant clown. No isolated parts. Genuine transparent alpha around skiff, only narrow painted water splash contact strip under hull, no water background. Painterly game style exact reference. 1536x1024 atlas.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-0d6f8429-d6c0-4859-bbfa-b14a0b9592a4.png"
+    },
+    {
+      "key": "fire-hit",
+      "refs": [
+        "public/arcade/sprites/hexy/element-hits.webp"
+      ],
+      "alpha": true,
+      "prompt": "Use case identity-preserve. FOUR new full body FIRE HIT animation poses of exact pink haired witch Hexy in reference, four equal cells in one horizontal row, facing RIGHT, same size/boots baseline. Keep navy star hat, sailor white blouse/red bow/navy skirt, knee socks and boots, star wand. Strongly visible stylized golden orange flames wrap AROUND the character, licking up hat edge and boots and following hair, not merely tiny embers. Sequence1 orange burst flinch,2 flames rising around silhouette as she recoils and protects hat,3 shaking flames off sleeves with flowing flame ribbons trailing,4 residual little flames dying and grey smoke while recovering. Body remains clearly visible; no injury, burns, clothing damage, melted anatomy or nudity. Match original beautiful detailed painted game art. Flame glow contained on transparent alpha, no colored rectangle or backdrop. Four full drawings completely inside cells with transparent gutters. Atlas1536x384 or2048x512, same body scale all four. Real alpha transparency.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-66b8ec39-14d6-4bdd-bc10-9205727654d4.png"
+    },
+    {
+      "key": "fire-juggler",
+      "refs": [
+        "public/arcade/sprites/enemies/juggler-actions.webp"
+      ],
+      "alpha": true,
+      "prompt": "Use case identity-preserve. Production transparent game sprite atlas of same clown juggler from reference, evolved FIRE JUGGLER variant. Orange curly hair red nose face, dark burgundy/purple suit with orange gold diamonds, small red cone cap. 12 frames exactly4columns3rows. Facing LEFT, feet baseline same. Row1 four walking frames holding two burning circus torches, clear alternating feet. Row2 four attack sequence: wind up one torch overhead, release flaming baton LEFT, follow through and recoil, recover with remaining torch. Row3 four breath-fire variant frames: lean back take breath, cheeks inflated torch at mouth, lean left blowing small fire cone, cough cooling down. Small flames bright yellow orange, no huge sheet obscuring body. Entire body and torches inside each frame, no text and no ground or black background, true transparent alpha. Same delightful richly painted ink outlined game style, consistent body proportions. 1536x1152.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-4a097c2a-a0b3-4f28-8b95-10930c5e60b5.png"
+    },
+    {
+      "key": "fortress",
+      "refs": [
+        "public/arcade/maps/grand-ring/exterior.webp"
+      ],
+      "alpha": true,
+      "prompt": "Use case stylized-concept. Production transparent isolated boss-machine sprite for a side scrolling hand painted circus action game, inspired by a destructible siege fort but ORIGINAL design NOT any existing game machine. A squat imposing CIRCUS GATE FORTRESS on broad bolted iron feet planted on land, red burgundy brass gold rivets, cream red circus awnings, climbing ladders and round hatches, two stacked tiers of armoured cabins. Flat SIDE VIEW facing LEFT, long wide800 and tall600 approximate. Tall center tower crowned by a gold theatrical diamond face and small red pennants. Separate clearly visible EMPTY turret mounting rings at upper left and lower left (cannons will be animated in code, do NOT paint barrels into body). Central oval boiler window glowing orange, CLOSED armored gate at lower center right, metal braces at feet. Color scheme and painterly wood gold fabric style of reference circus tent. Same stage perspective as side view platform game, no isometric floor. Entire machine fits image with margins, lots of material detail, empty crew stations. No clown characters, no lettering, no water, no background, no floor or cast shadow. Genuine transparent alpha. 1536x1024.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-68c373f3-7448-4334-903e-e3b1b03d5869.png"
+    },
+    {
+      "key": "approach-panorama",
+      "refs": [
+        "public/arcade/maps/woods/background.webp",
+        "public/arcade/maps/grand-ring/exterior.webp"
+      ],
+      "alpha": false,
+      "prompt": "Use case illustration-story. NEW panoramic background painting for side scrolling Hexy circus game matching beautiful warm painted storybook reference. Wide3072x1024 or3:1 composition. We have LEFT the river behind: NO river, lake, water, pier or bridge anywhere. Layered rolling wooded hills on SOLID LAND at orange violet twilight, beautiful clouds and distant mountains. Across panorama from LEFT to RIGHT: left lush deep green forest and sunlit mist among trees; center forest progressively scorched, blackened trunks and fading warm smoke; right charred woodland opens onto a hill bearing a distant GRAND red cream circus tent matching reference, gold lantern glow and small tents. This is distant panorama only: horizon around55percent image height, no large foreground trunks or close ground edge. Preserve sky beauty: luminous orange coral clouds left becoming dusky plum and smoky amber toward right. Dramatic narrative approach to fire circus, no people, text, interface or roads in exaggerated perspective. Painted richly layered depth, no flat gradient/vector style.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-b064c7f6-bafe-450f-8a32-9b6fb0e53382.png"
+    },
+    {
+      "key": "burnt-trees",
+      "refs": [
+        "public/arcade/maps/woods/background.webp"
+      ],
+      "alpha": true,
+      "prompt": "Use case illustration-story. Transparent asset kit for beautiful painted side scrolling circus game. Exactly FOUR isolated vegetation silhouettes arranged in one row with clear transparent gaps, consistent vertical baseline:1 tall partly scorched oak tree with sparse green ochre leaves and dark trunk;2 tall leafless charred branching tree with a few faint red embers in bark;3 small cluster of burnt stumps and ashy shrubs on no ground;4 skeletal pine with burned needles and twisted trunk. Painted fairy tale ink outlined detailed textures match reference, smoky blue dark brown silhouettes with warm ember accents. No background, no smoke rectangle, no landscape, no ground slab, no text. Full branches and roots entirely inside each of4equalcells. True alpha transparent. Atlas2048x1024.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-796210db-685c-4658-bb0e-85fa41f8d320.png"
+    },
+    {
+      "key": "ash-ground",
+      "refs": [
+        "public/arcade/maps/harbor/ground-v2.webp"
+      ],
+      "alpha": true,
+      "prompt": "Use case precise-object-edit. Side scrolling game ground terrain texture from reference structure. Replace green living vegetation along its top with ashy brown moss, blackened little roots, small charcoal rocks and sparse reddish embers; retain solid earth cliff vertical cross section and richly painted ink-outline style. Long continuous level top across whole width, irregular natural protrusions above contact line, NO straight bright outline. Dirt below as layered brown/charcoal stone and dead roots, continuous to bottom image edge. NO sky or scenery above soil, alpha transparency over uneven top contour. Horizontally tileable left-right. 2048x768. This is burned FOREST LAND not metal, not lava, no water. No characters or lettering.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-308e42e6-9aae-4d5c-aa2d-eb1595d8141f.png"
+    }
+  ]
+}

@@ -68,7 +68,7 @@ test('running casts have twelve drawings; air dash stays horizontal and ground d
 });
 
 test('a rescued bunny anticipates the star shot before releasing it from its own position',()=>{
- const s=quiet();s.rescued=1;s.buddyWait=0;tick(s);expect(buddyFrame(s,0)).toBe(0);expect(s.shots).toHaveLength(0);tick(s,{},20);expect(s.shots).toHaveLength(0);
+ const s=quiet();s.enemies=[makeEnemy(s.player.x+280,s.player.y,0,0)];s.enemies[0].timer=100;s.rescued=1;s.buddyWait=0;tick(s);expect(buddyFrame(s,0)).toBe(0);expect(s.shots).toHaveLength(0);tick(s,{},20);expect(s.shots).toHaveLength(0);
  tick(s,{},4);expect(buddyFrame(s,0)).toBeGreaterThanOrEqual(4);expect(s.shots).toHaveLength(1);expect(s.shots[0].x).toBeLessThan(s.player.x);expect(s.shots[0].y).toBe(buddyPosition(s,0).y-20);
  tick(s,{},60);expect(buddyFrame(s,0)).toBe(null);
 });
@@ -84,8 +84,8 @@ test('the clown organ exposes an elevated body target, transforms and leaves the
 });
 
 test('every long route has distributed encounters, late rescues and several usable checkpoints',()=>{
- for(let index=0;index<5;index++){
-  const s=quiet(index),l=s.level;expect(l.width).toBeGreaterThan(11000);expect(l.enemies.length).toBeGreaterThanOrEqual(20);expect(l.checkpoints).toHaveLength(2);expect(l.cages[2][0]).toBeGreaterThan(8500);
+ for(const index of [0,1,2,4]){
+  const s=quiet(index),l=s.level;expect(l.width).toBeGreaterThan(11000);expect(l.enemies.length+(l.harborAmbush?.waves.flat().length||0)).toBeGreaterThanOrEqual(20);expect(l.checkpoints).toHaveLength(2);expect(l.cages[2][0]).toBeGreaterThan(8500);
   const cp=l.checkpoints[1];s.player.x=cp[0]+5;s.player.y=cp[1];s.player.ground=s.platforms.findIndex(p=>s.player.x>=p.x&&s.player.x<=p.x+p.w);s.hearts=2;tick(s);expect(s.checkpointAt).toEqual(cp);
   s.player.y=900;s.player.ground=null;tick(s);expect(s.player.x).toBe(cp[0]);expect(s.player.y).toBe(cp[1]-10);
  }

@@ -20,6 +20,12 @@ export function stepWorldEffects(s,dt){
  if(s.organDebris)s.organDebris=s.organDebris.filter(q=>q.life>0);
  for(const q of s.particles){q.life-=dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.vy+=300*dt;}
  s.particles=s.particles.filter(q=>q.life>0);
- for(const q of s.effects){q.life-=dt;q.age+=dt;if(q.cinematicSmoke){q.x+=q.vx*dt;q.y+=q.vy*dt;q.vx*=Math.exp(-dt*.8);}}
+ for(const q of s.effects){
+  q.life-=dt;q.age+=dt;
+  if(q.cinematicSmoke){q.x+=q.vx*dt;q.y+=q.vy*dt;q.vx*=Math.exp(-dt*.8);}
+  if(q.waterDrop){q.x+=q.vx*dt;q.y+=q.vy*dt;q.vy+=480*dt;
+   if(q.y>=q.floor){q.y=q.floor;q.waterDrop=false;q.waterDetail=1;q.size*=2.3;q.age=0;q.life=q.duration=.38;}
+  }else if(q.waterDrift){q.x+=q.vx*dt;q.y+=q.vy*dt;}
+ }
  s.effects=s.effects.filter(q=>q.life>0);
 }

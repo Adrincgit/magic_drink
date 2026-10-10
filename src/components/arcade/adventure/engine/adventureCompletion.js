@@ -3,6 +3,7 @@ import {stepWorldEffects} from './adventureEffects';
 // Completion is part of the world: land, plant, salute and leave the frame.
 // It starts after victory even if the player did not rescue a single bunny.
 export function beginCompletion(s){
+ if(s.index===5)return;
  if(s.clear||s.superCinematic||s.boss.hp>0||(!s.boss.engaged&&!s.boss.defeat&&s.player.x<s.level.arena.entry))return;
  if(s.index===0&&!s.boss.defeat?.ready)return;
  if(s.index===1&&!s.boss.defeat?.ready)return;
@@ -12,7 +13,7 @@ export function beginCompletion(s){
  s.clear={age:0,stage:'land',flagX:p.x+51,flagY:a.y};
  s.hostile=[];s.shots=[];s.noticeTime=0;s.arenaLocked=false;
  s.enemies=s.enemies.filter(e=>e.x<a.left);
- Object.assign(p,{dir:1,vx:0,dash:0,spin:0,hitReact:0,cast:0,specialCast:0,superCast:0,charge:0,gliding:false,crouch:false,guarding:false,firing:false,hurt:1});
+ Object.assign(p,{dir:1,vx:0,dash:0,spin:0,hitReact:0,knockdown:null,cast:0,specialCast:0,superCast:0,charge:0,gliding:false,crouch:false,guarding:false,firing:false,hurt:1});
  s.events.push('win');
 }
 export function stepCompletion(s,dt){

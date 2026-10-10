@@ -2,6 +2,7 @@ import {openAdventureMenu} from './arcade-input.helpers';
 import {test,expect} from '@playwright/test';
 import {LEVELS} from '../src/components/arcade/adventure/world/adventureLevels';
 import {createAdventure,stepAdventure} from '../src/components/arcade/adventure/engine/adventureModel';
+import {surfaceY} from '../src/components/arcade/adventure/world/adventureTerrain';
 const tick=(s,keys={},frames=120)=>{for(let i=0;i<frames;i++)stepAdventure(s,keys,1/120);};
 test('every cage and exit has a reachable platform route',()=>{
  for(const l of LEVELS){
@@ -13,7 +14,7 @@ test('every cage and exit has a reachable platform route',()=>{
    const distance=Math.max(0,t.x-(f.x+f.w),f.x-(t.x+t.w));
    if(distance+20<reach){seen.add(b);changed=true;}
   }}
-  for(const [x,y] of [...l.cages,l.exit])expect(l.platforms.some((p,i)=>seen.has(i)&&x>=p.x&&x<=p.x+p.w&&y===p.y),`${l.id}: unreachable ${x},${y}; reachable ${[...seen]}`).toBe(true);
+  for(const [x,y] of [...l.cages,l.exit])expect(l.platforms.some((p,i)=>seen.has(i)&&x>=p.x&&x<=p.x+p.w&&Math.abs(y-surfaceY(p,x))<.01),`${l.id}: unreachable ${x},${y}; reachable ${[...seen]}`).toBe(true);
  }
 });
 test('variable jump, released keys, checkpoint damage and five different powers work',()=>{

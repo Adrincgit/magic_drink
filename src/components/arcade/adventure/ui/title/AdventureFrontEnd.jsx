@@ -1,3 +1,4 @@
+import {CHAPTER_ORDER,chapterRank} from '../../../shared/adventureProgression';
 import {useEffect,useRef,useState} from 'react';
 import {LEVELS} from '../../world/adventureLevels';
 import css from './adventureFrontEnd.module.css';
@@ -23,8 +24,10 @@ export default function AdventureFrontEnd({en,save,selected,onChoose,onStart,onS
   window.addEventListener('keydown',key,true);return()=>window.removeEventListener('keydown',key,true);
  });
  useEffect(()=>{
-  if(!active||!interactive||chapters)return;
-  root.current?.querySelector(menu?'[data-start-adventure]':'[data-title-start]')?.focus({preventScroll:true});
+  if(!active||!interactive)return;
+  const target=root.current?.querySelector(chapters?'[data-level-choice][aria-pressed="true"]':menu?'[data-start-adventure]':'[data-title-start]');
+  (target?.disabled?root.current?.querySelector('[data-practice]'):target)?.focus({preventScroll:true});
+  if(chapters)target?.scrollIntoView({block:'nearest',inline:'center'});
  },[menu,entrance,active,interactive,chapters]);
  return <section ref={root} className={css.title} data-title-screen data-entrance={entrance} data-menu-open={menu} aria-label="Hexy & the Lost Chorus">
   <img className={css.landscape} src="/arcade/title/landscape.webp" alt="" onLoad={()=>setLoaded(v=>v|1)}/>
@@ -36,7 +39,7 @@ export default function AdventureFrontEnd({en,save,selected,onChoose,onStart,onS
   {!menu&&<button className={css.pressStart} data-title-start data-pad-default disabled={!active} onClick={pressStart} aria-label={entrance==='settled'?(en?'Press Enter / Start':'Pulsa Enter / Start'):(en?'Skip title entrance':'Saltar entrada del título')}><span>{entrance==='settled'?(en?'PRESS ENTER / START':'PULSA ENTER / START'):(en?'Press any button to skip':'Pulsa cualquier botón para saltar')}</span></button>}
   {menu&&<>
    <div className={css.menu} data-title-menu>
-    <button data-pad-default data-start-adventure data-insert-coin disabled={busy||selected>save.adventureUnlocked} onClick={()=>onStart(false)}>{en?'Start adventure':'Comenzar aventura'}</button>
+    <button data-pad-default data-start-adventure data-insert-coin disabled={busy||chapterRank(selected)>save.adventureUnlocked} onClick={()=>onStart(false)}>{en?'Start adventure':'Comenzar aventura'}</button>
     <button onClick={onSettings} data-open-settings>{en?'Options':'Opciones'}</button>
     <button onClick={onTutorial}>{en?'How to play':'Cómo jugar'}</button>
     <button onClick={()=>setChapters(true)} aria-expanded={chapters}>{en?'Choose chapter':'Elegir capítulo'} <small>{chapterNumber(selected)}</small></button>
@@ -46,11 +49,11 @@ export default function AdventureFrontEnd({en,save,selected,onChoose,onStart,onS
    <a className={css.exit} href="/#directorio-wonderpop">← Wonderpop</a>
   </>}
   <span className={css.signature}>MAGIC DRINK</span>
-  {chapters&&<div className={css.chapterPicker} data-chapter-picker role="dialog" aria-modal="true" aria-label={en?'Chapters':'Capítulos'}>
-   <h2>{en?'Where shall we go?':'¿A dónde vamos?'}</h2>
-   <div>{LEVELS.map((l,i)=><button data-level-choice={i} key={i} aria-pressed={selected===i} onClick={()=>{onChoose(i);setChapters(false);}}><img src={l.background} alt=""/><b>{chapterNumber(i)} · {l.name[en?1:0]}</b><small>{i>save.adventureUnlocked?(en?'Practice':'Práctica'):save.adventureCleared.includes(i)?'★':en?'Available':'Disponible'}</small></button>)}</div>
+  {chapters&&<div className={css.chapterPicker} data-chapter-picker role="dialog" aria-modal="true" aria-label={en?'Chapters':'Capítulos'} onKeyDown={e=>{if(e.key!=='Tab')return;const items=[...e.currentTarget.querySelectorAll('button,input')],index=items.indexOf(document.activeElement);e.preventDefault();items[(index+(e.shiftKey?-1:1)+items.length)%items.length]?.focus();}}>
+   <h2 aria-label={en?'Where shall we go?':'¿A dónde vamos?'}><span aria-hidden="true">{!en&&<span className={css.invertedQuestion}>?</span>}{en?'Where shall we go?':'A dónde vamos?'}</span></h2>
+   <div className={css.chapterGrid}>{CHAPTER_ORDER.map(i=>{const l=LEVELS[i],cleared=save.adventureCleared.includes(i),practice=chapterRank(i)>save.adventureUnlocked;return <button data-level-choice={i} data-status={cleared?'cleared':practice?'practice':'available'} key={i} aria-pressed={selected===i} onClick={()=>{onChoose(i);setChapters(false);}}><div className={css.chapterPreview}><img src={l.background} alt=""/><span>{chapterNumber(i)}</span></div><b>{l.name[en?1:0]}</b><small>{cleared?(en?'Completed':'Completado'):practice?(en?'Practice':'Práctica'):en?'Available':'Disponible'}</small></button>;})}</div>
    <label><input type="checkbox" checked={gentle} onChange={e=>onGentle(e.target.checked)}/>{en?'A gentler adventure':'Una aventura más tranquila'}</label>
-   <button onClick={()=>setChapters(false)}>{en?'Back':'Volver'} ↩</button>
+   <button onClick={()=>setChapters(false)}>{en?'Back':'Volver'}</button>
   </div>}
  </section>;
 }

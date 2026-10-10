@@ -31,6 +31,7 @@ export function drawCircusForecourt(c,s,art,reduced){
  const deck=s.level.circusEntrance.deck;
  const exterior={...s,platforms:[deck],level:{...s.level,harborRoute:true,rivers:[{x:deck.x,w:deck.w,y:deck.y+62}]}};
  drawRiverWater(c,exterior,art,reduced);
+ drawRiverPierWater(c,exterior,art,reduced,'back');
  drawCircusFacade(c,s,art);drawCircusWalkway(c,deck,art,s.level.circusEntrance.doorX);drawRiverPierWater(c,exterior,art,reduced);
  const lamp=art['harbor-lantern'],h=172,w=h*lamp.width/lamp.height;
  for(const x of [-1120,-700])c.drawImage(lamp,x-w/2,deck.y+8-h,w,h);

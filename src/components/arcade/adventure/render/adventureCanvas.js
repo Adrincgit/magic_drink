@@ -1,4 +1,11 @@
+import {drawForestTerrain,drawEmberForeground} from './emberSurfaceCanvas';
+import {drawEmberBackdrop,drawEmberScenery,drawEmberFort,drawEmberProjectile,drawFortFade} from './emberTrailCanvas';
+import {drawEmberDepth,drawEmberHazards,drawHexyHeat} from './emberAtmosphereCanvas';
+import {energyGlow} from './paintedDuelCanvas';
+import {diverInWater} from '../actors/enemies/adventureDiver';
 import {drawFireImpact} from './harlequinFireCanvas';
+import {drawCheckpoint} from './checkpointCanvas';
+import {drawAquaticEnemy} from './riverActorsCanvas';
 import {buddyFrame,buddyPosition,buddyRollFrame} from '../engine/adventureDefense';
 import {shopForLevel} from '../engine/adventureShop';
 import {shieldCharges} from '../engine/adventureLoot';
@@ -6,8 +13,9 @@ import {paintOriginalTrail,paintOriginalScreen} from '../engine/adventureOrigina
 import {MEADOW_PLANES,paintMeadowPlane} from '../world/adventureParallax';
 import {superBackdrop,superBeam,superCaption,superCameraOffset} from './adventureSuperCanvas';
 import {drawSuperCutin} from './adventureSuperCutin';
-import {drawBarge,drawBargeProjectile,drawHarborFX} from './bargeCanvas';
-import {drawHarborBackdrop,drawHarborProps,drawHarborDock} from './adventureHarborCanvas';
+import {drawBarge,drawBargeProjectile,drawBargeSplash} from './bargeCanvas';
+import {drawHarborBackdrop,drawHarborProps,drawHarborDock,drawHarborDockSupports} from './adventureHarborCanvas';
+import {drawWaterEffect} from './paintedWaterCanvas';
 import {drawGrandRingBackdrop,drawGrandRingStage,drawHarlequin,drawHarlequinProjectile,drawHarlequinFX,drawHarlequinMeter} from './harlequinCanvas';
 import {drawInfernoBarriers} from './infernoStageCanvas';
 import {drawInfernoForeground} from './infernoBackdropCanvas';
@@ -57,9 +65,39 @@ export async function loadAdventureArt(){
  paths['inferno-scene']='/arcade/sprites/effects/painted-duel/inferno-scene.webp?v=20261008-inferno';
  paths['circus-chaos']='/arcade/sprites/effects/painted-duel/circus-chaos.webp?v=20261008-chaos';
  for(const name of ['motion-fluid','motion-fluid-mid','motion-fluid-final'])paths['harlequin-'+name]='/arcade/sprites/bosses/harlequin/'+name+'.webp?v=20261008-impact';
- for(const name of ['body','damaged','wheel','mallet','shield','cannon'])paths['barge-'+name]='/arcade/sprites/bosses/barge/'+name+'.webp';
+ for(const name of ['body','damaged','wheel','mallet','shield','cannon','crew','drum-states','tank','hose','nozzle','drummer','gunner'])paths['barge-'+name]='/arcade/sprites/bosses/barge/'+name+'.webp';
+ paths['river-diver-water']='/arcade/sprites/enemies/river-diver-water.webp';paths['river-boat-crew']='/arcade/sprites/enemies/river-boat-crew.webp';
+ paths['fire-juggler']='/arcade/sprites/enemies/fire-juggler.webp';
+ paths['fire-breather']='/arcade/sprites/enemies/fire-breather.webp';
+ paths['fire-breather-flat']='/arcade/sprites/enemies/fire-breather-flat.webp';
+ paths['torch-clown']='/arcade/sprites/enemies/torch-clown.webp';
+ paths['fire-wagon']='/arcade/sprites/enemies/fire-wagon-small-crew.webp';
+ for(const key of ['ember-motion','ember-torchwalk','ember-balloon','ember-balloon-defeat','ember-torch-attack'])paths[key]='/arcade/sprites/enemies/'+key+'.webp';
+ for(const key of ['ember-jet','ember-captured'])paths[key]='/arcade/sprites/effects/'+key+'.webp';
+ for(let i=0;i<8;i++)paths['forest-tree-'+i]='/arcade/maps/ember-trail/tree-clean-'+[0,1,2,0,3,4,5,3][i]+'.webp';
+ for(let i=0;i<4;i++)paths['forest-outcrop-'+i]='/arcade/maps/ember-trail/outcrop-'+i+'.webp';
+ paths['ember-fort-windows']='/arcade/sprites/bosses/ember-fort/windows-flat.webp';
+ paths['forest-hollow']='/arcade/maps/ember-trail/hollow.webp';
+ for(const name of ['healthy','burned'])paths['forest-canopy-'+name]='/arcade/maps/ember-trail/vista-'+name+'.webp';
+ for(const name of ['branch-tree','falling-tree-frames'])paths['forest-'+name]='/arcade/maps/ember-trail/'+name+'.webp';
+ for(let i=0;i<2;i++)paths['forest-understory-'+i]='/arcade/maps/ember-trail/understory-'+i+'.webp';
+ for(let i=0;i<2;i++)paths['forest-path-'+i]='/arcade/maps/ember-trail/floor-fine-'+i+'.webp';
+ paths['forest-grass-floor']='/arcade/maps/ember-trail/grass-floor.webp';
+ paths['ember-torch']='/arcade/sprites/effects/ember-torch.webp';
+ paths['fire-breather-walk']='/arcade/sprites/enemies/fire-breather-walk.webp';
+ paths['ember-flames']='/arcade/sprites/effects/ember-flames.webp';
+ paths['ember-mechanisms']='/arcade/sprites/bosses/ember-fort/mechanisms.webp';
+ paths['ember-bushes']='/arcade/maps/ember-trail/bushes.webp';
+ paths['ember-fort']='/arcade/sprites/bosses/ember-fort/body.webp';
+ for(let i=0;i<4;i++)paths['ember-tree-'+i]='/arcade/maps/ember-trail/tree-'+i+'.webp';
+ paths['ember-interior']='/arcade/maps/ring/background.webp';paths['ember-interior-ground']='/arcade/maps/ring/ground.webp';
+ paths['ember-ground']='/arcade/maps/ember-trail/ground.webp';
+ paths['ember-smoke']='/arcade/maps/ember-trail/smoke.webp';paths['ember-birds']='/arcade/maps/ember-trail/birds.webp';
+ paths['barge-sonic']='/arcade/sprites/effects/barge-sonic.webp';
  for(const name of ['water','lantern','boat','reeds','grove','distant','fair'])paths['harbor-'+name]='/arcade/maps/harbor/'+name+'.webp';
  paths['river-diver']='/arcade/sprites/enemies/river-diver.webp';paths['harbor-effects']='/arcade/sprites/effects/harbor-effects.webp';
+ paths['river-diver-aquatic']='/arcade/sprites/enemies/river-diver-aquatic.webp';paths['river-boat-actions']='/arcade/sprites/enemies/river-boat-actions.webp';paths['harbor-aquatic']='/arcade/sprites/effects/harbor-aquatic.webp';
+ paths['harbor-water-details']='/arcade/sprites/effects/harbor-water-details.webp';paths['harbor-jet']='/arcade/sprites/effects/harbor-jet.webp';
  paths['forest-edge']='/arcade/maps/meadow/forest-edge.webp';
  for(const name of ['sunset-sky','meadow-horizon','sunset-clouds'])paths[name]='/arcade/maps/meadow/'+name+'.webp';
  for(const {key} of MEADOW_PLANES)paths[key]='/arcade/maps/meadow/'+key+'.webp';
@@ -154,6 +192,7 @@ function terrain(c,q,world,art){
  if(q.kind==='moving'){star(c,q.x+q.w/2,q.y+h+5,6,'#ffe7a8');}
 }
 function atmosphere(c,s,reduced){
+ if(s.level.harborRoute)return;
  const world=s.level.world,time=reduced?0:s.time;
  c.save();
  if(world.ambient==='bulbs'||world.ambient==='crystals'){
@@ -188,11 +227,12 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  c.fillStyle=s.level.sky[0];c.fillRect(0,0,W,H);
  if(outside)drawCircusOutsideBackdrop(c,s,art,reduced);
  else if(s.level.grandRing)drawGrandRingBackdrop(c,s,art,reduced);
+ else if(s.level.emberTrail){drawEmberBackdrop(c,s,art);drawEmberDepth(c,s,art,reduced);}
  else if(s.level.harborRoute)drawHarborBackdrop(c,s,art,reduced);
  else if(s.level.riverRoute)drawRiverBackdrop(c,s,art,reduced);
  else if(s.level.groundRoute){drawMeadowSky(c,s,art,reduced);for(const plane of MEADOW_PLANES)paintMeadowPlane(c,art[plane.key],s.camera,plane,s.level.width);}
  else layer(c,bg,s.camera.x,world.farSpeed,-70-s.camera.y*.12,610);
- if(s.level.groundRoute&&!s.level.riverRoute&&!s.level.grandRing){
+ if(s.level.groundRoute&&!s.level.riverRoute&&!s.level.grandRing&&!s.level.emberTrail){
   // The forest enters from the right as solid cutouts. Crossfading entire
   // panoramas made trunks transparent against the hills behind them.
   const edge=s.level.forestEdge,img=art['forest-edge'],height=610,width=height*img.width/img.height;
@@ -209,9 +249,10 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
    if(x+width/2< -50||x-width/2>view.width+50)continue;
    c.save();c.translate(x,y);if(prop.flip)c.scale(-1,1);c.drawImage(img,-width/2,-prop.h,width,prop.h);c.restore();
   }c.restore();
- }else if(!s.level.riverRoute&&!s.level.grandRing)layer(c,art['mid'+s.index],s.camera.x,world.midSpeed,55-s.camera.y*.35,425);
- if(!s.level.grandRing)atmosphere(c,s,reduced);
+ }else if(!s.level.riverRoute&&!s.level.grandRing&&!s.level.emberTrail)layer(c,art['mid'+s.index],s.camera.x,world.midSpeed,55-s.camera.y*.35,425);
+ if(!s.level.grandRing&&!s.level.emberTrail)atmosphere(c,s,reduced);
  c.save();c.scale(view.zoom,view.zoom);c.translate(-s.camera.x,-s.camera.y);
+ if(s.level.emberTrail){drawEmberScenery(c,s,art);drawEmberFort(c,s,art,reduced);}
  if(outside)drawCircusForecourt(c,s,art,reduced);
  else if(s.level.grandRing)drawGrandRingStage(c,s,art,reduced);
  if(s.level.riverRoute){
@@ -225,11 +266,20 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
    c.save();c.translate(q.x,q.y);if(prop.flip){c.translate(q.w,0);c.scale(-1,1);}c.drawImage(img,0,0,q.w,q.h);c.restore();
   }
  }
- if(!outside&&!(s.level.grandRing&&circusFloor==='dark'))for(const q of s.platforms)if(q.x+q.w>s.camera.x-100&&q.x<s.camera.x+view.width+100){
+ if(s.level.riverRoute)drawRiverPierWater(c,s,art,reduced,'back');
+ for(const q of s.platforms)if(q.kind==='dock')drawHarborDockSupports(c,q,art);
+ const terrainPlatforms=s.level.emberTrail?[...s.platforms.filter(q=>q.kind!=='stone'),...s.platforms.filter(q=>q.kind==='stone')]:s.platforms;
+ if(!outside&&!(s.level.grandRing&&circusFloor==='dark'))for(const q of terrainPlatforms)if(q.x+q.w>s.camera.x-100&&q.x<s.camera.x+view.width+100){
+  if(q.emberFallen)continue;
   if(q.bridge&&s.level.circusArrival&&q.x>=s.level.arena.right)drawCircusWalkway(c,q,art,s.level.circusArrival.doorX);
-  else terrain(c,q,world,art);
+  else if(s.level.emberTrail&&!s.fortInside){
+   drawForestTerrain(c,s,q,art);
+  }else terrain(c,s.level.emberTrail&&['stone','ember-bed'].includes(q.kind)?{...q,kind:'earth'}:q,s.fortInside?{...LEVELS[3].world,key:'ember-interior'}:world,art);
  }
+ if(s.level.emberTrail)drawEmberHazards(c,s,art,reduced);
  if(s.level.riverRoute)drawRiverPierWater(c,s,art,reduced);
+ // Playable boats and swimmers occupy the channel in front of the supports.
+ if(s.level.riverRoute)for(const e of s.enemies)if(e.type===9||diverInWater(e))drawAquaticEnemy(c,e,art,reduced);
  if(s.level.grandRing&&!outside)drawInfernoBarriers(c,s,art,reduced);
  drawPowerBackdrop(c,s,reduced);
  if(s.level.grandRing&&!outside)drawInfernoFloorLights(c,s,reduced);
@@ -251,7 +301,6 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   if(q.value===10){
    const pulse=reduced?1:1+Math.sin(s.time*2.5+q.x)*.06,size=52*pulse,img=art['treasure-star'];
    c.save();c.shadowColor='#ffe191';c.shadowBlur=reduced?10:18;c.drawImage(img,q.x-size/2,q.y-size/2,size,size);c.restore();
-   for(let i=0;i<3;i++){const a=i*Math.PI*2/3+(reduced?0:s.time*.8);star(c,q.x+Math.cos(a)*32,q.y+Math.sin(a)*32,3.5,'#fff4b1');}
    c.save();c.textAlign='center';c.font='bold 12px Georgia';c.lineWidth=3;c.strokeStyle='#56304b';c.strokeText('10',q.x,q.y+39);c.fillStyle='#fff1b6';c.fillText('10',q.x,q.y+39);c.restore();
   }else sprite(c,art['collectible-star'],reduced?0:Math.floor(s.time*7+q.x)%4,q.x,q.y,30,false,true);
  }
@@ -280,24 +329,26 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  }
  for(const cp of outside?[]:s.level.checkpoints||[s.level.checkpoint]){
   const active=s.checkpointAt&&cp[0]<=s.checkpointAt[0];c.save();if(!active)c.filter='saturate(.4) brightness(.8)';
-  sprite(c,art['victory-flag'],reduced||!active?0:Math.floor(s.time*7)%4,cp[0]+23,cp[1],96);c.restore();
+  drawCheckpoint(c,art['victory-flag'],reduced?0:Math.floor(s.time*7)%4,cp[0]+23,cp[1],96);c.restore();
  }
  for(const e of s.enemies){
-  if(e.type===6||e.type===7&&!e.flightActive)continue;
+  if(e.type===9||diverInWater(e)||e.type===6||e.type===7&&!e.flightActive)continue;
   if(Math.abs(e.x-s.camera.x-view.width/2)>view.width/2+200)continue;
   const {size,w,h}=enemyGeometry(e);
-  shadow(c,e.x,e.type===2?e.baseY+120:e.type===7?groundY(s.platforms,e.x):e.baseY,w*.55,e.type===7?.06*(e.landed?e.deadTime/ZEPPELIN_DUST_DURATION:1):.15);
-  c.save();if(e.hp<=0&&!e.landed)c.globalAlpha=Math.min(1,e.deadTime*3);
-  if(e.emerging>0)c.globalAlpha=Math.max(.2,1-e.emerging/.8);
-  if((e.flash>0&&(reduced||Math.floor(e.flash*25)%2===0))||([7,8].includes(e.type)?e.hp<=0&&(e.deathAge||0)<.12:e.deadTime>.47))c.filter='brightness(2.8) saturate(.15)';
+  shadow(c,e.x,e.type===2?e.baseY+120:e.type===7||e.type===13?groundY(s.level.route||s.platforms,e.x):e.baseY,w*.55,e.type===7?.06*(e.landed?e.deadTime/ZEPPELIN_DUST_DURATION:1):.15);
+  if(e.hp>0&&[10,11].includes(e.type)){energyGlow(c,true,e.x+e.dir*28,e.y-67,62,.28);if(e.type===11)energyGlow(c,true,e.x-e.dir*30,e.y-64,55,.22);}
+  c.save();if(e.hp<=0&&(!e.landed||e.type===13))c.globalAlpha=Math.min(1,e.deadTime*3);
+  if(e.emerging>0&&e.fortCrew){c.beginPath();c.rect(e.hatchX-500,e.y-150,518,160);c.clip();}
+  else if(e.emerging>0)c.globalAlpha=Math.max(.2,1-e.emerging/.8);
+  if((e.flash>0&&(reduced||Math.floor(e.flash*25)%2===0))||([7,8,10,11,13].includes(e.type)?e.hp<=0&&(e.deathAge||0)<.08:e.deadTime>.47))c.filter='brightness(2.8) saturate(.15)';
   const drawing=enemyDrawing(e,reduced);
-  if(e.type===7)drawZeppelin(c,e,art,reduced);else sprite(c,art[drawing.key],drawing.frame,e.x,e.y,size,e.dir>0);c.restore();
+  if(e.type===7)drawZeppelin(c,e,art,reduced);else if(e.type===8)drawAquaticEnemy(c,e,art,reduced);else sprite(c,art[drawing.key],drawing.frame,e.x,e.y,size,e.dir>0);c.restore();
   if(e.trap){const frame=reduced?0:Math.floor(s.time*7)%4,bw=Math.max(w*1.65,h*1.35),bh=h*1.35;c.save();c.globalAlpha=.65;c.drawImage(art['trap-bubble'],frame*256,0,256,256,e.x-bw/2,e.y-h/2-bh/2,bw,bh);c.restore();}
   if(e.snare>0){sprite(c,art['special-kiwi'],reduced?8:8+Math.floor(s.time*10)%4,e.x,e.y-8,42,false,true);}
  }
  const b=s.boss;
  if(s.index===1&&b.phase!=='sleep')drawOrgan(c,s,art,reduced);
- if(b.phase!=='sleep'&&(b.hp>0||b.defeat||(b.deadTime||0)<1.8)){
+ if(s.index!==5&&b.phase!=='sleep'&&(b.hp>0||b.defeat||(b.deadTime||0)<1.8)){
   if(!b.shattered&&s.index!==2)shadow(c,b.x,s.level.arena.y,s.index===0?85:40,.22,s.ringPerspective);
   c.save();if(b.hp<=0&&!b.defeat)c.globalAlpha=Math.max(0,1-(b.deadTime||0)/1.8);
   c.filter=bossHitFilter(b,reduced);
@@ -318,7 +369,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  // A leaping clown crosses in front of the basket instead of disappearing
  // behind the balloon artwork during the first half of its jump.
  for(const e of s.enemies)if(e.type===6){const drawing=enemyDrawing(e,reduced);sprite(c,art[drawing.key],drawing.frame,e.x,e.y,enemyGeometry(e).size,e.dir>0);}
- if(s.clear&&s.clear.age>.5){const q=s.clear,drop=Math.max(0,1-(q.age-.5)/.7)*22;sprite(c,art['victory-flag'],reduced?0:Math.floor(s.fxTime*7)%4,q.flagX,q.flagY-drop,125);}
+ if(s.clear&&s.clear.age>.5){const q=s.clear,drop=Math.max(0,1-(q.age-.5)/.7)*22;drawCheckpoint(c,art['victory-flag'],reduced?0:Math.floor(s.fxTime*7)%4,q.flagX,q.flagY-drop,125);}
  for(const q of s.shots){
   if(q.super){
    const angle=Math.atan2(q.vy,q.vx),size=230;
@@ -330,15 +381,18 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   }else{const size=(q.kind===3?64:q.kind===1?58:q.kind===0?44:34)*(q.scale||1),rotation=q.kind===1?q.age*15:q.kind===3?0:Math.atan2(q.vy,q.vx);sprite(c,art.magic,effectFrame(MAGIC_ROWS[q.kind],q.age,reduced),q.x,q.y,size,false,true,rotation);}
   if(q.captured?.length){
    for(const [i,h]of q.captured.entries()){const a=i*2.4+q.age*2,x=q.x+Math.cos(a)*q.r*.3,y=q.y+Math.sin(a)*q.r*.3;
-    if(h.kind==='juggle')sprite(c,art['juggler-balls'],h.color*4+Math.floor(q.age*8)%4,x,y,16,false,true);
+    if(h.extinguished)sprite(c,art['ember-captured'],h.kind==='ember-torch'?0:h.kind==='harlequin-card'?2:h.kind==='ember-mortar'?3:1,x,y,Math.min(38,q.r*1.25),false,true);
+    else if(h.water||h.barge||h.kind==='diver-hoop')drawBargeProjectile(c,{...h,x,y,floor:y+10,age:q.age,drawSize:h.kind==='barge-balloon'?25:23,vx:-1,vy:0},art,reduced);
+    else if(h.kind==='juggle')sprite(c,art['juggler-balls'],h.color*4+Math.floor(q.age*8)%4,x,y,16,false,true);
     else sprite(c,h.kind==='ball'||h.kind==='bomb'?art['circus-projectiles']:art.hostile,h.kind==='ball'?0:h.kind==='bomb'?2:effectFrame(HOSTILE_ROWS[h.kind]??0,q.age,reduced),x,y,17,false,true);
    }
   }
  }
  for(const q of s.hostile){
-  if(q.life<=0||q.rain==='wait')continue;
+  if(q.life<=0||q.rain==='wait'||q.kind==='ember-blast')continue;
+  if(q.ember){drawEmberProjectile(c,q,art,reduced);continue;}
   if(q.harlequin){drawHarlequinProjectile(c,q,art,reduced);continue;}
-  if(q.barge||q.kind==='diver-hoop'){drawBargeProjectile(c,q,art,reduced);continue;}
+  if(q.barge||q.water||q.kind==='diver-hoop'){drawBargeProjectile(c,q,art,reduced);continue;}
   if(q.kind==='red-pellet'){drawRedPellet(c,q);continue;}
   if(q.kind==='sound-wave'){drawOrganWave(c,q,art,reduced);continue;}
   if(q.organ&&q.kind==='note'&&q.voice==='red'){drawOrganRedNote(c,q,art,reduced);continue;}
@@ -373,6 +427,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   const q=s.shopTransition,progress=q.leaving?Math.max(0,1-q.age/.75):Math.max(0,Math.min(1,(q.age-q.walk-.4)/.6));
   c.globalAlpha*=1-progress*.85;c.translate(p.x+progress*12,p.y-progress*20);c.scale(1-progress*.12,1-progress*.12);hexy(c,art,pose,0,0,false);
  }else hexy(c,art,pose,p.x,p.y,p.dir<0);c.restore();
+ drawHexyHeat(c,s,art,reduced);
  if(s.overdrive>0&&!p.drinkCast)for(let i=0;i<6;i++){const a=i*Math.PI/3+(reduced?0:s.time*2);c.save();c.globalAlpha=.75;sprite(c,art['collectible-star'],0,p.x+Math.cos(a)*55,p.y-43+Math.sin(a)*46,i%2?13:20,false,true);c.restore();}
  if(!s.powerClash)superBeam(c,s,art,reduced);
  drawPowerWorld(c,s,art,reduced);
@@ -395,16 +450,17 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   const roll=buddyRollFrame(s);
   if(roll!==null){drawing=art['bunny-roll'];pose=roll;}
   else if(p.crouch){drawing=art['bunny-movement'];pose=4+(Math.abs(p.vx)>20?Math.floor(p.stride*8+i)%4:0);}
-  else if(p.ground===null){drawing=art['bunny-movement'];pose=frame===null?(p.vy< -200?1:p.vy<100?2:3):8+Math.min(3,Math.floor(frame/3));}
+  else if(pet.ground===null){drawing=art['bunny-movement'];pose=frame===null?(pet.vy< -200?1:pet.vy<100?2:3):8+Math.min(3,Math.floor(frame/3));}
   else if(p.land>0){drawing=art['bunny-movement'];pose=3;}
-  if(p.ground!==null)shadow(c,pet.x,pet.y,12,.13);
-  sprite(c,drawing,pose,pet.x,pet.y-2,40,p.dir<0);
+  if(pet.ground!==null)shadow(c,pet.x,pet.y,12,.13);
+  sprite(c,drawing,pose,pet.x,pet.y-2,40,pet.dir<0);
  }
- for(const q of s.effects)if(q.fireBurst)drawFireImpact(c,art,q,reduced);else if(q.cinematicSmoke)drawCinematicSmoke(c,art,q);else if(q.clashDust)drawClashDust(c,art,q);else if(q.harlequin)drawHarlequinFX(c,art,2,Math.min(3,Math.floor(q.age/.14)),q.x,q.y,q.size);else if(q.bargeSplash)drawHarborFX(c,art,2,Math.min(3,Math.floor(q.age/.12)),q.x,q.y,q.size,q.size*.72);else if(!q.defense)sprite(c,q.armor?art['armor-ricochet']:q.super?art['super-star']:q.spell!==undefined?art[specialArt(q.spell)]:q.dragon?art.dragon:art.impacts,(q.armor?0:q.super?8:q.spell!==undefined||q.dragon?4:q.row*4)+Math.min(3,Math.floor(q.age/.08)),q.x,q.y,q.size,false,true);
+ for(const q of s.effects)if(q.waterDrop||q.waterDetail!==undefined)drawWaterEffect(c,art,q,reduced);else if(q.fireBurst)drawFireImpact(c,art,q,reduced);else if(q.cinematicSmoke)drawCinematicSmoke(c,art,q);else if(q.clashDust)drawClashDust(c,art,q);else if(q.harlequin)drawHarlequinFX(c,art,2,Math.min(3,Math.floor(q.age/.14)),q.x,q.y,q.size);else if(q.bargeSplash)drawBargeSplash(c,art,q,reduced);else if(!q.defense)sprite(c,q.armor?art['armor-ricochet']:q.super?art['super-star']:q.spell!==undefined?art[specialArt(q.spell)]:q.dragon?art.dragon:art.impacts,(q.armor?0:q.super?8:q.spell!==undefined||q.dragon?4:q.row*4)+Math.min(3,Math.floor(q.age/.08)),q.x,q.y,q.size,false,true);
  for(const q of s.particles){c.globalAlpha=Math.min(1,q.life*3);sprite(c,art['collectible-star'],0,q.x,q.y,11,false,true);}c.globalAlpha=1;c.restore();
  c.restore();
  drawClashScreenFlash(c,s,reduced);
  drawInfernoForeground(c,s,art,reduced);
+ if(s.level.emberTrail)drawEmberForeground(c,s,art,reduced);
  if(b.phase!=='sleep'&&b.hp>0){
   if(b.phase==='intro'&&s.index<=3){c.save();c.globalAlpha=Math.min(1,Math.max(0,(b.arrival?.age||0)-1.8));c.textAlign='center';c.font='bold 22px sans-serif';c.lineWidth=5;c.strokeStyle='#382440';c.fillStyle='#fff0c7';c.strokeText(s.level.bossName[en?1:0],480,120);c.fillText(s.level.bossName[en?1:0],480,120);c.restore();}
   else if(b.phase==='intro'){round(c,180,150,600,120,22,'#382440ed','#f2c187');c.textAlign='center';c.fillStyle='#ffdd97';c.font='bold 19px sans-serif';c.fillText(en?'THE NEXT ACT…':'EL SIGUIENTE NÚMERO…',480,186);c.fillStyle='#fff0c7';c.font='bold 28px sans-serif';c.fillText(s.level.bossName[en?1:0],480,227);}
@@ -417,5 +473,5 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  drawClashPortraits(c,s,art,reduced);
  c.strokeStyle='#fff0c133';c.lineWidth=2;c.strokeRect(6,6,W-12,H-12);
  if(s.shopTransition?.alpha>0){c.save();c.globalAlpha=s.shopTransition.alpha;c.fillStyle='#000';c.fillRect(0,0,W,H);c.restore();}
- drawCircusTransition(c,s);
+ drawCircusTransition(c,s);drawFortFade(c,s,en);
 }

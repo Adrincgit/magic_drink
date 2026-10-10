@@ -1,3 +1,4 @@
+import {hitReactionPose} from '../../engine/adventureHitReactions';
 import originalAtlas from './hexyAtlas';
 import combatAtlas from './hexyCombatAtlas';
 import movementAtlas from './hexyMovementAtlas';
@@ -15,11 +16,12 @@ const atlas={...originalAtlas,...combatAtlas,...movementAtlas,...handAtlas,...ai
 atlas['drink-original']=Array.from({length:4},()=>({tip:[236,250]}));
 atlas['clash-fall']=Array.from({length:8},()=>({tip:[220,215]}));
 atlas['super-cast']=superCastAtlas;
+for(const [sheet,count]of [['element-hits',12],['knockdown',8],['fire-hit',4],['heat',4]])atlas[sheet]=Array.from({length:count},()=>({tip:[235,245]}));
 for(const sheet of ['shop-enter','shop-exit'])atlas[sheet]=Array.from({length:8},()=>({tip:[236,250]}));
 
 export const HEXY_SHEETS=['air-aim','ground-aim','run','jump','crouch-walk','roll','cast','heavy','reactions','run-fire','run-diagonal-up','stand-fire','air-dash','guard-pose','somersault','glide','air-heavy','aim-down-diagonal','aim-down','crouch-heavy','super-charge','super-release','celebrate','flag-plant','drink-original','air-super','air-super-release','shop-enter','shop-exit'];
 export const HEXY_SIZE=116;
-HEXY_SHEETS.push('clash-fall','super-cast');
+HEXY_SHEETS.push('clash-fall','super-cast','element-hits','knockdown','fire-hit','heat');
 export const HEXY_RUN_FRAMES=atlas.run.length;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
@@ -38,6 +40,7 @@ export function hexyPose(s){
  const steadyFrame=cast?[1,2,3,0][clamp(Math.floor((.24-p.cast)/.06),0,3)]:0;
  if(s.done)return s.won?{sheet:'celebrate',frame:Math.floor(s.fxTime*6)%4}:{sheet:'reactions',frame:5};
  if(p.drinkCast>0)return{sheet:'drink-original',frame:clamp(Math.floor((.7-p.drinkCast)/.175),0,3)};
+ const hit=hitReactionPose(p);if(hit)return hit;
  if(p.dash>0)return {sheet:p.dashAir?'air-dash':'roll',frame:clamp(Math.floor((1-p.dash/p.dashDuration)*8),0,7)};
  if(p.hitReact>0)return {sheet:'reactions',frame:4+clamp(Math.floor((.32-p.hitReact)*12.5),0,3)};
  if(p.guarding)return {sheet:'guard-pose',frame:p.guardHit>0?4:2+Math.floor(s.time*5)%2};
@@ -76,6 +79,7 @@ export function hexyPose(s){
  if(p.land>0&&!cast)return {sheet:'jump',frame:p.land>.075?6:7};
  if(Math.abs(p.vx)>20)return {sheet:cast||p.firing?'run-fire':'run',frame:Math.floor(p.stride*HEXY_RUN_FRAMES)%HEXY_RUN_FRAMES};
  if(cast||p.firing)return {sheet:'stand-fire',frame:steadyFrame};
+ if(p.heatIdle>.65)return {sheet:'heat',frame:Math.floor((p.heatIdle-.65)/.55)%4};
  const phase=s.time%4;
  return {sheet:'reactions',frame:phase>3.7&&phase<3.82?2:phase<1.4?0:phase<2.6?1:3};
 }

@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-10",
+  "generator": "Built-in ImageGen",
+  "jobs": [
+    {
+      "name": "forest-panorama-pair",
+      "prompt": "Use case: illustration-story. Game background asset, painterly hand drawn 2D anime storybook forest matching the provided background reference. Create ONE atlas with EXACTLY TWO equally sized ultra-wide landscape panels stacked vertically, no gap, no text. Each panel is a continuous side-scrolling forest INTERIOR viewed from side-on eye level, many overlapping large trunks and dense foliage filling the entire width, forest ground in bottom 15 percent, no playable foreground path, no mountains, no valley vista, no cliffs, no tents, no buildings, no characters. Top half: lush healthy magical forest, massive oaks and ferns, full deep green and teal canopies overhead, gentle warm daylight glimpses through leaves, sheltered and thick vegetation, multiple depths of trees. Bottom half: the EXACT SAME TREE TRUNK POSITIONS AND FRAMING transformed to a devastated black charred forest, bare black trees and ash, strong orange fire behind the silhouettes, dense grey and brown smoke and low smoky fog obscuring farther trunks. Flat readable painted game scenery, ink-edged trees with restrained textured shadows, avoid realistic 3D. Both panels must have matching camera height and root horizon, so they can blend gradually. Entire image opaque. Output very wide image with two panoramic rows, each about 3:1 width to height. Reference is STYLE only: replace its valley with enclosed forest.",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/maps/ember-trail/background.webp"
+      ],
+      "transparent": false,
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-6bf208ac-03bb-4fe6-861a-a1b661424292.png",
+      "outputs": [
+        "public/arcade/maps/ember-trail/canopy-healthy.webp",
+        "public/arcade/maps/ember-trail/canopy-burned.webp"
+      ]
+    },
+    {
+      "name": "falling-tree-motion",
+      "prompt": "Use case: illustration-story. Transparent 2D game sprite animation atlas, 4 columns by 4 rows, 16 equal SQUARE cells. Reference image is style reference only. A large charred oak tree with sparse broken branches, orange cracks, and living painted flames. Entire tree and EVERY fragment fits inside each cell with transparent gutters. Side view falling toward RIGHT. Same staging in all cells: root pivot at 15 percent cell width, 87 percent cell height; standing tree crown reaches 12 percent height; fully fallen trunk ends at 88 percent width at 87 percent height. Do not recenter poses. Frames row-major: 0 upright smoking tree; 1 bark splitting with orange crack; 2 trunk flexing and twigs snapping; 3 large broken notch leaning right slightly; 4 falling at 15 degrees; 5 at 25 degrees; 6 at 38 degrees; 7 at 52 degrees; 8 at 66 degrees; 9 at 78 degrees; 10 trunk contacting ground with splinters; 11 major impact with ash cloud spreading along ground; 12 branches bouncing and breaking, flame tongues whipping; 13 smaller rebound and settling ash; 14 low embers on fallen broken trunk; 15 settled fallen burned trunk with small flickering flames. This is HAND DRAWN FRAME BY FRAME animation: branches bend, crack and break, silhouette deforms, flames change dramatically in every frame, wood fragments and ash appear at impact. Not a rigid repeated rotated tree. Strong coherent stylized 2D painted/ink aesthetic, restrained shadows, no 3D, no photorealism, no glow spilling into adjacent cells, no labels, no ground rectangle. Genuine transparent background.",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/maps/ember-trail/tree-clean-3.webp"
+      ],
+      "transparent": true,
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-609e9f14-15c3-4b20-96ed-537642a01147.png",
+      "outputs": [
+        "public/arcade/maps/ember-trail/falling-tree-frames.webp"
+      ]
+    },
+    {
+      "name": "branch-tree",
+      "prompt": "Use case: illustration-story. One isolated large old forest tree for a hand painted 2D side-scrolling platform game, on genuinely transparent background, square canvas. Strong organic dark brown trunk with cracked bark and broad grounded roots, some muted green and dry ochre foliage in the upper crown. A climbable tree with THREE clearly readable thick horizontal branches, each has a near-level top surface suitable for a small character standing. Root anchor at x50 percent y96 percent. Lowest branch extends LEFT from trunk x50 to x12 percent at y75 percent. Middle branch extends RIGHT from trunk x50 to x91 percent at y56 percent. Highest branch extends LEFT from x50 to x14 percent at y37 percent. Each branch thick at the trunk and naturally tapering at far tip but has at least 30 percent canvas width flat-ish upper landing area. Entire tree from crown at y3 percent to roots y96 percent, no clipping, no lanterns, no faces, no character, no fire. Natural silhouette with a few smaller twigs and sparse leaves, clear solid landing branches, coherent detailed 2D storybook anime environment painting with restrained shadows, no 3D. Reference image is only bark and drawing style; make this tree living and dry rather than entirely burned.",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/maps/ember-trail/tree-clean-3.webp"
+      ],
+      "transparent": true,
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-43890427-e010-4603-843f-cc6c2e97fc54.png",
+      "outputs": [
+        "public/arcade/maps/ember-trail/branch-tree.webp"
+      ]
+    }
+  ]
+}

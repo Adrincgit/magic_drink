@@ -41,7 +41,32 @@
 
 .presentation{position:absolute;inset:0;width:100%;height:100%;z-index:14;display:flex;flex-direction:column;justify-content:center;align-items:center;border:0;background:radial-gradient(ellipse at center,#67416e,#211731 70%);color:#fff0bc;cursor:pointer}.presentation img{width:15%;filter:drop-shadow(0 0 25px #e8ac6c);animation:float 2s ease-in-out infinite}.presentation b{font:400 5cqw BakeSoda,serif}.presentation span{font:400 1.8cqw BakeSoda,serif}.presentation small{position:absolute;bottom:8%;font:600 1cqw Inter,sans-serif;opacity:.7}
 .chapterCard{position:absolute;inset:0;z-index:10;background:#241c34;overflow:hidden;display:grid;place-items:center;color:#fff0bd;text-align:center}.chapterCard>div{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.5;animation:arrive 1.2s both}.chapterCard section{position:relative;width:85%;padding:2cqw;background:linear-gradient(100deg,transparent,#392642ed 18% 82%,transparent);transform:rotate(-3deg);animation:arrive .6s both}.chapterCard b{display:block;font:400 7cqw BakeSoda,serif;color:#ffd877;text-shadow:.2cqw .25cqw #85587b}.chapterCard h2{font:400 3.6cqw BakeSoda,serif;margin:0 0 1cqw}.chapterCard span,.chapterCard small{font:700 1cqw Inter,sans-serif;letter-spacing:.15em}
-.chapterPicker,.tutorial{position:absolute;inset:0;z-index:12;display:grid;align-content:center;justify-items:center;background:#20152deb;color:#fff0c4}.chapterPicker h2,.tutorial h2{font:400 3cqw BakeSoda,serif;margin:0 0 1.5cqw}.chapterPicker>div{display:flex;gap:1cqw;width:91%}.chapterPicker>div button{width:20%;padding:1cqw .5cqw;background:url('/arcade/shop/ui/price-tag.webp') center/100% 100%;border:0;color:#452844;cursor:pointer}.chapterPicker img{width:95%;aspect-ratio:16/9;object-fit:cover;border-radius:1cqw}.chapterPicker b{font:400 1.3cqw BakeSoda,serif;display:block;padding:.7cqw}.chapterPicker small{font:700 .8cqw Inter,sans-serif;display:block}.chapterPicker label{margin:1.5cqw;font:600 1cqw Inter,sans-serif}.chapterPicker input{margin-right:.5cqw;accent-color:#e9b775}.chapterPicker [aria-pressed=true]{filter:drop-shadow(0 0 .5cqw #ffe67a)}
+.chapterPicker,.tutorial{position:absolute;inset:0;z-index:12;display:grid;align-content:center;justify-items:center;background:#20152deb;color:#fff0c4}
+.chapterPicker h2,.tutorial h2{font:400 3cqw BakeSoda,serif;margin:0 0 2.5cqw}
+.chapterPicker h2 span{font:inherit}
+.invertedQuestion{display:inline-block;transform:rotate(180deg);margin-right:.12em}
+.chapterGrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1.1cqw;width:94%}
+.chapterGrid>button{display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:.45cqw .45cqw .8cqw;border:.12cqw solid #b58a56;border-radius:.85cqw;background:#e8cfa0 url('/arcade/shop/ui/paper.webp') center/100% 100%;color:#452844;cursor:pointer;box-shadow:0 .35cqw .65cqw #100d2299;transition:border-color .15s,box-shadow .15s}
+.chapterPreview{position:relative;overflow:hidden;aspect-ratio:16/9;border-radius:.5cqw;background:#242b42}
+.chapterPreview img{display:block;width:100%;height:100%;object-fit:cover}
+.chapterPreview span{position:absolute;left:.4cqw;bottom:.4cqw;padding:.2cqw .55cqw;border-radius:.3cqw;background:#281c3ce8;color:#ffe8a8;font:400 1.15cqw BakeSoda,serif}
+.chapterGrid b{display:flex;align-items:center;justify-content:center;min-height:4.8cqw;padding:.6cqw .25cqw;font:400 1.35cqw/1.25 BakeSoda,serif}
+.chapterGrid small{align-self:center;margin-top:auto;padding:.38cqw .85cqw;border-top:1px solid #97674666;font:400 1cqw/1.2 BakeSoda,serif;color:#634462}
+.chapterGrid [data-status=cleared] small{color:#375849}
+.chapterPicker label{display:flex;align-items:center;gap:.5cqw;margin:2cqw;font:600 1.05cqw Inter,sans-serif}
+.chapterPicker input{accent-color:#e9b775;width:1.15cqw;height:1.15cqw}
+.chapterGrid [aria-pressed=true],.chapterGrid>button:hover{border-color:#ffe8a4;box-shadow:0 0 0 .15cqw #e5be71,0 0 1.4cqw #e5be7166}
+@container(max-width:650px){
+ .chapterPicker h2{font-size:4cqw;margin-bottom:1.5cqw}
+ .chapterGrid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:1cqw;gap:2cqw;scrollbar-width:thin;scrollbar-color:#c29a67 #32233e}
+ .chapterGrid>button{flex:0 0 34cqw;scroll-snap-align:center;padding:.7cqw .7cqw 1cqw}
+ .chapterGrid b{font-size:2.5cqw;min-height:8cqw;line-height:1.2}
+ .chapterGrid small{font-size:2cqw;padding:.6cqw 1.5cqw}
+ .chapterPreview span{font-size:2.2cqw;padding:.4cqw .8cqw}
+ .chapterPicker label{font-size:2.1cqw;margin:1.5cqw}
+ .chapterPicker input{width:2.5cqw;height:2.5cqw}
+ .chapterPicker>button{font-size:2.8cqw;padding:1.5cqw 3cqw;min-height:6cqw}
+}
 .tutorial section{width:86%;padding:3cqw 4cqw;background:url('/arcade/shop/ui/paper.webp') center/100% 100%;color:#48273f}.tutorial h2{text-align:center}.bindings{display:grid;grid-template-columns:1fr 1fr;gap:1cqw 2cqw}.bindings>div{display:flex;align-items:center;gap:1cqw;font:600 1.1cqw/1.35 Inter,sans-serif}.bindings b{flex:none;text-align:center;min-width:9cqw;padding:.6cqw;background:url('/arcade/shop/ui/button-plum.webp') center/100% 100%;color:#fff0bd;font:400 1.2cqw BakeSoda,serif}.bindings small{display:block;font:600 .9cqw Inter,sans-serif;color:#eec38e}.tutorial p{font:600 1cqw/1.5 Inter,sans-serif;margin:1.5cqw 0}.tutorial button{display:block;margin:auto}
 @keyframes float{50%{transform:translateY(-.6cqw) rotate(1deg)}}@keyframes clouds{to{transform:translateX(-12%)}}@keyframes shine{50%{opacity:.4}}@keyframes arrive{from{opacity:0;translate:15% 0}to{translate:0 0}}
 @media(prefers-reduced-motion:reduce){.title *,.presentation *,.chapterCard *{animation:none!important}}

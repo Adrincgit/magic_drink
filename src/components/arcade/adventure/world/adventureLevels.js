@@ -4,6 +4,7 @@ import {shapeMeadowRoute} from './adventureTerrain';
 import {shapeRiverRoute} from './adventureRiverRoute';
 import {shapeHarborRoute} from './adventureHarborRoute';
 import {shapeGrandRing} from './adventureGrandRing';
+import {makeEmberTrail} from './adventureEmberTrail';
 const p=(x,y,w,kind='stone',extra={})=>({x,y,w,h:24,kind,...extra});
 export const LEVELS=[
  {id:0,name:['El puente de las luces','The bridge of lights'],subtitle:['Rescata al coro antes de que zarpe la feria.','Rescue the chorus before the fair sets sail.'],power:'Dragon Grape',tip:['Tu magia atraviesa enemigos. Mantén pulsado atacar.','Your magic pierces enemies. Hold attack.'],color:'#eeaa66',sky:['#7963a0','#f7b6ab'],background:'/arcade/maps/waterfront/background.webp',width:3100,bossName:['Don Cascabel','Mr. Jingle'],bossType:0,
@@ -95,3 +96,4 @@ Object.assign(LEVELS[1],{name:['El río del organillo','The barrel-organ river']
 shapeRiverRoute(LEVELS[1]);
 shapeHarborRoute(LEVELS[2]);
 shapeGrandRing(LEVELS[3]);
+LEVELS.push(makeEmberTrail(WORLDS[5]));

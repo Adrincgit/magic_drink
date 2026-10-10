@@ -20,7 +20,7 @@ export function updateOutposts(s,dt){
   if(active>=3){q.spawnIn=Math.max(.9,q.spawnIn);continue;}
   q.spawnIn-=dt;
   if(q.spawnIn<=0){
-   const type=q.spawned%3===2?3:0,e=makeEnemy(q.x,q.y,type,q.spawned);
+   const type=q.spawned%3===2?(s.level.emberTrail?11:3):0,e=makeEnemy(q.x,q.y,type,q.spawned);
    e.dir=s.player.x<q.x?-1:1;e.outpost=q.id;e.emerging=.8;e.timer=1.5;e.phase='emerge';
    s.enemies.push(e);q.spawned++;q.spawnIn=s.gentle?5.5:4.2;
   }

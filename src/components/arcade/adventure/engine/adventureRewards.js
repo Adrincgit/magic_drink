@@ -3,7 +3,7 @@ export const SUPER_RECHARGE=80;
 export const STAR_VALUE=1;
 export function collectAdventureStar(s,star){
  if(star.taken||star.hidden)return false;
- star.taken=true;if(star.id)(s.pendingStars??=[]).push(star.id);s.starMoney=(s.starMoney||0)+(star.value||STAR_VALUE);s.starPulse=.55;s.events.push('coin');
+ star.taken=true;if(star.id)(s.pendingStars??=[]).push(star.id);s.starMoney=(s.starMoney||0)+(star.value||STAR_VALUE);s.starPulse=.55;s.events.push(star.value===10?'treasureCoin':'coin');
  return true;
 }
 export function tickRewards(s,dt){

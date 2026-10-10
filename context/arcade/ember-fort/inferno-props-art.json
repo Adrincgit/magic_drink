@@ -1,0 +1,26 @@
+{
+  "jobs": {
+    "outcrops": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-c1f5126f-9ba8-4ba4-97a4-04092c3f641c.png",
+      "prompt": "Create a transparent-background game environment prop sprite sheet, FOUR separate natural low raised rock-and-earth outcrops in one horizontal row, each its own wide cell, overall 3:1 wide image. Full painted 2D anime fairy-tale videogame style, bold subtle ink outlines, warm watercolor texture matching a dry forest at sunset. NOT 3D, not photoreal. Each outcrop is a horizontal pile of weathered rocks, packed dirt and one fallen thick dead log forming a broad gently irregular FLAT WALKABLE TOP along its upper third. Height about half its width. The mound descends into organic rounded boulders at both sides and loose irregular pebbles at its bottom. No square or vertical cropped sides, no rectangular cutaway, no dangling roots. Each must be a complete isolated prop with TRANSPARENT gaps, 15 percent clear padding on every side of EVERY CELL. Do not overlap cells. Variants left to right: 1 tawny dry grass dirt and grey boulders; 2 burnt blackened version with charred twigs and tiny embers; 3 dry rock ledge with fallen horizontal log and sparse grass; 4 same charred. Empty transparent background, no landscape, no text, no ground extending beyond mound. Give all four identical bounding dimensions. Their top walkable edge must be naturally shallow and wide, without tall bushes.",
+      "outputs": [
+        "public/arcade/maps/ember-trail/outcrop-0.webp",
+        "public/arcade/maps/ember-trail/outcrop-1.webp",
+        "public/arcade/maps/ember-trail/outcrop-2.webp",
+        "public/arcade/maps/ember-trail/outcrop-3.webp"
+      ]
+    },
+    "clean-trees": {
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-f3214dd4-a7e7-4e87-be40-5321cbe1b544.png",
+      "prompt": "Transparent background environment sprite sheet. SIX COMPLETE ISOLATED trees, exactly THREE COLUMNS and TWO ROWS, six equal square cells, overall canvas 3:2. In EACH CELL the entire tree including every leaf, twig and root must fit inside CENTRAL 65% WIDTH AND 80% HEIGHT. Large clear transparent gutters, AT LEAST 17% empty space to the left and right of each tree, 10% above and below. No branches overlap neighboring cells. NO clipped branches, no neighboring leaves at cell edges, no backdrop or gradients. Style: beautiful hand-painted 2D anime cartoon forest game props with outlined branches, restrained watercolor shading, flat illustrated foliage clusters, not 3D photoreal render. Warm autumn twilight colors. TOP ROW: col1 compact mature oak with a rounded canopy and gnarled trunk; col2 mature slender golden birch; col3 mature dark green pine. BOTTOM ROW: the SAME corresponding three trees burned, blackened broken branches, scorched roots, tiny orange seams, mostly bare branches with a few charred foliage clumps, NO active flames. Full tree feet rooted at same baseline, all complete. No lamps, no signs, no characters. Err on smaller trees and wider empty gutters rather than any clipping.",
+      "outputs": [
+        "public/arcade/maps/ember-trail/tree-clean-0.webp",
+        "public/arcade/maps/ember-trail/tree-clean-1.webp",
+        "public/arcade/maps/ember-trail/tree-clean-2.webp",
+        "public/arcade/maps/ember-trail/tree-clean-3.webp",
+        "public/arcade/maps/ember-trail/tree-clean-4.webp",
+        "public/arcade/maps/ember-trail/tree-clean-5.webp"
+      ]
+    }
+  }
+}

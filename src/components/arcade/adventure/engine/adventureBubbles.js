@@ -1,14 +1,21 @@
+import {fortTargets,fortPartHit} from '../actors/bosses/adventureEmberFort';
+import {bargeTargets} from '../actors/bosses/adventureBarge';
+import {bargePartHit,jamBargePressure} from '../actors/bosses/bargeSystems';
 import {bossHitFeedback} from '../actors/bosses/bossFeedback';
 import {organTargets} from '../actors/bosses/adventureOrganFortress';
 // Held bullets cannot hurt Hexy or run their old bomb/floor behaviour.
+export const largeBubble=q=>!!q.heavy||(q.scale||1)>=1.3;
+export const canTrapEnemy=(q,e)=>![5,7,9,12].includes(e.type);
 export function captureInBubble(q,h){
  if(q.kind!==3||q.life<=0||h.life<=0)return false;
  q.captured||=[];if(q.captured.length>=(q.heavy?5:3))return false;
- q.captured.push({kind:h.kind,color:h.color||0});h.life=0;
+ if(['ember-blast','barge-jet','ember-breath','fort-breath','harlequin-groundfire','harlequin-pyre','harlequin-cloth','sound-wave'].includes(h.kind))return false;
+ if(!largeBubble(q)&&((h.r||0)>=24||(h.drawSize||0)>=90||['ember-mortar','harlequin-ember','barge-shell'].includes(h.kind)))return false;
+ q.captured.push({kind:h.kind,color:h.color||0,water:!!h.water,barge:!!h.barge,extinguished:!!h.ember||h.element==='fire'||!!h.harlequin});h.life=0;
  if(q.captured.length===1){q.vx*=.12;q.vy=-12;q.life=Math.min(q.life,.85);}
  return true;
 }
-export function trapEnemy(e,seconds){e.trap=Math.max(e.trap||0,seconds);e.trapX=e.x;e.trapY=e.y;}
+export function trapEnemy(e,seconds){if(!canTrapEnemy(null,e))return;e.trap=Math.max(e.trap||0,seconds);e.trapX=e.x;e.trapY=e.y;}
 export function burstBubble(s,q,defeat){
  if(q.popped)return;q.popped=true;q.life=0;
  if(q.armorBlocked)return;
@@ -17,8 +24,8 @@ export function burstBubble(s,q,defeat){
  if(!damage)return;
  for(const e of s.enemies)if(e.hp>0&&Math.hypot(e.x-q.x,e.y-38-q.y)<radius){e.hp-=damage;e.flash=.2;if(e.hp<=0)defeat(s,e);}
  // The burst obeys the same boss vulnerability rules as ordinary Bubble Tape.
- const b=s.boss,bodyHit=s.index===1?organTargets(s).some(t=>Math.hypot(q.x-Math.max(t.x,Math.min(t.x+t.w,q.x)),q.y-Math.max(t.y,Math.min(t.y+t.h,q.y)))<radius):Math.hypot(b.x-q.x,b.y-55-q.y)<radius+55;
- if(b.hp>0&&b.vulnerable&&bodyHit){b.trailHp=Math.max(b.trailHp||b.hp,b.hp);b.hp=Math.max(0,b.hp-damage);bossHitFeedback(s,q.heavy);}
+ const b=s.boss,bargeTarget=[2,5].includes(s.index)?(s.index===5?fortTargets(s):bargeTargets(s)).find(t=>Math.hypot(q.x-Math.max(t.x,Math.min(t.x+t.w,q.x)),q.y-Math.max(t.y,Math.min(t.y+t.h,q.y)))<radius):null,bodyHit=[2,5].includes(s.index)?!!bargeTarget:s.index===1?organTargets(s).some(t=>Math.hypot(q.x-Math.max(t.x,Math.min(t.x+t.w,q.x)),q.y-Math.max(t.y,Math.min(t.y+t.h,q.y)))<radius):Math.hypot(b.x-q.x,b.y-55-q.y)<radius+55;
+ if(b.hp>0&&b.vulnerable&&bodyHit){b.trailHp=Math.max(b.trailHp||b.hp,b.hp);b.hp=Math.max(0,b.hp-(s.index===5?fortPartHit(s,bargeTarget.part,damage):damage));if(s.index===2&&bargeTarget){jamBargePressure(s,q);bargePartHit(s,bargeTarget.part,damage);}bossHitFeedback(s,q.heavy);}
 }
 export function burstTrappedEnemy(s,e,defeat){
  if(!e.trap)return;e.trap=0;

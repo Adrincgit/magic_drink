@@ -11,7 +11,7 @@ export const ZEPPELIN_DUST_DURATION=.9;
 // Restore the source cells' vertical ratio after packing them into the atlas.
 export const ZEPPELIN_CELL_ASPECT=458/466;
 export const ZEPPELIN_HEIGHT=ZEPPELIN_WIDTH*805/1512*ZEPPELIN_CELL_ASPECT/(384/512);
-export const zeppelinMuzzle=e=>({x:e.x+ZEPPELIN_WIDTH*.39,y:e.y-ZEPPELIN_HEIGHT*.261});
+export const zeppelinMuzzle=e=>({x:e.x+(e.dir||1)*ZEPPELIN_WIDTH*.39,y:e.y-ZEPPELIN_HEIGHT*.261});
 
 export function zeppelinFrame(e,reduced=false){
  if(e.hp<=0){const age=e.deathAge||0;return age<.14?4:age<.55?5:age<.78?6:7;}
@@ -20,7 +20,7 @@ export function zeppelinFrame(e,reduced=false){
 }
 export function beginZeppelinDefeat(s,e){
  releaseCarriedBunny(e);
- e.deadTime=2.4;e.deathAge=0;e.phase='fall';e.vy=-95;e.deathVx=105;e.action=0;
+ e.deadTime=2.4;e.deathAge=0;e.phase='fall';e.vy=-95;e.deathVx=105*(e.dir||1);e.action=0;
  s.events.push('zeppelinBreak');
 }
 export function stepZeppelinDefeat(s,e,dt){
@@ -44,9 +44,16 @@ export function updateZeppelin(s,e,dt,shoot){
   if(Math.abs(p.x-e.home)>600)return;
   e.flightActive=true;e.x=s.camera.x-140;e.timer=.95;e.clock=0;
  }
- if(!e.trap){e.x+=ZEPPELIN_SPEED*dt;e.y=e.baseY+Math.sin(e.clock*2.8)*5;}
- const q=zeppelinMuzzle(e),ahead=p.x>q.x+20;
- e.dir=1;e.phase=e.timer<.42&&ahead?'windup':'flight';
+ if(!e.patrol)e.dir=1;
+ if(!e.trap){
+  e.x+=(e.patrol?.speed||ZEPPELIN_SPEED)*e.dir*dt;e.y=e.baseY+Math.sin(e.clock*2.8)*5;
+  if(e.patrol){
+   if(e.x<e.patrol.left&&e.dir<0){e.x=e.patrol.left;e.dir=1;}
+   if(e.x>e.patrol.right&&e.dir>0){e.x=e.patrol.right;e.dir=-1;}
+  }
+ }
+ const q=zeppelinMuzzle(e),ahead=(p.x-q.x)*e.dir>20;
+ e.phase=e.timer<.42&&ahead?'windup':'flight';
  const visible=e.x>s.camera.x+35&&e.x<s.camera.x+width-45;
  if(e.timer<=0&&visible&&ahead&&Math.abs(e.x-p.x)<620){
   const angle=Math.atan2(p.y-30-q.y,p.x-q.x);
@@ -55,5 +62,5 @@ export function updateZeppelin(s,e,dt,shoot){
  }
  // A crossing is one opportunity: it escapes past the visible encounter,
  // rather than remaining far ahead until Hexy catches it later in the route.
- if(e.x>s.camera.x+width+180||e.x>s.level.width+250){loseCarriedBunny(e);e.escaped=true;e.hp=0;e.deadTime=0;}
+ if(!e.patrol&&(e.x>s.camera.x+width+180||e.x>s.level.width+250)){loseCarriedBunny(e);e.escaped=true;e.hp=0;e.deadTime=0;}
 }

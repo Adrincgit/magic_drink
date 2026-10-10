@@ -3,7 +3,7 @@ import {collectStartingDrink,fixtureStartingDrink} from './arcade-input.helpers'
 import {test,expect} from '@playwright/test';
 test.use({hasTouch:true});
 import {createAdventure,stepAdventure} from '../src/components/arcade/adventure/engine/adventureModel';
-import {makeEnemy,updateEnemies} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
+import {makeEnemy,updateEnemies,bossTargets} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
 import {SPECIALS,specialShots} from '../src/components/arcade/adventure/engine/adventureMagic';
 const tick=(s,keys={},n=1)=>{for(let i=0;i<n;i++)stepAdventure(s,keys,1/120);};
 function empty(kind){const s=createAdventure();s.enemies=[];s.pickups=[];s.supplies=[];s.stars=[];s.cages=[];s.weapon=kind;return s;}
@@ -56,7 +56,7 @@ test('new spells respect boss invulnerability and have bounded damage',()=>{
  for(const kind of [1,2,3,4])for(const vulnerable of [false,true]){
   const s=createAdventure(1),b=s.boss;s.enemies=[];s.pickups=[];s.supplies=[];s.cages=[];s.weapon=kind;s.player.x=b.x-95;s.player.y=b.y;s.player.ground=9;s.player.hurt=10;
   Object.assign(b,{phase:vulnerable?'recover':'intro',timer:5,vulnerable});
-  s.shots=specialShots(kind,{x:b.x-20,y:b.y-55},{x:1,y:0});const hp=b.hp;tick(s,{},180);
+  const target=bossTargets(s)[0];s.shots=specialShots(kind,{x:target.x+20,y:target.y+target.h*.5},{x:1,y:0});const hp=b.hp;tick(s,{},180);
   expect(hp-b.hp).toBeLessThanOrEqual(kind===1?16:kind===4?20:kind===3?18:12);
   if(vulnerable)expect(b.hp,`spell ${kind} must damage an exposed boss`).toBeLessThan(hp);else expect(b.hp,`spell ${kind} must respect invulnerability`).toBe(hp);
  }
@@ -84,6 +84,6 @@ test('cancelling a touch after activation keeps the paid super running without a
  const canvas=page.locator('[data-adventure-canvas]');await collectStartingDrink(page,3);
  const control=page.getByRole('button',{name:'Super attack',exact:true});await control.scrollIntoViewIfNeeded();const r=await control.boundingBox(),session=await context.newCDPSession(page);
  await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:r.x+r.width/2,y:r.y+r.height/2,id:1}]});await expect(control).toHaveAttribute('data-charged','true');
- await session.send('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});await expect(canvas).toHaveAttribute('data-pose',/super-release:/);
+ await session.send('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});await expect(canvas).toHaveAttribute('data-pose',/super-cast:(9|10|11)/);
  await expect(page.getByRole('meter',{name:'Magic energy'})).toHaveAttribute('value','10');await expect(canvas).toHaveAttribute('data-super-active','false',{timeout:6000});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await context.close();
 });
