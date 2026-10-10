@@ -1,13 +1,14 @@
 import {fortWindows,fortWindowFrame} from '../actors/bosses/adventureFortWindows';
 import {groundY} from '../world/adventureTerrain';
 import {RIVER_TREE_ART} from '../world/riverTreeArt';
-import {emberVistaAt,emberForestPlacement,emberValleyPlacement,emberSceneryTrees} from './emberComposition';
-import {forestRootCover} from './emberSurfaceCanvas';
+import {emberForestEdges,woodlandCoverage,emberForestPlacement,emberValleyPlacement,emberSceneryTrees} from './emberComposition';
+import {paintWoodlandBush} from './emberWoodlandLayers';
 import {fortRig,fortSystems} from '../actors/bosses/adventureEmberFort';
 import {emberBurnAt,EMBER_BRANCH_ART} from '../world/adventureEmberTrail';
 import {painted,paintedParticle,energyGlow} from './paintedDuelCanvas';
 const JET_TIPS=[[36,142],[23,141],[17,140],[14,141],[20,136],[21,136],[17,137],[15,137],[21,134],[21,135],[17,135],[16,135],[20,132],[21,133],[19,132],[16,133]];
 const forestBands=new WeakMap();
+let forestScreen;
 function forestBand(img){
  let band=forestBands.get(img);if(band)return band;
  band=document.createElement('canvas');band.width=img.width;band.height=img.height;const g=band.getContext('2d');g.drawImage(img,0,0);
@@ -19,17 +20,21 @@ export function drawEmberBackdrop(c,s,art){
  if(s.fortInside){const img=art['ember-interior'],p=emberBackdropPlacement(s,img);c.drawImage(img,p.x,p.y,p.w,p.h);return;}
  const valley=emberValleyPlacement(s,art.world5),p=emberForestPlacement(s,art['forest-canopy-healthy']);
  c.drawImage(art.world5,valley.x,valley.y,valley.w,valley.h);
- const burn=emberBurnAt(s.player.x),vista=emberVistaAt(s.player.x);
- c.save();
- // Distant trunks keep the panorama's authored scale. An opening in the
- // canopy reveals the valley on the ridge, independent of camera height.
+ const burn=emberBurnAt(s.player.x);
+ if(!forestScreen){forestScreen=document.createElement('canvas');forestScreen.width=960;forestScreen.height=540;}
+ const g=forestScreen.getContext('2d');g.clearRect(0,0,960,540);
+ // The canopy has a geographical edge. We uncover the valley from the
+ // side as the last stand passes, without fading the entire landscape.
  for(let i=-1;i<2;i++){
   const x=p.x+i*p.step;if(x+p.w<0||x>960)continue;
-  c.save();c.translate(x,p.y);
-  c.globalAlpha=1-vista;c.drawImage(forestBand(art['forest-canopy-healthy']),0,0,p.w,p.h);
-  c.globalAlpha=(1-vista)*burn;c.drawImage(forestBand(art['forest-canopy-burned']),0,0,p.w,p.h);c.restore();
+  g.save();g.translate(x,p.y);
+  g.drawImage(forestBand(art['forest-canopy-healthy']),0,0,p.w,p.h);
+  g.globalAlpha=burn;g.drawImage(forestBand(art['forest-canopy-burned']),0,0,p.w,p.h);g.restore();
  }
- c.restore();
+ const edge=emberForestEdges(s),mask=g.createLinearGradient(0,0,960,0);
+ const stops=[0,960,edge.exit-28,edge.exit,edge.exit+28,edge.entry-28,edge.entry,edge.entry+28].filter(x=>x>=0&&x<=960).sort((a,b)=>a-b);
+ for(const x of stops)mask.addColorStop(x/960,`rgba(0,0,0,${woodlandCoverage(s,x)})`);
+ g.save();g.globalCompositeOperation='destination-in';g.fillStyle=mask;g.fillRect(0,0,960,540);g.restore();c.drawImage(forestScreen,0,0);
 }
 export function emberBackdropPlacement(s,img){
  if(!s.fortInside)return emberForestPlacement(s,img);
@@ -43,14 +48,14 @@ export function drawEmberScenery(c,s,art){
  for(const {x,i,h}of emberSceneryTrees(s.level)){
   if(x<s.camera.x-260||x>s.camera.x+width+270)continue;
   const green=((i*37)%101)/100>=emberBurnAt(x),key=green&&x<7500&&i%3!==2?'river-tree-oak':'forest-tree-'+(green?(x<5000?2:i%3):4+i%4),img=art[key];
-  const w=h*img.width/img.height,y=Math.max(...[-.36,0,.36].map(d=>groundY(s.level.route,x+w*d)));
-  c.save();c.translate(x,y+13);if(i%2)c.scale(-1,1);c.drawImage(img,-w*(RIVER_TREE_ART[key]?.rootX??.5),-h*.977,w,h);c.restore();
+  const w=h*img.width/img.height,y=groundY(s.level.route,x)-50;
+  c.save();c.translate(x,y+8);if(i%2)c.scale(-1,1);c.drawImage(img,-w*(RIVER_TREE_ART[key]?.rootX??.5),-h*.977,w,h);c.restore();
   // Low painted grass hides the root tips inside the soil at the same world
   // coordinate; it never moves at a different parallax speed from the tree.
-  const strip=art['forest-understory-'+(green?0:1)],gw=w*.9,gh=gw*strip.height/(strip.width/3);
+  const gw=w*1.03;
   const slope=(groundY(s.level.route,x+gw/2)-groundY(s.level.route,x-gw/2))/gw;
-  c.save();c.translate(x,groundY(s.level.route,x)+15);c.transform(1,slope,0,1,0,0);
-  c.drawImage(forestRootCover(strip,i%3),-gw/2,-gh,gw,gh);c.restore();
+  c.save();c.translate(x,groundY(s.level.route,x)-24);c.transform(1,slope,0,1,0,0);
+  paintWoodlandBush(c,art,0,0,gw,i%3,emberBurnAt(x));c.restore();
  }
  for(const q of s.level.branchTrees){
   if(q.x+q.size/2<s.camera.x||q.x-q.size/2>s.camera.x+width)continue;

@@ -1,6 +1,6 @@
 # Hexy & the Lost Chorus
 
-[Revisión vigente del 1-4: suelo 2D estable, vegetación anclada, fondo animado y encuadre fijo de la fortaleza](ember-fort/wildfire.md#reconstrucción-2d-estable).
+[Revisión vigente del 1-4: planos del bosque, raíces cubiertas, salida al mirador, animales huyendo y música entregada por el usuario](ember-fort/depth.md).
 
 La idea general y las decisiones vigentes están en [DISENO_DEL_JUEGO.md](DISENO_DEL_JUEGO.md). La propuesta de actos, carpas distintas, Halloween y jefes de tres/cuatro fases se desarrolla en [CAMPANA.md](CAMPANA.md). Ambos documentos distinguen lo decidido, lo implementado y lo que todavía estamos proponiendo.
 

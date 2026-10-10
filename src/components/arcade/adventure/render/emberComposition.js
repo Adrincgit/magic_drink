@@ -1,7 +1,17 @@
 const clamp=n=>Math.max(0,Math.min(1,n));
-const smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t);};
+export const woodlandSmooth=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t);};
+const smooth=woodlandSmooth;
 // Authored opening in the canopy, independent of camera height and lens.
 export const emberVistaAt=x=>smooth(7900,10600,x)*(1-smooth(14500,17900,x));
+export const WOODLAND_EXIT=10200,WOODLAND_RETURN=15700;
+export function emberForestEdges(s){
+ const scale=.85*(s.camera.zoom||1);
+ return{exit:(WOODLAND_EXIT-s.camera.x)*scale+72,entry:(WOODLAND_RETURN-s.camera.x)*scale+72};
+}
+export function woodlandCoverage(s,x){
+ const edge=emberForestEdges(s);
+ return Math.min(1,1-smooth(edge.exit-28,edge.exit+28,x)+smooth(edge.entry-28,edge.entry+28,x));
+}
 export function emberForestPlacement(s,img){
  const w=1320,h=w*img.height/img.width;
  const step=w-100,offset=s.camera.x*.16,tile=Math.floor(offset/step),x=tile*step-offset;
@@ -15,10 +25,10 @@ export function emberValleyPlacement(s,img){
 }
 export function emberSceneryTrees(level){
  const trees=[];
- for(let i=0;i<105;i++){
-  const x=260+i*284+i%3*37;
-  if(x>level.arena.left-250||x>9000&&x<15500||level.emberPits.some(p=>x>p.x-170&&x<p.x+p.w+170)||level.fallingTrees.some(q=>Math.abs(q.x-x)<190)||level.branchTrees.some(q=>Math.abs(q.x-x)<230))continue;
-  trees.push({x,i,h:250+i%3*22});
+ for(let i=0;i<49;i++){
+  const x=580+i*625+(i%3-1)*80;
+  if(x>level.arena.left-250||x>9450&&x<16000||level.emberPits.some(p=>x>p.x-200&&x<p.x+p.w+200)||level.fallingTrees.some(q=>Math.abs(q.x-x)<260)||level.branchTrees.some(q=>Math.abs(q.x-x)<300))continue;
+  trees.push({x,i,h:i%3===2?405:315+i%2*25});
  }
  return trees;
 }

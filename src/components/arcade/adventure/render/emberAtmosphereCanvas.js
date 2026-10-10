@@ -1,5 +1,7 @@
 import {drawForestFloor} from './emberSurfaceCanvas';
 import {drawEmberBackgroundLife,drawEmberGroundMist} from './emberBackgroundCanvas';
+import {drawWoodlandPlanes} from './emberWoodlandLayers';
+import {drawEmberWildlife} from './emberWildlifeCanvas';
 export {forestPlaneRoot,emberPlanePosition} from './emberForestProjection';
 import {emberTreeFrame} from '../engine/adventureEmberEnvironment';
 import {groundY} from '../world/adventureTerrain';
@@ -8,11 +10,13 @@ import {drawWaterDetail} from './paintedWaterCanvas';
 export function drawEmberDepth(c,s,art,reduced=false){
  if(s.fortInside)return;
  drawEmberBackgroundLife(c,s,art,reduced);
+ drawWoodlandPlanes(c,s,art);
  drawForestFloor(c,s,art);
  drawEmberGroundMist(c,s,art,reduced);
 }
 export function drawEmberHazards(c,s,art,reduced=false){
  if(s.fortInside)return;
+ drawEmberWildlife(c,s,art,reduced);
  const width=960/(s.camera.zoom||1),time=reduced?0:s.fxTime;
  const bush=art['ember-bushes'],cw=bush.width/4;
  for(const q of s.emberEnvironment?.bushes||[]){

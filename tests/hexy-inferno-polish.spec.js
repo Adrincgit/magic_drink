@@ -53,7 +53,8 @@ test('fire audio has a sustained roar, respects stop and can be decoded alongsid
   const proxy=new Proxy(ctx,{get(t,k){if(k==='currentTime')return time;const v=Reflect.get(t,k,t);return typeof v==='function'?v.bind(t):v;}});
   const voice=createEmberVoice(proxy,ctx.destination);voice.update({intensity:1});playEmberSound(proxy,ctx.destination,'emberIgnite',.5);time=2;voice.stop();const b=await ctx.startRendering(),d=b.getChannelData(0);
   const rms=(a,z)=>Math.sqrt(d.slice(a*44100,z*44100).reduce((sum,n)=>sum+n*n,0)/((z-a)*44100));
-  const music=await fetch('/arcade/music/exploration/ember-march.wav').then(r=>r.arrayBuffer()),decoded=await ctx.decodeAudioData(music);return{on:rms(.5,1.9),off:rms(2.3,4),duration:decoded.duration,channels:decoded.numberOfChannels};
+  const {adventureMusic}=await import('/src/components/arcade/adventure/world/adventureWorlds.js');
+  const music=await fetch(adventureMusic(5,'playing').src).then(r=>r.arrayBuffer()),decoded=await ctx.decodeAudioData(music);return{on:rms(.5,1.9),off:rms(2.3,4),duration:decoded.duration,channels:decoded.numberOfChannels};
  });expect(result.on).toBeGreaterThan(.02);expect(result.off).toBe(0);expect(result.duration).toBeGreaterThan(50);expect(result.channels).toBe(2);
 });
 

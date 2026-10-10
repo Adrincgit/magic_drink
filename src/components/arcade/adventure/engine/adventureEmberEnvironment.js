@@ -1,4 +1,5 @@
 import {groundY} from '../world/adventureTerrain';
+import {resetEmberWildlife,stepEmberWildlife} from './adventureEmberWildlife';
 const clamp=n=>Math.max(0,Math.min(1,n));
 // Earth is solid at the sides of a charcoal hollow, not a one-way platform.
 // Permit crossing its lip only after the player's feet have cleared the rim.
@@ -17,6 +18,7 @@ export function resetEmberEnvironment(s,at=0){
  s.emberEnvironment={bushes:s.level.bushes.map(q=>({...q,state:'green',age:0})),trees:s.level.fallingTrees.map(q=>({...q,phase:q.x+q.h<at?'spent':'standing',age:0,angle:0})),flocks:s.level.birdFlocks.map(q=>({...q,age:q.x<at-600?99:-1}))};
  s.platforms=s.platforms.filter(q=>!q.emberFallen);
  s.player.heat=0;s.player.heatIdle=0;
+ s.emberEnvironment.wildlife=resetEmberWildlife(at);
 }
 const FALL_FRAMES=[4,3,5,6,7,8,9,10],FALL_ANGLES=[.16,.28,.42,.61,.94,1.2,1.4,1.51];
 export function emberTreeFrame(q){
@@ -43,6 +45,7 @@ export function stepEmberEnvironment(s,dt){
  if(!s.emberEnvironment)resetEmberEnvironment(s);
  const p=s.player,env=s.emberEnvironment;
  if(s.fortInside){p.heat=Math.max(0,p.heat-dt);p.heatIdle=0;return;}
+ stepEmberWildlife(s,dt);
  let heat=0;
  for(const q of s.level.heatZones){const edge=Math.min((p.x-q.x)/180,(q.x+q.w-p.x)/180);heat=Math.max(heat,clamp(edge)*q.strength*clamp(1-Math.max(0,groundY(s.level.route,p.x)-p.y-50)/220));}
  for(const q of env.bushes)if(q.state==='burning'){q.age+=dt;if(q.age>=7){q.state='charred';q.age=0;}}

@@ -1,19 +1,10 @@
 import {groundY} from '../world/adventureTerrain';
 import {emberBurnAt} from '../world/adventureEmberTrail';
 import {drawEmberAir} from './emberBackgroundCanvas';
+import {drawWoodlandEdge} from './emberWoodlandLayers';
 
 const TILE_WIDTH=1200,TILE_HEIGHT=200,REAR=68;
 const floorTiles=new WeakMap();
-const rootCovers=new WeakMap();
-export function forestRootCover(img,variant){
- let cache=rootCovers.get(img);if(!cache){cache=[];rootCovers.set(img,cache);}if(cache[variant])return cache[variant];
- const c=document.createElement('canvas');c.width=Math.floor(img.width/3);c.height=img.height;const g=c.getContext('2d');
- g.drawImage(img,variant*img.width/3,0,img.width/3,img.height,0,0,c.width,c.height);g.globalCompositeOperation='destination-in';
- const horizontal=g.createLinearGradient(0,0,c.width,0);horizontal.addColorStop(0,'#0000');horizontal.addColorStop(.12,'#000');horizontal.addColorStop(.88,'#000');horizontal.addColorStop(1,'#0000');
- g.fillStyle=horizontal;g.fillRect(0,0,c.width,c.height);
- const bottom=g.createLinearGradient(0,c.height*.63,0,c.height);bottom.addColorStop(0,'#000');bottom.addColorStop(1,'#0000');g.fillStyle=bottom;g.fillRect(0,0,c.width,c.height);
- cache[variant]=c;return c;
-}
 function paintedFloor(art,tile){
  let cache=floorTiles.get(art);if(!cache){cache=new Map();floorTiles.set(art,cache);}
  if(cache.has(tile))return cache.get(tile);
@@ -40,24 +31,20 @@ export function drawForestFloor(c,s,art){
   const start=Math.max(left,route.x),end=Math.min(right,route.x+route.w);if(end<=start)continue;
   const slope=((route.yEnd??route.y)-route.y)/route.w;
   c.save();c.translate(route.x,route.y);c.transform(1,slope,0,1,0,0);
-  c.beginPath();c.rect(start-route.x,-REAR,end-start+1,1800);c.clip();
+  const edge=x=>-REAR+Math.sin(x*.024)*8+Math.sin(x*.061)*4;
+  c.beginPath();c.moveTo(start-route.x,1700);c.lineTo(start-route.x,edge(start));
+  for(let x=Math.ceil(start/24)*24;x<end;x+=24)c.lineTo(x-route.x,edge(x));
+  c.lineTo(end-route.x+1,edge(end+1));
+  c.lineTo(end-route.x+1,1700);c.closePath();c.clip();
   for(let tile=Math.floor(start/TILE_WIDTH);tile*TILE_WIDTH<end;tile++){
    const x=tile*TILE_WIDTH,paint=paintedFloor(art,tile);
-   for(let y=-REAR;y<1400;y+=TILE_HEIGHT){
+   for(let y=-REAR-TILE_HEIGHT;y<1400;y+=TILE_HEIGHT){
     c.drawImage(paint,x-route.x,y,TILE_WIDTH,TILE_HEIGHT+1);
    }
   }
   c.restore();
  }
- // Low vegetation is rooted along the rear edge and hides the panorama seam.
- const rear=art['forest-understory-0'],burnt=art['forest-understory-1'];
- const width=620,height=rear?width*rear.height/rear.width:0;
- if(rear&&burnt)for(let i=Math.floor(left/width)-1;i*width<right;i++){
-  const x=i*width,y=groundY(s.level.route,Math.max(0,x)),end=groundY(s.level.route,Math.max(0,x+width));
-  c.save();c.translate(x,y-REAR+12);c.transform(1,(end-y)/width,0,1,0,0);
-  const burn=emberBurnAt(x+width/2);
-  c.globalAlpha=1-burn;c.drawImage(rear,0,-height,width,height);c.globalAlpha=burn;c.drawImage(burnt,0,-height,width,height);c.restore();
- }
+ drawWoodlandEdge(c,s,art,left,right);
  for(const pit of s.level.emberPits){
   if(pit.x+pit.w<left||pit.x>right)continue;
   const mid=pit.x+pit.w/2,y=groundY(s.level.route,mid),burn=emberBurnAt(mid),h=(pit.y-y+36)/.68;

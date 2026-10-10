@@ -1,5 +1,7 @@
 # Escala, vegetación y mirador — 10 de octubre de 2026
 
+La composición y música posteriores están en [depth.md](depth.md). Ese documento sustituye las alturas decorativas y el fundido del mirador descritos aquí; conserva los cambios de fuego y el panorama a escala contenidos en esta revisión.
+
 Esta revisión responde al rechazo del panorama magnificado, los árboles desproporcionados, el suelo inicial sin hierba y las capas cercanas que parecían flotar. Sustituye la composición de la revisión anterior; sus capturas no representan el resultado actual.
 
 ## Composición

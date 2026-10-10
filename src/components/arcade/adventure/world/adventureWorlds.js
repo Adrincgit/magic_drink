@@ -20,7 +20,7 @@ export const WORLDS=[
   music:theme('silence','El secreto de las jaulas','muta','Que vuelva a cantar la noche')},
  {key:'ember-trail',background:'/arcade/maps/ember-trail/background.webp',ground:'/arcade/maps/ember-trail/ground.webp',groundInset:.18,groundFillInset:.25,midground:null,farSpeed:.085,midSpeed:.4,
   terrain:'riverbank',surface:'#83604d',edge:'#47352f',soil:['#6c4b40','#262331'],accent:'#f7ba75',ambient:'none',
-  music:{explore:{key:'ember-march',title:'La marcha de las brasas',src:'/arcade/music/exploration/ember-march.wav'},boss:{key:'agresivo',title:'El Bastión de las Antorchas'}}},
+  music:{explore:{key:'ember-trail',title:'El bosque de las brasas',src:'/arcade/music/exploration/ember-trail.mp3'},boss:{key:'agresivo',title:'El Bastión de las Antorchas'}}},
 ].map(world=>({...world,ground:world.ground||(world.key==='meadow'?'/arcade/maps/meadow/ground.webp':art(world.key+'-ground'))}));
 
 export function adventureMusic(index,phase,boss=false,won=false){

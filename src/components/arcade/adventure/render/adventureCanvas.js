@@ -83,6 +83,8 @@ export async function loadAdventureArt(){
  for(let i=0;i<2;i++)paths['forest-understory-'+i]='/arcade/maps/ember-trail/understory-'+i+'.webp';
  for(let i=0;i<2;i++)paths['forest-path-'+i]='/arcade/maps/ember-trail/floor-fine-'+i+'.webp';
  paths['forest-grass-floor']='/arcade/maps/ember-trail/grass-floor.webp';
+ paths['forest-shrub-clusters']='/arcade/maps/ember-trail/shrub-clusters.webp';
+ paths['forest-wildlife']='/arcade/maps/ember-trail/wildlife-run.webp';
  paths['ember-torch']='/arcade/sprites/effects/ember-torch.webp';
  paths['fire-breather-walk']='/arcade/sprites/enemies/fire-breather-walk.webp';
  paths['ember-flames']='/arcade/sprites/effects/ember-flames.webp';
