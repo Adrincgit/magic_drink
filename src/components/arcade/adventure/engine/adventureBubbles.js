@@ -1,3 +1,4 @@
+import {damageActTwoBoss} from '../actors/bosses/adventureActTwoBosses';
 import {damageBellkeeper} from '../actors/bosses/adventureBellkeeper';
 import {damageGravesInRadius} from './adventureGraveyard';
 import {fortTargets,fortPartHit} from '../actors/bosses/adventureEmberFort';
@@ -29,7 +30,7 @@ export function burstBubble(s,q,defeat){
  for(const e of s.enemies)if(!e.fleeing&&e.hp>0&&Math.hypot(e.x-q.x,e.y-38-q.y)<radius){e.hp-=damage;e.flash=.2;if(e.hp<=0)defeat(s,e);}
  // The burst obeys the same boss vulnerability rules as ordinary Bubble Tape.
  const b=s.boss,bargeTarget=[2,5].includes(s.index)?(s.index===5?fortTargets(s):bargeTargets(s)).find(t=>Math.hypot(q.x-Math.max(t.x,Math.min(t.x+t.w,q.x)),q.y-Math.max(t.y,Math.min(t.y+t.h,q.y)))<radius):null,bodyHit=[2,5].includes(s.index)?!!bargeTarget:s.index===1?organTargets(s).some(t=>Math.hypot(q.x-Math.max(t.x,Math.min(t.x+t.w,q.x)),q.y-Math.max(t.y,Math.min(t.y+t.h,q.y)))<radius):Math.hypot(b.x-q.x,b.y-55-q.y)<radius+55;
- if(b.hp>0&&b.vulnerable&&bodyHit){b.trailHp=Math.max(b.trailHp||b.hp,b.hp);if(s.level.nightmareTrail)damageBellkeeper(s,damage);else b.hp=Math.max(0,b.hp-(s.index===5?fortPartHit(s,bargeTarget.part,damage):damage));if(s.index===2&&bargeTarget){jamBargePressure(s,q);bargePartHit(s,bargeTarget.part,damage);}bossHitFeedback(s,q.heavy);}
+ if(b.hp>0&&b.vulnerable&&bodyHit){b.trailHp=Math.max(b.trailHp||b.hp,b.hp);if(s.level.actTwo)damageActTwoBoss(s,damage);else if(s.level.nightmareTrail)damageBellkeeper(s,damage);else b.hp=Math.max(0,b.hp-(s.index===5?fortPartHit(s,bargeTarget.part,damage):damage));if(s.index===2&&bargeTarget){jamBargePressure(s,q);bargePartHit(s,bargeTarget.part,damage);}bossHitFeedback(s,q.heavy);}
 }
 export function burstTrappedEnemy(s,e,defeat){
  if(!e.trap)return;e.trap=0;

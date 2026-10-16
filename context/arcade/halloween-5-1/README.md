@@ -1,4 +1,6 @@
-# 5-1: El sendero de las risas
+# 2-1: El sendero de las risas
+
+Numeración vigente desde el **16/10/2026**: primer nivel del acto 2, Halloween. Antes se mostró como 5-1. La carpeta y los recursos conservan su ruta histórica; el ID de guardado sigue siendo 6. Véase la [campaña aprobada](../CAMPANA.md).
 
 Revisión del 13 de octubre de 2026. La temática sigue siendo **creaciones y alucinaciones peligrosas de la arlequín de dos conos**; el ejército de marionetas queda para después. Se mantiene el anime cartoon con ambiente spooky, sin gore. La referencia retro influye en la actuación y el ambiente; no obliga a usar ojos de caricatura antigua. La inspiración de recorrido solicitada es el área de zombis de Metal Slug.
 

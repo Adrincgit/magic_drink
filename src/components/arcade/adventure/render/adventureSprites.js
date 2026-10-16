@@ -1,4 +1,6 @@
 import {isVillageEnemy,villageEnemyDrawing} from '../engine/adventureVillage';
+import {isActTwoEnemy,actTwoEnemyDrawing} from '../actors/enemies/adventureActTwoEnemies';
+import {actTwoBossDrawing} from '../actors/bosses/adventureActTwoBosses';
 import {umbrellaFrame} from '../actors/enemies/adventureUmbrella';
 import {acrobatAirFrame} from '../actors/enemies/adventureAcrobat';
 import {JUGGLER_WALK_FRAMES} from '../actors/enemies/adventureJugglerWalk';
@@ -19,6 +21,7 @@ export const ENEMY_ART=['clown','acrobat','balloon','juggler','acrobat','cannon'
 // the sign, which otherwise sends the sprite source outside its atlas.
 export const collectibleFrame=(time,x=0)=>((Math.floor(time*7+x)%4)+4)%4;
 export function enemyDrawing(e,reduced=false){
+ if(isActTwoEnemy(e))return actTwoEnemyDrawing(e,reduced);
  if(isVillageEnemy(e))return villageEnemyDrawing(e,reduced);
  if(e.fleeing){
   if(e.capture){const a=e.capture.age;return{key:'nightmare-conversion-v5',size:148,frame:a<.5?Math.min(3,Math.floor(a*8)):4+Math.min(11,Math.floor((a-.5)/.25))};}
@@ -65,6 +68,7 @@ export function enemyDrawing(e,reduced=false){
 }
 export const BOSS_ART=['boss-balloon','organ-machine','barge-body','harlequin/poses','muta'];
 export function bossDrawing(s,reduced=false){
+ if(s.level.actTwo)return actTwoBossDrawing(s,reduced);
  if(s.level.nightmareTrail)return nightmareDrawing(s.boss,reduced);
  const b=s.boss,key=BOSS_ART[s.index];
  if(s.index===0)return balloonShellDrawing(s);

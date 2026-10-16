@@ -4,6 +4,7 @@ import {followAdventureCamera} from '../render/adventureCamera';
 import {impactSmoke} from './cinematicImpact';
 import {updateSupplies} from '../world/adventureSupplies';
 import {stepHarlequinUltimate} from '../actors/bosses/harlequinUltimate';
+import {stepSoulPumpkin} from './villagePumpkins';
 
 export function beginPlayerDefeat(s,pit=false){
  const p=s.player;
@@ -21,7 +22,17 @@ export function stepPlayerDefeat(s,dt){
  for(const shot of s.hostile){shot.age+=slow;shot.vy+=(shot.gravity||0)*slow;shot.x+=(shot.vx||0)*slow;shot.y+=(shot.vy||0)*slow;shot.life-=slow;}
  if(s.boss.ultimate)stepHarlequinUltimate(s,slow);else s.boss.clock+=slow;
  s.hostile=s.hostile.filter(shot=>shot.life>0);stepWorldEffects(s,slow);
- if(q.state==='candy'||q.state==='pumpkin'){p.candy.age+=dt;if(q.state==='pumpkin'){p.candy.convertAge+=dt;p.y-=slow*14;}if(q.age>1.8){s.done=true;s.won=false;s.events.push('death');}}
+ if(q.state==='candy'||q.state==='pumpkin'){
+  p.candy.age+=dt;
+  if(q.state==='pumpkin'){
+   for(const enemy of s.enemies)if(enemy.releasePulse>0)enemy.releasePulse=Math.max(0,enemy.releasePulse-dt);
+   p.candy.convertAge+=dt;
+   const shell=s.enemies.find(e=>e.playerSoul&&e.curseId===p.candy.containerId);
+   if(shell){shell.convertAge=p.candy.convertAge;shell.clock+=slow;if(shell.phase==='release')stepSoulPumpkin(s,shell,dt,()=>{});else shell.y-=slow*14;p.x=shell.x;p.y=shell.y;}
+   else p.y-=slow*14;
+  }
+  if(q.age>1.8){s.done=true;s.won=false;s.events.push('death');}
+ }
  else if(q.state==='fall'){
   const old=p.y;p.vy+=1050*slow;p.x+=p.vx*slow;p.y+=p.vy*slow;
   p.clashFlight.frame=p.vy<0?0:p.vy<110?1:p.vy<260?2:3;

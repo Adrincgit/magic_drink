@@ -11,12 +11,12 @@ import {VILLAGE_PLANES,villagePlanePosition} from '../src/components/arcade/adve
 import {groundY} from '../src/components/arcade/adventure/world/adventureTerrain';
 const folder='tests/artifacts/arcade/village-5-2/';
 const tick=(s,seconds,input={})=>{for(let i=0;i<seconds*120;i++)stepAdventure(s,input,1/120);};
-test('5-2 follows the cemetery and old saves retain their unlocked final chapter',()=>{
- expect(CHAPTER_ORDER).toEqual([0,1,2,5,3,6,7,4]);expect(nextAdventureChapter(6)).toBe(7);expect(nextAdventureChapter(7)).toBe(4);
+test('2-2 follows the cemetery and old saves retain their unlocked final chapter',()=>{
+ expect(CHAPTER_ORDER).toEqual([0,1,2,5,3,6,7,8,9,10,4]);expect(nextAdventureChapter(6)).toBe(7);expect(nextAdventureChapter(7)).toBe(8);
  const old=sanitizeSave({version:1,campaign:3,economy:2,stars:87,adventureUnlocked:6,adventureCleared:[6,4],run:{id:'village-migration',practice:false,chapter:4,earned:12,banked:3}});
- expect(old.campaign).toBe(4);expect(old.adventureUnlocked).toBe(7);expect(old.stars).toBe(87);expect(old.run.chapter).toBe(4);expect(old.adventureCleared).toEqual([6,4]);
- expect(sanitizeSave(old).adventureUnlocked).toBe(7);
- const s=createAdventure(7);expect(s.level.chapter).toBe('5-2');expect(s.enemies.filter(e=>e.type===19).every(e=>e.ghostForm==='sheet')).toBe(true);
+ expect(old.campaign).toBe(5);expect(old.adventureUnlocked).toBe(10);expect(old.stars).toBe(87);expect(old.run.chapter).toBe(4);expect(old.adventureCleared).toEqual([6,4]);
+ expect(sanitizeSave(old).adventureUnlocked).toBe(10);
+ const s=createAdventure(7);expect(s.level.chapter).toBe('2-2');expect(s.level.spookyIdle).toBe(true);expect(s.enemies.filter(e=>e.type===19).every(e=>e.ghostForm==='sheet')).toBe(true);
 });
 test('the street simulates, civilians flee and zombies retain their clothed remains',()=>{
  const s=createAdventure(7);s.player.hurt=999;const start=s.villagers[0].x;tick(s,2,{right:true});
@@ -103,7 +103,7 @@ test('painted fire hurts on contact, can be jumped, and leaves a fire impact on 
 test('the real chapter selector starts the village and keeps simulating',async({page})=>{
  test.setTimeout(90000);fs.mkdirSync(folder,{recursive:true});const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('/arcade');await openAdventureMenu(page);const root=page.locator('[data-hexy-adventure]');await expect(root).toHaveAttribute('data-phase','ready',{timeout:30000});
- await page.getByRole('button',{name:/Elegir capítulo/}).click();await expect(page.locator('[data-level-choice="7"]')).toContainText('5-2');await page.locator('[data-level-choice="7"]').click();await page.locator('[data-practice]').click();await page.locator('[data-chapter-intro]').click();await expect(root).toHaveAttribute('data-phase','playing');
+ await page.getByRole('button',{name:/Elegir capítulo/}).click();await expect(page.locator('[data-level-choice="7"]')).toContainText('2-2');await page.locator('[data-level-choice="7"]').click();await page.locator('[data-practice]').click();await page.locator('[data-chapter-intro]').click();await expect(root).toHaveAttribute('data-phase','playing');
  await expect.poll(async()=>Number(await root.locator('canvas').first().getAttribute('data-sim-frame'))).toBeGreaterThan(180);
  await root.screenshot({path:folder+'real-start.png'});await page.keyboard.down('ArrowRight');await page.keyboard.down('z');await page.waitForTimeout(2800);await page.keyboard.up('ArrowRight');await page.keyboard.up('z');await expect(root).toHaveAttribute('data-phase','playing');await root.screenshot({path:folder+'real-play.png'});expect(errors).toEqual([]);
 });

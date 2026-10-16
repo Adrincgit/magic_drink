@@ -1,10 +1,12 @@
 import {drawVillageGate} from './villageGateCanvas';
 import {drawPopcornDefeat,drawPopcornPoof} from './popcornDefeatCanvas';
+import {electricBodyFilter,drawElectricReaction} from './electricEnemyCanvas';
+import {drawHarvesterLight,drawHarvesterBroom} from './harvesterCanvas';
 import {drawProjectileLights,paintMagicLight} from './projectileLightsCanvas';
 import {drawVillageObstacles} from './villageChaosCanvas';
 import {villageEnemyOrder} from '../engine/villageOrbit';
-import {drawCandyHexy,drawFlyingWitchDefeat,drawPumpkinDefeat,drawVillageRubble,drawVillageResistance,drawVillageForeground,drawVillageRoad,drawVillageGroundBank,drawVillageBackdrop,drawVillageScenery,drawVillagers,drawVillageProjectile,drawVillageFog} from './villageCanvas';
-import {drawPopcornBlast} from './popcornCanvas';
+import {drawCandyHexy,drawFlyingWitchDefeat,drawPumpkinDefeat,drawVillageRubble,drawVillageResistance,drawVillageForeground,drawVillageRoad,drawVillageGroundBank,drawVillageBackdrop,drawVillageScenery,drawVillageCarriages,drawVillagers,drawVillageProjectile,drawVillageFog} from './villageCanvas';
+import {drawPopcornBlast,drawPopcornScreenFlash} from './popcornCanvas';
 import {drawTrialTent} from './trialCanvas';
 import {drawPlacement,drawSpringBounce} from './placementCanvas';
 import {drawForestTerrain,drawEmberForeground} from './emberSurfaceCanvas';
@@ -70,8 +72,10 @@ import {drawDiveKick,drawPaperDecoy,drawTacticalFX,drawReturnedBolt} from './tac
 import {SPECIALS,SUPER_WINDUP,specialArt,spellFor} from '../engine/adventureMagic';
 import {ACTOR_SHEETS,bossDrawing,enemyDrawing,MAGIC_ROWS,HOSTILE_ROWS,effectFrame,collectibleFrame} from './adventureSprites';
 
+import {actTwoArtPaths,drawActTwoBackdrop,drawActTwoScenery,drawActTwoTerrain,drawActTwoEncounter,drawActTwoProjectile,drawActTwoDust} from './actTwoCanvas';
 export async function loadAdventureArt(){
  const paths={bunny:'/arcade/sprites/bunnies/bunny-atlas.webp',ground:'/arcade/maps/meadow/ground.webp',magic:'/arcade/sprites/effects/magic.webp',hostile:'/arcade/sprites/effects/hostile.webp',impacts:'/arcade/sprites/effects/impacts.webp'};
+ Object.assign(paths,actTwoArtPaths());
  paths['treasure-star']='/arcade/sprites/ui/treasure-star.webp';
  paths['hexy-encore-portrait']='/arcade/sprites/ui/hexy-encore-full.webp';
  paths['hexy-clash-portraits']='/arcade/sprites/ui/hexy-clash-full.webp?v=20261008-fire-acting';
@@ -222,6 +226,7 @@ export async function loadAdventureArt(){
  for(const name of ACTOR_SHEETS)paths[name]='/arcade/sprites/'+(['boss-balloon','serio','alegre','agresivo','muta'].includes(name)?'bosses/':'enemies/')+name+'.webp';
  paths['boss-balloon']='/arcade/sprites/bosses/balloon-hd.webp';paths['balloon-damaged']='/arcade/sprites/bosses/balloon-damaged-hd.webp';
  for(const name of ['volt-beam-v2','ribbon-satin','ribbon-whip','ribbon-slam','ribbon-bind','ribbon-dance'])paths[name]='/arcade/sprites/effects/'+name+'.webp';
+ for(const name of ['harvester-combat','harvester-ritual','harvester-flight-v15'])paths[name]='/arcade/sprites/bosses/'+name+'.webp';
  for(const name of HEXY_SHEETS)paths['hexy-'+name]='/arcade/sprites/hexy/'+name+'.webp';
  paths['hexy-air-super-release']+='?v=20261006-new-air-pose';
  // The rebuilt air pose also holds the windup: no return to the rejected
@@ -324,7 +329,8 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  else if(!reduced&&s.shake>0){const force=Math.min(1,s.shake/.12);c.translate(Math.sin(s.fxTime*137)*3*force,Math.cos(s.fxTime*113)*2*force);}
  const world=s.level.world,bg=art['world'+s.index],view=cameraView(s),outside=outsideCircus(s);
  c.fillStyle=s.level.sky[0];c.fillRect(0,0,W,H);
- if(s.level.villageTrail)drawVillageBackdrop(c,s,art);
+ if(s.level.actTwo)drawActTwoBackdrop(c,s,art,reduced);
+ else if(s.level.villageTrail)drawVillageBackdrop(c,s,art);
  else if(s.level.nightmareTrail)drawNightmareBackdrop(c,s,art);
  else if(outside)drawCircusOutsideBackdrop(c,s,art,reduced);
  else if(s.level.grandRing)drawGrandRingBackdrop(c,s,art,reduced);
@@ -333,7 +339,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  else if(s.level.riverRoute)drawRiverBackdrop(c,s,art,reduced);
  else if(s.level.groundRoute){drawMeadowSky(c,s,art,reduced);for(const plane of MEADOW_PLANES)paintMeadowPlane(c,art[plane.key],s.camera,plane,s.level.width);}
  else layer(c,bg,s.camera.x,world.farSpeed,-70-s.camera.y*.12,610);
- if(s.level.groundRoute&&!s.level.riverRoute&&!s.level.grandRing&&!s.level.emberTrail&&!s.level.nightmareTrail&&!s.level.villageTrail){
+ if(s.level.groundRoute&&!s.level.actTwo&&!s.level.riverRoute&&!s.level.grandRing&&!s.level.emberTrail&&!s.level.nightmareTrail&&!s.level.villageTrail){
   // The forest enters from the right as solid cutouts. Crossfading entire
   // panoramas made trunks transparent against the hills behind them.
   const edge=s.level.forestEdge,img=art['forest-edge'],height=610,width=height*img.width/img.height;
@@ -350,9 +356,10 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
    if(x+width/2< -50||x-width/2>view.width+50)continue;
    c.save();c.translate(x,y);if(prop.flip)c.scale(-1,1);if(prop.kind==='tent')drawWindCloth(c,img,-width/2,-prop.h,width,prop.h,s.fxTime,{windArt:art,flags:TENT_FLAGS,reduced});else c.drawImage(img,-width/2,-prop.h,width,prop.h);c.restore();
   }c.restore();
- }else if(!s.level.riverRoute&&!s.level.grandRing&&!s.level.emberTrail&&!s.level.nightmareTrail&&!s.level.villageTrail)layer(c,art['mid'+s.index],s.camera.x,world.midSpeed,55-s.camera.y*.35,425);
- if(!s.level.grandRing&&!s.level.emberTrail&&!s.level.nightmareTrail&&!s.level.villageTrail)atmosphere(c,s,reduced);
+ }else if(!s.level.actTwo&&!s.level.riverRoute&&!s.level.grandRing&&!s.level.emberTrail&&!s.level.nightmareTrail&&!s.level.villageTrail)layer(c,art['mid'+s.index],s.camera.x,world.midSpeed,55-s.camera.y*.35,425);
+ if(!s.level.actTwo&&!s.level.grandRing&&!s.level.emberTrail&&!s.level.nightmareTrail&&!s.level.villageTrail)atmosphere(c,s,reduced);
  c.save();c.scale(view.zoom,view.zoom);c.translate(-s.camera.x,-s.camera.y);
+ if(s.level.actTwo)drawActTwoScenery(c,s,art,reduced);
  if(s.level.emberTrail){drawEmberScenery(c,s,art);drawEmberFort(c,s,art,reduced);}
  if(outside)drawCircusForecourt(c,s,art,reduced);
  else if(s.level.grandRing)drawGrandRingStage(c,s,art,reduced);
@@ -372,7 +379,8 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  const terrainPlatforms=s.level.emberTrail?[...s.platforms.filter(q=>q.kind!=='stone'),...s.platforms.filter(q=>q.kind==='stone')]:s.platforms;
  if(s.level.villageTrail)drawVillageGroundBank(c,s,art);
  if(!outside&&!(s.level.grandRing&&circusFloor==='dark'))for(const q of terrainPlatforms)if(q.x+q.w>s.camera.x-100&&q.x<s.camera.x+view.width+100){
-  if(q.emberFallen)continue;
+  if(q.emberFallen||q.gone)continue;
+  if(s.level.actTwo){drawActTwoTerrain(c,s,q,art);continue;}
   if(q.bridge&&s.level.circusArrival&&q.x>=s.level.arena.right)drawCircusWalkway(c,q,art,s.level.circusArrival.doorX);
   else if(s.level.emberTrail&&!s.fortInside){
    drawForestTerrain(c,s,q,art);
@@ -389,7 +397,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   drawNightmareGraves(c,s,art);
   drawNightmareFog(c,s,art);
  }
- if(s.level.villageTrail){drawVillageScenery(c,s,art);drawVillageObstacles(c,s,art);drawVillageRubble(c,s,art);}
+ if(s.level.villageTrail){drawVillageScenery(c,s,art);drawVillageCarriages(c,s,art,reduced);drawVillageObstacles(c,s,art);drawVillageRubble(c,s,art);drawHarvesterBroom(c,s,art,reduced);}
  drawAquaGround(c,s,art,reduced);
  if(s.level.riverRoute)drawRiverPierWater(c,s,art,reduced);
  // Playable boats and swimmers occupy the channel in front of the supports.
@@ -467,16 +475,17 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   if(e.emerging>0&&e.fortCrew){c.beginPath();c.rect(e.hatchX-500,e.y-150,535,160);c.clip();c.filter='brightness('+(Math.min(1,.4+(e.hatchX-e.x)/125*.6))+')';}
   else if(e.emerging>0&&e.campTent!==undefined)c.filter='brightness('+(1-e.emerging/1.1*.55)+')';
   else if(e.emerging>0)c.globalAlpha=Math.max(.2,1-e.emerging/.8);
-  if(!e.elementHit&&((e.flash>0&&(reduced||Math.floor(e.flash*25)%2===0))||([7,8,10,11,13,14,18,19,20,21,22,24].includes(e.type)?e.hp<=0&&(e.deathAge||0)<.08:e.deadTime>.47)))c.filter='brightness(2.8) saturate(.15)';
-  if(e.hp<=0&&e.type>=18)c.globalAlpha*=Math.max(0,Math.min(1,((e.type===22?3:[18,21].includes(e.type)?1.9:1.15)-(e.deathAge||0))/.45));
+  if(!e.elementHit&&((e.flash>0&&(reduced||Math.floor(e.flash*25)%2===0))||([7,8,10,11,13,14,18,19,20,21,22,24,28].includes(e.type)?e.hp<=0&&(e.deathAge||0)<.08:e.deadTime>.47)))c.filter='brightness(2.8) saturate(.15)';
+  if(e.hp<=0&&e.type>=18&&e.type!==28&&!e.charred)c.globalAlpha*=Math.max(0,Math.min(1,((e.type===22?3:[18,21].includes(e.type)?1.9:1.15)-(e.deathAge||0))/.45));
   if(e.type===19&&e.ghostForm!=='sheet')c.globalAlpha*=.82;
   if(e.type===19&&e.phase==='vanish')c.globalAlpha*=Math.max(0,e.timer/.5);
   if(e.type===19&&['appear','soulRise'].includes(e.phase))c.globalAlpha*=Math.min(1,1-e.timer/(e.phase==='appear'?.75:1.3));
   if(e.phase==='manifest'&&s.graves?.find(q=>q.index===e.graveId)?.kind==='crypt'){c.filter='brightness('+(Math.min(1,.25+e.nightmareAge*.6))+')';c.globalAlpha*=Math.min(1,e.nightmareAge/.3);}
-  const drawing=enemyDrawing(e,reduced);
+  const drawing=enemyDrawing(e,reduced);electricBodyFilter(c,e,reduced);
   if(e.hp>0&&(e.orbitEscort||e.rapidLantern&&e.phase==='windup'))paintMagicLight(c,e.x,e.y-(e.orbitEscort?25:76),e.orbitEscort?52:58,'#40cfff',e.phase==='windup'?.58:.22);
   if(drawing.key==='juggler-walk-parts')drawJugglerWalk(c,e,art,size,reduced);
   else if(e.type===7)drawZeppelin(c,e,art,reduced);else if(e.type===8)drawAquaticEnemy(c,e,art,reduced);else sprite(c,art[drawing.key],drawing.frame,e.x+(e.type===14?e.dir*size*.18:0),e.y+(e.type===14?1:0),(drawing.size||size)*(e.phase==='manifest'?(e.cryptScale||1):1)*(drawing.key==='clown-ribbon'?.8:1),e.dir>0);c.restore();
+  drawElectricReaction(c,e,reduced);if(e.type===28)drawHarvesterLight(c,s,e,reduced);
   if(e.trap){const frame=reduced?0:Math.floor(s.time*7)%4,bw=Math.max(w*1.65,h*1.35),bh=h*1.35;c.save();c.globalAlpha=.65;c.drawImage(art['trap-bubble'],frame*256,0,256,256,e.x-bw/2,e.y-h/2-bh/2,bw,bh);c.restore();}
   if(s.level.nightmareTrail&&e.nightmareGrave>=0)drawNightmareGraveFront(c,s,e,art);
 
@@ -485,8 +494,9 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  }
  if(s.level.nightmareTrail){drawNightmareWind(c,s,art,reduced);drawNightmareTelegraphs(c,s,art,reduced);}
  const b=s.boss;
+ if(s.level.actTwo)drawActTwoEncounter(c,s,art,reduced);
  if(s.index===1&&b.phase!=='sleep')drawOrgan(c,s,art,reduced);
- if(!s.level.villageTrail&&s.index!==5&&b.phase!=='sleep'&&(b.hp>0||b.defeat||(b.deadTime||0)<1.8)){
+ if(!s.level.actTwo&&!s.level.villageTrail&&s.index!==5&&b.phase!=='sleep'&&(b.hp>0||b.defeat||(b.deadTime||0)<1.8)){
   if(!b.shattered&&s.index!==2)shadow(c,b.x,s.level.arena.y,s.index===0?85:40,.22,s.ringPerspective);
   c.save();if(b.hp<=0&&!b.defeat)c.globalAlpha=Math.max(0,1-(b.deadTime||0)/1.8);
   c.filter=bossHitFilter(b,reduced);
@@ -507,7 +517,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  }
  // A leaping clown crosses in front of the basket instead of disappearing
  // behind the balloon artwork during the first half of its jump.
- for(const e of s.enemies)if(e.type===6){const drawing=enemyDrawing(e,reduced);sprite(c,art[drawing.key],drawing.frame,e.x,e.y,enemyGeometry(e).size,e.dir>0);}
+ for(const e of s.enemies)if(e.type===6){const drawing=enemyDrawing(e,reduced);c.save();electricBodyFilter(c,e,reduced);if(e.hp<=0)c.globalAlpha=Math.min(1,e.deadTime*3);sprite(c,art[drawing.key],drawing.frame,e.x,e.y,enemyGeometry(e).size,e.dir>0);c.restore();drawElectricReaction(c,e,reduced);}
  if(s.clear&&s.clear.age>.5){const q=s.clear,drop=Math.max(0,1-(q.age-.5)/.7)*22;drawCheckpoint(c,art['victory-flag'],reduced?0:Math.floor(s.fxTime*7)%4,q.flagX,q.flagY-drop,125);}
  drawCoaster(c,s,art);
  drawCreativeFields(c,s,art,reduced);
@@ -538,6 +548,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  }
  drawAquaJet(c,s,art,reduced);
  for(const q of s.hostile){
+  if(drawActTwoProjectile(c,q,art))continue;
   if(drawVillageProjectile(c,q,art,s))continue;
   if(q.life<=0||q.rain==='wait'||q.kind==='ember-blast')continue;
   if(q.kind==='bone'){drawNightmareBone(c,art,q.boneFrame,q.x,q.y,q.boneFrame===11?30:23,q.age*8);continue;}
@@ -618,6 +629,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   if(pet.ground!==null)shadow(c,pet.x,pet.y,12,.13);
   sprite(c,drawing,pose,pet.x,pet.y-2,40,pet.dir<0);
  }
+ if(s.level.actTwo)drawActTwoDust(c,s,art);
  if(s.level.villageTrail){drawVillageFog(c,s,art,reduced);drawVillageResistance(c,s,art);}
  for(const q of s.effects)if(q.popcornPoof)drawPopcornPoof(c,q,art,reduced);else if(q.popcornBlast)drawPopcornBlast(c,q,art,reduced);else if(q.diveKick)drawDiveKick(c,q,art,reduced);else if(q.springBounce)drawSpringBounce(c,q);else if(q.confetti||q.reply)drawTacticalFX(c,q,reduced);else if(q.drinkArc)drawDrinkArc(c,q,art,reduced);else if(q.drinkFx!==undefined)drawCreativeImpact(c,q,art,reduced);else if(q.aqua||q.spell===5)drawAquaSplash(c,q,art,reduced);else if(q.fullheal)drawVitalHeart(c,art,q.x,q.y-q.age*35,q.size*(1-q.age/.8*.3));else if(q.waterDrop||q.waterDetail!==undefined)drawWaterEffect(c,art,q,reduced);else if(q.fireBurst)drawFireImpact(c,art,q,reduced);else if(q.cinematicSmoke)drawCinematicSmoke(c,art,q);else if(q.clashDust)drawClashDust(c,art,q);else if(q.harlequin)drawHarlequinFX(c,art,2,Math.min(3,Math.floor(q.age/.14)),q.x,q.y,q.size);else if(q.bargeSplash)drawBargeSplash(c,art,q,reduced);else if(!q.defense)sprite(c,q.armor?art['armor-ricochet']:q.super?art['super-star']:q.spell!==undefined?art[specialArt(q.spell)]:q.dragon?art.dragon:art.impacts,(q.armor?0:q.super?8:q.spell!==undefined||q.dragon?4:q.row*4)+Math.min(3,Math.floor(q.age/.08)),q.x,q.y,q.size,false,true);
  for(const q of s.particles){c.globalAlpha=Math.min(1,q.life*3);sprite(c,art['collectible-star'],0,q.x,q.y,11,false,true);}c.globalAlpha=1;
@@ -625,14 +637,14 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  if(s.level.villageTrail)drawVillageGate(c,s,art,true);c.restore();
  c.restore();
  if(s.level.villageTrail)drawVillageForeground(c,s,art);
- drawClashScreenFlash(c,s,reduced);
+ drawClashScreenFlash(c,s,reduced);drawPopcornScreenFlash(c,s,reduced);
  drawInfernoForeground(c,s,art,reduced);
  if(s.level.emberTrail)drawEmberForeground(c,s,art,reduced);
  if(outside)drawCampForeground(c,s,art);
  if(s.level.nightmareTrail)drawNightmareForeground(c,s,art);
  if(b.phase!=='sleep'&&b.hp>0){
   if(b.phase==='intro'&&s.index<=3){c.save();c.globalAlpha=Math.min(1,Math.max(0,(b.arrival?.age||0)-1.8));c.textAlign='center';c.font='bold 22px sans-serif';c.lineWidth=5;c.strokeStyle='#382440';c.fillStyle='#fff0c7';c.strokeText(s.level.bossName[en?1:0],480,120);c.fillText(s.level.bossName[en?1:0],480,120);c.restore();}
-  else if(b.phase==='intro'&&!s.level.nightmareTrail){round(c,180,150,600,120,22,'#382440ed','#f2c187');c.textAlign='center';c.fillStyle='#ffdd97';c.font='bold 19px sans-serif';c.fillText(en?'THE NEXT ACTâ€¦':'EL SIGUIENTE NÃšMEROâ€¦',480,186);c.fillStyle='#fff0c7';c.font='bold 28px sans-serif';c.fillText(s.level.bossName[en?1:0],480,227);}
+  else if(b.phase==='intro'&&!s.level.nightmareTrail){round(c,180,150,600,120,22,'#382440ed','#f2c187');c.textAlign='center';c.fillStyle='#ffdd97';c.font='bold 19px sans-serif';c.fillText(en?'THE NEXT ACT...':'EL SIGUIENTE NÚMERO...',480,186);c.fillStyle='#fff0c7';c.font='bold 28px sans-serif';c.fillText(s.level.bossName[en?1:0],480,227);}
  }
  paintOriginalScreen(c,s,art,reduced);paintPowerScreen(c,s,art,reduced);
  const cutin=drawSuperCutin(c,s,art,reduced,en);

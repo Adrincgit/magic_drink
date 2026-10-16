@@ -1,3 +1,4 @@
+import {worldSound} from './adventureWorldAudio';
 import {groundY,surfaceY} from '../world/adventureTerrain';
 import {makeEnemy} from '../actors/enemies/adventureEnemies';
 
@@ -32,7 +33,7 @@ function breakVillageObstacle(s,r){
  r.broken=true;r.hp=0;r.breakAge=0;
  const platform=villageObstaclePlatform(s,r);if(platform){platform.gone=true;if(s.platforms[s.player.ground]===platform)s.player.ground=null;}
  for(let i=0;i<(r.blockade?18:9);i++)s.villageDebris.push({x:r.x+(i%3-1)*r.w*.24,y:r.y-r.h*.55,vx:(i%9-4)*44,vy:-160-(i%4)*48,age:0,life:1.6,spin:(i%2?1:-1)*(4+i*.5),rotation:i,key:r.blockade?'village-collapse-v10':'village-obstacles-v8',frame:r.blockade?6+i%2:12+i%4,size:(r.blockade?36:25)+i%3*8});
- s.hitStop=Math.max(s.hitStop,.045);s.shake=Math.max(s.shake,.12);s.events.push('popcornLand');
+ s.hitStop=Math.max(s.hitStop,.045);s.shake=Math.max(s.shake,.12);worldSound(s,r.blockade?'wallCollapse':r.kind==='wagon'?'wagonBreak':'woodBreak',r.x,r.y);
 }
 function segmentBox(q,b){
  let lo=0,hi=1;for(const [a,d,min,max] of [[q.previousX??q.x,q.x-(q.previousX??q.x),b.x,b.x+b.w],[q.previousY??q.y,q.y-(q.previousY??q.y),b.y,b.y+b.h]]){if(Math.abs(d)<1e-8){if(a<min||a>max)return false;}else{const x=(min-a)/d,y=(max-a)/d;lo=Math.max(lo,Math.min(x,y));hi=Math.min(hi,Math.max(x,y));if(lo>hi)return false;}}return true;
@@ -42,7 +43,7 @@ export function hitVillageObstacles(s,shot,radius=0){
  const candidates=(s.villageObstacles||[]).filter(r=>!r.broken&&!(shot.obstacleHits||[]).includes(r.id)&&segmentBox(shot,{x:r.x-r.w/2-radius,y:r.y-r.h-radius,w:r.w+radius*2,h:r.h+radius*2})).sort((a,b)=>Math.abs(a.x-(shot.previousX??shot.x))-Math.abs(b.x-(shot.previousX??shot.x)));
  for(const r of candidates){
   (shot.obstacleHits??=[]).push(r.id);r.hp-=shot.damage||1;r.hit=.18;
-  if(r.hp<=0)breakVillageObstacle(s,r);else s.events.push('impact');
+  if(r.hp<=0)breakVillageObstacle(s,r);else worldSound(s,r.blockade?'rubbleHit':'woodHit',r.x,r.y);
   // A normal projectile meets a real solid surface; strong casts can break
   // through and keep travelling. Popcorn pellets share one physical cast.
   if(!shot.heavy&&!shot.piercing&&!shot.popcornStrong){shot.life=0;break;}

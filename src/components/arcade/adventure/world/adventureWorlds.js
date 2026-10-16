@@ -1,4 +1,5 @@
 import {VILLAGE_WORLD} from './adventureVillage';
+import {ACT_TWO_WORLDS} from './adventureActTwo';
 // Art, sound and scenery belong to the chapter; combat geometry stays in LEVELS.
 import {NIGHTMARE_WORLD} from './adventureNightmareTrail';
 const art=name=>{const [world,part]=name.split('-');return '/arcade/maps/'+world+'/'+(part==='mid'?'midground':part||'background')+'.webp';};
@@ -25,6 +26,7 @@ export const WORLDS=[
   music:{explore:{key:'ember-trail',title:'El bosque de las brasas',src:'/arcade/music/exploration/ember-trail.mp3'},boss:{key:'agresivo',title:'El Bastión de las Antorchas'}}},
 ].map(world=>({...world,ground:world.ground||(world.key==='meadow'?'/arcade/maps/meadow/ground.webp':art(world.key+'-ground'))}));
 WORLDS.push(NIGHTMARE_WORLD,VILLAGE_WORLD);
+WORLDS.push(...ACT_TWO_WORLDS);
 
 export function adventureMusic(index,phase,boss=false,won=false){
  if(phase==='ready'||phase==='loading')return{key:'title',src:'/arcade/music/title.ogg',loop:true,title:'Una estrella abre el cuento'};

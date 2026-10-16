@@ -1,6 +1,16 @@
-# 5-2 · El pueblo de los dulces
+# 2-2 · El pueblo de los dulces
 
-Estado actual: [revisión 10, 15/10/2026](revision-10/README.md): catorce vecinos se acumulan ante un derrumbe resistente e intentan trepar mientras la cámara se aleja y llegan brujas y calabazas. Los dulces se liberan automáticamente a los 30 segundos; las advertencias miran a Hexy y sólo ocurren antes del pueblo. Se conservan los séquitos, escondites y reparto de blancos de la [revisión 9](revision-9/README.md), los obstáculos, rescates, absorción, luces y polvo de la [revisión 8](revision-8/README.md), y las correcciones anteriores.
+Numeración vigente desde el **16/10/2026**: segundo nivel del acto 2, Halloween. Antes se mostró como 5-2. La carpeta y los recursos conservan su ruta histórica; el ID de guardado sigue siendo 7. Véase la [campaña aprobada](../CAMPANA.md).
+
+Estado actual: [revisión 15, 16/10/2026](revision-15/README.md): la Cosechera termina su ritual, es un 15 % más pequeña y tiene una segunda fase con llegada de escoba, montaje, despegue, vuelos y tres patrones de magia aérea. Carroza inicial más pequeña detrás de Miso; piedras reales sincronizadas; advertencias más claras de adultos hacia Hexy; retirada la secuencia de caída y ayuda.
+
+La [revisión 14](revision-14/README.md) incorporó absorción simultánea de todos los dulces cercanos, incluida Hexy, y una calabaza por víctima. Los golpes no interrumpen el ritual; derrotar a la bruja libera a sus cautivos. Voces reducidas unos 4 dB, conservando las grabaciones, su control independiente y el disparo básico de Hexy.
+
+La [revisión 13](revision-13/README.md) incorporó grabaciones de criaturas, volumen independiente de voces, flash breve de Popcorn e impulso aéreo calculado. La [revisión 12](revision-12/README.md) añadió sprites de Volt con reflejos azules dibujados, ocho poses de retroceso aéreo de Popcorn y respuesta física; FX de brujas, transformaciones, absorción y destrucción.
+
+La [revisión 11, 15/10/2026](revision-11/README.md) incorporó ataques iluminados y sonidos por familia, Volt III con ramificaciones y derrotas carbonizadas, retroceso de Popcorn y la Cosechera de Dulces como minijefe del refugio.
+
+Estado anterior: [revisión 10, 15/10/2026](revision-10/README.md): catorce vecinos se acumulan ante un derrumbe resistente e intentan trepar mientras la cámara se aleja y llegan brujas y calabazas. Los dulces se liberan automáticamente a los 30 segundos; las advertencias miran a Hexy y sólo ocurren antes del pueblo. Se conservan los séquitos, escondites y reparto de blancos de la [revisión 9](revision-9/README.md), los obstáculos, rescates, absorción, luces y polvo de la [revisión 8](revision-8/README.md), y las correcciones anteriores.
 
 ## Historial: primera entrega
 

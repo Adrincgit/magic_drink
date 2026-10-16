@@ -14,21 +14,22 @@ export function drawVillageDestruction(c,s,art){
 }
 export function drawVillageAbsorption(c,s,art,reduced){
  for(const e of s.enemies){
-  if(e.type!==26||e.hp<=0)continue;
+  if(![26,28].includes(e.type)||e.hp<=0)continue;
   const capturing=['absorb','absorb-player'].includes(e.phase),launch=e.releasePulse>0;if(!capturing&&!launch)continue;
-  const v=launch&&e.releasePoint?e.releasePoint:witchVessel(e),owner=witchId(e),victim=s.villagers.find(q=>q.curseOwner===owner&&q.state==='absorbing'),hexy=s.player.candy?.absorber===owner?s.player:null,source=victim||hexy;
-  const age=e.phaseAge||0,frame=reduced?1:Math.floor(s.time*14)%4;
-  if(source){
-   const start={x:source.x,y:source.y-(hexy?27:12)},dx=v.x-start.x,dy=v.y-start.y,d=Math.hypot(dx,dy),angle=Math.atan2(dy,dx);
-   if(d>14){c.save();c.translate(start.x,start.y);c.rotate(angle);c.globalCompositeOperation='screen';c.globalAlpha=.8;const img=art['village-absorb-fx-v8'],n=img.width/4;c.drawImage(img,frame*n,0,n,n,0,-28,d,56);c.restore();}
-   for(let i=0;i<5;i++){const t=(s.time*1.5+i/5)%1,x=start.x+dx*t,y=start.y+dy*t+Math.sin(t*Math.PI*3+s.time*8)*8*(1-t);cell(c,art['village-absorb-fx-v8'],8+frame,x,y,13,13,true);}
+  const v=witchVessel(e),owner=witchId(e),victims=s.villagers.filter(q=>q.curseOwner===owner&&['absorbing','absorbed'].includes(q.state)),hexy=s.player.candy?.absorber===owner&&!s.player.candy.pumpkin?s.player:null;
+  const sources=victims.filter(q=>q.state==='absorbing');if(hexy)sources.push(hexy);
+  const frame=reduced?1:Math.floor(s.time*14)%4;
+  for(const [index,source] of sources.entries()){
+   const start={x:source.x,y:source.y-(source===hexy?27:12)},dx=v.x-start.x,dy=v.y-start.y,d=Math.hypot(dx,dy),angle=Math.atan2(dy,dx);
+   if(d>14&&art['village-absorb-fx-v8']){c.save();c.translate(start.x,start.y);c.rotate(angle);c.globalCompositeOperation='screen';c.globalAlpha=Math.max(.35,.8/Math.sqrt(sources.length));const img=art['village-absorb-fx-v8'],n=img.width/4;c.drawImage(img,frame*n,0,n,n,0,-28,d,56);c.restore();}
+   for(let i=0;i<(reduced?2:5);i++){const t=(s.time*1.5+i/5+index*.17)%1,x=start.x+dx*t,y=start.y+dy*t+Math.sin(t*Math.PI*3+s.time*8+index)*8*(1-t);cell(c,art['village-absorb-fx-v8'],8+frame,x,y,13,13,true);}
    paintMagicLight(c,start.x,start.y,54,'#a968ff',.6);
   }
   if(capturing){
    paintMagicLight(c,v.x,v.y,78,'#ba57ff',.65);c.save();c.globalCompositeOperation='screen';cell(c,art['village-absorb-fx-v8'],4+frame,v.x,v.y,v.size*1.45,v.size*1.45,true);c.restore();
-   const charge=e.phase==='absorb'?Math.max(0,Math.min(1,(age-1.8)/.8)):Math.max(0,Math.min(1,(s.player.candy?.absorbProgress||0)-.5)*2);
+   const charge=Math.max(0,...victims.map(q=>Math.min(1,Math.max(0,((q.absorbProgress||0)-.55)/.45))),hexy?Math.max(0,Math.min(1,(hexy.candy.absorbProgress-.5)*2)):0);
    if(charge>0){paintMagicLight(c,v.x,v.y,100,'#ffb13b',charge*.9);c.save();c.globalCompositeOperation='screen';c.globalAlpha=charge;cell(c,art['village-absorb-fx-v8'],8+frame,v.x,v.y-5,v.size*1.85,v.size*1.85,true);c.restore();}
   }
-  if(launch){paintMagicLight(c,v.x,v.y,120,'#ffb444',e.releasePulse*1.5);cell(c,art['village-absorb-fx-v8'],12+Math.min(3,Math.floor((.55-e.releasePulse)/.55*4)),v.x+e.dir*18,v.y-20,110,110,true,e.dir<0);}
+  if(launch){const point=e.releasePoint||v;paintMagicLight(c,point.x,point.y,120,'#ffb444',e.releasePulse*1.5);cell(c,art['village-absorb-fx-v8'],12+Math.min(3,Math.floor((.55-e.releasePulse)/.55*4)),point.x+e.dir*18,point.y-20,110,110,true,e.dir<0);}
  }
 }

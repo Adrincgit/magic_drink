@@ -1,5 +1,11 @@
 # Hexy: documento vivo de diseño
 
+## Decisión vigente de campaña — 16/10/2026
+
+La guía aprobada es [CAMPANA.md](CAMPANA.md): **6 actos de 5 niveles**, cuatro recorridos con minijefe y un enfrentamiento principal por acto. Los primeros cuatro jefes principales son arlequines; el quinto es Mr. Eclipse y, tras su derrota y la revelación, el sexto es la Bruja. Halloween pasa al **acto 2**: cementerio **2-1** y pueblo **2-2**, conservando los IDs internos 6 y 7. Las referencias inferiores a Halloween como acto 5 y a estructuras de tres o cuatro niveles son antecedentes históricos sustituidos por esta decisión.
+
+La guía del equipamiento actual está en [MAGIC_DRINKS_Y_AMULETOS.md](MAGIC_DRINKS_Y_AMULETOS.md), contrastada con el catálogo y el motor vigentes. Las notas de balance inferiores se conservan como historial y no sustituyen sus valores actuales.
+
 [Revision vigente del 1-4: recorrido de 36.000 unidades, escupefuego, bosque con pendientes y fortaleza en dos fases](ember-fort/wildfire.md).
 
 **Revisión vigente, 9 de octubre de 2026:** el primer acto incorpora el **1-4, El bosque de las brasas**, con bosque progresivamente quemado, escupefuegos, fuerte con cañones destruibles y entrada terrestre al circo. Después de combatir en los bastidores se pasa al **1-5**, la batalla existente del Arlequín. Se conservan los identificadores internos y las monedas cobradas. La antigua conexión directa del muelle con la carpa y las referencias al Arlequín como 1-4 quedan sustituidas por esta decisión del usuario. Los actos posteriores siguen sin reordenarse.

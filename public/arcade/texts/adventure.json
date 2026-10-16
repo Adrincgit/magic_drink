@@ -134,5 +134,13 @@
   "villagePumpkinRescue": [
     "¡Rompe las calabazas voladoras para liberar a los vecinos atrapados!",
     "Break the flying pumpkins to free the trapped villagers!"
+  ],
+  "harvesterArrival": [
+    "La Cosechera de Dulces impide llegar al refugio.",
+    "The Candy Harvester blocks the refuge."
+  ],
+  "harvesterDefeated": [
+    "El farol se ha roto. ¡El refugio está libre!",
+    "The lantern is broken. The refuge is free!"
   ]
 }

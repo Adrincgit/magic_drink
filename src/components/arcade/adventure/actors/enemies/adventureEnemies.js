@@ -1,3 +1,6 @@
+import {enemyCastSound,stepCreatureVoice} from '../../engine/adventureWorldAudio';
+import {isActTwoEnemy,stepActTwoEnemy} from './adventureActTwoEnemies';
+import {stepActTwoBoss,actTwoBossBody} from '../bosses/adventureActTwoBosses';
 import {stepFallingPumpkin} from '../../engine/villagePumpkins';
 import {stepFallingWitch} from '../../engine/villageRescue';
 import {stepPopcornDefeat} from '../../engine/adventurePopcornDefeat';
@@ -32,8 +35,8 @@ import {RIVER_BOAT_TYPE,updateRiverBoat,stepRiverBoatDefeat} from './adventureRi
 import {HARLEQUIN_MOVES,harlequinBody,updateHarlequin} from '../bosses/adventureHarlequin';
 const TAU=Math.PI*2;
 export const ENEMY_HEALTH_MULTIPLIER=1.15;
-export function makeEnemy(x,y,type=0,seed=0){const hp=type===25?9.2:type===26?11.5:type===27?3:[18,21].includes(type)?ZOMBIE_HEALTH:type===19?GHOST_HEALTH:type===24?HAND_HEALTH:Math.round((type===20?120:type===22?20:type===ZEPPELIN_TYPE?ZEPPELIN_HEALTH:type===RIVER_BOAT_TYPE?9.5:type===FIRE_WAGON?18:[10,11,13].includes(type)?4.4:type===14?6:type===5?9:type===1||type===4?9:type===2?5:4)*ENEMY_HEALTH_MULTIPLIER*100)/100;return {x,y,home:x,baseY:y,type,spawnSeed:seed,...(type===19?{ghostForm:'clown'}:{}),dir:type===ZEPPELIN_TYPE?1:seed%2?1:-1,hp,maxHp:hp,clock:seed*.37,timer:1+seed*.23,phase:'patrol',action:0,deadTime:0,trap:0,flash:0,vy:0};}
-export function enemyShot(s,x,y,angle,speed,kind='ball',extra={}){s.hostile.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,r:kind==='bomb'?15:kind==='ring'?17:10,life:5,age:0,kind,...extra});}
+export function makeEnemy(x,y,type=0,seed=0){const hp=type===29?9.2:type===30?11.5:type===31?16.1:type===32?4.6:type===28?185:type===25?9.2:type===26?11.5:type===27?3:[18,21].includes(type)?ZOMBIE_HEALTH:type===19?GHOST_HEALTH:type===24?HAND_HEALTH:Math.round((type===20?120:type===22?20:type===ZEPPELIN_TYPE?ZEPPELIN_HEALTH:type===RIVER_BOAT_TYPE?9.5:type===FIRE_WAGON?18:[10,11,13].includes(type)?4.4:type===14?6:type===5?9:type===1||type===4?9:type===2?5:4)*ENEMY_HEALTH_MULTIPLIER*100)/100;return {x,y,home:x,baseY:y,type,spawnSeed:seed,...(type===19?{ghostForm:'clown'}:{}),dir:type===ZEPPELIN_TYPE?1:seed%2?1:-1,hp,maxHp:hp,clock:seed*.37,timer:1+seed*.23,phase:'patrol',action:0,deadTime:0,trap:0,flash:0,vy:0};}
+export function enemyShot(s,x,y,angle,speed,kind='ball',extra={}){s.hostile.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,r:kind==='bomb'?15:kind==='ring'?17:10,life:5,age:0,kind,...extra});enemyCastSound(s,kind,x,y);}
 export function updateEnemies(s,dt,hit,defeat){
  const p=s.player;
  stepClownBoosters(s,dt);stepGraveyard(s,dt,makeEnemy);
@@ -41,12 +44,12 @@ export function updateEnemies(s,dt,hit,defeat){
   if(e.hp<=0&&stepFallingPumpkin(s,e,dt))continue;
   if(e.hp<=0&&stepFallingWitch(s,e,dt))continue;
   if(e.hp<=0&&stepPopcornDefeat(s,e,dt,makeEnemy))continue;
-  if(s.level.nightmareTrail||s.level.villageTrail)shedZombieParts(s,e,makeEnemy);
+  if(!e.charred&&(s.level.nightmareTrail||s.level.villageTrail))shedZombieParts(s,e,makeEnemy);
   stepElementHit(e,dt);
   if(stepRibbonControl(s,e,dt))continue;
-  if(e.hp<=0){if(isNightmare(e))stepNightmareDefeat(s,e,dt,makeEnemy);else if(e.type===13&&e.defeated)stepEmberBalloonDefeat(s,e,dt);else if(e.type===ZEPPELIN_TYPE&&e.defeated)stepZeppelinDefeat(s,e,dt);else if(e.type===DIVER_TYPE&&e.defeated)stepDiverDefeat(s,e,dt);else if(e.type===RIVER_BOAT_TYPE&&e.defeated)stepRiverBoatDefeat(s,e,dt);else{e.deadTime=Math.max(0,e.deadTime-dt);e.deathAge=(e.deathAge||0)+dt;}continue;}
+  if(e.hp<=0){if(e.charred){e.deadTime=Math.max(0,e.deadTime-dt);e.deathAge+=dt;}else if(isNightmare(e))stepNightmareDefeat(s,e,dt,makeEnemy);else if(e.type===13&&e.defeated)stepEmberBalloonDefeat(s,e,dt);else if(e.type===ZEPPELIN_TYPE&&e.defeated)stepZeppelinDefeat(s,e,dt);else if(e.type===DIVER_TYPE&&e.defeated)stepDiverDefeat(s,e,dt);else if(e.type===RIVER_BOAT_TYPE&&e.defeated)stepRiverBoatDefeat(s,e,dt);else{e.deadTime=Math.max(0,e.deadTime-dt);e.deathAge=(e.deathAge||0)+dt;}continue;}
   if(e.boosterEntry||e.boosterHidden){e.flash=Math.max(0,e.flash-dt);continue;}
-  const previousX=e.x;e.previousY=e.y;const step=dt*(e.snare>0?.28:1);e.snare=Math.max(0,(e.snare||0)-dt);e.honeyed=Math.max(0,(e.honeyed||0)-dt);e.ribbonBound=Math.max(0,(e.ribbonBound||0)-dt);
+  const previousX=e.x;e.previousY=e.y;const step=dt*(e.elementHit?.element==='electric'?.32:e.snare>0?.28:1);e.snare=Math.max(0,(e.snare||0)-dt);e.honeyed=Math.max(0,(e.honeyed||0)-dt);e.ribbonBound=Math.max(0,(e.ribbonBound||0)-dt);
   if(e.ribbonStagger>0){e.ribbonStagger=Math.max(0,e.ribbonStagger-dt);e.flash=Math.max(0,e.flash-dt);continue;}
   if(e.jellyLift>0){
    e.jellyLift-=dt;e.vy+=850*dt;e.y+=e.vy*dt;e.phase='jump';e.flash=Math.max(0,e.flash-dt);
@@ -63,11 +66,13 @@ export function updateEnemies(s,dt,hit,defeat){
   const trapped=e.trap>0;if(trapped){e.trap=Math.max(0,e.trap-dt);e.trapX??=e.x;e.trapY??=e.y;e.x=e.trapX;e.y=e.trapY;}else{e.trapX=null;e.trapY=null;}
   if(e.landing>0){e.landing=Math.max(0,e.landing-dt);continue;}
   const floor=s.level.groundRoute?null:s.platforms.find(q=>e.x>=q.x&&e.x<=q.x+q.w&&Math.abs(q.baseY-e.baseY)<8);
-  if(s.level.groundRoute&&e.type!==2&&e.type!==13&&e.type!==ZEPPELIN_TYPE&&e.type!==RIVER_BOAT_TYPE)e.baseY=groundY(isNightmare(e)?s.level.route:s.platforms,e.x,e.baseY);
+  if(s.level.groundRoute&&!isActTwoEnemy(e)&&e.type!==2&&e.type!==13&&e.type!==ZEPPELIN_TYPE&&e.type!==RIVER_BOAT_TYPE)e.baseY=groundY(isNightmare(e)?s.level.route:s.platforms,e.x,e.baseY);
   const aim=enemyAimTarget(s,e),near=Math.abs(e.x-aim.x)<650;
   if(e.fleeing){stepFleeingClown(s,e,step);continue;}
+  stepCreatureVoice(s,e,dt);
   if(isNightmare(e)){stepNightmare(s,e,step,hit);continue;}
-  if(isVillageEnemy(e))stepVillageEnemy(s,e,step,enemyShot);
+  if(isActTwoEnemy(e))stepActTwoEnemy(s,e,step,enemyShot);
+  else if(isVillageEnemy(e))stepVillageEnemy(s,e,step,enemyShot);
   else if(e.type===ZEPPELIN_TYPE)updateZeppelin(s,e,step,enemyShot);
   else if(e.type===DIVER_TYPE)updateDiver(s,e,step,enemyShot);
   else if(e.type===RIVER_BOAT_TYPE)updateRiverBoat(s,e,step,enemyShot);
@@ -142,6 +147,7 @@ export const BOSS_MOVES=[['streamers','balls','bombs','drop'],ORGAN_MOVES,BARGE_
 export const towerSockets=organMouths;
 export function bossTargets(s){return s.level.nightmareTrail?[enemyBody(s.boss)]:s.index===5?fortTargets(s):s.index===2?bargeTargets(s):s.index===1?organTargets(s):[bossHitbox(s)];}
 export function updateBoss(s,dt,helpers){
+ if(s.level.actTwo)return stepActTwoBoss(s,dt,{...helpers,makeEnemy,shoot:enemyShot});
  if(s.level.villageTrail)return;
  if(s.level.nightmareTrail)return updateNightmareBoss(s,dt,{...helpers,makeEnemy});
  const {say,particles}=helpers,b=s.boss,p=s.player,a=s.level.arena,center=(a.left+a.right)/2;
@@ -221,5 +227,5 @@ export function updateBoss(s,dt,helpers){
  const target=bossHitbox(s),player=helpers.body(p);
  if(player.x<target.x+target.w&&player.x+player.w>target.x&&player.y<target.y+target.h&&player.y+player.h>target.y)s.damage({x:b.x,heavyImpact:b.move==='slam'&&b.phase==='attack'});
 }
-export function bossHitbox(s){const b=s.boss;return s.index===3?harlequinBody(s):s.index===2?bargeCollision(s):s.index===1?organCollision(s):s.index===0?{x:b.x-BALLOON_SIZE*.39,y:b.y-BALLOON_SIZE*.85,w:BALLOON_SIZE*.78,h:BALLOON_SIZE*.85}: {x:b.x-43,y:b.y-108,w:86,h:108};}
+export function bossHitbox(s){const b=s.boss;return s.level.actTwo?actTwoBossBody(s):s.index===3?harlequinBody(s):s.index===2?bargeCollision(s):s.index===1?organCollision(s):s.index===0?{x:b.x-BALLOON_SIZE*.39,y:b.y-BALLOON_SIZE*.85,w:BALLOON_SIZE*.78,h:BALLOON_SIZE*.85}: {x:b.x-43,y:b.y-108,w:86,h:108};}
 import {beginBossArrival,stepBossArrival} from '../bosses/adventureArrival';

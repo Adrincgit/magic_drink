@@ -26,9 +26,23 @@ const number=async(page,key)=>Number(await page.locator('[data-adventure-canvas]
 async function range(page,key,value){await page.locator('[data-audio-volume='+key+']').evaluate((el,value)=>{Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(el,String(value));el.dispatchEvent(new Event('input',{bubbles:true}));},value);await expect(page.locator('[data-audio-volume='+key+']')).toHaveValue(String(value));}
 
 test('audio preferences clamp invalid saves without losing independent zero volumes',()=>{
- expect(sanitizeAudioSettings({master:-4,music:NaN,effects:240,muted:'false'})).toEqual({master:0,music:70,effects:100,muted:false});
- expect(sanitizeAudioSettings({master:0,music:0,effects:0,muted:true})).toEqual({master:0,music:0,effects:0,muted:true});
- expect(sanitizeAudioSettings(null)).toEqual({master:70,music:70,effects:100,muted:false});
+ expect(sanitizeAudioSettings({master:-4,music:NaN,effects:240,muted:'false'})).toEqual({master:0,music:70,effects:100,voices:60,muted:false});
+ expect(sanitizeAudioSettings({master:0,music:0,effects:0,muted:true})).toEqual({master:0,music:0,effects:0,voices:60,muted:true});
+ expect(sanitizeAudioSettings(null)).toEqual({master:70,music:70,effects:100,voices:60,muted:false});
+});
+
+test('voices migrate, persist and adjust independently from effects and music',async({page})=>{
+ expect(sanitizeAudioSettings({voices:0}).voices).toBe(0);expect(sanitizeAudioSettings({voices:250}).voices).toBe(100);
+ await setup(page);await page.locator('[data-open-settings]').click();await expect(page.locator('[data-audio-volume=voices]')).toHaveValue('60');
+ await range(page,'master',40);await range(page,'voices',25);await range(page,'effects',0);
+ await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(0,3);
+ await expect.poll(()=>page.evaluate(()=>window.arcadeGains[2].gain.value)).toBeCloseTo(.7*.4*.25,3);
+ await expect(page.getByRole('button',{name:'Probar voces'})).toBeEnabled();await page.getByRole('button',{name:'Probar voces'}).click();
+ await range(page,'voices',0);await range(page,'effects',80);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[2].gain.value)).toBeCloseTo(0,3);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(.7*.4*.8,3);
+ await range(page,'voices',35);await page.getByRole('button',{name:'Silenciar todo'}).click();await expect.poll(()=>page.evaluate(()=>window.arcadeGains[2].gain.value)).toBeCloseTo(0,3);
+ await page.getByRole('button',{name:'Activar sonido'}).click();await page.reload();await openAdventureMenu(page);await page.locator('[data-open-settings]').click();await expect(page.locator('[data-audio-volume=voices]')).toHaveValue('35');
+ await page.locator('[data-adventure-settings]').screenshot({path:folder+'voices-settings.png'});
+ await page.getByRole('button',{name:'Restablecer',exact:true}).click();await expect(page.locator('[data-audio-volume=voices]')).toHaveValue('60');
 });
 
 test('Xbox movement, diagonals, held aim and shield share input safely with the keyboard',async({page})=>{

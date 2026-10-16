@@ -1,151 +1,131 @@
-# Campaña: recorrido, carpas y jefes
+# Guía de campaña: seis actos y treinta niveles
 
-## Decisión posterior: 13 de octubre de 2026
+Decisión acordada con el usuario: **16 de octubre de 2026**. Ésta es la distribución vigente para continuar el juego. Sustituye los planes de tres recorridos por acto, la antigua ubicación de Halloween como acto 5 y las tablas anteriores que todavía dejaban el número de actos por definir.
 
-El nuevo recorrido de Halloween pasa a **5-1**; el antiguo prototipo 2-1 conserva sus datos y pasa a **6-1**. La región nueva combinará anime cartoon y caricatura antigua, con sustos juguetones, criaturas creadas por la mente del arlequín de dos conos y **un minijefe al final de cada nivel**. La futura armada de marionetas queda reservada para después. El pueblo en fuga y el campo de maíz al atardecer son escenarios solicitados para los siguientes recorridos.
+Guías relacionadas: [Magic Drinks y amuletos](MAGIC_DRINKS_Y_AMULETOS.md), [diseño general](DISENO_DEL_JUEGO.md) y [dirección del acto Halloween](halloween-5-1/ACTO_5.md).
 
-Estas decisiones tienen prioridad sobre las ubicaciones y cantidades propuestas más abajo. [El 5-1 implementado](halloween-5-1/README.md) y [la dirección de los siguientes escenarios](halloween-5-1/ACTO_5.md) documentan el estado actual.
+## Estructura acordada
 
-Revisión de diseño: 7 de octubre de 2026. Documento principal: [DISENO_DEL_JUEGO.md](DISENO_DEL_JUEGO.md).
+- **6 actos, 5 niveles por acto: 30 niveles.**
+- Los niveles 1 a 4 de cada acto terminan con un minijefe propio: **24 minijefes** en total.
+- El nivel 5 se dedica al jefe principal: **6 enfrentamientos principales**.
+- Actos 1 a 4: arlequines de uno, dos, tres y cuatro conos, respectivamente.
+- Acto 5: **Mr. Eclipse**, quien dirige el circo. Tras derrotarlo se revela la **Bruja**, verdadera antagonista.
+- Acto 6: aproximación y enfrentamiento final contra la Bruja.
+- Arlequines con tres fases; Mr. Eclipse y la Bruja con cuatro, conforme a la dirección de combate existente. Vida, duración y equilibrio se ajustan al probar cada encuentro.
+- Halloween pasa al **acto 2**. El cementerio es **2-1** y Villa Lumbre es **2-2**.
 
-Esta revisión sustituye el plan anterior de tres niveles por escenario con el jefe principal al final del tercero. El usuario plantea **tres recorridos con minijefe y una batalla principal independiente**. Describió seis regiones y seis jefes principales, aunque también mencionó cinco actos o niveles: la cantidad definitiva está pendiente de aclaración.
+Los escenarios y encuentros siguientes son la guía aceptada. Los nombres de personajes nuevos son nombres de trabajo y pueden pulirse al producirlos. «Planificado» no significa que el nivel o su arte ya estén implementados. La planificación del videojuego no modifica el manuscrito ni el canon de la marca.
 
-Las tablas desarrollan la **hipótesis de seis actos con cuatro niveles cada uno**, no una estructura completa ya confirmada. La versión actual conserva cinco entradas: los recorridos 1-1, 1-2 y 1-3, la batalla principal 1-4 y un último prototipo.
+## Acto 1 — La llegada del circo
 
-El usuario autorizó después de esta propuesta el **1-4**, batalla dedicada al primer arlequín, de un cono y tres fases, tras un acceso breve. [La carpa del Gran Telón](grand-harlequin/README.md) reemplaza el cuarto prototipo. Esto no confirma la distribución de los actos restantes; sus nombres y carpas siguen siendo propuestas de trabajo.
+Naturaleza, agua, máquinas circenses y una escalada hacia el incendio. Se conserva el primer acto construido.
 
-## Reglas decididas
-
-- Tres recorridos con minijefes circenses y una batalla principal independiente.
-- Cuatro arlequines, identificados por uno, dos, tres y cuatro conos; después Mr. Eclipse y la bruja.
-- Arlequines con tres fases; Eclipse y la bruja con cuatro. Más resistencia que los minijefes; vida, duración y umbrales exactos pendientes.
-- Carpas distintas como grandes destinos del viaje.
-- Halloween obligatorio, con posición todavía abierta.
-- Anticipación mediante gestos y sonidos, entrada del jefe, transformación y derrota visibles. Conservar los criterios de combate del documento principal.
-
-## Ruta recomendada: una gira que se vuelve extraña
-
-**Propuesta.** La feria empieza como algo colorido en el paisaje, ocupa cada vez más espacio y acaba dominando la puesta en escena. Podemos expresar ese cambio con luz, materiales y música sin fijar todavía quién lo provoca ni inventar un giro de la historia.
-
-| Acto propuesto | Tres recorridos antes del jefe | Identidad y situación característica | Jefe principal |
+| Nivel | Escenario y dinámica | Minijefe o jefe | Estado |
 | --- | --- | --- | --- |
-| 1. Campo, bosque y ribera | Campo abierto → bosque con río → ribera amplia con instalaciones de feria | Verdes y luz cálida; pasar de naturaleza abierta a mecanismos circenses, con protagonismo del agua en el tercer recorrido | Arlequín de un cono; tres fases |
-| 2. La ruta de la sequía | Últimos campos → cañadas áridas → desierto | Horizontes abiertos, roca ocre, arena y sombras moradas; caravanas, números de puntería y ráfagas anunciadas por telas y banderas | Arlequín de dos conos; tres fases |
-| 3. El espinar del ocaso | Suelo duro agrietado → matas y ramas espinosas → raíces oscuras | Cobre apagado, vino y violeta; masas verticales y caminos encerrados. Espinas que cierran pasos con preparación visible, como una pista de contorsionismo | Arlequín de tres conos; tres fases |
-| 4. La noche de las marionetas | Ciudad destruida con Halloween → cementerio → bosque del circo oscuro | Calabazas, luna, faroles y telones; payasos marioneta, cuerdas y decorado móvil. Horror de cuento con acción legible | Arlequín de cuatro conos; tres fases |
-| 5. La función de Eclipse | Afueras frías → escarcha y zona helada → acceso a la gran carpa | Azul frío y plata fuera, terciopelo y focos dentro; sonidos amortiguados y escala monumental. El tramo helado puede concentrarse en un nivel | Mr. Eclipse; cuatro fases |
-| 6. El campo bajo la tormenta | Campo estrellado y viento → tormenta abierta → escenario de la bruja | Hierba oscura, reflejos estelares y nubes violentas. Suelo reconocible aunque el cielo se vuelva imposible | La bruja; cuatro fases |
+| 1-1 | **El campo de los globos.** Colinas, caravanas y ataques desde el aire. | La Comparsa Voladora | Implementado; sujeto a pulido |
+| 1-2 | **El río del organillo.** Puentes, corrientes y plataformas entre árboles. | Fortaleza Organillo | Implementado; sujeto a pulido |
+| 1-3 | **La ribera de los redobles.** Muelles, buzos y combate entre embarcaciones. | La Barcaza del Redoble | Implementado; sujeto a pulido |
+| 1-4 | **El bosque de las brasas.** Incendios, fortificaciones y acceso al campamento. | El Fuerte Escupefuegos | Implementado; sujeto a pulido |
+| 1-5 | **La carpa del Gran Telón.** Encuentro principal. | Arlequín de un cono: fuego | Implementado; sujeto a pulido |
 
-La luz puede evolucionar entre actos sin que toda la aventura deba transcurrir durante una sola tarde. Mostrar las transiciones mediante un último tramo, una vista lejana o una llegada breve.
+Referencias: [bosque y fortaleza](ember-fort/README.md), [ribera y barcaza](harbor-barge/README.md), [Gran Telón](grand-harlequin/README.md).
 
-## Qué conservar, combinar o reducir
+## Acto 2 — La noche de las pesadillas
 
-### Halloween
+Continúa desde el bosque quemado. Las criaturas de Halloween nacen de la mente de la arlequín de dos conos y pueden dañar físicamente a Hexy. Anime cartoon, ambiente spooky y actuación expresiva, sin gore. El ejército de marionetas queda para el acto 4.
 
-Recomendación: **acto 4**. Ciudad → cementerio → circo entre árboles permite tres identidades propias. Cierra el grupo de arlequines y prepara una escala mayor para Eclipse. El acto 3 puede terminar con los primeros faroles y tejados abandonados.
+| Nivel | Escenario y dinámica | Minijefe o jefe | Estado |
+| --- | --- | --- | --- |
+| 2-1 | **El sendero de las risas.** Bosque de cenizas, cementerio, criptas y caminos sobre las tumbas. | El Campanero Hueco | Implementado; antes 5-1 |
+| 2-2 | **Villa Lumbre / El pueblo de los dulces.** Evacuación, barricadas, rescates y habitantes convertidos en dulces. | La Cosechera de Dulces | Implementado; antes 5-2 |
+| 2-3 | **El maizal del último atardecer.** Surcos, graneros, molinos y espantapájaros confundidos con el decorado; suelo, tejados y carros de cosecha. | El Rey de Paja: se recompone con partes del maizal | Implementado; sujeto a pulido |
+| 2-4 | **La mansión de las máscaras.** Jardín, salones, balcones y tejados; vampiros, murciélagos y armaduras animadas; recorrido vertical. | El Conde de Medianoche: se transforma en bandada | Implementado; sujeto a pulido |
+| 2-5 | **La carpa de los malos sueños.** Cambios anunciados de suelo, decorado y criaturas durante la batalla. | Arlequín de dos conos: pesadillas e ilusiones | Implementado; sujeto a pulido |
 
-Para adelantar Halloween al acto 3, una alternativa sería incorporar el espinar al final del desierto. Entonces habría que redefinir el territorio del cuarto arlequín. No añadir otro bioma sólo para rellenar el hueco.
+Repartir las criaturas por escenario: zombis y esqueletos en el cementerio; brujas y calabazas en el pueblo; espantapájaros en el maizal; vampiros en la mansión. Evitar concentrar todos los tipos en cada recorrido.
 
-### Desierto y espinas
+Implementación de 2-3 a 2-5, arte, mecánicas y comprobaciones: [ampliación del acto 2](act-2-expansion/README.md).
 
-Es el mayor riesgo de repetición. El desierto necesita amplitud, calor y viento; el espinar, suelo compacto, color más oscuro, siluetas que corten el horizonte y un recorrido más cerrado. Cambiar también la composición y el problema que resuelve el jugador.
+Referencias conservadas: [cementerio](halloween-5-1/README.md), [pueblo y revisión actual](village-5-2/README.md). Sus carpetas mantienen los nombres históricos para conservar enlaces y recursos.
 
-Si sus prototipos tienen el mismo ritmo, convertir el tercero en un **jardín de feria abandonado e invadido por espinas**, con pérgolas rotas, estructuras de números aéreos y setos muertos. Conserva el suelo seco del usuario y suma identidad circense.
+## Acto 3 — Las caravanas del desierto
 
-### Frío y Eclipse
+Amplitud, viento, roca y un tramo de velocidad después de Halloween.
 
-Probar una progresión de escarcha y silencio hacia la gran carpa. Un nivel claramente helado puede dar suficiente variedad sin exigir tres recorridos de nieve. Como posible explicación, el frío podría relacionarse con la ausencia de luz alrededor de Eclipse; **esa relación narrativa no está decidida**.
+| Nivel | Escenario y dinámica | Minijefe o jefe | Estado |
+| --- | --- | --- | --- |
+| 3-1 | **Las dunas de los cascabeles.** Caravanas semienterradas, arena que cede y salidas anunciadas bajo el suelo. | El Tragaarenas: bestia circense excavadora | Planificado |
+| 3-2 | **El barranco de los equilibristas.** Puentes de cuerda, ascensores mineros y rutas a distintas alturas. | Los Gemelos del Barranco: atacan desde lados opuestos | Planificado |
+| 3-3 | **El oasis de las ruinas.** Acueductos, patios inundados y mecanismos para cambiar el nivel del agua. | La Encantadora del Oasis, acompañada de una enorme cobra | Planificado |
+| 3-4 | **El Expreso de Medianoche.** Tren en marcha; interiores, techos de vagones y cargas destructibles. | El Maquinista del Expreso | Planificado |
+| 3-5 | **La carpa de los vientos.** Cuerdas tensas, plataformas suspendidas y corrientes anunciadas por las lonas. | Arlequín de tres conos: viento y acrobacias | Planificado |
 
-Las superficies deslizantes serían puntuales y reconocibles; Hexy debe conservar control para combatir y el suelo normal debe distinguirse.
+## Acto 4 — La ciudad de los hilos
 
-### Tormenta y bruja
+El ejército de marionetas ocupa una ciudad cuyos edificios funcionan como mecanismos de escenario.
 
-Conservar el campo estrellado propuesto por el usuario y darle una composición final propia: ráfagas sobre la hierba, constelaciones reflejadas en charcos y una carpa o pabellón contra las nubes. Evitar cubrir continuamente el combate con lluvia, oscuridad o destellos.
+| Nivel | Escenario y dinámica | Minijefe o jefe | Estado |
+| --- | --- | --- | --- |
+| 4-1 | **Los tejados del reloj.** Calles ocupadas, campanarios y recorridos por azoteas. | El Sereno de Cuerda: vigilante mecánico | Planificado |
+| 4-2 | **El jardín de las espinas.** Invernaderos rotos, setos móviles y plantas que abren o cierran caminos. | La Jardinera de Espinas | Planificado |
+| 4-3 | **La fábrica de comparsas.** Cintas, prensas y marionetas que se ensamblan delante del jugador. | El Sastre Mecánico | Planificado |
+| 4-4 | **El teatro abandonado.** Escenarios giratorios, contrapesos y combate entre bambalinas. | La Bailarina de Porcelana | Planificado |
+| 4-5 | **La carpa de los cuatro mástiles.** El jefe mueve partes del escenario y sus marionetas durante el combate. | Arlequín de cuatro conos: hilos y control del escenario | Planificado |
 
-Eclipse puede concentrar su espectáculo dentro de una gran carpa; la bruja lleva la tormenta y el paisaje al enfrentamiento. Está pendiente cuánto se vuelve sobrenatural el escenario.
+## Acto 5 — La última función de Mr. Eclipse
 
-### Otros elementos clásicos
+Frío en la aproximación y espectáculo monumental al entrar en el centro de operaciones del circo.
 
-- **Agua:** protagonismo en la ribera del acto 1, con puentes, compuertas o embarcaciones. El combate submarino requeriría un diseño aparte.
-- **Fuego:** un número de tragafuegos, un horno de caravana o un sector incendiado pueden aportar un tramo propio. No se ha decidido un acto volcánico.
-- **Veneno:** posible planta del espinar o atracción concreta; debe distinguirse de los efectos mágicos decorativos.
-- **Selva:** no añadirla por obligación; desarrollar primero la identidad del bosque inicial.
+| Nivel | Escenario y dinámica | Minijefe o jefe | Estado |
+| --- | --- | --- | --- |
+| 5-1 | **El paso de las carpas heladas.** Caravanas congeladas, pendientes y pequeñas avalanchas anunciadas. | El Forzudo de la Escarcha | Planificado |
+| 5-2 | **El lago de cristal.** Hielo quebradizo, embarcaderos y plataformas que flotan al romperse. | El Cisne de Hielo: combate sobre y bajo la superficie | Planificado |
+| 5-3 | **Los bastidores del gran circo.** Jaulas, almacenes y entrenamiento de las tropas más peligrosas. | El Domador de las Sombras | Planificado |
+| 5-4 | **La cúpula de los reflectores.** Ascenso entre pasarelas, focos móviles y grandes mecanismos. | El Equilibrista Astral | Planificado |
+| 5-5 | **La función de Mr. Eclipse.** Distintas puestas en escena de su gran pista. | Mr. Eclipse | Planificado |
 
-Son opciones de diseño, no contenidos aprobados.
+Tras la victoria sobre Mr. Eclipse se revela la Bruja. La escena debe dar peso a la aparente victoria y a la aparición de quien realmente controla el conflicto.
 
-## Seis carpas con siluetas propias
+## Acto 6 — Más allá del telón
 
-**Propuestas.** Cada llegada se reconoce incluso en silueta y culmina en una arena distinta.
+Un paisaje reconocible se transforma conforme Hexy se acerca a la Bruja: campo estrellado, agua suspendida, viento y tormenta.
 
-| Destino | Exterior y llegada | Interior o transformación posible |
+| Nivel | Escenario y dinámica | Minijefe o jefe | Estado |
+| --- | --- | --- | --- |
+| 6-1 | **El campo de las estrellas caídas.** Colinas, grandes charcos y fragmentos celestes que modifican el terreno. | El Ciervo de las Estrellas | Planificado |
+| 6-2 | **El río del cielo.** Cascadas suspendidas, islas y recorridos entre agua y aire. | La Manta de Medianoche | Planificado |
+| 6-3 | **La torre de la tormenta.** Ascenso vertical, estructuras que se desprenden y rayos anunciados. | El Heraldo de la Tormenta | Planificado |
+| 6-4 | **El corazón del hechizo.** Calderos, energía cautiva y mecanismos mágicos destructibles que abren el camino. | El Guardián del Caldero | Planificado |
+| 6-5 | **El último aquelarre.** La magia de la Bruja transforma progresivamente la arena e incorpora la tormenta. | La Bruja: antagonista final | Planificado |
+
+La Bruja final necesita silueta, actuación y magia exclusivas para sostener su revelación después de las brujas menores y de la Cosechera.
+
+## Reglas de variedad y continuidad
+
+- Cada acto combina combate, plataformas, destrucción, rescates y movimiento de forma distinta. El tren, la evacuación, la fábrica y el ascenso por la tormenta deben ofrecer situaciones propias.
+- Presentar cada amenaza con animación y sonido, mantener legibles cuerpos y proyectiles y probar las transiciones entre fases.
+- Un obstáculo importante puede ofrecer salto, ruta alternativa o destrucción; conservar terreno y objetivos claros.
+- Las máquinas, criaturas, dúos y personajes individuales requieren comportamientos distintos.
+- Conservar la regla permanente: **sin barras de vida enemigas**, incluidos minijefes, arlequines y generadores. Mostrar daño y fase mediante actuación, deterioro y efectos. Se conserva el HUD de Hexy.
+- La intercepción por magia fuerte se mantiene en todos los actos.
+
+## Numeración visible e identificadores de guardado
+
+Se conservan los IDs anteriores, música, estrellas, cofres y partidas. Los nuevos niveles amplían el orden y sus desbloqueos se migran sin borrar el avance anterior.
+
+| ID interno | Etiqueta visible actual | Contenido |
 | --- | --- | --- |
-| Primer arlequín | Carpa de un mástil, banderines y escenario sobre la ribera | Pista circular clara; entrada que presenta al arlequín antes de combatir |
-| Segundo arlequín | Pabellón ancho de dos cumbres, lonas tensadas y caravanas laterales | Telones de espejismos y mecanismos de un número de puntería |
-| Tercer arlequín | Tres pináculos inclinados, tela granate y cuerdas mezcladas con espinas | Estructuras de contorsionismo; el decorado abre y cierra el espacio |
-| Cuarto arlequín | Cuatro torres de una carpa-teatro de Halloween, fachada de feria abandonada | Marionetas, bambalinas, cuerdas y decorados que se desmontan |
-| Mr. Eclipse | Carpa monumental, cúpula oscura, entrada ceremonial y emblema astral | Gran pista con focos y cortinas; cuatro puestas en escena |
-| La bruja | Carpa-observatorio torcida por el viento, telas suspendidas y corona de mástiles | Las fases pueden abrir la cubierta e incorporar la tormenta a la arena |
+| 0 | 1-1 | Campo |
+| 1 | 1-2 | Río |
+| 2 | 1-3 | Ribera |
+| 5 | 1-4 | Bosque de las brasas |
+| 3 | 1-5 | Primer arlequín |
+| 6 | 2-1 | Cementerio; antes 5-1 |
+| 7 | 2-2 | Pueblo; antes 5-2 |
+| 8 | 2-3 | Maizal del último atardecer |
+| 9 | 2-4 | Mansión de las máscaras |
+| 10 | 2-5 | Arlequín de dos conos |
+| 4 | 6-1 | Prototipo heredado; todavía no representa el 6-1 planificado arriba |
 
-Relacionar los conos con las cumbres de las primeras cuatro carpas es opcional. No establece una regla de ataques ni la personalidad de los arlequines.
-
-Mostrar cada gran carpa a lo lejos, después su umbral y finalmente la llegada del jefe. La introducción puede ser breve y omitir su parte larga al reintentar. Las pequeñas carpas de refuerzos conservan su función distinta.
-
-## Aplicación al primer acto
-
-| Encuentro | Estado real y dirección |
-| --- | --- |
-| 1-1: campo / comparsa en globo | Implementado y sujeto a pulido. Minijefe de dos fases, compuerta de bombas, fuga de aire y destrucción |
-| 1-2: bosque y río / Fortaleza Organillo | Implementado y sujeto a pulido. Notas musicales, ondas bajas, embestidas y cuerpo vulnerable; dos fases |
-| 1-3: La ribera de los redobles / La Barcaza del Redoble | Implementado por petición del usuario. Ribera al anochecer, muelles elevados, tres rescates, payasos buzos y barcaza circense de percusión de dos fases. Sustituye el recorrido entre copas y su arlequina de prototipo. [Detalles](harbor-barge/README.md) |
-| 1-4: La carpa del Gran Telón / Arlequín del Gran Telón | Implementado por petición posterior del usuario. Arlequín de un cono, 720/480 de vida y tres fases. El acceso continúa desde el final de 1-3: exterior, entrada y caminata interior antes de su presentación. [Detalles](grand-harlequin/entrance.md) |
-
-No asignar todavía Serio, Alegre u otros nombres a los cuatro puestos. El orden de nombres anterior era provisional; esta revisión define la secuencia por conos.
-
-## Siguiente paso de diseño
-
-1. Confirmar actos y cantidad de niveles.
-2. Probar el tercer recorrido y su llegada ya implementada a la primera gran carpa.
-3. Ajustar cartas, cintas y acrobacias del primer arlequín a partir de partidas del usuario.
-4. Evaluar la duración y dificultad de sus tres fases antes de diseñar el siguiente acto.
-5. Mantener el pulido de 1-1, 1-2 y 1-3. El resto de esta tabla es una dirección para conversar, no una lista de niveles construidos.
-
-
-## Halloween: siguiente recorrido implementado (2026-10-14)
-
-El usuario ha pedido continuar del cementerio 5-1 al pueblo 5-2. La primera entrega jugable incluye vecinos huyendo, zombis, payasos con calabaza encendida en la cabeza, los fantasmas blancos originales y brujas que transforman a los vecinos en dulces al alcanzarlos con un rayo. La plaza del refugio cierra el recorrido. [Implementacion, arte y pruebas](village-5-2/README.md).
-
-Orden estable actual: IDs `0, 1, 2, 5, 3, 6, 7, 4`. El nuevo pueblo usa ID 7 / capitulo 5-2; el ID 4 sigue siendo 6-1. Migracion de partidas campaign 3 a 4 sin perder capitulos desbloqueados ni monedas.
-
-### Ampliación del pueblo (2026-10-15)
-
-El 5-2 ya tiene la misma longitud que el cementerio: 21 440 unidades. Comienza en su salida y atraviesa huertos antes de llegar al pueblo. Ocho diseños de habitantes (incluidos niños) huyen hacia las afueras en 14 grupos; el payaso calabaza exhala chispas animadas. Tres plazas, decoración de Halloween y capas de profundidad con terreno propio. [Estado y verificación de la revisión 2](village-5-2/revision-2/README.md).
-
-### Villa Lumbre de noche: revisión 4 (2026-10-15)
-
-La llegada se amplía otras 1.800 unidades, conservando el tramo urbano: longitud actual 23.240. Suelo y edificios opacos, cámara vertical estable, entrada señalizada, 106 habitantes con nuevas carreras, advertencias, tropiezos y ayuda, y cuatro carrozas. Noche completa desde el 52 % del recorrido. Algunas brujas vuelan; su escoba se rompe al derrotarlas. Hexy puede quedar atrapada en caramelo y liberarse con pulsaciones; el último corazón conserva esa forma al perder. Las brujas heridas absorben dulces para curarse, y derrotarlas libera a sus víctimas, incluso las ya absorbidas. [Arte, reglas y pruebas](village-5-2/revision-4/README.md).
-
-El campo de paja con espantapájaros y su minijefe es una idea posterior del usuario, todavía no implementada ni asignada a un nuevo ID.
-
-### Villa Lumbre: corrección visual y rescates, revisión 5 (2026-10-15)
-
-La revisión visual del usuario mostró cortes y cielo incorporado en capas inferiores que la revisión 4 no había detectado. Se reemplazan por un terraplén sin cielo, camino opaco con transición pintada, tejados intermedios individuales y una entrada oblicua con cerca hacia el frente y el fondo. Brujas un 10 % más grandes y con un 15 % más de resistencia, 40 nuevas celdas de absorción/lanzamiento. Absorber un dulce libera una calabaza voladora que porta al habitante: al destruirla cae y lo libera en tierra. Los demás vecinos hechizados por esa calabaza también se rescatan. Tres habitantes atrapados entre escombros y adultos lanzando piedras mientras retroceden. [Arte, reglas actualizadas y verificación visual](village-5-2/revision-5/README.md).
-
-### Villa Lumbre: capas unidas y absorción de Hexy, revisión 6 (2026-10-15)
-
-La capa de piedras, calabazas y árboles pasa al espacio del camino y comparte su movimiento y pendiente. Detrás queda otro terraplén, con fondo más lento y nubes móviles. Casas más bajas y entrada con dos pilares independientes, el cercano grande y desenfocado; se retira la reja. La magia fuerte intercepta proyectiles por contacto en todos los capítulos. Los payasos calabaza exhalan fuego fantasmal azul que convierte vecinos en dulces, y las brujas pueden aprovecharlos. Hexy necesita 21 pulsaciones o cambios de dirección para liberarse; una absorción de 4,8 segundos completada la convierte en calabaza y termina la partida. Rayos más largos con impacto contra el terreno. [Arte y pruebas](village-5-2/revision-6/README.md).
-
-### Villa Lumbre: ataques y carreras, revisión 7 (2026-10-15)
-
-Cuerpos sin proyectiles incorporados, emisión desde boca y varita registradas, fuego azul con resplandor y brujas con cuatro dibujos de daño. Ocho carreras completas con una cadencia legible independiente del avance rápido. Escombros detrás de Hexy y borde rural con continuidad de terreno. Las brujas aéreas recorren ambos sentidos, disparan más a menudo y dejan gotas que convierten en dulce al tocar el suelo. Popcorn fuerte lanza al payaso calabaza en piezas y suprime el fantasma de ese remate y del de los zombis. Se retira el contador visual de pulsaciones. [Arte, grabaciones y pruebas](village-5-2/revision-7/README.md).
-
-### Villa Lumbre: destrucción y rescates, revisión 8 (2026-10-15)
-
-Los vecinos bajo escombros requieren disparos para quedar libres. La salida del rayo pierde el corte plano, los defensores conservan su escala y el herrero tiene una carrera de huida nueva. Corrientes, remolinos, encendido y descarga acompañan la absorción; una bruja cercana puede absorber a Hexy desde patrulla, preparación o recuperación. Los proyectiles mágicos emiten luz de color. Tres carretas volcadas, carga y vigas forman obstáculos físicos con apoyos transitables y destrucción por impactos. Dos grupos de vecinos quedan entre barricadas bajo riesgo de hechizo; los bloqueos atraen refuerzos limitados. Sólo una carroza con caballo aparece al principio. [Arte, colisiones y verificación](village-5-2/revision-8/README.md).
-
-### Villa Lumbre: séquitos y escondites, revisión 9 (2026-10-15)
-
-Dos brujas voladoras conservan su diseño y llegan con tres calabazas que orbitan y disparan por turnos mientras ellas atacan. Son objetivos independientes; derrotar a su bruja rompe el séquito restante. Las calabazas voladoras disparan más rápido y uno de cada tres zombis calabaza tiene un ataque acelerado. Los atacantes alternan blancos entre Hexy y vecinos cuando ambos están a alcance. Cuatro vecinos se agachan y asoman entre escombros; requieren disparar a la cobertura para poder huir y siguen expuestos a hechizos bajos. [Arte, reglas y pruebas](village-5-2/revision-9/README.md).
-
-### Villa Lumbre: el derrumbe y la multitud, revisión 10 (2026-10-15)
-
-Catorce vecinos se acumulan ante una estructura derrumbada de alta resistencia. Intentan trepar, resbalan y buscan paso; la cámara se aleja suavemente para mostrar el peligro. Mientras siga bloqueada llegan dos brujas, calabazas voladoras y zombis calabaza rápidos, y las absorciones pueden añadir más enemigos. Los dulces se liberan automáticamente a los 30 segundos, incluso si una calabaza transporta al vecino. Hexy conserva la derrota por último corazón o absorción completada. Las advertencias laterales miran a Hexy, señalan el peligro detrás y sólo aparecen antes del pueblo. [Arte, reglas y verificación](village-5-2/revision-10/README.md).
+Orden técnico vigente: `0, 1, 2, 5, 3, 6, 7, 8, 9, 10, 4`. La campaña 5 migra las versiones 2, 3 y 4 conservando capítulos activos, estrellas, compras y recibos. Quien ya tenía el prototipo heredado desbloqueado lo conserva, incluidos los tres nuevos niveles intermedios. Las reglas de compra siguen usando el rango técnico existente.

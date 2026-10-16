@@ -4,6 +4,7 @@ import {nightmareGuardianAlive} from '../actors/enemies/adventureNightmares';
 // Completion is part of the world: land, plant, salute and leave the frame.
 // It starts after victory even if the player did not rescue a single bunny.
 export function beginCompletion(s){
+ if(s.level.actTwo&&!s.boss.defeat?.ready)return;
  if(s.level.villageTrail&&!s.village?.complete)return;
  if(s.level.nightmareTrail&&nightmareGuardianAlive(s))return;
  if(s.index===5&&!s.boss.defeat?.ready)return;

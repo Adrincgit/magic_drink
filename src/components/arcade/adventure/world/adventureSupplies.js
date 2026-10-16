@@ -1,4 +1,5 @@
 import {rollLoot} from '../engine/adventureLoot';
+import {worldSound} from '../engine/adventureWorldAudio';
 export const SUPPLY_SIZE=110;
 export const supplyBody=q=>({x:q.x-33,y:q.y-62,w:66,h:62});
 export function createSupplies(level){
@@ -13,7 +14,7 @@ export function releaseItem(s,x,floor,item){
 export const releaseDrink=(s,x,floor,kind)=>releaseItem(s,x,floor,{type:'drink',kind});
 export function damageSupply(s,q,damage){
  if(q.hp<=0)return;
- q.hp=Math.max(0,q.hp-damage);q.flash=.13;s.events.push(q.hp?'pop':'impact');
+ q.hp=Math.max(0,q.hp-damage);q.flash=.13;worldSound(s,q.hp?'woodHit':'woodBreak',q.x,q.y);
  s.effects.push({x:q.x,y:q.y-30,row:1,size:q.hp?42:75,age:0,life:.3});
  if(!q.hp){q.age=0;const item=releaseItem(s,q.x,q.y,q.loot||rollLoot(s,q.kind));if(q.landingY!==undefined)item.floor=q.landingY-28;}
 }

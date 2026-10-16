@@ -24,6 +24,7 @@ export function addVillageDestruction(level){
  }
  // The evacuation carriage belongs to the approach. The street wrecks have
  // no horse or passengers, and are physical objects rather than decoration.
- level.carriages=[{id:0,x:1300,y:floor(1300)-28,wakeX:0,speed:285}];
+ level.carriages=[{id:0,x:1300,y:floor(1300)-52,wakeX:0,speed:285,scale:.82}];
+ for(const q of level.villagers)q.trip=false;
  return addVillageBlockade(level);
 }

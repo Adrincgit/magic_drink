@@ -1,15 +1,39 @@
+import {hexyMuzzle} from '../actors/hexy/hexyAnimation';
 import {groundY} from '../world/adventureTerrain';
 export const POPCORN=13;
 export const POPCORN_RANGE=240,POPCORN_STRONG_RANGE=480,POPCORN_COST=45;
 export const POPCORN_SPREAD=.24,POPCORN_DAMAGE=3.2,POPCORN_SPEED=1200,POPCORN_RECOVERY=.78;
+export const popcornBlastDuration=strong=>strong?.43:.31;
 // Both casts use the same seven physical kernels, damage and cone angle.
-// The strong cast changes only their travel budget, never penetration or damage.
+// The strong cast adds range and recoil, never pellet penetration or damage.
 export function firePopcorn(s,muzzle,aim,scale=1,strong=false){
+ const p=s.player,duration=popcornBlastDuration(strong);
+ s.popcornFlash={at:s.fxTime,duration:strong?.17:.12,strong};
+ if(p.ground===null&&!p.coasterGround){
+  // Under 1550px/s² gravity, 2*v/g is the return time to the cast height.
+  // Clear the entire painted burst plus 80ms before descending through it.
+  const clearTime=duration+.08;p.vy=Math.min(p.vy,-1550*clearTime/2);
+  p.popcornClearUntil=s.time+clearTime;p.gliding=false;
+ }
+ if(strong){
+  p.popcornKick={speed:-aim.x*150,age:0,duration:.2};
+ }
+ if(strong&&!s.player.crouch&&aim.y===0){s.player.popcornRecoilAir=s.player.ground===null&&!s.player.coasterGround;s.player.popcornRecoilStart=s.time;s.player.popcornRecoilUntil=s.time+.64;muzzle=hexyMuzzle(s);}
  const angle=Math.atan2(aim.y,aim.x),range=strong?POPCORN_STRONG_RANGE:POPCORN_RANGE,group={impacts:new Set()};
  const shots=Array.from({length:7},(_,i)=>{const a=angle+(i-3)*POPCORN_SPREAD/3;return{x:muzzle.x,y:muzzle.y,vx:Math.cos(a)*POPCORN_SPEED,vy:Math.sin(a)*POPCORN_SPEED,kind:POPCORN,popcorn:true,popcornStrong:strong,popcornRange:range,popcornTravel:0,popcornGroup:group,pellet:i,r:8*scale,scale,damage:POPCORN_DAMAGE,age:0,life:range/POPCORN_SPEED+.025,hits:[]};});
- s.shots.push(...shots);s.effects.push({popcornBlast:true,x:muzzle.x,y:muzzle.y,angle,range,scale,age:0,life:strong?.43:.31,duration:strong?.43:.31});
+ s.shots.push(...shots);s.effects.push({popcornBlast:true,x:muzzle.x,y:muzzle.y,angle,range,scale,age:0,life:duration,duration});
  s.player.cast=.3;s.shake=Math.max(s.shake,.075);
  return shots;
+}
+export function stepPopcornRecoil(s,dt){
+ const p=s.player;if(p.ground!==null)p.popcornClearUntil=0;
+ const q=p.popcornKick;if(!q)return 0;
+ if(p.candy||p.hitReact>0||p.knockdown||p.dash>0||s.playerDefeat){delete p.popcornKick;return 0;}
+ // Integrate the decaying kick separately from steering, through the same wall
+ // collision pass. Normal input cannot erase it on the frame of the shot.
+ const from=Math.min(q.duration,q.age),to=Math.min(q.duration,q.age+dt);
+ const delta=q.speed*((to-from)-(to*to-from*from)/(2*q.duration));q.age=to;
+ if(to>=q.duration)delete p.popcornKick;return delta;
 }
 export function popcornImpact(s,q,target){
  if(!q.popcorn)return;

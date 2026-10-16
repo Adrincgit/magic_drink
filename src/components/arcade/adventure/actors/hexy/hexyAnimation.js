@@ -1,3 +1,5 @@
+import popcornAtlas from './hexyPopcornAtlas';
+import combatV12Atlas from './hexyCombatV12Atlas';
 import {hitReactionPose} from '../../engine/adventureHitReactions';
 import ribbonAtlas from './hexyRibbonAtlas';
 import ribbonActionAtlas from './hexyRibbonActionAtlas';
@@ -23,6 +25,8 @@ const atlas={...originalAtlas,...combatAtlas,...movementAtlas,...handAtlas,...ai
 atlas.fear=Array.from({length:12},()=>({tip:[236,250]}));
 atlas['drink-original']=Array.from({length:4},()=>({tip:[236,250]}));
 atlas['clash-fall']=Array.from({length:8},()=>({tip:[220,215]}));
+atlas['popcorn-recoil']=popcornAtlas;
+Object.assign(atlas,combatV12Atlas);
 atlas['super-cast']=superCastAtlas;
 atlas['ribbon-swing']=ribbonAtlas;
 atlas['ribbon-action']=ribbonActionAtlas;
@@ -35,7 +39,8 @@ for(const sheet of ['shop-enter','shop-exit'])atlas[sheet]=Array.from({length:8}
 
 export const HEXY_SHEETS=['air-aim','ground-aim','run','jump','crouch-walk','roll','cast','heavy','reactions','run-fire','run-diagonal-up','stand-fire','air-dash','guard-pose','somersault','glide','air-heavy','aim-down-diagonal','aim-down','crouch-heavy','super-charge','super-release','celebrate','flag-plant','drink-original','air-super','air-super-release','shop-enter','shop-exit'];
 export const HEXY_SIZE=116;
-HEXY_SHEETS.push('fear','clash-fall','super-cast','element-hits','knockdown','fire-hit','heat');
+HEXY_SHEETS.push('popcorn-recoil','fear','clash-fall','super-cast','element-hits','knockdown','fire-hit','heat');
+HEXY_SHEETS.push('volt-cast','popcorn-air');
 HEXY_SHEETS.push('ribbon-swing','ribbon-action','ribbon-spin','ribbon-dance','ribbon-mastery','guard-up','comet-kick');
 export const HEXY_RUN_FRAMES=atlas.run.length;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
@@ -74,6 +79,15 @@ export function hexyPose(s){
  if(p.ribbonSwing>0)return {sheet:'ribbon-action',frame:ribbonFrame(1-p.ribbonSwing/p.ribbonDuration,p.ribbonStrong,p.ribbonCombo)};
  if(s.ribbonDance&&p.ribbonCharge?.age>.2)return{sheet:'ribbon-mastery',frame:p.ribbonCharge.age<.5?12:13};
  if(s.ribbonDance&&p.ribbonFlip>0&&p.ground===null)return{sheet:'ribbon-mastery',frame:8+clamp(Math.floor((.48-p.ribbonFlip)/.12),0,3)};
+ if(p.popcornRecoilUntil>s.time&&!p.crouch&&p.aimY===0&&!p.guarding){
+  const air=p.ground===null&&!p.coasterGround;
+  if(air===p.popcornRecoilAir)return{sheet:air?'popcorn-air':'popcorn-recoil',frame:Math.min(7,Math.floor((s.time-p.popcornRecoilStart)/.08))};
+ }
+ if(!s.basicFire&&s.weapon===9&&(p.firing&&(s.ammo>0||s.overdrive>0)||p.specialCast>0||s.voltBeam?.segments?.length)){
+  const air=p.ground===null&&!p.coasterGround,frame=[0,1,2,3,2,1][Math.floor((s.voltBeam?.age||Math.max(0,.36-p.specialCast))/.095)%6];
+  if(p.aimY===0&&(air||p.crouch||Math.abs(p.vx)<20))return{sheet:'volt-cast',frame:(air?4:p.crouch?12:0)+frame};
+  if(!air&&!p.crouch&&p.aimY<0&&p.aimX!==0&&Math.abs(p.vx)<20)return{sheet:'volt-cast',frame:8+frame};
+ }
  if(p.specialCast>0){
   const frame=[1,2,2,3][clamp(Math.floor((.36-p.specialCast)/.09),0,3)];
   if(p.crouch)return {sheet:'ground-aim',frame:8+frame};

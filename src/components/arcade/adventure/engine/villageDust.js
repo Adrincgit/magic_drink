@@ -18,7 +18,8 @@ export function villageFootDust(s,q,oldAge,profile,floor){
 export function villageCarriageDust(s,q,oldGait,distance){
  // Wheel contact is continuous. Hoof strikes follow the drawn gallop.
  q.dustTravel=(q.dustTravel||0)+distance;
- if(q.dustTravel>=38){q.dustTravel%=38;puff(s,q.x+116,q.y,49,'wheel');}
+ const scale=q.scale||.82;
+ if(q.dustTravel>=38){q.dustTravel%=38;puff(s,q.x+116*scale,q.y,49*scale,'wheel');}
  const a=Math.floor(oldGait*8),b=Math.floor(q.gait*8);
- for(let step=a+1;step<=b;step++)if(step%2===0)puff(s,q.x-(step%4===0?78:38),q.y,43,'hoof');
+ for(let step=a+1;step<=b;step++)if(step%2===0)puff(s,q.x-(step%4===0?78:38)*scale,q.y,43*scale,'hoof');
 }

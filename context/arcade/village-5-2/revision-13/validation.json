@@ -1,0 +1,188 @@
+{
+  "errors": [],
+  "audio": [
+    {
+      "kind": "soulCast",
+      "peak": 0.3409017324447632,
+      "rms": 0.04951829955788956,
+      "clipped": 0
+    },
+    {
+      "kind": "pumpkinDeath",
+      "peak": 0.3135792016983032,
+      "rms": 0.03448077932307711,
+      "clipped": 0
+    },
+    {
+      "kind": "pumpkinBreak",
+      "peak": 0.22838592529296875,
+      "rms": 0.01873935369868637,
+      "clipped": 0
+    },
+    {
+      "kind": "witchAbsorb",
+      "peak": 0.17947033047676086,
+      "rms": 0.04882720779475267,
+      "clipped": 0
+    },
+    {
+      "kind": "pumpkinBirth",
+      "peak": 0.3852352797985077,
+      "rms": 0.08304097586210048,
+      "clipped": 0
+    },
+    {
+      "kind": "zombieDeath",
+      "peak": 0.20497460663318634,
+      "rms": 0.02739126905551079,
+      "clipped": 0
+    },
+    {
+      "kind": "zombieGroan",
+      "peak": 0.1407443881034851,
+      "rms": 0.027773452639940552,
+      "clipped": 0
+    },
+    {
+      "kind": "crowd-mix",
+      "peak": 0.5539842247962952,
+      "rms": 0.0800098631683233,
+      "clipped": 0
+    },
+    {
+      "kind": "hexy-basic",
+      "peak": 0.030781425535678864,
+      "rms": 0.0019710453188787613,
+      "clipped": 0
+    }
+  ],
+  "metrics": [
+    {
+      "mode": "side",
+      "t": 0,
+      "y": -3.1861111111111313,
+      "flash": true,
+      "blast": true
+    },
+    {
+      "mode": "side",
+      "t": 0.041666666666666664,
+      "y": -17.50208333333336,
+      "flash": true,
+      "blast": true
+    },
+    {
+      "mode": "side",
+      "t": 0.10833333333333334,
+      "y": -34.8104166666667,
+      "flash": true,
+      "blast": true
+    },
+    {
+      "mode": "side",
+      "t": 0.20833333333333334,
+      "y": -47.856250000000045,
+      "flash": false,
+      "blast": true
+    },
+    {
+      "mode": "side",
+      "t": 0.35833333333333334,
+      "y": -38.36250000000007,
+      "flash": false,
+      "blast": true
+    },
+    {
+      "mode": "side",
+      "t": 0.5416666666666666,
+      "y": 20.60208333333327,
+      "flash": false,
+      "blast": false
+    },
+    {
+      "mode": "down",
+      "t": 0,
+      "y": -3.1861111111111313,
+      "flash": true,
+      "blast": true
+    },
+    {
+      "mode": "down",
+      "t": 0.041666666666666664,
+      "y": -17.50208333333336,
+      "flash": true,
+      "blast": true
+    },
+    {
+      "mode": "down",
+      "t": 0.10833333333333334,
+      "y": -34.8104166666667,
+      "flash": true,
+      "blast": true
+    },
+    {
+      "mode": "down",
+      "t": 0.20833333333333334,
+      "y": -47.856250000000045,
+      "flash": false,
+      "blast": true
+    },
+    {
+      "mode": "down",
+      "t": 0.35833333333333334,
+      "y": -38.36250000000007,
+      "flash": false,
+      "blast": true
+    },
+    {
+      "mode": "down",
+      "t": 0.5416666666666666,
+      "y": 20.60208333333327,
+      "flash": false,
+      "blast": false
+    },
+    {
+      "mode": "up",
+      "t": 0,
+      "y": -3.1861111111111313,
+      "flash": true,
+      "blast": true
+    },
+    {
+      "mode": "up",
+      "t": 0.041666666666666664,
+      "y": -17.50208333333336,
+      "flash": true,
+      "blast": true
+    },
+    {
+      "mode": "up",
+      "t": 0.10833333333333334,
+      "y": -34.8104166666667,
+      "flash": true,
+      "blast": true
+    },
+    {
+      "mode": "up",
+      "t": 0.20833333333333334,
+      "y": -47.856250000000045,
+      "flash": false,
+      "blast": true
+    },
+    {
+      "mode": "up",
+      "t": 0.35833333333333334,
+      "y": -38.36250000000007,
+      "flash": false,
+      "blast": true
+    },
+    {
+      "mode": "up",
+      "t": 0.5416666666666666,
+      "y": 20.60208333333327,
+      "flash": false,
+      "blast": false
+    }
+  ],
+  "duration": 3.310447
+}

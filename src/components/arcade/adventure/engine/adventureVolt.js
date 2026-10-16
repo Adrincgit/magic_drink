@@ -1,4 +1,5 @@
 import {graveBody} from './adventureGraveyard';
+import {actTwoObstacleBody} from './actTwoRoute';
 import {hexyMuzzle} from '../actors/hexy/hexyAnimation';
 import {enemyBody} from '../actors/enemies/adventureEnemyGeometry';
 import {umbrellaBlocks,umbrellaShield,umbrellaOpen} from '../actors/enemies/adventureUmbrella';
@@ -25,10 +26,11 @@ function wallDistance(s,o,d,length){
  }
  return length;
 }
-function beamPath(s,o,d,strong){
+export function beamPath(s,o,d,strong){
  const mastery=drinkMastery(s,9),jump=mastery===3?(strong?340:200):(strong?290:165);
- const reach=wallDistance(s,o,d,strong?850:315),candidates=s.enemies.filter(e=>e.hp>0&&!e.fleeing&&!e.emerging).map(e=>({target:e,enemy:true,box:umbrellaOpen(e)?{...enemyBody(e),x:Math.min(enemyBody(e).x,umbrellaShield(e).x),w:99}:enemyBody(e)}));
+ const reach=wallDistance(s,o,d,mastery===3?(strong?1150:650):(strong?850:315)),candidates=s.enemies.filter(e=>e.hp>0&&!e.fleeing&&!e.emerging).map(e=>({target:e,enemy:true,box:umbrellaOpen(e)?{...enemyBody(e),x:Math.min(enemyBody(e).x,umbrellaShield(e).x),w:99}:enemyBody(e)}));
  candidates.push(...(s.graves||[]).filter(q=>q.hp>0).map(q=>({target:q,box:graveBody(q)})));
+ if(s.level.actTwo)candidates.push(...s.platforms.filter(q=>q.solid&&!q.gone).map(q=>({target:q,box:actTwoObstacleBody(q)})),...[...s.strawPiles,...s.dreamMirrors].filter(q=>q.hp>0).map(q=>({target:q,box:{x:q.x-40,y:q.y-q.h,w:80,h:q.h}})));
  candidates.push(...s.supplies.filter(q=>q.hp>0).map(q=>({target:q,box:supplyBody(q)})),...s.outposts.filter(q=>q.hp>0).map(q=>({target:q,box:outpostBody(q)})),...s.cages.filter(q=>!q.open&&!q.carried&&!q.lost).map(q=>({target:q,box:{x:q.x-30,y:q.y-62,w:60,h:62}})));
  if(s.boss.hp>0&&!['sleep','defeated','dying'].includes(s.boss.phase))candidates.push(...bossTargets(s).map(box=>({target:s.boss,box})));
  const first=candidates.map(q=>({...q,t:rayBox(o,d,q.box,reach)})).filter(q=>q.t!==null).sort((a,b)=>a.t-b.t)[0];
@@ -38,6 +40,24 @@ function beamPath(s,o,d,strong){
  // Continue from the visible impact, not an unrelated point at the centre
  // of the first clown; that offset left a gap between connected branches.
  let from=to,chainCenter={x:first.target.x,y:first.target.y-38};const seen=new Set([first.target]);
+ if(mastery===3){
+  // Flood the local cluster, including forks, with exactly one hit per actor.
+  // Locality and solid walls stop propagation; there is no target-count cap.
+  const queue=[{point:to,center:chainCenter,depth:0}];
+  for(let at=0;at<queue.length;at++){
+   const node=queue[at];
+   for(const e of s.enemies){
+    if(e.hp<=0||e.fleeing||e.emerging||seen.has(e))continue;
+    const b=enemyBody(e),point={x:b.x+b.w/2,y:b.y+b.h*.55};
+    if(!b.w||Math.hypot(point.x-node.center.x,point.y-node.center.y)>jump||Math.hypot(point.x-to.x,point.y-to.y)>jump*2.5)continue;
+    const dist=Math.hypot(point.x-node.point.x,point.y-node.point.y),dir={x:(point.x-node.point.x)/(dist||1),y:(point.y-node.point.y)/(dist||1)};
+    if(wallDistance(s,node.point,dir,dist)<dist)continue;
+    seen.add(e);segments.push({from:node.point,to:point});hits.push({target:e,enemy:true,point,from:node.point,damageScale:Math.max(.65,1-(node.depth+1)*.12)});
+    if(!umbrellaBlocks(e,{...point,voltOrigin:node.point,vx:dir.x,vy:dir.y}))queue.push({point,center:point,depth:node.depth+1});
+   }
+  }
+  return{segments,hits};
+ }
  for(let i=1;i<(strong?5:3);i++){
   const next=s.enemies.filter(e=>e.hp>0&&!e.fleeing&&!e.emerging&&!seen.has(e)).map(e=>({e,d:Math.hypot(e.x-chainCenter.x,e.y-38-chainCenter.y),paintDistance:Math.hypot(e.x-from.x,e.y-38-from.y)})).filter(q=>q.d<jump).sort((a,b)=>a.d-b.d).find(q=>wallDistance(s,from,{x:(q.e.x-from.x)/(q.paintDistance||1),y:(q.e.y-38-from.y)/(q.paintDistance||1)},q.paintDistance)>=q.paintDistance);
   if(!next)break;seen.add(next.e);const point={x:next.e.x,y:next.e.y-38};segments.push({from,to:point});hits.push({target:next.e,enemy:true,point,from,damageScale:Math.pow(.75,i)});

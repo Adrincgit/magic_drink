@@ -9,6 +9,7 @@ export function adventureBounds(s){
  if(!s.arenaLocked)return{left:18,right:s.level.width-18};
  const a=s.level.arena,view=cameraView(s);
  if(s.level.nightmareTrail)return{left:a.left+24,right:s.level.nightmareGate.x-44};
+ if(s.level.villageTrail||s.level.actTwo)return{left:a.left+24,right:a.right-24};
  if(s.index===3&&s.clashRetreatBounds){
   if(s.player.x>=a.left+24&&s.player.x<=a.right-24)delete s.clashRetreatBounds;
   else return{left:Math.max(18,s.clashRetreatBounds.left),right:Math.min(s.level.width-18,s.clashRetreatBounds.right)};
@@ -20,6 +21,25 @@ export function adventureBounds(s){
  return{left:center-450,right:center+450};
 }
 export function followAdventureCamera(s,dt){
+ if(s.level.actTwo){
+  const a=s.level.arena,b=s.boss,battle=s.arenaLocked||!!s.clear||!!b.defeat,ease=1-Math.exp(-dt*4);
+  const zoom=battle?Math.max(.68,Math.min(.88,960/(Math.abs(s.player.x-b.x)+510))):1;
+  const previousFloor=(a.y-s.camera.y)*(s.camera.zoom||1);s.camera.zoom+=(zoom-s.camera.zoom)*ease;
+  const width=960/s.camera.zoom,targetX=battle?Math.max(a.left,Math.min(a.right-width,(s.player.x+b.x)/2-width/2)):Math.max(0,Math.min(s.level.width-width,s.player.x-width*.32));
+  s.camera.x+=(targetX-s.camera.x)*ease;s.camera.x=Math.max(0,Math.min(Math.max(0,s.level.width-width),s.camera.x));
+  if(battle)s.camera.y=a.y-(previousFloor+(440-previousFloor)*ease)/s.camera.zoom;
+  else {const targetY=s.level.maskMansion?Math.max(-320,Math.min(180,s.player.y-385)):40;s.camera.y+=(targetY-s.camera.y)*Math.min(1,dt*3);}
+  s.camera.backdropY+=(40-s.camera.backdropY)*Math.min(1,dt);return;
+ }
+
+ const harvester=s.level.villageTrail&&s.arenaLocked&&s.enemies.find(e=>e.type===28&&e.hp>0&&e.active);
+ if(harvester){
+  const floor=groundY(s.level.route,s.player.x),screenFloor=(floor-s.camera.y)*(s.camera.zoom||1),ease=1-Math.exp(-dt*3.4);
+  const zoom=Math.max(.64,Math.min(harvester.harvestStage===2?.8:.95,960/(Math.abs(s.player.x-harvester.x)+440)));
+  s.camera.zoom+=(zoom-s.camera.zoom)*ease;const width=960/s.camera.zoom;
+  const x=Math.max(s.level.arena.left,Math.min(s.level.width-width,(s.player.x+harvester.x)/2-width/2));
+  s.camera.x+=(x-s.camera.x)*ease;s.camera.y=floor-(screenFloor+(440-screenFloor)*ease)/s.camera.zoom;s.camera.backdropY=40;return;
+ }
  const blockade=s.villageBlockade,wall=s.villageObstacles?.find(q=>q.id===blockade?.wallId);
  if(s.level.villageTrail&&(blockade?.started&&wall&&!wall.broken&&Math.abs(s.player.x-wall.x)<1200||(s.camera.zoom||1)<1)){
   const active=blockade?.started&&wall&&!wall.broken&&Math.abs(s.player.x-wall.x)<1200,target=active?.78:1,ease=1-Math.exp(-dt*2.8),oldZoom=s.camera.zoom||1;

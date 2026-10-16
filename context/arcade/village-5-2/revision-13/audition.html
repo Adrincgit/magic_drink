@@ -1,0 +1,10 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Villa Lumbre · Sonidos</title>
+<style>body{max-width:1050px;margin:40px auto;padding:0 24px;background:#191426;color:#f5e8d5;font:16px/1.5 system-ui}h1{font-size:28px}main{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}article{background:#2b223b;border:1px solid #514361;border-radius:12px;padding:16px}h2{font-size:17px;margin:0 0 12px}audio{width:100%}a{color:#f0c77e}small{color:#c8bbd5}</style>
+<h1>Villa Lumbre · Prueba de sonidos</h1><p>Mezcla renderizada con los mismos canales del juego: general 70 %, FX 100 % y voces 60 %. Incluye el disparo básico conservado para comparar.</p><main id="clips"></main>
+<p><a href="CREDITS.md">Fuentes y edición</a> · <small>Los clips son muestras aisladas; el juego ajusta distancia y panorámica.</small></p>
+<script>
+const clips=[['soulCast','Llama de calabaza'],['pumpkinDeath','Muerte de calabaza: rotura y voz'],['pumpkinBreak','Calabaza al tocar el suelo'],['witchAbsorb','Risa durante la absorción'],['pumpkinBirth','Invocación de calabaza'],['zombieDeath','Muerte de zombi'],['zombieGroan','Gruñido de zombi'],['crowd-mix','Combate con varios sonidos'],['hexy-basic','Disparo básico de Hexy']];
+for(const [name,title]of clips){const card=document.createElement('article'),h=document.createElement('h2'),audio=document.createElement('audio');h.textContent=title;audio.controls=true;audio.preload='metadata';audio.src='audio/'+name+'.wav';card.append(h,audio);document.getElementById('clips').append(card);}
+const card=document.createElement('article');card.innerHTML='<h2>Referencia aportada: momia de Metal Slug</h2>';const reference=document.createElement('audio');reference.controls=true;reference.preload='metadata';reference.src=(location.protocol==='file:'?'../../../../public':'')+'/arcade/music/for%20replace/momia-mslug.mp3';card.append(reference);document.getElementById('clips').append(card);
+document.addEventListener('play',e=>{if(e.target.tagName==='AUDIO')document.querySelectorAll('audio').forEach(a=>{if(a!==e.target)a.pause();});},true);
+</script></html>

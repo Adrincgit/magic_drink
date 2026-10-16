@@ -1,0 +1,47 @@
+[
+  {
+    "file": "witch-laugh.mp3",
+    "url": "https://cdn.freesound.org/previews/348/348142_6358944-hq.mp3",
+    "bytes": 69936
+  },
+  {
+    "file": "zombies.zip",
+    "url": "https://opengameart.org/sites/default/files/zombies.zip",
+    "bytes": 4667201
+  },
+  {
+    "file": "pumpkin-break.ogg",
+    "url": "https://opengameart.org/sites/default/files/pumpkin_break_01.ogg",
+    "bytes": 11930
+  },
+  {
+    "file": "flame-burst.mp3",
+    "url": "https://cdn.freesound.org/previews/539/539972_12029332-hq.mp3",
+    "bytes": 19308
+  },
+  {
+    "file": "fireball.wav",
+    "url": "https://opengameart.org/sites/default/files/105016__julien-matthey__jm-fx-fireball-01.wav",
+    "bytes": 346694
+  },
+  {
+    "file": "magic-1.ogg",
+    "url": "https://opengameart.org/sites/default/files/magical_1.ogg",
+    "bytes": 59071
+  },
+  {
+    "file": "magic-3.ogg",
+    "url": "https://opengameart.org/sites/default/files/magical_3.ogg",
+    "bytes": 38266
+  },
+  {
+    "file": "magic-5.ogg",
+    "url": "https://opengameart.org/sites/default/files/magical_5.ogg",
+    "bytes": 37790
+  },
+  {
+    "file": "voice-zombieDeath1.wav, voice-zombieDeath2.wav, voice-zombieDeath3.wav",
+    "url": "https://opengameart.org/sites/default/files/Voice%20Effects%20Zombie-Skeleton-Monster%20Human%20Male.zip",
+    "note": "Selected WAV files extracted from the pack; unused candidates and archives removed."
+  }
+]

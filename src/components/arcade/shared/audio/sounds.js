@@ -1,25 +1,34 @@
+import {playHexyAttackSound,hexyChannelProfile,createHexyChannelVoice} from './hexyAttackSound';
+import {playWorldCombatSound,villageChannelProfile,createVillageVoice} from './worldCombatSound';
 import {createEffectsBus} from './effectsBus';
+import {createCreaturePlayer} from './creatureSamples';
 import {playPopcornSound} from './popcornSound';
 import {playEncoreSound} from './encoreSound';
 import {playPowerClashSound} from './powerClashSound';
 import {adventureEnergyProfile,createEnergyVoice} from './energyVoice';
 import {emberAudioProfile,createEmberVoice,playEmberSound} from './emberVoice';
 export {EFFECTS_BOOST} from './effectsBus';
-let context,master,effectsInput,energyVoice,emberVoice,muted=false,volume=1;const last=new Map();
+let context,master,voiceMaster,effectsInput,creaturePlayer,energyVoice,emberVoice,hexyVoice,villageVoice,muted=false,volume=1,generalVolume=1,voiceVolume=.6;const last=new Map();
 // The user's controls follow compression, so zero and mute remain absolute
 // and changing volume does not change the balance between quiet/loud effects.
 const outputGain=()=>muted?0:.7*volume;
+const outputVoiceGain=()=>muted?0:.7*generalVolume*voiceVolume;
 export function unlockArcadeAudio(){
  if(typeof window==='undefined')return;
- try{context ||= new (window.AudioContext||window.webkitAudioContext)();if(!master){master=context.createGain();master.gain.value=outputGain();master.connect(context.destination);effectsInput=createEffectsBus(context,master);}if(context.state==='suspended')void context.resume();}catch{}
+ try{context ||= new (window.AudioContext||window.webkitAudioContext)();if(!master){master=context.createGain();master.gain.value=outputGain();master.connect(context.destination);effectsInput=createEffectsBus(context,master);voiceMaster=context.createGain();voiceMaster.gain.value=outputVoiceGain();voiceMaster.connect(context.destination);creaturePlayer=createCreaturePlayer(context,effectsInput,createEffectsBus(context,voiceMaster));void creaturePlayer.preload();}if(context.state==='suspended')void context.resume();}catch{}
 }
-export function muteArcadeSounds(value){muted=!!value;if(master)master.gain.setTargetAtTime(outputGain(),context.currentTime,.025);}
-export function setArcadeSoundsVolume(general=1,effects=1){
+export function muteArcadeSounds(value){muted=!!value;if(master)master.gain.setTargetAtTime(outputGain(),context.currentTime,.025);if(voiceMaster)voiceMaster.gain.setTargetAtTime(outputVoiceGain(),context.currentTime,.025);}
+export function setArcadeSoundsVolume(general=1,effects=1,voices=.6){
  const clamp=n=>Number.isFinite(n)?Math.max(0,Math.min(1,n)):1;
- volume=clamp(general)*clamp(effects);if(master)master.gain.setTargetAtTime(outputGain(),context.currentTime,.025);
+ generalVolume=clamp(general);voiceVolume=clamp(voices);volume=generalVolume*clamp(effects);if(master)master.gain.setTargetAtTime(outputGain(),context.currentTime,.025);if(voiceMaster)voiceMaster.gain.setTargetAtTime(outputVoiceGain(),context.currentTime,.025);
 }
-export function stopArcadeEnergy(atImpact=false){energyVoice?.stop(atImpact);energyVoice=null;emberVoice?.stop();emberVoice=null;}
+export function stopArcadeEnergy(atImpact=false){creaturePlayer?.stopAll();villageVoice?.stop();villageVoice=null;hexyVoice?.stop();hexyVoice=null;energyVoice?.stop(atImpact);energyVoice=null;emberVoice?.stop();emberVoice=null;}
 export function syncArcadeEnergy(s,enabled=true){
+ creaturePlayer?.sync(s,enabled);
+ const village=enabled?villageChannelProfile(s):null;
+ if(village){unlockArcadeAudio();if(context&&effectsInput){villageVoice??=createVillageVoice(context,effectsInput);villageVoice.update(village);}}else{villageVoice?.stop();villageVoice=null;}
+ const hexy=enabled?hexyChannelProfile(s):null;
+ if(hexy){unlockArcadeAudio();if(context&&effectsInput){hexyVoice??=createHexyChannelVoice(context,effectsInput);hexyVoice.update(hexy);}}else{hexyVoice?.stop();hexyVoice=null;}
  const fire=enabled?emberAudioProfile(s):null;
  if(fire){unlockArcadeAudio();if(context&&effectsInput){emberVoice??=createEmberVoice(context,effectsInput);emberVoice.update(fire);}}
  else{emberVoice?.stop();emberVoice=null;}
@@ -28,15 +37,21 @@ export function syncArcadeEnergy(s,enabled=true){
  unlockArcadeAudio();if(!context||!effectsInput)return;
  energyVoice??=createEnergyVoice(context,effectsInput);energyVoice.update(profile);
 }
-export function arcadeSound(kind,enabled=true){
+export function arcadeSound(event,enabled=true){
  if(!enabled||typeof window==='undefined')return;unlockArcadeAudio();if(!context||!master)return;
- const now=context.currentTime;if(now-(last.get(kind)??-10)<(kind==='bossHit'?.09:.035))return;last.set(kind,now);
+ const kind=typeof event==='string'?event:event.kind,spatial=typeof event==='object',now=context.currentTime;
+ if(now-(last.get(kind)??-10)<(spatial?.085:kind==='bossHit'?.09:.035))return;
+ if(spatial&&/Cast|Ray|Drop|Hit|Throw|Impact/.test(kind)&&now-(last.get('world-bus')??-10)<.025)return;
+ last.set(kind,now);if(spatial)last.set('world-bus',now);
  if(kind==='clashExplosion')stopArcadeEnergy(true);
  else energyVoice?.accent(kind);
  if(playEncoreSound(context,effectsInput,kind,now))return;
  if(playEmberSound(context,effectsInput,kind,now))return;
  if(playPowerClashSound(context,effectsInput,kind,now))return;
  if(playPopcornSound(context,effectsInput,kind,now))return;
+ if(creaturePlayer?.play(kind,now,spatial?event:{}))return;
+ if(playWorldCombatSound(context,effectsInput,kind,now,spatial?event:{}))return;
+ if(playHexyAttackSound(context,effectsInput,kind,now))return;
  const tone=(from,to,duration,type='square',gain=.06,delay=0)=>{
   const osc=context.createOscillator(),volume=context.createGain(),at=now+delay;
   osc.type=type;osc.frequency.setValueAtTime(from,at);osc.frequency.exponentialRampToValueAtTime(Math.max(20,to),at+duration);

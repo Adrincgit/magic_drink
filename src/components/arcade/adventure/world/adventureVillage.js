@@ -22,7 +22,7 @@ export function makeVillage(world=VILLAGE_WORLD){
  const oldStars=Array.from({length:49},(_,i)=>350+i*210),stars=oldStars.map(x=>[town(x),floor(town(x))-44]),starIds=oldStars.map(x=>`7:star:${x}:${groundY(oldRoute,x)-44}`);
  for(const x of [450,780,1120,1480,1850,2230,2590,2960,3350,3730,4100,4450]){stars.push([x,floor(x)-44]);starIds.push(`7:approach-star:${x}`);}
  const checkpoints=[4000,8000,12000,16000,19000].map(x=>[x,floor(x)]);
- const level={id:7,chapter:'5-2',name:['El pueblo de los dulces','The candy-struck village'],subtitle:['Familias huyen del pueblo mientras las brujas convierten en dulces a quienes alcanzan.','Families flee the village while witches turn anyone they strike into candy.'],tip:['Sigue el camino desde el cementerio. Interrumpe a las brujas y abre paso hasta el refugio.','Follow the road from the cemetery. Interrupt the witches and clear a path to the refuge.'],power:'Bubble Tape',bossName:['La plaza del refugio','Refuge Square'],background:world.background,world,sky:['#35324f','#a38893'],color:'#cfa0d5',biome:'halloween',villageTrail:true,groundRoute:true,themeStart:true,cameraFloor:440,width,route,platforms,spawn:[90,480],enemies,villagers,houses,plazas,plazaProps,decorations,cemeteryExit:{x:-100,y:480,size:300},villageStart:5500,cages:[town(2920),town(6640)].map(x=>[x,floor(x)]),hazards:[],outposts:[],scenery:[],checkpoint:checkpoints[0],checkpoints,boss:[20000,480],exit:[21150,480],arena:{left:19200,right:21350,entry:20580,y:480},shop:{x:390,y:480},pickups:[],supplies:[1850,4200,7050,10800,14700,17325,19100].map((x,i)=>({x,y:floor(x)-28,kind:[0,3].includes(i)?13:i%2?8:3,fixed:true,loot:{type:'drink',kind:[0,3].includes(i)?13:i%2?8:3,boosted:[1,3,5].includes(i)}})),treasurePositions:[2350,7890,11475,13545,17500],stars,starIds,sections:[{x:0,name:['La salida del cementerio','The cemetery exit']},{x:1600,name:['Familias en el camino','Families on the road']},{x:5500,name:['Las puertas del pueblo','The village gates']},{x:8500,name:['La plaza de la fuente','Fountain Square']},{x:13900,name:['El mercado de Halloween','Halloween Market']},{x:19200,name:['La plaza del refugio','Refuge Square']}]};
+ const level={id:7,chapter:'2-2',name:['El pueblo de los dulces','The candy-struck village'],subtitle:['Familias huyen del pueblo mientras las brujas convierten en dulces a quienes alcanzan.','Families flee the village while witches turn anyone they strike into candy.'],tip:['Sigue el camino desde el cementerio. Interrumpe a las brujas y abre paso hasta el refugio.','Follow the road from the cemetery. Interrupt the witches and clear a path to the refuge.'],power:'Bubble Tape',bossName:['La plaza del refugio','Refuge Square'],background:world.background,world,sky:['#35324f','#a38893'],color:'#cfa0d5',biome:'halloween',villageTrail:true,spookyIdle:true,groundRoute:true,themeStart:true,cameraFloor:440,width,route,platforms,spawn:[90,480],enemies,villagers,houses,plazas,plazaProps,decorations,cemeteryExit:{x:-100,y:480,size:300},villageStart:5500,cages:[town(2920),town(6640)].map(x=>[x,floor(x)]),hazards:[],outposts:[],scenery:[],checkpoint:checkpoints[0],checkpoints,boss:[20000,480],exit:[21150,480],arena:{left:19200,right:21350,entry:20580,y:480},shop:{x:390,y:480},pickups:[],supplies:[1850,4200,7050,10800,14700,17325,19100].map((x,i)=>({x,y:floor(x)-28,kind:[0,3].includes(i)?13:i%2?8:3,fixed:true,loot:{type:'drink',kind:[0,3].includes(i)?13:i%2?8:3,boosted:[1,3,5].includes(i)}})),treasurePositions:[2350,7890,11475,13545,17500],stars,starIds,sections:[{x:0,name:['La salida del cementerio','The cemetery exit']},{x:1600,name:['Familias en el camino','Families on the road']},{x:5500,name:['Las puertas del pueblo','The village gates']},{x:8500,name:['La plaza de la fuente','Fountain Square']},{x:13900,name:['El mercado de Halloween','Halloween Market']},{x:19200,name:['La plaza del refugio','Refuge Square']}]};
  return extendVillageArrival(level);
 }
 
@@ -46,6 +46,12 @@ function extendVillageArrival(level){
   const first=level.villagers.find(q=>q.group===group),count=group<2?0:Math.min(5,1+Math.floor(group/2));
   for(let i=0;i<count;i++){const x=first.x+440+i*78;level.villagers.push({id:'village:extra:'+group+':'+i,x,y:floor(x),style:(group+i*3)%8,group,safeX:-180,wakeX:first.wakeX,speed:190+(group*11+i*9)%35});}
  }
+ // A standing adult carries the warning clearly while the children keep
+ // escaping. Use one baker per approach group, rather than the front child.
+ for(const group of [...new Set(level.villagers.filter(q=>q.warning).map(q=>q.group))]){
+  for(const q of level.villagers)if(q.group===group)q.warning=false;
+  const adult=level.villagers.find(q=>q.group===group&&q.style===0&&q.x<move(5500)-450);if(adult)adult.warning=true;
+ }
  level.carriages=[3650,6200,10000,15100].map((x,i)=>({id:i,x:move(x),y:floor(move(x))-28,wakeX:move(x)-850,speed:280+i*14}));
  level.width+=1800;level.villageStart=move(level.villageStart);
  level.entrance={x:level.villageStart-450,y:floor(level.villageStart-450)-65,size:360};
@@ -54,5 +60,7 @@ function extendVillageArrival(level){
  level.treasurePositions=level.treasurePositions.map(move);
  level.rubble=[8200,13200,18500].map((x,i)=>{const npc=level.villagers.find(q=>q.style===0&&!q.rubbleId&&q.x>x-1000);npc.x=x;npc.y=floor(x);npc.wakeX=x-700;npc.rubbleId='rubble:'+i;npc.warning=false;npc.trip=false;return{id:npc.rubbleId,x,y:floor(x),hp:4,villager:npc.id};});
  for(const group of [3,5,8,11]){const npc=level.villagers.find(q=>q.group===group&&[0,6].includes(q.style)&&!q.rubbleId);if(npc){npc.defender=true;npc.warning=false;npc.trip=false;}}
+ level.bossName=['La Cosechera de Dulces','The Candy Harvester'];
+ level.enemies.push([level.arena.right-420,floor(level.arena.right-420),28]);
  return addVillageDestruction(level);
 }

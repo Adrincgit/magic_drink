@@ -5,6 +5,7 @@ import {groundY} from '../world/adventureTerrain';
 import {villageVillagerProfile,villageVillagerRunFrame} from '../actors/villageVillagers';
 import {drawVillageAbsorption,drawVillageDestruction} from './villageChaosCanvas';
 import {drawVillageDust} from './villageDustCanvas';
+import {HARVESTER_SIZE} from '../actors/harvesterRegistration';
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 const cel=(c,img,frame,x,y,size,flip=false)=>{const cell=img.width/4;c.save();c.translate(x,y);if(flip)c.scale(-1,1);c.drawImage(img,frame%4*cell,Math.floor(frame/4)*cell,cell,cell,-size/2,-size*250/256,size,size);c.restore();};
 const shelter=(c,img,frame,x,y)=>{c.save();c.translate(x,y);c.scale(1,.7);cel(c,img,frame,0,0,153);c.restore();};
@@ -96,16 +97,20 @@ export function drawVillageScenery(c,s,art){
  for(const q of s.level.decorations)if(visible(q))cel(c,decor,q.frame,q.x,q.y,q.size);
  drawVillageGate(c,s,art);
 }
+export function drawVillageCarriages(c,s,art,reduced){
+ drawVillageDust(c,s,art,reduced,'carriage');
+ for(const q of s.carriages||[])if(q.active&&q.x>s.camera.x-400&&q.x<s.camera.x+1350)cel(c,art['village-journey-v4'],4+(reduced?0:Math.floor(q.gait*8)%8),q.x,q.y,330*(q.scale||.82));
+}
 export function drawVillagers(c,s,art,reduced){
  drawVillageDust(c,s,art,reduced);
- for(const q of s.carriages||[])if(q.active&&q.x>s.camera.x-400&&q.x<s.camera.x+1350)cel(c,art['village-journey-v4'],4+(reduced?0:Math.floor(q.gait*8)%8),q.x,q.y,330);
- for(const q of s.villagers){if(['waiting','safe','absorbed','carried'].includes(q.state)||q.x<s.camera.x-160||q.x>s.camera.x+960/(s.camera.zoom||1)+160)continue;
+ const ordered=[...s.villagers.filter(q=>q.state!=='warning'),...s.villagers.filter(q=>q.state==='warning')];
+ for(const q of ordered){if(['waiting','safe','absorbed','carried'].includes(q.state)||q.x<s.camera.x-160||q.x>s.camera.x+960/(s.camera.zoom||1)+160)continue;
   if(q.state==='flee'&&q.blocked&&q.blockedAge>.1){
    const p=villageVillagerProfile(q.style),key='village-climb-'+['adults','children','elders','neighbors'][Math.floor(q.style/2)]+'-v10',frame=q.style%2*8+(reduced?0:q.blockedFrame||0);
    cel(c,art[key],frame,q.x,q.y+(reduced?q.climbLift||0:0),p.size*1.5);continue;
   }
   if(q.state==='warning'){
-   const frame=(q.style===2?4:0)+(reduced?0:Math.min(3,Math.floor(q.age/.85*4))),p=villageVillagerProfile(q.style);
+   const frame=(q.style===2?4:0)+(reduced?2:q.age<.3?0:q.age<.65?1:q.age<2.45?2:3),p=villageVillagerProfile(q.style);
    cel(c,art['village-warning-v10'],frame,q.x,q.y,p.size*1.5);continue;
   }
   if(q.state==='hiding'){
@@ -117,8 +122,8 @@ export function drawVillagers(c,s,art,reduced){
    cel(c,art['village-resistance-v5'],16+Math.floor((q.age||0)*3)%3,q.x,q.y,132);continue;
   }
   if(q.state==='defend'){
-   const p=villageVillagerProfile(q.style),age=q.age%1.05,frame=[0,.13,.23,.34,.43,.57,.70,.86].filter(t=>age>=t).length-1;
-   cel(c,art[p.defendKey],frame,q.x,q.y,p.size);continue;
+   const p=villageVillagerProfile(q.style),frame=q.throwFrame??0;
+   cel(c,art[p.defendKey],frame,q.x,q.y,p.size,q.defendDir<0);continue;
   }
   const p=villageVillagerProfile(q.style),base=p.base,turn=q.state==='turning'||q.state==='rescue',candy=['candy','absorbing'].includes(q.state),age=q.state==='rescue'?Math.max(0,1.2-q.age*1.85):q.age,u=clamp((age-.6)/.6);
   const acting={warning:8,trip:9,fallen:9,recover:10,help:11}[q.state];
@@ -131,7 +136,7 @@ export function drawVillagers(c,s,art,reduced){
 }
 export function drawCandyHexy(c,s,art,reduced){
  const q=s.player.candy;if(!q)return false;
- if(q.pumpkin){const frame=q.convertAge<.9?Math.min(3,Math.floor(q.convertAge/.225)):4+(reduced?0:Math.floor(q.convertAge*8)%4);cel(c,art['village-hexy-pumpkin-v6'],frame,s.player.x,s.player.y,100);return true;}
+ if(q.pumpkin){if(q.containerId)return true;const frame=q.convertAge<.9?Math.min(3,Math.floor(q.convertAge/.225)):4+(reduced?0:Math.floor(q.convertAge*8)%4);cel(c,art['village-hexy-pumpkin-v6'],frame,s.player.x,s.player.y,100);return true;}
  const turning=q.age<.9,frame=turning?4+Math.min(3,Math.floor(q.age/.23)):q.terminal?7:8+Math.min(2,Math.floor(q.effort/21*3));
  const size=(turning?128-(Math.max(0,q.age-.45)/.45)*48:80)*(1-(q.absorbProgress||0)*.25);
  c.save();c.globalAlpha=1;c.filter='none';c.translate(s.player.x,s.player.y);if(!turning&&!q.terminal&&!reduced)c.rotate(Math.sin(q.age*18)*q.pulse*.15);
@@ -139,6 +144,7 @@ export function drawCandyHexy(c,s,art,reduced){
 }
 export function drawFlyingWitchDefeat(c,e,art){
  if(!e.witchFall)return false;
+ if(e.type===28){c.save();c.globalAlpha=Math.min(1,e.deadTime/.45);cel(c,art['harvester-ritual'],12+Math.min(3,Math.floor((e.witchFall.landed?e.witchFall.landAge+ .4:e.witchFall.age)*3)),e.x,e.y,HARVESTER_SIZE,e.dir>0);c.restore();return true;}
  const q=e.witchFall,frame=q.landed?14+Math.min(1,Math.floor(q.landAge*3)):8+Math.min(5,Math.floor(q.age*8));
  c.save();c.globalAlpha=Math.min(1,e.deadTime/.45);cel(c,art['village-witch-flight-v4'],frame,e.x,e.y,198,e.dir>0);c.restore();return true;
 }
@@ -155,7 +161,10 @@ export function drawVillageRubble(c,s,art){
  }
 }
 export function drawVillageResistance(c,s,art){
- for(const q of s.villageStones||[])fireCel(c,art['village-soul-effects-v5'],12+Math.floor(q.age*12)%4,q.x,q.y,18,q.age*9);
+ for(const q of s.villageStones||[]){
+  c.save();c.strokeStyle='#d9c6a9';c.globalAlpha=.65;c.lineWidth=2;c.beginPath();c.moveTo(q.x-q.vx*.045,q.y-q.vy*.045);c.lineTo(q.x,q.y);c.stroke();c.restore();
+  fireCel(c,art['village-soul-effects-v5'],12+Math.floor(q.age*12)%4,q.x,q.y,26,q.age*9);
+ }
 }
 function fireCel(c,img,frame,x,y,size,angle=0,flight=false,trailLength=Infinity,stretch=1){
  const cell=img.width/4;c.save();c.translate(x,y);c.rotate(angle);

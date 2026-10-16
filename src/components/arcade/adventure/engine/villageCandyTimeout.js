@@ -5,6 +5,6 @@ export function stepVillageCandyTimeout(s,n,dt){
  n.curseAge=(n.curseAge||0)+dt;if(n.curseAge<VILLAGE_CANDY_SECONDS)return false;
  const container=s.enemies.find(e=>e.type===27&&pumpkinId(e)===n.curseOwner);
  if(container?.carriedId===n.id)container.carriedId=null;
- for(const witch of s.enemies)if(witch.type===26&&witch.phase==='absorb'&&witch.absorbId===n.id){witch.phase='recover';witch.phaseAge=0;witch.timer=1.2;delete witch.absorbId;}
+ for(const witch of s.enemies)if(witch.absorbIds)witch.absorbIds=witch.absorbIds.filter(id=>id!==n.id);
  releaseVillageVictim(s,n,container?.x??n.candyHomeX??n.x);delete n.curseAge;n.autoReleased=true;return true;
 }

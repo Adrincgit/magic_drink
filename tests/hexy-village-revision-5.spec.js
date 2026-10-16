@@ -19,16 +19,18 @@ test('absorption heals once and transfers the exact victim into one released pum
  const pumpkins=s.enemies.filter(e=>e.type===27);expect(pumpkins).toHaveLength(1);expect(e.hp).toBe(7);expect(q.state).toBe('carried');expect(q.curseOwner).toBe(pumpkinId(pumpkins[0]));expect(pumpkins[0].carriedId).toBe(q.id);
  releaseWitchVictims(s,e);expect(q.state).toBe('carried');expect(pumpkins[0].hp).toBeGreaterThan(0);
 });
-test('a healthy witch can create a pumpkin, but taking damage before consumption cancels it',()=>{
+test('taking damage before consumption does not cancel a witch ritual',()=>{
  const s=setup(),e=Object.assign(makeEnemy(600,480,26),{active:true,timer:0}),q=s.villagers[0];s.enemies=[e];s.villagers=[q];Object.assign(q,{state:'candy',x:480,y:480,curseOwner:witchId(e),age:0});
  stepVillageEnemy(s,e,.01,enemyShot);expect(e.phase).toBe('absorb');stepVillageEnemy(s,e,1,enemyShot);e.flash=.2;stepVillageEnemy(s,e,.01,enemyShot);
- expect(q.state).toBe('candy');expect(q.x).toBe(480);expect(s.enemies.filter(e=>e.type===27)).toHaveLength(0);expect(e.hp).toBe(11.5);
+ expect(q.state).toBe('absorbing');expect(q.x).toBeGreaterThan(480);expect(e.phase).toBe('absorb');expect(s.enemies.filter(e=>e.type===27)).toHaveLength(0);expect(e.hp).toBe(11.5);
 });
 
-test('interrupting the release after consumption cannot lose the captive or duplicate a pumpkin',()=>{
+test('damage after consumption neither cancels nor prematurely releases the pumpkin',()=>{
  const s=setup(),e=Object.assign(makeEnemy(600,480,26),{active:true,timer:0,hp:4}),q=s.villagers[0];s.enemies=[e];s.villagers=[q];Object.assign(q,{state:'candy',x:480,y:480,curseOwner:witchId(e),age:0});
  for(let i=0;i<280;i++)stepVillageEnemy(s,e,1/120,enemyShot);
  expect(q.state).toBe('absorbed');expect(e.hp).toBe(7);e.flash=.2;stepVillageEnemy(s,e,.01,enemyShot);
+ expect(q.state).toBe('absorbed');expect(s.enemies.filter(e=>e.type===27)).toHaveLength(0);
+ for(let i=0;i<90;i++)stepVillageEnemy(s,e,1/120,enemyShot);
  expect(q.state).toBe('carried');expect(s.enemies.filter(e=>e.type===27)).toHaveLength(1);
  stepVillageEnemy(s,e,.01,enemyShot);expect(s.enemies.filter(e=>e.type===27)).toHaveLength(1);expect(e.hp).toBe(7);
 });

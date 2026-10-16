@@ -13,3 +13,8 @@ export function drawPopcornBlast(c,q,art,reduced){
 export function drawPopcornImpact(c,q,art,reduced){
  c.save();c.globalAlpha=Math.min(1,q.life/.08);cel(c,art,12+(reduced?1:Math.min(3,Math.floor(q.age/q.duration*4))),q.x,q.y,q.size);c.restore();
 }
+export function drawPopcornScreenFlash(c,s,reduced=false){
+ const q=s.popcornFlash;if(!q||reduced)return;
+ const u=(s.fxTime-q.at)/q.duration;if(u<0||u>=1)return;
+ c.save();c.globalAlpha=(q.strong?.3:.18)*(1-u)**2;c.fillStyle='#fff1d0';c.fillRect(0,0,960,540);c.restore();
+}

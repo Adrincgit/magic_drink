@@ -1,4 +1,4 @@
-import {chapterRank,nextAdventureChapter,lastChapterRank,maxChapterId,CHAPTER_ORDER,PREVIOUS_CHAPTER_ORDER,CEMETERY_CHAPTER_ORDER} from './adventureProgression';
+import {chapterRank,nextAdventureChapter,lastChapterRank,maxChapterId,CHAPTER_ORDER,PREVIOUS_CHAPTER_ORDER,CEMETERY_CHAPTER_ORDER,VILLAGE_CHAPTER_ORDER} from './adventureProgression';
 import { useSyncExternalStore } from 'react';
 import {MODS,validMods,equippedMods,validModLevels,modPrice,modSlots,availableMod,canUpgradeMod} from '../adventure/engine/adventureMods';
 import {categorySlots,modCategory,categoryUsed,categorySlotPrice,canExpandCategory} from '../adventure/engine/adventureMods';
@@ -20,7 +20,7 @@ export const ACCESSORIES = [
   { id: 'crown', cost: 25, es: 'Estrella del show', en: 'Star of the show', icon: '♛' },
   { id: 'comet', cost: 40, es: 'Pasos de cometa', en: 'Comet footsteps', icon: '✦' },
 ];
-const fresh = () => ({ version: 1, campaign:4, economy:2, coins: 0, stars: 0, found: [], owned: ['plain'], equipped: 'plain', modSlots:1,modCategorySlots:categorySlots({}),collectedStars:[],modsOwned:[],modsEquipped:[],best: 0, wins: 0, run: null, guideSeen:false, arcadeFound:false, adventureUnlocked:0, adventureCleared:[] });
+const fresh = () => ({ version: 1, campaign:5, economy:2, coins: 0, stars: 0, found: [], owned: ['plain'], equipped: 'plain', modSlots:1,modCategorySlots:categorySlots({}),collectedStars:[],modsOwned:[],modsEquipped:[],best: 0, wins: 0, run: null, guideSeen:false, arcadeFound:false, adventureUnlocked:0, adventureCleared:[] });
 const server = fresh();
 let state = server, loaded = false, queue = Promise.resolve();
 const listeners = new Set();
@@ -36,9 +36,9 @@ export function sanitizeSave(raw) {
   // Preserve its purchase and its function without charging for the migration.
   if(modsOwned.includes('double-pocket')){families.drinks=Math.max(2,families.drinks);modsOwned=validMods([...modsOwned.filter(id=>id!=='double-pocket'),'reserve-sleeve']);selected=selected.map(id=>id==='double-pocket'?'reserve-sleeve':id);levels['reserve-sleeve']=levels['reserve-sleeve']||1;}
   const found=[...new Set((Array.isArray(raw.found)?raw.found:[]).filter(id=>BUNNIES.some(b=>b.id===id)))];
-  return { version:1, campaign:4, economy:2, coins:number(raw.coins,999), stars:number(number(raw.stars)+(raw.economy===2?0:found.length*50)), found, owned,
+  return { version:1, campaign:5, economy:2, coins:number(raw.coins,999), stars:number(number(raw.stars)+(raw.economy===2?0:found.length*50)), found, owned,
     equipped:owned.includes(raw.equipped)?raw.equipped:'plain',modsOwned,modSlots:slots,modCategorySlots:families,collectedStars:validCollectedStars(raw.collectedStars),modsEquipped:equippedMods(selected,modsOwned,families),modLevels:validModLevels(levels,modsOwned), best:number(raw.best), wins:number(raw.wins), guideSeen:raw.guideSeen===true,arcadeFound:raw.arcadeFound===true,
-    adventureUnlocked:raw.campaign>=4?number(raw.adventureUnlocked,lastChapterRank):raw.campaign===3?chapterRank(CEMETERY_CHAPTER_ORDER[number(raw.adventureUnlocked,CEMETERY_CHAPTER_ORDER.length-1)]):raw.campaign===2?chapterRank(PREVIOUS_CHAPTER_ORDER[number(raw.adventureUnlocked,PREVIOUS_CHAPTER_ORDER.length-1)]):chapterRank(number(raw.adventureUnlocked,4)),adventureCleared:[...new Set((Array.isArray(raw.adventureCleared)?raw.adventureCleared:[]).filter(n=>Number.isInteger(n)&&CHAPTER_ORDER.includes(n)))],
+    adventureUnlocked:raw.campaign>=5?number(raw.adventureUnlocked,lastChapterRank):raw.campaign===4?chapterRank(VILLAGE_CHAPTER_ORDER[number(raw.adventureUnlocked,VILLAGE_CHAPTER_ORDER.length-1)]):raw.campaign===3?chapterRank(CEMETERY_CHAPTER_ORDER[number(raw.adventureUnlocked,CEMETERY_CHAPTER_ORDER.length-1)]):raw.campaign===2?chapterRank(PREVIOUS_CHAPTER_ORDER[number(raw.adventureUnlocked,PREVIOUS_CHAPTER_ORDER.length-1)]):chapterRank(number(raw.adventureUnlocked,4)),adventureCleared:[...new Set((Array.isArray(raw.adventureCleared)?raw.adventureCleared:[]).filter(n=>Number.isInteger(n)&&CHAPTER_ORDER.includes(n)))],
     run:raw.run && typeof raw.run.id==='string' && typeof raw.run.practice==='boolean' ? {id:raw.run.id,practice:raw.run.practice,collectibles:raw.run.collectibles===true,chapter:number(raw.run.chapter,maxChapterId),earned:number(raw.run.earned,1000),banked:number(raw.run.banked,200)} : null };
 }
 function read() { try { const value=localStorage.getItem(SAVE_KEY); return value ? sanitizeSave(JSON.parse(value)) : fresh(); } catch { return state; } }

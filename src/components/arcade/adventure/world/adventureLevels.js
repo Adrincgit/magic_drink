@@ -1,4 +1,5 @@
 import {makeVillage} from './adventureVillage';
+import {makeCornfield,makeMaskMansion,makeBadDreams} from './adventureActTwo';
 import {WORLDS} from './adventureWorlds';
 import {extendAdventureRoutes} from './adventureRoutes';
 import {shapeMeadowRoute,surfaceY} from './adventureTerrain';
@@ -113,6 +114,7 @@ LEVELS.push(makeEmberTrail(WORLDS[5]));
 LEVELS[4].chapter='6-1';
 LEVELS.push(makeNightmareTrail(WORLDS[6]));
 LEVELS.push(makeVillage(WORLDS[7]));
+LEVELS.push(makeCornfield(WORLDS[8]),makeMaskMansion(WORLDS[9]),makeBadDreams(WORLDS[10]));
 // Launchers have a nearby ordinary patrol to use them. The walker is present
 // from level creation and remains the same enemy after its boosted jump.
 for(const level of LEVELS)for(const [x,y,type] of [...level.enemies])if(type===5){

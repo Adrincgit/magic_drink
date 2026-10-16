@@ -1,3 +1,5 @@
+import {damageActTwoBoss} from '../actors/bosses/adventureActTwoBosses';
+import {hitActTwoObjects} from './actTwoRoute';
 import {damageBellkeeper} from '../actors/bosses/adventureBellkeeper';
 import {damageGrave,graveBody} from './adventureGraveyard';
 import {fortPartHit} from '../actors/bosses/adventureEmberFort';
@@ -42,6 +44,7 @@ export function stepSuper(s,dt,{defeat,particles,burst,say}){
  const due=q.age<SUPER_WINDUP?0:Math.min(8,1+Math.floor((q.age-SUPER_WINDUP)/.24));
  while(q.pulses<due){
   q.pulses++;s.events.push('superPulse');s.shake=Math.max(s.shake,.16);
+  if(s.level.actTwo)for(const target of [...s.platforms.filter(p=>p.solid&&!p.gone).map(p=>({x:p.x+p.w/2,y:p.y+p.h/2})),...[...s.strawPiles,...s.dreamMirrors].filter(p=>p.hp>0).map(p=>({x:p.x,y:p.y-p.h/2}))])if(inBeam(target.x,target.y,45))hitActTwoObjects(s,{...target,life:1,damage:8,heavy:true},45);
   for(const shot of s.hostile)if(shot.life>0&&inBeam(shot.x,shot.y,shot.r)){shot.life=0;particles(s,shot.x,shot.y,'#bcecff',3);}
   for(const cage of s.cages)if(!cage.open&&!cage.carried&&!cage.lost&&inBeam(cage.x,cage.y-32,30)){cage.hp=0;cage.open=true;particles(s,cage.x,cage.y-30,'#ffe6a7',8);}
   for(const grave of s.graves||[])if(grave.hp>0&&bodyInBeam(graveBody(grave)))damageGrave(s,grave,8);
@@ -53,10 +56,11 @@ export function stepSuper(s,dt,{defeat,particles,burst,say}){
   const b=s.boss;
   const hitTargets=bossTargets(s).filter(t=>s.index===1?bodyInBeam(t):inBeam(t.x+t.w/2,t.y+t.h/2,Math.max(t.w,t.h)/2));
   if(b.hp>0&&(!s.level.nightmareTrail||b.vulnerable)&&!['sleep','intro','transform','defeated'].includes(b.phase)&&hitTargets.length){
-   b.trailHp=Math.max(b.trailHp||b.hp,b.hp);const damage=s.index===5?hitTargets.reduce((n,t)=>n+fortPartHit(s,t.part,SUPER_BOSS_DAMAGE/8/hitTargets.length),0):SUPER_BOSS_DAMAGE/8;if(s.level.nightmareTrail)damageBellkeeper(s,damage);else b.hp=Math.max(0,b.hp-damage);if(s.index===2)for(const target of hitTargets)bargePartHit(s,target.part,SUPER_BOSS_DAMAGE/8/hitTargets.length);bossHitFeedback(s,true);b.recoil=q.dir;
+   b.trailHp=Math.max(b.trailHp||b.hp,b.hp);const damage=s.index===5?hitTargets.reduce((n,t)=>n+fortPartHit(s,t.part,SUPER_BOSS_DAMAGE/8/hitTargets.length),0):SUPER_BOSS_DAMAGE/8;if(s.level.actTwo)damageActTwoBoss(s,damage);else if(s.level.nightmareTrail)damageBellkeeper(s,damage);else b.hp=Math.max(0,b.hp-damage);if(s.index===2)for(const target of hitTargets)bargePartHit(s,target.part,SUPER_BOSS_DAMAGE/8/hitTargets.length);bossHitFeedback(s,true);b.recoil=q.dir;
    burst(s,b.x,b.y-(s.index===1?204:55),0,150);particles(s,b.x,b.y-(s.index===1?204:50),'#fff1a4',6);
    if(!b.hp){
-    if(s.level.nightmareTrail){b.phase='dying';s.hostile=[];}
+    if(s.level.actTwo){b.phase='dying';s.hostile=[];}
+    else if(s.level.nightmareTrail){b.phase='dying';s.hostile=[];}
     else if(s.index===2||s.index===5){b.phase='defeated';s.hostile=[];}
     else if(s.index===3){b.phase='dying';b.defeatPending=true;s.hostile=[];}
     else{b.phase='defeated';s.arenaLocked=false;s.hearts=Math.min(s.maxHearts,s.hearts+2);s.score+=60;s.events.push('bossDown');say(s,'bossDown');s.hostile=[];s.enemies=s.enemies.filter(e=>e.x<s.level.arena.left);}

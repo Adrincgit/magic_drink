@@ -53,7 +53,7 @@ test('ordinary horizontal shots can breach both barriers and destroy the core wi
  expect(fortSystems(s).wall.hp).toBe(0);expect(fortSystems(s).gate.hp).toBe(0);expect(s.boss.hp).toBe(0);
 });
 test('chapter order inserts the land approach and migrates progress without renumbering collected stars',()=>{
- expect(CHAPTER_ORDER).toEqual([0,1,2,5,3,4]);expect(nextAdventureChapter(2)).toBe(5);expect(nextAdventureChapter(5)).toBe(3);expect(nextAdventureChapter(4)).toBeNull();
+ expect(CHAPTER_ORDER).toEqual([0,1,2,5,3,6,7,8,9,10,4]);expect(nextAdventureChapter(2)).toBe(5);expect(nextAdventureChapter(5)).toBe(3);expect(nextAdventureChapter(4)).toBeNull();
  const save=sanitizeSave({version:1,adventureUnlocked:3,adventureCleared:[0,1,2,3],stars:123,economy:2});expect(save.adventureUnlocked).toBe(4);expect(save.adventureCleared).toEqual([0,1,2,3]);expect(save.stars).toBe(123);expect(sanitizeSave(save)).toEqual(save);
  expect(createAdventure(5).level.chapter).toBe('1-4');expect(createAdventure(3).level.chapter).toBe('1-5');expect(createAdventure(2).level.circusArrival).toBeUndefined();expect(createAdventure(3).player.x).toBeLessThan(0);
 });

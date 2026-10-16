@@ -1,0 +1,415 @@
+{
+  "errors": [],
+  "missing": [],
+  "scenes": [
+    {
+      "id": 8,
+      "samples": [
+        {
+          "t": 0.5039999999999999,
+          "wall": 0.504,
+          "phase": "intro",
+          "move": "",
+          "stage": 1,
+          "hp": 188,
+          "x": 9080,
+          "y": 480,
+          "hostile": 0
+        },
+        {
+          "t": 2.5073000000000008,
+          "wall": 2.5073,
+          "phase": "recover",
+          "move": "",
+          "stage": 1,
+          "hp": 188,
+          "x": 9080,
+          "y": 480,
+          "hostile": 0
+        },
+        {
+          "t": 4.305000000000004,
+          "wall": 4.305,
+          "phase": "windup",
+          "move": "fan",
+          "stage": 1,
+          "hp": 188,
+          "x": 9027.999999999987,
+          "y": 480,
+          "hostile": 0
+        },
+        {
+          "t": 6.806100000000007,
+          "wall": 6.806100000000001,
+          "phase": "recover",
+          "move": "fan",
+          "stage": 1,
+          "hp": 188,
+          "x": 9027.999999999987,
+          "y": 480,
+          "hostile": 2
+        },
+        {
+          "t": 9.207099999999938,
+          "wall": 9.2071,
+          "phase": "transform",
+          "move": "rush",
+          "stage": 2,
+          "hp": 94,
+          "x": 8975.778999999982,
+          "y": 480,
+          "hostile": 1
+        },
+        {
+          "t": 11.702899999999786,
+          "wall": 11.7029,
+          "phase": "rebuild",
+          "move": "rush",
+          "stage": 2,
+          "hp": 94,
+          "x": 8975.778999999982,
+          "y": 480,
+          "hostile": 2
+        },
+        {
+          "t": 14.407299999999662,
+          "wall": 14.407300000000001,
+          "phase": "recover",
+          "move": "rush",
+          "stage": 2,
+          "hp": 118,
+          "x": 8975.778999999982,
+          "y": 480,
+          "hostile": 1
+        },
+        {
+          "t": 17.106899999999573,
+          "wall": 17.106900000000003,
+          "phase": "dying",
+          "move": "summon",
+          "stage": 2,
+          "hp": 0,
+          "x": 8923.616499999966,
+          "y": 480,
+          "hostile": 0
+        },
+        {
+          "t": 19.603099999999507,
+          "wall": 19.6031,
+          "phase": "defeated",
+          "move": "summon",
+          "stage": 2,
+          "hp": 0,
+          "x": 8923.616499999966,
+          "y": 480,
+          "hostile": 0
+        }
+      ],
+      "phases": [
+        "sleep",
+        "intro",
+        "recover",
+        "patrol",
+        "windup",
+        "attack",
+        "transform",
+        "rebuild",
+        "dying",
+        "defeated"
+      ],
+      "events": {
+        "coin": 3,
+        "woodHit": 1,
+        "boss": 1,
+        "witchRay": 9,
+        "stoneThrow": 6,
+        "towerTransform": 1,
+        "pumpkinBirth": 1,
+        "rubbleBreak": 1,
+        "bossDown": 1,
+        "win": 1
+      }
+    },
+    {
+      "id": 9,
+      "samples": [
+        {
+          "t": 0.504,
+          "wall": 0.504,
+          "phase": "intro",
+          "move": "",
+          "stage": 1,
+          "hp": 205,
+          "x": 8070,
+          "y": 180,
+          "hostile": 0
+        },
+        {
+          "t": 2.506899999999997,
+          "wall": 2.5068999999999977,
+          "phase": "recover",
+          "move": "",
+          "stage": 1,
+          "hp": 205,
+          "x": 8070,
+          "y": 180,
+          "hostile": 0
+        },
+        {
+          "t": 4.307500000000001,
+          "wall": 4.3075,
+          "phase": "windup",
+          "move": "fan",
+          "stage": 1,
+          "hp": 205,
+          "x": 8001.67699999998,
+          "y": 180,
+          "hostile": 0
+        },
+        {
+          "t": 6.805700000000007,
+          "wall": 6.805700000000001,
+          "phase": "recover",
+          "move": "fan",
+          "stage": 1,
+          "hp": 205,
+          "x": 8001.67699999998,
+          "y": 180,
+          "hostile": 1
+        },
+        {
+          "t": 9.205999999999932,
+          "wall": 9.205999999999996,
+          "phase": "transform",
+          "move": "swarm",
+          "stage": 2,
+          "hp": 102.5,
+          "x": 7933.124499999953,
+          "y": 85.82356426030695,
+          "hostile": 0
+        },
+        {
+          "t": 11.700999999999809,
+          "wall": 11.700999999999997,
+          "phase": "patrol",
+          "move": "swarm",
+          "stage": 2,
+          "hp": 102.5,
+          "x": 7908.65299999995,
+          "y": 180,
+          "hostile": 0
+        },
+        {
+          "t": 14.403799999999642,
+          "wall": 14.403799999999999,
+          "phase": "attack",
+          "move": "rain",
+          "stage": 2,
+          "hp": 102.5,
+          "x": 7864.554999999932,
+          "y": 180,
+          "hostile": 5
+        },
+        {
+          "t": 17.10359999999953,
+          "wall": 17.103600000000004,
+          "phase": "dying",
+          "move": "summon",
+          "stage": 2,
+          "hp": 0,
+          "x": 7859.471999999932,
+          "y": 180,
+          "hostile": 0
+        },
+        {
+          "t": 19.605999999999433,
+          "wall": 19.605999999999998,
+          "phase": "defeated",
+          "move": "summon",
+          "stage": 2,
+          "hp": 0,
+          "x": 7859.471999999932,
+          "y": 180,
+          "hostile": 0
+        }
+      ],
+      "phases": [
+        "sleep",
+        "intro",
+        "recover",
+        "patrol",
+        "windup",
+        "attack",
+        "transform",
+        "dying",
+        "defeated"
+      ],
+      "events": {
+        "coin": 1,
+        "boss": 1,
+        "witchRay": 10,
+        "towerTransform": 1,
+        "rubbleBreak": 1,
+        "bossDown": 1,
+        "win": 1
+      }
+    },
+    {
+      "id": 10,
+      "samples": [
+        {
+          "t": 0.5019000000000018,
+          "wall": 0.5019000000000015,
+          "phase": "intro",
+          "move": "",
+          "stage": 1,
+          "hp": 360,
+          "x": 1410,
+          "y": 480,
+          "hostile": 0
+        },
+        {
+          "t": 2.5020999999999964,
+          "wall": 2.5020999999999987,
+          "phase": "recover",
+          "move": "",
+          "stage": 1,
+          "hp": 360,
+          "x": 1410,
+          "y": 480,
+          "hostile": 0
+        },
+        {
+          "t": 4.407099999999996,
+          "wall": 4.407099999999999,
+          "phase": "windup",
+          "move": "fan",
+          "stage": 1,
+          "hp": 360,
+          "x": 1325.842500000006,
+          "y": 480,
+          "hostile": 0
+        },
+        {
+          "t": 7.803700000000003,
+          "wall": 7.803699999999997,
+          "phase": "windup",
+          "move": "mirrors",
+          "stage": 1,
+          "hp": 360,
+          "x": 1241.296500000012,
+          "y": 480,
+          "hostile": 1
+        },
+        {
+          "t": 10.206899999999887,
+          "wall": 10.206900000000001,
+          "phase": "transform",
+          "move": "mirrors",
+          "stage": 2,
+          "hp": 240,
+          "x": 1241.296500000012,
+          "y": 480,
+          "hostile": 0
+        },
+        {
+          "t": 12.504299999999777,
+          "wall": 12.504300000000002,
+          "phase": "windup",
+          "move": "summon",
+          "stage": 2,
+          "hp": 240,
+          "x": 1156.5090000000177,
+          "y": 480,
+          "hostile": 0
+        },
+        {
+          "t": 15.300099999999627,
+          "wall": 15.300099999999999,
+          "phase": "recover",
+          "move": "summon",
+          "stage": 2,
+          "hp": 240,
+          "x": 1156.5090000000177,
+          "y": 480,
+          "hostile": 2
+        },
+        {
+          "t": 18.30429999999958,
+          "wall": 18.3043,
+          "phase": "transform",
+          "move": "lanes",
+          "stage": 3,
+          "hp": 120,
+          "x": 1139.6985000000195,
+          "y": 480,
+          "hostile": 0
+        },
+        {
+          "t": 21.400399999999532,
+          "wall": 21.400399999999994,
+          "phase": "patrol",
+          "move": "lanes",
+          "stage": 3,
+          "hp": 120,
+          "x": 1139.6985000000195,
+          "y": 480,
+          "hostile": 2
+        },
+        {
+          "t": 24.20569999999948,
+          "wall": 24.205699999999997,
+          "phase": "attack",
+          "move": "lanes",
+          "stage": 3,
+          "hp": 120,
+          "x": 1139.6985000000195,
+          "y": 480,
+          "hostile": 2
+        },
+        {
+          "t": 27.00439999999942,
+          "wall": 27.004399999999993,
+          "phase": "dying",
+          "move": "lanes",
+          "stage": 3,
+          "hp": 0,
+          "x": 1139.6985000000195,
+          "y": 480,
+          "hostile": 0
+        },
+        {
+          "t": 29.505899999999365,
+          "wall": 29.505899999999993,
+          "phase": "defeated",
+          "move": "lanes",
+          "stage": 3,
+          "hp": 0,
+          "x": 1139.6985000000195,
+          "y": 480,
+          "hostile": 0
+        }
+      ],
+      "phases": [
+        "sleep",
+        "intro",
+        "recover",
+        "patrol",
+        "windup",
+        "attack",
+        "transform",
+        "dying",
+        "defeated"
+      ],
+      "events": {
+        "coin": 1,
+        "boss": 1,
+        "witchRay": 14,
+        "towerTransform": 2,
+        "rubbleBreak": 1,
+        "bossDown": 1,
+        "win": 1
+      }
+    }
+  ]
+}

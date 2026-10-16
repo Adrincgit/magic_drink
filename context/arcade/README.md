@@ -1,8 +1,10 @@
 # Hexy & the Lost Chorus
 
+**Guías vigentes, 16/10/2026:** [campaña aprobada de seis actos y treinta niveles](CAMPANA.md) · [Magic Drinks, amuletos, mejoras y precios actuales](MAGIC_DRINKS_Y_AMULETOS.md). Halloween es el **acto 2**: cementerio 2-1, Villa Lumbre 2-2, maizal 2-3, mansión 2-4 y arlequín de dos conos 2-5. [Arte y funcionamiento de los últimos tres niveles](act-2-expansion/README.md). Las carpetas `halloween-5-1` y `village-5-2` conservan su nombre histórico.
+
 [Revisión vigente del 1-4: planos del bosque, raíces cubiertas, salida al mirador, animales huyendo y música entregada por el usuario](ember-fort/depth.md).
 
-La idea general y las decisiones vigentes están en [DISENO_DEL_JUEGO.md](DISENO_DEL_JUEGO.md). La propuesta de actos, carpas distintas, Halloween y jefes de tres/cuatro fases se desarrolla en [CAMPANA.md](CAMPANA.md). Ambos documentos distinguen lo decidido, lo implementado y lo que todavía estamos proponiendo.
+La idea general y las decisiones vigentes están en [DISENO_DEL_JUEGO.md](DISENO_DEL_JUEGO.md). La distribución aprobada de actos, carpas, Halloween y jefes se desarrolla en [CAMPANA.md](CAMPANA.md), con el estado de implementación de cada nivel.
 
 La revisión vigente enlaza la ribera 1-3 con **El bosque de las brasas, 1-4**, y traslada la batalla del Arlequín al **1-5**. El nuevo recorrido atraviesa un bosque quemado, permite destruir un fuerte y entrar al circo desde tierra. La barcaza pierde su embestida, desembarca buzos y usa tripulación redibujada. [Reglas actuales, arte y migración de partidas](ember-fort/README.md).
 

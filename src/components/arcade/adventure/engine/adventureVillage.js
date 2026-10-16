@@ -1,3 +1,4 @@
+import {worldSound} from './adventureWorldAudio';
 import {groundY} from '../world/adventureTerrain';
 import {villageVillagerBody} from '../actors/villageVillagers';
 import {witchId,stepWitchAbsorption} from './villageRescue';
@@ -8,8 +9,9 @@ import {villageTarget,villageAim,villageClownWindup,villageClosestCivilian} from
 import {prepareVillageObstacles,stepVillageObstacles} from './villageObstacles';
 import {prepareVillageBlockade,stepVillageBlockade,stepBlockadeArrival} from './villageBlockade';
 import {SOUL_PUMPKIN,pumpkinId,isCandySpell,stepSoulPumpkin,pumpkinDrawing} from './villagePumpkins';
+import {HARVESTER,prepareHarvester,stepHarvester,harvesterDrawing} from './villageHarvester';
 export const PUMPKIN_CLOWN=25,VILLAGE_WITCH=26;
-export const isVillageEnemy=e=>e.type===PUMPKIN_CLOWN||e.type===VILLAGE_WITCH||e.type===SOUL_PUMPKIN;
+export const isVillageEnemy=e=>e.type===PUMPKIN_CLOWN||e.type===VILLAGE_WITCH||e.type===SOUL_PUMPKIN||e.type===HARVESTER;
 export function prepareVillage(s,fromX=0){
  if(!s.level.villageTrail)return;
  const previous=new Map((s.villagers||[]).map(q=>[q.id,q]));
@@ -27,11 +29,16 @@ export function prepareVillage(s,fromX=0){
  for(const e of s.enemies)if(e.type===19)e.ghostForm='sheet';
  // A retry may retire enemies behind the checkpoint. Their retained hostages
  // must not be left attached to an owner that can no longer be defeated.
- const owners=new Set(s.enemies.filter(e=>e.type===26||e.type===SOUL_PUMPKIN).map(e=>e.type===SOUL_PUMPKIN?pumpkinId(e):witchId(e)));
+ const owners=new Set(s.enemies.filter(e=>e.type===26||e.type===HARVESTER||e.type===SOUL_PUMPKIN).map(e=>e.type===SOUL_PUMPKIN?pumpkinId(e):witchId(e)));
  for(const q of s.villagers)if(q.curseOwner&&!owners.has(q.curseOwner)&&['candy','turning','absorbed','absorbing','carried'].includes(q.state)){
   q.state='rescue';q.age=0;q.active=true;q.warned=true;q.tripped=true;q.x=q.candyHomeX??q.x;q.y=groundY(s.level.route,q.x);delete q.curseOwner;delete q.containerId;delete q.absorbProgress;
  }
- prepareVillageResistance(s);prepareVillageObstacles(s);prepareVillageBlockade(s);s.notice='villageStart';s.noticeTime=6;
+ // Retry rebuilds the witches. Retained candies cannot keep a trajectory from
+ // a ritual that belonged to the previous enemy instance.
+ for(const q of s.villagers)if(['absorbed','absorbing'].includes(q.state)){
+  q.state='candy';q.x=q.candyHomeX??q.x;q.y=groundY(s.level.route,q.x);delete q.absorbFrom;delete q.absorbStartedAt;delete q.absorbProgress;
+ }
+ prepareHarvester(s);prepareVillageResistance(s);prepareVillageObstacles(s);prepareVillageBlockade(s);s.notice='villageStart';s.noticeTime=6;
 }
 export function stepVillagers(s,dt){
  if(!s.level.villageTrail)return;
@@ -42,7 +49,7 @@ export function stepVillagers(s,dt){
  for(const b of s.looseBones){b.life-=dt;if(!b.settled){b.vy+=620*dt;b.x+=b.vx*dt;b.y+=b.vy*dt;b.rotation+=dt*b.spin;const floor=groundY(s.level.route,b.x)-5;if(b.y>=floor){b.y=floor;b.vx=0;b.vy=0;b.settled=true;b.rotation=0;}}}
  s.looseBones=s.looseBones.filter(b=>b.life>0&&!b.collected);
  stepVillageCrowd(s,dt);stepVillageObstacles(s,dt);stepVillageBlockade(s,dt);
- if(s.player.x>=s.level.arena.entry&&!s.enemies.some(e=>e.hp>0&&e.home>=s.level.arena.left)){
+ if(s.player.x>=s.level.arena.entry&&!s.enemies.some(e=>(e.hp>0||e.type===HARVESTER&&e.deadTime>0)&&e.home>=s.level.arena.left)){
   s.village.complete=true;s.boss.hp=0;s.boss.phase='defeated';s.boss.deadTime=3;s.hostile=[];
  }
 }
@@ -58,17 +65,18 @@ function flyVillageWitch(s,e,dt){
 }
 function phase(e,key){e.phase=key;e.phaseAge=0;}
 export function stepVillageEnemy(s,e,dt,shoot){
+ if(e.type===HARVESTER){stepHarvester(s,e,dt,shoot);return;}
  if(stepBlockadeArrival(s,e,dt))return;
  if(e.type===SOUL_PUMPKIN){stepSoulPumpkin(s,e,dt,shoot);return;}
  e.moving=false;
  if(!e.active&&Math.abs(s.player.x-e.x)<740)e.active=true;
- if(!e.active||e.trap>0)return;
+ if(!e.active)return;
  e.phaseAge=(e.phaseAge||0)+dt;
  e.releasePulse=Math.max(0,(e.releasePulse||0)-dt);
+ if(e.trap>0){if(e.type===26&&['absorb','absorb-player'].includes(e.phase))stepWitchAbsorption(s,e,dt);return;}
  if(e.type===26){if(e.witchObservedHp!==undefined&&e.hp<e.witchObservedHp)e.witchHitAge=0;else if(e.witchHitAge!==undefined)e.witchHitAge+=dt;e.witchObservedHp=e.hp;}
  flyVillageWitch(s,e,dt);e.y=e.baseY-(e.flying?(e.flightHeight||170)+Math.sin(e.clock*1.7)*24:0);
  if(e.type===26)spawnWitchOrbit(s,e);
- if(e.phase==='absorb-player'){if(s.player.candy?.absorber!==witchId(e)){phase(e,'recover');e.timer=1.5;}return;}
  if(e.type===26&&stepWitchAbsorption(s,e,dt))return;
  if(e.flash>0&&e.phase==='windup'){phase(e,'recover');e.timer=1.05;e.candyAim=null;return;}
  if(e.phase==='windup'){
@@ -122,7 +130,7 @@ export function resolveVillageProjectile(s,q,playerBox){
  if(q.kind==='witch-puddle'){
   q.villagePlayerHit=false;
   const touches=box=>box.x<q.x+q.r&&box.x+box.w>q.x-q.r&&box.y<q.y+14&&box.y+box.h>q.y-14;
-  for(const npc of s.villagers)if(['flee','warning','trip','fallen','help','recover','defend','trapped','hiding'].includes(npc.state)&&touches(villageVillagerBody(npc))){npc.state='turning';npc.age=0;npc.curseAge=0;npc.curseOwner=q.owner;npc.candyHomeX=npc.x;npc.active=false;s.events.push('power');}
+  for(const npc of s.villagers)if(['flee','warning','trip','fallen','help','recover','defend','trapped','hiding'].includes(npc.state)&&touches(villageVillagerBody(npc))){npc.state='turning';npc.age=0;npc.curseAge=0;npc.curseOwner=q.owner;npc.candyHomeX=npc.x;npc.active=false;worldSound(s,'candyTransform',npc.x,npc.y);}
   q.villagePlayerHit=touches(playerBox);return false;
  }
  const x0=q.previousX??q.x,y0=q.previousY??q.y,hit=box=>villageSegmentHit(x0,y0,q.x,q.y,box),playerHit=hit(playerBox);
@@ -135,21 +143,23 @@ export function resolveVillageProjectile(s,q,playerBox){
   if(at!==null&&at<first){first=at;victim=npc;}
  }
  if(terrain!==null&&terrain<first){q.x=x0+(q.x-x0)*terrain;q.y=groundY(s.level.route,q.x)-8;q.groundImpact=true;q.life=0;villageFireImpact(s,q);return true;}
- if(victim){q.life=0;villageFireImpact(s,q);victim.state='turning';victim.age=0;victim.curseAge=0;victim.curseOwner=q.owner;victim.candyHomeX=victim.x;victim.active=false;s.events.push('power');s.notice='villageTurned';s.noticeTime=3.5;return true;}
+ if(victim){q.life=0;villageFireImpact(s,q);victim.state='turning';victim.age=0;victim.curseAge=0;victim.curseOwner=q.owner;victim.candyHomeX=victim.x;victim.active=false;worldSound(s,'candyTransform',victim.x,victim.y);s.notice='villageTurned';s.noticeTime=3.5;return true;}
  if(playerHit!==null)q.villagePlayerHit=true;
  return false;
 }
 export function villageFireImpact(s,q){
+ if(!q.fireImpact&&['witch-drop','lantern-ember','soul-flame','lantern-soul','candy-ray'].includes(q.kind))worldSound(s,q.kind==='witch-drop'?'magicSplash':'magicImpact',q.x,q.y);
  if(q.kind==='witch-drop'&&!q.fireImpact){q.fireImpact=true;s.villageFire.push({x:q.x,y:q.y,kind:'drop-impact',age:0,life:.4,angle:0});if(q.groundImpact)s.hostile.push({x:q.x,y:q.y,vx:0,vy:0,r:40,age:0,life:3.8,kind:'witch-puddle',owner:q.owner,element:'magic',village:true});return;}
  if(!['lantern-ember','soul-flame','lantern-soul','candy-ray'].includes(q.kind)||q.fireImpact)return;
  q.fireImpact=true;s.villageFire.push({x:q.x,y:q.y,kind:q.kind==='candy-ray'?'ray-impact':q.kind==='lantern-ember'?'impact':'soul-impact',age:0,life:.38,angle:0});
 }
 export function villageEnemyDrawing(e,reduced=false){
+ if(e.type===HARVESTER)return harvesterDrawing(e,reduced);
  if(e.type===SOUL_PUMPKIN)return pumpkinDrawing(e);
  if(e.type===26&&e.hp>0){
   const key=e.flying?'village-witch-air-v7':'village-witch-ground-v7';let frame=0;
-  if(e.witchHitAge>=0&&e.witchHitAge<.36)frame=12+Math.min(3,Math.floor(e.witchHitAge/.09));
-  else if(['absorb','absorb-player'].includes(e.phase))frame=(e.flying?20:16)+Math.min(e.flying?3:7,Math.floor((e.phaseAge||0)/(e.phase==='absorb'?3.05:4.8)*(e.flying?4:8)));
+  if(['absorb','absorb-player'].includes(e.phase))frame=(e.flying?20:16)+Math.min(e.flying?3:7,Math.floor((e.phaseAge||0)/(e.absorbDuration||(e.phase==='absorb'?3.05:4.8))*(e.flying?4:8)));
+  else if(e.witchHitAge>=0&&e.witchHitAge<.36)frame=12+Math.min(3,Math.floor(e.witchHitAge/.09));
   else if(e.castMode==='drop'&&e.phase==='windup')frame=16+Math.min(1,Math.floor(e.phaseAge/.31));
   else if(e.castMode==='drop'&&e.phase==='attack')frame=18+Math.min(1,Math.floor(e.phaseAge/.19));
   else if(e.phase==='windup')frame=4+Math.min(3,Math.floor(e.phaseAge/(e.flying?.62:1.1)*4));
