@@ -1,0 +1,235 @@
+
+> users-adrinc-documents-adrinc-proyectos-astro-ui-web@0.0.1 build
+> astro check && astro build
+
+13:12:46 [content] Syncing content
+13:12:46 [content] Synced content
+13:12:46 [types] Generated 2.38s
+13:12:46 [check] Getting diagnostics for Astro files in G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink...
+[96msrc/components/Page_404/Page_404.jsx[0m:[93m1[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'React' is declared but its value is never read.
+
+[7m1[0m import React from "react";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/arcade/adventure/HexyAdventure.jsx[0m:[93m56[0m:[93m69[0m - [93mwarning[0m[90m ts(6133): [0m'level' is declared but its value is never read.
+
+[7m56[0m  opts.current={reduced,muted,en,circusFloor:GRAND_RING_FLOOR};const level=LEVELS[selected],playing=phase==='playing',inRun=playing||phase==='paused'||phase==='between'||phase==='shop'||phase.startsWith('shop-'),lang=en?1:0;
+[7m  [0m [93m                                                                    ~~~~~[0m
+[96msrc/components/arcade/adventure/HexyAdventure.jsx[0m:[93m55[0m:[93m79[0m - [93mwarning[0m[90m ts(6133): [0m'open' is declared but its value is never read.
+
+[7m55[0m  const [finish,setFinish]=useIllustratedFinish('arcade'),dialog=useRef(null),{open,close}=usePlazaDialog(dialog);
+[7m  [0m [93m                                                                              ~~~~[0m
+
+[96msrc/components/arcade/adventure/actors/bosses/adventureBarge.js[0m:[93m8[0m:[93m46[0m - [93mwarning[0m[90m ts(6133): [0m'damage' is declared but its value is never read.
+
+[7m8[0m export function resolveBargeContact(s,bodyOf,damage=true){
+[7m [0m [93m                                             ~~~~~~[0m
+
+[96msrc/components/arcade/adventure/actors/bosses/adventureOrganFortress.js[0m:[93m19[0m:[93m33[0m - [93mwarning[0m[90m ts(6133): [0m's' is declared but its value is never read.
+
+[7m19[0m export function stepOrganRain(q,s,dt){
+[7m  [0m [93m                                ~[0m
+[96msrc/components/arcade/adventure/actors/bosses/adventureOrganFortress.js[0m:[93m1[0m:[93m9[0m - [93mwarning[0m[90m ts(6133): [0m'organAnchor' is declared but its value is never read.
+
+[7m1[0m import {organAnchor,organPipes,organMouths,organBassMouth,organMechanism,organDriveRect} from './organMechanism';
+[7m [0m [93m        ~~~~~~~~~~~[0m
+
+[96msrc/components/arcade/adventure/actors/enemies/adventureClownBooster.js[0m:[93m31[0m:[93m27[0m - [93mwarning[0m[90m ts(6133): [0m's' is declared but its value is never read.
+
+[7m31[0m function releasePassenger(s,c){
+[7m  [0m [93m                          ~[0m
+
+[96msrc/components/arcade/adventure/actors/enemies/adventureRiverBoat.js[0m:[93m1[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'enemyMuzzle' is declared but its value is never read.
+
+[7m1[0m import {enemyMuzzle} from './adventureEnemyGeometry';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/arcade/adventure/actors/hexy/hexyAnimation.js[0m:[93m45[0m:[93m33[0m - [93mwarning[0m[90m ts(6133): [0m'castFrame' is declared but its value is never read.
+
+[7m45[0m  const p=s.player,cast=p.cast>0,castFrame=[1,2,0,3][clamp(Math.floor((.24-p.cast)/.06),0,3)];
+[7m  [0m [93m                                ~~~~~~~~~[0m
+
+[96msrc/components/arcade/adventure/engine/adventureExtraDrinks.js[0m:[93m47[0m:[93m36[0m - [93mwarning[0m[90m ts(6133): [0m'dt' is declared but its value is never read.
+
+[7m47[0m export function stepExtraField(s,f,dt){
+[7m  [0m [93m                                   ~~[0m
+
+[96msrc/components/arcade/adventure/engine/adventureModel.js[0m:[93m39[0m:[93m84[0m - [93mwarning[0m[90m ts(6133): [0m'swapDrink' is declared but its value is never read.
+
+[7m39[0m import {DRINK_SHOTS,strongShots,syncDrink,spendDrink,drinkScale,grantStartingDrink,swapDrink,validSpare,cycleShotMode,activeWeapon} from './adventureAmmo';
+[7m  [0m [93m                                                                                   ~~~~~~~~~[0m
+
+[96msrc/components/arcade/adventure/engine/adventureNightmareMotion.js[0m:[93m50[0m:[93m38[0m - [93mwarning[0m[90m ts(6133): [0m's' is declared but its value is never read.
+
+[7m50[0m export function beginNightmareDefeat(s,e){
+[7m  [0m [93m                                     ~[0m
+
+[96msrc/components/arcade/adventure/render/adventureRiverCanvas.js[0m:[93m25[0m:[93m29[0m - [93mwarning[0m[90m ts(6133): [0m'river' is declared but its value is never read.
+
+[7m25[0m export function riverFlow(s,river,reduced=false){
+[7m  [0m [93m                            ~~~~~[0m
+[96msrc/components/arcade/adventure/render/adventureRiverCanvas.js[0m:[93m1[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'groundY' is declared but its value is never read.
+
+[7m1[0m import {groundY} from '../world/adventureTerrain';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/arcade/adventure/render/bargeCanvas.js[0m:[93m9[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'part' is declared but its value is never read.
+
+[7m9[0m function part(c,img,x,y,w,h,angle=0){c.save();c.translate(x,y);c.rotate(angle);c.drawImage(img,-w/2,-h/2,w,h);c.restore();}
+[7m [0m [93m         ~~~~[0m
+
+[96msrc/components/arcade/adventure/render/circusCampCanvas.js[0m:[93m1[0m:[93m40[0m - [93mwarning[0m[90m ts(6133): [0m'CAMP_FLAGS' is declared but its value is never read.
+
+[7m1[0m import {drawWindCloth,drawCampWindTent,CAMP_FLAGS,SIDE_FLAGS} from './windClothCanvas';
+[7m [0m [93m                                       ~~~~~~~~~~[0m
+
+[96msrc/components/arcade/adventure/render/harlequinCanvas.js[0m:[93m41[0m:[93m44[0m - [93mwarning[0m[90m ts(6133): [0m'reduced' is declared but its value is never read.
+
+[7m41[0m export function drawGrandRingStage(c,s,art,reduced){
+[7m  [0m [93m                                           ~~~~~~~[0m
+[96msrc/components/arcade/adventure/render/harlequinCanvas.js[0m:[93m41[0m:[93m40[0m - [93mwarning[0m[90m ts(6133): [0m'art' is declared but its value is never read.
+
+[7m41[0m export function drawGrandRingStage(c,s,art,reduced){
+[7m  [0m [93m                                       ~~~[0m
+
+[96msrc/components/arcade/adventure/render/powerClashCanvas.js[0m:[93m96[0m:[93m40[0m - [93mwarning[0m[90m ts(6133): [0m'en' is declared but its value is never read.
+
+[7m96[0m export function drawClashMeter(c,s,art,en,reduced){
+[7m  [0m [93m                                       ~~[0m
+[96msrc/components/arcade/adventure/render/powerClashCanvas.js[0m:[93m37[0m:[93m39[0m - [93mwarning[0m[90m ts(6133): [0m'reduced' is declared but its value is never read.
+
+[7m37[0m export function drawPowerBackdrop(c,s,reduced){
+[7m  [0m [93m                                      ~~~~~~~[0m
+
+[96msrc/components/arcade/adventure/render/villageCanvas.js[0m:[93m106[0m:[93m40[0m - [93mwarning[0m[90m ts(6133): [0m'reduced' is declared but its value is never read.
+
+[7m106[0m export function drawVillageFog(c,s,art,reduced){
+[7m   [0m [93m                                       ~~~~~~~[0m
+
+[96msrc/components/arcade/adventure/ui/settings/AdventureSettings.jsx[0m:[93m3[0m:[93m25[0m - [93mwarning[0m[90m ts(6133): [0m'GAMEPAD_BUTTON_NAMES' is declared but its value is never read.
+
+[7m3[0m import {GAMEPAD_ACTIONS,GAMEPAD_BUTTON_NAMES,DEFAULT_GAMEPAD_BINDINGS,assignGamepadButton,bindingName} from '../../input/gamepadBindings';
+[7m [0m [93m                        ~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/arcade/shared/audio/sounds.js[0m:[93m14[0m:[93m51[0m - [93mwarning[0m[90m ts(2568): [0mProperty 'webkitAudioContext' may not exist on type 'Window & typeof globalThis'. Did you mean 'AudioContext'?
+
+[7m14[0m  try{context ||= new (window.AudioContext||window.webkitAudioContext)();if(!master){master=context.createGain();master.gain.value=outputGain();master.connect(context.destination);effectsInput=createEffectsBus(context,master);}if(context.state==='suspended')void context.resume();}catch{}
+[7m  [0m [93m                                                  ~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/global/animations/riveComponent.jsx[0m:[93m58[0m:[93m15[0m - [93mwarning[0m[90m ts(6133): [0m'state' is declared but its value is never read.
+
+[7m58[0m         const state = event.data[0];
+[7m  [0m [93m              ~~~~~[0m
+[96msrc/components/global/animations/riveComponent.jsx[0m:[93m17[0m:[93m5[0m - [93mwarning[0m[90m ts(6133): [0m'ingles' is declared but its value is never read.
+
+[7m17[0m     ingles = false,
+[7m  [0m [93m    ~~~~~~[0m
+[96msrc/components/global/animations/riveComponent.jsx[0m:[93m1[0m:[93m27[0m - [93mwarning[0m[90m ts(6133): [0m'Fit' is declared but its value is never read.
+
+[7m1[0m import { useRive, Layout, Fit, Alignment, useStateMachineInput } from "@rive-app/react-canvas";
+[7m [0m [93m                          ~~~[0m
+
+[96msrc/components/hexy/HexyWorld.jsx[0m:[93m111[0m:[93m21[0m - [93mwarning[0m[90m ts(6133): [0m'reduced' is declared but its value is never read.
+
+[7m111[0m function Hero({ en, reduced }) {
+[7m   [0m [93m                    ~~~~~~~[0m
+
+[96msrc/components/hexy/components/HexyAudioProvider.jsx[0m:[93m1[0m:[93m8[0m - [93mwarning[0m[90m ts(6133): [0m'React' is declared but its value is never read.
+
+[7m1[0m import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+[7m [0m [93m       ~~~~~[0m
+
+[96msrc/components/hexy/components/HexyPlayer.jsx[0m:[93m1[0m:[93m8[0m - [93mwarning[0m[90m ts(6133): [0m'React' is declared but its value is never read.
+
+[7m1[0m import React, { useEffect, useId, useRef, useState } from 'react';
+[7m [0m [93m       ~~~~~[0m
+
+[96msrc/components/index/animations/audioReaction.js[0m:[93m18[0m:[93m49[0m - [93mwarning[0m[90m ts(2568): [0mProperty 'webkitAudioContext' may not exist on type 'Window & typeof globalThis'. Did you mean 'AudioContext'?
+
+[7m18[0m   const Context = window.AudioContext || window.webkitAudioContext;
+[7m  [0m [93m                                                ~~~~~~~~~~~~~~~~~~[0m
+
+Result (314 files): 
+- 0 errors
+- 0 warnings
+- 30 hints
+
+13:13:20 [content] Syncing content
+13:13:20 [content] Synced content
+13:13:20 [types] Generated 215ms
+13:13:20 [build] output: "static"
+13:13:20 [build] mode: "static"
+13:13:20 [build] directory: G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\dist\
+13:13:20 [build] Collecting build info...
+13:13:20 [build] ✓ Completed in 485ms.
+13:13:24 [build] Building static entrypoints...
+node.exe : Browserslist: browsers data (caniuse-lite) is 17 months old. Please run:
+En línea: 1 Carácter: 1
++ & "C:\nvm4w\nodejs/node.exe" "C:\nvm4w\nodejs/node_modules/npm/bin/np ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Browserslist: b...ld. Please run::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+13:13:53 [vite] ✓ built in 29.16s
+13:13:53 [build] ✓ Completed in 29.25s.
+
+ building client (vite) 
+13:13:53 [vite] transforming...
+13:14:07 [vite] ✓ 2066 modules transformed.
+13:14:07 [vite] rendering chunks...
+13:14:08 [vite] computing gzip size...
+13:14:08 [vite] dist/_astro/bebidas.DqgdlSq8.css               10.94 kB │ gzip:   3.38 kB
+13:14:08 [vite] dist/_astro/arcade.C1bO38-L.css                11.71 kB │ gzip:   3.50 kB
+13:14:08 [vite] dist/_astro/bebidas.DWdxdeAQ.css               17.96 kB │ gzip:   4.69 kB
+13:14:08 [vite] dist/_astro/hexy.CXoKt53D.css                  87.35 kB │ gzip:  19.52 kB
+13:14:08 [vite] dist/_astro/arcade.BdTyZxc_.css                99.52 kB │ gzip:  21.66 kB
+13:14:08 [vite] dist/_astro/index.tTYXhE1P.css                112.37 kB │ gzip:  25.52 kB
+13:14:08 [vite] dist/_astro/IndexExperience.H4CmVKX5.js         0.34 kB │ gzip:   0.24 kB
+13:14:08 [vite] dist/_astro/hexyPlaylist.B8nPPW3s.js            0.98 kB │ gzip:   0.36 kB
+13:14:08 [vite] dist/_astro/arcade.1e0481da.Brbdb7_W.js         1.06 kB │ gzip:   0.55 kB
+13:14:08 [vite] dist/_astro/bebidas.2598042d.DLX_BJ4f.js        1.11 kB │ gzip:   0.51 kB
+13:14:08 [vite] dist/_astro/bebidas.864e6ef5.CrBNUkvs.js        1.61 kB │ gzip:   0.72 kB
+13:14:08 [vite] dist/_astro/client.g3m__AEg.js                  1.87 kB │ gzip:   0.92 kB
+13:14:08 [vite] dist/_astro/useReducedMotion.BwjYSKNM.js        2.10 kB │ gzip:   0.92 kB
+13:14:08 [vite] dist/_astro/variables.CxPxvKRg.js               2.48 kB │ gzip:   1.25 kB
+13:14:08 [vite] dist/_astro/waterMotion.BVNHj5CQ.js             2.72 kB │ gzip:   1.35 kB
+13:14:08 [vite] dist/_astro/crowdMotion.LRXDqSbE.js             3.34 kB │ gzip:   1.64 kB
+13:14:08 [vite] dist/_astro/wonderpopFilm.BOJSvYmf.js           5.42 kB │ gzip:   2.59 kB
+13:14:08 [vite] dist/_astro/atriumWorld.Bw5ClRls.js             5.43 kB │ gzip:   2.59 kB
+13:14:08 [vite] dist/_astro/arcade.180d3b5d.c2DqhEHP.js         5.46 kB │ gzip:   2.21 kB
+13:14:08 [vite] dist/_astro/gardenWorld.DOi_HbLb.js             5.50 kB │ gzip:   2.62 kB
+13:14:08 [vite] dist/_astro/hexy.b41d93b9.B-XOgGOD.js           6.79 kB │ gzip:   2.70 kB
+13:14:08 [vite] dist/_astro/index.DK-fsZOb.js                   6.81 kB │ gzip:   2.73 kB
+13:14:08 [vite] dist/_astro/index.95d291e9.DZuZ3aD1.js          9.53 kB │ gzip:   4.02 kB
+13:14:08 [vite] dist/_astro/MagicDrinkExperience.skllUTqG.js   11.75 kB │ gzip:   4.40 kB
+13:14:08 [vite] dist/_astro/HexyShowcase.A6o2cMOv.js           43.56 kB │ gzip:  13.68 kB
+13:14:08 [vite] dist/_astro/Page_404.DJKbpbXu.js              125.49 kB │ gzip:  41.10 kB
+13:14:08 [vite] dist/_astro/HexyFinish.gwo9aZ-Y.js            128.40 kB │ gzip:  47.97 kB
+13:14:08 [vite] dist/_astro/index.BoiOKwrL.js                 134.64 kB │ gzip:  43.22 kB
+13:14:08 [vite] dist/_astro/IndexExperience.BvQoW1V2.js       246.97 kB │ gzip:  91.81 kB
+13:14:08 [vite] dist/_astro/three.module.CxCtQbCr.js          459.38 kB │ gzip: 115.13 kB
+13:14:08 [vite] dist/_astro/HexyAdventure.CPqjz_FL.js         549.60 kB │ gzip: 189.59 kB
+13:14:08 [WARN] [vite] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+13:14:08 [vite] ✓ built in 14.51s
+
+ generating static routes 
+13:14:08 ▶ src/pages/404.astro
+13:14:08   └─ /404.html (+13ms) 
+13:14:08 ▶ src/pages/arcade.astro
+13:14:08   └─ /arcade/index.html (+11ms) 
+13:14:08 ▶ src/pages/bebidas.astro
+13:14:08   └─ /bebidas/index.html (+15ms) 
+13:14:08 ▶ src/pages/hexy.astro
+13:14:08   └─ /hexy/index.html (+19ms) 
+13:14:08 ▶ src/pages/index.astro
+13:14:08   └─ /index.html (+18ms) 
+13:14:08 ✓ Completed in 487ms.
+
+13:14:08 [build] 5 page(s) built in 48.96s
+13:14:08 [build] Complete!

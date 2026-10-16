@@ -1,0 +1,5 @@
+{
+  "climb-children": [{"frame": 4, "source": "anatomy-fix/sources/climb-children-fixed.png"}],
+  "climb-elders": [{"frame": 4, "source": "anatomy-fix/sources/climb-elders-fixed.png"}],
+  "warning": [{"frame": 1, "source": "anatomy-fix/sources/warning-fixed.png"}]
+}

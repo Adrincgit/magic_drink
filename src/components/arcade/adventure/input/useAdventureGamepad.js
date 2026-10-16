@@ -5,8 +5,10 @@ export default function useAdventureGamepad(options){
  const latest=useRef(options);latest.current=options;
  const [status,setStatus]=useState({state:'waiting',name:''});
  useEffect(()=>{
-  let raf=0,selected=null,previous={},context='',reset=true,blocked={},signature='',repeat={},focused=document.hasFocus();
+  let raf=0,selected=null,previous={},lastRaw={},context='',reset=true,blocked={},signature='',repeat={},focused=document.hasFocus();
   const report=next=>{const key=next.state+'|'+next.name;if(key!==signature){signature=key;setStatus(next);}};
+  const device=mode=>{const root=latest.current.getRoot?.();if(root)root.dataset.inputMode=mode;};
+  const keyboard=e=>{if(e.isTrusted)device('keyboard');},pointer=e=>{if(e.isTrusted)device('pointer');};
   const clear=()=>{previous={};repeat={};reset=true;latest.current.onInput({},[]);};
   const focus=()=>{focused=true;clear();},blur=()=>{focused=false;clear();};
   const visibility=()=>{if(document.hidden)blur();else focused=document.hasFocus();};
@@ -21,22 +23,24 @@ export default function useAdventureGamepad(options){
    if(!pad){if(pads.length)report({state:'unsupported',name:pads[0].id});else if(signature.startsWith('unsupported|'))report({state:'waiting',name:''});return;}
    if(!selected){selected={index:pad.index,id:pad.id};clear();}
    report({state:'connected',name:pad.id});
-   const raw=readAdventureGamepad(pad),mode=latest.current.getContext();
-   if(mode!==context){context=mode;clear();}
+   const bindings=latest.current.getBindings?.(),raw=readAdventureGamepad(pad,bindings),mode=latest.current.getContext(),identity=mode+'|'+JSON.stringify(bindings||null);
+   if(identity!==context){const held=lastRaw,changing=!!context;context=identity;clear();if(changing){blocked={...held};reset=false;}}
    if(document.hidden||!focused){clear();return;}
    // Only suppress controls held across a screen change. Releasing confirm
    // must not require an unrelated new stick movement to return to neutral.
    if(reset){blocked={...raw};reset=false;}
    const keys={};for(const key of Object.keys(raw)){if(!raw[key])delete blocked[key];keys[key]=raw[key]&&!blocked[key];}
    const edges=Object.keys(keys).filter(key=>keys[key]&&!previous[key]);
+   if(edges.length)device('gamepad');
    if(mode==='playing'){
     if(edges.includes('pause')){latest.current.onInput({},[]);latest.current.onAction('pause');}
     else if(edges.includes('interact')){latest.current.onInput({},[]);latest.current.onAction('interact');}
     else latest.current.onInput(keys,edges,pad.id);
    }else{
     latest.current.onInput({},[]);
-    if(!mode.startsWith('shop-')&&!['loading','settling','between'].includes(mode)){
-     const action=['presentation','title'].includes(mode)&&edges.length?'confirm':['pause','back','confirm','interact'].find(key=>edges.includes(key));
+    if(!mode.startsWith('shop-')&&!mode.startsWith('tutorial-')&&!['loading','settling','between'].includes(mode)){
+     const tabs=['settings','tutorial'].includes(mode)&&['tabPrevious','tabNext'].find(key=>edges.includes(key));
+     const action=tabs||(['presentation','title'].includes(mode)&&edges.length?'confirm':['pause','back','confirm','interact'].find(key=>edges.includes(key)));
      if(action)latest.current.onAction(action);
      else for(const key of ['left','right','up','down']){
       if(keys[key]&&(edges.includes(key)||now>repeat[key])){latest.current.onAction(key);repeat[key]=now+(edges.includes(key)?360:145);}
@@ -44,10 +48,11 @@ export default function useAdventureGamepad(options){
      }
     }
    }
-   previous=keys;
+   previous=keys;lastRaw=raw;
   }
+  window.addEventListener('keydown',keyboard,true);window.addEventListener('pointerdown',pointer,true);
   window.addEventListener('focus',focus);window.addEventListener('blur',blur);window.addEventListener('gamepaddisconnected',disconnect);document.addEventListener('visibilitychange',visibility);raf=requestAnimationFrame(poll);
-  return()=>{cancelAnimationFrame(raf);window.removeEventListener('focus',focus);window.removeEventListener('blur',blur);window.removeEventListener('gamepaddisconnected',disconnect);document.removeEventListener('visibilitychange',visibility);latest.current.onInput({},[]);};
+  return()=>{window.removeEventListener('keydown',keyboard,true);window.removeEventListener('pointerdown',pointer,true);cancelAnimationFrame(raf);window.removeEventListener('focus',focus);window.removeEventListener('blur',blur);window.removeEventListener('gamepaddisconnected',disconnect);document.removeEventListener('visibilitychange',visibility);latest.current.onInput({},[]);};
  },[]);
  return status;
 }

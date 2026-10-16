@@ -1,0 +1,32 @@
+{
+  "mode": "built-in image_gen",
+  "conversion": {
+    "prompt": "Use case: identity-preserve. Production 2D animation sprite sheet, transparent background, exactly 12 poses in a regular FOUR columns THREE rows grid, each cell square with generous empty gutters. Image 1 is the EXACT final zombie character identity and painting style. Image 2 is the EXACT starting frightened red clown identity. Make a continuous hand drawn transformation from image 2 to image 1, all facing LEFT. Preserve head size, proportions, nose, curled hair, cream ruff, gold buttons and gloves of image 1. Constant character scale across all cells, feet or body touch one consistent baseline inside each cell. NO background, NO ground shadows, NO grid or labels. Row 1: red clown lying face down, then propped on elbows, pale mint skin slowly appears and red hair subtly becomes orange. Row 2: pushes up on hands, sits then kneels, red polka dot costume gradually transforms into the exact stitched orange and deep plum costume of image 1, gloves stay cream, ruff stays CREAM. Row 3: rises from one knee into hunched zombie stance, arms extended LEFT, final two frames reproduce image 1 almost exactly (same mint face, orange curls, cream ruff, purple boots, orange/plum hat with bell). Complete body painting in each cell, coherent anatomy, no parts atlas, no missing limbs, no extreme expression, no green bare fingers, no purple ruff. Animation should connect both reference identities smoothly, not introduce a third design.",
+    "referenced_image_paths": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/halloween-5-1/revision-5/sources/zombie-reference.png",
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/halloween-5-1/revision-5/sources/fallen-reference.png"
+    ],
+    "transparent_background": true
+  },
+  "crypt": {
+    "prompt": "Use case: precise-object-edit. Production game sprite sheet, transparent background, exactly EIGHT frames TWO columns FOUR rows, square cells, same gothic crypt shown in the reference. Preserve exactly the existing side-view angle, tall opaque rectangular masonry body, doorway facing left, long stone side wall to right, roof, moss, steps and little bat statue. Consistent size and baseline in every cell. Hand painted muted slate purple stone and grey green moss, subdued warm highlights, no vivid neon. Frame 0 sealed heavy wooden door; frame 1 door cracked a little; frame 2 half opened inward; frame 3 fully open inward, a clearly visible dark doorway big enough for an adult cartoon zombie to walk out. Frame 4 same fully open door, thin wisps of cold grey mist inside; frame 5 same fully open crypt with structural cracks; frame 6 collapsing masonry; frame 7 low settled rubble pile. Living frames 0-5 use IDENTICAL unchanging building outline, wall, roof, base, angle and scale, only door changes. No emitted mist outside silhouette (will be animated in game), no characters, no letters, no grid, transparent gutters between cells, keep all edges intact.",
+    "referenced_image_paths": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/maps/halloween/crypt-side-v2.webp"
+    ],
+    "transparent_background": true
+  },
+  "gate": {
+    "prompt": "Use case: stylized-concept. Transparent cutout game scenery, one gothic cemetery PORTAL in pronounced OBLIQUE perspective for a horizontal side-scrolling game. The reference is material/style only, its frontal composition must change. Two grey stone pillars connected by restrained black iron arch, the NEAR pillar at lower LEFT is tall and larger, FAR pillar at upper RIGHT smaller and recessed. The ground line between pillar bases climbs diagonally from left bottom to right middle (around 140 pixels upward across 450 pixels). Clearly show the thick side faces of the pillars. View across the entrance from its left side, about 55 degrees away from frontal. Wrought iron gate leaves open INWARD, one leaf behind near pillar and other behind far pillar. CLEAR BROAD TRANSPARENT GAP BETWEEN PILLARS for player to cross left to right. No fence wings! The left and right OUTER sides of pillars end cleanly so separate fence assets can attach later. Whole portal uncropped with transparent margins, fully transparent doorway, NO terrain, trees, tombs, sky or background. Hand painted vintage cartoon environment consistent with reference but quieter and duskier: desaturated charcoal iron, lavender grey weathered stone, sparse dull olive ivy, tiny dim amber lantern. NO bright green or white sheen. Not symmetrical, not front elevation. Near-left pillar base at approx 24% width 92% height, far-right base at 78% width 72% height; near pillar capital around 24% width 27% height, far capital around 78% width 24% height; arch high above.",
+    "referenced_image_paths": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/maps/halloween/gate-complete-v2.webp"
+    ],
+    "transparent_background": true
+  },
+  "fence": {
+    "prompt": "Use case: stylized-concept. One seamless modular gothic wrought iron fence bay, transparent cutout, front elevation ready for perspective projection by a 2D game engine. Match the reference gate's hand painted weathered materials but keep it duskily desaturated. Wide aspect 3:1, one low weathered slate-grey stone curb across bottom and twelve thin black spear-tipped iron bars, two thin horizontal connecting rails, restrained curls, sparse dull olive ivy at bottom. NO large stone pillars at either end, NO arch, NO gate door, NO landscape or sky. Rails and curb reach left and right edge so multiple bays join continuously. Rectangular uniform height, vertical bars straight, true alpha in all holes and above tips. Hand painted storybook game art with crisp dark outlines, subtle purple-grey stone shadows, low contrast highlights. No green saturated vines, no white shine. This module will form BOTH receding distant and enlarged foreground continuation of the same cemetery fence.",
+    "referenced_image_paths": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/maps/halloween/gate-complete-v2.webp"
+    ],
+    "transparent_background": true
+  }
+}

@@ -1,0 +1,45 @@
+
+Running 30 tests using 1 worker
+
+node.exe : (node:564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+En línea: 1 Carácter: 1
++ & "C:\nvm4w\nodejs/node.exe" "C:\nvm4w\nodejs/node_modules/npm/bin/np ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((node:564) Warn... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › tests\hexy-popcorn.spec.js:15:1 › Popcorn is a collectible, saved shop starter and guaranteed village loot without changing existing IDs (12ms)
+  ok  2 [chromium] › tests\hexy-popcorn.spec.js:22:1 › normal fires seven kernels for one ammo without magic and respects the recovery interval (16ms)
+  ok  3 [chromium] › tests\hexy-popcorn.spec.js:27:1 › strong only doubles travel, costs exactly 45 magic and one ammo, including the last charge (5ms)
+  ok  4 [chromium] › tests\hexy-popcorn.spec.js:34:1 › alternating normal and strong cannot skip the shared recovery or double-bill a press (6ms)
+  ok  5 [chromium] › tests\hexy-popcorn.spec.js:39:1 › close targets receive equal normal and strong damage, and only strong reaches distant targets (12ms)
+  ok  6 [chromium] › tests\hexy-popcorn.spec.js:44:1 › kernels stop at the first body and both directions have a bounded reach (8ms)
+  ok  7 [chromium] › tests\hexy-popcorn.spec.js:49:1 › prisms preserve the remaining distance budget; retries clear every blast (3ms)
+  ok  8 [chromium] › tests\hexy-popcorn.spec.js:55:1 › switching pockets preserves Popcorn ammo and does not grant fresh charges (4ms)
+  ok  9 [chromium] › tests\hexy-town-cannon-browser.spec.js:4:1 › review town streets in motion and three real cannon finishes (39.8s)
+  ok 10 [chromium] › tests\hexy-town-cannon-browser.spec.js:32:1 › render the cannon audio through the real effects bus with no clipping and absolute mute (2.4s)
+  ok 11 [chromium] › tests\hexy-town-cannon.spec.js:10:65 › a real lethal Popcorn hit triggers vapor once and cleans up without hostile fragments (6ms)
+  ok 12 [chromium] › tests\hexy-town-cannon.spec.js:10:65 › a real lethal Popcorn hit triggers scatter once and cleans up without hostile fragments (7ms)
+  ok 13 [chromium] › tests\hexy-town-cannon.spec.js:10:65 › a real lethal Popcorn hit triggers launch once and cleans up without hostile fragments (7ms)
+  ok 14 [chromium] › tests\hexy-town-cannon.spec.js:16:1 › launch travels away from the shot and lands on the floor with a single dust impact (3ms)
+  ok 15 [chromium] › tests\hexy-town-cannon.spec.js:20:1 › the cannon does not duplicate an already missing arm or release an extra live hand (1ms)
+  ok 16 [chromium] › tests\hexy-town-cannon.spec.js:24:1 › pumpkin clowns, witches and skeletons can evaporate; ordinary hits retain their own defeat (10ms)
+  ok 17 [chromium] › tests\hexy-town-cannon.spec.js:28:1 › retry clears cannon defeats and the denser street preserves length, plazas and rewards (4ms)
+  ok 18 [chromium] › tests\hexy-village.spec.js:14:1 › 5-2 follows the cemetery and old saves retain their unlocked final chapter (3ms)
+  ok 19 [chromium] › tests\hexy-village.spec.js:21:1 › the street simulates, civilians flee and zombies retain their clothed remains (36ms)
+  ok 20 [chromium] › tests\hexy-village.spec.js:28:1 › witches telegraph, commit their aim and can be interrupted before casting (2ms)
+  ok 21 [chromium] › tests\hexy-village.spec.js:35:1 › only a real ray collision transforms a villager, once; Hexy can stand in its path (3ms)
+  ok 22 [chromium] › tests\hexy-village.spec.js:45:1 › pumpkin heads cast a short ember fan and have ordinary damageable bodies (1ms)
+  ok 23 [chromium] › tests\hexy-village.spec.js:50:1 › actual basic shots defeat both new enemies and interrupt a witch windup (25ms)
+  ok 24 [chromium] › tests\hexy-village.spec.js:56:1 › checkpoint retries preserve resolved townspeople and completion opens after clearing the square (5ms)
+  ok 25 [chromium] › tests\hexy-village.spec.js:62:1 › the extended route matches the cemetery, preserves receipts and opens into three plazas (53ms)
+  ok 26 [chromium] › tests\hexy-village.spec.js:75:1 › eight distinct villagers include children fleeing left with adults in the opening (7ms)
+  ok 27 [chromium] › tests\hexy-village.spec.js:84:1 › child-sized beam collision and committed witch aim follow the smaller body (1ms)
+  ok 28 [chromium] › tests\hexy-village.spec.js:92:1 › parallax planes keep their vertical roots across slopes and move throughout the full route (3ms)
+  ok 29 [chromium] › tests\hexy-village.spec.js:98:1 › painted fire hurts on contact, can be jumped, and leaves a fire impact on the floor (6ms)
+  ok 30 [chromium] › tests\hexy-village.spec.js:103:1 › the real chapter selector starts the village and keeps simulating (31.6s)
+
+  30 passed (1.4m)

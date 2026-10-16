@@ -9,10 +9,10 @@ const tick=(s,n,input={})=>{for(let i=0;i<n;i++)stepAdventure(s,input,1/120);};
 function scene(x=85){const s=createAdventure(5);for(const k of ['enemies','stars','supplies','outposts','cages'])s[k]=[];Object.assign(s.player,{x,y:groundY(s.platforms,x),ground:s.platforms.indexOf(groundAt(s.platforms,x))});s.noticeTime=0;return s;}
 
 test('1-4 is the longest authored route, with safe checkpoints and a complete land journey',()=>{
- const l=LEVELS[5];expect(l.width).toBe(36000);expect(l.width).toBeGreaterThan(Math.max(...LEVELS.filter(q=>q!==l).map(q=>q.width))*1.3);
+ const l=LEVELS[5];expect(l.width).toBe(33200);expect(l.width).toBeGreaterThan(Math.max(...LEVELS.filter(q=>q!==l).map(q=>q.width))*1.3);
  expect(l.checkpoints).toHaveLength(7);expect(l.emberPits).toHaveLength(5);expect(l.fallingTrees).toHaveLength(6);expect(l.enemies.length).toBeGreaterThan(28);
  for(const [x,y]of l.checkpoints){expect(groundY(l.platforms,x)).toBe(y);expect(l.emberPits.some(p=>x>p.x-100&&x<p.x+p.w+100)).toBe(false);expect(l.fallingTrees.some(t=>Math.abs(x-t.x)<350)).toBe(false);}
- expect(l.arena.right).toBeLessThan(l.fortDoor.x);expect(l.fortDoor.insideX).toBeLessThan(l.exit[0]);expect(l.exit[0]).toBeLessThan(l.width);
+ expect(l.fortDoor).toBeUndefined();expect(l.arena.right).toBeLessThan(l.exit[0]);expect(l.exit[0]).toBeLessThan(l.width);
 });
 test('all charcoal gaps can be crossed with the existing jumps without taking fire damage',()=>{
  for(const pit of LEVELS[5].emberPits){const s=scene(pit.x-65),hp=s.hearts;
@@ -27,9 +27,9 @@ test('falling into hot roots burns on contact and permits jumping back to safety
  tick(s,45);for(let i=0;i<240;i++)stepAdventure(s,{left:true,jump:i<42||i>=45&&i<95},1/120);
  expect(s.player.x).toBeLessThan(pit.x-30);expect(s.player.y).toBeLessThanOrEqual(groundY(s.platforms,s.player.x)+1);expect(s.hearts).toBeGreaterThan(0);
 });
-test('falling trees telegraph, strike only their trunk and leave a traversable log; retry resets them',()=>{
+test('scenic falling trees animate without damaging or obstructing the route; retry resets them',()=>{
  const s=scene(LEVELS[5].fallingTrees[0].x+90),q=s.emberEnvironment.trees[0],hp=s.hearts;tick(s,1);expect(q.phase).toBe('warning');expect(s.events).toContain('treeCreak');
- tick(s,180);expect(q.phase).toBe('warning');expect(s.hearts).toBe(hp);tick(s,210);expect(q.phase).toBe('fallen');expect(s.hearts).toBeLessThan(hp);expect(s.platforms.some(p=>p.emberFallen)).toBe(true);
+ tick(s,180);expect(q.phase).toBe('warning');expect(s.hearts).toBe(hp);tick(s,210);expect(q.phase).toBe('fallen');expect(s.hearts).toBe(hp);expect(s.platforms.some(p=>p.emberFallen)).toBe(false);
  retryAdventure(s);expect(s.platforms.some(p=>p.emberFallen)).toBe(false);expect(s.emberEnvironment.trees[0].phase).toBe('standing');
  const safe=scene(LEVELS[5].fallingTrees[0].x-120);tick(safe,410);expect(safe.emberEnvironment.trees[0].phase).toBe('fallen');expect(safe.hearts).toBe(safe.maxHearts);
 });

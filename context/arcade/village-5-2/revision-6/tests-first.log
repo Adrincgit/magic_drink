@@ -1,0 +1,271 @@
+
+Running 65 tests using 1 worker
+
+
+
+node.exe : (node:27744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+En línea: 1 Carácter: 1
++ & "C:\nvm4w\nodejs/node.exe" "C:\nvm4w\nodejs/node_modules/npm/bin/np ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((node:2... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/65] [chromium] › tests\hexy-combat.spec.js:14:1 › HOLD fixes position while turning and aiming diagonally; releasing restores movement
+[2/65] [chromium] › tests\hexy-combat.spec.js:21:1 › held shield spends magic, intercepts frontal bullets and leaves Hexy exposed from behind
+[3/65] [chromium] › tests\hexy-combat.spec.js:30:1 › bunny charm degrades across three hits, breaks visibly and then life takes damage
+[4/65] [chromium] › tests\hexy-combat.spec.js:36:1 › all charged spells cancel hostile bullets and bombs; ordinary shots do not
+[5/65] [chromium] › tests\hexy-combat.spec.js:45:1 › green harlequins withstand multiple normal hits and show a damage reaction
+[6/65] [chromium] › tests\hexy-combat.spec.js:56:1 › the two Bubble Tape spheres travel apart and float above the floor
+[7/65] [chromium] › tests\hexy-combat.spec.js:62:1 › running casts have twelve drawings; air dash stays horizontal and ground dash rolls
+[8/65] [chromium] › tests\hexy-combat.spec.js:70:1 › a rescued bunny anticipates the star shot before releasing it from its own position
+[9/65] [chromium] › tests\hexy-combat.spec.js:76:1 › the clown organ exposes an elevated body target, transforms and leaves the arena after a finishing spell
+[10/65] [chromium] › tests\hexy-combat.spec.js:86:1 › every long route has distributed encounters, late rescues and several usable checkpoints
+[11/65] [chromium] › tests\hexy-combat.spec.js:94:30 › 390: HUD stays inside the game and HOLD / shield inputs work
+  1) [chromium] › tests\hexy-combat.spec.js:94:30 › 390: HUD stays inside the game and HOLD / shield inputs work 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('[data-title-screen]')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 30000ms
+      - waiting for locator('[data-title-screen]')
+
+
+       at arcade-input.helpers.js:5
+
+      3 | // the skippable branding and entrance sequence.
+      4 | export async function openAdventureMenu(page){
+    > 5 |  const title=page.locator('[data-title-screen]');await expect(title).toBeVisible({timeout:30000});
+        |                                                                      ^
+      6 |  // The presentation can finish between visibility and click actionability.
+      7 |  // Its real keyboard shortcut also safely advances the title if that happens.
+      8 |  const brand=page.locator('[data-presentation]');if(await brand.isVisible())await page.keyboard.press('Space');
+        at openAdventureMenu (G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\tests\arcade-input.helpers.js:5:70)
+        at G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\tests\hexy-combat.spec.js:95:98
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    tests\results\v6-first\hexy-combat-390-HUD-stays--a8338-and-HOLD-shield-inputs-work-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: tests\results\v6-first\hexy-combat-390-HUD-stays--a8338-and-HOLD-shield-inputs-work-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    tests\results\v6-first\hexy-combat-390-HUD-stays--a8338-and-HOLD-shield-inputs-work-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace tests\results\v6-first\hexy-combat-390-HUD-stays--a8338-and-HOLD-shield-inputs-work-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+[12/65] [chromium] › tests\hexy-combat.spec.js:94:30 › 844: HUD stays inside the game and HOLD / shield inputs work
+[13/65] [chromium] › tests\hexy-popcorn.spec.js:15:1 › Popcorn is a collectible, saved shop starter and guaranteed village loot without changing existing IDs
+[14/65] [chromium] › tests\hexy-popcorn.spec.js:22:1 › normal fires seven kernels for one ammo without magic and respects the recovery interval
+[15/65] [chromium] › tests\hexy-popcorn.spec.js:27:1 › strong only doubles travel, costs exactly 45 magic and one ammo, including the last charge
+[16/65] [chromium] › tests\hexy-popcorn.spec.js:34:1 › alternating normal and strong cannot skip the shared recovery or double-bill a press
+[17/65] [chromium] › tests\hexy-popcorn.spec.js:39:1 › close targets receive equal normal and strong damage, and only strong reaches distant targets
+[18/65] [chromium] › tests\hexy-popcorn.spec.js:44:1 › kernels stop at the first body and both directions have a bounded reach
+[19/65] [chromium] › tests\hexy-popcorn.spec.js:49:1 › prisms preserve the remaining distance budget; retries clear every blast
+[20/65] [chromium] › tests\hexy-popcorn.spec.js:55:1 › switching pockets preserves Popcorn ammo and does not grant fresh charges
+[21/65] [chromium] › tests\hexy-siege-water.spec.js:20:1 › water quenches progressively, larger fire takes more, and one wave cannot count the same fire twice
+[22/65] [chromium] › tests\hexy-siege-water.spec.js:29:1 › water puts out burning brush and keeps the soaked ground from immediately reigniting
+  2) [chromium] › tests\hexy-siege-water.spec.js:29:1 › water puts out burning brush and keeps the soaked ground from immediately reigniting 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 3
+    Received: 0
+
+      31 |  for(let i=0;i<3;i++)quenchWithWater(s,water(bush.x,bush.y-30));expect(bush.state).toBe('charred');expect(wetGround(s,bush.x,bush.y)).toBe(true);
+      32 |  igniteEmberGround(s,bush.x);expect(s.hostile.filter(q=>q.life>0&&Math.abs(q.x-bush.x)<80)).toHaveLength(0);
+    > 33 |  const bullet={kind:'note',element:'sound',x:bush.x,y:bush.y-30,r:12,life:3};s.hostile=[bullet];const wave=water(bullet.x,bullet.y,true);clearPowerProjectiles(s,[wave]);quenchWithWater(s,wave);expect(bullet.life).toBe(0);
+         |                                                                                                                                                                                                                      ^
+      34 | });
+      35 |
+      36 | test('forest drops exclude Dragon Grape while an explicitly equipped shop flavor survives',()=>{
+        at G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\tests\hexy-siege-water.spec.js:33:214
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    tests\results\v6-first\hexy-siege-water-water-put-e454b-from-immediately-reigniting-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace tests\results\v6-first\hexy-siege-water-water-put-e454b-from-immediately-reigniting-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+
+(node:28076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[23/65] [chromium] › tests\hexy-siege-water.spec.js:36:1 › forest drops exclude Dragon Grape while an explicitly equipped shop flavor survives
+[24/65] [chromium] › tests\hexy-siege-water.spec.js:44:1 › every hollow has a damage-free jump with real nearby enemies, including after scenic trees have fallen
+[25/65] [chromium] › tests\hexy-siege-water.spec.js:52:1 › outer wall and core door block both progress and premature core damage; cannons remain optional
+[26/65] [chromium] › tests\hexy-siege-water.spec.js:63:1 › camp patrols remain by their tents and leave the healing approach clear
+[27/65] [chromium] › tests\hexy-siege-water.spec.js:70:1 › the short camp previews a full heal and side entry preserves the existing Harlequin arena and retry checkpoint
+[28/65] [chromium] › tests\hexy-siege-water.spec.js:78:1 › render the water shot, safe crossing, siege phases and side entrance with actual artwork
+[29/65] [chromium] › tests\hexy-village-night.spec.js:10:1 › a real candy ray removes exactly one heart and locks actions until fresh input breaks it
+  3) [chromium] › tests\hexy-village-night.spec.js:10:1 › a real candy ray removes exactly one heart and locks actions until fresh input breaks it 
+
+    Error: expect(received).toBeUndefined()
+
+    Received: {"age": 1.3666666666666643, "effort": 8, "last": {"left": true, "right": false}, "owner": "test", "pulse": 0.8666666666666667, "required": 21}
+
+      12 |  tick(s,1,{right:true,attack:true,jump:true});expect(s.player.x).toBeCloseTo(x);expect(s.ammo).toBe(ammo);expect(s.player.candy.effort).toBe(1);
+      13 |  for(let i=0;i<21;i++){tick(s,.04,{left:i%2===0,right:i%2!==0});}
+    > 14 |  expect(s.player.candy).toBeUndefined();expect(s.hearts).toBe(hp-1);
+         |                         ^
+      15 | });
+      16 | test('captured Hexy remains vulnerable after the ordinary hit grace',()=>{
+      17 |  const s=empty();cast(s);tick(s,1.6);expect(s.player.candy).toBeTruthy();const hp=s.hearts;
+        at G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\tests\hexy-village-night.spec.js:14:25
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    tests\results\v6-first\hexy-village-night-a-real--72922-until-fresh-input-breaks-it-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace tests\results\v6-first\hexy-village-night-a-real--72922-until-fresh-input-breaks-it-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:27060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+
+
+(node:27060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[30/65] [chromium] › tests\hexy-village-night.spec.js:16:1 › captured Hexy remains vulnerable after the ordinary hit grace
+[31/65] [chromium] › tests\hexy-village-night.spec.js:20:1 › the last heart leaves Hexy candy through game over; retry clears the curse
+[32/65] [chromium] › tests\hexy-village-night.spec.js:25:1 › a shield protects against capture and a swept beam cannot tunnel through Hexy
+[33/65] [chromium] › tests\hexy-village-night.spec.js:29:1 › only the responsible witch releases a victim during an interrupted absorption
+[34/65] [chromium] › tests\hexy-village-night.spec.js:36:1 › damage interrupts absorption without losing the hostage
+[35/65] [chromium] › tests\hexy-village-night.spec.js:41:1 › a real lethal hit frees that witch victims through the shared combat path
+[36/65] [chromium] › tests\hexy-village-night.spec.js:45:1 › flying witches cast down and broken brooms fall onto actual terrain
+[37/65] [chromium] › tests\hexy-village-night.spec.js:51:1 › crowd escalates toward town, a neighbor helps a fallen person, and carriages flee
+[38/65] [chromium] › tests\hexy-village-night.spec.js:57:1 › night arrives just beyond half way and cannot flicker back when reversing
+[39/65] [chromium] › tests\hexy-village-night.spec.js:61:1 › ordinary defeat still falls and checkpoint retries do not orphan candy hostages
+[40/65] [chromium] › tests\hexy-village-revision-5.spec.js:13:1 › witch is 10 percent larger and survives 15 percent more damage
+[41/65] [chromium] › tests\hexy-village-revision-5.spec.js:16:1 › absorption heals once and transfers the exact victim into one released pumpkin
+[42/65] [chromium] › tests\hexy-village-revision-5.spec.js:22:1 › a healthy witch can create a pumpkin, but taking damage before consumption cancels it
+[43/65] [chromium] › tests\hexy-village-revision-5.spec.js:28:1 › interrupting the release after consumption cannot lose the captive or duplicate a pumpkin
+[44/65] [chromium] › tests\hexy-village-revision-5.spec.js:36:1 › a missed ghost flame bursts on the terrain instead of crossing beneath the street
+[45/65] [chromium] › tests\hexy-village-revision-5.spec.js:40:1 › pumpkin fire transforms a civilian, with ownership independent of its former witch
+[46/65] [chromium] › tests\hexy-village-revision-5.spec.js:45:1 › pumpkin destruction falls first, releases all its captives once on landing, then they flee
+[47/65] [chromium] › tests\hexy-village-revision-5.spec.js:52:1 › actual player shots break a pumpkin through the shared defeat path and release its villager
+[48/65] [chromium] › tests\hexy-village-revision-5.spec.js:56:1 › ghost fire traps Hexy like the witch spell and obeys last-heart candy defeat
+[49/65] [chromium] › tests\hexy-village-revision-5.spec.js:60:1 › rubble rescues work by proximity or damage and never award twice
+[50/65] [chromium] › tests\hexy-village-revision-5.spec.js:67:1 › adult defenders throw damaging stones while retreating, then join the escape
+[51/65] [chromium] › tests\hexy-village-revision-5.spec.js:72:1 › checkpoint retry cannot leave a victim in a removed dynamic pumpkin
+[52/65] [chromium] › tests\hexy-village-road-opacity.spec.js:3:1 › country road, sloped ground and town transition never reveal the layer underneath
+  4) [chromium] › tests\hexy-village-road-opacity.spec.js:3:1 › country road, sloped ground and town transition never reveal the layer underneath 
+
+    Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'height')
+        at drawVillageRoad (http://127.0.0.1:4321/src/components/arcade/adventure/render/villageCanvas.js:23:246)
+        at eval (eval at evaluate (:290:30), <anonymous>:30:9)
+        at async <anonymous>:316:30
+        at drawVillageRoad (http://127.0.0.1:4321/src/components/arcade/adventure/render/villageCanvas.js:23:246)
+        at eval (eval at evaluate (:290:30), <anonymous>:30:9)
+        at async <anonymous>:316:30
+        at G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\tests\hexy-village-road-opacity.spec.js:5:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    tests\results\v6-first\hexy-village-road-opacity--fb705-reveal-the-layer-underneath-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: tests\results\v6-first\hexy-village-road-opacity--fb705-reveal-the-layer-underneath-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    tests\results\v6-first\hexy-village-road-opacity--fb705-reveal-the-layer-underneath-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace tests\results\v6-first\hexy-village-road-opacity--fb705-reveal-the-layer-underneath-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:29536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:29536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[53/65] [chromium] › tests\hexy-village.spec.js:14:1 › 5-2 follows the cemetery and old saves retain their unlocked final chapter
+[54/65] [chromium] › tests\hexy-village.spec.js:21:1 › the street simulates, civilians flee and zombies retain their clothed remains
+[55/65] [chromium] › tests\hexy-village.spec.js:28:1 › witches telegraph, commit their aim and can be interrupted before casting
+[56/65] [chromium] › tests\hexy-village.spec.js:35:1 › only a real ray collision transforms a villager, once; Hexy can stand in its path
+[57/65] [chromium] › tests\hexy-village.spec.js:45:1 › pumpkin heads cast a short ember fan and have ordinary damageable bodies
+  5) [chromium] › tests\hexy-village.spec.js:45:1 › pumpkin heads cast a short ember fan and have ordinary damageable bodies 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 3
+    Received length: 0
+    Received array:  []
+
+      46 |  const s=createAdventure(7),e=makeEnemy(540,480,25);e.active=true;e.timer=0;s.enemies=[e];s.player.x=180;s.damage=()=>{};
+      47 |  updateEnemies(s,.01,playerBody,()=>{});expect(e.phase).toBe('windup');updateEnemies(s,.81,playerBody,()=>{});
+    > 48 |  expect(s.hostile.filter(q=>q.kind==='lantern-soul')).toHaveLength(3);expect(s.hostile.every(q=>q.life<=2&&q.element==='magic')).toBe(true);
+         |                                                        ^
+      49 | });
+      50 | test('actual basic shots defeat both new enemies and interrupt a witch windup',()=>{
+      51 |  for(const type of [25,26]){
+        at G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\tests\hexy-village.spec.js:48:56
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    tests\results\v6-first\hexy-village-pumpkin-heads-45a53--ordinary-damageable-bodies-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace tests\results\v6-first\hexy-village-pumpkin-heads-45a53--ordinary-damageable-bodies-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:15112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:15112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[58/65] [chromium] › tests\hexy-village.spec.js:50:1 › actual basic shots defeat both new enemies and interrupt a witch windup
+[59/65] [chromium] › tests\hexy-village.spec.js:56:1 › checkpoint retries preserve resolved townspeople and completion opens after clearing the square
+[60/65] [chromium] › tests\hexy-village.spec.js:62:1 › the extended route matches the cemetery, preserves receipts and opens into three plazas
+[61/65] [chromium] › tests\hexy-village.spec.js:75:1 › eight distinct villagers include children fleeing left with adults in the opening
+[62/65] [chromium] › tests\hexy-village.spec.js:84:1 › child-sized beam collision and committed witch aim follow the smaller body
+[63/65] [chromium] › tests\hexy-village.spec.js:92:1 › parallax planes keep their vertical roots across slopes and move throughout the full route
+[64/65] [chromium] › tests\hexy-village.spec.js:98:1 › painted fire hurts on contact, can be jumped, and leaves a fire impact on the floor
+[65/65] [chromium] › tests\hexy-village.spec.js:103:1 › the real chapter selector starts the village and keeps simulating
+  5 failed
+    [chromium] › tests\hexy-combat.spec.js:94:30 › 390: HUD stays inside the game and HOLD / shield inputs work 
+    [chromium] › tests\hexy-siege-water.spec.js:29:1 › water puts out burning brush and keeps the soaked ground from immediately reigniting 
+    [chromium] › tests\hexy-village-night.spec.js:10:1 › a real candy ray removes exactly one heart and locks actions until fresh input breaks it 
+    [chromium] › tests\hexy-village-road-opacity.spec.js:3:1 › country road, sloped ground and town transition never reveal the layer underneath 
+    [chromium] › tests\hexy-village.spec.js:45:1 › pumpkin heads cast a short ember fan and have ordinary damageable bodies 
+  60 passed (1.9m)

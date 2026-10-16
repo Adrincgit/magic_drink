@@ -27,13 +27,13 @@ test('camera closes with proximity, opens with separation on either side, and pr
  }
 });
 
-test('launch travels before impact; contest starts only on contact and grin begins at twenty-point advantage',()=>{
+test('launch travels before impact; contest starts only on contact and any boss advantage keeps a grin',()=>{
  const s=scene();beginHarlequinUltimate(s);for(let i=0;i<150&&s.boss.ultimate.state==='leap';i++)tick(s);tick(s,{super:true});
  for(let i=0;i<130&&s.powerClash.state==='windup';i++)tick(s);
  expect(s.powerClash.state).toBe('travel');expect(s.events).toContain('harlequinRelease');expect(s.events).not.toContain('clashImpact');let frames=0,impacts=0;
  while(s.powerClash.state==='travel'&&frames++<60){tick(s);impacts+=s.events.filter(e=>e==='clashImpact').length;expect(s.powerClash.contestAge).toBe(0);}
  expect(frames/120).toBeCloseTo(CLASH_TRAVEL,1);expect(impacts).toBe(1);expect(s.powerClash.state).toBe('contest');expect(s.powerClash.sparks.length).toBe(40);
- expect(clashPortraitFrames({pressure:.4,rally:0,contestAge:2}).boss).toBe(3);expect(clashPortraitFrames({pressure:.41,rally:0,contestAge:2}).boss).not.toBe(3);
+ expect(clashPortraitFrames({pressure:.4,rally:0,contestAge:2}).boss).toBe(3);expect(clashPortraitFrames({pressure:.49,rally:0,contestAge:2}).boss).toBe(3);expect(clashPortraitFrames({pressure:.5,rally:0,contestAge:2}).boss).not.toBe(3);
 });
 
 test('legacy interior checkpoints are discarded on retry and no flag is recreated on entry',()=>{

@@ -1,0 +1,36 @@
+{
+  "tool": "image_gen built-in",
+  "sourceDirectory": "context/arcade/grand-harlequin/rotation-sources",
+  "assets": {
+    "grin": {
+      "source": "exec-97151ec9-3e99-4820-a247-e1ab0c07cfc8.png",
+      "generatedSource": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-97151ec9-3e99-4820-a247-e1ab0c07cfc8.png",
+      "prompt": "Use case: identity-preserve. New production transparent sprite sheet18figures SIX columns by THREE rows. Same male adult Harlequin villain as both references, exact angular adult face design from reference1 BOTTOM LEFT closed sinister smile and reference2 narrow grinning charging face. All full-body figures face LEFT with torso SIDE-ON, both arms fully extended left at chest height casting a small orange palm flame, feet in wide planted stance, as reference1. CRITICAL FACE: long sharp pointed nose and chin, narrow long ADULT jaw and deep cheek hollows, white angular face, dark navy spiky hair, heavily inked small narrowed eyes under threatening sharply lowered brows, red diamond eye marks red clownnose. Precise left three-quarter profile as original, NOT ROUND or cute or childlike, NOT wide cartoon grin, no broad rounded cheekbones, no Joker caricature. The smile is a tightly controlled thin curved mouth line opening just enough to show CLENCHED narrow teeth, corners twisted upward cruelly, evil predatory confidence, mouth never open. In ALL eighteen frames keep same original severe face; small closed smirk top row, stronger tightly clenched cruel grin middle row, intensely malicious thin toothy closed smile bottom row. Six successive wind-loop poses perrow with cape crests traveling outward, hat tip and gold bell swaying, fine shoulder tension, SAME feet and hands registered. One red crooked hat goldbell, creamruff, redblackdiamond suit goldcuffs curledboots raggedcrimsoncape asreferences. Match original reference1 highdetail crisp anime ink contours, sculpted cel shadows, mature villain elegance. Transparent background with clear gutters around18figures, no ambient backdrop, no text, no borders, no labels. Wide sheet3072x1792. Each row EXACT6 drawings,3rows. Full hat and feet visible. Recreate original adult side-facing features faithfully, no redesigned roundcartoon face.",
+      "columns": 6,
+      "rows": 3,
+      "outputs": [
+        "public/arcade/sprites/bosses/harlequin/clash-grin-sinister.webp",
+        "public/arcade/sprites/bosses/harlequin/super-grin-sinister.webp"
+      ]
+    },
+    "charge": {
+      "source": "exec-03644237-861b-4c95-abf7-38c865d4aab2.png",
+      "generatedSource": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-03644237-861b-4c95-abf7-38c865d4aab2.png",
+      "prompt": "Use case: identity-preserve. Create a SIX-FRAME wind-loop animation of this exact Harlequin villain CHARGING his ultimate, BEFORE release, using same original sharp hand-drawn anime art, face proportions, dark expressive ink contours and cel shading. Transparent sprite sheet THREE columns by TWO rows, full body each, exactly6, canvas1536x1024. All face LEFT, feet in broad planted bent-knee stance. BOTH ELBOWS BENT, two hands CUPPED TOGETHER NEAR HIS CHEST, holding a SMALL concentrated gold-orange ember/diamond, hands never outstretched, absolutely NO projected beam. Forearms fold inward visibly, preparing power. Cruel confident CLOSED grin, sharp narrow eyes with dark shadows, gaunt white face red diamond makeup and round red nose. Single bent red cone hat gold bell, navy spiky hair, cream ruff, red-black diamond suit, gold cuffs, black curled boots, ragged red cape. Sequence six wind phases: cape whips outward behind him to RIGHT, hat and bell bend in wind, shoulders breathe under increasing power. Same hip center, hand location and boot baseline each frame, ample transparent gutters, body scale constant. Keep complete hat and feet, comparable proportions to original reference, avoid cute round face, no friendly smile, no shout. Genuine transparent background, no text, no banners, no frames, no labels. Clear crisp paintings suitable for a dramatic large portrait cut-in and a small game character.",
+      "columns": 3,
+      "rows": 2,
+      "outputs": [
+        "public/arcade/sprites/bosses/harlequin/clash-charge.webp",
+        "public/arcade/sprites/bosses/harlequin/super-charge.webp"
+      ]
+    },
+    "cutinFrames": {
+      "source": "exec-1ef11ba9-6d0d-4381-8ee7-1aa4b8e34933.png",
+      "generatedSource": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-1ef11ba9-6d0d-4381-8ee7-1aa4b8e34933.png",
+      "prompt": "Use case: stylized-concept. Transparent 2D ANIME ULTIMATE CUT-IN ORNAMENT sprite atlas, EXACT two columns by four rows =eight isolated HORIZONTAL energy borders. Each equal cell holds one thin elongated horizontal painted magical flourish. No rectangular panel or background. Canvas2048x1024, eachcell1024x256. LEFT COLUMN: four animated phases of a sinister FIRE BORDER, jagged deepcrimson and brilliant gold-orange flames licking outward around an irregular blackred charred flourish, pointed diamond ember at right tip, sharply inked hand-drawn fire tongues, intense blazing rim, small sparks. RIGHT COLUMN: four animated phases of a HEROIC MUSICAL WITCH'S STARLIGHT BORDER, flowing pinkcyan violet starlight surrounding a sweeping golden musical staff with luminous notes, one strong golden five-point star at right tip and small stars along energy, powerful and elegant. References establish these two characters' energy style and palettes. Each column is its own coherent 4frame loop advancing the flame tongues / luminous wisps without moving baseline and landmark star/diamond. These are painted anime cut-in frames, textured cel-shading with animated uneven edges, emphatically NOT simple SVG geometric banners, no flat rectangles, no plain outlined ribbons, no UI bars, no writing. The largest fiery tip/star stays at RIGHT. Long horizontal strips at center of eachcell with generous transparent space between neighboring shapes. Everything outside painted magic fully transparent. No characters or faces or backgrounds. Exactly 4fire strips on left and4music strips onright.",
+      "columns": 2,
+      "rows": 4,
+      "output": "public/arcade/sprites/effects/painted-duel/cutin-borders.webp"
+    }
+  }
+}

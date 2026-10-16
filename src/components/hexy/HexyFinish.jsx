@@ -15,7 +15,7 @@ export default function HexyFinish({ enabled, reduced, intensity = 60, expanded 
   const amount = intensity / 100;
   const grainOpacity = settings ? settings.grain / 100 * .35 : .08 + amount * .25;
   const vignetteOpacity = settings ? Math.pow(settings.vignette / 100,arcade?1.35:1) : .35 + amount * .4;
-  const lensOpacity = settings ? (settings.chromatic > 0 ? (arcade?1:.2275) : 0) : .14 + amount * .25;
+  const lensOpacity = settings ? (settings.chromatic > 0 || monochrome ? (arcade?1:.2275) : 0) : .14 + amount * .25;
   const strength=(settings?.chromatic||0)/100,opticalScale=Math.max(.5,viewport.width/1440);
   const registration = arcade ? (strength*.6+strength*strength*3.4)*opticalScale : settings ? settings.chromatic / 100 * 4.1 : (1.2 + amount) * chromatic;
   const dispersion = arcade ? strength*strength*8*opticalScale : settings ? settings.chromatic / 100 * 3.6 : (.8 + amount * 1.6) * chromatic;
@@ -51,18 +51,21 @@ export default function HexyFinish({ enabled, reduced, intensity = 60, expanded 
     <div className={styles.lens} data-finish-lens data-ready={Boolean(lensMap)} style={{ display: lensOpacity === 0 ? 'none' : undefined }} />
     <canvas ref={canvas} className={styles.grain} data-finish-grain />
     <div className={styles.vignette} data-finish-vignette />
-    <div className={styles.monochrome} data-finish-monochrome style={{display:monochrome?'block':'none'}} />
+    {!arcade&&<div className={styles.monochrome} data-finish-monochrome style={{display:monochrome?'block':'none'}} />}
   </div>;
   return <>
     <svg className={styles.definitions} aria-hidden="true" focusable="false">
       <defs>
         <filter id="hexy-film-optics" filterUnits="userSpaceOnUse" x="0" y="0" width={viewport.width} height={viewport.height} colorInterpolationFilters="sRGB">
           <feImage href={lensMap || undefined} x="0" y="0" width={viewport.width} height={viewport.height} preserveAspectRatio="none" result="dispersion" />
-          <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red" />
+          <feColorMatrix in="SourceGraphic" type="saturate" values={arcade?1-monochrome:1} result="filmBase" />
+          <feColorMatrix in="filmBase" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red" />
           <feOffset in="red" dx={registration} dy={verticalShift} result="redRegistered" />
           <feDisplacementMap in="redRegistered" in2="dispersion" scale={dispersion} xChannelSelector="R" yChannelSelector="G" result="redShift" />
-          <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green" />
-          <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue" />
+          <feColorMatrix in="filmBase" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="greenBase" />
+          <feOffset in="greenBase" dx={arcade&&monochrome?registration:0} dy={arcade&&monochrome?verticalShift:0} result="greenRegistered" />
+          <feDisplacementMap in="greenRegistered" in2="dispersion" scale={arcade&&monochrome?dispersion:0} xChannelSelector="R" yChannelSelector="G" result="green" />
+          <feColorMatrix in="filmBase" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue" />
           <feOffset in="blue" dx={-registration} dy={-verticalShift} result="blueRegistered" />
           <feDisplacementMap in="blueRegistered" in2="dispersion" scale={-dispersion} xChannelSelector="R" yChannelSelector="G" result="blueShift" />
           <feBlend in="redShift" in2="green" mode="screen" result="redGreen" />

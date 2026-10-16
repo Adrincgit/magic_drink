@@ -1,0 +1,761 @@
+{
+  "villagers": {
+    "cuts": [
+      0,
+      256,
+      479,
+      741,
+      988,
+      1240,
+      1536
+    ],
+    "columns": [
+      [
+        0,
+        256,
+        512,
+        768,
+        1024
+      ],
+      [
+        0,
+        256,
+        512,
+        768,
+        1024
+      ],
+      [
+        0,
+        256,
+        512,
+        768,
+        1024
+      ],
+      [
+        0,
+        256,
+        512,
+        768,
+        1024
+      ],
+      [
+        0,
+        256,
+        512,
+        768,
+        1024
+      ],
+      [
+        0,
+        256,
+        512,
+        768,
+        1024
+      ]
+    ],
+    "frames": [
+      {
+        "left": 43,
+        "top": 28,
+        "width": 198,
+        "height": 207
+      },
+      {
+        "left": 300,
+        "top": 28,
+        "width": 195,
+        "height": 210
+      },
+      {
+        "left": 554,
+        "top": 28,
+        "width": 197,
+        "height": 210
+      },
+      {
+        "left": 811,
+        "top": 27,
+        "width": 196,
+        "height": 209
+      },
+      {
+        "left": 40,
+        "top": 269,
+        "width": 198,
+        "height": 207
+      },
+      {
+        "left": 294,
+        "top": 269,
+        "width": 208,
+        "height": 203
+      },
+      {
+        "left": 554,
+        "top": 268,
+        "width": 199,
+        "height": 208
+      },
+      {
+        "left": 807,
+        "top": 270,
+        "width": 195,
+        "height": 207
+      },
+      {
+        "left": 25,
+        "top": 490,
+        "width": 230,
+        "height": 238
+      },
+      {
+        "left": 287,
+        "top": 480,
+        "width": 211,
+        "height": 242
+      },
+      {
+        "left": 558,
+        "top": 496,
+        "width": 200,
+        "height": 227
+      },
+      {
+        "left": 794,
+        "top": 544,
+        "width": 197,
+        "height": 163
+      },
+      {
+        "left": 41,
+        "top": 743,
+        "width": 214,
+        "height": 227
+      },
+      {
+        "left": 302,
+        "top": 742,
+        "width": 200,
+        "height": 233
+      },
+      {
+        "left": 555,
+        "top": 743,
+        "width": 209,
+        "height": 232
+      },
+      {
+        "left": 811,
+        "top": 744,
+        "width": 200,
+        "height": 227
+      },
+      {
+        "left": 38,
+        "top": 990,
+        "width": 218,
+        "height": 234
+      },
+      {
+        "left": 299,
+        "top": 994,
+        "width": 206,
+        "height": 246
+      },
+      {
+        "left": 553,
+        "top": 989,
+        "width": 208,
+        "height": 235
+      },
+      {
+        "left": 806,
+        "top": 993,
+        "width": 203,
+        "height": 232
+      },
+      {
+        "left": 22,
+        "top": 1247,
+        "width": 234,
+        "height": 264
+      },
+      {
+        "left": 256,
+        "top": 1240,
+        "width": 248,
+        "height": 263
+      },
+      {
+        "left": 562,
+        "top": 1258,
+        "width": 196,
+        "height": 232
+      },
+      {
+        "left": 792,
+        "top": 1307,
+        "width": 208,
+        "height": 172
+      }
+    ],
+    "scale": 0.9596774193548387,
+    "path": "public/arcade/sprites/enemies/village-villagers-v1.webp"
+  },
+  "witch": {
+    "cuts": [
+      0,
+      176,
+      350,
+      538,
+      702,
+      870,
+      1024
+    ],
+    "columns": [
+      [
+        0,
+        384,
+        768,
+        1152,
+        1536
+      ],
+      [
+        0,
+        384,
+        768,
+        1152,
+        1536
+      ],
+      [
+        0,
+        384,
+        768,
+        1152,
+        1536
+      ],
+      [
+        0,
+        384,
+        768,
+        1152,
+        1536
+      ],
+      [
+        0,
+        384,
+        768,
+        1152,
+        1536
+      ],
+      [
+        0,
+        384,
+        768,
+        1152,
+        1536
+      ]
+    ],
+    "frames": [
+      {
+        "left": 118,
+        "top": 6,
+        "width": 200,
+        "height": 169
+      },
+      {
+        "left": 492,
+        "top": 7,
+        "width": 207,
+        "height": 168
+      },
+      {
+        "left": 884,
+        "top": 6,
+        "width": 192,
+        "height": 169
+      },
+      {
+        "left": 1245,
+        "top": 7,
+        "width": 186,
+        "height": 169
+      },
+      {
+        "left": 122,
+        "top": 183,
+        "width": 195,
+        "height": 167
+      },
+      {
+        "left": 487,
+        "top": 179,
+        "width": 202,
+        "height": 171
+      },
+      {
+        "left": 848,
+        "top": 185,
+        "width": 230,
+        "height": 165
+      },
+      {
+        "left": 1252,
+        "top": 181,
+        "width": 193,
+        "height": 169
+      },
+      {
+        "left": 96,
+        "top": 355,
+        "width": 233,
+        "height": 183
+      },
+      {
+        "left": 488,
+        "top": 350,
+        "width": 220,
+        "height": 186
+      },
+      {
+        "left": 845,
+        "top": 350,
+        "width": 225,
+        "height": 188
+      },
+      {
+        "left": 1225,
+        "top": 356,
+        "width": 221,
+        "height": 182
+      },
+      {
+        "left": 69,
+        "top": 538,
+        "width": 270,
+        "height": 164
+      },
+      {
+        "left": 452,
+        "top": 540,
+        "width": 261,
+        "height": 162
+      },
+      {
+        "left": 822,
+        "top": 542,
+        "width": 272,
+        "height": 160
+      },
+      {
+        "left": 1212,
+        "top": 542,
+        "width": 250,
+        "height": 160
+      },
+      {
+        "left": 129,
+        "top": 702,
+        "width": 191,
+        "height": 166
+      },
+      {
+        "left": 508,
+        "top": 702,
+        "width": 201,
+        "height": 168
+      },
+      {
+        "left": 882,
+        "top": 704,
+        "width": 198,
+        "height": 165
+      },
+      {
+        "left": 1243,
+        "top": 702,
+        "width": 178,
+        "height": 168
+      },
+      {
+        "left": 130,
+        "top": 871,
+        "width": 174,
+        "height": 148
+      },
+      {
+        "left": 488,
+        "top": 870,
+        "width": 207,
+        "height": 148
+      },
+      {
+        "left": 820,
+        "top": 909,
+        "width": 235,
+        "height": 103
+      },
+      {
+        "left": 1193,
+        "top": 870,
+        "width": 279,
+        "height": 139
+      }
+    ],
+    "scale": 0.8530465949820788,
+    "path": "public/arcade/sprites/enemies/village-witch-v1.webp"
+  },
+  "pumpkin": {
+    "cuts": [
+      0,
+      216,
+      426,
+      624,
+      806,
+      1002,
+      1222
+    ],
+    "columns": [
+      [
+        0,
+        322,
+        644,
+        965,
+        1287
+      ],
+      [
+        0,
+        322,
+        644,
+        965,
+        1287
+      ],
+      [
+        0,
+        322,
+        644,
+        965,
+        1287
+      ],
+      [
+        0,
+        322,
+        644,
+        965,
+        1287
+      ],
+      [
+        0,
+        322,
+        644,
+        965,
+        1287
+      ],
+      [
+        0,
+        322,
+        644,
+        965,
+        1287
+      ]
+    ],
+    "frames": [
+      {
+        "left": 64,
+        "top": 13,
+        "width": 175,
+        "height": 198
+      },
+      {
+        "left": 400,
+        "top": 11,
+        "width": 169,
+        "height": 198
+      },
+      {
+        "left": 722,
+        "top": 11,
+        "width": 168,
+        "height": 200
+      },
+      {
+        "left": 1042,
+        "top": 11,
+        "width": 171,
+        "height": 200
+      },
+      {
+        "left": 63,
+        "top": 222,
+        "width": 179,
+        "height": 195
+      },
+      {
+        "left": 397,
+        "top": 220,
+        "width": 174,
+        "height": 197
+      },
+      {
+        "left": 720,
+        "top": 220,
+        "width": 181,
+        "height": 200
+      },
+      {
+        "left": 1041,
+        "top": 220,
+        "width": 172,
+        "height": 197
+      },
+      {
+        "left": 56,
+        "top": 441,
+        "width": 207,
+        "height": 178
+      },
+      {
+        "left": 368,
+        "top": 436,
+        "width": 218,
+        "height": 183
+      },
+      {
+        "left": 687,
+        "top": 434,
+        "width": 225,
+        "height": 186
+      },
+      {
+        "left": 1008,
+        "top": 436,
+        "width": 219,
+        "height": 184
+      },
+      {
+        "left": 27,
+        "top": 631,
+        "width": 243,
+        "height": 168
+      },
+      {
+        "left": 351,
+        "top": 631,
+        "width": 249,
+        "height": 171
+      },
+      {
+        "left": 671,
+        "top": 631,
+        "width": 261,
+        "height": 171
+      },
+      {
+        "left": 1006,
+        "top": 631,
+        "width": 242,
+        "height": 171
+      },
+      {
+        "left": 68,
+        "top": 810,
+        "width": 181,
+        "height": 192
+      },
+      {
+        "left": 386,
+        "top": 811,
+        "width": 179,
+        "height": 191
+      },
+      {
+        "left": 719,
+        "top": 811,
+        "width": 174,
+        "height": 191
+      },
+      {
+        "left": 1042,
+        "top": 811,
+        "width": 171,
+        "height": 191
+      },
+      {
+        "left": 59,
+        "top": 1002,
+        "width": 215,
+        "height": 192
+      },
+      {
+        "left": 376,
+        "top": 1002,
+        "width": 214,
+        "height": 192
+      },
+      {
+        "left": 648,
+        "top": 1002,
+        "width": 303,
+        "height": 186
+      },
+      {
+        "left": 969,
+        "top": 1002,
+        "width": 292,
+        "height": 193
+      }
+    ],
+    "scale": 0.7854785478547854,
+    "path": "public/arcade/sprites/enemies/village-pumpkin-v1.webp"
+  },
+  "houses": {
+    "cuts": [
+      0,
+      517,
+      1024
+    ],
+    "columns": [
+      [
+        0,
+        364,
+        702,
+        1057,
+        1536
+      ],
+      [
+        0,
+        384,
+        768,
+        1152,
+        1536
+      ]
+    ],
+    "frames": [
+      {
+        "left": 13,
+        "top": 132,
+        "width": 346,
+        "height": 385
+      },
+      {
+        "left": 364,
+        "top": 25,
+        "width": 338,
+        "height": 490
+      },
+      {
+        "left": 702,
+        "top": 121,
+        "width": 344,
+        "height": 394
+      },
+      {
+        "left": 1058,
+        "top": 159,
+        "width": 464,
+        "height": 347
+      },
+      {
+        "left": 13,
+        "top": 642,
+        "width": 360,
+        "height": 348
+      },
+      {
+        "left": 391,
+        "top": 564,
+        "width": 376,
+        "height": 419
+      },
+      {
+        "left": 776,
+        "top": 528,
+        "width": 368,
+        "height": 464
+      },
+      {
+        "left": 1154,
+        "top": 574,
+        "width": 364,
+        "height": 416
+      }
+    ],
+    "scale": null,
+    "path": "public/arcade/maps/village/village-houses-v1.webp"
+  },
+  "decor": {
+    "cuts": [
+      0,
+      540,
+      1024
+    ],
+    "columns": [
+      [
+        0,
+        499,
+        831,
+        1101,
+        1536
+      ],
+      [
+        0,
+        504,
+        803,
+        1125,
+        1536
+      ]
+    ],
+    "frames": [
+      {
+        "left": 11,
+        "top": 80,
+        "width": 488,
+        "height": 453
+      },
+      {
+        "left": 531,
+        "top": 239,
+        "width": 300,
+        "height": 295
+      },
+      {
+        "left": 831,
+        "top": 57,
+        "width": 225,
+        "height": 481
+      },
+      {
+        "left": 1102,
+        "top": 284,
+        "width": 421,
+        "height": 255
+      },
+      {
+        "left": 18,
+        "top": 671,
+        "width": 486,
+        "height": 258
+      },
+      {
+        "left": 542,
+        "top": 694,
+        "width": 261,
+        "height": 246
+      },
+      {
+        "left": 872,
+        "top": 585,
+        "width": 221,
+        "height": 361
+      },
+      {
+        "left": 1126,
+        "top": 655,
+        "width": 375,
+        "height": 289
+      }
+    ],
+    "scale": null,
+    "path": "public/arcade/maps/village/village-decor-v1.webp"
+  }
+}

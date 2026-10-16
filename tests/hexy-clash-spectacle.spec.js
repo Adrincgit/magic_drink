@@ -7,7 +7,6 @@ import {harlequinDrawing,harlequinBody,harlequinHand,updateHarlequin,stepHarlequ
 import {clashContact,clashPortraitFrames,CLASH_DURATION} from '../src/components/arcade/adventure/engine/adventurePowerClash';
 import {superCameraOffset} from '../src/components/arcade/adventure/render/adventureSuperCanvas';
 import {followAdventureCamera,adventureBounds} from '../src/components/arcade/adventure/render/adventureCamera';
-import {damageSupply,dropHarlequinSupply,updateSupplies} from '../src/components/arcade/adventure/world/adventureSupplies';
 import {hexyPose} from '../src/components/arcade/adventure/actors/hexy/hexyAnimation';
 const folder='tests/artifacts/arcade/clash-spectacle/';
 const tick=(s,n,input={})=>{for(let i=0;i<n;i++)stepAdventure(s,input,1/120);};
@@ -82,14 +81,12 @@ test('portraits clench through equilibrium and losing; only winning makes Hexy s
  q.won=true;q.rally=.6;expect(clashPortraitFrames(q).hexy).toBe(3);
 });
 
-test('each new phase drops one real chest, with guaranteed usable drink loot and fresh retry aid',()=>{
+test('phase changes and retries preserve a duel without supply crates inside the tent',()=>{
  const s=battle();s.boss.stage=1;s.boss.hp=480;s.checkpointAt=[1150,480];tick(s,112);
- expect(s.supplies).toHaveLength(1);const first=s.supplies[0];expect(first.falling).toBe(true);expect(first.y).toBeLessThan(480);expect(first.phaseAid).toBe(2);
- for(let n=0;n<200;n++)updateSupplies(s,1/120);expect(first.y).toBe(480);expect(first.falling).toBe(false);damageSupply(s,first,1);
- expect(s.pickups[0]).toMatchObject({type:'drink',kind:2,phaseAid:2});tick(s,100);s.player.x=first.x;tick(s,1);expect(s.weapon).toBe(2);expect(s.ammo).toBeGreaterThan(0);
-  s.boss.hp=240;for(let n=0;n<400&&s.supplies.length<2;n++)tick(s,1);expect(s.supplies).toHaveLength(2);const second=s.supplies[1];expect(second.phaseAid).toBe(3);damageSupply(s,second,1);expect(s.pickups.at(-1)).toMatchObject({type:'drink',kind:2,phaseAid:3});expect(s.pickups.at(-1).y).toBeLessThan(100);
- dropHarlequinSupply(s,2);dropHarlequinSupply(s,3);expect(s.supplies).toHaveLength(2);retryAdventure(s);expect(s.supplies.filter(q=>q.phaseAid)).toHaveLength(0);expect(s.pickups.filter(q=>q.phaseAid)).toHaveLength(0);
- dropHarlequinSupply(s,2);expect(s.supplies.filter(q=>q.phaseAid)).toHaveLength(1);expect(s.starMoney).toBe(0);
+ expect(s.boss.stage).toBe(2);expect(s.supplies).toHaveLength(0);expect(s.pickups).toHaveLength(0);
+ s.boss.hp=240;for(let n=0;n<400&&s.boss.stage<3;n++)tick(s,1);
+ expect(s.boss.stage).toBe(3);expect(s.supplies).toHaveLength(0);expect(s.pickups).toHaveLength(0);
+ retryAdventure(s);expect(s.supplies).toHaveLength(0);expect(s.pickups).toHaveLength(0);expect(s.starMoney).toBe(0);
 });
 
 test('ribbon has a windup, an actual release from the hand and a visible descent to the floor',()=>{

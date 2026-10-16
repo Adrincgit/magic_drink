@@ -1,0 +1,942 @@
+{
+  "tool": "image_gen built-in",
+  "date": "2026-10-11",
+  "sourceDirectory": "context/arcade/grand-harlequin/rotation-sources",
+  "assets": {
+    "grin": {
+      "source": "exec-97151ec9-3e99-4820-a247-e1ab0c07cfc8.png",
+      "generatedSource": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-97151ec9-3e99-4820-a247-e1ab0c07cfc8.png",
+      "prompt": "Use case: identity-preserve. New production transparent sprite sheet18figures SIX columns by THREE rows. Same male adult Harlequin villain as both references, exact angular adult face design from reference1 BOTTOM LEFT closed sinister smile and reference2 narrow grinning charging face. All full-body figures face LEFT with torso SIDE-ON, both arms fully extended left at chest height casting a small orange palm flame, feet in wide planted stance, as reference1. CRITICAL FACE: long sharp pointed nose and chin, narrow long ADULT jaw and deep cheek hollows, white angular face, dark navy spiky hair, heavily inked small narrowed eyes under threatening sharply lowered brows, red diamond eye marks red clownnose. Precise left three-quarter profile as original, NOT ROUND or cute or childlike, NOT wide cartoon grin, no broad rounded cheekbones, no Joker caricature. The smile is a tightly controlled thin curved mouth line opening just enough to show CLENCHED narrow teeth, corners twisted upward cruelly, evil predatory confidence, mouth never open. In ALL eighteen frames keep same original severe face; small closed smirk top row, stronger tightly clenched cruel grin middle row, intensely malicious thin toothy closed smile bottom row. Six successive wind-loop poses perrow with cape crests traveling outward, hat tip and gold bell swaying, fine shoulder tension, SAME feet and hands registered. One red crooked hat goldbell, creamruff, redblackdiamond suit goldcuffs curledboots raggedcrimsoncape asreferences. Match original reference1 highdetail crisp anime ink contours, sculpted cel shadows, mature villain elegance. Transparent background with clear gutters around18figures, no ambient backdrop, no text, no borders, no labels. Wide sheet3072x1792. Each row EXACT6 drawings,3rows. Full hat and feet visible. Recreate original adult side-facing features faithfully, no redesigned roundcartoon face.",
+      "columns": 6,
+      "rows": 3,
+      "outputs": [
+        "public/arcade/sprites/bosses/harlequin/clash-grin-sinister.webp",
+        "public/arcade/sprites/bosses/harlequin/super-grin-sinister.webp"
+      ],
+      "registration": [
+        {
+          "crop": {
+            "left": 8,
+            "top": 0,
+            "width": 287,
+            "height": 300
+          },
+          "anchor": [
+            153,
+            291
+          ],
+          "destination": [
+            9,
+            84
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 296,
+            "top": 4,
+            "width": 264,
+            "height": 296
+          },
+          "anchor": [
+            132.5,
+            287
+          ],
+          "destination": [
+            34,
+            89
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 560,
+            "top": 3,
+            "width": 272,
+            "height": 297
+          },
+          "anchor": [
+            135,
+            288
+          ],
+          "destination": [
+            31,
+            88
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 827,
+            "top": 3,
+            "width": 267,
+            "height": 297
+          },
+          "anchor": [
+            133.5,
+            288
+          ],
+          "destination": [
+            33,
+            88
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 1093,
+            "top": 0,
+            "width": 280,
+            "height": 300
+          },
+          "anchor": [
+            135.5,
+            291
+          ],
+          "destination": [
+            30,
+            84
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 1366,
+            "top": 4,
+            "width": 276,
+            "height": 296
+          },
+          "anchor": [
+            129,
+            287
+          ],
+          "destination": [
+            38,
+            89
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 11,
+            "top": 312,
+            "width": 286,
+            "height": 306
+          },
+          "anchor": [
+            150,
+            297
+          ],
+          "destination": [
+            13,
+            77
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 294,
+            "top": 315,
+            "width": 265,
+            "height": 303
+          },
+          "anchor": [
+            134,
+            294
+          ],
+          "destination": [
+            32,
+            81
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 559,
+            "top": 314,
+            "width": 273,
+            "height": 304
+          },
+          "anchor": [
+            135.5,
+            295
+          ],
+          "destination": [
+            30,
+            80
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 825,
+            "top": 316,
+            "width": 274,
+            "height": 303
+          },
+          "anchor": [
+            135.5,
+            294
+          ],
+          "destination": [
+            30,
+            81
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 1094,
+            "top": 317,
+            "width": 277,
+            "height": 302
+          },
+          "anchor": [
+            135,
+            293
+          ],
+          "destination": [
+            31,
+            82
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 1366,
+            "top": 317,
+            "width": 276,
+            "height": 301
+          },
+          "anchor": [
+            129,
+            292
+          ],
+          "destination": [
+            38,
+            83
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 9,
+            "top": 636,
+            "width": 292,
+            "height": 306
+          },
+          "anchor": [
+            152,
+            297
+          ],
+          "destination": [
+            10,
+            77
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 294,
+            "top": 636,
+            "width": 278,
+            "height": 305
+          },
+          "anchor": [
+            134,
+            296
+          ],
+          "destination": [
+            32,
+            78
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 559,
+            "top": 633,
+            "width": 282,
+            "height": 309
+          },
+          "anchor": [
+            135.5,
+            300
+          ],
+          "destination": [
+            30,
+            74
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 827,
+            "top": 633,
+            "width": 278,
+            "height": 308
+          },
+          "anchor": [
+            132.5,
+            299
+          ],
+          "destination": [
+            34,
+            75
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 1096,
+            "top": 632,
+            "width": 283,
+            "height": 309
+          },
+          "anchor": [
+            130,
+            300
+          ],
+          "destination": [
+            37,
+            74
+          ],
+          "scale": 1.1945392491467577
+        },
+        {
+          "crop": {
+            "left": 1366,
+            "top": 633,
+            "width": 276,
+            "height": 308
+          },
+          "anchor": [
+            128,
+            299
+          ],
+          "destination": [
+            39,
+            75
+          ],
+          "scale": 1.1945392491467577
+        }
+      ]
+    },
+    "bossBeam": {
+      "source": "exec-09418aaa-81d9-4163-9e7c-1e82a0d70690.png",
+      "generatedSource": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-09418aaa-81d9-4163-9e7c-1e82a0d70690.png",
+      "prompt": "Use case: stylized-concept. Production transparent sprite atlas of the reference Harlequin red orange golden fire ultimate BEAM. Exactly twelve distinct sequential animation frames arranged TWO COLUMNS by SIX ROWS, canvas2048x1536. Each equal1024x256 cell contains one long thin HORIZONTAL beam pointing RIGHT, fixed source and head positions, stable centerline and equal silhouette scale. Reading row-major, show coherent phases0,30,60,90,120,150,180,210,240,270,300,330 degrees of one seamless rotation around the beam's HORIZONTAL LONG AXIS. Crimson flame ribbons twist helically around a white-hot gold core, rolling from above to front to below to behind with each phase. Right tip is pointed white-gold fireball, a few small rotating gold diamond embers. Preserve established design colors and hand-painted anime cartoon style of reference, but sharper defined flame shapes and cleaner edges. This is a real phased animation sheet, not twelve unrelated designs, not flat SVG, no gradual fade-out or size changes betweenframes. Full beam including tips contained in each cell with generous transparent margin on all four sides, no overlap between cells. Genuinely transparent backdrop; no black rectangle, no checkerboard, no text, no labels, no borders.",
+      "output": "public/arcade/sprites/bosses/harlequin/ultimate-beam-rotation.webp",
+      "columns": 2,
+      "rows": 6,
+      "frameCount": 12,
+      "frameSize": [
+        1024,
+        256
+      ],
+      "crops": [
+        {
+          "left": 11,
+          "top": 8,
+          "width": 703,
+          "height": 183
+        },
+        {
+          "left": 733,
+          "top": 13,
+          "width": 706,
+          "height": 175
+        },
+        {
+          "left": 10,
+          "top": 203,
+          "width": 705,
+          "height": 166
+        },
+        {
+          "left": 733,
+          "top": 209,
+          "width": 706,
+          "height": 158
+        },
+        {
+          "left": 9,
+          "top": 397,
+          "width": 706,
+          "height": 147
+        },
+        {
+          "left": 733,
+          "top": 399,
+          "width": 706,
+          "height": 149
+        },
+        {
+          "left": 11,
+          "top": 579,
+          "width": 704,
+          "height": 153
+        },
+        {
+          "left": 733,
+          "top": 580,
+          "width": 705,
+          "height": 157
+        },
+        {
+          "left": 9,
+          "top": 754,
+          "width": 707,
+          "height": 158
+        },
+        {
+          "left": 733,
+          "top": 754,
+          "width": 706,
+          "height": 161
+        },
+        {
+          "left": 9,
+          "top": 910,
+          "width": 706,
+          "height": 176
+        },
+        {
+          "left": 733,
+          "top": 913,
+          "width": 707,
+          "height": 173
+        }
+      ]
+    },
+    "hexyBeam": {
+      "source": "exec-9a04bcad-cb06-4ad2-9525-557e5e42d9e9.png",
+      "generatedSource": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-9a04bcad-cb06-4ad2-9525-557e5e42d9e9.png",
+      "prompt": "Use case: stylized-concept. Production sprite atlas: twelve sequential frames of the reference Hexy pink gold cyan magical ultimate energy BEAM rotating around its horizontal axis. Precise grid THREE COLUMNS by FOUR ROWS, landscape canvas 3072x1024. Each cell 1024x256 holds one isolated long thin HORIZONTAL beam pointing right; same source x, endpoint x, centerline, thickness, and scale in every frame; generous transparent padding top and bottom. Frames read left to right then downward, exactly12 unique successive phases 0,30,60,...330 degrees of ONE complete rotation, smooth seamless cycle. Important: phase change of interwoven luminous pink/cyan/gold ENERGY STRANDS wrapping a stable creamy gold axial core, crests move across the top/front/bottom/back around the cylinder, not random different beam designs. Keep same very elongated silhouette and reference colors. Right end bright gold four-point star head with pink corona, tiny gold stars/music notes following the rotating strands. Art direction match reference: detailed hand-drawn anime cartoon magical energy, crisp outlined pink ribbons, soft luminous painted highlights, vivid cinematic power, transparent background outside beam, not vector diagram or line art. Leave strong transparent gutters between cells, never touch canvas edge. No character, no words, no grid, no checkerboard painted behind.\nCritical COUNT: draw 3 beams in row1, 3 in row2, 3 in row3, 3 in row4. Exactly four rows. Total twelve beams; no empty cells. Entire canvas allocated to these twelve cells. Do not output ten frames.",
+      "output": "public/arcade/sprites/effects/super-beam-rotation.webp",
+      "columns": 3,
+      "rows": 4,
+      "frameCount": 12,
+      "frameSize": [
+        1024,
+        256
+      ],
+      "crops": [
+        {
+          "left": 18,
+          "top": 50,
+          "width": 694,
+          "height": 83
+        },
+        {
+          "left": 741,
+          "top": 50,
+          "width": 694,
+          "height": 90
+        },
+        {
+          "left": 1462,
+          "top": 49,
+          "width": 695,
+          "height": 89
+        },
+        {
+          "left": 18,
+          "top": 230,
+          "width": 695,
+          "height": 84
+        },
+        {
+          "left": 741,
+          "top": 229,
+          "width": 694,
+          "height": 90
+        },
+        {
+          "left": 1463,
+          "top": 231,
+          "width": 694,
+          "height": 91
+        },
+        {
+          "left": 18,
+          "top": 410,
+          "width": 695,
+          "height": 88
+        },
+        {
+          "left": 741,
+          "top": 412,
+          "width": 694,
+          "height": 91
+        },
+        {
+          "left": 1463,
+          "top": 411,
+          "width": 694,
+          "height": 92
+        },
+        {
+          "left": 18,
+          "top": 585,
+          "width": 693,
+          "height": 86
+        },
+        {
+          "left": 740,
+          "top": 591,
+          "width": 695,
+          "height": 87
+        },
+        {
+          "left": 1463,
+          "top": 590,
+          "width": 692,
+          "height": 88
+        }
+      ]
+    },
+    "charge": {
+      "source": "exec-03644237-861b-4c95-abf7-38c865d4aab2.png",
+      "generatedSource": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-03644237-861b-4c95-abf7-38c865d4aab2.png",
+      "prompt": "Use case: identity-preserve. Create a SIX-FRAME wind-loop animation of this exact Harlequin villain CHARGING his ultimate, BEFORE release, using same original sharp hand-drawn anime art, face proportions, dark expressive ink contours and cel shading. Transparent sprite sheet THREE columns by TWO rows, full body each, exactly6, canvas1536x1024. All face LEFT, feet in broad planted bent-knee stance. BOTH ELBOWS BENT, two hands CUPPED TOGETHER NEAR HIS CHEST, holding a SMALL concentrated gold-orange ember/diamond, hands never outstretched, absolutely NO projected beam. Forearms fold inward visibly, preparing power. Cruel confident CLOSED grin, sharp narrow eyes with dark shadows, gaunt white face red diamond makeup and round red nose. Single bent red cone hat gold bell, navy spiky hair, cream ruff, red-black diamond suit, gold cuffs, black curled boots, ragged red cape. Sequence six wind phases: cape whips outward behind him to RIGHT, hat and bell bend in wind, shoulders breathe under increasing power. Same hip center, hand location and boot baseline each frame, ample transparent gutters, body scale constant. Keep complete hat and feet, comparable proportions to original reference, avoid cute round face, no friendly smile, no shout. Genuine transparent background, no text, no banners, no frames, no labels. Clear crisp paintings suitable for a dramatic large portrait cut-in and a small game character.",
+      "columns": 3,
+      "rows": 2,
+      "outputs": [
+        "public/arcade/sprites/bosses/harlequin/clash-charge.webp",
+        "public/arcade/sprites/bosses/harlequin/super-charge.webp"
+      ],
+      "registration": [
+        {
+          "crop": {
+            "left": 11,
+            "top": 6,
+            "width": 477,
+            "height": 497
+          },
+          "anchor": [
+            228,
+            488
+          ],
+          "destination": [
+            40,
+            106
+          ],
+          "scale": 0.6678765880217786
+        },
+        {
+          "crop": {
+            "left": 519,
+            "top": 7,
+            "width": 495,
+            "height": 497
+          },
+          "anchor": [
+            228.5,
+            488
+          ],
+          "destination": [
+            39,
+            106
+          ],
+          "scale": 0.6678765880217786
+        },
+        {
+          "crop": {
+            "left": 1034,
+            "top": 1,
+            "width": 502,
+            "height": 503
+          },
+          "anchor": [
+            226.5,
+            494
+          ],
+          "destination": [
+            41,
+            102
+          ],
+          "scale": 0.6678765880217786
+        },
+        {
+          "crop": {
+            "left": 13,
+            "top": 514,
+            "width": 499,
+            "height": 501
+          },
+          "anchor": [
+            227,
+            492
+          ],
+          "destination": [
+            40,
+            103
+          ],
+          "scale": 0.6678765880217786
+        },
+        {
+          "crop": {
+            "left": 521,
+            "top": 515,
+            "width": 501,
+            "height": 500
+          },
+          "anchor": [
+            227.5,
+            491
+          ],
+          "destination": [
+            40,
+            104
+          ],
+          "scale": 0.6678765880217786
+        },
+        {
+          "crop": {
+            "left": 1028,
+            "top": 515,
+            "width": 501,
+            "height": 500
+          },
+          "anchor": [
+            231.5,
+            491
+          ],
+          "destination": [
+            37,
+            104
+          ],
+          "scale": 0.6678765880217786
+        }
+      ]
+    },
+    "cutinFrames": {
+      "source": "exec-1ef11ba9-6d0d-4381-8ee7-1aa4b8e34933.png",
+      "generatedSource": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-1ef11ba9-6d0d-4381-8ee7-1aa4b8e34933.png",
+      "prompt": "Use case: stylized-concept. Transparent 2D ANIME ULTIMATE CUT-IN ORNAMENT sprite atlas, EXACT two columns by four rows =eight isolated HORIZONTAL energy borders. Each equal cell holds one thin elongated horizontal painted magical flourish. No rectangular panel or background. Canvas2048x1024, eachcell1024x256. LEFT COLUMN: four animated phases of a sinister FIRE BORDER, jagged deepcrimson and brilliant gold-orange flames licking outward around an irregular blackred charred flourish, pointed diamond ember at right tip, sharply inked hand-drawn fire tongues, intense blazing rim, small sparks. RIGHT COLUMN: four animated phases of a HEROIC MUSICAL WITCH'S STARLIGHT BORDER, flowing pinkcyan violet starlight surrounding a sweeping golden musical staff with luminous notes, one strong golden five-point star at right tip and small stars along energy, powerful and elegant. References establish these two characters' energy style and palettes. Each column is its own coherent 4frame loop advancing the flame tongues / luminous wisps without moving baseline and landmark star/diamond. These are painted anime cut-in frames, textured cel-shading with animated uneven edges, emphatically NOT simple SVG geometric banners, no flat rectangles, no plain outlined ribbons, no UI bars, no writing. The largest fiery tip/star stays at RIGHT. Long horizontal strips at center of eachcell with generous transparent space between neighboring shapes. Everything outside painted magic fully transparent. No characters or faces or backgrounds. Exactly 4fire strips on left and4music strips onright.",
+      "columns": 2,
+      "rows": 4,
+      "output": "public/arcade/sprites/effects/painted-duel/cutin-borders.webp"
+    }
+  },
+  "previousGrin": {
+    "source": "exec-2000bc88-7781-472d-bd36-150ec002d0f3.png",
+    "generatedSource": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-2000bc88-7781-472d-bd36-150ec002d0f3.png",
+    "prompt": "Use case: identity-preserve. Production transparent sprite atlas for the same 2D anime cartoon Harlequin in the reference. Create EXACTLY eighteen full-body drawings in a precise grid SIX COLUMNS by THREE ROWS, landscape canvas 3072x1792, generous clear transparent gaps, no grid lines or labels. Same character, proportions, rendering, white pointed face red eye makeup and red round nose, navy spiky hair, one long red floppy hat with gold bell, cream ruff, red black diamond suit gold cuffs, ragged crimson cape, curled black boots. All figures face LEFT in the SAME planted casting stance as reference: both hands extended left at chest height, restrained small orange palm glow. Feet and hand origin registered identically in every cell, whole hat and boots visible. Each row is a six-frame LOOP of wind animation, cloth and cape rippling, hat bending and bell swaying, shoulders and chest breathing slightly; clearly distinct intermediate DRAWINGS, not repeats or scaling. Row1 slight confident closed-mouth smirk; Row2 stronger closed sly grin; Row3 broad evil CLOSED clenched-teeth smile, lifted cheeks and narrowed eyes. Mouth never opens in any cell. Six columns correspond wind phases 0,60,120,180,240,300 degrees, cape crests traveling outward then returning smoothly to start. Maintain face identity, same location and size across all eighteen drawings. Preserve exactly reference style: crisp hand-drawn anime contour, rich flat cel shadows, painterly red cloth highlights, no 3D rendering, no blurry photorealism. GENUINELY TRANSPARENT BACKGROUND. No separate portraits, no new effects obscuring body, no text, no borders.",
+    "outputs": [
+      "public/arcade/sprites/bosses/harlequin/clash-grin.webp",
+      "public/arcade/sprites/bosses/harlequin/super-grin.webp"
+    ],
+    "columns": 6,
+    "rows": 3,
+    "registration": [
+      {
+        "crop": {
+          "left": 6,
+          "top": 6,
+          "width": 282,
+          "height": 310
+        },
+        "anchor": [
+          137,
+          301
+        ],
+        "destination": [
+          33,
+          83
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 281,
+          "top": 7,
+          "width": 282,
+          "height": 309
+        },
+        "anchor": [
+          136,
+          300
+        ],
+        "destination": [
+          34,
+          84
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 556,
+          "top": 8,
+          "width": 287,
+          "height": 307
+        },
+        "anchor": [
+          135.5,
+          298
+        ],
+        "destination": [
+          35,
+          86
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 830,
+          "top": 6,
+          "width": 301,
+          "height": 310
+        },
+        "anchor": [
+          136,
+          301
+        ],
+        "destination": [
+          34,
+          83
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 1114,
+          "top": 10,
+          "width": 286,
+          "height": 305
+        },
+        "anchor": [
+          133.5,
+          296
+        ],
+        "destination": [
+          37,
+          89
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 1379,
+          "top": 6,
+          "width": 263,
+          "height": 310
+        },
+        "anchor": [
+          130.5,
+          301
+        ],
+        "destination": [
+          41,
+          83
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 7,
+          "top": 324,
+          "width": 280,
+          "height": 312
+        },
+        "anchor": [
+          136,
+          303
+        ],
+        "destination": [
+          34,
+          81
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 281,
+          "top": 325,
+          "width": 284,
+          "height": 311
+        },
+        "anchor": [
+          136.5,
+          302
+        ],
+        "destination": [
+          34,
+          82
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 556,
+          "top": 329,
+          "width": 286,
+          "height": 307
+        },
+        "anchor": [
+          135.5,
+          298
+        ],
+        "destination": [
+          35,
+          86
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 830,
+          "top": 324,
+          "width": 300,
+          "height": 312
+        },
+        "anchor": [
+          136,
+          303
+        ],
+        "destination": [
+          34,
+          81
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 1114,
+          "top": 328,
+          "width": 286,
+          "height": 308
+        },
+        "anchor": [
+          133,
+          299
+        ],
+        "destination": [
+          38,
+          85
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 1378,
+          "top": 325,
+          "width": 264,
+          "height": 311
+        },
+        "anchor": [
+          131.5,
+          302
+        ],
+        "destination": [
+          39,
+          82
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 7,
+          "top": 641,
+          "width": 281,
+          "height": 309
+        },
+        "anchor": [
+          136,
+          300
+        ],
+        "destination": [
+          34,
+          84
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 281,
+          "top": 642,
+          "width": 282,
+          "height": 308
+        },
+        "anchor": [
+          136,
+          299
+        ],
+        "destination": [
+          34,
+          85
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 556,
+          "top": 641,
+          "width": 286,
+          "height": 309
+        },
+        "anchor": [
+          135.5,
+          300
+        ],
+        "destination": [
+          35,
+          84
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 830,
+          "top": 640,
+          "width": 301,
+          "height": 310
+        },
+        "anchor": [
+          136,
+          301
+        ],
+        "destination": [
+          34,
+          83
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 1114,
+          "top": 643,
+          "width": 285,
+          "height": 306
+        },
+        "anchor": [
+          133.5,
+          297
+        ],
+        "destination": [
+          37,
+          87
+        ],
+        "scale": 1.16
+      },
+      {
+        "crop": {
+          "left": 1379,
+          "top": 640,
+          "width": 263,
+          "height": 310
+        },
+        "anchor": [
+          130.5,
+          301
+        ],
+        "destination": [
+          41,
+          83
+        ],
+        "scale": 1.16
+      }
+    ]
+  }
+}

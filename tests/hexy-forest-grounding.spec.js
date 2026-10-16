@@ -17,11 +17,11 @@ function hit(s,e,damage=999){s.shots.push({x:e.x,y:e.y-40,vx:0,vy:0,r:8,kind:-1,
 
 for(const [kind,factor]of [['ember-torch',.6],['ember-cinder',.6],['ember-mortar',.75]]){
  test(`${kind}: exact reduction and blast damage beyond the projectile and persistent fire`,()=>{
-  expect(emberBlastSize(kind)).toBeCloseTo(648*factor,8);
+  expect(emberBlastSize(kind)).toBeCloseTo(648*factor*.88,8);
   for(const [offset,damaged]of [[120,true],[255,false]]){
    const s=fresh(10800+offset),before=s.hearts;
    const q={kind,ember:true,x:10800,y:-520,vx:0,vy:100,r:12,age:.5,life:1};
-   expect(landEmberFire(s,q)).toBe(true);expect(s.effects.at(-1).size).toBeCloseTo(648*factor);
+   expect(landEmberFire(s,q)).toBe(true);expect(s.effects.at(-1).size).toBeCloseTo(648*factor*.88);
    tick(s,63);expect(s.hearts).toBe(before-(damaged?1:0));if(damaged)expect(s.player.hitType).toBe('fire');
   }
  });

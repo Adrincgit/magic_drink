@@ -1,6 +1,7 @@
-import {chapterRank,nextAdventureChapter,lastChapterRank,CHAPTER_ORDER} from './adventureProgression';
+import {chapterRank,nextAdventureChapter,lastChapterRank,maxChapterId,CHAPTER_ORDER,PREVIOUS_CHAPTER_ORDER,CEMETERY_CHAPTER_ORDER} from './adventureProgression';
 import { useSyncExternalStore } from 'react';
-import {MODS,MOD_SLOTS,validMods,equippedMods,validModLevels,modPrice,modSlots,slotPrice,availableMod,canUpgradeMod} from '../adventure/engine/adventureMods';
+import {MODS,validMods,equippedMods,validModLevels,modPrice,modSlots,availableMod,canUpgradeMod} from '../adventure/engine/adventureMods';
+import {categorySlots,modCategory,categoryUsed,categorySlotPrice,canExpandCategory} from '../adventure/engine/adventureMods';
 
 import {validCollectedStars,collectibleValue} from '../adventure/engine/adventureCollectibles';
 import {applyRequestedLocalReset} from './arcadeLocalReset';
@@ -19,7 +20,7 @@ export const ACCESSORIES = [
   { id: 'crown', cost: 25, es: 'Estrella del show', en: 'Star of the show', icon: '♛' },
   { id: 'comet', cost: 40, es: 'Pasos de cometa', en: 'Comet footsteps', icon: '✦' },
 ];
-const fresh = () => ({ version: 1, campaign:2, economy:2, coins: 0, stars: 0, found: [], owned: ['plain'], equipped: 'plain', modSlots:1,collectedStars:[],modsOwned:[],modsEquipped:[],best: 0, wins: 0, run: null, guideSeen:false, arcadeFound:false, adventureUnlocked:0, adventureCleared:[] });
+const fresh = () => ({ version: 1, campaign:4, economy:2, coins: 0, stars: 0, found: [], owned: ['plain'], equipped: 'plain', modSlots:1,modCategorySlots:categorySlots({}),collectedStars:[],modsOwned:[],modsEquipped:[],best: 0, wins: 0, run: null, guideSeen:false, arcadeFound:false, adventureUnlocked:0, adventureCleared:[] });
 const server = fresh();
 let state = server, loaded = false, queue = Promise.resolve();
 const listeners = new Set();
@@ -27,13 +28,18 @@ const number = (n, max=99999) => Number.isFinite(n) ? Math.max(0, Math.min(max, 
 export function sanitizeSave(raw) {
   if (!raw || raw.version !== 1) return fresh();
   const owned = [...new Set(['plain', ...(Array.isArray(raw.owned) ? raw.owned : []).filter(id => ACCESSORIES.some(a => a.id === id))])];
-  const modsOwned=validMods(raw.modsOwned);
+  let modsOwned=validMods(raw.modsOwned),selected=validMods(raw.modsEquipped),levels={...raw.modLevels};
   const slots=modSlots(raw.modSlots??Math.max(1,Math.min(3,equippedMods(raw.modsEquipped,modsOwned).length)));
+  selected=raw.modCategorySlots?selected.filter(id=>modsOwned.includes(id)):equippedMods(selected,modsOwned,slots);
+  const families=categorySlots(raw.modCategorySlots,slots,selected);
+  // The old two-can charm becomes a permanent pocket and an ammo sleeve.
+  // Preserve its purchase and its function without charging for the migration.
+  if(modsOwned.includes('double-pocket')){families.drinks=Math.max(2,families.drinks);modsOwned=validMods([...modsOwned.filter(id=>id!=='double-pocket'),'reserve-sleeve']);selected=selected.map(id=>id==='double-pocket'?'reserve-sleeve':id);levels['reserve-sleeve']=levels['reserve-sleeve']||1;}
   const found=[...new Set((Array.isArray(raw.found)?raw.found:[]).filter(id=>BUNNIES.some(b=>b.id===id)))];
-  return { version:1, campaign:2, economy:2, coins:number(raw.coins,999), stars:number(number(raw.stars)+(raw.economy===2?0:found.length*50)), found, owned,
-    equipped:owned.includes(raw.equipped)?raw.equipped:'plain',modsOwned,modSlots:slots,collectedStars:validCollectedStars(raw.collectedStars),modsEquipped:equippedMods(raw.modsEquipped,modsOwned,slots),modLevels:validModLevels(raw.modLevels,modsOwned), best:number(raw.best), wins:number(raw.wins), guideSeen:raw.guideSeen===true,arcadeFound:raw.arcadeFound===true,
-    adventureUnlocked:raw.campaign===2?number(raw.adventureUnlocked,lastChapterRank):chapterRank(number(raw.adventureUnlocked,4)),adventureCleared:[...new Set((Array.isArray(raw.adventureCleared)?raw.adventureCleared:[]).filter(n=>Number.isInteger(n)&&CHAPTER_ORDER.includes(n)))],
-    run:raw.run && typeof raw.run.id==='string' && typeof raw.run.practice==='boolean' ? {id:raw.run.id,practice:raw.run.practice,collectibles:raw.run.collectibles===true,chapter:number(raw.run.chapter,5),earned:number(raw.run.earned,1000),banked:number(raw.run.banked,200)} : null };
+  return { version:1, campaign:4, economy:2, coins:number(raw.coins,999), stars:number(number(raw.stars)+(raw.economy===2?0:found.length*50)), found, owned,
+    equipped:owned.includes(raw.equipped)?raw.equipped:'plain',modsOwned,modSlots:slots,modCategorySlots:families,collectedStars:validCollectedStars(raw.collectedStars),modsEquipped:equippedMods(selected,modsOwned,families),modLevels:validModLevels(levels,modsOwned), best:number(raw.best), wins:number(raw.wins), guideSeen:raw.guideSeen===true,arcadeFound:raw.arcadeFound===true,
+    adventureUnlocked:raw.campaign>=4?number(raw.adventureUnlocked,lastChapterRank):raw.campaign===3?chapterRank(CEMETERY_CHAPTER_ORDER[number(raw.adventureUnlocked,CEMETERY_CHAPTER_ORDER.length-1)]):raw.campaign===2?chapterRank(PREVIOUS_CHAPTER_ORDER[number(raw.adventureUnlocked,PREVIOUS_CHAPTER_ORDER.length-1)]):chapterRank(number(raw.adventureUnlocked,4)),adventureCleared:[...new Set((Array.isArray(raw.adventureCleared)?raw.adventureCleared:[]).filter(n=>Number.isInteger(n)&&CHAPTER_ORDER.includes(n)))],
+    run:raw.run && typeof raw.run.id==='string' && typeof raw.run.practice==='boolean' ? {id:raw.run.id,practice:raw.run.practice,collectibles:raw.run.collectibles===true,chapter:number(raw.run.chapter,maxChapterId),earned:number(raw.run.earned,1000),banked:number(raw.run.banked,200)} : null };
 }
 function read() { try { const value=localStorage.getItem(SAVE_KEY); return value ? sanitizeSave(JSON.parse(value)) : fresh(); } catch { return state; } }
 function publish(next) { state=next; try { localStorage.setItem(SAVE_KEY,JSON.stringify(next)); } catch { /* Still playable for this visit. */ } listeners.forEach(fn=>fn()); }
@@ -44,7 +50,7 @@ export function useArcadeSave() { return useSyncExternalStore(subscribe,snapshot
 // Explicit local testing action, never an automatic migration of player saves.
 export function resetAdventureLoadout(){return mutate(s=>{
  try{localStorage.setItem(SAVE_KEY+':before-loadout-reset',JSON.stringify(s));}catch{return{value:false};}
- return{next:{...s,coins:0,stars:0,modsOwned:[],modsEquipped:[],modLevels:{},modSlots:1,collectedStars:[],run:null},value:true};
+ return{next:{...s,coins:0,stars:0,modsOwned:[],modsEquipped:[],modLevels:{},modSlots:1,modCategorySlots:categorySlots({}),collectedStars:[],run:null},value:true};
 });}
 async function mutate(fn) {
   init();
@@ -58,7 +64,7 @@ export function collectBunny(id) { return mutate(s=>{
 }); }
 export function beginRun(practice=false,chapter=0,collectibles=false) { return mutate(s=>{
   if(s.run)return {value:null};
-  const run={id:crypto.randomUUID(),practice,collectibles,chapter:number(chapter,5),earned:0,banked:0};return {next:{...s,run},value:run};
+  const run={id:crypto.randomUUID(),practice,collectibles,chapter:number(chapter,maxChapterId),earned:0,banked:0};return {next:{...s,run},value:run};
 }); }
 // Chapter receipts settle earnings; entering or continuing never costs coins.
 export function advanceAdventure(id,{level,stars}) { return mutate(s=>{
@@ -104,7 +110,7 @@ export function upgradeAdventureMod(id,expectedLevel){return mutate(s=>{
 export function toggleAdventureMod(id){return mutate(s=>{
  if(!s.modsOwned.includes(id))return{value:false};let mods=[...s.modsEquipped];
  if(mods.includes(id))mods=mods.filter(m=>m!==id);
- else{if(id.startsWith('starter-'))mods=mods.filter(m=>!m.startsWith('starter-'));if(mods.length>=s.modSlots)return{value:false};mods.push(id);}
+ else{const mod=MODS.find(m=>m.id===id),category=modCategory(mod),limit=s.modCategorySlots[category];if(categoryUsed(mods,category)>=limit||mod.drink!==undefined&&!mod.timed&&mods.filter(m=>m.startsWith('starter-')&&m!=='starter-12').length>=2)return{value:false};mods.push(id);}
  return{next:{...s,modsEquipped:mods},value:true};
 });}
 
@@ -117,7 +123,8 @@ export function claimAdventureStars(id,level,ids){return mutate(s=>{
  if(!delta)return{value:0};
  return{next:{...s,collectedStars:[...s.collectedStars,...fresh],stars:Math.min(99999,s.stars+delta),run:{...s.run,banked:s.run.banked+delta,earned:s.run.earned+delta}},value:delta};
 });}
-export function buyAdventureSlot(expected){return mutate(s=>{
- const cost=slotPrice(s.modSlots);if(s.modSlots!==expected||cost===null||s.stars<cost)return{value:false};
- return{next:{...s,stars:s.stars-cost,modSlots:s.modSlots+1},value:true};
+export function buyAdventureCategorySlot(category,expected){return mutate(s=>{
+ const count=s.modCategorySlots[category],cost=categorySlotPrice(category,count);
+ if(count!==expected||cost===null||!canExpandCategory(s,category)||s.stars<cost)return{value:false};
+ return{next:{...s,stars:s.stars-cost,modCategorySlots:{...s.modCategorySlots,[category]:count+1}},value:true};
 });}

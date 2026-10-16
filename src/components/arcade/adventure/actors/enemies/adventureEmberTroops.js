@@ -1,4 +1,5 @@
 import {enemyMuzzle} from './adventureEnemyGeometry';
+import {enemyAimTarget} from '../../engine/adventureTacticalMods';
 import {groundY} from '../../world/adventureTerrain';
 import {emberFloor} from '../../engine/adventureEmberFire';
 export const TORCH_CLOWN=11;
@@ -6,7 +7,7 @@ export const FIRE_WAGON=12;
 
 export function updateEmberTroop(s,e,dt,shoot){
  if(e.trap>0)return;
- const machine=e.type===FIRE_WAGON,near=Math.abs(s.player.x-e.x)<(machine?620:450)&&Math.abs(s.player.y-e.y)<220;
+ const aim=enemyAimTarget(s,e),machine=e.type===FIRE_WAGON,near=Math.abs(aim.x-e.x)<(machine?620:450)&&Math.abs(aim.y-e.y)<220;
  e.y=e.baseY;e.fireState??='patrol';e.fireAge=(e.fireAge||0)+dt;
  const enter=state=>{e.fireState=state;e.fireAge=0;};
  if(e.fireState==='patrol'){
@@ -15,7 +16,7 @@ export function updateEmberTroop(s,e,dt,shoot){
    if(Math.abs(next-e.home)>120||s.level.emberPits?.some(p=>next>p.x-40&&next<p.x+p.w+40))e.dir*=-1;else e.x=next;
    e.y=e.baseY=groundY(s.platforms,e.x,e.baseY);
   }
-  if(near&&e.timer<=0){e.dir=Math.sign(s.player.x-e.x)||e.dir;e.targetX=s.player.x;e.fired=0;enter('windup');}
+  if(near&&e.timer<=0){e.dir=Math.sign(aim.x-e.x)||e.dir;e.targetX=aim.x;e.fired=0;enter('windup');}
  }else if(e.fireState==='windup'&&e.fireAge>=(machine?1.3:.95))enter('attack');
  else if(e.fireState==='attack'){
   const releases=machine?[.12,.78]:[.2];

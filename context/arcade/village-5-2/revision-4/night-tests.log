@@ -1,0 +1,63 @@
+
+Running 10 tests using 1 worker
+
+
+
+node.exe : [1A[2K(node:16648) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+En línea: 1 Carácter: 1
++ & "C:\nvm4w\nodejs/node.exe" "C:\nvm4w\nodejs/node_modules/npm/bin/np ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([1A[2K(node:1... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K(node:16648) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[1/10] [chromium] › tests\hexy-village-night.spec.js:10:1 › a real candy ray removes exactly one heart and locks actions until fresh input breaks it
+[1A[2K[2/10] [chromium] › tests\hexy-village-night.spec.js:16:1 › captured Hexy remains vulnerable after the ordinary hit grace
+[1A[2K[3/10] [chromium] › tests\hexy-village-night.spec.js:20:1 › the last heart leaves Hexy candy through game over; retry clears the curse
+[1A[2K[4/10] [chromium] › tests\hexy-village-night.spec.js:25:1 › a shield protects against capture and a swept beam cannot tunnel through Hexy
+[1A[2K[5/10] [chromium] › tests\hexy-village-night.spec.js:29:1 › only the responsible witch absorbs a victim, heals once and releases even swallowed people
+[1A[2K[6/10] [chromium] › tests\hexy-village-night.spec.js:36:1 › damage interrupts absorption without losing the hostage
+[1A[2K[7/10] [chromium] › tests\hexy-village-night.spec.js:41:1 › a real lethal hit frees that witch victims through the shared combat path
+[1A[2K  1) [chromium] › tests\hexy-village-night.spec.js:41:1 › a real lethal hit frees that witch victims through the shared combat path 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoContain[2m([22m[32mexpected[39m[2m) // indexOf[22m
+
+    Expected value: [32m"warning"[39m
+    Received array: [31m["rescue", "flee"][39m
+
+      41 | test('a real lethal hit frees that witch victims through the shared combat path',()=>{
+      42 |  const s=createAdventure(7),e=Object.assign(makeEnemy(230,480,26,3),{hp:.5,active:false,timer:99}),n=s.villagers[0];s.enemies=[e];s.villagers=[n];Object.assign(n,{x:400,state:'candy',curseOwner:witchId(e)});s.player.hurt=99;
+    > 43 |  tick(s,1,{attack:true});expect(e.defeated).toBe(true);expect(['rescue','flee']).toContain(n.state);
+         |                                                                                  ^
+      44 | });
+      45 | test('flying witches cast down and broken brooms fall onto actual terrain',()=>{
+      46 |  const s=empty(),e=Object.assign(makeEnemy(500,480,26,2),{flying:true,flightHeight:170,active:true,timer:0});s.enemies=[e];stepVillageEnemy(s,e,.01,enemyShot);stepVillageEnemy(s,e,1.11,enemyShot);
+        at G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\tests\hexy-village-night.spec.js:43:82
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    tests\results\hexy-village-night-a-real--05eb7-ough-the-shared-combat-path-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace tests\results\hexy-village-night-a-real--05eb7-ough-the-shared-combat-path-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:21236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:21236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[8/10] [chromium] › tests\hexy-village-night.spec.js:45:1 › flying witches cast down and broken brooms fall onto actual terrain
+[1A[2K[9/10] [chromium] › tests\hexy-village-night.spec.js:51:1 › crowd escalates toward town, a neighbor helps a fallen person, and carriages flee
+[1A[2K[10/10] [chromium] › tests\hexy-village-night.spec.js:57:1 › night arrives just beyond half way and cannot flicker back when reversing
+[1A[2K  1 failed
+    [chromium] › tests\hexy-village-night.spec.js:41:1 › a real lethal hit frees that witch victims through the shared combat path 
+  9 passed (3.7s)

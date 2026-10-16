@@ -1,13 +1,14 @@
 import {enemyMuzzle} from './adventureEnemyGeometry';
+import {enemyAimTarget} from '../../engine/adventureTacticalMods';
 export function updateFireJuggler(s,e,dt,shoot){
  if(e.trap>0)return;
- const near=Math.abs(s.player.x-e.x)<460&&Math.abs(s.player.y-e.y)<180;
+ const aim=enemyAimTarget(s,e),near=Math.abs(aim.x-e.x)<460&&Math.abs(aim.y-e.y)<180;
  e.y=e.baseY;e.fireState??='patrol';e.fireAge=(e.fireAge||0)+dt;
  const enter=state=>{e.fireState=state;e.fireAge=0;};
  if(e.fireState==='patrol'){
   const next=e.x+e.dir*42*dt;
   if(Math.abs(next-e.home)>125||s.level.emberPits?.some(q=>next>q.x-35&&next<q.x+q.w+35))e.dir*=-1;else e.x=next;
-  if(near&&e.timer<=0){e.dir=Math.sign(s.player.x-e.x)||e.dir;enter('windup');e.timer=1.15;s.events.push('emberInhale');}
+  if(near&&e.timer<=0){e.dir=Math.sign(aim.x-e.x)||e.dir;enter('windup');e.timer=1.15;s.events.push('emberInhale');}
  }else if(e.fireState==='windup'&&e.fireAge>=1.15){
   enter('attack');
   const mouth=enemyMuzzle(e);

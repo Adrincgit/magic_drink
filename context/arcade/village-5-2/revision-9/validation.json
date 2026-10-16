@@ -1,0 +1,190 @@
+{
+  "date": "2026-10-15",
+  "assets": [
+    {
+      "name": "hiding",
+      "path": "public/arcade/sprites/enemies/village-hiding-v9.webp",
+      "bytes": 438338,
+      "frames": 12,
+      "width": 1024,
+      "height": 768,
+      "alpha": true
+    },
+    {
+      "name": "orbit-pumpkin",
+      "path": "public/arcade/sprites/enemies/village-orbit-pumpkin-v9.webp",
+      "bytes": 984172,
+      "frames": 16,
+      "width": 1024,
+      "height": 1024,
+      "alpha": true
+    }
+  ],
+  "totalFrames": 28,
+  "totalAssetBytes": 1422510,
+  "uniquePassingTests": 105,
+  "checks": [
+    {
+      "path": "tests/artifacts/arcade/village-v9-validation.log",
+      "result": "103 passed (32.4s)"
+    },
+    {
+      "path": "tests/artifacts/arcade/village-v9-browser-final.log",
+      "result": "2 passed (1.2m)"
+    },
+    {
+      "path": "tests/artifacts/arcade/village-v9-motion-polish.log",
+      "result": "Recorded and decoded successfully"
+    },
+    {
+      "path": "tests/artifacts/arcade/village-v9-motion-final.log",
+      "result": "Recorded and decoded successfully"
+    },
+    {
+      "path": "tests/artifacts/arcade/village-v9-build.log",
+      "result": "Complete; 0 errors; 0 warnings; 29 hints"
+    }
+  ],
+  "scenes": [
+    {
+      "name": "orbit-combat",
+      "video": "tests/artifacts/arcade/village-depth-v9/orbit-combat.webm",
+      "montage": "tests/artifacts/arcade/village-depth-v9/orbit-combat-motion.png",
+      "simulationTime": 7.966666666666852,
+      "maxOrbs": 3,
+      "fallenOrbs": 0,
+      "witchShots": true,
+      "orbOwners": [
+        "orbit:witch:6:11640:0",
+        "orbit:witch:6:11640:1",
+        "orbit:witch:6:11640:2"
+      ],
+      "states": [
+        "trapped",
+        "turning",
+        "candy",
+        "absorbing",
+        "absorbed",
+        "carried"
+      ],
+      "rescued": false,
+      "targets": [
+        "villager",
+        "player"
+      ],
+      "renderP95": 11.5
+    },
+    {
+      "name": "orbit-break",
+      "video": "tests/artifacts/arcade/village-depth-v9/orbit-break.webm",
+      "montage": "tests/artifacts/arcade/village-depth-v9/orbit-break-motion.png",
+      "simulationTime": 8.025000000000185,
+      "maxOrbs": 3,
+      "fallenOrbs": 3,
+      "witchShots": true,
+      "orbOwners": [
+        "orbit:witch:6:11640:0",
+        "orbit:witch:6:11640:1",
+        "orbit:witch:6:11640:2"
+      ],
+      "states": [
+        "trapped",
+        "turning",
+        "candy",
+        "rescue",
+        "flee"
+      ],
+      "rescued": false,
+      "targets": [
+        "villager",
+        "player"
+      ],
+      "renderP95": 5.399999998509884
+    },
+    {
+      "name": "hide-blacksmith",
+      "video": "tests/artifacts/arcade/village-depth-v9/hide-blacksmith.webm",
+      "montage": "tests/artifacts/arcade/village-depth-v9/hide-blacksmith-motion.png",
+      "simulationTime": 5.200000000000048,
+      "maxOrbs": 0,
+      "fallenOrbs": 0,
+      "witchShots": false,
+      "orbOwners": [],
+      "states": [
+        "hiding",
+        "recover",
+        "flee"
+      ],
+      "rescued": true,
+      "targets": [],
+      "renderP95": 3.600000001490116
+    },
+    {
+      "name": "hide-woman",
+      "video": "tests/artifacts/arcade/village-depth-v9/hide-woman.webm",
+      "montage": "tests/artifacts/arcade/village-depth-v9/hide-woman-motion.png",
+      "simulationTime": 5.200000000000048,
+      "maxOrbs": 0,
+      "fallenOrbs": 0,
+      "witchShots": false,
+      "orbOwners": [],
+      "states": [
+        "hiding",
+        "recover",
+        "flee"
+      ],
+      "rescued": true,
+      "targets": [],
+      "renderP95": 3.100000001490116
+    },
+    {
+      "name": "hide-risk",
+      "video": "tests/artifacts/arcade/village-depth-v9/hide-risk.webm",
+      "montage": "tests/artifacts/arcade/village-depth-v9/hide-risk-motion.png",
+      "simulationTime": 5.200000000000048,
+      "maxOrbs": 0,
+      "fallenOrbs": 0,
+      "witchShots": false,
+      "orbOwners": [],
+      "states": [
+        "hiding",
+        "turning",
+        "candy"
+      ],
+      "rescued": false,
+      "targets": [
+        "villager",
+        "player"
+      ],
+      "renderP95": 3
+    },
+    {
+      "name": "rapid-targets",
+      "video": "tests/artifacts/arcade/village-depth-v9/rapid-targets.webm",
+      "montage": "tests/artifacts/arcade/village-depth-v9/rapid-targets-motion.png",
+      "simulationTime": 8.933333333333467,
+      "maxOrbs": 0,
+      "fallenOrbs": 0,
+      "witchShots": false,
+      "orbOwners": [],
+      "states": [
+        "trapped",
+        "turning",
+        "candy"
+      ],
+      "rescued": false,
+      "targets": [
+        "villager",
+        "player"
+      ],
+      "renderP95": 7.399999998509884
+    }
+  ],
+  "liveBrowserScreenshots": [
+    "tests/artifacts/arcade/village-depth-v9/real-orbit-1440.png",
+    "tests/artifacts/arcade/village-depth-v9/real-orbit-1920.png",
+    "tests/artifacts/arcade/village-depth-v9/real-hiding.png",
+    "tests/artifacts/arcade/village-depth-v9/real-rescue.png"
+  ],
+  "review": "All six recordings decoded and inspected as montages and full frames. Lowered shelter cover so faces remain visible; repeated affected scenes and real keyboard rescue. Orbit destruction uses controlled physical shot fixtures, not player input."
+}

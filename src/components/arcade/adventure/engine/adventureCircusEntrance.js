@@ -3,7 +3,7 @@ import {stepWorldEffects} from './adventureEffects';
 
 const clamp=n=>Math.max(0,Math.min(1,n));
 // The outside occupies negative world coordinates. The combat floor stays in
-// its own coordinates. Defeat returns outside to Missi; entry sets no checkpoint.
+// its own coordinates. The completed camp becomes a checkpoint at the wings.
 export const outsideCircus=s=>!!s.level.circusEntrance&&s.player.x<0;
 export function circusEntryFade(s){
  const q=s.circusEntry;if(!q)return 0;
@@ -15,14 +15,14 @@ export function circusEntryFigure(s){
 }
 export function circusEntryPose(s){
  const q=s.circusEntry;
- return q&&!q.inside&&q.age>=.45?{sheet:'shop-enter',frame:Math.min(7,Math.floor((q.age-.45)/.12))}:null;
+ return !s.level.circusCamp&&q&&!q.inside&&q.age>=.45?{sheet:'shop-enter',frame:Math.min(7,Math.floor((q.age-.45)/.12))}:null;
 }
 export function stepCircusEntrance(s,dt){
  const spec=s.level.circusEntrance,p=s.player;
  if(!spec)return false;
  if(!s.circusEntry){
   if(!outsideCircus(s)||p.x<spec.trigger||p.ground===null)return false;
-  s.circusEntry={age:0,fromX:p.x,inside:false};s.shots=[];s.hostile=[];
+  s.circusEntry={age:0,fromX:p.x,inside:false};s.shots=[];s.hostile=[];s.aquaJet=null;s.voltBeam=null;s.placement=null;p.aquaChannel=false;s.drinkFields=[];s.drinkHistory=[];s.confettiDecoy=null;s.coaster=null;p.coasterGround=false;p.parryWindow=0;
   Object.assign(p,{dir:1,vx:0,vy:0,dash:0,cast:0,specialCast:0,superCast:0,charge:0,spin:0,crouch:false,guarding:false,firing:false,gliding:false,pendingSpecial:null});
   s.events.push('doorOpen');s.noticeTime=0;
  }
@@ -33,6 +33,7 @@ export function stepCircusEntrance(s,dt){
   if(q.age>=1.35){
    q.inside=true;p.x=spec.insideX;p.vx=0;p.ground=s.platforms.findIndex(t=>t.x<=p.x&&t.x+t.w>=p.x);
    s.camera={x:Math.max(0,p.x-300),y:p.y-440,backdropY:40,zoom:1};
+   if(s.level.circusCamp){s.checkpoint=true;s.checkpointAt=[spec.insideX,spec.floor];}
    s.events.push('doorClose');
   }
  }

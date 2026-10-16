@@ -1,0 +1,35 @@
+[
+  {
+    "name": "pillars",
+    "referenced_image_paths": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/maps/village/gate-v5.webp"
+    ],
+    "transparent_background": true,
+    "prompt": "Edit target: the attached isolated village gate game artwork. Preserve the same two stone pillars, stone cap roofs, autumn ivy, warm lamps, pumpkins and blank wooden hanging plaque, painted gothic storybook videogame style. REMOVE ALL iron gate leaves, rails, fence panels, spikes and hinges that extend out from either pillar. Output ONLY two independent freestanding stone entrance pillars on a perfectly transparent background, separated by a wide transparent gap, no connecting arch, no fence whatsoever, no painted scenery or ground plane. Near pillar on left is tall and substantial; far pillar on right about 55 percent as tall, as in the reference. Keep each complete from cap to pumpkins/base and leave clear margins, no cropping. Wide 3:2 image. Exactly two columns so we can crop each pillar independently. No words, no text; keep the plaque blank. The surrounding empty area and gap must have alpha zero. Strong side view with oblique masonry faces, identical materials and lighting to reference.",
+    "mode": "built-in ImageGen",
+    "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-1752dd8e-2ec3-4b9b-b7bb-d4dc800d5324.png"
+  },
+  {
+    "name": "clouds",
+    "transparent_background": true,
+    "prompt": "Use case stylized-concept. Game bitmap overlay: a single extra wide 3:1 strip of hand painted gothic night clouds, on a truly transparent background. Four uneven drifting wisps of midnight indigo, muted violet and slate blue clouds with very subtle pale moonlit upper rims. Match a detailed gothic storybook 2D side scrolling Halloween game. Clouds occupy mostly the middle third of the image, separated by open transparent gaps; generous transparent edges. No stars, moon, sky color, horizon, trees, buildings, ground, labels or border. No white cartoon puffs. Intricate brushed forms, low contrast so they can move over an existing dark blue starry sky. Preserve transparent alpha around all wisps.",
+    "mode": "built-in ImageGen",
+    "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-3ee94372-93ce-47ab-81a4-b9cd79f86779.png"
+  },
+  {
+    "name": "pumpkin",
+    "referenced_image_paths": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/enemies/village-pumpkin-v1.webp"
+    ],
+    "transparent_background": true,
+    "prompt": "Edit target: the attached 4 column by 6 row registered game sprite sheet of an orange and violet zombie jester with a carved pumpkin worn AS ITS HEAD. Preserve all 24 poses, character shape, costume, white gloves, curled boots, hat, facing LEFT, cell layout, exact four columns and six rows. Change the supernatural head light: carved eyes and mouth emit CYAN BLUE GHOST FIRE with a small warm yellow inner core, cyan rim light on the orange pumpkin shell. Row 3 prepares to exhale cool blue haunted smoke; row 4 exhales short curling CYAN BLUE magical ghost fire with a tiny yellow heart instead of orange/yellow sparks. Walking rows 1-2 and recovery row 5 have subtle blue light. Defeat row 6 preserves the fall poses and separate pumpkin head, with fading cyan light. Do not change costume to blue, only the pumpkin glow and magical breath change. Full hand drawn animated cartoon sprites with strong dark outlines, exact same game style and consistent body size. Every cell isolated on transparent alpha, clear generous gutters and no neighboring sprite fragments. No sky, colored backdrop, labels, border, blood or gore. Output 1024 by 1536 if possible.",
+    "mode": "built-in ImageGen",
+    "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-1c1a2ddd-335d-41bc-bd3d-e90648f6cedc.png"
+  },
+  {
+    "name": "hexy-pumpkin",
+    "prompt": "Use case stylized-concept, transparent videogame sprite atlas. Reference image is style and character identity reference: Hexy pink-haired witch has been trapped inside a purple striped wrapped sweet with her navy star witch hat. Create EIGHT full animation cels arranged exactly 4 columns by 2 rows, same cel size, generous transparent gutters. Sequence is a non-gory magic GAME OVER transformation from that purple wrapped candy to a floating carved orange Halloween pumpkin which retains Hexy's navy witch hat with its gold star and two small pink ribbon ties. Row1 four cels: candy begins pulsing with blue and violet magical spirals, wrapper opens into magic ribbons, orange pumpkin silhouette forms from the candy, fully formed pumpkin emerges. Row2 four cels: final floating pumpkin sways left then right, carved eyes glow cyan with yellow inner cores, small confused/sad stylized eyes rather than evil grin. Whole object in every cel, centered with a stable size, no human limbs or loose heads, no gore. Colorful 2D cartoon anime game style, strong dark outlines and rich shading matching reference. No background, sky, frame, text, labels or ground shadow. Transparent alpha around every sprite.",
+    "mode": "built-in ImageGen",
+    "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-266cb71d-91f6-41c6-9ecf-49149db3d294.png"
+  }
+]

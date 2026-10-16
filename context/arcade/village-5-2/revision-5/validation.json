@@ -1,0 +1,146 @@
+{
+  "date": "2026-10-15",
+  "baseURL": "http://127.0.0.1:4321",
+  "regression": {
+    "passed": 52,
+    "log": "regression.log"
+  },
+  "browser": {
+    "routePassed": true,
+    "animationGroundPassed": true,
+    "animationAirPassed": true,
+    "screenshots": 24,
+    "viewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        1920,
+        1080
+      ]
+    ],
+    "reviewed": "Decoded contact sheets and full frames inspected; no browser exceptions or missing arcade assets in final animation tests."
+  },
+  "build": {
+    "completed": true,
+    "errors": 0,
+    "warnings": 0,
+    "hints": 30,
+    "log": "build.log",
+    "notes": "Astro diagnostics. Vite additionally reports existing chunk-size and Browserslist notices."
+  },
+  "motion": {
+    "country": {
+      "simulationTime": 7.6,
+      "defeats": []
+    },
+    "entrance": {
+      "simulationTime": 7.6,
+      "defeats": []
+    },
+    "cast-ground": {
+      "states": [],
+      "simulationTime": 5.200000000000048,
+      "defeats": [],
+      "maxPumpkins": 0,
+      "renderP95": 6.800000000745058
+    },
+    "cast-air": {
+      "states": [],
+      "simulationTime": 4.933333333333368,
+      "defeats": [],
+      "maxPumpkins": 0,
+      "renderP95": 3.199999999254942
+    },
+    "absorb-ground": {
+      "states": [
+        "candy",
+        "absorbing",
+        "absorbed",
+        "carried"
+      ],
+      "simulationTime": 5.208333333333382,
+      "defeats": [],
+      "maxPumpkins": 1,
+      "renderP95": 7.100000001490116
+    },
+    "absorb-air": {
+      "states": [
+        "candy",
+        "absorbing",
+        "absorbed",
+        "carried"
+      ],
+      "simulationTime": 5.200000000000048,
+      "defeats": [],
+      "maxPumpkins": 1,
+      "renderP95": 3.199999999254942
+    },
+    "pumpkin-fall": {
+      "states": [
+        "carried",
+        "rescue",
+        "flee"
+      ],
+      "simulationTime": 5.000000000000038,
+      "defeats": [
+        {
+          "time": 0.9166666666666659
+        }
+      ],
+      "maxPumpkins": 1,
+      "renderP95": 3.099999997764826
+    },
+    "pumpkin-fire": {
+      "states": [
+        "carried",
+        "trapped",
+        "turning",
+        "candy"
+      ],
+      "simulationTime": 5.200000000000048,
+      "defeats": [],
+      "maxPumpkins": 1,
+      "renderP95": 5.199999999254942
+    },
+    "rubble": {
+      "states": [
+        "trapped",
+        "recover",
+        "flee"
+      ],
+      "simulationTime": 5.200000000000048,
+      "defeats": [],
+      "maxPumpkins": 0,
+      "renderP95": 6.399999998509884
+    },
+    "defenders": {
+      "states": [
+        "defend",
+        "flee"
+      ],
+      "simulationTime": 5.208333333333382,
+      "defeats": [],
+      "maxPumpkins": 0,
+      "renderP95": 6.300000000745058
+    }
+  },
+  "sha256": {
+    "src/components/arcade/adventure/engine/adventureVillage.js": "8c60c6e22c8c58930a26eb1ab0c7bc1c558b6f37f97f1830ab0ea335e5fd17aa",
+    "src/components/arcade/adventure/engine/villageRescue.js": "c9629e55c1b8afe8cc73e151819f9587259e61355b376e18eb9cdabd6b7e6742",
+    "src/components/arcade/adventure/engine/villagePumpkins.js": "c782f8dad97911390c1e94912a6b2827a59df7f6cca863cd1c575f145d150f7c",
+    "src/components/arcade/adventure/engine/villageResistance.js": "8e61de67ebb1d887d0e79fd6c27effe2ebc5ffc8a6047d1da804650eca3556c2",
+    "src/components/arcade/adventure/render/villageCanvas.js": "e173d82372520a541e3a9374f53b07f0d169a6f744d172ed7231a6129950042e",
+    "src/components/arcade/adventure/render/villageGateCanvas.js": "4ea09dd2fa4c0bdd7e7182fc875277f9f5a7e2086c9a4f2eb0a37a0bd1bb6613",
+    "public/arcade/sprites/enemies/village-witch-absorb-v5.webp": "5196086952394f7244b7c098e57c76384022a3a8eb06d4975c899498bf795cfc",
+    "public/arcade/sprites/enemies/village-witch-cast-v5.webp": "3be5c01263a35574f3dcb365c619f9dca5383575a68c8027f4b9811187ec87ac",
+    "public/arcade/sprites/enemies/village-soul-pumpkin-v5.webp": "9088335c29643c0acacf589767531bf4a78ac811423f6ea6df8b2186d87a6086",
+    "public/arcade/maps/village/berm-v5.webp": "6ddabde290dcc1d38662c282e013edaac1fc15df8109bada8a68be446842f019",
+    "public/arcade/maps/village/gate-v5.webp": "a4e138b6b3431359757b0271d04619b4ed5bdfc640b6c73a9f4cdf650eb088a0",
+    "public/arcade/maps/village/country-road-v5.webp": "ce8d2e52a1a5b4085f3bd2c2fc0708a8d29e06bb40f1603fffcdf3839416b0df",
+    "public/arcade/sprites/enemies/village-resistance-v5.webp": "4637d70b369929a409a160d89652d7f60b0f1c6b195c12b8edfc316b2cd09e07",
+    "public/arcade/sprites/enemies/village-soul-effects-v5.webp": "cf53342b3584ba5c8419d1293a7a64b2f4d1fb1e12bad915e1be989e99e15b58",
+    "public/arcade/maps/village/road-entry-v5.webp": "128e302cb4ffb68d399b2584b80891e784d4d148a6b7cd6d9a49b18a085602ab"
+  }
+}

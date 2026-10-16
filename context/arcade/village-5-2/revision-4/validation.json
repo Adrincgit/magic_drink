@@ -1,0 +1,139 @@
+{
+  "modelAndExistingRegression": 38,
+  "realChapterSelector": 1,
+  "elevenSceneBrowserReview": 1,
+  "totalUniqueTests": 40,
+  "build": {
+    "errors": 0,
+    "complete": true,
+    "log": "build-final.log"
+  },
+  "scenes": {
+    "entrance": {
+      "states": [],
+      "simulationTime": 4.199999999999998,
+      "defeats": [],
+      "renderP95": 5.5,
+      "hearts": 5,
+      "done": false,
+      "candy": false
+    },
+    "street": {
+      "states": [],
+      "simulationTime": 4.199999999999998,
+      "defeats": [],
+      "renderP95": 4.5,
+      "hearts": 5,
+      "done": false,
+      "candy": false
+    },
+    "crowd": {
+      "states": [
+        "flee",
+        "warning"
+      ],
+      "simulationTime": 4.174999999999997,
+      "defeats": [],
+      "renderP95": 4.599999999627471,
+      "hearts": 5,
+      "done": false,
+      "candy": false
+    },
+    "help": {
+      "states": [
+        "flee",
+        "trip",
+        "fallen",
+        "recover",
+        "help"
+      ],
+      "simulationTime": 4.199999999999998,
+      "defeats": [],
+      "renderP95": 4.099999999627471,
+      "hearts": 5,
+      "done": false,
+      "candy": false
+    },
+    "carriage": {
+      "states": [],
+      "simulationTime": 4.199999999999998,
+      "defeats": [],
+      "renderP95": 3.799999998882413,
+      "hearts": 5,
+      "done": false,
+      "candy": false
+    },
+    "flying": {
+      "states": [],
+      "simulationTime": 4.199999999999998,
+      "defeats": [],
+      "renderP95": 3,
+      "hearts": 5,
+      "done": false,
+      "candy": false
+    },
+    "fall": {
+      "states": [],
+      "simulationTime": 4.199999999999998,
+      "defeats": [],
+      "renderP95": 9.300000000745058,
+      "hearts": 5,
+      "done": false,
+      "candy": false
+    },
+    "absorb": {
+      "states": [
+        "candy",
+        "absorbing",
+        "absorbed"
+      ],
+      "simulationTime": 4.133333333333328,
+      "defeats": [],
+      "renderP95": 9.300000000745058,
+      "hearts": 5,
+      "done": false,
+      "candy": false
+    },
+    "rescue": {
+      "states": [
+        "candy",
+        "rescue",
+        "flee"
+      ],
+      "simulationTime": 4.116666666666661,
+      "defeats": [],
+      "renderP95": 6.199999999254942,
+      "hearts": 5,
+      "done": false,
+      "candy": false
+    },
+    "capture": {
+      "states": [
+        "hexy-candy"
+      ],
+      "simulationTime": 4.199999999999998,
+      "defeats": [],
+      "renderP95": 3.199999999254942,
+      "hearts": 4,
+      "done": false,
+      "candy": false
+    },
+    "last-heart": {
+      "states": [
+        "hexy-candy"
+      ],
+      "simulationTime": 4.174999999999997,
+      "defeats": [],
+      "renderP95": 3.400000000372529,
+      "hearts": 0,
+      "done": true,
+      "candy": true
+    }
+  },
+  "lastWandReview": {
+    "modelLog": "wand-final.log",
+    "renderLog": "wand-trail-final.log",
+    "decoded": "flying.webm",
+    "note": "Casting pose and painted trail begin at the wand tip."
+  }
+}

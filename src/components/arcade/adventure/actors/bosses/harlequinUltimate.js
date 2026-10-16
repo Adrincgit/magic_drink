@@ -2,7 +2,9 @@ import {fireImpact,leaveUltimateFire} from './harlequinFire';
 import {impactSmoke} from '../../engine/cinematicImpact';
 export const HARLEQUIN_ULTIMATE={leap:.85,charge:2.8,travel:.28,fire:.95,recover:2.4,cooldown:28,slow:.34};
 export function ultimateHand(b,charging=b.ultimate?.state==='charge'){
- return{x:b.x+b.dir*(charging?47:80)*HARLEQUIN_SCALE,y:b.y-(charging?116:161)*HARLEQUIN_SCALE};
+ // Cupped hands in the six charging drawings: about (155,245) in the
+ // registered 512px actor cell. Release keeps the extended-arm socket.
+ return{x:b.x+b.dir*(charging?63:80)*HARLEQUIN_SCALE,y:b.y-(charging?153:161)*HARLEQUIN_SCALE};
 }
 export function beginHarlequinUltimate(s){
  const b=s.boss;if(s.index!==3||b.stage!==3||b.hp<=0||s.superCinematic||s.powerClash)return false;

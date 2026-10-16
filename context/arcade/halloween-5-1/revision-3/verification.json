@@ -1,0 +1,177 @@
+{
+  "date": "2026-10-14T20:05:19.005Z",
+  "scope": "Latest user list, checkpoints 6-10 only",
+  "generation": {
+    "mode": "built-in imagegen",
+    "prompts": "context/arcade/halloween-5-1/revision-3/prompts.json",
+    "cleanupPrompt": "context/arcade/halloween-5-1/revision-3/cleanup-prompt.json",
+    "forearmPrompt": "context/arcade/halloween-5-1/revision-3/forearm-prompt.json",
+    "sources": "context/arcade/halloween-5-1/revision-3/sources/",
+    "registration": "context/arcade/halloween-5-1/revision-3/registration.json",
+    "packer": "scripts/arcade/pack-nightmare-revision-3.mjs"
+  },
+  "changes": {
+    "skeleton": "Round cartoon skull and simple ivory bones; reaches chest, pulls a temporary rib prop and throws from the wrist. Rib cage and limbs remain whole at all health levels; no bone collection.",
+    "missingLimb": "Missing arm, armLost, legLost or crawler prevents lunge. Injury during windup becomes a bite; injury during flight descends continuously then recovers.",
+    "defeat": "Four 4-frame sequences: side, forward with extended arms, one-arm and legless crawler. 2.1 seconds of corpse lifetime, final fade after resting pose. Smoke delayed until 1.15 seconds.",
+    "souls": "Stable per-spawn 35-percent eligibility; once per eligible corpse; suppressed after miniboss defeat.",
+    "ghost": "Clown silhouette with hat, curls, ruff and buttons, blue-white translucent body and spectral tail. Wandering and zombie souls use new art. Boss summons retain previous sheet ghost.",
+    "preserved": {
+      "zombieHp": 23,
+      "regularClownHp": 4.6,
+      "ghostHp": 4,
+      "handHp": 2,
+      "basicWandDamage": 2
+    }
+  },
+  "validation": {
+    "modelRegressionTests": 44,
+    "recordingTest": 1,
+    "chapterMusicAndRealUiTests": 3,
+    "totalPassingTests": 48,
+    "build": "npm run build: exit 0, Astro 0 errors, [build] Complete!",
+    "buildLog": "context/arcade/halloween-5-1/revision-3/build.log",
+    "visualReview": "Decoded and inspected all five production recordings, their contact sheets and selected full frames. Close review of skeleton rib reach, pull and overhead throw. Confirmed separate forward/side falls, no limb regrowth, spectral tail and transparency, and old ghosts at the boss. Direct 12-second full-engine simulation also confirmed repeated skeleton attacks after stopping within throwing distance.",
+    "recordingBoundary": "Actor review scenes use player invulnerability to inspect animation. Real-menu UI smoke and existing regression tests separately validate gameplay integration.",
+    "gestureCloseup": "tests/artifacts/arcade/cemetery-revision-3/skeleton-gesture.png",
+    "recordings": [
+      {
+        "name": "cartoon-skeleton",
+        "video": "tests/artifacts/arcade/cemetery-revision-3/cartoon-skeleton.webm",
+        "contactSheet": "tests/artifacts/arcade/cemetery-revision-3/cartoon-skeleton-motion.png",
+        "stats": {
+          "phases": [
+            "patrol",
+            "pluck",
+            "throw",
+            "recover"
+          ],
+          "souls": 0,
+          "throws": 1,
+          "deathFrames": [],
+          "maxFrameSeconds": 0.21220000000000006
+        }
+      },
+      {
+        "name": "injured-no-leap",
+        "video": "tests/artifacts/arcade/cemetery-revision-3/injured-no-leap.webm",
+        "contactSheet": "tests/artifacts/arcade/cemetery-revision-3/injured-no-leap-motion.png",
+        "stats": {
+          "phases": [
+            "windup",
+            "patrol",
+            "lunge",
+            "injuredFall",
+            "handFall",
+            "recover",
+            "handLeap",
+            "rush"
+          ],
+          "souls": 0,
+          "throws": 0,
+          "deathFrames": [],
+          "maxFrameSeconds": 0.0485
+        }
+      },
+      {
+        "name": "zombie-falls",
+        "video": "tests/artifacts/arcade/cemetery-revision-3/zombie-falls.webm",
+        "contactSheet": "tests/artifacts/arcade/cemetery-revision-3/zombie-falls-motion.png",
+        "stats": {
+          "phases": [
+            "patrol",
+            "dying",
+            "soulRise",
+            "windup",
+            "rush",
+            "recover"
+          ],
+          "souls": 1,
+          "throws": 0,
+          "deathFrames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "maxFrameSeconds": 0.024200000000000728
+        }
+      },
+      {
+        "name": "clown-ghost",
+        "video": "tests/artifacts/arcade/cemetery-revision-3/clown-ghost.webm",
+        "contactSheet": "tests/artifacts/arcade/cemetery-revision-3/clown-ghost-motion.png",
+        "stats": {
+          "phases": [
+            "patrol",
+            "windup",
+            "rush",
+            "recover",
+            "vanish",
+            "hidden",
+            "appear"
+          ],
+          "souls": 0,
+          "throws": 0,
+          "deathFrames": [],
+          "maxFrameSeconds": 0.00630000000000291
+        }
+      },
+      {
+        "name": "boss-ghost",
+        "video": "tests/artifacts/arcade/cemetery-revision-3/boss-ghost.webm",
+        "contactSheet": "tests/artifacts/arcade/cemetery-revision-3/boss-ghost-motion.png",
+        "stats": {
+          "phases": [
+            "soulRise",
+            "patrol",
+            "windup",
+            "rush",
+            "recover"
+          ],
+          "souls": 0,
+          "throws": 0,
+          "deathFrames": [],
+          "maxFrameSeconds": 0.018200000000004365
+        }
+      }
+    ],
+    "ui": [
+      "tests/artifacts/arcade/cemetery-revision-3/real-idle-start.png",
+      "tests/artifacts/arcade/cemetery-revision-3/real-game.png",
+      "tests/artifacts/arcade/cemetery-revision-3/chapter-picker.png"
+    ]
+  },
+  "assets": [
+    {
+      "path": "public/arcade/sprites/enemies/nightmare-skeleton-cartoon-v3.webp",
+      "bytes": 228754,
+      "publicHash": "bd5975041bc259e355e2b3f4d0581e5fe823d623ecd42faa5806f3a1f5c10f84",
+      "distHash": "bd5975041bc259e355e2b3f4d0581e5fe823d623ecd42faa5806f3a1f5c10f84"
+    },
+    {
+      "path": "public/arcade/sprites/enemies/nightmare-zombie-defeat-v3.webp",
+      "bytes": 349516,
+      "publicHash": "6c14b38f2c20bd8a2fe12c222ebce5b103b578f9da1d1ef4553158fe659ebddc",
+      "distHash": "6c14b38f2c20bd8a2fe12c222ebce5b103b578f9da1d1ef4553158fe659ebddc"
+    },
+    {
+      "path": "public/arcade/sprites/enemies/nightmare-clown-ghost-v3.webp",
+      "bytes": 291558,
+      "publicHash": "698b3e32dbedb1329f6c88c54e45ee539402886e651d66d15494f9ead4b11a20",
+      "distHash": "698b3e32dbedb1329f6c88c54e45ee539402886e651d66d15494f9ead4b11a20"
+    }
+  ]
+}

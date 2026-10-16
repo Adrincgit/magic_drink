@@ -1,0 +1,309 @@
+{
+  "date": "2026-10-14",
+  "build": {
+    "complete": true,
+    "errors": 0
+  },
+  "assets": [
+    {
+      "path": "public/arcade/maps/halloween/crypt-opening-v7.webp",
+      "width": 1024,
+      "height": 2048,
+      "alpha": true,
+      "bytes": 663996,
+      "sha256": "57590a787f2aafca99620db559429f0752e3191deca3f77a990bb9630e270293",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/maps/halloween/crypt-fog-v7.webp",
+      "width": 512,
+      "height": 512,
+      "alpha": true,
+      "bytes": 62418,
+      "sha256": "6e965d605f0a1fa6abcbbd9c79b36f917364267a3b99480b0fc7867efee55855",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/nightmare-clothed-limbs-v7.webp",
+      "width": 1024,
+      "height": 1024,
+      "alpha": true,
+      "bytes": 222950,
+      "sha256": "f81ea037b9b437a3a66f9cbd287800029dcf21e3be52ee4f6573c7498734d086",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/nightmare-zombie-reactions-v7.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "bytes": 624110,
+      "sha256": "92ee8e4fe8d18e14d6761d2f4c7367e000af0b65396bee517b2f2dee0e2925b6",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/nightmare-injured-v7.webp",
+      "width": 1024,
+      "height": 1024,
+      "alpha": true,
+      "bytes": 394022,
+      "sha256": "40756f00bdcafd3fb8331e60a182fe75d7c5e1ff25aa194cbeee24cf555eb22c",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/nightmare-skeleton-parts-v7.webp",
+      "width": 1024,
+      "height": 768,
+      "alpha": true,
+      "bytes": 158044,
+      "sha256": "3ea7b7c2c5a17abe1baad940abf7745957ffddc9feeceb2ce29c88c04228be76",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/nightmare-spirit-v7.webp",
+      "width": 1024,
+      "height": 512,
+      "alpha": true,
+      "bytes": 119154,
+      "sha256": "b263d47d59d1d5f1fec9fc26224a1e34856515bec43ce5c4e6e23382c0f36129",
+      "distMatches": true
+    }
+  ],
+  "visualScenes": {
+    "crypt": {
+      "phases": [
+        "manifest",
+        "patrol",
+        "windup",
+        "rush",
+        "recover",
+        "pluck",
+        "throw"
+      ],
+      "keys": [
+        "nightmare-zombie-walk",
+        "nightmare-skeleton-frames-v4",
+        "nightmare-actions",
+        "nightmare-zombie-recover"
+      ],
+      "handDeath": [],
+      "reactions": [],
+      "spawned": 8,
+      "fragments": 0,
+      "remains": 0,
+      "spiritShots": 0,
+      "minHearts": 5,
+      "simulationTime": 13.86666666666652,
+      "renderP95": 3.2999999970197678,
+      "crates": [],
+      "drops": []
+    },
+    "hand": {
+      "phases": [
+        "patrol",
+        "dying"
+      ],
+      "keys": [
+        "nightmare-clothed-limbs-v7"
+      ],
+      "handDeath": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "reactions": [],
+      "spawned": 0,
+      "fragments": 0,
+      "remains": 1,
+      "spiritShots": 0,
+      "minHearts": 5,
+      "simulationTime": 5.991666666666754,
+      "renderP95": 3.399999998509884,
+      "crates": [],
+      "drops": []
+    },
+    "skeleton": {
+      "phases": [
+        "patrol",
+        "pluck",
+        "throw",
+        "recover",
+        "dying",
+        "handFall",
+        "handLeap"
+      ],
+      "keys": [
+        "nightmare-skeleton-frames-v4",
+        "nightmare-skeleton-parts-v7"
+      ],
+      "handDeath": [],
+      "reactions": [],
+      "spawned": 0,
+      "fragments": 5,
+      "remains": 7,
+      "spiritShots": 0,
+      "minHearts": 5,
+      "simulationTime": 9.975000000000074,
+      "renderP95": 3.5999999940395355,
+      "crates": [],
+      "drops": []
+    },
+    "injuries": {
+      "phases": [
+        "patrol",
+        "armBreak",
+        "handFall",
+        "legBreak",
+        "recover",
+        "handLeap",
+        "windup",
+        "rush",
+        "dying"
+      ],
+      "keys": [
+        "nightmare-zombie-walk",
+        "nightmare-zombie-reactions-v7",
+        "nightmare-clothed-limbs-v7",
+        "nightmare-injured-v7"
+      ],
+      "handDeath": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "reactions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        6,
+        9,
+        7,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "spawned": 0,
+      "fragments": 0,
+      "remains": 2,
+      "spiritShots": 0,
+      "minHearts": 5,
+      "simulationTime": 7.866666666666847,
+      "renderP95": 3,
+      "crates": [],
+      "drops": []
+    },
+    "reach": {
+      "phases": [
+        "reachUp",
+        "patrol",
+        "windup",
+        "lunge",
+        "recover"
+      ],
+      "keys": [
+        "nightmare-zombie-reactions-v7",
+        "nightmare-zombie-walk",
+        "nightmare-actions",
+        "nightmare-zombie-recover"
+      ],
+      "handDeath": [],
+      "reactions": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "spawned": 0,
+      "fragments": 0,
+      "remains": 0,
+      "spiritShots": 0,
+      "minHearts": 5,
+      "simulationTime": 7.000000000000138,
+      "renderP95": 3.2999999970197678,
+      "crates": [],
+      "drops": []
+    },
+    "spirits": {
+      "phases": [],
+      "keys": [],
+      "handDeath": [],
+      "reactions": [],
+      "spawned": 0,
+      "fragments": 0,
+      "remains": 0,
+      "spiritShots": 6,
+      "minHearts": 5,
+      "simulationTime": 7.683333333333505,
+      "renderP95": 3,
+      "crates": [],
+      "drops": []
+    },
+    "crate-a": {
+      "phases": [],
+      "keys": [],
+      "handDeath": [],
+      "reactions": [],
+      "spawned": 0,
+      "fragments": 0,
+      "remains": 0,
+      "spiritShots": 0,
+      "minHearts": 5,
+      "simulationTime": 3.9999999999999885,
+      "renderP95": 3.100000001490116,
+      "crates": [
+        {
+          "hp": 0,
+          "boosted": true
+        }
+      ],
+      "drops": [
+        {
+          "kind": 3,
+          "boosted": true
+        }
+      ]
+    },
+    "crate-b": {
+      "phases": [],
+      "keys": [],
+      "handDeath": [],
+      "reactions": [],
+      "spawned": 0,
+      "fragments": 0,
+      "remains": 0,
+      "spiritShots": 0,
+      "minHearts": 5,
+      "simulationTime": 3.9999999999999885,
+      "renderP95": 3.2000000029802322,
+      "crates": [
+        {
+          "hp": 0,
+          "boosted": true
+        }
+      ],
+      "drops": [
+        {
+          "kind": 8,
+          "boosted": true
+        }
+      ]
+    }
+  },
+  "checks": {
+    "initialRegressionCases": 42,
+    "correctedStaleAssertionsPassed": 2,
+    "finalFocusedCases": 22,
+    "realArcadePicker": true,
+    "noBrowserErrors": true
+  },
+  "sourceChangesPublished": false
+}

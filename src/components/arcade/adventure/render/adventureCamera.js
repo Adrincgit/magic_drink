@@ -5,9 +5,10 @@ export {BALLOON_SIZE} from '../actors/bosses/adventureBalloonCrew';
 export const cameraView=s=>({zoom:s.camera.zoom||1,width:960/(s.camera.zoom||1),height:540/(s.camera.zoom||1)});
 export function adventureBounds(s){
  if(s.harborAmbush?.state==='active'){const a=s.level.harborAmbush;return{left:a.left+24,right:a.right-24};}
- if(s.level.circusEntrance&&s.player.x<0)return{left:-1382,right:s.level.circusEntrance.doorX+18};
+ if(s.level.circusEntrance&&s.player.x<0)return{left:(s.level.circusEntrance.left??-1400)+18,right:s.level.circusEntrance.doorX+18};
  if(!s.arenaLocked)return{left:18,right:s.level.width-18};
  const a=s.level.arena,view=cameraView(s);
+ if(s.level.nightmareTrail)return{left:a.left+24,right:s.level.nightmareGate.x-44};
  if(s.index===3&&s.clashRetreatBounds){
   if(s.player.x>=a.left+24&&s.player.x<=a.right-24)delete s.clashRetreatBounds;
   else return{left:Math.max(18,s.clashRetreatBounds.left),right:Math.min(s.level.width-18,s.clashRetreatBounds.right)};
@@ -19,6 +20,16 @@ export function adventureBounds(s){
  return{left:center-450,right:center+450};
 }
 export function followAdventureCamera(s,dt){
+ const blockade=s.villageBlockade,wall=s.villageObstacles?.find(q=>q.id===blockade?.wallId);
+ if(s.level.villageTrail&&(blockade?.started&&wall&&!wall.broken&&Math.abs(s.player.x-wall.x)<1200||(s.camera.zoom||1)<1)){
+  const active=blockade?.started&&wall&&!wall.broken&&Math.abs(s.player.x-wall.x)<1200,target=active?.78:1,ease=1-Math.exp(-dt*2.8),oldZoom=s.camera.zoom||1;
+  const floor=groundY(s.level.route,s.player.x),oldScreen=(floor-s.camera.y)*oldZoom;
+  s.camera.zoom=oldZoom+(target-oldZoom)*ease;if(Math.abs(s.camera.zoom-target)<.0005)s.camera.zoom=target;
+  const width=960/s.camera.zoom,normal=s.player.x-width*.3125,focus=wall?wall.x+365-width/2:normal;
+  const desired=active?Math.max(s.player.x+85-width,Math.min(s.player.x-100,focus)):normal;
+  s.camera.x+=(Math.max(0,Math.min(s.level.width-width,desired))-s.camera.x)*(1-Math.exp(-dt*4));
+  s.camera.y=floor-(oldScreen+(floor-40-oldScreen)*ease)/s.camera.zoom;s.camera.backdropY=40;return;
+ }
  if(s.harborAmbush?.state==='active'){
   const a=s.level.harborAmbush,target=960/(a.right-a.left),ease=1-Math.exp(-dt*5);
   const floor=(a.y-s.camera.y)*(s.camera.zoom||1);
@@ -44,7 +55,7 @@ export function followAdventureCamera(s,dt){
   s.camera.y=a.y-(previousFloor+(454-previousFloor)*(1-Math.exp(-dt*4)))/s.camera.zoom;return;
  }
  if(s.level.circusEntrance&&s.player.x<0){
-  const zoom=.8,x=Math.max(-1400,s.player.x-960/zoom*.3125);
+  const zoom=s.level.circusCamp?1:.8,x=Math.max(s.level.circusEntrance.left??-1400,s.player.x-960/zoom*.3125);
   s.camera.zoom=zoom;s.camera.y=s.level.circusEntrance.floor-440/zoom;s.camera.backdropY=40;
   s.camera.x+=(x-s.camera.x)*Math.min(1,dt*7);return;
  }
@@ -62,21 +73,22 @@ export function followAdventureCamera(s,dt){
  const previousFloor=(a.y-s.camera.y)*(s.camera.zoom||1);
  const rushing=organ&&s.boss.move==='organ-charge'&&['warn','attack'].includes(s.boss.phase);
  const organZoom=Math.max(.62,Math.min(rushing?.72:s.boss.transformed?.8:.82,960/(Math.abs(s.boss.x-s.player.x)+440)));
- const fort=s.index===5&&s.arenaLocked;
- const zoom=fort?.5:harlequin?Math.max(.56,Math.min(1.08,960/(Math.abs(s.boss.x-s.player.x)+420))):barge?Math.max(.52,Math.min(.8,960/(Math.abs(s.boss.x-s.player.x)+650))):balloon ? (s.boss.move==='bombing-run'&&['warn','attack'].includes(s.boss.phase)?.72:.82) : organ?organZoom:1;
+ const fort=s.index===5&&(s.arenaLocked||!!s.boss.defeat||!!s.clear);
+ const nightmare=s.level.nightmareTrail&&(s.arenaLocked||!!s.clear||!!s.boss.defeat);
+ const zoom=nightmare?Math.max(.6,Math.min(.8,960/(Math.abs(s.player.x-s.boss.x)+500))):fort?.43:harlequin?Math.max(.56,Math.min(1.08,960/(Math.abs(s.boss.x-s.player.x)+420))):barge?Math.max(.52,Math.min(.8,960/(Math.abs(s.boss.x-s.player.x)+650))):balloon ? (s.boss.move==='bombing-run'&&['warn','attack'].includes(s.boss.phase)?.72:.82) : organ?organZoom:1;
  s.camera.zoom=(s.camera.zoom??1)+(zoom-(s.camera.zoom??1))*Math.min(1,dt*3.4);
  if(harlequin)s.camera.zoom=Math.min(s.camera.zoom,960/(Math.abs(s.boss.x-s.player.x)+270),430/Math.max(300,a.y-Math.min(s.boss.y-205,s.player.y-110)));
  const view=cameraView(s),center=(a.left+a.right)/2;
  const organCenter=(Math.min(s.player.x,s.boss.x-204)+Math.max(s.player.x,s.boss.x+170))/2;
  const bargeCenter=(Math.min(s.player.x-70,s.boss.x-370)+s.boss.x+375)/2;
- const battleX=fort?Math.max(a.left,Math.min(a.right-view.width,(s.player.x-80+s.boss.x+390)/2-view.width/2)):harlequin?(s.player.x+s.boss.x)/2-view.width/2:barge?Math.max(a.left,Math.min(a.right-view.width,bargeCenter-view.width/2)):s.index===0?Math.max(a.left,Math.min(a.right-view.width,s.player.x-view.width*.42)):s.index===1?Math.max(a.left,Math.min(a.right-view.width,organCenter-view.width/2)):center-view.width/2;
- const x=s.arenaLocked?battleX:Math.max(0,Math.min(s.level.width-view.width,s.player.x-view.width*.3125));
+ const battleX=nightmare?Math.max(a.left,Math.min(a.right-view.width,(s.player.x+s.boss.x)/2-view.width/2)):fort?Math.max(a.left,Math.min(a.right-view.width,(s.player.x-80+s.boss.x+650)/2-view.width/2)):harlequin?(s.player.x+s.boss.x)/2-view.width/2:barge?Math.max(a.left,Math.min(a.right-view.width,bargeCenter-view.width/2)):s.index===0?Math.max(a.left,Math.min(a.right-view.width,s.player.x-view.width*.42)):s.index===1?Math.max(a.left,Math.min(a.right-view.width,organCenter-view.width/2)):center-view.width/2;
+ const x=s.arenaLocked||fort?battleX:Math.max(0,Math.min(s.level.width-view.width,s.player.x-view.width*.3125));
  // A zoomed battle keeps the floor visible and opens room above the balloon.
  // Collision gaps have no earth platform. The continuous route still has an
  // elevation there; sampling a missing collider used to fall back to y=480.
  const routeY=groundY(s.level.route||s.platforms,s.player.x);
  const pitLook=s.level.emberTrail?Math.min(20,Math.max(0,s.player.y-routeY-40)*.35):0;
- const y=fort?a.y-440/view.zoom:barge?a.y-440/view.zoom:balloon?a.y-475/view.zoom:organ?a.y-470/view.zoom:s.level.groundRoute?routeY-(s.level.cameraFloor||440)+pitLook:s.arenaLocked?a.y-420:Math.max(-190,Math.min(150,s.player.y-380));
+ const y=s.level.villageTrail?40:nightmare?a.y-440/view.zoom:fort?a.y-440/view.zoom:barge?a.y-440/view.zoom:balloon?a.y-475/view.zoom:organ?a.y-470/view.zoom:s.level.groundRoute?routeY-(s.level.cameraFloor||440)+pitLook:s.arenaLocked?a.y-420:Math.max(-190,Math.min(150,s.player.y-380));
  s.camera.x+=(x-s.camera.x)*Math.min(1,dt*7);
  // Zoom widens the viewport immediately; the eased x must respect the NEW
  // width on this same frame, including the boss arrival and retreat.
@@ -86,6 +98,16 @@ export function followAdventureCamera(s,dt){
   if(near<=far)s.camera.x=Math.max(near,Math.min(far,s.camera.x));
  }
  if(s.index>=4){
+  if(s.level.nightmareTrail&&!nightmare){
+   // The broad floor gives room for elevation changes inside the frame.
+   // Average nearby earth and damp reversals instead of tracking each slope
+   // directly; distant landscape planes keep their fixed vertical anchors.
+   const route=s.level.route,near=(groundY(route,Math.max(0,s.player.x-260))+routeY*2+groundY(route,Math.min(s.level.width-1,s.player.x+260)))/4;
+   const target=Math.max(routeY-480,Math.min(routeY-350,near-(s.level.cameraFloor||440)));
+   const shift=(target-s.camera.y)*(1-Math.exp(-dt*1.65));
+   s.camera.y+=Math.max(-70*dt,Math.min(70*dt,shift));
+   s.camera.y=Math.max(routeY-495,Math.min(routeY-335,s.camera.y));s.camera.backdropY=40;return;
+  }
   if(fort||s.level.emberTrail&&Math.abs(view.zoom-1)>.001){
    const targetFloor=fort?440:s.level.cameraFloor||440;
    const floor=previousFloor+(targetFloor-previousFloor)*(1-Math.exp(-dt*3));

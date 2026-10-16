@@ -18,20 +18,20 @@ function burningGlow(img,original){
  c.putImageData(pixels,0,0);glowLayers.set(img,layer);return layer;
 }
 
-export function drawInfernoBackdrop(c,s,art,q,reduced=false){
- const b=s.boss;if(b.stage<2||reduced)return;
- const img=art[b.stage===3?'grand-ring-inferno':'grand-ring-burning'];if(!img||!art.world3)return;
- const layer=burningGlow(img,art.world3),strength=(b.stage===3?1:.7)*(b.backdropBlend??1),age=s.fxTime;
+export function drawInfernoBackdrop(c,s,art,q,reduced=false,stageOverride){
+ const b=s.boss,stage=stageOverride??b.stage;if(stage<2||reduced)return;
+ const img=art[stage===3?'grand-ring-inferno':'grand-ring-burning'];if(!img||!art.world3)return;
+ const layer=burningGlow(img,art.world3),strength=(stage===3?1:.7)*(stageOverride?1:b.backdropBlend??1),age=s.fxTime;
  c.save();c.globalCompositeOperation='screen';
  const strips=18,source=layer.width/strips;
  for(let i=0;i<strips;i++){
-  const phase=age*(7.5+i%4)+i*2.4,lift=(1+Math.sin(phase))*(b.stage===3?2.7:1.8);
+  const phase=age*(7.5+i%4)+i*2.4,lift=(1+Math.sin(phase))*(stage===3?2.7:1.8);
   c.globalAlpha=strength*(.30+Math.sin(phase+1.2)*.12);
   c.drawImage(layer,i*source,0,source,layer.height,q.x+q.w*i/strips+Math.sin(phase*.55)*.65,q.y-lift,q.w/strips,q.h+lift);
  }
  c.restore();
  // Embers rise at the actual rear architecture, rather than standing jets.
- for(let i=0;i<(b.stage===3?38:24);i++){
+ for(let i=0;i<(stage===3?38:24);i++){
   const t=(age*(.12+i%4*.025)+i*.618)%1,x=q.x+q.w*((i*.381966)%1)+Math.sin(t*4+i)*12,y=q.y+q.h*(.77-t*.68);
   paintedParticle(c,art,3,age+i,x,y,7+i%3*3,i+t*2,Math.sin(t*Math.PI)*strength*.75);
  }

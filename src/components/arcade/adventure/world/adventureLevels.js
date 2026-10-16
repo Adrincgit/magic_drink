@@ -1,10 +1,12 @@
+import {makeVillage} from './adventureVillage';
 import {WORLDS} from './adventureWorlds';
 import {extendAdventureRoutes} from './adventureRoutes';
-import {shapeMeadowRoute} from './adventureTerrain';
+import {shapeMeadowRoute,surfaceY} from './adventureTerrain';
 import {shapeRiverRoute} from './adventureRiverRoute';
 import {shapeHarborRoute} from './adventureHarborRoute';
 import {shapeGrandRing} from './adventureGrandRing';
 import {makeEmberTrail} from './adventureEmberTrail';
+import {makeNightmareTrail} from './adventureNightmareTrail';
 const p=(x,y,w,kind='stone',extra={})=>({x,y,w,h:24,kind,...extra});
 export const LEVELS=[
  {id:0,name:['El puente de las luces','The bridge of lights'],subtitle:['Rescata al coro antes de que zarpe la feria.','Rescue the chorus before the fair sets sail.'],power:'Dragon Grape',tip:['Tu magia atraviesa enemigos. Mantén pulsado atacar.','Your magic pierces enemies. Hold attack.'],color:'#eeaa66',sky:['#7963a0','#f7b6ab'],background:'/arcade/maps/waterfront/background.webp',width:3100,bossName:['Don Cascabel','Mr. Jingle'],bossType:0,
@@ -31,11 +33,21 @@ LEVELS[4].platforms.push(p(1660,420,140));
 
 // V55: one travelling circus, from the meadow to its last big top.
 export const DRINKS=[
+ // IDs stay stable: Popcorn Panic is appended after the timed Ribbon flavor.
  {id:0,name:'Dragon Grape',color:'#f39a58',image:'/arcade/sprites/pickups/dragon-grape.webp',tip:['Llama que atraviesa enemigos.','Flame that pierces enemies.']},
  {id:1,name:'Banna Drama',color:'#ffe280',image:'/arcade/sprites/pickups/banna-drama.webp',tip:['Búmeran: golpea y vuelve a ti.','Boomerang: it strikes and returns.']},
  {id:2,name:'Witchy Kiwii',color:'#a2ecad',image:'/arcade/sprites/pickups/witchy-kiwii.webp',tip:['Hojas mágicas; el remolino frena enemigos.','Magic leaves; the cyclone slows enemies.']},
- {id:3,name:'Bubble Tape',color:'#fca7de',image:'/arcade/sprites/pickups/bubble-tape.webp',tip:['Captura disparos y frena enemigos; las burbujas estallan en cadena.','Captures shots and roots enemies; bubbles burst in chains.']},
+ {id:3,name:'Bubble Tape',color:'#fca7de',image:'/arcade/sprites/pickups/bubble-tape.webp',tip:["El b?sico captura proyectiles. El fuerte también atrapa payasos pequeños; las máquinas resisten.", "Normal bubbles catch projectiles. Strong bubbles also trap small clowns; machines resist."]},
  {id:4,name:'Sparkle Soda',color:'#a4edff',image:'/arcade/sprites/pickups/sparkle-soda.webp',tip:['Tres estrellas y esquiva más rápida.','Three stars and a faster dodge.']},
+ {id:5,name:'Aqua Berry',color:'#79e8f4',image:'/arcade/sprites/pickups/aqua-berry.webp',tip:['Ráfagas de agua apagan las llamas; los incendios grandes necesitan más agua.','Water bursts put out flames; larger fires need more water.']},
+ {id:6,name:'Jelly Cherry',color:'#ff79aa',image:'/arcade/sprites/pickups/jelly-cherry.webp',tip:["Cerezas que rebotan. Mantén C y apunta con ← →; suelta para plantar un trampolín.", "Bouncing cherries. Hold C and aim with ← →; release to plant a trampoline."]},
+ {id:7,name:'Prism Peach',color:'#ffc699',image:'/arcade/sprites/pickups/prism-peach.webp',tip:["Agujas ligeras; un prisma divide los tiros de otros sabores. Apunta para colocarlos: II permite dos y III, tres.", "Light needles; a prism splits other flavors. Aim to place them: II allows two; III, three."]},
+ {id:8,name:'Echo Melon',color:'#8ff5c9',image:'/arcade/sprites/pickups/echo-melon.webp',tip:["Ondas que se expanden. Su eco te sigue durante 3,5 s y copia tus nuevos disparos.", "Expanding waves. Your echo follows for 3.5s and copies your new shots."]},
+ {id:9,name:'Volt Lychee',unlock:2,color:'#ffef70',image:'/arcade/sprites/pickups/volt-lychee.webp',tip:["Mantén Z: el rayo gana fuerza y encadena enemigos. C lanza una descarga larga instantánea.", "Hold Z: the beam grows stronger and chains enemies. C fires a long instant discharge."]},
+ {id:10,name:'Honey Mango',unlock:1,color:'#ffc557',image:'/arcade/sprites/pickups/honey-mango.webp',tip:["Miel que ralentiza. Mantén C y usa las flechas para colocar la lluvia; suelta para invocarla.", "Slowing honey. Hold C and use arrows to position the shower; release to summon it."]},
+ {id:11,name:'Orbit Orange',unlock:3,color:'#ffab56',image:'/arcade/sprites/pickups/orbit-orange.webp',tip:['Lunas giran antes de salir disparadas; tres satélites te protegen con el fuerte.','Moons orbit before launching; three satellites protect you with strong magic.']},
+ {id:12,name:'Ribbon Raspberry',unlock:2,color:'#f25598',image:'/arcade/sprites/pickups/ribbon-raspberry.webp',tip:['Encuéntrala en el camino: 10 segundos de danza de cinta. Levanta, amarra y remata; gira al esquivar y devuelve proyectiles.','Find it along the path: 10 seconds of ribbon dance. Launch, bind and slam; spin through foes and return projectiles.']},
+ {id:13,name:'Popcorn Panic',unlock:1,color:'#f6bd53',image:'/arcade/sprites/pickups/popcorn-panic.webp',tip:['Descarga corta de maíz caramelizado y dulces. C / Y duplica el alcance por 45 de magia, con la misma potencia.','A short caramel-popcorn and candy blast. C / Y doubles its reach for 45 magic, with the same power.']},
 ];
 const chapters=[
  ['El campo de los globos','The balloon meadow','La comparsa voladora','The flying troupe'],
@@ -97,3 +109,16 @@ shapeRiverRoute(LEVELS[1]);
 shapeHarborRoute(LEVELS[2]);
 shapeGrandRing(LEVELS[3]);
 LEVELS.push(makeEmberTrail(WORLDS[5]));
+// Keep the old prototype's internal ID and saved treasure identities.
+LEVELS[4].chapter='6-1';
+LEVELS.push(makeNightmareTrail(WORLDS[6]));
+LEVELS.push(makeVillage(WORLDS[7]));
+// Launchers have a nearby ordinary patrol to use them. The walker is present
+// from level creation and remains the same enemy after its boosted jump.
+for(const level of LEVELS)for(const [x,y,type] of [...level.enemies])if(type===5){
+ for(const direction of [1,-1]){
+  const start=x-direction*120;
+  const floor=level.platforms.filter(q=>start>=q.x+24&&start<=q.x+q.w-24).sort((a,b)=>Math.abs(surfaceY(a,start)-y)-Math.abs(surfaceY(b,start)-y))[0];
+  if(floor&&Math.abs(surfaceY(floor,start)-y)<24){level.enemies.push([start,surfaceY(floor,start),0,direction]);break;}
+ }
+}

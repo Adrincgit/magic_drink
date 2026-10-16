@@ -1,5 +1,7 @@
 # Revisión del barco y aproximación al Gran Telón — 9 de octubre de 2026
 
+> Revisión vigente de la tripulación, maza mecánica, cañones, defensa y puerta principal: [Viento y maquinaria — 12 de octubre](machinery-rework.md). Sustituye las poses del percusionista gigante y la compuerta pequeña descritas más abajo.
+
 Implementación autorizada por el usuario: retirar la embestida injusta, rehacer la tripulación, separar los destellos de daño y llevar la entrada al circo a tierra firme.
 
 ## 1-3: barco y enemigos acuáticos
@@ -15,9 +17,9 @@ Implementación autorizada por el usuario: retirar la embestida injusta, rehacer
 
 ## 1-4: El bosque de las brasas
 
-El recorrido vigente mide 36.000 unidades. La revisión del 10 de octubre reorganiza el bosque frondoso, la transición seca, las ramas transitables y el final carbonizado; retira los payasos decorativos del fondo. Detalles y evidencia en [wildfire.md](wildfire.md#progresión-del-bosque-y-ramas-10-de-octubre).
+La revisión vigente de jugabilidad, Aqua Berry y campamento está en [siege.md](siege.md). El 1-4 termina al destruir el bastión; el acceso a la carpa pasa al 1-5. Se conserva el bosque frondoso, la transición seca, las ramas transitables y el final carbonizado del pulido anterior.
 
-El 1-4 mide **36.000 unidades**, con siete puntos de control. Empieza llano hasta 3.400, asciende hasta una meseta a 10.600, inicia el descenso después de 14.400 y llega al fondo del bosque incendiado a 21.600. Hay más de 1.100 unidades de desnivel, cinco huecos con brasas y seis árboles en llamas que crujen antes de caer. Los troncos caídos se ajustan a la pendiente y forman superficies transitables. La cámara y el límite de caída siguen la altura local del recorrido.
+El 1-4 mide **33.200 unidades**, con siete puntos de control. Empieza llano hasta 3.400, asciende hasta una meseta a 10.600, inicia el descenso después de 14.400 y llega al fondo del bosque incendiado a 21.600. Hay más de 1.100 unidades de desnivel, cinco huecos con brasas y seis árboles en llamas que crujen antes de caer. Estos árboles son ahora elementos del fondo: conservan su animación, sin colisión ni daño en el camino. La cámara y el límite de caída siguen la altura local del recorrido.
 
 La quemadura del terreno aumenta suavemente entre 5.000 y 28.000. Los cinco hoyos están en tramos llanos con aproximaciones llanas; no hay huecos en la subida ni en la bajada. Después del descenso, entre 21.900 y 24.700, hay arbustos incendiables, una roca de acceso y seis árboles con tres ramas sólidas cada uno. Se pueden cruzar las ramas inferiores y medias sin doble salto. El tramo posterior lleva al bosque negro en llamas y al fuerte.
 
@@ -27,17 +29,19 @@ El escupefuego fue redibujado con colores planos y estilo 2D, acompañado de lan
 
 Todos los ataques activos de fuego comparten el contacto con arbustos: Dragon Grape, chorros, antorchas, morteros, brasas, ventanas del fuerte y explosiones durante sus cuadros de llama. El fuego de suelo se propaga con demora, sin encender todo el matorral en un solo cuadro. Los arbustos pasan de vegetación a quemadura y restos carbonizados; el fuego de suelo reutiliza la animación pintada del Arlequín. Las llamas duran varios segundos, registran su contacto en el suelo local y causan daño de fuego. La defensa puede contener el chorro mientras tenga magia; no borra toda la emisión al primer contacto. Agua, burbujas, ataques apagados y humo residual no encienden vegetación.
 
-El Bastión ocupa la arena 30.000–32.300. Sus cañones giran hacia un objetivo fijado durante el aviso, retroceden y lanzan bolas grandes con gravedad. Las bolas dejan fuego al impactar. La compuerta lateral se abre antes de que los refuerzos caminen desde su interior; no usan una aparición por transparencia en el campo de batalla.
+El Bastión ocupa la arena 30.000–32.900 y su dibujo crece un 60% en el mundo. Sus cañones giran hacia un objetivo fijado durante el aviso, retroceden y lanzan bolas grandes con gravedad. Las bolas dejan fuego al impactar. La compuerta lateral se abre antes de que los refuerzos caminen desde su interior.
 
-El núcleo se puede atacar desde el inicio entrando bajo los cañones. Destruirlos es opcional y reduce los ataques, con daño y destello independientes. La fase II comienza al perder la mitad de la vida del núcleo o ambos cañones. El bastión despliega lanzallamas anunciados y salvas parabólicas. Destruir el núcleo termina el combate aunque las armas sigan activas. El casco no causa daño por contacto.
+Primero se rompe el muro exterior, después la compuerta del reactor y finalmente el núcleo expuesto. La compuerta dispara la segunda fase al abrirse. Los cañones y las ventanas se pueden destruir por separado y siguen siendo opcionales. El reactor conserva su volumen hasta ser destruido; sus barreras bloquean el paso sin causar daño por contacto.
 
-Derrotar el fuerte libera el paso. La entrada terrestre al circo está en 33.700, los bastidores empiezan en 34.000 y la salida está en 35.720. El siguiente capítulo sigue siendo el 1-5 del Arlequín; no se renumeran los identificadores ni se borra el progreso.
+Al destruir el núcleo se reproducen cuatro cuadros de derrumbe; Hexy planta la bandera, sale de escena y completa el 1-4. El siguiente capítulo sigue siendo el 1-5 del Arlequín; no se renumeran los identificadores ni se borra el progreso.
 
 [Arte, pruebas y detalles de la revision vigente](wildfire.md).
 
 ## 1-5 y partidas guardadas
 
-La batalla existente del Arlequín conserva sus tres fases, fuego, choque de poderes y pista oscura. El 1-5 comienza dentro de la carpa y no incluye tienda ni interacción de compra. La tienda del 1-4 está en el exterior.
+Revisión más reciente del exterior: [profundidad del campamento, escuadras y carpa principal](camp-depth.md). Sustituye el recorrido inicial de seis patrullas y una sola capa de fondo por ocho carpas y 19 enemigos, con varias capas independientes de paisaje y humo.
+
+La batalla existente del Arlequín conserva sus tres fases, fuego, choque de poderes y pista oscura. El 1-5 comienza en un campamento corto de carpas sobre bosque consumido, sin incendios activos. La carpa principal tiene acceso lateral: entrar produce el fundido y fija un punto de reintento en los bastidores. Una caja anterior muestra y entrega el Corazón vital, que restaura toda la vida. No hay tienda dentro de la carpa.
 
 Los identificadores internos no se renumeran: el orden es `0, 1, 2, 5, 3, 4`. Las tarjetas muestran `1-1, 1-2, 1-3, 1-4, 1-5, 2-2`. El último escenario continúa siendo el prototipo previo. `campaign: 2` migra el rango de desbloqueo, conserva capítulos completados y no cambia los identificadores de monedas ya cobradas. No se restablece el guardado del usuario.
 

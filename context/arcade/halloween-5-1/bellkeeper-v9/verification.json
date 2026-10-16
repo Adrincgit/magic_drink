@@ -1,0 +1,122 @@
+{
+  "tests": {
+    "initial": 15,
+    "finalBoss": 7
+  },
+  "build": {
+    "exitCode": 0,
+    "errors": 0
+  },
+  "reviewedScenes": [
+    "bell",
+    "reveal",
+    "wraith",
+    "victory"
+  ],
+  "assets": [
+    {
+      "path": "arcade/sprites/enemies/nightmare-bell-idle-v9.webp",
+      "width": 1280,
+      "height": 1920,
+      "alpha": true,
+      "publicMatchesDist": true,
+      "bytes": 597010,
+      "sha256": "82ae915f2217923ba9bbe1898d255716252902c40d2fce534eb6dd34a29b5327"
+    },
+    {
+      "path": "arcade/sprites/enemies/nightmare-bell-ring-v9.webp",
+      "width": 1280,
+      "height": 1920,
+      "alpha": true,
+      "publicMatchesDist": true,
+      "bytes": 611562,
+      "sha256": "3f9c6d09125e6d292108af108e56289399fef6c2ed0af28a89a021283bf3d797"
+    },
+    {
+      "path": "arcade/sprites/enemies/nightmare-bell-impact-v9.webp",
+      "width": 1280,
+      "height": 1920,
+      "alpha": true,
+      "publicMatchesDist": true,
+      "bytes": 853862,
+      "sha256": "34d2587b856cf385bd891e4b8a14796eef9362a3eceb169b8a20a98f653abe7a"
+    },
+    {
+      "path": "arcade/sprites/enemies/nightmare-bell-summon-v9.webp",
+      "width": 1280,
+      "height": 1920,
+      "alpha": true,
+      "publicMatchesDist": true,
+      "bytes": 753824,
+      "sha256": "bc0d69f799018972057605941fb63c75111279050dbda02a573505b2f69930d1"
+    },
+    {
+      "path": "arcade/sprites/enemies/nightmare-wraith-idle-v9.webp",
+      "width": 1280,
+      "height": 1920,
+      "alpha": true,
+      "publicMatchesDist": true,
+      "bytes": 638398,
+      "sha256": "2d1031c74100b91d9f5fc236f68ecc1f9cd2e063ca0479c9ff8ec4b762f9e54d"
+    },
+    {
+      "path": "arcade/sprites/enemies/nightmare-wraith-cast-v9.webp",
+      "width": 1280,
+      "height": 1920,
+      "alpha": true,
+      "publicMatchesDist": true,
+      "bytes": 772092,
+      "sha256": "097d42c1e2d15eeb4fc49778b6951fd53fd0283b62ad4da308ea1d5bb622ca1a"
+    },
+    {
+      "path": "arcade/sprites/enemies/nightmare-wraith-dash-v9.webp",
+      "width": 1280,
+      "height": 1920,
+      "alpha": true,
+      "publicMatchesDist": true,
+      "bytes": 643918,
+      "sha256": "05cf78770dcad126d45f6ef1afaa3eafbea389e5bbb7b1475fb337160d620241"
+    },
+    {
+      "path": "arcade/sprites/enemies/nightmare-wraith-defeat-v9.webp",
+      "width": 1280,
+      "height": 1920,
+      "alpha": true,
+      "publicMatchesDist": true,
+      "bytes": 525692,
+      "sha256": "b4e2f6ab43d55867d4a6df12d032a14f385911ebad31f0f92d7d7b262b5aaa4e"
+    },
+    {
+      "path": "arcade/sprites/enemies/nightmare-break-v9.webp",
+      "width": 1280,
+      "height": 1920,
+      "alpha": true,
+      "publicMatchesDist": true,
+      "bytes": 686686,
+      "sha256": "2a62e05b1ec1390d6a07089f625699c25f51cd57cf4031175423b591e7d8418a"
+    }
+  ],
+  "renderedFrames": {
+    "nightmare-bell-idle-v9": 24,
+    "nightmare-bell-ring-v9": 24,
+    "nightmare-bell-impact-v9": 24,
+    "nightmare-bell-summon-v9": 24,
+    "nightmare-wraith-idle-v9": 24,
+    "nightmare-wraith-cast-v9": 24,
+    "nightmare-wraith-dash-v9": 24,
+    "nightmare-wraith-defeat-v9": 24,
+    "nightmare-break-v9": 24
+  },
+  "renderP95": {
+    "bell": 4.5,
+    "reveal": 4.199999995529652,
+    "wraith": 5.5,
+    "victory": 5.800000004470348
+  },
+  "totalObservedFrames": 216,
+  "previousZombieCorrectionPreserved": {
+    "nightmare-injured-v8.webp": true,
+    "nightmare-zombie-reactions-v8.webp": true,
+    "nightmare-clothed-limbs-v7.webp": true
+  }
+}

@@ -526,3 +526,11 @@ Este archivo define:
 
 Es la guía oficial para desarrollar el portal **Magic Drink**.
 
+
+## Regla permanente del arcade: vida de los enemigos
+
+No mostrar barras de salud de enemigos, minibosses, jefes ni criptas/generadores hostiles. El jugador lo solicita expresamente. Comunicar da?o y cambios de fase mediante poses, destellos, grietas y animaciones; nunca volver a a?adir barras de vida. El HUD de salud de Hexy se conserva.
+
+## Regla del arcade: intercepción de proyectiles
+
+La magia fuerte debe destruir los proyectiles enemigos al tocarlos en todos los niveles, incluidos Popcorn Panic, el chorro fuerte de agua y la descarga fuerte de Volt. No depender sólo del indicador `heavy`: algunos ataques usan perdigones o sondas invisibles. Comprobar también los cruces rápidos durante el movimiento del proyectil enemigo. Los peligros persistentes del escenario y las secuencias de choque de rayos conservan sus propias reglas.

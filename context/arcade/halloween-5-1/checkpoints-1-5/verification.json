@@ -1,0 +1,93 @@
+{
+  "scope": {
+    "completed": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "pending": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  "changes": {
+    "1": "Fugitives activate before entering the camera view, including at spawn. Distant inactive groups cannot trigger captures or warning sounds.",
+    "2": "Standing, crawling and converted zombies use 36.8 HP: 8 times the normal clown health of 4.6.",
+    "3": "Three horizontal depth planes at .26, .51 and .78 plus .10 panorama and 1.12 foreground. Fixed backdrop altitude, opaque drawing, clean tree cutouts, world-anchored roots and lightly blurred foreground.",
+    "4": "Natural tapered boughs attached behind their tree collars. Collision follows the upper bark. Branches remain reachable, warn and collapse; retry restores them. Old loose log artwork is no longer loaded.",
+    "5": "The 145px one-way cliff before the gate is now a continuous slope. Removed translucent bank composition, regenerated the gate cutout, preserved front-pillar occlusion."
+  },
+  "validation": {
+    "model": "36 tests passed",
+    "browser": "2 tests passed, including real chapter picker and idle opening",
+    "gateMatrix": "56 starts/directions/jump durations without health loss or reset",
+    "recordings": [
+      {
+        "name": "idle-start",
+        "minHearts": 5,
+        "maxTeleport": 0,
+        "grounds": [],
+        "broken": 0,
+        "playerX": 90,
+        "video": "tests/artifacts/arcade/checkpoints-1-5/idle-start.webm",
+        "frames": "tests/artifacts/arcade/checkpoints-1-5/idle-start-motion.png"
+      },
+      {
+        "name": "forest-return",
+        "minHearts": 5,
+        "maxTeleport": 2.125,
+        "grounds": [],
+        "broken": 0,
+        "playerX": 756.3125,
+        "video": "tests/artifacts/arcade/checkpoints-1-5/forest-return.webm",
+        "frames": "tests/artifacts/arcade/checkpoints-1-5/forest-return-motion.png"
+      },
+      {
+        "name": "gate-return",
+        "minHearts": 5,
+        "maxTeleport": 2.125,
+        "grounds": [],
+        "broken": 0,
+        "playerX": 3956.3125,
+        "video": "tests/artifacts/arcade/checkpoints-1-5/gate-return.webm",
+        "frames": "tests/artifacts/arcade/checkpoints-1-5/gate-return-motion.png"
+      },
+      {
+        "name": "natural-boughs",
+        "minHearts": 5,
+        "maxTeleport": 2.125,
+        "grounds": [
+          27,
+          28,
+          29
+        ],
+        "broken": 3,
+        "playerX": 1848.25,
+        "video": "tests/artifacts/arcade/checkpoints-1-5/natural-boughs.webm",
+        "frames": "tests/artifacts/arcade/checkpoints-1-5/natural-boughs-motion.png"
+      }
+    ],
+    "build": "npm run build passed (0 errors, 0 warnings, 29 hints)",
+    "visualReview": "Reviewed decoded motion contact sheets, full-size gateway/bough frames and the actual game UI opening. Broad ground retained."
+  },
+  "art": {
+    "tool": "image_gen (built-in)",
+    "prompts": "context/arcade/halloween-5-1/checkpoints-1-5/prompts.json",
+    "files": [
+      "public/arcade/maps/halloween/tree-solid-a.webp",
+      "public/arcade/maps/halloween/tree-solid-b.webp",
+      "public/arcade/maps/halloween/side-gate-solid.webp",
+      "public/arcade/maps/halloween/branch-tree-natural.webp",
+      "public/arcade/maps/halloween/branch-natural.webp"
+    ]
+  },
+  "limits": [
+    "Points 6-10 intentionally deferred, including isolated rock platforms.",
+    "No commit, push or unrelated cleanup."
+  ]
+}

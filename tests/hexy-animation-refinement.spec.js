@@ -53,9 +53,9 @@ test('every overhead frame emits above the hat, never from a gold boot buckle',(
   expect(hexyMuzzle(s).y).toBeLessThan(s.player.y-95);
  }
 });
-test('both minibosses preserve their cumulative health increases and balloon fire grows fifteen percent',()=>{
+test('both minibosses preserve their health and balloon explosions receive the global twelve percent reduction',()=>{
  expect(createAdventure().boss.maxHp).toBeCloseTo(161*1.44*1.15);expect(createAdventure(1).boss.maxHp).toBeCloseTo(164*1.44*1.15);
- expect(BOMB_FLAME_SIZE).toBeCloseTo(86*1.1*1.15);expect(BOMB_FLAME_RADIUS).toBeCloseTo(23*1.1*1.15);
+ expect(BOMB_FLAME_SIZE).toBeCloseTo(86*1.1*1.15*.88);expect(BOMB_FLAME_RADIUS).toBeCloseTo(23*1.1*1.15*.88);
  expect(bombFlames({x:0,floor:500})[0].drawSize).toBe(BOMB_FLAME_SIZE);
 });
 test('organ releases large notes and traverses six mechanical transformation stages',()=>{

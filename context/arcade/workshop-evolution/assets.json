@@ -1,0 +1,20 @@
+{
+  "mode": "built-in imagegen",
+  "sources": {
+    "volt": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-3a30e830-fdae-48d6-a450-89773bfe4252.png",
+    "ribbon": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-34ca8406-adbd-49f8-817e-fbe3c4b32a4a.png",
+    "hexy": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-e5911af3-7451-4c36-85d0-859d2c1ada1f.png",
+    "mods": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-d34271c0-8696-480e-b290-c983c43e3695.png"
+  },
+  "outputs": [
+    "public/arcade/sprites/effects/volt-beam-v2.webp",
+    "public/arcade/sprites/effects/ribbon-satin.webp",
+    "public/arcade/sprites/hexy/ribbon-swing.webp",
+    "public/arcade/sprites/ui/comet-dive.webp",
+    "public/arcade/sprites/ui/double-dash.webp",
+    "public/arcade/sprites/ui/sky-guard.webp",
+    "public/arcade/sprites/ui/reserve-sleeve.webp",
+    "public/arcade/sprites/ui/swift-step.webp",
+    "public/arcade/sprites/ui/skills-emblem.webp"
+  ]
+}

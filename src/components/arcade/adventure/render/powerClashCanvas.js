@@ -5,6 +5,9 @@ import {ultimateHand,ultimateBeamGeometry,HARLEQUIN_ULTIMATE} from '../actors/bo
 import {clashEffect,drawClashSparks} from './clashSpectacleCanvas';
 import {drawDuelCharge} from './duelCutinCanvas';
 import {drawChargeStreams,drawClashAtmosphere} from './clashAtmosphereCanvas';
+import {duelBeamPhase,drawDuelBeamTexture} from './duelBeamFrames';
+import {drawHexyCharge} from './adventureSuperCanvas';
+import {drawAnimeClashContact} from './clashImpactCanvas';
 const clamp=n=>Math.max(0,Math.min(1,n));
 function fx(c,art,row,frame,x,y,size,alpha=1){
  c.save();c.globalAlpha=alpha;c.drawImage(art['harlequin-ultimate-effects'],frame*256,row*256,256,256,x-size/2,y-size/2,size,size);c.restore();
@@ -21,10 +24,7 @@ function beam(c,img,a,b,frame,height,portion=1){
   c.bezierCurveTo(length-20,height*.13,length-48,height/2,shoulder,height/2);
   c.lineTo(-5,height/2);c.closePath();c.clip();
  }
- // Blend adjacent painted frames at render cadence: motion never holds for 1/12s.
- const base=Math.floor(frame)%4,mix=frame-Math.floor(frame),alpha=c.globalAlpha;
- c.drawImage(img,0,base*256,1024*portion,256,-5,-height/2,length+10,height);
- if(mix){c.globalAlpha=alpha*mix;c.drawImage(img,0,((base+1)%4)*256,1024*portion,256,-5,-height/2,length+10,height);}c.restore();
+ drawDuelBeamTexture(c,img,frame,-5,-height/2,length+10,height,portion);c.restore();
 }
 function beamFilaments(c,art,a,b,age,boss,reduced){
  const distance=Math.hypot(b.x-a.x,b.y-a.y),angle=Math.atan2(b.y-a.y,b.x-a.x);
@@ -47,8 +47,11 @@ export function drawPowerBackdrop(c,s,reduced){
 }
 export function drawPowerWorld(c,s,art,reduced){
  const u=s.boss.ultimate,q=s.powerClash;if(!u&&!q)return;
- const age=q?.age??u.age,frame=reduced?1:Math.floor(age*12)%4,beamFrame=reduced?1:(age*18)%4;
+ const age=q?.age??u.age,frame=reduced?1:Math.floor(age*12)%4,beamFrame=duelBeamPhase(s.fxTime,reduced);
  drawChargeStreams(c,s,art,reduced);
+ // The standalone backdrop is skipped during a duel; Hexy's absorption must
+ // still be drawn while answering the Harlequin's charge.
+ if(q?.state==='windup')drawHexyCharge(c,s,art,reduced);
  if(q&&['travel','contest','resolve'].includes(q.state)){
   const h=clashContact(s),swell=reduced?1:1+Math.sin(age*21)*.06+(q.wave||0)*.09;
   const travel=q.state==='travel'?clamp(age/CLASH_TRAVEL):1;
@@ -67,6 +70,7 @@ export function drawPowerWorld(c,s,art,reduced){
   // Painted contact + expanding shock rings, with short local colour pulses.
   c.save();c.translate(h.x,h.y);c.rotate(Math.atan2(h.b.y-h.a.y,h.b.x-h.a.x));
   clashEffect(c,art,0,frame,0,0,(q.state==='resolve'?320+q.age*440:320+(q.tapPulse>0?28:0))*swell);c.restore();
+  drawAnimeClashContact(c,s,art,h,reduced);
   if(!reduced)for(let i=0;i<2;i++){
    const t=(age*1.5+i*.5)%1,size=140+t*230;
    painted(c,art,'heads',16+i*8+Math.floor(t*8),h.x,h.y,size,size*.875,age*.5+i*Math.PI,(1-t)*.65);

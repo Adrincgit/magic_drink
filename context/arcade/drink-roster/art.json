@@ -1,0 +1,44 @@
+{
+  "generator": "built-in image_gen",
+  "references": [
+    "public/arcade/sprites/pickups/aqua-berry.webp"
+  ],
+  "jobs": [
+    {
+      "key": "jelly-can",
+      "prompt": "Generate ONE new transparent game pickup illustration, using the attached Aqua Berry can only as the STYLE and FAMILY reference, not as an edit target. Front-facing tall soda can, whole object with generous transparent margins, silver lid and base, strong clean black cartoon outlines, crisp flat colors with restrained highlights, hand-drawn playful Magic Drink game universe. New flavor: JELLY CHERRY. Cherry-red and magenta can with creamy pink accents and little cherries, a cheerful squishy red jelly cat mascot bouncing on a golden star. Large extremely readable exact lettering MAGIC DRINK, smaller exact flavor JELLY CHERRY. Same overall can proportions and typography hierarchy as the reference. Product only, straight vertical, no ground shadow, no backdrop, no extra items, no photoreal reflections.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-c72852a3-c38d-4507-ae00-66b23e43df96.png",
+      "output": "public/arcade/sprites/pickups/jelly-cherry.webp"
+    },
+    {
+      "key": "jelly-fx",
+      "prompt": "Transparent animation sprite sheet for Jelly Cherry magic in a hand-painted colorful cartoon 2D platform game. EXACT FOUR columns THREE rows, twelve equally spaced isolated cells, generous transparent padding around EVERY sprite, no text/grid/background. Crisp dark burgundy outlines, red cherry translucent gelatin with pink-white highlights, little yellow star motif, flat friendly cel shading, not photoreal. ROW ONE: four consecutive bouncing cherry jelly projectile frames, spherical with tiny cherry stalk: round, horizontally squashed, vertically stretched, round with wobble; SAME visual volume and centered registration. ROW TWO: four consecutive frames of a low wide magical jelly SPRING PAD made entirely of coiled cherry-red gelatin, golden star on front, rooted to same bottom baseline: ready raised coil, compressed flattened coil, tall spring recoil, settling ready coil. Entire pad shape inside each cell, transparent below. ROW THREE: four consecutive impact burst frames made of pink jelly droplets and tiny cherry-red fragments, opening, expanding, breaking apart, dissipating. No metal mechanisms, no floor, no unrelated objects, no characters. Each cell includes ONE effect only; consistent size and baseline across animation. 1536x1024 wide sheet.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-b238399a-a155-4b7f-be9d-fd618f7b36e4.png",
+      "output": "public/arcade/sprites/effects/jelly-cherry.webp"
+    },
+    {
+      "key": "prism-can",
+      "prompt": "ONE new transparent collectible soda can for the same illustrated Magic Drink game family as reference Aqua Berry. Use reference for graphic style only. Whole front-facing tall can with silver lid and base, generous transparent margins, straight vertical, crisp thick black outlines, flat friendly cartoon shading, no cast shadow. New flavor PRISM PEACH. Peach-orange and lavender label, small peach fruits and tiny musical notes, cute lavender origami fox mascot holding a faceted peach-pink triangular crystal that splits light into coral, mint and violet rays. Large exact title MAGIC DRINK in cheerful yellow and lavender letters, smaller exact flavor PRISM PEACH. Clean readable label, distinctive magical peach theme. Not photoreal, no scenery, no additional objects outside the can.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-8073bd41-db7f-4427-93f0-e440288253d5.png",
+      "output": "public/arcade/sprites/pickups/prism-peach.webp"
+    },
+    {
+      "key": "prism-fx",
+      "prompt": "Transparent sprite sheet for Prism Peach magic in a hand-painted cartoon platform game. Exact FOUR columns THREE rows, 12 equally sized isolated animation cells, each with generous transparent padding. No text, no grid, no background, no dark backdrop, no full-cell glow. Crisp purple outlines and flat peach-pink, lavender, mint facets. ROW ONE four animation frames of a narrow horizontal peach-colored light needle travelling RIGHT, pointed crystal head and thin luminous short trailing streak, same center. ROW TWO four frames of ONE floating triangular peach-lavender crystal PRISM, slowly rotating around its vertical axis while remaining centered, recognizable triangular crystal, three colored highlights in its facets, consistent size. ROW THREE four consecutive crystal light impact frames: small peach-white contact spark, sharp three-color refracted sparkle, breaking into small facets, dissipating tiny fragments. Restrained highlights confined to the drawn shapes, fully transparent empty space. Charming animated ink-and-paint game art, no photo or realism. 1536x1024 sheet.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-78c34bc6-26ea-4f22-a60b-5eebb8b8ef76.png",
+      "output": "public/arcade/sprites/effects/prism-peach.webp"
+    },
+    {
+      "key": "echo-can",
+      "prompt": "ONE transparent front-facing tall soda can illustration, the same Magic Drink game family as the attached reference can. Reference is for family style only. Entire can with silver lid and base, centered straight vertically with transparent margins. Crisp thick black outlines and flat playful cartoon shading. New flavor ECHO MELON. Mint green label with watermelon pink and dark green rind stripes, tiny melon slices and musical notes. Cute small pale mint bat mascot wearing round pink headphones, singing and hugging a golden star; friendly eyes and tiny wings. Large exact MAGIC DRINK lettering in yellow and pink, smaller exact ECHO MELON. Readable graphic label, cheerful musical identity. No background, no floor, no cast shadow, no photorealism, no props beyond the can.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-e12f6bf5-82bd-4312-a690-a017480fbd99.png",
+      "output": "public/arcade/sprites/pickups/echo-melon.webp"
+    },
+    {
+      "key": "echo-fx",
+      "prompt": "Transparent sprite sheet for Echo Melon magic in a colorful hand-painted cartoon 2D platform game. EXACT FOUR columns THREE rows, twelve evenly spaced isolated animation cells, generous transparent padding in every cell, no text, no grid, no scenery. Crisp dark teal outlines, mint cyan and watermelon pink, flat ink-and-paint shading. ROW ONE four consecutive frames of ONE sound-wave pulse traveling RIGHT: a thin curved crescent of mint sound opening toward the right, with two tiny pink musical notes trailing left; expands slightly through the cycle. ROW TWO four looping frames of a magical musical aura around an EMPTY center: sparse floating mint/pink notes around a soft oval ring, for surrounding a character silhouette, NO character included. ROW THREE four consecutive sonic impact frames: little mint-white star and musical notes, expanding pink/mint notes, fragments, sparse fading notes. Restrained highlights only on the shapes, fully transparent empty spaces, no full-cell glow. Not photorealistic, not pixel art. Consistent centers, all art contained inside each cell. 1536x1024 wide sheet.",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-1ab9b83a-6bd5-4bf0-b6fc-54d3042c42b8.png",
+      "output": "public/arcade/sprites/effects/echo-melon.webp"
+    }
+  ]
+}

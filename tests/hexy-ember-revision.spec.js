@@ -31,34 +31,31 @@ test('guarded water balloons burst into a splash and falling droplets',()=>{
  const q={kind:'barge-balloon',barge:true,water:true,x:s.player.x+35,y:s.player.y-30,r:23,vx:-100,life:3};
  expect(guardBlocks(s,q)).toBe(true);expect(q.life).toBe(0);expect(s.effects.some(e=>e.bargeSplash)).toBe(true);expect(s.effects.filter(e=>e.waterDrop)).toHaveLength(6);
 });
-test('fort has independently damaged cannons, then an exposed core, and does not end the walk at death',()=>{
- const s=battle(5),parts=fortSystems(s);expect(fortTargets(s).filter(t=>!t.part.startsWith('window-')).map(t=>t.part)).toEqual(['upper','lower','core']);
- strike(s,'upper',999);expect(parts.upper.hp).toBe(0);expect(parts.lower.hp).toBe(70);expect(s.boss.hp).toBe(210);expect(parts.upper.flash).toBeGreaterThan(0);expect(parts.lower.flash).toBe(0);
- strike(s,'lower',999);tick(s,40);expect(s.boss.phase).toBe('transform');expect(fortTargets(s).filter(t=>!t.part.startsWith('window-')).map(t=>t.part)).toEqual(['core']);tick(s,300);expect(fortTargets(s).filter(t=>!t.part.startsWith('window-')).map(t=>t.part)).toEqual(['core']);strike(s,'core',999);tick(s,360);
- expect(s.boss.hp).toBe(0);expect(s.boss.defeat.ready).toBe(true);expect(s.done).toBe(false);expect(s.clear).toBeFalsy();expect(s.arenaLocked).toBe(false);
- const x=s.player.x;tick(s,120,{right:true});expect(s.player.x).toBeGreaterThan(x+100);
- s.player.x=s.level.fortDoor.x;tick(s,180);expect(s.fortInside).toBe(true);expect(s.player.x).toBe(s.level.fortDoor.insideX);
- s.player.x=s.level.exit[0];tick(s,140);expect(s.done).toBe(true);expect(s.won).toBe(true);expect(nextAdventureChapter(s.index)).toBe(3);
+test('fort cannons take local damage independently; the wall and door protect the core until broken',()=>{
+ const s=battle(5),parts=fortSystems(s);expect(fortTargets(s).filter(t=>!t.part.startsWith('window-')).map(t=>t.part)).toEqual(['wall','upper','lower']);
+ strike(s,'upper',999);expect(parts.upper.hp).toBe(0);expect(parts.lower.hp).toBe(60);expect(s.boss.hp).toBe(340);expect(parts.upper.flash).toBeGreaterThan(0);expect(parts.lower.flash).toBe(0);
+ strike(s,'lower',999);tick(s,40);expect(s.boss.coreOpened).toBeFalsy();strike(s,'wall',999);strike(s,'gate',999);tick(s,310);expect(s.boss.coreOpened).toBe(true);strike(s,'core',999);tick(s,560);
+ expect(s.boss.hp).toBe(0);expect(s.boss.defeat.ready).toBe(true);expect(s.clear).toBeTruthy();expect(s.arenaLocked).toBe(false);
+ tick(s,2000);expect(s.done).toBe(true);expect(s.won).toBe(true);expect(nextAdventureChapter(s.index)).toBe(3);
  retryAdventure(s);expect(s.fortInside).toBeUndefined();expect(s.boss.hp).toBe(s.boss.maxHp);
 });
-test('fort preserves backstage enemies, announces attacks before launching, and its shots are fire',()=>{
+test('fort ends the forest route, announces attacks before launching, and its shots are fire',()=>{
  const s=createAdventure(5);s.player.x=s.level.arena.entry+20;s.player.y=s.level.arena.y;s.player.hurt=999;tick(s,1);
- expect(s.enemies.some(e=>e.x>s.level.fortDoor.insideX)).toBe(true);tick(s,220);expect(s.hostile.some(q=>q.ember)).toBe(false);
+ expect(s.enemies.some(e=>e.x>s.level.arena.right)).toBe(false);tick(s,220);expect(s.hostile.some(q=>q.ember)).toBe(false);
  const phases=new Set();for(let i=0;i<480;i++){stepAdventure(s,{},1/120);phases.add(s.boss.phase);}
  expect(phases.has('warn')).toBe(true);expect(phases.has('attack')).toBe(true);expect(s.hostile.some(q=>q.ember&&q.element==='fire')).toBe(true);
 });
-test('ordinary aimed shots can disable both gun decks and then the heart from inside the fort',()=>{
- const s=battle(5);s.player.x=s.boss.x-200;s.boss.timer=999;
+test('ordinary horizontal shots can breach both barriers and destroy the core without special ammo',()=>{
+ const s=battle(5);s.player.x=s.boss.x-750;s.boss.timer=999;
  for(let i=0;i<10800&&s.boss.hp>0;i++){
-  const parts=fortSystems(s),guns=parts.upper.hp>0||parts.lower.hp>0;
-  stepAdventure(s,guns?{attack:true,hold:true,up:true}:{right:true,attack:true,hold:s.player.x>=s.boss.x-100},1/120);
+  stepAdventure(s,{right:true,attack:true},1/120);
  }
- expect(fortSystems(s).upper.hp).toBe(0);expect(fortSystems(s).lower.hp).toBe(0);expect(s.boss.hp).toBe(0);
+ expect(fortSystems(s).wall.hp).toBe(0);expect(fortSystems(s).gate.hp).toBe(0);expect(s.boss.hp).toBe(0);
 });
 test('chapter order inserts the land approach and migrates progress without renumbering collected stars',()=>{
  expect(CHAPTER_ORDER).toEqual([0,1,2,5,3,4]);expect(nextAdventureChapter(2)).toBe(5);expect(nextAdventureChapter(5)).toBe(3);expect(nextAdventureChapter(4)).toBeNull();
  const save=sanitizeSave({version:1,adventureUnlocked:3,adventureCleared:[0,1,2,3],stars:123,economy:2});expect(save.adventureUnlocked).toBe(4);expect(save.adventureCleared).toEqual([0,1,2,3]);expect(save.stars).toBe(123);expect(sanitizeSave(save)).toEqual(save);
- expect(createAdventure(5).level.chapter).toBe('1-4');expect(createAdventure(3).level.chapter).toBe('1-5');expect(createAdventure(2).level.circusArrival).toBeUndefined();expect(createAdventure(3).player.x).toBeGreaterThan(0);
+ expect(createAdventure(5).level.chapter).toBe('1-4');expect(createAdventure(3).level.chapter).toBe('1-5');expect(createAdventure(2).level.circusArrival).toBeUndefined();expect(createAdventure(3).player.x).toBeLessThan(0);
 });
 
 test('forest, scorched approach, fortress, backstage and revised crews render in the browser',async({page})=>{
@@ -67,7 +64,7 @@ test('forest, scorched approach, fortress, backstage and revised crews render in
   const [{createAdventure,stepAdventure},{loadAdventureArt,renderAdventure},{followAdventureCamera},{fortSystems}]=await Promise.all([import('/src/components/arcade/adventure/engine/adventureModel.js'),import('/src/components/arcade/adventure/render/adventureCanvas.js'),import('/src/components/arcade/adventure/render/adventureCamera.js'),import('/src/components/arcade/adventure/actors/bosses/adventureEmberFort.js')]);
   const art=await loadAdventureArt(),c=document.createElement('canvas');c.id='ember-review';c.style='position:fixed;inset:0;z-index:99999;width:1440px;height:810px';document.body.append(c);window.ember={art,c,createAdventure,stepAdventure,renderAdventure,followAdventureCamera,fortSystems};
  });
- for(const [name,x]of [['forest',800],['scorched',7200],['fort',31070],['entrance',33250],['backstage',34300]]){
+ for(const [name,x]of [['forest',800],['scorched',7200],['fort',31070]]){
   await page.evaluate(({name,x})=>{const w=window.ember,s=w.createAdventure(5);w.s=s;s.player.x=x;s.player.y=s.level.arena.y;s.player.hurt=999;s.noticeTime=0;s.player.ground=0;if(name==='backstage')s.fortInside=true;if(name==='fort'){s.boss.phase='warn';s.boss.move='salvo';s.boss.timer=1;s.boss.engaged=true;s.arenaLocked=true;}for(let i=0;i<500;i++)w.followAdventureCamera(s,1/120);w.renderAdventure(w.c,s,w.art);},{name,x});
   await page.locator('#ember-review').screenshot({path:folder+name+'.jpg'});
  }

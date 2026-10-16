@@ -31,6 +31,7 @@ function resolve(s,won){
 }
 export function stepPowerClash(s,input,dt,{hurt,finishBoss}){
  const q=s.powerClash,p=s.player,b=s.boss;if(!q)return;
+ q.portraitPressure=(q.portraitPressure??.5)+(q.pressure-(q.portraitPressure??.5))*(1-Math.exp(-dt*7));
  updateSupplies(s,dt);
  q.flashPulse=Math.max(0,(q.flashPulse||0)-dt);
  q.age+=dt;s.time+=dt;b.flash=Math.max(0,b.flash-dt);q.tapPulse=Math.max(0,q.tapPulse-dt);q.rally=Math.max(0,q.rally-dt);stepWorldEffects(s,dt);stepClashSparks(q,dt);

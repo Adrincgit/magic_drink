@@ -27,6 +27,12 @@
 @keyframes recover{to{background-position:22px 0}}
 @media(prefers-reduced-motion:reduce){.fill,.superFill,.drinkFill,.companions .icon{transition:none}.vitals[data-exhausted=true] .fill{animation:none}}
 
-.mods{display:flex;gap:.65cqw;margin:.6cqw 0 0 .3cqw}.mods>div{position:relative;width:clamp(18px,3.2cqw,42px);height:clamp(20px,3.7cqw,47px)}.modIcon{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 1px 2px #322042)}.mods small{position:absolute;bottom:-.55em;left:0;width:100%;text-align:center;font:bold clamp(7px,1cqw,11px) Georgia;color:#ffe698;letter-spacing:.07em}
+.mods{display:flex;flex-wrap:wrap;gap:.65cqw;margin:.6cqw 0 0 .3cqw}.mods>div{position:relative;width:clamp(18px,3.2cqw,42px);height:clamp(20px,3.7cqw,47px)}.modIcon{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 1px 2px #322042)}.mods small{position:absolute;bottom:-.55em;left:0;width:100%;text-align:center;font:bold clamp(7px,1cqw,11px) Georgia;color:#ffe698;letter-spacing:.07em}
 
 .treasures{position:absolute;right:2%;bottom:8.5%;display:flex;align-items:center;gap:.5cqw;font:bold clamp(10px,1.5cqw,17px) Georgia;color:#ffe9ab;text-shadow:0 2px #392239}.treasures .icon{width:3cqw;height:3cqw;object-fit:contain;filter:drop-shadow(0 0 2px #f6c46a)}
+
+.pocket{pointer-events:auto;position:relative;display:grid;justify-items:center;align-content:center;min-width:44px;min-height:48px;padding:3px 6px 12px;border:1px solid #d7af67;border-radius:8px;color:#ffe6ac;background:#291c40cc;cursor:pointer;font:bold 12px Georgia}.pocket img{height:clamp(25px,4cqw,50px);width:24px;object-fit:contain}.pocket small{position:absolute;bottom:1px;white-space:nowrap;font-size:9px}.pocket:disabled{opacity:.5;cursor:default}.pocket:focus-visible{outline:2px solid #fff4bd;outline-offset:2px}
+
+.mods [data-cooling=true] img{filter:grayscale(.7) brightness(.6)}.mods [data-reply=true]{filter:brightness(1.5) drop-shadow(0 0 3px #fff3a9)}
+
+.basicMode{align-self:center;padding:4px 8px;border-radius:12px;background:#24193aca;color:#fff0ad;font:800 10px Nunito,sans-serif;letter-spacing:.06em}.pocket[data-basic-active="true"]{filter:drop-shadow(0 0 5px #ffe18b)}

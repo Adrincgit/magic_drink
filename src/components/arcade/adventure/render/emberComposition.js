@@ -20,7 +20,7 @@ export function emberForestPlacement(s,img){
 }
 export function emberValleyPlacement(s,img){
  const h=510,w=h*img.width/img.height;
- const x=-clamp(s.camera.x/(s.level.fortDoor.x-800))*(w-960);
+ const x=-clamp(s.camera.x/(s.level.width-2000))*(w-960);
  return{x,y:-30,w,h};
 }
 export function emberSceneryTrees(level){

@@ -1,4 +1,5 @@
 import {enemyMuzzle} from './adventureEnemyGeometry';
+import {bargeRig} from '../bosses/bargeRig';
 export const DIVER_TYPE=8;
 export const WATER_BOLT='water-bolt';
 export const diverInWater=e=>e.type===8&&['hidden','emerge','swim','dive','submerged','surfaceFire'].includes(e.phase);
@@ -16,8 +17,13 @@ export function updateDiver(s,e,dt,shoot){
  e.phaseAge=(e.phaseAge||0)+dt;e.diveWait=Math.max(0,(e.diveWait||0)-dt);
  e.dir=Math.sign(s.player.x-e.x)||-1;
  if(e.phase==='hidden'){if(Math.abs(s.player.x-e.x)<760){e.phase='emerge';e.phaseAge=0;waterSplash(s,e.x,e.waterY,45);}return;}
+ if(e.phase==='exit'){
+  const m=bargeRig(s),u=Math.min(1,e.phaseAge/.95);e.dir=1;
+  e.x=m.stern.x+(m.ledge.x-m.stern.x)*u;e.y=m.stern.y+(m.ledge.y-m.stern.y)*u;e.gait=(e.gait||0)+dt*1.2;
+  if(u===1){e.phase='deploy';e.phaseAge=0;e.vy=-200;e.launchVx=85;}return;
+ }
  if(e.phase==='deploy'){
-  e.x-=105*dt;e.vy+=700*dt;e.y+=e.vy*dt;
+  e.dir=e.bargeCrew?1:-1;e.x+=(e.launchVx??-105)*dt;e.vy+=700*dt;e.y+=e.vy*dt;
   if(e.y>=e.waterY&&e.vy>0){e.y=e.waterY+14;e.phase='submerged';e.phaseAge=0;e.home=e.x;waterSplash(s,e.x,e.waterY,110);}return;
  }
  if(e.phase==='emerge'){
@@ -75,6 +81,7 @@ export function updateDiver(s,e,dt,shoot){
 export function diverDrawing(e,reduced=false){
  if(e.hp<=0)return{key:'river-diver',frame:3};
  if(['emerge','dive','surfaceFire'].includes(e.phase))return{key:'river-diver-water',frame:e.phase==='emerge'?Math.min(3,Math.floor(e.phaseAge/.85*4)):e.phase==='dive'?4+Math.min(3,Math.floor(e.phaseAge/.65*4)):8+Math.min(3,Math.floor(e.phaseAge/.85*4)),columns:4,surface:true};
+ if(e.phase==='exit')return{key:'river-diver-aquatic',frame:18+(reduced?0:Math.floor((e.gait||0)*12)%6),columns:6};
  if(e.phase==='deploy')return{key:'river-diver-aquatic',frame:7+Math.min(3,Math.floor(e.phaseAge*5)),columns:6};
  const loop=reduced?0:Math.floor(e.clock*14)%6;
  const frame=e.phase==='swim'?loop:e.phase==='leap'?6+Math.min(4,Math.floor((e.leapAge||0)*5)):e.phase==='landing'?11:e.phase==='patrol'?18+(reduced?0:Math.floor((e.gait||0)*12)%6):12+(e.phase==='windup'?Math.min(1,Math.floor((.65-e.timer)*3)):e.phase==='attack'?2+(reduced?0:Math.floor((e.volleyAge||0)*14)%3):5);

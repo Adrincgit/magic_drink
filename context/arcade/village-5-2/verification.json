@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-14",
+  "timezone": "America/Tijuana",
+  "assets": [
+    {
+      "file": "sprites/enemies/village-villagers-v1.webp",
+      "sha256": "fe4193a7fcef8e5080f5474db42c091feac1ad790ade513e5ec0df1964262339",
+      "bytes": 1562810
+    },
+    {
+      "file": "sprites/enemies/village-witch-v1.webp",
+      "sha256": "e0cb76a0e0a1a60230bf0c738869e679b015189f43d4b60ea79f9f92932aa516",
+      "bytes": 868250
+    },
+    {
+      "file": "sprites/enemies/village-pumpkin-v1.webp",
+      "sha256": "71c4ff99310e455d352ec29f93f175b4d7922fb168992e12abaab72e4aff926b",
+      "bytes": 917214
+    },
+    {
+      "file": "maps/village/village-houses-v1.webp",
+      "sha256": "2e9742beea56d53a8267b9e6281cb781b7b363452729c203f4a8442dc59d9f46",
+      "bytes": 523804
+    },
+    {
+      "file": "maps/village/village-decor-v1.webp",
+      "sha256": "74dc3ca794857fafca46a077d76b3ca8b1d4742bc26215d5acce0002864b994c",
+      "bytes": 464414
+    },
+    {
+      "file": "maps/village/panorama-v1.webp",
+      "sha256": "524746f727833fb30781e0bd28c3dc2e04d518b0d8bbbbf36280b28d77ec71d2",
+      "bytes": 188326
+    },
+    {
+      "file": "maps/village/street-v1.webp",
+      "sha256": "6831fc7c55496707c07c7c20f423cdd43f2e676800efc0b6913a060da1417c4b",
+      "bytes": 416212
+    }
+  ],
+  "preserved": [
+    {
+      "file": "nightmare-injured-v8.webp",
+      "sha256": "810c7f987fbb2139a657a4eef5c3c125e649121f77bc1eb6c62885d97d9d14d9"
+    },
+    {
+      "file": "nightmare-zombie-reactions-v8.webp",
+      "sha256": "9cd51af40b08b39eeb872a80f349483150be278c5dbcc0de4070d99c4fe70174"
+    },
+    {
+      "file": "nightmare-clothed-limbs-v7.webp",
+      "sha256": "f81ea037b9b437a3a66f9cbd287800029dcf21e3be52ee4f6573c7498734d086"
+    }
+  ],
+  "recordings": [
+    {
+      "name": "arrival",
+      "renderP95": 8.900000005960464,
+      "simulationTime": 10.416666666666716,
+      "turned": 0,
+      "won": false
+    },
+    {
+      "name": "candy",
+      "renderP95": 6.399999998509884,
+      "simulationTime": 7.175000000000146,
+      "turned": 1,
+      "won": false
+    },
+    {
+      "name": "street",
+      "renderP95": 14.100000001490116,
+      "simulationTime": 8.575000000000154,
+      "turned": 2,
+      "won": false
+    },
+    {
+      "name": "refuge",
+      "renderP95": 10.799999997019768,
+      "simulationTime": 6.733333333333458,
+      "turned": 0,
+      "won": true
+    }
+  ],
+  "tests": {
+    "village": 8,
+    "recording": 1,
+    "regression": 15
+  },
+  "build": {
+    "errors": 0,
+    "complete": true
+  },
+  "visualReview": [
+    "arrival-motion.png",
+    "candy-motion.png",
+    "candy-frame-3.png",
+    "street-motion.png",
+    "street-frame-5.png",
+    "refuge-motion.png"
+  ],
+  "notes": "Local implementation and production build. Not published."
+}

@@ -1,0 +1,156 @@
+{
+  "hexy-pumpkin": {
+    "output": "public/arcade/sprites/enemies/village-hexy-pumpkin-v6.webp",
+    "frames": [
+      {
+        "left": 21,
+        "top": 131,
+        "width": 405,
+        "height": 323,
+        "row": 0,
+        "col": 0,
+        "scale": 0.5492957746478874,
+        "packed": {
+          "width": 222,
+          "height": 177,
+          "left": 17,
+          "top": 73
+        }
+      },
+      {
+        "left": 454,
+        "top": 66,
+        "width": 426,
+        "height": 405,
+        "row": 0,
+        "col": 1,
+        "scale": 0.5492957746478874,
+        "packed": {
+          "width": 234,
+          "height": 222,
+          "left": 11,
+          "top": 28
+        }
+      },
+      {
+        "left": 892,
+        "top": 79,
+        "width": 426,
+        "height": 392,
+        "row": 0,
+        "col": 2,
+        "scale": 0.5492957746478874,
+        "packed": {
+          "width": 234,
+          "height": 215,
+          "left": 11,
+          "top": 35
+        }
+      },
+      {
+        "left": 1338,
+        "top": 123,
+        "width": 415,
+        "height": 338,
+        "row": 0,
+        "col": 3,
+        "scale": 0.5492957746478874,
+        "packed": {
+          "width": 228,
+          "height": 186,
+          "left": 14,
+          "top": 64
+        }
+      },
+      {
+        "left": 42,
+        "top": 503,
+        "width": 381,
+        "height": 319,
+        "row": 1,
+        "col": 0,
+        "scale": 0.5492957746478874,
+        "packed": {
+          "width": 209,
+          "height": 175,
+          "left": 24,
+          "top": 75
+        }
+      },
+      {
+        "left": 473,
+        "top": 509,
+        "width": 385,
+        "height": 321,
+        "row": 1,
+        "col": 1,
+        "scale": 0.5492957746478874,
+        "packed": {
+          "width": 211,
+          "height": 176,
+          "left": 23,
+          "top": 74
+        }
+      },
+      {
+        "left": 927,
+        "top": 518,
+        "width": 377,
+        "height": 308,
+        "row": 1,
+        "col": 2,
+        "scale": 0.5492957746478874,
+        "packed": {
+          "width": 207,
+          "height": 169,
+          "left": 25,
+          "top": 81
+        }
+      },
+      {
+        "left": 1360,
+        "top": 504,
+        "width": 379,
+        "height": 324,
+        "row": 1,
+        "col": 3,
+        "scale": 0.5492957746478874,
+        "packed": {
+          "width": 208,
+          "height": 178,
+          "left": 24,
+          "top": 72
+        }
+      }
+    ],
+    "ys": [
+      0,
+      471,
+      887
+    ]
+  },
+  "pumpkin": {
+    "output": "public/arcade/sprites/enemies/village-pumpkin-v6.webp"
+  },
+  "clouds": {
+    "output": "public/arcade/maps/village/clouds-v6.webp"
+  },
+  "pillar-near": {
+    "output": "public/arcade/maps/village/pillar-near-v6.webp",
+    "box": {
+      "left": 102,
+      "top": 0,
+      "width": 587,
+      "height": 1024
+    }
+  },
+  "pillar-far": {
+    "output": "public/arcade/maps/village/pillar-far-v6.webp",
+    "box": {
+      "left": 1092,
+      "top": 260,
+      "width": 372,
+      "height": 634
+    }
+  }
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "name": "launcher",
+    "out": "public/arcade/sprites/enemies/cannon-launcher-painted.webp",
+    "cell": 384,
+    "scale": 0.5598455598455598,
+    "boxes": [
+      {
+        "left": 30,
+        "top": 125,
+        "width": 518,
+        "height": 490
+      },
+      {
+        "left": 14,
+        "top": 126,
+        "width": 516,
+        "height": 489
+      },
+      {
+        "left": 17,
+        "top": 209,
+        "width": 463,
+        "height": 406
+      },
+      {
+        "left": 40,
+        "top": 210,
+        "width": 463,
+        "height": 405
+      }
+    ]
+  }
+]

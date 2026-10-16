@@ -15,7 +15,7 @@ export function resolveEmberPitWalls(s,oldX){
 }
 export function resetEmberEnvironment(s,at=0){
  if(!s.level.emberTrail)return;
- s.emberEnvironment={bushes:s.level.bushes.map(q=>({...q,state:'green',age:0})),trees:s.level.fallingTrees.map(q=>({...q,phase:q.x+q.h<at?'spent':'standing',age:0,angle:0})),flocks:s.level.birdFlocks.map(q=>({...q,age:q.x<at-600?99:-1}))};
+ s.emberEnvironment={wetGround:[],pits:s.level.emberPits.map(q=>({...q})),bushes:s.level.bushes.map(q=>({...q,state:'green',age:0})),trees:s.level.fallingTrees.map(q=>({...q,phase:q.x+q.h<at?'spent':'standing',age:0,angle:0})),flocks:s.level.birdFlocks.map(q=>({...q,age:q.x<at-600?99:-1}))};
  s.platforms=s.platforms.filter(q=>!q.emberFallen);
  s.player.heat=0;s.player.heatIdle=0;
  s.emberEnvironment.wildlife=resetEmberWildlife(at);
@@ -44,6 +44,8 @@ export function stepEmberEnvironment(s,dt){
  if(!s.level.emberTrail)return;
  if(!s.emberEnvironment)resetEmberEnvironment(s);
  const p=s.player,env=s.emberEnvironment;
+ env.wetGround=env.wetGround.filter(q=>(q.life-=dt)>0);
+ for(const q of env.bushes)q.wetTime=Math.max(0,(q.wetTime||0)-dt);
  if(s.fortInside){p.heat=Math.max(0,p.heat-dt);p.heatIdle=0;return;}
  stepEmberWildlife(s,dt);
  let heat=0;
@@ -52,7 +54,8 @@ export function stepEmberEnvironment(s,dt){
  p.heat+=(heat-p.heat)*(1-Math.exp(-dt*(heat>p.heat?1.8:.8)));
  p.heatIdle=p.heat>.4&&p.ground!==null&&Math.abs(p.vx)<20&&!p.firing&&!p.cast&&!p.guarding&&!p.hitReact&&!p.dash?(p.heatIdle||0)+dt:0;
  for(const q of env.flocks){if(q.age<0&&Math.abs(p.x-q.x)<650)q.age=0;else if(q.age>=0)q.age+=dt;}
- for(const pit of s.level.emberPits){
+ for(const pit of env.pits){
+  if(pit.quenched)continue;
   if(p.x+12>pit.x+8&&p.x-12<pit.x+pit.w-8&&p.y>=pit.y-20&&p.y<pit.y+45){
    const hearts=s.hearts;s.damage?.({element:'fire',x:pit.x+pit.w/2});
    if(s.hearts<hearts&&!s.playerDefeat){p.vy=-370;p.ground=null;p.jumps=0;}
@@ -64,16 +67,16 @@ export function stepEmberEnvironment(s,dt){
   else if(q.phase!=='standing')q.age+=dt;
   if(q.phase==='warning'&&q.age>=q.warning){q.phase='falling';q.age=0;s.events.push('treeFall');}
   if(q.phase==='falling'){
-   if(nearTrunk(p,q))s.damage?.({element:'physical',heavyImpact:true,x:q.x});
+   if(!q.scenic&&nearTrunk(p,q))s.damage?.({element:'physical',heavyImpact:true,x:q.x});
    if(q.age>=1.05){
-    q.phase='fallen';q.age=0;s.shake=.16;s.events.push('treeLand');
+    q.phase='fallen';q.age=0;if(!q.scenic)s.shake=.16;s.events.push('treeLand');
     const x=q.dir>0?q.x:q.x-q.h*.8;
     const w=q.h*.8,y=groundY(s.level.route,x)-18,yEnd=groundY(s.level.route,x+w)-18;
     q.landedAngle=Math.atan2(q.dir*w,-(groundY(s.level.route,q.x+q.dir*w)-q.y));
-    s.platforms.push({x,y,yEnd,w,h:18,kind:'ember-log',emberFallen:true,dx:0,dy:0});
+    if(!q.scenic)s.platforms.push({x,y,yEnd,w,h:18,kind:'ember-log',emberFallen:true,dx:0,dy:0});
    }
   }
   q.angle=emberTreeAngle(q);
-  if(q.phase==='fallen'&&q.burning&&nearTrunk(p,q))s.damage?.({element:'fire',x:q.x});
+  if(!q.scenic&&q.phase==='fallen'&&q.burning&&nearTrunk(p,q))s.damage?.({element:'fire',x:q.x});
  }
 }

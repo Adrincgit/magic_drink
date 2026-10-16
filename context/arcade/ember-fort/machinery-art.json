@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-12",
+  "tool": "built-in image_gen",
+  "bulwark": {
+    "prompt": "Use case: stylized-concept. Asset: transparent 2D game sprite sheet for the foreground defense of the attached red-and-gold circus fortress. Reference image is STYLE ONLY, do not redraw the whole fortress. Paint a formidable angled siege bulwark, a stout layered barricade made of scorched dark red timber beams, charcoal iron diagonal buttresses, heavy brass rivets and tiny hanging tattered crimson circus cloth, one gold diamond emblem. It is NOT a door, no archway, no handles, no thin picket fence. Strong grounded wide triangular foot, jagged uneven top, believable thickness on its right side, light from upper left. Hand painted detailed side-view fantasy videogame art matching the reference. Sheet exactly TWO columns TWO rows, four equal square cells, each with wide transparent margin, same scale and aligned ground: upper left intact, upper right heavy damage with clear cracks and missing planks, bottom left collapsing into broken falling timbers with intact low base, bottom right low pile of broken timbers and bent metal. In intact pose silhouette about 65 percent width and 82 percent height of its cell. Four coherent states of EXACT SAME bulwark. No characters, no fire background, no captions, no checkerboard, genuinely transparent alpha around every isolated sprite.",
+    "source": "sources/bulwark.png",
+    "output": "public/arcade/sprites/bosses/ember-fort/bulwark.webp"
+  },
+  "gate": {
+    "prompt": "Use case: precise-object-edit. Create a sprite sheet for the EXACT double door shown in the input reference. FOUR CELLS in one horizontal row, all exactly same scale, stationary arch silhouette and threshold aligned, genuine transparent outside the outer arch. Matching detailed painted fantasy game art. This is the fortress's large RED wooden double gate with polished BRASS arch, hinges, horizontal metal strips and a gold diamond split across the center. Cell1 CLOSED exactly like reference. Cell2 the two leaves opening inward about 25 degrees, revealing a narrow dark warm interior. Cell3 leaves opened inward 60 degrees, larger dark opening. Cell4 leaves fully open inward with a dark deep interior passage and subtle warm orange backlight near floor. Keep the fixed rounded frame outline unchanged in ALL cells; the doors stay inside the same exterior frame width. No fire, no characters, no objects in the doorway, no ground outside, no text, no gaps between frame and doorway. Each cell square with transparent margin. The center of the open doorway must be opaque near-black; alpha only outside the arch, not in the doorway. Preserve the original artistic style and original red/brass palette, no new ornament or oval door design.",
+    "source": "sources/grand-gate.png",
+    "output": "public/arcade/sprites/bosses/ember-fort/grand-gate.webp"
+  }
+}

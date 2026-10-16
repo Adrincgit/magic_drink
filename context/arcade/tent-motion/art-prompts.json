@@ -1,0 +1,24 @@
+[
+  {
+    "key": "meadow",
+    "prompt": "Use case identity-preserve. Production hand-painted 2D game sprite atlas matching the reference circus outpost EXACTLY: round pink and cream striped roof, purple curtains, gold star trims and tassels, gold poles, small red star flag, leafy planted base. Create precisely EIGHT wind-animation cels in FOUR columns TWO rows on real transparent background. Row0 four gentle breeze cels with curtains CLOSED. Row1 four corresponding breeze cels with curtains fully OPEN. Preserve tent identity, original small proportions and art detail, no new tent design. Common fixed roof peak, gold poles, footprint and scale across all eight cels. Only cloth/fringe/tassels and the red flag flutter; four distinct fabric folds and flag curls, seamless gentle sequence, no whole-tent rotation or squashing. In open row, the doorway is deep DARK OPAQUE burgundy-black painted interior following the curtains' irregular boundaries down to the tent threshold. Exterior remains transparent. No transparent hole, no rectangular backing protruding beneath tent. No clowns, text, grids, blur or SVG appearance. Fully uncropped tent in each equal square cell; generous transparent gutters.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/props/clown-outpost.webp"
+    ]
+  },
+  {
+    "key": "camp",
+    "prompt": "Use case precise-object-edit. EDIT the reference eight-cel 4-column 2-row tent atlas. Preserve EXACTLY its existing red/cream tent designs, flags with gold diamonds, painted texture, roof, poles, ropes, fringes, cell layout, art scale and four different wind poses in each row. Fix ONLY the open door interiors in the TOP FOUR cells: these are currently see-through alpha holes. Fill each opening with opaque deep almost-black burgundy interior darkness, a faint shaded canvas fold receding into the darkness. The dark interior MUST follow the actual curved/tapered curtain opening from its top apex to the curved tent threshold. No rectangle, no spill below the fabric's hem, no extra black background outside tent, no shadow slab. Give opening a believable dark depth. Keep every exterior alpha pixel transparent. Keep lower CLOSED row unchanged. FOUR columns TWO rows, wide 8:3 total atlas aspect, rectangular 4:3 cells. No layout guides, grid, text or new character. Do not redesign or rotate tents. High quality painterly finish coherent with original.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/maps/circus/camp-wind-painted.webp"
+    ]
+  },
+  {
+    "key": "juggler",
+    "prompt": "Use case identity-preserve. Production hand-painted 2D WALK sprite animation for the exact PURPLE polka-dot red-haired clown with three juggling balls from reference. Precisely EIGHT equal square cells in FOUR columns TWO rows, transparent background. All face LEFT with same round white face, large eyes, red nose, orange curly hair, purple pointed cap with orange dots and gold bell, yellow ruff, purple/orange-dot short round costume and purple curled shoes. He cradles EXACTLY the same red-white, blue-white and green-white balls against his chest with two white-gloved hands throughout. Animate ONLY a natural complete WALK cycle with eight distinct leg/support poses and small weight shifts: near foot forward contact, compression, far knee passing forward, push-off, FAR foot forward contact with NEAR foot now behind, compression on far foot, near knee passing, push-off. Front and back legs must exchange positions between first and second halves. Short separate legs with bent knees, naturally attached to hips; never stretch into a worm. Keep the head facing left, stable face and overall scale, shared floor baseline for planted soles, no circular head movement. Tiny hat/ball secondary bob. Full body and all three balls contained in every cell with alpha gutters. No floating/juggling/thrown balls, extra hands, new clothing, background, text or repeated standing pose. Preserve original shaded painterly style and clean dark outline.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/enemies/juggler-actions.webp",
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/enemies/juggler.webp"
+    ]
+  }
+]

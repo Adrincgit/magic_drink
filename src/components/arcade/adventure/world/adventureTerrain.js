@@ -2,7 +2,12 @@ const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
 // One surface function drives collisions, artwork and planted scenery.
 export function surfaceY(platform,x){
- return platform.y+((platform.yEnd??platform.y)-platform.y)*clamp((x-platform.x)/platform.w,0,1);
+ const t=clamp((x-platform.x)/platform.w,0,1);
+ if(platform.profile){
+  const points=platform.profile,i=Math.max(1,points.findIndex(q=>q[0]>=t)),a=points[i-1],b=points[i];
+  return platform.y+a[1]+(b[1]-a[1])*(t-a[0])/(b[0]-a[0]);
+ }
+ return platform.y+((platform.yEnd??platform.y)-platform.y)*t;
 }
 export function groundAt(platforms,x){
  return platforms.find(q=>q.kind==='earth'&&x>=q.x&&x<=q.x+q.w);

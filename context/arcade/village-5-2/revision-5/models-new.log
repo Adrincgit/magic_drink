@@ -1,0 +1,63 @@
+
+Running 10 tests using 1 worker
+
+node.exe : (node:27160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+En línea: 1 Carácter: 1
++ & "C:\nvm4w\nodejs/node.exe" "C:\nvm4w\nodejs/node_modules/npm/bin/np ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((node:2... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:27160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/10] [chromium] › tests\hexy-village-revision-5.spec.js:13:1 › witch is 10 percent larger and survives 15 percent more damage
+[2/10] [chromium] › tests\hexy-village-revision-5.spec.js:16:1 › absorption heals once and transfers the exact victim into one released pumpkin
+[3/10] [chromium] › tests\hexy-village-revision-5.spec.js:22:1 › a healthy witch can create a pumpkin, but taking damage before consumption cancels it
+[4/10] [chromium] › tests\hexy-village-revision-5.spec.js:27:1 › pumpkin fire transforms a civilian, with ownership independent of its former witch
+[5/10] [chromium] › tests\hexy-village-revision-5.spec.js:32:1 › pumpkin destruction falls first, releases all its captives once on landing, then they flee
+[6/10] [chromium] › tests\hexy-village-revision-5.spec.js:39:1 › actual player shots break a pumpkin through the shared defeat path and release its villager
+  1) [chromium] › tests\hexy-village-revision-5.spec.js:39:1 › actual player shots break a pumpkin through the shared defeat path and release its villager 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected value: "carried"
+    Received array: ["rescue", "flee", "safe"]
+
+      39 | test('actual player shots break a pumpkin through the shared defeat path and release its villager',()=>{
+      40 |  const s=setup(),q=s.villagers[0],e=spawnSoulPumpkin(s,makeEnemy(260,480,26),q);s.villagers=[q];Object.assign(e,{x:240,home:240,y:445,phase:'patrol',phaseAge:0,flightHeight:35,timer:99});
+    > 41 |  tick(s,3.5,{attack:true});expect(e.defeated).toBe(true);expect(e.pumpkinFall?.landed).toBe(true);expect(['rescue','flee','safe']).toContain(q.state);
+         |                                                                                                                                    ^
+      42 | });
+      43 | test('ghost fire traps Hexy like the witch spell and obeys last-heart candy defeat',()=>{
+      44 |  const s=setup();s.villagers=[];s.player.hurt=0;s.hearts=1;enemyShot(s,s.player.x+40,s.player.y-35,Math.PI,250,'soul-flame',{r:13,life:2,village:true,owner:'pumpkin:test'});tick(s,.3);
+        at G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\tests\hexy-village-revision-5.spec.js:41:132
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    tests\results\v5-model-new\hexy-village-revision-5-ac-c240f-th-and-release-its-villager-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace tests\results\v5-model-new\hexy-village-revision-5-ac-c240f-th-and-release-its-villager-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:27504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[7/10] [chromium] › tests\hexy-village-revision-5.spec.js:43:1 › ghost fire traps Hexy like the witch spell and obeys last-heart candy defeat
+[8/10] [chromium] › tests\hexy-village-revision-5.spec.js:47:1 › rubble rescues work by proximity or damage and never award twice
+[9/10] [chromium] › tests\hexy-village-revision-5.spec.js:54:1 › adult defenders throw damaging stones while retreating, then join the escape
+[10/10] [chromium] › tests\hexy-village-revision-5.spec.js:59:1 › checkpoint retry cannot leave a victim in a removed dynamic pumpkin
+  1 failed
+    [chromium] › tests\hexy-village-revision-5.spec.js:39:1 › actual player shots break a pumpkin through the shared defeat path and release its villager 
+  9 passed (8.6s)

@@ -7,9 +7,10 @@ import {stepHarlequinUltimate} from '../actors/bosses/harlequinUltimate';
 
 export function beginPlayerDefeat(s,pit=false){
  const p=s.player;
- s.playerDefeat={state:'fall',age:0,total:0,pit};s.won=false;s.hitStop=0;
+ s.playerDefeat={state:p.candy?.pumpkin?'pumpkin':p.candy?'candy':'fall',age:0,total:0,pit};s.won=false;s.hitStop=0;
  p.clashFlight={frame:0};p.hurt=0;p.hitReact=0;p.firing=false;p.gliding=false;p.crouch=false;
  p.vx=pit?0:-p.dir*145;p.vy=pit?Math.max(150,p.vy):-265;
+ if(p.candy){p.candy.terminal=true;p.vx=0;p.vy=0;delete p.clashFlight;}
  s.events.push('hexyDefeatLaunch');s.shake=.12;
 }
 export function stepPlayerDefeat(s,dt){
@@ -20,7 +21,8 @@ export function stepPlayerDefeat(s,dt){
  for(const shot of s.hostile){shot.age+=slow;shot.vy+=(shot.gravity||0)*slow;shot.x+=(shot.vx||0)*slow;shot.y+=(shot.vy||0)*slow;shot.life-=slow;}
  if(s.boss.ultimate)stepHarlequinUltimate(s,slow);else s.boss.clock+=slow;
  s.hostile=s.hostile.filter(shot=>shot.life>0);stepWorldEffects(s,slow);
- if(q.state==='fall'){
+ if(q.state==='candy'||q.state==='pumpkin'){p.candy.age+=dt;if(q.state==='pumpkin'){p.candy.convertAge+=dt;p.y-=slow*14;}if(q.age>1.8){s.done=true;s.won=false;s.events.push('death');}}
+ else if(q.state==='fall'){
   const old=p.y;p.vy+=1050*slow;p.x+=p.vx*slow;p.y+=p.vy*slow;
   p.clashFlight.frame=p.vy<0?0:p.vy<110?1:p.vy<260?2:3;
   let landed=-1;

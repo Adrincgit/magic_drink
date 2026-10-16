@@ -5,7 +5,7 @@ import {createAdventure,stepAdventure,playerBody} from '../src/components/arcade
 import {hexyPose,hexyMuzzle} from '../src/components/arcade/adventure/actors/hexy/hexyAnimation';
 import {harlequinDrawing,updateHarlequin} from '../src/components/arcade/adventure/actors/bosses/adventureHarlequin';
 import {beginHarlequinUltimate} from '../src/components/arcade/adventure/actors/bosses/harlequinUltimate';
-import {clashPortraitFrames,clashPressureWave,clashResistance,opponentLight} from '../src/components/arcade/adventure/engine/clashActing';
+import {clashPortraitFrames,clashPortraitSprite,clashPressureWave,clashResistance,opponentLight} from '../src/components/arcade/adventure/engine/clashActing';
 import {clashPortraitLayout} from '../src/components/arcade/adventure/render/clashPortraitLayout';
 import {followAdventureCamera} from '../src/components/arcade/adventure/render/adventureCamera';
 import {castHarlequinFire} from '../src/components/arcade/adventure/actors/bosses/harlequinFire';
@@ -27,7 +27,7 @@ test('all twelve measured wand sockets are on the actual golden star, including 
  }
 });
 test('gameplay and portraits share effort states without a rally smile or early worried face',()=>{
- const s=clash();for(const [pressure,expected]of [[.5,0],[.44,0],[.35,1],[.2,1],[.1,2],[.6,3],[.9,3]]){s.powerClash.pressure=pressure;s.powerClash.rally=1;expect(clashPortraitFrames(s.powerClash).hexy).toBe(expected);expect(Math.floor(hexyPose(s).frame/3)).toBe(expected);expect(Math.floor(harlequinDrawing(s).frame/3)).toBe(clashPortraitFrames(s.powerClash).boss);}
+ const s=clash();for(const [pressure,expected]of [[.5,0],[.44,0],[.35,1],[.2,1],[.1,2],[.6,3],[.9,3]]){s.powerClash.pressure=pressure;s.powerClash.rally=1;expect(clashPortraitFrames(s.powerClash).hexy).toBe(expected);expect(Math.floor(hexyPose(s).frame/3)).toBe(expected);const portrait=clashPortraitSprite(s.powerClash,true,s.fxTime),actor=harlequinDrawing(s);expect(actor.frame).toBe(portrait.frame);expect(actor.key).toBe(pressure<.5?'harlequin-super-grin':'harlequin-super-cast');}
  expect(opponentLight({pressure:.1},false)).toBeGreaterThan(.9);expect(opponentLight({pressure:.9},true)).toBeGreaterThan(.9);expect(opponentLight({pressure:.5},false)).toBe(0);
 });
 test('normal pressure has four recoverable waves; gentle has three weaker waves',()=>{

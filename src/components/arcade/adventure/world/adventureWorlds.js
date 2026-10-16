@@ -1,4 +1,6 @@
+import {VILLAGE_WORLD} from './adventureVillage';
 // Art, sound and scenery belong to the chapter; combat geometry stays in LEVELS.
+import {NIGHTMARE_WORLD} from './adventureNightmareTrail';
 const art=name=>{const [world,part]=name.split('-');return '/arcade/maps/'+world+'/'+(part==='mid'?'midground':part||'background')+'.webp';};
 const theme=(key,title,boss,bossTitle)=>({explore:{key,title},boss:{key:boss,title:bossTitle}});
 const harborMusic={key:'harbor',title:'La ribera de los redobles',src:'/arcade/music/exploration/harbor.mp3'};
@@ -22,6 +24,7 @@ export const WORLDS=[
   terrain:'riverbank',surface:'#83604d',edge:'#47352f',soil:['#6c4b40','#262331'],accent:'#f7ba75',ambient:'none',
   music:{explore:{key:'ember-trail',title:'El bosque de las brasas',src:'/arcade/music/exploration/ember-trail.mp3'},boss:{key:'agresivo',title:'El Bastión de las Antorchas'}}},
 ].map(world=>({...world,ground:world.ground||(world.key==='meadow'?'/arcade/maps/meadow/ground.webp':art(world.key+'-ground'))}));
+WORLDS.push(NIGHTMARE_WORLD,VILLAGE_WORLD);
 
 export function adventureMusic(index,phase,boss=false,won=false){
  if(phase==='ready'||phase==='loading')return{key:'title',src:'/arcade/music/title.ogg',loop:true,title:'Una estrella abre el cuento'};

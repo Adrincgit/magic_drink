@@ -7,18 +7,18 @@ import {updateHarlequin,stepHarlequinProjectile,harlequinDrawing} from '../src/c
 import {beginBossArrival,stepBossArrival} from '../src/components/arcade/adventure/actors/bosses/adventureArrival';
 import {castHarlequinFire,leaveHarlequinFire,TRAIL_DURATION} from '../src/components/arcade/adventure/actors/bosses/harlequinFire';
 import {guardBlocks,clearPowerProjectiles} from '../src/components/arcade/adventure/engine/adventureDefense';
-import {paintedMeter} from '../src/components/arcade/adventure/render/paintedDuelCanvas';
 
 function fresh(){const s=createAdventure(3);s.arenaLocked=true;s.supplies=[];s.stars=[];s.noticeTime=0;Object.assign(s.player,{x:1500,y:480,ground:2});Object.assign(s.boss,{x:2430,y:480,phase:'recover',timer:100,engaged:true,vulnerable:true});return s;}
 const tick=(s,n=1,input={})=>{for(let i=0;i<n;i++)stepAdventure(s,input,1/120);};
 
-test('health has a plain fill while the clash retains both moving beam textures',()=>{
- const calls=[],c=new Proxy({globalAlpha:1,createLinearGradient:()=>({addColorStop(){}}),drawImage:(img)=>calls.push(img)},{get:(o,k)=>o[k]??(()=>{})});
- const art={'duel-meter':{},'harlequin-ultimate-beam':{},'super-beam':{}};
- paintedMeter(c,art,0,0,600,90,.6,true,1,true);
- expect(calls).toEqual([art['duel-meter']]);calls.length=0;
- paintedMeter(c,art,0,0,600,90,.6,true,1,false);
- expect(calls).toContain(art['harlequin-ultimate-beam']);expect(calls).toContain(art['super-beam']);
+test('the clash meter retains moving energy from both combatants',async({page})=>{
+ await page.goto('/arcade');const changed=await page.evaluate(async()=>{
+  const {paintedMeter}=await import('/src/components/arcade/adventure/render/paintedDuelCanvas.js');
+  const {loadAdventureArt}=await import('/src/components/arcade/adventure/render/adventureCanvas.js');
+  const art=await loadAdventureArt(),c=new OffscreenCanvas(600,90).getContext('2d'),frames=[];
+  for(const age of [1,1.125]){c.clearRect(0,0,600,90);paintedMeter(c,art,0,0,600,90,.5,true,age);frames.push(c.getImageData(0,0,600,90).data);}
+  return[150,420].map(start=>{let count=0;for(let y=30;y<60;y++)for(let x=start;x<start+60;x++){const k=(y*600+x)*4;if(frames[0][k]!==frames[1][k])count++;}return count;});
+ });for(const count of changed)expect(count).toBeGreaterThan(200);
 });
 
 test('fire projectiles explode with fire on the floor, Hexy, guard and charged interception',()=>{

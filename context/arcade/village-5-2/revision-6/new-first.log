@@ -1,0 +1,64 @@
+
+Running 10 tests using 1 worker
+
+
+
+node.exe : (node:25604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+En línea: 1 Carácter: 1
++ & "C:\nvm4w\nodejs/node.exe" "C:\nvm4w\nodejs/node_modules/npm/bin/np ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((node:2... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/10] [chromium] › tests\hexy-village-revision-6.spec.js:15:1 › candy escape requires 21 fresh presses and holding a button cannot substitute for them
+[2/10] [chromium] › tests\hexy-village-revision-6.spec.js:22:1 › a captured Hexy travels above the ground toward the witch and can escape during the pull
+[3/10] [chromium] › tests\hexy-village-revision-6.spec.js:28:1 › an uninterrupted absorption transforms Hexy into a pumpkin and ends the run even with hearts remaining
+[4/10] [chromium] › tests\hexy-village-revision-6.spec.js:34:1 › defeating the absorbing witch drops the tether without instantly teleporting Hexy
+[5/10] [chromium] › tests\hexy-village-revision-6.spec.js:38:1 › pumpkin clown ghost fire makes candy that a nearby different witch can absorb
+  1) [chromium] › tests\hexy-village-revision-6.spec.js:38:1 › pumpkin clown ghost fire makes candy that a nearby different witch can absorb 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 3
+    Received length: 0
+    Received array:  []
+
+      38 | test('pumpkin clown ghost fire makes candy that a nearby different witch can absorb',()=>{
+      39 |  const s=quiet(),clown=Object.assign(makeEnemy(8500,452,25,41),{active:true,timer:0}),witch=Object.assign(makeEnemy(8300,452,26,42),{active:true,timer:0,hp:4}),q={...s.level.villagers[0],x:8200,y:452,state:'trapped',age:0};s.player.x=7900;s.enemies=[clown,witch];s.villagers=[q];
+    > 40 |  stepVillageEnemy(s,clown,.01,enemyShot);stepVillageEnemy(s,clown,.81,enemyShot);expect(s.hostile).toHaveLength(3);expect(s.hostile.every(q=>q.kind==='lantern-soul'&&q.element==='magic')).toBe(true);
+         |                                                                                                    ^
+      41 |  const shot={...s.hostile[1],previousX:8250,previousY:405,x:8150,y:405};expect(resolveVillageProjectile(s,shot,{x:0,y:0,w:1,h:1})).toBe(true);expect(q.state).toBe('turning');stepVillagers(s,1.21);expect(q.state).toBe('candy');
+      42 |  for(let i=0;i<400;i++)stepVillageEnemy(s,witch,1/120,enemyShot);expect(q.state).toBe('carried');expect(witch.hp).toBe(7);expect(s.enemies.filter(e=>e.type===27)).toHaveLength(1);
+      43 | });
+        at G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\tests\hexy-village-revision-6.spec.js:40:100
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    tests\results\v6-new-first\hexy-village-revision-6-pu-5aa7b--different-witch-can-absorb-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace tests\results\v6-new-first\hexy-village-revision-6-pu-5aa7b--different-witch-can-absorb-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:11032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:11032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+[6/10] [chromium] › tests\hexy-village-revision-6.spec.js:45:1 › a fast witch ray ends at its first terrain impact instead of crossing below the street
+[7/10] [chromium] › tests\hexy-village-revision-6.spec.js:50:1 › strong projectiles clear hostile magic across chapters, including Popcorn and hidden water probes
+[8/10] [chromium] › tests\hexy-village-revision-6.spec.js:56:1 › ordinary Popcorn leaves bullets intact; the strong cast intercepts them through the real update
+[9/10] [chromium] › tests\hexy-village-revision-6.spec.js:63:1 › fast hostile bullets are intercepted after moving, before they can cross the player
+[10/10] [chromium] › tests\hexy-village-revision-6.spec.js:67:1 › the strong Volt beam clears a bullet midway along its visible path
+  1 failed
+    [chromium] › tests\hexy-village-revision-6.spec.js:38:1 › pumpkin clown ghost fire makes candy that a nearby different witch can absorb 
+  9 passed (4.1s)

@@ -81,10 +81,10 @@ test('the long water cannon hits standing Hexy, can be jumped and stops with the
  s.boss.hp=0;tick(s,1);expect(s.hostile.some(q=>q.kind==='barge-jet')).toBe(false);
 });
 
-test('rear cannons have distinct real origins and the hull stays anchored',()=>{
+test('second-phase salvos use the mounted front cannon and the hull stays anchored',()=>{
  const s=battle('broadside');Object.assign(s.boss,{hp:140,transformed:true,armorBroken:true});s.player.hurt=100;
  const x=s.boss.x;tick(s,120);const shots=s.hostile.filter(q=>q.kind==='barge-balloon');expect(shots.length).toBeGreaterThanOrEqual(2);expect(s.boss.x).toBeCloseTo(x);expect(s.hostile.some(q=>q.kind==='barge-surf')).toBe(false);
- const m=bargeRig(s);expect(m.ports).toHaveLength(2);expect(m.ports[1].x).toBeGreaterThan(m.ports[0].x);
+ const m=bargeRig(s);expect(m.ports).toHaveLength(0);expect(m.muzzle.x).toBeLessThan(m.cannon.x);
 });
 
 test('bunnies stay on a raised dock and follow takeoff and landing continuously',()=>{

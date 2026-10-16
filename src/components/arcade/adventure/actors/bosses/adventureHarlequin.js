@@ -1,8 +1,7 @@
 import {harlequinArrivalFrame} from './harlequinEntrance';
 import {beginHarlequinUltimate} from './harlequinUltimate';
 import {HARLEQUIN_SCALE} from './harlequinMetrics';
-import {dropHarlequinSupply} from '../../world/adventureSupplies';
-import {clashPortraitFrames,castingWindFrame} from '../../engine/clashActing';
+import {clashPortraitSprite,castingWindFrame,chargingWindFrame} from '../../engine/clashActing';
 import {castHarlequinFire,stepHarlequinFire,leaveHarlequinFire,fireImpact,harlequinRushSpeed} from './harlequinFire';
 import {stepBurningCloth} from './harlequinChaos';
 import {impactSmoke} from '../../engine/cinematicImpact';
@@ -29,8 +28,11 @@ export function harlequinDrawing(s){
  const fluid=b.stage===3?'harlequin-motion-fluid-final':b.stage===2?'harlequin-motion-fluid-mid':'harlequin-motion-fluid';
  if(q?.state==='leap')return{key:fluid,frame:8+Math.min(7,Math.floor(q.age/.85*8)),scale:1.5};
  if(q&&q.state!=='recover'&&b.hp>0){
-  if(q.state==='fire')return{key:'harlequin-super-cast',frame:(s.powerClash?clashPortraitFrames(s.powerClash).boss:0)*3+castingWindFrame(s.fxTime)};
-  return{key:'harlequin-fire-actions',frame:Math.floor((s.powerClash?.age??q.age)*12)%4};
+  if(q.state==='fire'){
+   const pose=s.powerClash?clashPortraitSprite(s.powerClash,true,s.fxTime):null;
+   return{key:pose?.key==='harlequin-clash-grin'?'harlequin-super-grin':'harlequin-super-cast',frame:pose?.frame??castingWindFrame(s.fxTime)};
+  }
+  return{key:'harlequin-super-charge',frame:chargingWindFrame(q.age+(s.powerClash?.state==='windup'?s.powerClash.age:0))};
  }
  if(b.hp<=0)return{key:'harlequin-fire-actions',frame:12};
  if((b.move==='dash'&&b.phase==='warn')||(b.move==='pyre'&&['warn','attack'].includes(b.phase))){
@@ -101,7 +103,7 @@ export function updateHarlequin(s,dt,helpers,shoot){
  }
  if(b.phase==='transform'){
   b.y+=(a.y-b.y)*Math.min(1,dt*6);b.vulnerable=false;
-  if(b.timer<.9&&!b.transitionBurst){b.transitionBurst=true;b.backdropFrom=b.stage;b.backdropBlend=0;b.stage=b.nextStage;b.turn=0;dropHarlequinSupply(s,b.stage);fireImpact(s,b.x,b.y-70,1.85);impactSmoke(s,b.x,b.y,1.1);s.shake=.32;}
+  if(b.timer<.9&&!b.transitionBurst){b.transitionBurst=true;b.backdropFrom=b.stage;b.backdropBlend=0;b.stage=b.nextStage;b.turn=0;fireImpact(s,b.x,b.y-70,1.85);impactSmoke(s,b.x,b.y,1.1);s.shake=.32;}
   if(b.timer<=0){b.y=a.y;recover(b,s);b.vulnerable=true;}
   return;
  }

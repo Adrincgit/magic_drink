@@ -15,7 +15,7 @@ const clean=(mods=[])=>{const s=createAdventure(0,false,{mods,modSlots:3});for(c
 test('old saves keep their wallet and accessories; only owned, unique Mods fit the three slots',()=>{
  const old=sanitizeSave({version:1,stars:270,coins:2,owned:['crown'],equipped:'crown'});
  expect(old.stars).toBe(270);expect(old.equipped).toBe('crown');expect(old.modsOwned).toEqual([]);expect(old.modsEquipped).toEqual([]);
- const next=sanitizeSave({...old,modSlots:undefined,modsOwned:['starter-0','starter-1','quick-cast','bright-spark','grand-flourish','fake'],modsEquipped:['fake','encore-pocket','starter-0','starter-1','quick-cast','quick-cast','bright-spark','grand-flourish']});
+ const next=sanitizeSave({...old,modCategorySlots:undefined,modSlots:undefined,modsOwned:['starter-0','starter-1','quick-cast','bright-spark','grand-flourish','fake'],modsEquipped:['fake','encore-pocket','starter-0','starter-1','quick-cast','quick-cast','bright-spark','grand-flourish']});
  expect(next.modsEquipped).toEqual(['starter-0','quick-cast','bright-spark']);expect(next.modsOwned).not.toContain('fake');
 });
 test('equipped fire-rate and size Mods affect the actual shots, including basic strong magic',()=>{

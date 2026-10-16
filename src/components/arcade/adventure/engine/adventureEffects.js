@@ -1,4 +1,8 @@
+import {stepAquaEffect} from './adventureAquaEffects';
 export function stepWorldEffects(s,dt){
+ for(const list of [s.hostile,s.emberEnvironment?.bushes,s.emberEnvironment?.pits])for(const q of list||[]){
+  if(q.fireStrength!==undefined)q.fireVisualStrength=(q.fireVisualStrength??1)+(q.fireStrength-(q.fireVisualStrength??1))*(1-Math.exp(-dt*12));
+ }
  for(const q of s.organDust||[]){q.age+=dt;q.life-=dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.vy+=28*dt;}
  if(s.organDust)s.organDust=s.organDust.filter(q=>q.life>0);
  for(const q of s.organDebris||[]){
@@ -22,6 +26,7 @@ export function stepWorldEffects(s,dt){
  s.particles=s.particles.filter(q=>q.life>0);
  for(const q of s.effects){
   q.life-=dt;q.age+=dt;
+  if(q.aquaKind)stepAquaEffect(s,q,dt);
   if(q.cinematicSmoke){q.x+=q.vx*dt;q.y+=q.vy*dt;q.vx*=Math.exp(-dt*.8);}
   if(q.waterDrop){q.x+=q.vx*dt;q.y+=q.vy*dt;q.vy+=480*dt;
    if(q.y>=q.floor){q.y=q.floor;q.waterDrop=false;q.waterDetail=1;q.size*=2.3;q.age=0;q.life=q.duration=.38;}

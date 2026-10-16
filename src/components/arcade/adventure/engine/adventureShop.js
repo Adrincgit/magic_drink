@@ -6,6 +6,7 @@ export const shopForLevel=level=>level.grandRing?null:level.shop||(level.themeSt
 export function canEnterShop(s){const shop=shopForLevel(s.level),p=s.player;return !!shop&&!s.done&&!s.clear&&!s.arenaLocked&&!s.superCinematic&&!s.circusEntry&&p.ground!==null&&!p.drinkCast&&Math.abs(p.x-shop.x)<85&&Math.abs(p.y-shop.y)<30;}
 export function beginShopTransition(s,leaving=false){
  const door=shopForLevel(s.level),p=s.player;if(!door)return;
+ s.aquaJet=null;s.voltBeam=null;s.placement=null;p.aquaChannel=false;s.drinkFields=[];s.drinkHistory=[];s.confettiDecoy=null;s.coaster=null;p.coasterGround=false;p.parryWindow=0;
  s.shopTransition={age:0,leaving,fromX:p.x,walk:Math.max(.3,Math.abs(p.x-door.x)/150),door,alpha:leaving?1:0,ready:leaving};
  Object.assign(p,{vx:0,vy:0,dash:0,cast:0,specialCast:0,charge:0,crouch:false,guarding:false,hitReact:0});
 }

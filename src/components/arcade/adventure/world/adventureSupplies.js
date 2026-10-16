@@ -2,20 +2,15 @@ import {rollLoot} from '../engine/adventureLoot';
 export const SUPPLY_SIZE=110;
 export const supplyBody=q=>({x:q.x-33,y:q.y-62,w:66,h:62});
 export function createSupplies(level){
- const positions=(level.supplies||level.pickups).filter(q=>q.x>1000).sort((a,b)=>a.x-b.x);
+ const positions=(level.supplies||level.pickups).filter(q=>q.x>1000||q.fixed).sort((a,b)=>a.x-b.x);
  const selected=[positions[0],positions[Math.floor(positions.length/2)],positions.at(-1)].filter((q,i,a)=>q&&a.indexOf(q)===i);
- return selected.map((q,id)=>({x:q.x,y:q.y+28,kind:q.kind,id,hp:4,maxHp:4,flash:0,age:0}));
+ for(const q of positions)if(q.fixed&&!selected.includes(q))selected.push(q);
+ return selected.map((q,id)=>({x:q.x,y:q.y+28,kind:q.kind,loot:q.loot&&{...q.loot},preview:q.preview,id,hp:4,maxHp:4,flash:0,age:0}));
 }
 export function releaseItem(s,x,floor,item){
  const drop={x,y:floor-35,...item,taken:false,vy:-165,floor:floor-28,collectWait:.18,dropAge:0};s.pickups.push(drop);return drop;
 }
 export const releaseDrink=(s,x,floor,kind)=>releaseItem(s,x,floor,{type:'drink',kind});
-export function dropHarlequinSupply(s,stage){
- if(s.index!==3||stage<2||stage>3)return;
- s.harlequinAidStages??=[];if(s.harlequinAidStages.includes(stage))return;s.harlequinAidStages.push(stage);
- const a=s.level.arena,x=Math.max(a.left+95,Math.min(a.right-95,s.player.x+(s.player.x<s.boss.x?120:-120)));
- s.supplies.push({id:'harlequin-aid-'+stage,phaseAid:stage,x,y:a.y-560,landingY:a.y,fallSpeed:80,falling:true,kind:2,loot:{type:'drink',kind:2,phaseAid:stage},hp:1,maxHp:1,flash:0,age:0});
-}
 export function damageSupply(s,q,damage){
  if(q.hp<=0)return;
  q.hp=Math.max(0,q.hp-damage);q.flash=.13;s.events.push(q.hp?'pop':'impact');

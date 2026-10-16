@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-15",
+  "modelAndRegressionTests": 42,
+  "browserTests": 2,
+  "browserLastRun": "passed; inspected tests/results/.last-run.json after browser suite",
+  "decodedAndVisuallyReviewed": [
+    "normal",
+    "strong",
+    "aim",
+    "moving"
+  ],
+  "build": {
+    "exitCode": 0,
+    "errors": 0,
+    "complete": true,
+    "localTime": "00:37:37"
+  },
+  "hashes": {
+    "public/arcade/sprites/pickups/popcorn-panic.webp": "15227ecef92d1faf226529f0c9789835d76d125b30e45cce229ee65ad4e762a3",
+    "public/arcade/sprites/effects/popcorn-panic.webp": "0ec2e9a75310445f6838c7954575d9ca33f757c62947e301b3e9ffb58a9bdd1e",
+    "src/components/arcade/adventure/engine/adventurePopcorn.js": "d426ff6bcc1ea824b04cc060f17847a45f7487e4ece5bbe2b9fc2d5abace36e6",
+    "src/components/arcade/adventure/render/popcornCanvas.js": "fbf113131279123552eda9f64160fe3481d5278a7f8ba31f4da30ba800e9fa8b"
+  }
+}

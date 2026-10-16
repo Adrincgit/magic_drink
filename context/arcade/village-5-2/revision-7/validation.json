@@ -1,0 +1,76 @@
+{
+  "assets": [
+    {
+      "path": "public/arcade/sprites/enemies/village-pumpkin-clean-v7.webp",
+      "bytes": 1233210,
+      "frames": 24
+    },
+    {
+      "path": "public/arcade/sprites/enemies/village-witch-ground-v7.webp",
+      "bytes": 1060140,
+      "frames": 24
+    },
+    {
+      "path": "public/arcade/sprites/enemies/village-witch-air-v7.webp",
+      "bytes": 1202206,
+      "frames": 24
+    },
+    {
+      "path": "public/arcade/sprites/enemies/village-spell-fx-v7.webp",
+      "bytes": 424790,
+      "frames": 24
+    },
+    {
+      "path": "public/arcade/sprites/enemies/village-pumpkin-finish-v7.webp",
+      "bytes": 330060,
+      "frames": 8
+    },
+    {
+      "path": "public/arcade/sprites/enemies/village-run-adults-v7.webp",
+      "bytes": 723378,
+      "frames": 16
+    },
+    {
+      "path": "public/arcade/sprites/enemies/village-run-children-v7.webp",
+      "bytes": 759738,
+      "frames": 16
+    },
+    {
+      "path": "public/arcade/sprites/enemies/village-run-elders-v7.webp",
+      "bytes": 705478,
+      "frames": 16
+    },
+    {
+      "path": "public/arcade/sprites/enemies/village-run-neighbors-v7.webp",
+      "bytes": 648790,
+      "frames": 16
+    }
+  ],
+  "checks": {
+    "modelsAndTerrain": 48,
+    "regressions": 41,
+    "browserSession": 1,
+    "motionSession": 1
+  },
+  "recordedScenes": [
+    "absorb-air.webm",
+    "absorb-ground.webm",
+    "cast-air.webm",
+    "cast-ground.webm",
+    "clown-fire.webm",
+    "country.webm",
+    "crowd.webm",
+    "entrance.webm",
+    "pumpkin-finish.webm",
+    "rubble-depth.webm",
+    "witch-drop.webm",
+    "witch-hit-air.webm",
+    "witch-hit-ground.webm"
+  ],
+  "build": {
+    "errors": 0,
+    "astroWarnings": 0,
+    "hints": 30,
+    "complete": true
+  }
+}

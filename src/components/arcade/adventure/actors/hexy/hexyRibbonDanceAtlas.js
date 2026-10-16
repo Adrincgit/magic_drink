@@ -1,0 +1,2 @@
+// Rhythmic dance, tumble, aerial bind, guard and sip; registered foot planes and wand tips.
+export default [{"tip":[84,226]},{"tip":[235,76]},{"tip":[230,66]},{"tip":[232,101]},{"tip":[223,197]},{"tip":[173,213]},{"tip":[249,231]},{"tip":[262,203]},{"tip":[259,81]},{"tip":[241,176]},{"tip":[240,270]},{"tip":[246,282]},{"tip":[197,77]},{"tip":[142,76]},{"tip":[126,75]},{"tip":[183,75]},{"tip":[217,155]},{"tip":[199,134]},{"tip":[204,123]},{"tip":[201,159]}];

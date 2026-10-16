@@ -26,9 +26,9 @@ export function drawBargeMachinery(c,s,art,m,t,reduced){
   bargeCell(c,art['barge-tank'],1,tank.x,tank.y,tank.w,tank.h);c.restore();
  }
  c.restore();
- // A second painted elbow connects the reservoir outlet to the water gun.
- c.save();c.translate(tank.x-tank.w*.3,tank.y+tank.h*.26);c.rotate(Math.PI/2);
- bargeCell(c,art['barge-hose'],flow&&!reduced?Math.floor(t*8)%2:0,27,25,72,92);c.restore();
+ // Fixed discharge pipe follows the hull, clear of both crew stations.
+ c.save();c.lineCap='round';c.lineJoin='round';c.beginPath();c.moveTo(tank.x-18,tank.y+tank.h*.35);c.lineTo(tank.x-18,m.nozzle.y+12);c.lineTo(m.nozzle.x+43,m.nozzle.y+12);
+ c.strokeStyle='#352523';c.lineWidth=14*m.scale;c.stroke();c.strokeStyle='#987247';c.lineWidth=9*m.scale;c.stroke();c.strokeStyle='#d1a85e';c.lineWidth=2*m.scale;c.stroke();c.restore();
  if(b.pressureStun>0)for(let i=0;i<3;i++){
   const u=reduced?i/3:(t+i*.3)%1;drawWaterDetail(c,art,3,i,tank.x+(i-1)*22,tank.y-tank.h*.35-u*55,45+u*35,45+u*35,0,(1-u)*.65);
  }

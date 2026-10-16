@@ -1,3 +1,9 @@
+import {isVillageEnemy,villageEnemyDrawing} from '../engine/adventureVillage';
+import {umbrellaFrame} from '../actors/enemies/adventureUmbrella';
+import {acrobatAirFrame} from '../actors/enemies/adventureAcrobat';
+import {JUGGLER_WALK_FRAMES} from '../actors/enemies/adventureJugglerWalk';
+import {isNightmare,nightmareDrawing} from '../actors/enemies/adventureNightmares';
+import {elementDrawing} from '../actors/enemies/adventureElementHits';
 import {emberBalloonDefeatFrame} from '../actors/enemies/adventureEmberBalloon';
 import {fireBreatherFrame} from '../actors/enemies/adventureFireJuggler';
 import {emberTroopDrawing} from '../actors/enemies/adventureEmberTroops';
@@ -9,7 +15,21 @@ import {harlequinDrawing} from '../actors/bosses/adventureHarlequin';
 // Each actor owns a 12-frame sheet. Frames follow gameplay states, not a global pose loop.
 export const ACTOR_SHEETS=['clown','balloon','juggler','acrobat','cannon','boss-balloon','serio','alegre','agresivo','muta'];
 export const ENEMY_ART=['clown','acrobat','balloon','juggler','acrobat','cannon','clown'];
+// Exterior chapters can have negative world coordinates; JS remainder keeps
+// the sign, which otherwise sends the sprite source outside its atlas.
+export const collectibleFrame=(time,x=0)=>((Math.floor(time*7+x)%4)+4)%4;
 export function enemyDrawing(e,reduced=false){
+ if(isVillageEnemy(e))return villageEnemyDrawing(e,reduced);
+ if(e.fleeing){
+  if(e.capture){const a=e.capture.age;return{key:'nightmare-conversion-v5',size:148,frame:a<.5?Math.min(3,Math.floor(a*8)):4+Math.min(11,Math.floor((a-.5)/.25))};}
+  if(e.fleeState==='fall')return{key:'red-clown-fall',frame:Math.min(3,Math.floor(e.fleeAge/.15))};
+  if(e.fleeState==='prone')return{key:'red-clown-fall',frame:e.fleeAge%1.2<.6?3:4};
+  if(e.fleeState==='recover')return{key:'red-clown-fall',frame:5+Math.min(2,Math.floor(e.fleeAge/.28))};
+  const back=(e.clock+(e.lookOffset||0))%3.1>1.85;return{key:'red-clown-flee',frame:back?8+Math.floor((e.gait||0)*8)%4:Math.floor((e.gait||0)*8)%8};
+ }
+ if(isNightmare(e))return nightmareDrawing(e,reduced);
+ const element=elementDrawing(e,reduced);if(element)return element;
+ if(e.type===14)return{key:'umbrella-clown',frame:umbrellaFrame(e,reduced)};
  if(e.type===13&&e.hp<=0)return{key:'ember-balloon-defeat',frame:emberBalloonDefeatFrame(e)};
  if(e.type===13)return{key:'ember-balloon',frame:e.phase==='windup'?4+Math.min(3,Math.floor((e.fireAge||0)*3)):e.phase==='attack'?8+(reduced?0:Math.floor((e.fireAge||0)*8)%4):reduced?0:Math.floor(e.clock*6)%4};
  if(e.type===11||e.type===12)return emberTroopDrawing(e,reduced);
@@ -22,25 +42,30 @@ export function enemyDrawing(e,reduced=false){
  if(e.type===9)return{key:'river-boat-crew',frame:e.hp<=0?(e.deathAge<.35?4:5):e.action>0?2+(reduced?0:Math.floor(e.clock*14)%2):e.phase==='windup'?1:0,columns:3};
  if(e.type===7)return{key:'clown-zeppelin',frame:0};
  if(e.balloonCrew||e.type===0)return redClownDrawing(e,reduced);
- if(e.type===6)return{key:'cannon-clown',frame:reduced?0:Math.min(3,Math.floor(e.clock*6)%4)};
+ if(e.type===6)return redClownDrawing(e,reduced);
+ if(e.type===5){
+  if(e.hp<=0)return{key:'cannon',frame:11};
+  return{key:'cannon-launcher-painted',frame:e.boosterPassenger?.boosterHidden?(e.boosterAge>.64?1:0):2};
+ }
  if(e.type===3){
+  if(e.hp>0&&!e.flash&&!(e.action>0)&&!(e.recovery>0)&&!(e.trap>0)&&e.volleyAge===undefined&&['patrol','emerge'].includes(e.phase)&&e.moving!==false)return{key:'juggler-walk-parts',frame:reduced?0:Math.floor((e.gait||0)*JUGGLER_WALK_FRAMES)%JUGGLER_WALK_FRAMES};
   let frame=e.hp<=0?11:e.flash>0?10:e.phase==='windup'?4:e.phase==='patrol'?(reduced?0:Math.floor((e.gait||0)*8)%2):2;
   if(e.hp>0&&!e.flash&&e.volleyAge!==undefined)frame=e.action>0?5+(e.ballColor||0)*2:e.volleyCount<3?4+e.volleyCount*2:9;
   return{key:'juggler-actions',frame};
  }
  if(e.type!==1&&e.type!==4)return{key:ENEMY_ART[e.type],frame:actorFrame(e,reduced,ENEMY_ART[e.type])};
- const rings=frame=>({key:'acrobat-rings',frame}),motion=frame=>({key:'acrobat-motion',frame});
+ const rings=frame=>({key:'acrobat-rings',frame});
  if(e.hp<=0)return rings(11);if(e.flash>0)return rings(10);
+ if(e.acrobatAir||e.acrobatCrouch>0||e.landing>0)return{key:'acrobat-air-painted',frame:reduced?e.landing>0?7:2:acrobatAirFrame(e)};
  if(e.action>0)return rings(4+(reduced?0:Math.min(1,Math.floor((.32-e.action)/.16))));
  if(e.recovery>0)return rings(e.recovery>.22?6:7);
  if(e.phase==='windup')return rings(reduced?2:Math.max(0,Math.min(3,Math.floor((.55-e.timer)/.55*4))));
- const lift=e.baseY-e.y;
- if(lift>12)return motion(lift>(e.type===4?78:31)?10:e.y<(e.previousY??e.y)?9:11);
- if(e.phase==='patrol')return motion(reduced?0:Math.floor((e.gait||0)*8)%8);
+ if(['patrol','emerge'].includes(e.phase)&&!(e.trap>0)&&e.moving!==false)return{key:'acrobat-run-fluid',frame:reduced?1:Math.floor((e.gait||0)*8)%8};
  return rings(reduced?8:8+Math.floor(e.clock*2)%2);
 }
 export const BOSS_ART=['boss-balloon','organ-machine','barge-body','harlequin/poses','muta'];
 export function bossDrawing(s,reduced=false){
+ if(s.level.nightmareTrail)return nightmareDrawing(s.boss,reduced);
  const b=s.boss,key=BOSS_ART[s.index];
  if(s.index===0)return balloonShellDrawing(s);
  if(s.index===1)return organShellDrawing(s);

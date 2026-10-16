@@ -1,0 +1,90 @@
+
+Running 37 tests using 1 worker
+
+
+node.exe : [1A[2K(node:19964) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+En línea: 1 Carácter: 1
++ & "C:\nvm4w\nodejs/node.exe" "C:\nvm4w\nodejs/node_modules/npm/bin/np ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([1A[2K(node:1... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K(node:19964) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/37] [chromium] › tests\hexy-popcorn.spec.js:15:1 › Popcorn is a collectible, saved shop starter and guaranteed village loot without changing existing IDs
+[1A[2K[2/37] [chromium] › tests\hexy-popcorn.spec.js:22:1 › normal fires seven kernels for one ammo without magic and respects the recovery interval
+[1A[2K[3/37] [chromium] › tests\hexy-popcorn.spec.js:27:1 › strong only doubles travel, costs exactly 45 magic and one ammo, including the last charge
+[1A[2K[4/37] [chromium] › tests\hexy-popcorn.spec.js:34:1 › alternating normal and strong cannot skip the shared recovery or double-bill a press
+[1A[2K[5/37] [chromium] › tests\hexy-popcorn.spec.js:39:1 › close targets receive equal normal and strong damage, and only strong reaches distant targets
+[1A[2K[6/37] [chromium] › tests\hexy-popcorn.spec.js:44:1 › kernels stop at the first body and both directions have a bounded reach
+[1A[2K[7/37] [chromium] › tests\hexy-popcorn.spec.js:49:1 › prisms preserve the remaining distance budget; retries clear every blast
+[1A[2K[8/37] [chromium] › tests\hexy-popcorn.spec.js:55:1 › switching pockets preserves Popcorn ammo and does not grant fresh charges
+[1A[2K[9/37] [chromium] › tests\hexy-town-cannon.spec.js:10:65 › a real lethal Popcorn hit triggers vapor once and cleans up without hostile fragments
+[1A[2K[10/37] [chromium] › tests\hexy-town-cannon.spec.js:10:65 › a real lethal Popcorn hit triggers scatter once and cleans up without hostile fragments
+[1A[2K[11/37] [chromium] › tests\hexy-town-cannon.spec.js:10:65 › a real lethal Popcorn hit triggers launch once and cleans up without hostile fragments
+[1A[2K[12/37] [chromium] › tests\hexy-town-cannon.spec.js:16:1 › launch travels away from the shot and lands on the floor with a single dust impact
+[1A[2K[13/37] [chromium] › tests\hexy-town-cannon.spec.js:20:1 › the cannon does not duplicate an already missing arm or release an extra live hand
+[1A[2K[14/37] [chromium] › tests\hexy-town-cannon.spec.js:24:1 › pumpkin clowns, witches and skeletons can evaporate; ordinary hits retain their own defeat
+[1A[2K[15/37] [chromium] › tests\hexy-town-cannon.spec.js:28:1 › retry clears cannon defeats and the denser street preserves length, plazas and rewards
+[1A[2K[16/37] [chromium] › tests\hexy-village-night.spec.js:10:1 › a real candy ray removes exactly one heart and locks actions until fresh input breaks it
+[1A[2K[17/37] [chromium] › tests\hexy-village-night.spec.js:16:1 › captured Hexy remains vulnerable after the ordinary hit grace
+[1A[2K[18/37] [chromium] › tests\hexy-village-night.spec.js:20:1 › the last heart leaves Hexy candy through game over; retry clears the curse
+[1A[2K[19/37] [chromium] › tests\hexy-village-night.spec.js:25:1 › a shield protects against capture and a swept beam cannot tunnel through Hexy
+[1A[2K[20/37] [chromium] › tests\hexy-village-night.spec.js:29:1 › only the responsible witch absorbs a victim, heals once and releases even swallowed people
+[1A[2K[21/37] [chromium] › tests\hexy-village-night.spec.js:36:1 › damage interrupts absorption without losing the hostage
+[1A[2K[22/37] [chromium] › tests\hexy-village-night.spec.js:41:1 › a real lethal hit frees that witch victims through the shared combat path
+[1A[2K[23/37] [chromium] › tests\hexy-village-night.spec.js:45:1 › flying witches cast down and broken brooms fall onto actual terrain
+[1A[2K[24/37] [chromium] › tests\hexy-village-night.spec.js:51:1 › crowd escalates toward town, a neighbor helps a fallen person, and carriages flee
+[1A[2K[25/37] [chromium] › tests\hexy-village-night.spec.js:57:1 › night arrives just beyond half way and cannot flicker back when reversing
+[1A[2K[26/37] [chromium] › tests\hexy-village.spec.js:14:1 › 5-2 follows the cemetery and old saves retain their unlocked final chapter
+[1A[2K[27/37] [chromium] › tests\hexy-village.spec.js:21:1 › the street simulates, civilians flee and zombies retain their clothed remains
+[1A[2K[28/37] [chromium] › tests\hexy-village.spec.js:28:1 › witches telegraph, commit their aim and can be interrupted before casting
+[1A[2K[29/37] [chromium] › tests\hexy-village.spec.js:35:1 › only a real ray collision transforms a villager, once; Hexy can stand in its path
+[1A[2K[30/37] [chromium] › tests\hexy-village.spec.js:45:1 › pumpkin heads cast a short ember fan and have ordinary damageable bodies
+[1A[2K[31/37] [chromium] › tests\hexy-village.spec.js:50:1 › actual basic shots defeat both new enemies and interrupt a witch windup
+[1A[2K[32/37] [chromium] › tests\hexy-village.spec.js:56:1 › checkpoint retries preserve resolved townspeople and completion opens after clearing the square
+[1A[2K[33/37] [chromium] › tests\hexy-village.spec.js:62:1 › the extended route matches the cemetery, preserves receipts and opens into three plazas
+[1A[2K  1) [chromium] › tests\hexy-village.spec.js:62:1 › the extended route matches the cemetery, preserves receipts and opens into three plazas 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      64 |  expect(s.level.width).toBe(previous.level.width+1800);expect(s.level.width).toBe(23240);
+      65 |  expect(s.level.exit[0]).toBeGreaterThan(21000);expect(s.level.plazas).toHaveLength(3);
+    > 66 |  expect(s.level.houses.every(q=>q.x>=s.level.villageStart-30)).toBe(true);
+         |                                                                ^
+      67 |  for(let x=0;x<s.level.width;x+=90)expect(Number.isFinite(groundY(s.level.route,x,NaN))).toBe(true);
+      68 |  expect(s.level.starIds.slice(0,49)).toContain('7:star:350:436');
+      69 |  expect(s.level.starIds.slice(0,49)).toContain('7:star:2030:408');
+        at G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\tests\hexy-village.spec.js:66:64
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    tests\results\hexy-village-the-extended--01989-and-opens-into-three-plazas-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace tests\results\hexy-village-the-extended--01989-and-opens-into-three-plazas-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:4528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:4528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[34/37] [chromium] › tests\hexy-village.spec.js:75:1 › eight distinct villagers include children fleeing left with adults in the opening
+[1A[2K[35/37] [chromium] › tests\hexy-village.spec.js:84:1 › child-sized beam collision and committed witch aim follow the smaller body
+[1A[2K[36/37] [chromium] › tests\hexy-village.spec.js:92:1 › parallax planes keep their vertical roots across slopes and move throughout the full route
+[1A[2K[37/37] [chromium] › tests\hexy-village.spec.js:98:1 › painted fire hurts on contact, can be jumped, and leaves a fire impact on the floor
+[1A[2K  1 failed
+    [chromium] › tests\hexy-village.spec.js:62:1 › the extended route matches the cemetery, preserves receipts and opens into three plazas 
+  36 passed (15.2s)

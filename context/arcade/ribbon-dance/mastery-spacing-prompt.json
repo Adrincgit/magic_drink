@@ -1,0 +1,5 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Use case: precise-object-edit. Edit target: this 16-frame Hexy animation sprite sheet. ONLY fix its grid layout and spacing for lossless game sprite extraction. Preserve all 16 character drawings, their exact poses, colors, outfit, identity and animation sequence. Output SQUARE image with EXACTLY 4 columns and 4 rows of identical square cells, transparent alpha background. Each character including complete hair, boots, wand and ribbon fits entirely inside its own cell with at least 12% TRANSPARENT MARGIN at all four sides. No drawing, wand, ribbon, star, leg or hair crosses any cell boundary. Scale each entire drawing down as necessary to fit. Every pose is centred within its cell at consistent overall scale. Especially the thrown wand in row1 col3 must remain within row1 col3; row2 col4 ribbon must not touch outer edge. No gridlines, no text, no new poses, no shadows, no partial pieces from neighbouring cells. The result should have wide empty transparent gutters between all 16 drawings. Preserve true transparent RGBA.",
+  "reference": "source/mastery.png"
+}

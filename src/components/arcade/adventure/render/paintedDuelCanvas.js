@@ -1,3 +1,4 @@
+import {duelBeamPhase,drawDuelBeamTexture} from './duelBeamFrames';
 const cells={heads:[256,224],particles:[128,128],dust:[256,320],fire:[256,128],pyres:[256,416],'fire-show':[384,256]};
 export function painted(c,art,kind,frame,x,y,w,h=w,angle=0,alpha=1,anchorX=.5,anchorY=.5){
  const img=art['duel-'+kind];if(!img||alpha<=0)return;
@@ -28,7 +29,7 @@ export function paintedMeter(c,art,x,y,w,h,ratio,hexyLeft,age,bossOnly=false){
  const fill=(left,width,boss)=>{
   if(width<=0)return;c.save();c.beginPath();c.rect(left,iy,width,ih);c.clip();
   const g=c.createLinearGradient(0,iy,0,iy+ih);g.addColorStop(0,boss?'#ffc56a':'#fff3a3');g.addColorStop(.45,boss?'#f57b35':'#f69dda');g.addColorStop(1,boss?'#aa2534':'#9653bb');c.fillStyle=g;c.fillRect(left,iy,width,ih);
-  if(!bossOnly){const texture=art[boss?'harlequin-ultimate-beam':'super-beam'];c.globalAlpha=.5;c.drawImage(texture,0,Math.floor(age*18)%4*256,1024,256,ix,iy-ih*.9,iw,ih*2.8);}c.restore();
+  if(!bossOnly){const texture=art[boss?'harlequin-ultimate-beam':'super-beam'];c.globalAlpha=.5;drawDuelBeamTexture(c,texture,duelBeamPhase(age),ix,iy-ih*.9,iw,ih*2.8);}c.restore();
  };
  if(bossOnly)fill(ix,iw*ratio,true);
  else{fill(ix,iw,true);fill(hexyLeft?ix:ix+iw*(1-ratio),iw*ratio,false);}

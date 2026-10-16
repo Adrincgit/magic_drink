@@ -1,0 +1,184 @@
+{
+  "date": "2026-10-14T19:16:34.857Z",
+  "scope": "New user list checkpoints 1-5 only; 6-10 remain pending",
+  "generation": {
+    "mode": "built-in imagegen",
+    "prompts": "context/arcade/halloween-5-1/revision-2/prompts.json",
+    "gateCleanupPrompt": "context/arcade/halloween-5-1/revision-2/gate-cleanup-prompt.json",
+    "sources": "context/arcade/halloween-5-1/revision-2/sources/",
+    "registration": "context/arcade/halloween-5-1/revision-2/registration.json"
+  },
+  "changes": {
+    "zombieHp": 23,
+    "regularClownHp": 4.6,
+    "ghostHp": 4,
+    "handHp": 2,
+    "basicWandDamage": 2,
+    "crypts": [
+      9720,
+      15400
+    ],
+    "cryptHp": 48,
+    "cryptBodyHeight": 350,
+    "graveArmWarningSeconds": 1.15,
+    "parallaxDepths": [
+      0,
+      0.045,
+      0.1,
+      0.27,
+      0.55,
+      0.72,
+      1,
+      1.12
+    ]
+  },
+  "validation": {
+    "regressions": "44/45 initially passed; the remaining old walk-only test was updated for mandatory crypt destruction and passed with actual attack input through the full route",
+    "focusedRun": "8/8 passed: four behavior checks, four-scene production recording, chapter identity, song identity and real chapter-picker/gameplay UI",
+    "uniquePassingChecks": 49,
+    "build": "npm run build: exit 0; Astro 0 errors; [build] Complete!",
+    "buildLog": "context/arcade/halloween-5-1/revision-2/build.log",
+    "visualReview": "Decoded all four recordings; reviewed contact sheets and full frames. Raised the warning arm above the dirt lip after first review, then recorded again. Fixed floor tile seam with mirrored repeats. Gate opening has foreground pillar occlusion. No invulnerability in recorded scenes; crypt combat intentionally took enemy damage while holding the doorway.",
+    "recordings": [
+      {
+        "name": "forest-return",
+        "video": "tests/artifacts/arcade/cemetery-revision-2/forest-return.webm",
+        "contactSheet": "tests/artifacts/arcade/cemetery-revision-2/forest-return-motion.png",
+        "stats": {
+          "minHearts": 5,
+          "arms": [],
+          "phases": [],
+          "maxTeleport": 2.125,
+          "wallBeforeBreak": null,
+          "passed": false,
+          "casts": 0,
+          "playerX": 803.0625,
+          "crypts": []
+        }
+      },
+      {
+        "name": "gate-return",
+        "video": "tests/artifacts/arcade/cemetery-revision-2/gate-return.webm",
+        "contactSheet": "tests/artifacts/arcade/cemetery-revision-2/gate-return-motion.png",
+        "stats": {
+          "minHearts": 5,
+          "arms": [],
+          "phases": [],
+          "maxTeleport": 2.125,
+          "wallBeforeBreak": null,
+          "passed": false,
+          "casts": 0,
+          "playerX": 3964.8125,
+          "crypts": []
+        }
+      },
+      {
+        "name": "grave-arm",
+        "video": "tests/artifacts/arcade/cemetery-revision-2/grave-arm.webm",
+        "contactSheet": "tests/artifacts/arcade/cemetery-revision-2/grave-arm-motion.png",
+        "stats": {
+          "minHearts": 5,
+          "arms": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "phases": [
+            "manifest",
+            "patrol"
+          ],
+          "maxTeleport": 0,
+          "wallBeforeBreak": null,
+          "passed": false,
+          "casts": 0,
+          "playerX": 4700,
+          "crypts": []
+        }
+      },
+      {
+        "name": "crypt-wall",
+        "video": "tests/artifacts/arcade/cemetery-revision-2/crypt-wall.webm",
+        "contactSheet": "tests/artifacts/arcade/cemetery-revision-2/crypt-wall-motion.png",
+        "stats": {
+          "minHearts": 1,
+          "arms": [],
+          "phases": [
+            "manifest",
+            "patrol",
+            "windup",
+            "rush",
+            "recover"
+          ],
+          "maxTeleport": 2.125,
+          "wallBeforeBreak": 9527,
+          "passed": true,
+          "casts": 44,
+          "playerX": 10847.556232962796,
+          "crypts": [
+            {
+              "hp": 0,
+              "spawned": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "file": "public/arcade/maps/halloween/depth-clouds-v2.webp",
+      "bytes": 125704,
+      "sha256": "1cf2f34c3825b80a3a61cc6393109bfe0cc4b920ec2113b74a8bee5ec905bbe8",
+      "distMatches": true
+    },
+    {
+      "file": "public/arcade/maps/halloween/depth-mountains-v2.webp",
+      "bytes": 49286,
+      "sha256": "04d215b6c6ddd10b76a30f17e415bdd32c5f1f8231e61cd745095cbef5e19fc0",
+      "distMatches": true
+    },
+    {
+      "file": "public/arcade/maps/halloween/depth-woods-v2.webp",
+      "bytes": 79980,
+      "sha256": "33c96e1920a162b05a914be4e847b2ba44819dbd2a93d0fc0c678f59e29927a8",
+      "distMatches": true
+    },
+    {
+      "file": "public/arcade/maps/halloween/depth-bank-v2.webp",
+      "bytes": 252766,
+      "sha256": "ddb855bd9f814a458f6f92bf12ddf398e882e493a524116c814c48048d2f0574",
+      "distMatches": true
+    },
+    {
+      "file": "public/arcade/maps/halloween/cemetery-bank-v2.webp",
+      "bytes": 388192,
+      "sha256": "4c944087b955b0e6843a6b7b1b7d1ac6702c177a25ffd70c1fb3bc579a991f1d",
+      "distMatches": true
+    },
+    {
+      "file": "public/arcade/maps/halloween/cemetery-path-v2.webp",
+      "bytes": 548780,
+      "sha256": "ea33d0f545941967343191e8bf7346b1c93ab8a32d1875d39d1237819e5c447e",
+      "distMatches": true
+    },
+    {
+      "file": "public/arcade/maps/halloween/gate-complete-v2.webp",
+      "bytes": 534956,
+      "sha256": "69b9b86aa4ba69671cadf84716ed389fde2b77d7c4e37cf0242f688b18d910c0",
+      "distMatches": true
+    },
+    {
+      "file": "public/arcade/maps/halloween/crypt-side-v2.webp",
+      "bytes": 378748,
+      "sha256": "70a30ab1db8c3e87f136bab3789bfc0f8116e17de0ed03724f9746f6c1682d74",
+      "distMatches": true
+    },
+    {
+      "file": "public/arcade/maps/halloween/grave-arm-v2.webp",
+      "bytes": 58876,
+      "sha256": "87533f2cc908c28de06b5e4bd59961dd856ca32871b19e7c21b790b0c79f3d76",
+      "distMatches": true
+    }
+  ]
+}

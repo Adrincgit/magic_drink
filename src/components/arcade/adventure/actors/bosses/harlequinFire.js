@@ -1,3 +1,4 @@
+import {EXPLOSION_SCALE} from '../../engine/explosionScale';
 export const PYRE_HEIGHT=420;
 export const TRAIL_DURATION=2.1;
 export const PYRE_AFTERBURN=3.1;
@@ -11,7 +12,7 @@ export function rushFireScale(q){
  return q.source==='rush'&&q.stage>=2?clamp(q.life/q.duration,0,1)**.8:1;
 }
 export function fireImpact(s,x,y,power=1,grounded=false){
- s.effects.push({fireBurst:true,x,y,size:270*power,age:0,life:.92,duration:.92,grounded});
+ s.effects.push({fireBurst:true,x,y,size:270*power*EXPLOSION_SCALE,age:0,life:.92,duration:.92,grounded});
  if(!s.events.includes('harlequinFireImpact'))s.events.push('harlequinFireImpact');
 }
 export function leaveHarlequinFire(s,b,shoot,oldX){

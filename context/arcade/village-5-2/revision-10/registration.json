@@ -1,0 +1,1182 @@
+{
+  "climb-adults": {
+    "output": "public/arcade/sprites/enemies/village-climb-adults-v10.webp",
+    "cell": 384,
+    "frames": [
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 44,
+        "top": 67,
+        "width": 234,
+        "height": 283,
+        "scale": 0.833922261484099,
+        "packed": {
+          "left": 95,
+          "top": 139,
+          "width": 195,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 352,
+        "top": 20,
+        "width": 225,
+        "height": 330,
+        "scale": 0.833922261484099,
+        "packed": {
+          "left": 98,
+          "top": 100,
+          "width": 188,
+          "height": 275
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 657,
+        "top": 46,
+        "width": 222,
+        "height": 302,
+        "scale": 0.833922261484099,
+        "packed": {
+          "left": 100,
+          "top": 123,
+          "width": 185,
+          "height": 252
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 982,
+        "top": 51,
+        "width": 227,
+        "height": 299,
+        "scale": 0.833922261484099,
+        "packed": {
+          "left": 98,
+          "top": 126,
+          "width": 189,
+          "height": 249
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 34,
+        "top": 375,
+        "width": 246,
+        "height": 278,
+        "scale": 0.833922261484099,
+        "packed": {
+          "left": 90,
+          "top": 143,
+          "width": 205,
+          "height": 232
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 363,
+        "top": 428,
+        "width": 256,
+        "height": 225,
+        "scale": 0.833922261484099,
+        "packed": {
+          "left": 86,
+          "top": 187,
+          "width": 213,
+          "height": 188
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 676,
+        "top": 381,
+        "width": 234,
+        "height": 272,
+        "scale": 0.833922261484099,
+        "packed": {
+          "left": 95,
+          "top": 148,
+          "width": 195,
+          "height": 227
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 1018,
+        "top": 377,
+        "width": 206,
+        "height": 276,
+        "scale": 0.833922261484099,
+        "packed": {
+          "left": 106,
+          "top": 145,
+          "width": 172,
+          "height": 230
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 46,
+        "top": 688,
+        "width": 224,
+        "height": 285,
+        "scale": 0.8280701754385965,
+        "packed": {
+          "left": 100,
+          "top": 139,
+          "width": 185,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 364,
+        "top": 655,
+        "width": 224,
+        "height": 322,
+        "scale": 0.8280701754385965,
+        "packed": {
+          "left": 100,
+          "top": 108,
+          "width": 185,
+          "height": 267
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 668,
+        "top": 671,
+        "width": 228,
+        "height": 306,
+        "scale": 0.8280701754385965,
+        "packed": {
+          "left": 98,
+          "top": 122,
+          "width": 189,
+          "height": 253
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 986,
+        "top": 674,
+        "width": 241,
+        "height": 303,
+        "scale": 0.8280701754385965,
+        "packed": {
+          "left": 92,
+          "top": 124,
+          "width": 200,
+          "height": 251
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 38,
+        "top": 990,
+        "width": 254,
+        "height": 256,
+        "scale": 0.8280701754385965,
+        "packed": {
+          "left": 87,
+          "top": 163,
+          "width": 210,
+          "height": 212
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 373,
+        "top": 1027,
+        "width": 242,
+        "height": 222,
+        "scale": 0.8280701754385965,
+        "packed": {
+          "left": 92,
+          "top": 191,
+          "width": 200,
+          "height": 184
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 672,
+        "top": 987,
+        "width": 217,
+        "height": 260,
+        "scale": 0.8280701754385965,
+        "packed": {
+          "left": 102,
+          "top": 160,
+          "width": 180,
+          "height": 215
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-adults.png",
+        "left": 1017,
+        "top": 977,
+        "width": 205,
+        "height": 270,
+        "scale": 0.8280701754385965,
+        "packed": {
+          "left": 107,
+          "top": 151,
+          "width": 170,
+          "height": 224
+        }
+      }
+    ]
+  },
+  "climb-children": {
+    "output": "public/arcade/sprites/enemies/village-climb-children-v10.webp",
+    "cell": 384,
+    "frames": [
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 28,
+        "top": 21,
+        "width": 247,
+        "height": 314,
+        "scale": 0.7515923566878981,
+        "packed": {
+          "left": 99,
+          "top": 139,
+          "width": 186,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 331,
+        "top": 14,
+        "width": 249,
+        "height": 314,
+        "scale": 0.7515923566878981,
+        "packed": {
+          "left": 99,
+          "top": 139,
+          "width": 187,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 672,
+        "top": 23,
+        "width": 225,
+        "height": 308,
+        "scale": 0.7515923566878981,
+        "packed": {
+          "left": 108,
+          "top": 144,
+          "width": 169,
+          "height": 231
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 996,
+        "top": 21,
+        "width": 233,
+        "height": 314,
+        "scale": 0.7515923566878981,
+        "packed": {
+          "left": 105,
+          "top": 139,
+          "width": 175,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/anatomy-fix/registered/climb-children-4.png",
+        "left": 0,
+        "top": 0,
+        "width": 286,
+        "height": 300,
+        "anatomySource": "context/arcade/village-5-2/revision-10/anatomy-fix/sources/climb-children-fixed.png",
+        "original": {
+          "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+          "left": 30,
+          "top": 335,
+          "width": 286,
+          "height": 300
+        },
+        "scale": 0.7515923566878981,
+        "packed": {
+          "left": 85,
+          "top": 150,
+          "width": 215,
+          "height": 225
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 352,
+        "top": 409,
+        "width": 241,
+        "height": 220,
+        "scale": 0.7515923566878981,
+        "packed": {
+          "left": 102,
+          "top": 210,
+          "width": 181,
+          "height": 165
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 665,
+        "top": 346,
+        "width": 248,
+        "height": 290,
+        "scale": 0.7515923566878981,
+        "packed": {
+          "left": 99,
+          "top": 157,
+          "width": 186,
+          "height": 218
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 978,
+        "top": 351,
+        "width": 247,
+        "height": 285,
+        "scale": 0.7515923566878981,
+        "packed": {
+          "left": 99,
+          "top": 161,
+          "width": 186,
+          "height": 214
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 28,
+        "top": 642,
+        "width": 261,
+        "height": 318,
+        "scale": 0.7421383647798742,
+        "packed": {
+          "left": 95,
+          "top": 139,
+          "width": 194,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 346,
+        "top": 640,
+        "width": 258,
+        "height": 314,
+        "scale": 0.7421383647798742,
+        "packed": {
+          "left": 97,
+          "top": 142,
+          "width": 191,
+          "height": 233
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 686,
+        "top": 641,
+        "width": 234,
+        "height": 315,
+        "scale": 0.7421383647798742,
+        "packed": {
+          "left": 105,
+          "top": 141,
+          "width": 174,
+          "height": 234
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 1003,
+        "top": 641,
+        "width": 236,
+        "height": 319,
+        "scale": 0.7421383647798742,
+        "packed": {
+          "left": 105,
+          "top": 138,
+          "width": 175,
+          "height": 237
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 27,
+        "top": 960,
+        "width": 279,
+        "height": 279,
+        "scale": 0.7421383647798742,
+        "packed": {
+          "left": 89,
+          "top": 168,
+          "width": 207,
+          "height": 207
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 347,
+        "top": 1008,
+        "width": 249,
+        "height": 230,
+        "scale": 0.7421383647798742,
+        "packed": {
+          "left": 100,
+          "top": 204,
+          "width": 185,
+          "height": 171
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 670,
+        "top": 960,
+        "width": 261,
+        "height": 287,
+        "scale": 0.7421383647798742,
+        "packed": {
+          "left": 95,
+          "top": 162,
+          "width": 194,
+          "height": 213
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-children.png",
+        "left": 979,
+        "top": 973,
+        "width": 266,
+        "height": 275,
+        "scale": 0.7421383647798742,
+        "packed": {
+          "left": 94,
+          "top": 171,
+          "width": 197,
+          "height": 204
+        }
+      }
+    ]
+  },
+  "climb-elders": {
+    "output": "public/arcade/sprites/enemies/village-climb-elders-v10.webp",
+    "cell": 384,
+    "frames": [
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 25,
+        "top": 50,
+        "width": 251,
+        "height": 305,
+        "scale": 0.7737704918032787,
+        "packed": {
+          "left": 95,
+          "top": 139,
+          "width": 194,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 393,
+        "top": 17,
+        "width": 199,
+        "height": 346,
+        "scale": 0.7737704918032787,
+        "packed": {
+          "left": 115,
+          "top": 107,
+          "width": 154,
+          "height": 268
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 685,
+        "top": 25,
+        "width": 218,
+        "height": 338,
+        "scale": 0.7737704918032787,
+        "packed": {
+          "left": 108,
+          "top": 113,
+          "width": 169,
+          "height": 262
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 994,
+        "top": 25,
+        "width": 212,
+        "height": 338,
+        "scale": 0.7737704918032787,
+        "packed": {
+          "left": 110,
+          "top": 113,
+          "width": 164,
+          "height": 262
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/anatomy-fix/registered/climb-elders-4.png",
+        "left": 0,
+        "top": 0,
+        "width": 259,
+        "height": 267,
+        "anatomySource": "context/arcade/village-5-2/revision-10/anatomy-fix/sources/climb-elders-fixed.png",
+        "original": {
+          "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+          "left": 29,
+          "top": 380,
+          "width": 259,
+          "height": 267
+        },
+        "scale": 0.7737704918032787,
+        "packed": {
+          "left": 92,
+          "top": 168,
+          "width": 200,
+          "height": 207
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 380,
+        "top": 431,
+        "width": 221,
+        "height": 216,
+        "scale": 0.7737704918032787,
+        "packed": {
+          "left": 107,
+          "top": 208,
+          "width": 171,
+          "height": 167
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 714,
+        "top": 380,
+        "width": 192,
+        "height": 267,
+        "scale": 0.7737704918032787,
+        "packed": {
+          "left": 118,
+          "top": 168,
+          "width": 149,
+          "height": 207
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 1024,
+        "top": 380,
+        "width": 194,
+        "height": 267,
+        "scale": 0.7737704918032787,
+        "packed": {
+          "left": 117,
+          "top": 168,
+          "width": 150,
+          "height": 207
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 22,
+        "top": 666,
+        "width": 260,
+        "height": 292,
+        "scale": 0.8082191780821918,
+        "packed": {
+          "left": 87,
+          "top": 139,
+          "width": 210,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 395,
+        "top": 655,
+        "width": 224,
+        "height": 311,
+        "scale": 0.8082191780821918,
+        "packed": {
+          "left": 102,
+          "top": 124,
+          "width": 181,
+          "height": 251
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 681,
+        "top": 660,
+        "width": 244,
+        "height": 315,
+        "scale": 0.8082191780821918,
+        "packed": {
+          "left": 94,
+          "top": 120,
+          "width": 197,
+          "height": 255
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 1007,
+        "top": 658,
+        "width": 221,
+        "height": 317,
+        "scale": 0.8082191780821918,
+        "packed": {
+          "left": 103,
+          "top": 119,
+          "width": 179,
+          "height": 256
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 35,
+        "top": 975,
+        "width": 274,
+        "height": 267,
+        "scale": 0.8082191780821918,
+        "packed": {
+          "left": 82,
+          "top": 159,
+          "width": 221,
+          "height": 216
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 376,
+        "top": 1033,
+        "width": 236,
+        "height": 208,
+        "scale": 0.8082191780821918,
+        "packed": {
+          "left": 97,
+          "top": 207,
+          "width": 191,
+          "height": 168
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 712,
+        "top": 975,
+        "width": 206,
+        "height": 266,
+        "scale": 0.8082191780821918,
+        "packed": {
+          "left": 109,
+          "top": 160,
+          "width": 166,
+          "height": 215
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-elders.png",
+        "left": 1024,
+        "top": 977,
+        "width": 202,
+        "height": 264,
+        "scale": 0.8082191780821918,
+        "packed": {
+          "left": 111,
+          "top": 162,
+          "width": 163,
+          "height": 213
+        }
+      }
+    ]
+  },
+  "climb-neighbors": {
+    "output": "public/arcade/sprites/enemies/village-climb-neighbors-v10.webp",
+    "cell": 384,
+    "frames": [
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 22,
+        "top": 52,
+        "width": 288,
+        "height": 294,
+        "scale": 0.8027210884353742,
+        "packed": {
+          "left": 77,
+          "top": 139,
+          "width": 231,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 381,
+        "top": 10,
+        "width": 232,
+        "height": 336,
+        "scale": 0.8027210884353742,
+        "packed": {
+          "left": 99,
+          "top": 105,
+          "width": 186,
+          "height": 270
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 707,
+        "top": 21,
+        "width": 198,
+        "height": 325,
+        "scale": 0.8027210884353742,
+        "packed": {
+          "left": 113,
+          "top": 114,
+          "width": 159,
+          "height": 261
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 1037,
+        "top": 23,
+        "width": 174,
+        "height": 323,
+        "scale": 0.8027210884353742,
+        "packed": {
+          "left": 122,
+          "top": 116,
+          "width": 140,
+          "height": 259
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 16,
+        "top": 349,
+        "width": 268,
+        "height": 298,
+        "scale": 0.8027210884353742,
+        "packed": {
+          "left": 85,
+          "top": 136,
+          "width": 215,
+          "height": 239
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 341,
+        "top": 427,
+        "width": 231,
+        "height": 220,
+        "scale": 0.8027210884353742,
+        "packed": {
+          "left": 100,
+          "top": 198,
+          "width": 185,
+          "height": 177
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 666,
+        "top": 356,
+        "width": 232,
+        "height": 291,
+        "scale": 0.8027210884353742,
+        "packed": {
+          "left": 99,
+          "top": 141,
+          "width": 186,
+          "height": 234
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 1011,
+        "top": 367,
+        "width": 222,
+        "height": 280,
+        "scale": 0.8027210884353742,
+        "packed": {
+          "left": 103,
+          "top": 150,
+          "width": 178,
+          "height": 225
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 24,
+        "top": 659,
+        "width": 250,
+        "height": 295,
+        "scale": 0.8,
+        "packed": {
+          "left": 92,
+          "top": 139,
+          "width": 200,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 375,
+        "top": 647,
+        "width": 220,
+        "height": 303,
+        "scale": 0.8,
+        "packed": {
+          "left": 104,
+          "top": 133,
+          "width": 176,
+          "height": 242
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 714,
+        "top": 648,
+        "width": 207,
+        "height": 306,
+        "scale": 0.8,
+        "packed": {
+          "left": 109,
+          "top": 130,
+          "width": 166,
+          "height": 245
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 1015,
+        "top": 648,
+        "width": 227,
+        "height": 306,
+        "scale": 0.8,
+        "packed": {
+          "left": 101,
+          "top": 130,
+          "width": 182,
+          "height": 245
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 17,
+        "top": 954,
+        "width": 286,
+        "height": 288,
+        "scale": 0.8,
+        "packed": {
+          "left": 78,
+          "top": 145,
+          "width": 229,
+          "height": 230
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 377,
+        "top": 1007,
+        "width": 241,
+        "height": 225,
+        "scale": 0.8,
+        "packed": {
+          "left": 96,
+          "top": 195,
+          "width": 193,
+          "height": 180
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 700,
+        "top": 954,
+        "width": 235,
+        "height": 290,
+        "scale": 0.8,
+        "packed": {
+          "left": 98,
+          "top": 143,
+          "width": 188,
+          "height": 232
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/climb-neighbors.png",
+        "left": 1011,
+        "top": 954,
+        "width": 230,
+        "height": 285,
+        "scale": 0.8,
+        "packed": {
+          "left": 100,
+          "top": 147,
+          "width": 184,
+          "height": 228
+        }
+      }
+    ]
+  },
+  "warning": {
+    "output": "public/arcade/sprites/enemies/village-warning-v10.webp",
+    "cell": 384,
+    "frames": [
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/warning.png",
+        "left": 13,
+        "top": 197,
+        "width": 307,
+        "height": 362,
+        "scale": 0.6519337016574586,
+        "packed": {
+          "left": 92,
+          "top": 139,
+          "width": 200,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/anatomy-fix/registered/warning-1.png",
+        "left": 0,
+        "top": 0,
+        "width": 275,
+        "height": 365,
+        "anatomySource": "context/arcade/village-5-2/revision-10/anatomy-fix/sources/warning-fixed.png",
+        "original": {
+          "path": "context/arcade/village-5-2/revision-10/sources/warning.png",
+          "left": 344,
+          "top": 196,
+          "width": 275,
+          "height": 365
+        },
+        "scale": 0.6519337016574586,
+        "packed": {
+          "left": 103,
+          "top": 137,
+          "width": 179,
+          "height": 238
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/warning.png",
+        "left": 635,
+        "top": 196,
+        "width": 301,
+        "height": 363,
+        "scale": 0.6519337016574586,
+        "packed": {
+          "left": 94,
+          "top": 138,
+          "width": 196,
+          "height": 237
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/warning.png",
+        "left": 946,
+        "top": 194,
+        "width": 292,
+        "height": 372,
+        "scale": 0.6519337016574586,
+        "packed": {
+          "left": 97,
+          "top": 132,
+          "width": 190,
+          "height": 243
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/warning.png",
+        "left": 16,
+        "top": 728,
+        "width": 297,
+        "height": 368,
+        "scale": 0.6413043478260869,
+        "packed": {
+          "left": 97,
+          "top": 139,
+          "width": 190,
+          "height": 236
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/warning.png",
+        "left": 348,
+        "top": 725,
+        "width": 282,
+        "height": 372,
+        "scale": 0.6413043478260869,
+        "packed": {
+          "left": 102,
+          "top": 136,
+          "width": 181,
+          "height": 239
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/warning.png",
+        "left": 637,
+        "top": 728,
+        "width": 295,
+        "height": 370,
+        "scale": 0.6413043478260869,
+        "packed": {
+          "left": 98,
+          "top": 138,
+          "width": 189,
+          "height": 237
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/warning.png",
+        "left": 942,
+        "top": 729,
+        "width": 290,
+        "height": 375,
+        "scale": 0.6413043478260869,
+        "packed": {
+          "left": 99,
+          "top": 135,
+          "width": 186,
+          "height": 240
+        }
+      }
+    ]
+  },
+  "collapse": {
+    "output": "public/arcade/sprites/enemies/village-collapse-v10.webp",
+    "cell": 512,
+    "frames": [
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/collapse.png",
+        "left": 10,
+        "top": 7,
+        "width": 426,
+        "height": 415,
+        "scale": 1.1455399061032865,
+        "packed": {
+          "left": 12,
+          "top": 25,
+          "width": 488,
+          "height": 475
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/collapse.png",
+        "left": 454,
+        "top": 7,
+        "width": 425,
+        "height": 415,
+        "scale": 1.1455399061032865,
+        "packed": {
+          "left": 13,
+          "top": 25,
+          "width": 487,
+          "height": 475
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/collapse.png",
+        "left": 897,
+        "top": 7,
+        "width": 425,
+        "height": 415,
+        "scale": 1.1455399061032865,
+        "packed": {
+          "left": 13,
+          "top": 25,
+          "width": 487,
+          "height": 475
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/collapse.png",
+        "left": 1341,
+        "top": 15,
+        "width": 424,
+        "height": 407,
+        "scale": 1.1455399061032865,
+        "packed": {
+          "left": 13,
+          "top": 34,
+          "width": 486,
+          "height": 466
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/collapse.png",
+        "left": 12,
+        "top": 442,
+        "width": 479,
+        "height": 422,
+        "scale": 1.1455399061032865,
+        "packed": {
+          "left": -18,
+          "top": 17,
+          "width": 549,
+          "height": 483
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/collapse.png",
+        "left": 512,
+        "top": 664,
+        "width": 424,
+        "height": 200,
+        "scale": 1.1455399061032865,
+        "packed": {
+          "left": 13,
+          "top": 271,
+          "width": 486,
+          "height": 229
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/collapse.png",
+        "left": 936,
+        "top": 654,
+        "width": 443,
+        "height": 210,
+        "scale": 1.1455399061032865,
+        "packed": {
+          "left": 3,
+          "top": 259,
+          "width": 507,
+          "height": 241
+        }
+      },
+      {
+        "path": "context/arcade/village-5-2/revision-10/sources/collapse.png",
+        "left": 1427,
+        "top": 661,
+        "width": 331,
+        "height": 200,
+        "scale": 1.1455399061032865,
+        "packed": {
+          "left": 67,
+          "top": 271,
+          "width": 379,
+          "height": 229
+        }
+      }
+    ]
+  }
+}

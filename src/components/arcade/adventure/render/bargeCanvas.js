@@ -1,5 +1,7 @@
+import {drawWindCloth} from './windClothCanvas';
 import {bargeParts} from '../actors/bosses/bargeSystems';
-import {bargeCell,drawBargeCrew,drawBargeMachinery} from './bargeMachineryCanvas';
+import {bargeCell} from './bargeMachineryCanvas';
+import {drawAquaticEnemy} from './riverActorsCanvas';
 import {bargeRig} from '../actors/bosses/adventureBarge';
 import {bossHitFilter} from '../actors/bosses/bossFeedback';
 import {drawHullWater} from './harborWaterCanvas';
@@ -26,53 +28,68 @@ export function drawCannonWater(c,art,x,y,length,height,angle,age,reduced=false,
  c.save();c.globalAlpha*=alpha;c.translate(x,y);c.rotate(angle);
  c.drawImage(art['harbor-jet'],1450-sourceWidth,frame*224,sourceWidth,224,-length,-height/2,length+5,height);c.restore();
 }
+function paintRegion(c,img,m,rect){
+ const [x,y,w,h]=rect;c.drawImage(img,x,y,w,h,m.body.x+x*m.unit,m.body.y+y*m.unit,w*m.unit,h*m.unit);
+}
+const DRUM_REGION=[316,314,285,340],TANK_REGION=[753,322,174,317];
 export function drawBarge(c,s,art,reduced=false){
- const b=s.boss;if(b.phase==='sleep')return;if(b.shattered){drawBargeEscape(c,s,art,reduced);return;}
- const m=bargeRig(s),t=reduced?0:Math.floor((s.time||0)*12)/12,preparing=b.phase==='warn',strike=b.release>0,parts=bargeParts(s),k=m.scale;
- drawHullWater(c,art['barge-body'],b.x,m.waterY,m.body.w,m.body.h,t,reduced,art);
- c.save();c.beginPath();c.rect(m.body.x-80,m.body.y-180,m.body.w+160,m.waterY-m.body.y+182);c.clip();
- if(b.defeat){const tilt=reduced?0:Math.min(.09,b.defeat.age*.04);c.translate(b.x,m.waterY);c.rotate(tilt);c.translate(-b.x,-m.waterY+Math.min(28,b.defeat.age*14));}
-
- const hull=m.body;c.drawImage(art['barge-body'],hull.x,hull.y,hull.w,hull.h);
- if(b.transformed){const damaged=art['barge-damaged'];c.drawImage(damaged,0,damaged.height*.65,damaged.width,damaged.height*.35,hull.x,hull.y+hull.h*.65,hull.w,hull.h*.35);}
- part(c,art['barge-wheel'],m.wheel.x,m.wheel.y,m.wheel.r*2,m.wheel.r*2,reduced?0:b.wheelAngle||t*2.6);
- const ratio=parts.drum.hp/parts.drum.maxHp,drumFrame=ratio<=0?3:ratio<.35?2:ratio<.7?1:0;
- const beat=strike&&b.move==='drumroll'&&ratio>0;
- c.save();c.filter=bossHitFilter(parts.drum,reduced);
- bargeCell(c,art['barge-drum-states'],drumFrame,m.drum.x,m.drum.y,m.drum.r*2+(beat?5:0),m.drum.r*2-(beat?5:0));
- c.restore();drawBargeMachinery(c,s,art,m,t,reduced);
- const loop=reduced?0:Math.floor(t*6)%4;
- const drummerFrame=ratio<=0?8+loop:b.move==='drumroll'?(preparing?4:beat?(b.release>.12?6:7):(b.shotClock<.15?5:loop)):loop;
- if(!b.defeat||b.defeat.age<.7){const size=228*k;c.drawImage(art['barge-drummer'],drummerFrame%4*384,Math.floor(drummerFrame/4)*384,384,384,m.drummer.x-size*.68,m.drummer.y-size*368/384,size,size);}
- const gunner=parts.tank.hp<=0?12+loop:b.move==='jet'?(preparing?4+loop:b.phase==='attack'?8+loop:loop):loop;
- if(!b.defeat||b.defeat.age<1){const size=160*k;c.drawImage(art['barge-gunner'],gunner%4*256,Math.floor(gunner/4)*256,256,256,m.nozzle.x+64*k-size*.61,m.nozzle.y+10*k-size*250/256,size,size);}
- for(const [i,port]of m.ports.entries()){
-  const firing=b.portFlash?.index===i&&b.portFlash.age>0;
-  part(c,art['barge-cannon'],port.x+(firing?5:0),port.y,100*k,60*k,preparing&&b.move==='broadside'?.15:0);
-  if(preparing&&b.move==='broadside')drawWaterDetail(c,art,3,loop,port.x-45,port.y,38,36,0,.55);
+ const b=s.boss;if(b.phase==='sleep')return;
+ if(b.shattered){drawBargeEscape(c,s,art,reduced);return;}
+ const m=bargeRig(s),t=s.fxTime||s.time||0,parts=bargeParts(s),img=art['barge-pressure-barge'],damaged=art['barge-pressure-damage'];
+ const preparing=b.phase==='warn',firing=b.release>0,frame=reduced?0:Math.floor(t*10)%4;
+ drawHullWater(c,img,b.x,m.waterY,m.body.w,m.body.h,t,reduced,art);
+ c.save();
+ if(b.defeat){c.translate(b.x,m.waterY);c.rotate(reduced?0:Math.min(.06,b.defeat.age*.03));c.translate(-b.x,-m.waterY+Math.min(22,b.defeat.age*12));}
+ c.filter=bossHitFilter(b,reduced);
+ drawWindCloth(c,img,m.body.x,m.body.y,m.body.w,m.body.h,t,{flags:[[.11,.283,.069,.079],[.901,.326,.07,.078]],windArt:art,reduced});
+ for(const [name,rect]of [['drum',DRUM_REGION],['tank',TANK_REGION]]){
+  c.save();if(!b.flash)c.filter=bossHitFilter(parts[name],reduced);
+  if(parts[name].hp<=0)paintRegion(c,damaged,m,rect);
+  else if(parts[name].flash>0)paintRegion(c,img,m,rect);
+  c.restore();
  }
- part(c,art['barge-cannon'],m.cannon.x,m.cannon.y,132*k,79*k,m.cannon.angle);
- bargeCell(c,art['barge-nozzle'],strike&&b.move==='jet'?1:0,m.nozzle.x,m.nozzle.y,120*k,96*k);
  c.restore();
- if(strike&&b.move==='tidal'){
-  const x=m.muzzle.x,y=m.muzzle.y,tip=m.wave;drawCannonWater(c,art,x,y,Math.hypot(x-tip.x,y-tip.y),66,Math.atan2(y-tip.y,x-tip.x),t,reduced);
+ // Real level divers leave the stern cabin on a supported deck. The front
+ // rail occludes their feet, as the basket rim does for the first boss.
+ for(const e of s.enemies)if(e.bargeCrew&&['exit','deploy'].includes(e.phase)&&e.hp>0){
+  c.save();if(e.phase==='exit'){c.beginPath();c.rect(m.stern.x-22,m.body.y,m.ledge.x-m.stern.x+110,m.waterY-m.body.y);c.clip();}
+  drawAquaticEnemy(c,e,art,reduced);c.restore();
  }
+ c.save();c.filter=bossHitFilter(b,reduced);paintRegion(c,img,m,[1127,552,386,82]);c.restore();
  drawBargeEscape(c,s,art,reduced);
- const frame=reduced?1:Math.floor(t*8)%4,force=false;
- drawHarborFX(c,art,2,frame,m.wheel.x,m.waterY,force?170:108,force?100:50);
- if(force)drawHarborFX(c,art,0,frame,b.x-310,m.waterY-18,145,90);
- for(const [j,vent]of m.vents.entries())for(let i=0;i<(b.transformed?4:2);i++){
-  const age=reduced?(i+.5)/4:(t*.85+i*.27+j*.1)%1,r=7+age*14;
-  drawWaterDetail(c,art,3,Math.min(3,Math.floor(age*4)),vent.x+Math.sin(age*4+j)*8,vent.y-age*72,r*3,r*3,0,(1-age)*.4);
+ if(preparing&&['mortar','broadside','tidal'].includes(b.move)){
+  const pulse=reduced?.5:.5+.3*Math.sin(t*20);drawWaterDetail(c,art,3,frame,m.muzzle.x-10,m.muzzle.y,38,30,0,pulse);
+ }
+ if(firing&&['mortar','broadside','tidal'].includes(b.move)){
+  const u=1-b.release/.25;
+  for(let i=0;i<4;i++)drawWaterDetail(c,art,3,(frame+i)%4,m.muzzle.x-20-u*(45+i*12),m.muzzle.y+(i-1.5)*9,65+u*70,50+u*55,0,(1-u)*.75);
+ }
+ if(preparing&&b.move==='drumroll'&&parts.drum.hp>0||firing&&b.move==='drumroll'){
+  const pulse=firing?1-b.release/.25:((t*2)%1);c.save();c.globalAlpha=firing?.8:.2;
+  bargeCell(c,art['barge-sonic'],Math.min(3,Math.floor(pulse*4)),m.drum.x-16-pulse*30,m.drum.y,70+pulse*90,90+pulse*75);c.restore();
+ }
+ if(preparing&&b.move==='jet'&&parts.tank.hp>0){
+  // Painted bubbles are confined to the real glass chamber.
+  c.save();c.beginPath();c.ellipse(m.tank.x,m.tank.y,m.tank.w*.29,m.tank.h*.39,0,0,Math.PI*2);c.clip();
+  for(let i=0;i<5;i++){const u=reduced?i/5:(t*1.6+i/5)%1;drawWaterDetail(c,art,0,(i+frame)%4,m.tank.x+Math.sin(i*2)*12,m.tank.y+m.tank.h*.35-u*m.tank.h*.7,12,18,0,.8);}
+  c.restore();drawWaterDetail(c,art,3,frame,m.jetMuzzle.x-8,m.jetMuzzle.y,34,25,0,.5);
+ }
+ if(firing&&b.move==='tidal')drawCannonWater(c,art,m.muzzle.x,m.muzzle.y,Math.hypot(m.muzzle.x-m.wave.x,m.muzzle.y-m.wave.y),66,Math.atan2(m.muzzle.y-m.wave.y,m.muzzle.x-m.wave.x),t,reduced);
+ drawHarborFX(c,art,2,frame,m.wheel.x,m.waterY,108,50);
+ for(const [j,vent]of m.vents.entries())for(let i=0;i<(preparing?4:2);i++){
+  const u=reduced?(i+.5)/4:(t*.85+i*.27+j*.1)%1;
+  drawWaterDetail(c,art,3,Math.min(3,Math.floor(u*4)),vent.x+Math.sin(u*4+j)*8,vent.y-u*70,23+u*50,25+u*52,0,(1-u)*(preparing?.65:.4));
  }
 }
 function drawBargeEscape(c,s,art,reduced){
- const b=s.boss,q=b.defeat;if(!q)return;const m=bargeRig(s);
+ const q=s.boss.defeat;if(!q)return;const m=bargeRig(s);
  for(let i=0;i<2;i++){
-  const age=q.age-(i?1:.7);if(age<0)continue;const start=i?{x:m.nozzle.x+64,y:m.nozzle.y+10}:m.drummer,u=Math.min(1,age/.95);
-  const x=start.x-u*(130+i*40)-Math.max(0,age-.95)*24,y=start.y+(m.waterY-start.y)*u-(reduced?0:Math.sin(u*Math.PI)*110);
-  c.save();c.globalAlpha=Math.min(1,Math.max(0,(4.5-q.age)/.45));drawBargeCrew(c,art,u<1?14:15,x,y,105);
-  if(u===1)drawWaterDetail(c,art,1,reduced?0:Math.floor(s.time*8)%4,x,m.waterY,72,24,0,.7);c.restore();
+  const age=q.age-.15-i*.48;if(age<0)continue;
+  const walk=Math.min(1,age/.6),jump=Math.max(0,Math.min(1,(age-.6)/.85));
+  const x=m.stern.x+(m.ledge.x-m.stern.x)*walk+jump*48;
+  const y=jump?m.ledge.y+(m.waterY-m.ledge.y)*jump-Math.sin(jump*Math.PI)*75:m.stern.y+(m.ledge.y-m.stern.y)*walk;
+  if(jump<1)drawAquaticEnemy(c,{type:8,hp:1,x,y,dir:1,phase:walk<1?'exit':'deploy',phaseAge:age-.6,gait:age*1.2,clock:s.time},art,reduced);
+  else if(age<2)drawWaterDetail(c,art,1,Math.floor(s.time*8)%4,x,m.waterY,72,24,0,.7);
  }
 }
 export function drawBargeProjectile(c,q,art,reduced=false){

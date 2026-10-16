@@ -1,6 +1,7 @@
+import {EXPLOSION_SCALE} from './explosionScale';
 import {fireImpact} from '../actors/bosses/harlequinFire';
 // Relative to the previous 648px impacts: torches/cinders -40%, mortars -25%.
-export function emberBlastSize(kind){return 648*(kind==='ember-mortar'?.75:.6);}
+export function emberBlastSize(kind){return 648*(kind==='ember-mortar'?.75:.6)*EXPLOSION_SCALE;}
 export function emberBlastHitbox(q){
  if(q.kind!=='ember-blast'||q.age>=.575)return null;
  // The first five fire-show drawings contain flame; the last three are
@@ -11,7 +12,7 @@ export function emberBlastHitbox(q){
 }
 export function burstEmberProjectile(s,q,{grounded=false,damaging=true,multiplier=1}={}){
  const size=emberBlastSize(q.kind)*multiplier;
- fireImpact(s,q.x,q.y,size/270,grounded);
+ fireImpact(s,q.x,q.y,size/(270*EXPLOSION_SCALE),grounded);
  if(damaging)s.hostile.push({kind:'ember-blast',element:'fire',x:q.x,y:q.y,vx:0,vy:0,r:0,size,grounded,age:0,life:.575});
  s.events.push('emberImpact');
 }

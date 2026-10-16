@@ -4,7 +4,7 @@
 .finish>div, .finish>canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; clip-path: var(--finish-clip, none); }
 /* Filter the actual backdrop. Filtering the world itself would capture fixed
    navigation, and an RGB-colored overlay would not refract its pixels. */
-.lens { z-index: 10000; opacity: var(--lens-opacity); backdrop-filter: url('#hexy-film-optics') grayscale(var(--finish-monochrome, 0)); -webkit-backdrop-filter: url('#hexy-film-optics') grayscale(var(--finish-monochrome, 0)); }
+.lens { z-index: 10000; opacity: var(--lens-opacity); backdrop-filter: url('#hexy-film-optics'); -webkit-backdrop-filter: url('#hexy-film-optics'); }
 .lens[data-ready=false] { visibility: hidden; }
 .grain { z-index: 10001; display: block; opacity: var(--grain-opacity); mix-blend-mode: soft-light; }
 .vignette { z-index: 10002; opacity: var(--vignette-opacity); background: radial-gradient(ellipse at 50% 48%, transparent 44%, #271d3308 72%, #21162d2e 100%); filter: grayscale(var(--finish-monochrome, 0)); }
@@ -17,3 +17,4 @@
 .monochrome { z-index:10003; backdrop-filter:grayscale(var(--finish-monochrome, 0)); -webkit-backdrop-filter:grayscale(var(--finish-monochrome, 0)); }
 .finish[data-arcade-optics=true] .vignette{opacity:var(--vignette-opacity);background:radial-gradient(ellipse at 50% 48%,transparent 32%,#10071e30 55%,#0b061887 76%,#080311eb 100%)}
 .finish[data-arcade-optics=true] .lens{opacity:var(--lens-opacity)}
+.finish[data-arcade-optics=false] .lens{backdrop-filter:url('#hexy-film-optics') grayscale(var(--finish-monochrome,0));-webkit-backdrop-filter:url('#hexy-film-optics') grayscale(var(--finish-monochrome,0))}

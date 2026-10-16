@@ -7,11 +7,11 @@ export const COLLECTIBLES=LEVELS.map(level=>{
  const normal=level.stars||level.platforms.filter(p=>p.w<700).flatMap(p=>{
   const row=[];for(let x=p.x+45;x<p.x+p.w-20;x+=70)row.push([x,p.y-48]);return row;
  });
- const stars=normal.map(([x,y])=>({id:`${level.id}:star:${x}:${y}`,x,y,value:1}));
+ const stars=normal.map(([x,y],i)=>({id:level.starIds?.[i]??`${level.id}:star:${x}:${y}`,x,y,value:1}));
  const tents=(level.outposts||[]).slice(0,2);
  const count=level.bossOnly?0:5-tents.length;
  for(let i=0;i<count;i++){
-  const target=level.arena.left*(.17+i*.23);
+  const target=level.treasurePositions?.[i]??level.arena.left*(.17+i*.23);
   const platform=level.platforms.filter(p=>p.x+p.w/2<level.arena.left).reduce((a,b)=>Math.abs(b.x+b.w/2-target)<Math.abs(a.x+a.w/2-target)?b:a);
   const x=level.groundRoute?target:platform.x+platform.w/2;
   const floor=level.groundRoute?groundY(level.platforms,x):platform.y;

@@ -26,7 +26,8 @@ export function drawGroundFire(c,art,q,reduced=false){
  // Rush flames are born tall, then consume themselves. Column bases retain
  // their own fixed size and continuity as the tall column dissipates.
  const rush=q.source==='rush'&&q.stage>=2,scale=rushFireScale(q);
- if(q.source==='forest'){energyGlow(c,{stage:2},q.x,q.floor-40,150,fade*.6);painted(c,art,'fire-show',frame,q.x,q.floor,210,q.age<.6?190:140,0,fade,.5,205/256);return;}
- painted(c,art,'fire-show',frame,q.x,q.floor,rush?122*(.55+.45*scale):122,rush?260*scale:82,0,fade,.5,205/256);
+ const strength=q.fireVisualStrength??q.fireStrength??1,soaked=.25+.75*strength;
+ if(q.source==='forest'){energyGlow(c,{stage:2},q.x,q.floor-40*soaked,150*soaked,fade*.6*strength);painted(c,art,'fire-show',frame,q.x,q.floor,210*(.7+.3*strength),(q.age<.6?190:140)*soaked,0,fade*(.5+.5*strength),.5,205/256);return;}
+ painted(c,art,'fire-show',frame,q.x,q.floor,rush?122*(.55+.45*scale):122,(rush?260*scale:82)*soaked,0,fade*(.5+.5*strength),.5,205/256);
  if(dying)for(let i=0;i<3;i++){const t=1-q.life/.45;paintedParticle(c,art,3,q.age+i,q.x+(i-1)*22,q.floor-15-t*35,11,0,fade);}
 }

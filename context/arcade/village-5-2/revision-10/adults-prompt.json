@@ -1,0 +1,7 @@
+{
+  "mode": "Built-in ImageGen, transparent generation with identity reference",
+  "reference": "public/arcade/sprites/enemies/village-run-adults-v7.webp",
+  "selected": "sources/climb-adults.png",
+  "prompt": "Transparent FOUR-column FOUR-row sprite sheet. First eight cells: baker with brown cap, moustache, cream shirt, blue waistcoat, white apron and boots. Last eight: brown-haired mother with bun, rose dress, cream apron and green scarf. Reference identities/style only. Full-body eight-frame desperate climb-slip-panic cycle facing LEFT toward invisible wall: brace palms, reach high, grip and raise knee, pull hard, slip, crouched landing, wave to someone behind on right, frightened look back pointing up. Consistent head/body scale, no wall/landscape, full boots/fingertips within clear alpha gutters. Hand-painted dimensional arcade cartoon with dark outlines, no running, text, grids, floor or magic effects.",
+  "provenance": "Condensed reconstruction of the original prompt before interruption; selected source is retained."
+}

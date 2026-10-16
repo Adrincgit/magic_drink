@@ -1,0 +1,22 @@
+{
+  "tool": "image_gen built-in",
+  "date": "2026-10-12",
+  "prompt": "Use case: precise identity-preserve edit for existing animated sprite. INPUT is an already finished 3-frame horizontal casting animation of the same Harlequin. Preserve the original three full-body poses, composition, camera angle, anatomy, proportions, planted feet, outstretched hands casting fire to LEFT, head orientation, cape wind, hat, face identity and every costume detail. ONLY REPAIR THE MOUTH OF THE MIDDLE (SECOND) FIGURE: he currently opens his mouth; instead hold the same sinister CLOSED clenched-tooth grin seen on the first and third figures. Lower jaw raised, teeth meet, no black open mouth gap. Mouth corners cruelly curled upwards, retain original angular face and eye expression exactly. Do not redesign face, do not make friendly/confident new smile, do not rotate or nod head, do not replace with bust portrait. The outer two figures must stay unchanged. This is just correcting one bad animation cel so he keeps smiling evilly while physically pushing his beam. Exact same horizontal strip of 3 full figures at same positions and size, complete hat and boots, transparent canvas 1152x448. Preserve alpha, same existing colored fire glow, no background, no added frames, no labels. A minimal local correction to the middle mouth only.",
+  "reference": "context/arcade/grand-harlequin/cast-smile-sources/original-smile-row.png",
+  "generatedSource": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-aa0eb3be-921c-44f5-bfeb-f34a7e680bbe.png",
+  "source": "context/arcade/grand-harlequin/cast-smile-sources/closed-middle-mouth.png",
+  "outputs": [
+    "public/arcade/sprites/bosses/harlequin/clash-smile-cast.webp",
+    "public/arcade/sprites/bosses/harlequin/super-smile-cast.webp"
+  ],
+  "frames": 3,
+  "mouthPatch": {"left":530,"top":174,"width":34,"height":30},
+  "sequence": [
+    0,
+    1,
+    2,
+    1
+  ],
+  "fps": 12,
+  "notes": "Original casting row: integrate only the generated mouth region in the middle cel. Original head, hands, body and cape remain registered and unchanged. Remove rotating busts. No gameplay changes."
+}

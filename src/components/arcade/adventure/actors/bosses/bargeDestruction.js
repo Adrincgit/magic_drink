@@ -9,9 +9,9 @@ export function stepBargeDefeat(s,dt){
  if(!b.defeat){b.defeat={age:0,ready:false};b.phase='defeated';b.flash=0;s.hostile=[];s.shots=[];s.enemies=s.enemies.filter(e=>e.x<a.left);s.arenaLocked=true;s.noticeTime=0;
   Object.assign(p,{vx:0,dash:0,spin:0,cast:0,specialCast:0,hitReact:0,knockdown:null,firing:false,guarding:false});s.events.push('bargeBreak');}
  const q=b.defeat;q.age+=dt;b.deadTime=q.age;s.time+=dt;p.hurt=1;
+ if(q.age<2){q.steamClock=(q.steamClock||0)-dt;if(q.steamClock<=0){q.steamClock=.13;const m=bargeRig(s),i=q.steamCount=(q.steamCount||0)+1;s.effects.push({x:m.tank.x+(i%3-1)*65,y:m.tank.y+35,waterDetail:3,waterDrift:true,size:120+i%3*25,vx:(i%3-1)*38,vy:-35,age:0,life:1.25,duration:1.25});}}
  if(!b.shattered&&q.age>=1.55){
-  const m=bargeRig(s);bargeFragments(s,b.armorBroken?'barge-damaged':'barge-body',m.body,5,3,1.2);bargeFragments(s,'barge-wheel',{x:m.wheel.x-77,y:m.wheel.y-77,w:154,h:154},1,1,1.4);
-  bargeFragments(s,'barge-cannon',{x:m.cannon.x-66,y:m.cannon.y-39.5,w:132,h:79},1,1,1.2);
+  const m=bargeRig(s);bargeFragments(s,'barge-pressure-damage',m.body,7,5,.7);
   b.shattered=true;s.shake=.3;s.events.push('bargeDestroy','bargeSplash');s.effects.push({x:b.x,y:a.y,bargeSplash:true,size:350,age:0,life:.75});
  }
  for(const [i,at]of [1.85,2.25,2.8].entries())if(q.age>=at&&!((q.blasts||0)&(1<<i))){q.blasts=(q.blasts||0)|(1<<i);s.effects.push({x:b.x-165+i*150,y:bargeWaterline(s),bargeSplash:true,size:170,age:0,life:.65});s.events.push(i===1?'bargeBreak':'bargeSplash');}

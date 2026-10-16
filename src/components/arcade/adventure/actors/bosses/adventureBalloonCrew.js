@@ -53,9 +53,18 @@ export function balloonCrewDrawing(s,reduced=false){
  });
 }
 export function redClownDrawing(e,reduced=false){
+ if(e.type!==6){
+  const f=e.ribbonControl;
+  if(f?.kind==='airbind'||f?.kind==='bind')return{key:'clown-ribbon',frame:f.age<.09?4:5};
+  if(f?.kind==='slam')return{key:'clown-ribbon',frame:e.baseY-e.y>40?6:7};
+  if(e.ribbonLanding>0)return{key:'clown-ribbon',frame:8+Math.min(3,Math.floor((.38-e.ribbonLanding)/.095))};
+  if(e.ribbonLift)return{key:'clown-ribbon',frame:e.vy< -300?1:e.vy<0?2:3};
+  if(e.ribbonStagger>0)return{key:'clown-ribbon',frame:0};
+ }
  if(e.hp<=0)return{key:'clown',frame:11};
  if(e.flash>0)return{key:'clown',frame:10};
- if(e.type===6){
+ if(e.boosterEntry)return{key:'red-clown-air',frame:0};
+ if(e.type===6||e.ribbonLift){
   const frame=e.clock<.075?1:e.vy< -75?2:e.vy<70?3:e.baseY-e.y<48?5:4;
   return{key:'red-clown-air',frame};
  }

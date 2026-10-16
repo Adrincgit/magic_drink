@@ -13,7 +13,7 @@ export function updateRiverBoat(s,e,dt,shoot){
  e.y=e.waterY+Math.sin(e.clock*3)*2;e.dir=Math.sign(s.player.x-e.x)||-1;
  e.phase=e.timer<.65?'windup':e.action>0?'attack':'sail';
  if(e.timer<=0&&Math.abs(e.x-s.player.x)<670){
-  for(const offset of [-29,20]){const m={x:e.x+e.dir*offset,y:e.y-54},aim=Math.atan2(s.player.y-34-m.y,s.player.x-m.x);shoot(s,m.x,m.y,aim,s.gentle?245:295,WATER_BOLT,{r:9,drawSize:40,life:3.3,water:true});}
+  for(const offset of [-29,20]){const m={x:e.x+e.dir*offset*1.15,y:e.y-54*1.15},aim=Math.atan2(s.player.y-34-m.y,s.player.x-m.x);shoot(s,m.x,m.y,aim,s.gentle?245:295,WATER_BOLT,{r:9,drawSize:40,life:3.3,water:true});}
   e.action=.3;e.timer=s.gentle?3.2:2.25;s.events.push('diverThrow');
  }
 }

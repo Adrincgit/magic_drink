@@ -4,6 +4,7 @@
 .button:active .illustration,.button[data-pressed=true] .illustration{animation:none;background-position:42.857% 0}
 .button:active .key,.button[data-pressed=true] .key{animation:none;top:47%}
 .button:focus-visible{outline:3px solid #b8fbff;outline-offset:3px;border-radius:16%}
+.escapeLabel{position:absolute;bottom:96%;left:50%;transform:translateX(-50%);width:250%;text-align:center;text-shadow:0 2px 2px #24152e,1px 0 #24152e;pointer-events:none}.escapeLabel b{display:block;color:#fff0a5;font-size:1.1em}.escapeLabel small{display:block;font-size:.55em;line-height:1.4}
 @keyframes tap-sprite{to{background-position:114.285714% 0}}
 @keyframes tap-kick{0%,100%{transform:rotate(-3deg) scale(1)}37.5%{transform:translateY(4px) rotate(2deg) scale(.95,.91)}62.5%{transform:translateY(-3px) rotate(-2deg) scale(1.06,1.08)}}
 @keyframes tap-label{0%,100%{top:32%}12.5%{top:35%}25%{top:40%}37.5%{top:47%}50%{top:44%}62.5%{top:21%}75%{top:30%}87.5%{top:34%}}

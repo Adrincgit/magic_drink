@@ -1,0 +1,40 @@
+{
+  "tool": "image_gen (built-in)",
+  "assets": [
+    {
+      "name": "tree-solid-a",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-08bba951-1acf-4dd3-bd77-801f85117bdd.png",
+      "prompt": "Use case: background-extraction / precise-object-edit. This illustrated tree is the edit target. Preserve its exact gnarled tree silhouette, roots, leaf clusters, bark design, proportions, colors and painted anime cartoon style. Remove ALL surrounding colored fog, blue-purple haze, gradients, rectangular patches and remnants of background, including between every twig. Outside bark and leaves must be pure transparent alpha zero. All WOOD and LEAF interiors must be entirely opaque alpha 255, never see-through ghost branches. Keep natural edge antialias only. Do not introduce any background, ground, shadow, glow, checkerboard, transparency effect inside the wood, stump, fallen log, face, words or extra object. Output the isolated complete tree centered uncropped on TRUE transparent background.",
+      "savedSource": "context/arcade/halloween-5-1/checkpoints-1-5/sources/tree-solid-a.png",
+      "runtime": "public/arcade/maps/halloween/tree-solid-a.webp"
+    },
+    {
+      "name": "tree-solid-b",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-a2346b61-7956-4751-86cc-88ea72706c9f.png",
+      "prompt": "Use case: background-extraction / precise-object-edit. This illustrated tree is the edit target. Preserve its exact gnarled tree silhouette, roots, leaf clusters, bark design, proportions, colors and painted anime cartoon style. Remove ALL surrounding colored fog, blue-purple haze, gradients, rectangular patches and remnants of background, including between every twig. Outside bark and leaves must be pure transparent alpha zero. All WOOD and LEAF interiors must be entirely opaque alpha 255, never see-through ghost branches. Keep natural edge antialias only. Do not introduce any background, ground, shadow, glow, checkerboard, transparency effect inside the wood, stump, fallen log, face, words or extra object. Output the isolated complete tree centered uncropped on TRUE transparent background.",
+      "savedSource": "context/arcade/halloween-5-1/checkpoints-1-5/sources/tree-solid-b.png",
+      "runtime": "public/arcade/maps/halloween/tree-solid-b.webp"
+    },
+    {
+      "name": "side-gate-solid",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-902ddaf9-cfa8-4043-ac43-2b37e3ebccb9.png",
+      "prompt": "Use case: background-extraction / precise-object-edit. This cemetery gate is the edit target. Preserve the exact illustrated oblique side-view gate, its two pillars, ivy, lamp, proportions, perspective, colors, detailed painted anime texture and empty opening. Repair its alpha so every stone, solid wrought-iron bar and leaf is FULLY OPAQUE, alpha 255 in all material interiors. Remove all ghostly translucency inside the stone pillars and wall. Keep actual openings between the bars and arch EMPTY and fully transparent, alpha zero. No scenery or sky visible through solid materials. No surrounding backdrop, haze, glow rectangle, checkerboard, shadow or floor. Preserve only tiny antialias transparency at silhouette edges. Output the complete object uncropped with small transparent margin, no extra content.",
+      "savedSource": "context/arcade/halloween-5-1/checkpoints-1-5/sources/side-gate-solid.png",
+      "runtime": "public/arcade/maps/halloween/side-gate-solid.webp"
+    },
+    {
+      "name": "branch-tree-natural",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-d4fbe486-0b27-45f4-b4b9-0345a4170c64.png",
+      "prompt": "Use case: stylized-concept. Asset type: transparent cutout of one rooted tree for a hand-painted anime cartoon side-scrolling spooky forest. Create an upright slender old gnarled tree, fully visible from roots to its forked bare crown, at twilight, charcoal bark, subtle desaturated teal moss and violet side light matching the reference. Roots are a compact mound, no long fallen logs. The lower trunk remains strong and continuous, and has TWO subtle organic branch collars for attaching game platform branches: one collar to LEFT at about 28 percent of trunk height above roots; one to RIGHT at about 52 percent. Branch collars should be short rounded wooden growths with connected bark grain, not cut circular logs, saw cuts, spikes or metal pegs. Upper tree has irregular fine branching and very sparse ochre leaves. No face, eyes or character. Composition: one tall tree centered with generous empty padding all around, trunk predominantly upright, crown not wide. Painted cel/gouache detail, not photograph, no solid outline sticker, no floor plane. TRUE TRANSPARENT background: outside the complete opaque wood and leaves there is only alpha zero. Absolutely no smoky backdrop, fog, purple glow cloud, translucent colored rectangles, grid, shadow or gradient surrounding the tree. Reference image is STYLE ONLY; do not retain its backdrop or sawed branch ends.",
+      "savedSource": "context/arcade/halloween-5-1/checkpoints-1-5/sources/branch-tree-natural.png",
+      "runtime": "public/arcade/maps/halloween/branch-tree-natural.webp"
+    },
+    {
+      "name": "branch-natural",
+      "source": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-13025457-ca4f-4de7-8776-b4332d4e4ec3.png",
+      "prompt": "Use case: stylized-concept. Asset type: a single natural growing tree BOUGH for a hand-painted anime cartoon side-scrolling forest. Isolated horizontal branch, organically curved. A stout short flared branch collar at the LEFT gradually tapers to a slender pointed fork at the RIGHT. Its upper surface is broad enough near the first two thirds to stand on but gently uneven, never a straight shelf. The shape bends gently upward and then levels; a few slender twigs curve down off its underside near the right tip. Bark grain flows continuously out from left collar along the branch. Slender proportions: main load-bearing bough thickness about ONE TWELFTH of its total horizontal length, thicker curved left collar only. Width about four times total bounding height including twig curves. Desaturated charcoal and blue teal bark, sparse muted moss, subtle violet twilight edge light, fine anime cartoon painted texture matching the reference style. No saw-cut circle, no flat broken ends, no fallen log, no plank, no platform of stones, no leaves spread like a floor. ONE bough only, fully visible with padding, oriented growing RIGHT out of an unseen trunk at the left. Opaque wooden core and crisp organic silhouette; TRUE transparent background with alpha zero outside it. No painted background, backdrop color, shadow, fog, translucency around branch, purple rectangle, checkerboard or text. The attached image is STYLE ONLY and the old log-like silhouette must be replaced.",
+      "savedSource": "context/arcade/halloween-5-1/checkpoints-1-5/sources/branch-natural.png",
+      "runtime": "public/arcade/maps/halloween/branch-natural.webp"
+    }
+  ]
+}

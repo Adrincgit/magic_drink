@@ -1,9 +1,12 @@
 import {DRINKS} from '../world/adventureLevels';
 import {collectDrink,refillDrink} from './adventureAmmo';
 import {hasMod,originalDuration} from './adventureMods';
+import {chapterRank} from '../../shared/adventureProgression';
+import {endRibbonDance} from './adventureRibbonState';
 export const ORIGINAL_DURATION=8;
 export const ORIGINAL_FIRE_RATE=1.7;
 export const ORIGINAL_SPEED=1.15;
+export const drinkLootPool=s=>[...(s.level.drinkPool||DRINKS.slice(0,5).map(q=>q.id)),...DRINKS.filter(d=>d.id>=6&&chapterRank(s.index)>=(d.unlock??d.id-5)).map(d=>d.id)];
 export const shieldCharges=(s,q)=>hasMod(s,'full-bubble')?3:Math.max(1,Math.min(3,Math.floor(q.charges)||1));
 export function lootRandom(s){
  let seed=(s.lootSeed||0x9e3779b9)>>>0;seed^=seed<<13;seed^=seed>>>17;seed^=seed<<5;s.lootSeed=seed>>>0;return s.lootSeed/4294967296;
@@ -11,7 +14,8 @@ export function lootRandom(s){
 export function rollLoot(s,preferred=s.index){
  const choice=lootRandom(s);
  if(choice<.5||(choice<.73&&s.weapon<0)){
-  const kind=lootRandom(s)<.55?(s.weapon>=0?s.weapon:preferred):Math.floor(lootRandom(s)*DRINKS.length);
+  const pool=drinkLootPool(s),wanted=s.weapon>=0?s.weapon:preferred;
+  const kind=lootRandom(s)<.55?(pool.includes(wanted)?wanted:pool[0]):pool[Math.floor(lootRandom(s)*pool.length)];
   return{type:'drink',kind,boosted:lootRandom(s)<.08};
  }
  if(choice<.73)return{type:'ammo'};
@@ -21,12 +25,14 @@ export function rollLoot(s,preferred=s.index){
 export function takeLoot(s,q){
  if(q.taken)return null;q.taken=true;const type=q.type||'drink',p=s.player;
  if(type==='drink'){
-  if(s.weapon!==q.kind){p.charge=0;p.pendingSpecial=null;p.specialCast=0;p.specialWait=.2;}
+  if(s.weapon!==q.kind){p.charge=0;p.pendingSpecial=null;p.specialCast=0;p.specialWait=.2;s.aquaJet=null;s.voltBeam=null;s.placement=null;p.aquaChannel=false;}
   collectDrink(s,q.kind,q.boosted);
  }else if(type==='ammo'){
-  if(!refillDrink(s))collectDrink(s,s.lastDrink??s.index);
+  if(!refillDrink(s)){const pool=drinkLootPool(s),kind=s.lastDrink??pool[0];collectDrink(s,pool.includes(kind)?kind:pool[0]);}
  }else if(type==='shield'){s.shield=Math.min(3,(s.shield||0)+shieldCharges(s,q));s.shieldHit=.3;s.shieldBreak=0;}
+ else if(type==='fullheal'){s.hearts=s.maxHearts;s.effects.push({x:p.x,y:p.y-40,fullheal:true,size:100,age:0,life:.8});}
  else if(type==='original'){
+  endRibbonDance(s);p.sipKind='original';
   s.overdrive=s.overdriveDuration=originalDuration(s);p.drinkCast=p.ground!==null?.7:0;p.pendingSip=p.ground===null;
   p.cast=0;p.specialCast=0;p.pendingSpecial=null;p.charge=0;p.guarding=false;
  }

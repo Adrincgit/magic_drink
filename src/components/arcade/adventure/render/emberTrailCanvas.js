@@ -1,11 +1,15 @@
+import {drawWindCloth,FORT_FLAGS} from './windClothCanvas';
+import {drawFortVents} from './fortWeaponsCanvas';
 import {fortWindows,fortWindowFrame} from '../actors/bosses/adventureFortWindows';
 import {groundY} from '../world/adventureTerrain';
 import {RIVER_TREE_ART} from '../world/riverTreeArt';
 import {emberForestEdges,woodlandCoverage,emberForestPlacement,emberValleyPlacement,emberSceneryTrees} from './emberComposition';
 import {paintWoodlandBush} from './emberWoodlandLayers';
 import {fortRig,fortSystems} from '../actors/bosses/adventureEmberFort';
+import {FORT_SCALE,FORT_WIDTH} from '../actors/bosses/fortGeometry';
 import {emberBurnAt,EMBER_BRANCH_ART} from '../world/adventureEmberTrail';
 import {painted,paintedParticle,energyGlow} from './paintedDuelCanvas';
+import {drawSiegeCannon} from './siegeCannonCanvas';
 const JET_TIPS=[[36,142],[23,141],[17,140],[14,141],[20,136],[21,136],[17,137],[15,137],[21,134],[21,135],[17,135],[16,135],[20,132],[21,133],[19,132],[16,133]];
 const forestBands=new WeakMap();
 let forestScreen;
@@ -17,7 +21,6 @@ function forestBand(img){
  g.globalCompositeOperation='destination-in';g.fillStyle=fade;g.fillRect(0,0,band.width,band.height);forestBands.set(img,band);return band;
 }
 export function drawEmberBackdrop(c,s,art){
- if(s.fortInside){const img=art['ember-interior'],p=emberBackdropPlacement(s,img);c.drawImage(img,p.x,p.y,p.w,p.h);return;}
  const valley=emberValleyPlacement(s,art.world5),p=emberForestPlacement(s,art['forest-canopy-healthy']);
  c.drawImage(art.world5,valley.x,valley.y,valley.w,valley.h);
  const burn=emberBurnAt(s.player.x);
@@ -37,9 +40,7 @@ export function drawEmberBackdrop(c,s,art){
  g.save();g.globalCompositeOperation='destination-in';g.fillStyle=mask;g.fillRect(0,0,960,540);g.restore();c.drawImage(forestScreen,0,0);
 }
 export function emberBackdropPlacement(s,img){
- if(!s.fortInside)return emberForestPlacement(s,img);
- const h=570,w=h*img.width/img.height,x=-((s.camera.x-s.level.fortDoor.insideX)*.12%Math.max(1,w-960));
- return{x,y:-30,w,h};
+ return emberForestPlacement(s,img);
 }
 export function drawEmberScenery(c,s,art){
  if(s.fortInside)return;
@@ -61,52 +62,56 @@ export function drawEmberScenery(c,s,art){
   if(q.x+q.size/2<s.camera.x||q.x-q.size/2>s.camera.x+width)continue;
   c.drawImage(art['forest-branch-tree'],q.x-q.size*EMBER_BRANCH_ART.rootX,q.y-q.size*EMBER_BRANCH_ART.rootY,q.size,q.size);
  }
- const door=s.level.fortDoor,img=art['grand-ring-exterior'],w=door.width,h=w*img.height/img.width;
- if(door.x+w/2>s.camera.x&&door.x-w/2<s.camera.x+width)c.drawImage(img,door.x-w/2,door.floor-h*930/1024,w,h);
 }
 export function drawEmberFort(c,s,art,reduced=false){
- const b=s.boss;if(s.fortInside||b.x+390<s.camera.x||b.x-390>s.camera.x+960/(s.camera.zoom||1))return;
- const img=art['ember-fort'],parts=fortSystems(s),rig=fortRig(s),k=720/1536,dead=b.defeat;
+ const b=s.boss;if(s.fortInside||b.x+650<s.camera.x||b.x-650>s.camera.x+960/(s.camera.zoom||1))return;
+ const img=art['ember-fort'],parts=fortSystems(s),rig=fortRig(s),k=FORT_WIDTH/1536,dead=b.defeat;
  c.save();
- if(dead){c.filter='saturate(.25) brightness(.56)';c.translate(0,Math.min(32,dead.age*14));}
- c.drawImage(img,b.x-360,b.y-950*k,720,1024*k);
+ if(dead){
+  const sheet=art['fort-collapse'],cw=sheet.width/2,ch=sheet.height/2,frame=Math.min(3,Math.floor(dead.age/1.05));
+  c.drawImage(sheet,frame%2*cw,Math.floor(frame/2)*ch,cw,ch,b.x-FORT_WIDTH/2,b.y-740,FORT_WIDTH,780);c.restore();return;
+ }
+ drawWindCloth(c,img,b.x-FORT_WIDTH/2,b.y-950*k,FORT_WIDTH,1024*k,s.fxTime,{windArt:art,flags:FORT_FLAGS,cloth:false,reduced});
  for(const q of fortWindows(s)){
-  const sheet=art['ember-fort-windows'],frame=dead?7:fortWindowFrame(q),size=64;
+  const sheet=art['ember-fort-windows'],frame=fortWindowFrame(q),size=64*FORT_SCALE;
   c.save();c.translate(q.x,q.y);c.scale(-q.dir,1);
-  c.beginPath();c.arc(0,0,26.5,0,Math.PI*2);c.clip();
+  c.beginPath();c.arc(0,0,26.5*FORT_SCALE,0,Math.PI*2);c.clip();
   if(q.flash>0)c.filter='brightness(1.9) saturate(.5)';
   c.drawImage(sheet,frame%4*256,Math.floor(frame/4)*256,256,256,-size/2,-size/2,size,size);c.restore();
-  if(q.phase==='aim'&&q.age>.4&&q.hp>0&&!dead)energyGlow(c,true,q.x+q.dir*24,q.y+7,30,.25+q.age*.4);
+  if(q.phase==='aim'&&q.age>.4&&q.hp>0&&!dead)energyGlow(c,true,q.x+q.dir*24*FORT_SCALE,q.y+7*FORT_SCALE,30,.25+q.age*.4);
  }
  // Separate transparent mechanism: damage light follows its painted silhouette.
  const mechanisms=art['ember-mechanisms'],cw=mechanisms.width/4,ch=mechanisms.height/2;
- const opening=b.phase==='transform'?Math.min(2,Math.floor((2.3-b.timer)/.65)):2+(Math.floor(s.fxTime*5)%2);
- c.save();if(parts.core.flash>0)c.filter='brightness(1.8) saturate(.55)';
- c.drawImage(mechanisms,opening*cw,0,cw,ch,rig.core.x-89,rig.core.y-100,178,200);c.restore();
+ const opening=parts.gate.hp>0?0:b.phase==='transform'?Math.min(3,Math.floor((2.3-b.timer)/.57)):2+(Math.floor(s.fxTime*5)%2);
+ c.save();if(parts.core.flash>0||parts.gate.flash>0)c.filter='brightness(1.8) saturate(.55)';
+ if(!b.coreOpened)c.drawImage(mechanisms,opening*cw,0,cw,ch,rig.core.x-135,rig.core.y-150,270,300);c.restore();
+ if(parts.gate.hp>0&&parts.gate.hp<parts.gate.maxHp*.5){c.save();c.globalAlpha=.7;painted(c,art,'fire-show',Math.floor(s.fxTime*12)%8,rig.gate.x,rig.gate.y+25,45,70);c.restore();}
  const hatchFrame=b.hatchOpen>0?Math.min(3,Math.floor(Math.min(4.8-b.hatchOpen,b.hatchOpen)*5)):0;
- c.drawImage(mechanisms,hatchFrame*cw,ch,cw,ch,rig.hatch.x-75,rig.hatch.y-137,150,150);
+ // Open the large painted entrance already present in the rear facade.
+ const door=rig.doorway;
+ c.drawImage(art['fort-grand-gate'],hatchFrame*384,0,384,384,door.x,door.y,door.w,door.h);
  for(const key of ['upper','lower']){
   const q=parts[key],m=rig[key];
   if(q.hp<=0){painted(c,art,'fire-show',Math.floor(s.fxTime*12)%8,m.x,m.y-15,95,70,0,dead?.35:.6);continue;}
-  const recoil=b.release>0&&b.firedPort===key?Math.sin(b.release/.23*Math.PI)*9:0;
   const angle=b.gunAngles?.[key]||0;
-  c.save();if(q.flash>0)c.filter='brightness(2.1) saturate(.25)';c.translate(m.x+Math.cos(angle)*recoil,m.y+Math.sin(angle)*recoil);c.rotate(angle);
-  c.drawImage(art['barge-cannon'],-78,-48,156,96);c.restore();
-  const mx=m.x-Math.cos(angle)*75,my=m.y-Math.sin(angle)*75;
+  c.save();if(q.flash>0)c.filter='brightness(2.1) saturate(.25)';
+  drawSiegeCannon(c,art,{x:m.x,y:m.y,width:156*FORT_SCALE,angle,shotAge:b.gunBursts?.[key]??-1,reduced});c.restore();
+  const barrel=326/513*156*FORT_SCALE,lip=44/513*156*FORT_SCALE;
+  const mx=m.x-Math.cos(angle)*barrel+Math.sin(angle)*lip,my=m.y-Math.sin(angle)*barrel-Math.cos(angle)*lip;
   if(b.phase==='warn'&&b.move==='salvo'){energyGlow(c,true,mx,my,48,.45+Math.sin(s.fxTime*19)*.1);paintedParticle(c,art,3,s.fxTime,mx,my,14,angle,.9);}
-  if(b.release>0&&b.firedPort===key){energyGlow(c,true,mx,my,120,.9);painted(c,art,'fire-show',Math.floor((.23-b.release)*30)%8,mx,my,145,98,Math.PI+angle);}
  }
- for(const dir of [-1,1]){
-  const x=b.x+dir*145,y=b.y-68,deploy=b.move==='vent'&&['warn','attack'].includes(b.phase);
-  if(deploy&&!dead){c.save();c.translate(x,y);c.scale(-dir,1);c.drawImage(art['barge-nozzle'],-42,-30,84,60);c.restore();energyGlow(c,true,x+dir*30,y,b.phase==='warn'?50:110,b.phase==='warn'?.6:.9);}
- }
- energyGlow(c,true,rig.core.x,rig.core.y,95,dead?0:.45+Math.sin(s.fxTime*6)*.12);
+ drawFortVents(c,s,art,reduced);
+ if(b.coreOpened)energyGlow(c,true,rig.core.x,rig.core.y,130,.45+Math.sin(s.fxTime*6)*.12);
  // Animated crews keep tending their cannons; their hands and tools are in each frame.
  for(const [i,key]of ['upper','lower'].entries()){
-  const m=rig[key],broken=parts[key].hp<=0,frame=(broken?12:b.phase==='warn'?4:0)+(reduced?0:Math.floor(s.fxTime*6+i)%4),size=120;
+  const m=rig[key],broken=parts[key].hp<=0,frame=(broken?12:b.phase==='warn'?4:0)+(reduced?0:Math.floor(s.fxTime*6+i)%4),size=104;
   if(dead||broken)continue;
-  c.drawImage(art['barge-gunner'],frame%4*256,Math.floor(frame/4)*256,256,256,m.x+89-size*.61,m.y-10-size*250/256,size,size);
+  c.drawImage(art['barge-gunner'],frame%4*256,Math.floor(frame/4)*256,256,256,m.x+108-size*.61,m.y+48-size*250/256,size,size);
  }
+ const wall=art['fort-wall'],wc=wall.width/2,hc=wall.height/2;
+ const wf=parts.wall.hp>0?(parts.wall.hp<parts.wall.maxHp*.6?1:0):(b.wallBreakAge||0)<.65?2:3;
+ c.save();if(parts.wall.flash>0)c.filter='brightness(1.8)';
+ c.drawImage(wall,wf%2*wc,Math.floor(wf/2)*hc,wc,hc,rig.wall.x-162,b.y-305,324,337);c.restore();
  c.restore();
 }
 export function drawEmberProjectile(c,q,art,reduced=false){
@@ -119,7 +124,7 @@ export function drawEmberProjectile(c,q,art,reduced=false){
  if(['ember-breath','fort-breath'].includes(q.kind)){
   const jet=art['ember-jet'],frame=q.age<.38?Math.min(3,Math.floor(q.age/.095)):reduced?6:4+Math.floor((q.age-.38)*24)%12;
   const w=(q.maxRange||320)*1.13,h=w/2;
-  c.save();c.translate(q.x,q.y);c.scale(q.dir,1);c.globalAlpha=Math.min(1,q.life/.22);
+  c.save();c.translate(q.x,q.y);if(Number.isFinite(q.angle))c.rotate(q.angle);else c.scale(q.dir,1);c.globalAlpha=Math.min(1,q.life/.22);
   // Every painting has a fixed mouth registration and fixed scale. Startup
   // grows through four drawings; the sustained jet curls through twelve.
   const [tipX,tipY]=JET_TIPS[frame];
@@ -133,7 +138,7 @@ export function drawEmberProjectile(c,q,art,reduced=false){
 export function drawFortFade(c,s,en=false){
  if(s.level.emberTrail&&s.arenaLocked){
   const b=s.boss;
-  const label=b.phase==='transform'?(en?'THE FURNACE AWAKENS':'EL HORNO SE DESATA'):b.move==='vent'&&b.phase==='warn'?(en?'FLAMETHROWERS HEATING':'LOS LANZALLAMAS SE ENCIENDEN'):b.coreOpened?(en?'STRIKE THE HEART · DODGE THE FLAMES':'GOLPEA EL NÚCLEO · ESQUIVA LAS LLAMAS'):(en?'REACH THE HEART · CANNONS ARE OPTIONAL':'ACÉRCATE AL NÚCLEO · CAÑONES OPCIONALES');
+  const parts=fortSystems(s),label=parts.wall.hp>0?(en?'BREAK THE OUTER WALL':'ROMPE EL MURO EXTERIOR'):parts.gate.hp>0?(en?'BREAK OPEN THE CORE DOOR':'ABRE LA COMPUERTA DEL NÚCLEO'):b.phase==='transform'?(en?'THE CORE IS EXPOSED':'EL NÚCLEO QUEDA EXPUESTO'):(en?'DESTROY THE CORE':'DESTRUYE EL NÚCLEO');
   c.save();c.textAlign='center';c.font='bold 16px Nunito, sans-serif';c.shadowColor='#170b11';c.shadowBlur=5;c.fillStyle='#ffe4a4';c.fillText(label,480,92);c.restore();
  }
  if(!s.fortFade)return;c.save();c.globalAlpha=s.fortFade;c.fillStyle='#110e1b';c.fillRect(0,0,960,540);c.restore();

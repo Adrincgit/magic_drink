@@ -40,15 +40,17 @@ test('forest flames use the local slope height, burn on contact and expire',()=>
  expect(q.floor).toBeCloseTo(groundY(s.platforms,5800),5);expect(q.floor).not.toBe(s.level.arena.y);
  tick(s,30);expect(s.hearts).toBe(hp-1);expect(s.player.hitType).toBe('fire');tick(s,200);expect(s.hostile.some(q=>q.source==='forest')).toBe(false);
 });
-test('fort guns turn and fire large ballistic shots; reinforcements walk out of an open hatch',()=>{
- const s=battle();tick(s,200);const ball=s.hostile.find(q=>q.kind==='ember-mortar');expect(ball).toBeTruthy();expect(ball.r).toBeGreaterThanOrEqual(26);expect(ball.gravity).toBeGreaterThan(400);expect(ball.vy).toBeLessThan(0);
+test('fort guns turn and fire large ballistic shots; reinforcements walk out of the main gate',()=>{
+ const s=battle();let ball;for(let i=0;i<300&&!ball;i++){tick(s,1);ball=s.hostile.find(q=>q.kind==='ember-mortar');}expect(ball).toBeTruthy();expect(ball.r).toBeGreaterThanOrEqual(26);expect(ball.gravity).toBeGreaterThan(400);expect(ball.vy).toBeLessThan(0);
  const vy=ball.vy;tick(s,30);expect(ball.vy).toBeGreaterThan(vy);expect(Math.abs(s.boss.gunAngles.lower)).toBeGreaterThan(.1);
  Object.assign(s.boss,{phase:'recover',timer:0,turn:2});tick(s,1);expect(s.boss.move).toBe('reinforce');expect(s.boss.hatchOpen).toBeGreaterThan(4);
  tick(s,165);const e=s.enemies.find(e=>e.fortCrew);expect(e).toBeTruthy();expect(e.phase).toBe('emerge');expect(e.x).toBeLessThan(fortRig(s).hatch.x);expect(e.x).toBeGreaterThan(fortRig(s).hatch.x-90);
 });
-test('second phase has an opening interval, lowered target and a new furnace attack',()=>{
+test('breaching both barriers opens the stationary core and starts the furnace phase',()=>{
  const s=battle(),parts=fortSystems(s);parts.upper.hp=parts.lower.hp=0;s.boss.hp=140;
- tick(s,1);expect(s.boss.phase).toBe('transform');expect(fortTargets(s).filter(q=>!q.part.startsWith('window-')).map(q=>q.part)).toEqual(['core']);tick(s,300);expect(s.boss.fortStage).toBe(2);expect(fortTargets(s).find(q=>q.part==='core').part).toBe('core');expect(fortRig(s).core.y).toBe(s.level.arena.y-95);
+ tick(s,1);expect(s.boss.phase).not.toBe('transform');expect(fortTargets(s)[0].part).toBe('wall');
+ parts.wall.hp=0;parts.gate.hp=0;
+ tick(s,1);expect(s.boss.phase).toBe('transform');expect(fortTargets(s).filter(q=>!q.part.startsWith('window-')).map(q=>q.part)).toEqual(['core']);tick(s,300);expect(s.boss.fortStage).toBe(2);expect(fortTargets(s).find(q=>q.part==='core').part).toBe('core');expect(fortRig(s).core.y).toBe(s.level.arena.y-130);
  tick(s,360);expect(s.hostile.some(q=>q.kind==='fort-breath')).toBe(true);
 });
 test('roots share the floor projection on hills and during zoom, reversing camera restores positions',()=>{

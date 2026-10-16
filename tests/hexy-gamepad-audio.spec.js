@@ -68,11 +68,11 @@ test('Menu and disconnect pause; reconnect and held buttons cannot resume or jum
  await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','paused');await page.evaluate(()=>window.dispatchEvent(new Event('focus')));await page.waitForTimeout(80);await tap(page,9);await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','playing');
 });
 
-test('View enters the shop; A and B inspect and close products, and the controller changes audio sliders',async({page})=>{
+test('View enters the workshop, and Xbox navigates audio sliders before returning to the path',async({page})=>{
  await setup(page);await practice(page);await connect(page);await axes(page,.8);await page.waitForFunction(()=>Number(document.querySelector('[data-adventure-canvas]').dataset.playerX)>318);await axes(page,0);await page.waitForTimeout(130);await tap(page,8);await expect(page.locator('[data-adventure-shop]')).toBeVisible();await page.waitForTimeout(100);
- await tap(page,0);await expect(page.locator('[data-item-popup]')).toBeVisible();await tap(page,1);await expect(page.locator('[data-item-popup]')).toHaveCount(0);
+ await expect(page.locator('[data-adventure-shop]')).toHaveAttribute('data-shop-view','workshop');
  await page.locator('[data-adventure-shop]').getByRole('button',{name:'Ajustes de audio y mando'}).click();await expect(page.locator('[data-adventure-settings]')).toBeVisible();
- await axes(page,0,.8);await page.waitForTimeout(80);await axes(page,0);await expect(page.locator('[data-audio-volume=master]')).toBeFocused();
+ await expect(page.locator('[data-audio-volume=master]')).toBeFocused();await page.waitForTimeout(200);await axes(page,0,.8);await expect(page.locator('[data-audio-volume=music]')).toBeFocused();await axes(page,0);await page.waitForTimeout(100);await axes(page,0,-.8);await expect(page.locator('[data-audio-volume=master]')).toBeFocused();await axes(page,0);
  await axes(page,-.8);await expect(page.locator('[data-audio-volume=master]')).toHaveValue('65');await axes(page,0);await tap(page,1);await expect(page.locator('[data-adventure-settings]')).toHaveCount(0);await expect(page.locator('[data-adventure-shop]')).toBeVisible();
  await tap(page,1);await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','playing');
 });
@@ -91,7 +91,7 @@ for(const width of [1440,390])test(width+': audio mixer remains inside the game,
  await page.getByRole('button',{name:'Silenciar todo'}).click();await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBe(0);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(0,3);
  await page.getByRole('button',{name:'Activar sonido'}).click();await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBeCloseTo(.24,5);
  await page.getByRole('region',{name:'Aventura de Hexy',exact:true}).screenshot({path:folder+'audio-'+width+'.jpg'});
- await page.getByRole('button',{name:'Mando',exact:false}).filter({hasText:'Mando'}).click();await expect(page.locator('[data-controller-status]')).toHaveAttribute('data-controller-status','waiting');await page.getByRole('region',{name:'Aventura de Hexy',exact:true}).screenshot({path:folder+'controller-'+width+'.jpg'});
+ await page.getByRole('tab',{name:'Mando',exact:true}).click();await expect(page.locator('[data-controller-status]')).toHaveAttribute('data-controller-status','waiting');await page.getByRole('region',{name:'Aventura de Hexy',exact:true}).screenshot({path:folder+'controller-'+width+'.jpg'});
  await page.keyboard.press('Escape');await expect(page.locator('[data-adventure-settings]')).toHaveCount(0);await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','paused');
  await page.reload();await openAdventureMenu(page);await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','ready',{timeout:30000});await page.locator('[data-open-settings]').click();for(const [key,value]of [['master','40'],['music','60'],['effects','25']])await expect(page.locator('[data-audio-volume='+key+']')).toHaveValue(value);
  await page.getByRole('button',{name:'Restablecer'}).click();await expect(page.locator('[data-audio-volume=master]')).toHaveValue('70');

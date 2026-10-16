@@ -22,7 +22,7 @@ test('drinks change projectiles and the rescued chorus gives distinct rewards',(
  for(let i=0;i<3;i++){const q=s.cages[i];q.open=true;s.player.x=q.x;s.player.y=q.y;s.player.ground=s.platforms.findIndex(p=>q.x>=p.x&&q.x<=p.x+p.w&&q.y===p.y);tick(s);}
  expect(s.rescued).toBe(3);expect(s.hearts).toBeGreaterThanOrEqual(4);expect(s.shield).toBe(0);expect(s.buff).toBeGreaterThan(15);
  const carry=adventureCarry({...s,weapon:2,ammo:17,doubleJump:true});expect(createAdventure(1,false,carry)).toMatchObject({weapon:2,ammo:17,doubleJump:true,hearts:s.hearts,shield:s.shield});
- const bubble=createAdventure();bubble.weapon=3;bubble.enemies=[makeEnemy(140,480)];tick(bubble,{attack:true},30);expect(bubble.enemies[0].trap).toBeGreaterThan(0);
+ const bubble=createAdventure();bubble.weapon=3;bubble.enemies=[makeEnemy(140,480)];bubble.enemies[0].hp=30;tick(bubble,{special:true},30);expect(bubble.enemies[0].trap).toBeGreaterThan(0);
  const banana=createAdventure();banana.weapon=1;tick(banana,{attack:true},1);tick(banana,{},95);expect(banana.shots[0].vx).toBeLessThan(0);
 });
 

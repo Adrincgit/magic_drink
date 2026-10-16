@@ -37,7 +37,7 @@ test('drumroll and tidal attacks hit standing Hexy; mortar breaks into short wav
  const s=battle('mortar');s.boss.timer=.01;let balloons=false,waves=false;for(let i=0;i<400;i++){stepAdventure(s,{},1/120);balloons ||= s.hostile.some(q=>q.kind==='barge-balloon');waves ||=s.hostile.some(q=>q.kind==='barge-wave');}expect(balloons&&waves).toBe(true);
 });
 
-test('second phase keeps local armor, fires the rear cannons and delays destruction for the crew',()=>{
+test('second phase keeps local armor, fires the mounted bow cannon and delays destruction for the crew',()=>{
  const s=battle();s.boss.hp=150;tick(s,1);expect(s.boss.phase).toBe('transform');tick(s,130);expect(s.boss.armorBroken).toBeFalsy();expect(s.boss.parts.drum.hp).toBe(80);tick(s,150);expect(s.boss.vulnerable).toBe(true);
  Object.assign(s.boss,{phase:'warn',move:'broadside',timer:1.4});const x=s.boss.x;tick(s,120);expect(s.boss.x).toBeCloseTo(x);tick(s,160);expect(s.boss.x).toBeCloseTo(x);expect(s.hostile.some(q=>q.kind==='barge-balloon')).toBe(true);
  s.boss.hp=0;s.boss.phase='defeated';tick(s,200);expect(s.boss.shattered).toBe(true);expect(s.organDebris.length).toBeGreaterThan(12);expect(s.clear).toBeFalsy();tick(s,360);expect(s.clear).toBeTruthy();

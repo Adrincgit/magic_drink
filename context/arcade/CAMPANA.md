@@ -1,5 +1,11 @@
 # Campaña: recorrido, carpas y jefes
 
+## Decisión posterior: 13 de octubre de 2026
+
+El nuevo recorrido de Halloween pasa a **5-1**; el antiguo prototipo 2-1 conserva sus datos y pasa a **6-1**. La región nueva combinará anime cartoon y caricatura antigua, con sustos juguetones, criaturas creadas por la mente del arlequín de dos conos y **un minijefe al final de cada nivel**. La futura armada de marionetas queda reservada para después. El pueblo en fuga y el campo de maíz al atardecer son escenarios solicitados para los siguientes recorridos.
+
+Estas decisiones tienen prioridad sobre las ubicaciones y cantidades propuestas más abajo. [El 5-1 implementado](halloween-5-1/README.md) y [la dirección de los siguientes escenarios](halloween-5-1/ACTO_5.md) documentan el estado actual.
+
 Revisión de diseño: 7 de octubre de 2026. Documento principal: [DISENO_DEL_JUEGO.md](DISENO_DEL_JUEGO.md).
 
 Esta revisión sustituye el plan anterior de tres niveles por escenario con el jefe principal al final del tercero. El usuario plantea **tres recorridos con minijefe y una batalla principal independiente**. Describió seis regiones y seis jefes principales, aunque también mencionó cinco actos o niveles: la cantidad definitiva está pendiente de aclaración.
@@ -102,3 +108,44 @@ No asignar todavía Serio, Alegre u otros nombres a los cuatro puestos. El orden
 3. Ajustar cartas, cintas y acrobacias del primer arlequín a partir de partidas del usuario.
 4. Evaluar la duración y dificultad de sus tres fases antes de diseñar el siguiente acto.
 5. Mantener el pulido de 1-1, 1-2 y 1-3. El resto de esta tabla es una dirección para conversar, no una lista de niveles construidos.
+
+
+## Halloween: siguiente recorrido implementado (2026-10-14)
+
+El usuario ha pedido continuar del cementerio 5-1 al pueblo 5-2. La primera entrega jugable incluye vecinos huyendo, zombis, payasos con calabaza encendida en la cabeza, los fantasmas blancos originales y brujas que transforman a los vecinos en dulces al alcanzarlos con un rayo. La plaza del refugio cierra el recorrido. [Implementacion, arte y pruebas](village-5-2/README.md).
+
+Orden estable actual: IDs `0, 1, 2, 5, 3, 6, 7, 4`. El nuevo pueblo usa ID 7 / capitulo 5-2; el ID 4 sigue siendo 6-1. Migracion de partidas campaign 3 a 4 sin perder capitulos desbloqueados ni monedas.
+
+### Ampliación del pueblo (2026-10-15)
+
+El 5-2 ya tiene la misma longitud que el cementerio: 21 440 unidades. Comienza en su salida y atraviesa huertos antes de llegar al pueblo. Ocho diseños de habitantes (incluidos niños) huyen hacia las afueras en 14 grupos; el payaso calabaza exhala chispas animadas. Tres plazas, decoración de Halloween y capas de profundidad con terreno propio. [Estado y verificación de la revisión 2](village-5-2/revision-2/README.md).
+
+### Villa Lumbre de noche: revisión 4 (2026-10-15)
+
+La llegada se amplía otras 1.800 unidades, conservando el tramo urbano: longitud actual 23.240. Suelo y edificios opacos, cámara vertical estable, entrada señalizada, 106 habitantes con nuevas carreras, advertencias, tropiezos y ayuda, y cuatro carrozas. Noche completa desde el 52 % del recorrido. Algunas brujas vuelan; su escoba se rompe al derrotarlas. Hexy puede quedar atrapada en caramelo y liberarse con pulsaciones; el último corazón conserva esa forma al perder. Las brujas heridas absorben dulces para curarse, y derrotarlas libera a sus víctimas, incluso las ya absorbidas. [Arte, reglas y pruebas](village-5-2/revision-4/README.md).
+
+El campo de paja con espantapájaros y su minijefe es una idea posterior del usuario, todavía no implementada ni asignada a un nuevo ID.
+
+### Villa Lumbre: corrección visual y rescates, revisión 5 (2026-10-15)
+
+La revisión visual del usuario mostró cortes y cielo incorporado en capas inferiores que la revisión 4 no había detectado. Se reemplazan por un terraplén sin cielo, camino opaco con transición pintada, tejados intermedios individuales y una entrada oblicua con cerca hacia el frente y el fondo. Brujas un 10 % más grandes y con un 15 % más de resistencia, 40 nuevas celdas de absorción/lanzamiento. Absorber un dulce libera una calabaza voladora que porta al habitante: al destruirla cae y lo libera en tierra. Los demás vecinos hechizados por esa calabaza también se rescatan. Tres habitantes atrapados entre escombros y adultos lanzando piedras mientras retroceden. [Arte, reglas actualizadas y verificación visual](village-5-2/revision-5/README.md).
+
+### Villa Lumbre: capas unidas y absorción de Hexy, revisión 6 (2026-10-15)
+
+La capa de piedras, calabazas y árboles pasa al espacio del camino y comparte su movimiento y pendiente. Detrás queda otro terraplén, con fondo más lento y nubes móviles. Casas más bajas y entrada con dos pilares independientes, el cercano grande y desenfocado; se retira la reja. La magia fuerte intercepta proyectiles por contacto en todos los capítulos. Los payasos calabaza exhalan fuego fantasmal azul que convierte vecinos en dulces, y las brujas pueden aprovecharlos. Hexy necesita 21 pulsaciones o cambios de dirección para liberarse; una absorción de 4,8 segundos completada la convierte en calabaza y termina la partida. Rayos más largos con impacto contra el terreno. [Arte y pruebas](village-5-2/revision-6/README.md).
+
+### Villa Lumbre: ataques y carreras, revisión 7 (2026-10-15)
+
+Cuerpos sin proyectiles incorporados, emisión desde boca y varita registradas, fuego azul con resplandor y brujas con cuatro dibujos de daño. Ocho carreras completas con una cadencia legible independiente del avance rápido. Escombros detrás de Hexy y borde rural con continuidad de terreno. Las brujas aéreas recorren ambos sentidos, disparan más a menudo y dejan gotas que convierten en dulce al tocar el suelo. Popcorn fuerte lanza al payaso calabaza en piezas y suprime el fantasma de ese remate y del de los zombis. Se retira el contador visual de pulsaciones. [Arte, grabaciones y pruebas](village-5-2/revision-7/README.md).
+
+### Villa Lumbre: destrucción y rescates, revisión 8 (2026-10-15)
+
+Los vecinos bajo escombros requieren disparos para quedar libres. La salida del rayo pierde el corte plano, los defensores conservan su escala y el herrero tiene una carrera de huida nueva. Corrientes, remolinos, encendido y descarga acompañan la absorción; una bruja cercana puede absorber a Hexy desde patrulla, preparación o recuperación. Los proyectiles mágicos emiten luz de color. Tres carretas volcadas, carga y vigas forman obstáculos físicos con apoyos transitables y destrucción por impactos. Dos grupos de vecinos quedan entre barricadas bajo riesgo de hechizo; los bloqueos atraen refuerzos limitados. Sólo una carroza con caballo aparece al principio. [Arte, colisiones y verificación](village-5-2/revision-8/README.md).
+
+### Villa Lumbre: séquitos y escondites, revisión 9 (2026-10-15)
+
+Dos brujas voladoras conservan su diseño y llegan con tres calabazas que orbitan y disparan por turnos mientras ellas atacan. Son objetivos independientes; derrotar a su bruja rompe el séquito restante. Las calabazas voladoras disparan más rápido y uno de cada tres zombis calabaza tiene un ataque acelerado. Los atacantes alternan blancos entre Hexy y vecinos cuando ambos están a alcance. Cuatro vecinos se agachan y asoman entre escombros; requieren disparar a la cobertura para poder huir y siguen expuestos a hechizos bajos. [Arte, reglas y pruebas](village-5-2/revision-9/README.md).
+
+### Villa Lumbre: el derrumbe y la multitud, revisión 10 (2026-10-15)
+
+Catorce vecinos se acumulan ante una estructura derrumbada de alta resistencia. Intentan trepar, resbalan y buscan paso; la cámara se aleja suavemente para mostrar el peligro. Mientras siga bloqueada llegan dos brujas, calabazas voladoras y zombis calabaza rápidos, y las absorciones pueden añadir más enemigos. Los dulces se liberan automáticamente a los 30 segundos, incluso si una calabaza transporta al vecino. Hexy conserva la derrota por último corazón o absorción completada. Las advertencias laterales miran a Hexy, señalan el peligro detrás y sólo aparecen antes del pueblo. [Arte, reglas y verificación](village-5-2/revision-10/README.md).

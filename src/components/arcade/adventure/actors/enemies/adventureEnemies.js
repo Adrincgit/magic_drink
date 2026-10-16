@@ -1,4 +1,19 @@
+import {stepFallingPumpkin} from '../../engine/villagePumpkins';
+import {stepFallingWitch} from '../../engine/villageRescue';
+import {stepPopcornDefeat} from '../../engine/adventurePopcornDefeat';
+import {isVillageEnemy,stepVillageEnemy} from '../../engine/adventureVillage';
+import {stompable,stompBounce} from '../../engine/adventureSpringBoots';
+import {stepRibbonControl} from '../../engine/adventureRibbonControl';
+import {stepElementHit} from './adventureElementHits';
+import {stepClownBoosters,tryClownBooster,stepBoostedClown} from './adventureClownBooster';
+import {isAcrobat,acrobatSpeed,acrobatStride,prepareAcrobat,stepAcrobatMotion} from './adventureAcrobat';
+import {JUGGLER_STRIDE} from './adventureJugglerWalk';
+import {stepGraveyard,stepFleeingClown,ZOMBIE_HEALTH,GHOST_HEALTH,HAND_HEALTH} from '../../engine/adventureGraveyard';
+import {shedZombieParts,stepNightmareDefeat} from '../../engine/adventureNightmareMotion';
+import {isNightmare,stepNightmare,updateNightmareBoss} from './adventureNightmares';
+import {stepUmbrella} from './adventureUmbrella';
 import {updateEmberBalloon,stepEmberBalloonDefeat} from './adventureEmberBalloon';
+import {enemyAimTarget,decoyContact} from '../../engine/adventureTacticalMods';
 import {fortTargets,updateEmberFort} from '../bosses/adventureEmberFort';
 import {updateFireJuggler} from './adventureFireJuggler';
 import {updateEmberTroop,TORCH_CLOWN,FIRE_WAGON} from './adventureEmberTroops';
@@ -17,43 +32,66 @@ import {RIVER_BOAT_TYPE,updateRiverBoat,stepRiverBoatDefeat} from './adventureRi
 import {HARLEQUIN_MOVES,harlequinBody,updateHarlequin} from '../bosses/adventureHarlequin';
 const TAU=Math.PI*2;
 export const ENEMY_HEALTH_MULTIPLIER=1.15;
-export function makeEnemy(x,y,type=0,seed=0){const hp=Math.round((type===ZEPPELIN_TYPE?ZEPPELIN_HEALTH:type===RIVER_BOAT_TYPE?8:type===FIRE_WAGON?18:[10,11,13].includes(type)?4.4:type===5?9:type===1||type===4?9:type===2?5:4)*ENEMY_HEALTH_MULTIPLIER*100)/100;return {x,y,home:x,baseY:y,type,dir:type===ZEPPELIN_TYPE?1:seed%2?1:-1,hp,maxHp:hp,clock:seed*.37,timer:1+seed*.23,phase:'patrol',action:0,deadTime:0,trap:0,flash:0,vy:0};}
+export function makeEnemy(x,y,type=0,seed=0){const hp=type===25?9.2:type===26?11.5:type===27?3:[18,21].includes(type)?ZOMBIE_HEALTH:type===19?GHOST_HEALTH:type===24?HAND_HEALTH:Math.round((type===20?120:type===22?20:type===ZEPPELIN_TYPE?ZEPPELIN_HEALTH:type===RIVER_BOAT_TYPE?9.5:type===FIRE_WAGON?18:[10,11,13].includes(type)?4.4:type===14?6:type===5?9:type===1||type===4?9:type===2?5:4)*ENEMY_HEALTH_MULTIPLIER*100)/100;return {x,y,home:x,baseY:y,type,spawnSeed:seed,...(type===19?{ghostForm:'clown'}:{}),dir:type===ZEPPELIN_TYPE?1:seed%2?1:-1,hp,maxHp:hp,clock:seed*.37,timer:1+seed*.23,phase:'patrol',action:0,deadTime:0,trap:0,flash:0,vy:0};}
 export function enemyShot(s,x,y,angle,speed,kind='ball',extra={}){s.hostile.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,r:kind==='bomb'?15:kind==='ring'?17:10,life:5,age:0,kind,...extra});}
 export function updateEnemies(s,dt,hit,defeat){
  const p=s.player;
+ stepClownBoosters(s,dt);stepGraveyard(s,dt,makeEnemy);
  for(const e of s.enemies){
-  if(e.hp<=0){if(e.type===13&&e.defeated)stepEmberBalloonDefeat(s,e,dt);else if(e.type===ZEPPELIN_TYPE&&e.defeated)stepZeppelinDefeat(s,e,dt);else if(e.type===DIVER_TYPE&&e.defeated)stepDiverDefeat(s,e,dt);else if(e.type===RIVER_BOAT_TYPE&&e.defeated)stepRiverBoatDefeat(s,e,dt);else{e.deadTime=Math.max(0,e.deadTime-dt);e.deathAge=(e.deathAge||0)+dt;}continue;}
-  const previousX=e.x;e.previousY=e.y;const step=dt*(e.snare>0?.28:1);e.snare=Math.max(0,(e.snare||0)-dt);
+  if(e.hp<=0&&stepFallingPumpkin(s,e,dt))continue;
+  if(e.hp<=0&&stepFallingWitch(s,e,dt))continue;
+  if(e.hp<=0&&stepPopcornDefeat(s,e,dt,makeEnemy))continue;
+  if(s.level.nightmareTrail||s.level.villageTrail)shedZombieParts(s,e,makeEnemy);
+  stepElementHit(e,dt);
+  if(stepRibbonControl(s,e,dt))continue;
+  if(e.hp<=0){if(isNightmare(e))stepNightmareDefeat(s,e,dt,makeEnemy);else if(e.type===13&&e.defeated)stepEmberBalloonDefeat(s,e,dt);else if(e.type===ZEPPELIN_TYPE&&e.defeated)stepZeppelinDefeat(s,e,dt);else if(e.type===DIVER_TYPE&&e.defeated)stepDiverDefeat(s,e,dt);else if(e.type===RIVER_BOAT_TYPE&&e.defeated)stepRiverBoatDefeat(s,e,dt);else{e.deadTime=Math.max(0,e.deadTime-dt);e.deathAge=(e.deathAge||0)+dt;}continue;}
+  if(e.boosterEntry||e.boosterHidden){e.flash=Math.max(0,e.flash-dt);continue;}
+  const previousX=e.x;e.previousY=e.y;const step=dt*(e.snare>0?.28:1);e.snare=Math.max(0,(e.snare||0)-dt);e.honeyed=Math.max(0,(e.honeyed||0)-dt);e.ribbonBound=Math.max(0,(e.ribbonBound||0)-dt);
+  if(e.ribbonStagger>0){e.ribbonStagger=Math.max(0,e.ribbonStagger-dt);e.flash=Math.max(0,e.flash-dt);continue;}
+  if(e.jellyLift>0){
+   e.jellyLift-=dt;e.vy+=850*dt;e.y+=e.vy*dt;e.phase='jump';e.flash=Math.max(0,e.flash-dt);
+   if(e.vy>0&&e.y>=e.baseY){e.y=e.baseY;e.vy=0;e.jellyLift=0;e.ribbonLift=false;e.landing=.2;}
+   continue;
+  }
   e.clock+=step;e.timer-=step;e.flash=Math.max(0,e.flash-dt);const wasAttacking=e.action>0;e.action=Math.max(0,e.action-step);e.recovery=Math.max(0,(e.recovery||0)-step);if(wasAttacking&&!e.action&&e.type!==3)e.recovery=.45;
-  if(e.emerging>0&&!(e.trap>0)){e.emerging=Math.max(0,e.emerging-step);e.x+=e.dir*55*step;e.gait=(e.gait||0)+Math.abs(e.x-previousX)/95;e.phase='emerge';continue;}
+  if(e.emerging>0&&!(e.trap>0)){
+   e.emerging=Math.max(0,e.emerging-step);e.x+=e.dir*(e.fortCrew?190:55)*step;
+   if(s.level.groundRoute&&!e.fortCrew){e.baseY=groundY(s.platforms,e.x,e.baseY);e.y=e.baseY;}
+   else if(e.fortCrew)e.y=e.baseY-21*Math.min(1,e.emerging/2.1);else if(e.campTent!==undefined)e.y=e.baseY-12*e.emerging/1.1;
+   e.gait=(e.gait||0)+Math.abs(e.x-previousX)/(isAcrobat(e)?acrobatStride(e):e.type===3?JUGGLER_STRIDE:95);e.moving=true;e.phase='emerge';continue;
+  }
   const trapped=e.trap>0;if(trapped){e.trap=Math.max(0,e.trap-dt);e.trapX??=e.x;e.trapY??=e.y;e.x=e.trapX;e.y=e.trapY;}else{e.trapX=null;e.trapY=null;}
   if(e.landing>0){e.landing=Math.max(0,e.landing-dt);continue;}
   const floor=s.level.groundRoute?null:s.platforms.find(q=>e.x>=q.x&&e.x<=q.x+q.w&&Math.abs(q.baseY-e.baseY)<8);
-  if(s.level.groundRoute&&e.type!==2&&e.type!==13&&e.type!==ZEPPELIN_TYPE&&e.type!==RIVER_BOAT_TYPE)e.baseY=groundY(s.platforms,e.x,e.baseY);
-  const near=Math.abs(e.x-p.x)<650;
-  if(e.type===ZEPPELIN_TYPE)updateZeppelin(s,e,step,enemyShot);
+  if(s.level.groundRoute&&e.type!==2&&e.type!==13&&e.type!==ZEPPELIN_TYPE&&e.type!==RIVER_BOAT_TYPE)e.baseY=groundY(isNightmare(e)?s.level.route:s.platforms,e.x,e.baseY);
+  const aim=enemyAimTarget(s,e),near=Math.abs(e.x-aim.x)<650;
+  if(e.fleeing){stepFleeingClown(s,e,step);continue;}
+  if(isNightmare(e)){stepNightmare(s,e,step,hit);continue;}
+  if(isVillageEnemy(e))stepVillageEnemy(s,e,step,enemyShot);
+  else if(e.type===ZEPPELIN_TYPE)updateZeppelin(s,e,step,enemyShot);
   else if(e.type===DIVER_TYPE)updateDiver(s,e,step,enemyShot);
   else if(e.type===RIVER_BOAT_TYPE)updateRiverBoat(s,e,step,enemyShot);
+  else if(e.type===14)stepUmbrella(s,e,step,enemyShot);
   else if(e.type===13)updateEmberBalloon(s,e,step,enemyShot);
   else if(e.type===10)updateFireJuggler(s,e,step,enemyShot);
   else if(e.type===TORCH_CLOWN||e.type===FIRE_WAGON)updateEmberTroop(s,e,step,enemyShot);
   else if(e.type===2){ // Balloon clown: drifting flight, then a visible breath before the streamer.
    if(!trapped){e.x=e.home+Math.sin(e.clock*.75)*75;e.y=e.baseY+Math.sin(e.clock*1.7)*22;}
    if(e.timer<.65)e.phase='windup';
-   e.dir=Math.sign(p.x-e.x)||-1;
-   if(e.timer<=0&&near){const m=enemyMuzzle(e),a=Math.atan2(p.y-25-m.y,p.x-m.x);enemyShot(s,m.x,m.y,a,175,'streamer');e.timer=s.gentle?3.4:2.6;e.phase='float';e.action=.35;}
+   e.dir=Math.sign(aim.x-e.x)||-1;
+   if(e.timer<=0&&near){const m=enemyMuzzle(e),a=Math.atan2(aim.y-25-m.y,aim.x-m.x);enemyShot(s,m.x,m.y,a,175,'streamer');e.timer=s.gentle?3.4:2.6;e.phase='float';e.action=.35;}
   }else if(e.type===5){
-   e.dir=Math.sign(p.x-e.x)||-1;e.phase=e.timer<.8?'windup':'rest';
-   if(e.timer<=0&&near){const m=enemyMuzzle(e);enemyShot(s,m.x,m.y,e.dir>0?-.35:Math.PI+.35,320,'clown',{gravity:310,r:22});e.timer=s.gentle?3.8:2.8;e.action=.4;s.events.push('cannon');}
+   e.y=e.baseY;
+   if(!e.boosterPassenger){e.dir=Math.sign(aim.x-e.x)||e.dir;e.phase='rest';tryClownBooster(s,e);}
   }else if(e.type===3){
    e.phase=e.timer<.55?'windup':'patrol';
-   if(e.phase==='windup'||e.volleyAge!==undefined)e.dir=Math.sign(p.x-e.x)||e.dir;
+   if(e.phase==='windup'||e.volleyAge!==undefined)e.dir=Math.sign(aim.x-e.x)||e.dir;
    if(e.timer<=0&&near&&e.volleyAge===undefined){e.volleyAge=0;e.volleyCount=0;e.timer=s.gentle?4:3.3;}
    if(e.volleyAge!==undefined){
     e.volleyAge+=step;e.phase='attack';
     while(e.volleyCount<3&&e.volleyAge>=e.volleyCount*.35){
      const m=enemyMuzzle(e),color=e.volleyCount++;e.ballColor=color;e.action=.16;
-     enemyShot(s,m.x,m.y,Math.atan2(-155,p.x-m.x),255+color*10,'juggle',{color,gravity:300,bounce:1,floor:e.baseY,r:11});
+     enemyShot(s,m.x,m.y,Math.atan2(-155,aim.x-m.x),255+color*10,'juggle',{color,gravity:300,bounce:1,floor:e.baseY,r:11});
     }
     if(e.volleyAge>.98){delete e.volleyAge;e.recovery=.35;e.phase='recover';}
    }else if(!trapped&&!e.recovery&&e.phase==='patrol'){
@@ -62,30 +100,38 @@ export function updateEnemies(s,dt,hit,defeat){
     e.baseY=s.level.groundRoute?groundY(s.platforms,e.x,e.baseY):e.baseY;e.y=e.baseY;
    }
   }else if(e.type===6){ // Clowns dropped by the balloon land before pursuing Hexy.
-   if(!trapped){e.vy+=800*step;e.x+=(e.launchVx||0)*step;e.y+=e.vy*step;if(e.y>=e.baseY){e.y=e.baseY;e.vy=0;e.type=0;e.phase='patrol';e.landing=e.balloonCrew?.25:0;e.timer=Math.max(e.timer,.85);e.gait=0;}}
+   if(!trapped){if(e.boosterFlight)stepBoostedClown(s,e,step);else{e.vy+=800*step;e.x+=(e.launchVx||0)*step;e.y+=e.vy*step;if(e.y>=e.baseY){e.y=e.baseY;e.vy=0;e.type=0;e.phase='patrol';e.landing=e.balloonCrew?.25:0;e.timer=Math.max(e.timer,.85);e.gait=0;}}}
   }else{
-   e.phase=e.timer<.55?'windup':'patrol';
-   if(near&&e.phase==='windup'&&(e.type===1||e.type===4))e.dir=Math.sign(p.x-e.x)||e.dir;
-   if(!trapped&&e.phase==='patrol'&&e.action<=0&&e.recovery<=0)e.x+=e.dir*(e.type===4?100:e.type===1?66:40)*step;
+   const acrobat=isAcrobat(e);if(acrobat)prepareAcrobat(e,trapped);
+   e.phase=acrobat&&e.acrobatAir?'jump':acrobat&&e.acrobatCrouch>0?'crouchJump':e.timer<.55?'windup':'patrol';
+   if(aim!==p&&!trapped&&e.phase==='patrol')e.dir=Math.sign(aim.x-e.x)||e.dir;
+   if(near&&e.phase==='windup'&&(e.type===1||e.type===4))e.dir=Math.sign(aim.x-e.x)||e.dir;
+   if(!trapped&&['patrol','jump'].includes(e.phase)&&e.action<=0&&e.recovery<=0)e.x+=e.dir*(acrobat?acrobatSpeed(e):40)*step;
    if(floor){if(e.x<floor.x+24){e.x=floor.x+24;e.dir=1;}if(e.x>floor.x+floor.w-24){e.x=floor.x+floor.w-24;e.dir=-1;}}
    if(s.level.emberTrail&&s.level.emberPits.some(q=>e.x>q.x-26&&e.x<q.x+q.w+26)){e.x=previousX;e.dir*=-1;}
-   if(s.level.groundRoute){e.x=Math.max(24,Math.min(s.level.width-24,e.x));if(Math.abs(e.x-e.home)>160)e.dir=e.x>e.home?-1:1;e.baseY=groundY(s.platforms,e.x,e.baseY);}
-   if(!trapped)e.y=e.baseY-(e.type===4?Math.max(0,Math.sin(e.clock*2.7))*112:e.type===1?Math.max(0,Math.sin(e.clock*2.1))*42:0);
+   if(s.level.groundRoute){
+    const camp=s.level.circusCamp&&e.home<0,left=camp?s.level.circusEntrance.left+24:24,right=camp?-1000:s.level.width-24;
+    e.x=Math.max(left,Math.min(right,e.x));if(Math.abs(e.x-e.home)>160&&!(acrobat&&e.acrobatAir))e.dir=e.x>e.home?-1:1;e.baseY=groundY(s.platforms,e.x,e.baseY);
+   }
+   if(acrobat)stepAcrobatMotion(e,step,trapped,e.x-previousX);else if(!trapped)e.y=e.baseY;
    if(e.timer<=0){
     const m=enemyMuzzle(e);
-    if(near&&e.type===0&&Math.abs(p.x-e.x)<260)enemyShot(s,m.x,m.y,e.dir===1?0:Math.PI,200,'streamer',{life:.8});
+    if(near&&e.type===0&&Math.abs(aim.x-e.x)<260)enemyShot(s,m.x,m.y,e.dir===1?0:Math.PI,200,'streamer',{life:.8});
     else if(near&&(e.type===1||e.type===4)){
-     const angle=Math.atan2(p.y-28-m.y,p.x-m.x),speed=e.type===4?195:175;
+     const angle=Math.atan2(aim.y-28-m.y,aim.x-m.x),speed=e.type===4?195:175;
      enemyShot(s,m.x,m.y,angle,speed,'ring',{arc:e.type===4?-1:1,launchAngle:angle,speed,r:14*1.15,life:3.2});
     }
     if(near)e.action=.32;e.timer=(s.gentle?3.4:2.5)+e.type*.18;
    }
   }
-  if(e.recovery>0&&e.type!==DIVER_TYPE)e.phase='recover';
-  e.gait=(e.gait||0)+Math.abs(e.x-previousX)/([10,11].includes(e.type)?64:95);
+  if(e.recovery>0&&e.type!==14&&e.type!==DIVER_TYPE)e.phase='recover';
+  if(e.practice&&!trapped){if(e.practiceEntering){if(e.x<=e.practiceRight)e.practiceEntering=false;}else if(e.x<e.practiceLeft){e.x=e.practiceLeft;e.dir=1;}else if(e.x>e.practiceRight){e.x=e.practiceRight;e.dir=-1;}}
+  if(!isAcrobat(e)||!e.acrobatAir&&!(e.acrobatCrouch>0)&&!(e.landing>0))e.gait=(e.gait||0)+Math.abs(e.x-previousX)/(isAcrobat(e)?acrobatStride(e):e.type===3?JUGGLER_STRIDE:[10,11].includes(e.type)?64:e.type===14?72:95);
+  if(e.type===3)e.moving=Math.abs(e.x-previousX)>.001;
+  decoyContact(s,e);
   const a=hit(p),b=enemyBody(e);
   if(a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y&&p.dash<=0){
-   if(p.vy>130&&p.y-p.vy*dt<b.y+9&&e.type!==5&&e.type!==FIRE_WAGON){defeat(s,e);p.vy=-390;p.ground=null;}
+   if(p.vy>130&&p.y-p.vy*dt<b.y+9&&stompable(e)){defeat(s,e);stompBounce(s,e);}
    else if(guardBlocks(s,{x:e.x,y:e.y-30,r:23,life:1})){if(!trapped)e.x=p.x+p.dir*67;e.timer=Math.max(e.timer,.7);}
    else s.damage({x:e.x});
   }
@@ -94,8 +140,10 @@ export function updateEnemies(s,dt,hit,defeat){
 }
 export const BOSS_MOVES=[['streamers','balls','bombs','drop'],ORGAN_MOVES,BARGE_MOVES,HARLEQUIN_MOVES,['spiral','rain','silence']];
 export const towerSockets=organMouths;
-export function bossTargets(s){return s.index===5?fortTargets(s):s.index===2?bargeTargets(s):s.index===1?organTargets(s):[bossHitbox(s)];}
+export function bossTargets(s){return s.level.nightmareTrail?[enemyBody(s.boss)]:s.index===5?fortTargets(s):s.index===2?bargeTargets(s):s.index===1?organTargets(s):[bossHitbox(s)];}
 export function updateBoss(s,dt,helpers){
+ if(s.level.villageTrail)return;
+ if(s.level.nightmareTrail)return updateNightmareBoss(s,dt,{...helpers,makeEnemy});
  const {say,particles}=helpers,b=s.boss,p=s.player,a=s.level.arena,center=(a.left+a.right)/2;
  b.flash=Math.max(0,b.flash-dt);
  if(b.hp<=0){b.phase='defeated';b.deadTime=(b.deadTime||0)+dt;s.arenaLocked=false;return;}

@@ -15,7 +15,7 @@ export function resolveBargeContact(s,bodyOf,damage=true){
 // Only the solid lower hull blocks shots. The contact box includes empty
 // space ahead of the drum and must not intercept shots aimed at that drum.
 export function bargeArmor(s){const m=bargeRig(s);return{x:s.boss.x-300,y:s.level.arena.y-20,w:625,h:m.waterY-s.level.arena.y+20};}
-export function bargeTargets(s){const m=bargeRig(s),targets=[{part:bargePartBroken(s,'tank')?'core':'tank',x:m.tank.x-m.tank.w*.45,y:m.tank.y-m.tank.h*.45,w:m.tank.w*.9,h:bargePartBroken(s,'tank')?Math.max(m.tank.h*.9,s.level.arena.y-26-(m.tank.y-m.tank.h*.45)):m.tank.h*.9}];if(!bargePartBroken(s,'drum'))targets.unshift({part:'drum',x:m.drum.x-m.drum.r*.94,y:m.drum.y-m.drum.r*.94,w:m.drum.r*1.88,h:m.drum.r*1.88});return targets;}
+export function bargeTargets(s){const m=bargeRig(s),targets=[{part:bargePartBroken(s,'tank')?'core':'tank',x:m.tank.x-m.tank.w*.45,y:m.tank.y-m.tank.h*.45,w:m.tank.w*.9,h:bargePartBroken(s,'tank')?Math.max(m.tank.h*.9,s.level.arena.y-26-(m.tank.y-m.tank.h*.45)):m.tank.h*.9}];if(!bargePartBroken(s,'drum'))targets.unshift({part:'drum',x:m.drum.x-m.drum.w*.47,y:m.drum.y-m.drum.h*.47,w:m.drum.w*.94,h:m.drum.h*.94});return targets;}
 export function bargeDrawing(s){const b=s.boss;return{key:'barge-body',frame:b.hp<=0?5:b.phase==='transform'?4:b.phase==='attack'?3:b.phase==='warn'?2:b.transformed?1:0};}
 function splash(s,x,y,size=110,onDeck=false){s.effects.push({x,y,row:1,bargeSplash:true,surfaceY:onDeck?y:undefined,size,age:0,life:.5});s.events.push('bargeSplash');}
 export function bargeFragments(s,art,rect,columns,rows,power=1){
@@ -38,7 +38,7 @@ export function updateBarge(s,dt,helpers,shoot){
  b.vulnerable=true;
  if((b.move==='drumroll'&&bargePartBroken(s,'drum')||b.move==='jet'&&bargePartBroken(s,'tank'))&&['warn','attack'].includes(b.phase)){b.phase='recover';b.timer=.9;}
  b.x+=(home-b.x)*Math.min(1,dt*.75);
- if(b.phase==='warn'&&b.timer<=0){b.phase='attack';b.attackClock=0;b.shotClock=.09;b.volley=0;b.targetX=clamp(p.x-70,a.left+140,b.x-360);b.timer=b.move==='drumroll'?3.4:b.move==='mortar'?4.0:b.move==='boarding'?2.8:b.move==='jet'?2.35:2.7;}
+ if(b.phase==='warn'&&b.timer<=0){if(b.move==='jet')b.jetAngle=bargeRig(s).nozzle.angle;b.phase='attack';b.attackClock=0;b.shotClock=.09;b.volley=0;b.targetX=clamp(p.x-70,a.left+140,b.x-360);b.timer=b.move==='drumroll'?3.4:b.move==='mortar'?4.0:b.move==='boarding'?2.8:b.move==='jet'?2.35:2.7;}
  else if(b.phase==='attack'){
   b.attackClock=(b.attackClock||0)+dt;b.shotClock=(b.shotClock||0)-dt;
   const m=bargeRig(s),fast=b.transformed?1.15:1,easy=s.gentle?.85:1;
@@ -51,12 +51,12 @@ export function updateBarge(s,dt,helpers,shoot){
    }else if(b.move==='boarding'){
     if(s.enemies.filter(e=>e.bargeCrew&&e.hp>0).length<(s.gentle?2:3)){
      const e=helpers.makeEnemy(m.stern.x,m.stern.y,8,n);
-     Object.assign(e,{bargeCrew:true,aquatic:true,phase:'deploy',phaseAge:0,baseY:a.y,waterY:m.waterY,channelWaterY:a.y+134,home:m.stern.x,dir:-1,vy:-240,launchX:m.stern.x,launchY:m.stern.y,swimAge:0,deckAge:0,waterOnly:n%2===1});s.enemies.push(e);
+     Object.assign(e,{bargeCrew:true,aquatic:true,phase:'exit',phaseAge:0,baseY:a.y,waterY:m.waterY,channelWaterY:a.y+134,home:m.stern.x,dir:1,vy:0,launchX:m.stern.x,launchY:m.stern.y,swimAge:0,deckAge:0,waterOnly:n%2===1});s.enemies.push(e);
     }
     b.shotClock=1.1;
    }else if(b.move==='broadside'){
-    const port=m.ports[n%2],target=clamp(b.targetX+(n%2?100:-100),a.left+100,b.x-390),flight=1.3;
-    shoot(s,port.x-54,port.y,0,0,'barge-balloon',{vx:(target-port.x)/flight,vy:(a.y-22-port.y-180*flight*flight)/flight,gravity:360,floor:a.y,r:22,drawSize:70,life:5,barge:true,water:true});b.portFlash={index:n%2,age:.2};b.shotClock=.7;s.events.push('bargeCannon');
+    const port=m.muzzle,target=clamp(b.targetX+(n%2?100:-100),a.left+100,b.x-390),flight=1.3;
+    shoot(s,port.x,port.y,0,0,'barge-balloon',{vx:(target-port.x)/flight,vy:(a.y-22-port.y-180*flight*flight)/flight,gravity:360,floor:a.y,r:22,drawSize:70,life:5,barge:true,water:true});b.shotClock=.7;s.events.push('bargeCannon');
    }else if(b.move==='mortar'){
     const flight=1.35,gravity=360,targetX=clamp(b.targetX+(n%3-1)*150,a.left+100,b.x-360);
     shoot(s,m.muzzle.x,m.muzzle.y,0,0,'barge-balloon',{vx:(targetX-m.muzzle.x)/flight,vy:(a.y-22-m.muzzle.y-.5*gravity*flight*flight)/flight,gravity,floor:a.y,r:24,drawSize:76,life:5,barge:true,water:true});

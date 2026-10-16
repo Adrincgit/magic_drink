@@ -1,0 +1,7 @@
+{
+  "prompt": "Create an OPAQUE painted game terrain TRANSITION tile, wide 3:1 landscape. References are exact material/style targets: first cobblestone village road, second forest dirt road. NO transparency anywhere. Left edge is completely the second reference earthy dark cemetery path with scattered flat stones and blue-green grass at top. Right edge is completely the first reference purple grey fan-pattern cobblestones with straight raised curb in upper fifth. In center the two surfaces meet along an irregular diagonal broken stone edging from upper-left towards lower-right, scattered loose cobbles gradually become orderly pavement; NOT an alpha fade, no haze, no rectangular seam. Match stone scale, perspective and muted lighting from the two references, dark outlines painted 2D spooky cartoon style. Only ground, no buildings, sky, people, text, borders. The leftmost and rightmost quarter should match the respective reference material. Top is farther away, bottom nearest; horizon outside image.",
+  "refs": [
+    "public/arcade/maps/village/road-v3.webp",
+    "public/arcade/maps/halloween/cemetery-path-v2.webp"
+  ]
+}

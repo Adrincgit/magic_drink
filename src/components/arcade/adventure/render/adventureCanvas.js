@@ -1,3 +1,12 @@
+import {drawVillageGate} from './villageGateCanvas';
+import {drawPopcornDefeat,drawPopcornPoof} from './popcornDefeatCanvas';
+import {drawProjectileLights,paintMagicLight} from './projectileLightsCanvas';
+import {drawVillageObstacles} from './villageChaosCanvas';
+import {villageEnemyOrder} from '../engine/villageOrbit';
+import {drawCandyHexy,drawFlyingWitchDefeat,drawPumpkinDefeat,drawVillageRubble,drawVillageResistance,drawVillageForeground,drawVillageRoad,drawVillageGroundBank,drawVillageBackdrop,drawVillageScenery,drawVillagers,drawVillageProjectile,drawVillageFog} from './villageCanvas';
+import {drawPopcornBlast} from './popcornCanvas';
+import {drawTrialTent} from './trialCanvas';
+import {drawPlacement,drawSpringBounce} from './placementCanvas';
 import {drawForestTerrain,drawEmberForeground} from './emberSurfaceCanvas';
 import {drawEmberBackdrop,drawEmberScenery,drawEmberFort,drawEmberProjectile,drawFortFade} from './emberTrailCanvas';
 import {drawEmberDepth,drawEmberHazards,drawHexyHeat} from './emberAtmosphereCanvas';
@@ -9,20 +18,29 @@ import {drawAquaticEnemy} from './riverActorsCanvas';
 import {buddyFrame,buddyPosition,buddyRollFrame} from '../engine/adventureDefense';
 import {shopForLevel} from '../engine/adventureShop';
 import {shieldCharges} from '../engine/adventureLoot';
+import {paintPowerAura,paintPowerScreen} from './powerCelebrationCanvas';
 import {paintOriginalTrail,paintOriginalScreen} from '../engine/adventureOriginal';
+import {drawRibbonPetals,drawRibbonOrbit,drawRibbonReturn} from './ribbonDanceCanvas';
+import {ribbonActive} from '../engine/adventureRibbonState';
 import {MEADOW_PLANES,paintMeadowPlane} from '../world/adventureParallax';
 import {superBackdrop,superBeam,superCaption,superCameraOffset} from './adventureSuperCanvas';
 import {drawSuperCutin} from './adventureSuperCutin';
+import {drawMangaClashImpact} from './clashImpactCanvas';
 import {drawBarge,drawBargeProjectile,drawBargeSplash} from './bargeCanvas';
 import {drawHarborBackdrop,drawHarborProps,drawHarborDock,drawHarborDockSupports} from './adventureHarborCanvas';
 import {drawWaterEffect} from './paintedWaterCanvas';
-import {drawGrandRingBackdrop,drawGrandRingStage,drawHarlequin,drawHarlequinProjectile,drawHarlequinFX,drawHarlequinMeter} from './harlequinCanvas';
+import {drawGrandRingBackdrop,drawGrandRingStage,drawHarlequin,drawHarlequinProjectile,drawHarlequinFX} from './harlequinCanvas';
 import {drawInfernoBarriers} from './infernoStageCanvas';
 import {drawInfernoForeground} from './infernoBackdropCanvas';
 import {drawInfernoFloorLights} from './infernoLightCanvas';
 import {GRAND_RING_FLOOR,grandRingFloorView,drawRingContactShadow} from './grandRingFloor';
 import {drawCircusFacade,drawCircusOutsideBackdrop,drawCircusForecourt,drawCircusWalkway,drawCircusTransition,outsideCircus} from './circusEntranceCanvas';
 import {circusEntryFigure} from '../engine/adventureCircusEntrance';
+import {drawAquaShot,drawAquaSplash,drawAquaGround,drawAquaJet,drawVitalHeart} from './aquaCanvas';
+import {drawCampForeground} from './circusCampCanvas';
+import {drawCoaster} from './coasterCanvas';
+import {drawCreativeShot,drawCreativeFields,drawCreativeImpact} from './creativeDrinksCanvas';
+import {drawDrinkArc,drawHoneySlow} from './extraDrinksCanvas';
 import {drawPowerBackdrop,drawPowerWorld,drawHarlequinCutin,drawClashMeter} from './powerClashCanvas';
 import {drawClashDust,drawClashPortraits,drawClashScreenFlash,drawCinematicSmoke} from './clashSpectacleCanvas';
 import {drawOrgan} from './organCanvas';
@@ -38,14 +56,19 @@ import {enemyGeometry} from '../actors/enemies/adventureEnemyGeometry';
 import {cameraView,BALLOON_SIZE} from './adventureCamera';
 import {balloonCrewDrawing,BALLOON_RIM_Y} from '../actors/bosses/adventureBalloonCrew';
 import {surfaceY,sceneryPlacement,rootedSceneryPlacement,groundY} from '../world/adventureTerrain';
-import {OUTPOST_SIZE,outpostFrame} from '../actors/enemies/adventureOutposts';
+import {drawWindCloth,TENT_FLAGS} from './windClothCanvas';
+import {drawOutpost} from './outpostCanvas';
+import {drawJugglerWalk} from './jugglerWalkCanvas';
+import {drawNightmareBackdrop,drawNightmareScenery,drawNightmareGraves,drawNightmareGraveFront,drawNightmareWind,drawNightmareBone,drawNightmareCryptMist} from './nightmareTrailCanvas';
+import {drawNightmareTerrain,drawNightmareSideGate,drawNightmareTelegraphs,drawNightmareForeground,drawNightmareFog} from './nightmareDepthCanvas';
 import {SUPPLY_SIZE,supplyFrame} from '../world/adventureSupplies';
 import {drawMeadowSky} from '../world/adventureSky';
 import {LEVELS,DRINKS} from '../world/adventureLevels';
 import {HEXY_SHEETS,hexyPose,hexyMuzzle} from '../actors/hexy/hexyAnimation';
 import {drawHexy as hexy} from './hexyCanvas';
+import {drawDiveKick,drawPaperDecoy,drawTacticalFX,drawReturnedBolt} from './tacticalModsCanvas';
 import {SPECIALS,SUPER_WINDUP,specialArt,spellFor} from '../engine/adventureMagic';
-import {ACTOR_SHEETS,bossDrawing,enemyDrawing,MAGIC_ROWS,HOSTILE_ROWS,effectFrame} from './adventureSprites';
+import {ACTOR_SHEETS,bossDrawing,enemyDrawing,MAGIC_ROWS,HOSTILE_ROWS,effectFrame,collectibleFrame} from './adventureSprites';
 
 export async function loadAdventureArt(){
  const paths={bunny:'/arcade/sprites/bunnies/bunny-atlas.webp',ground:'/arcade/maps/meadow/ground.webp',magic:'/arcade/sprites/effects/magic.webp',hostile:'/arcade/sprites/effects/hostile.webp',impacts:'/arcade/sprites/effects/impacts.webp'};
@@ -54,6 +77,12 @@ export async function loadAdventureArt(){
  paths['hexy-clash-portraits']='/arcade/sprites/ui/hexy-clash-full.webp?v=20261008-fire-acting';
  for(const name of ['poses','mid','final','effects','ultimate','ultimate-portrait','ultimate-effects','ultimate-beam','motion','motion-mid','motion-final','clash-fall','clash-portraits','clash-effects'])paths['harlequin-'+name]='/arcade/sprites/bosses/harlequin/'+name+'.webp';
  paths['harlequin-clash-portraits']='/arcade/sprites/bosses/harlequin/clash-full.webp?v=20261008-cinematic';
+ paths['harlequin-clash-grin']='/arcade/sprites/bosses/harlequin/clash-smile-cast.webp?v=20261012-cast';
+ paths['harlequin-super-grin']='/arcade/sprites/bosses/harlequin/super-smile-cast.webp?v=20261012-cast';
+ paths['harlequin-clash-charge']='/arcade/sprites/bosses/harlequin/clash-charge.webp?v=20261011';
+ paths['harlequin-super-charge']='/arcade/sprites/bosses/harlequin/super-charge.webp?v=20261011';
+ paths['duel-contact-shock']='/arcade/sprites/effects/painted-duel/contact-shock.webp?v=20261012';
+ paths['harlequin-ultimate-beam']='/arcade/sprites/bosses/harlequin/ultimate-beam-rotation.webp?v=20261011';
  for(const name of ['motion','motion-mid','motion-final','fire-actions','fire-actions-mid','super-cast'])paths['harlequin-'+name]='/arcade/sprites/bosses/harlequin/'+name+'.webp?v=20261008-fire-acting';
  paths['grand-ring-exterior']='/arcade/maps/grand-ring/exterior.webp';
  for(const name of ['burning','inferno'])paths['grand-ring-'+name]='/arcade/maps/grand-ring/background-'+name+'-v2.webp?v=20261008-inferno';
@@ -72,7 +101,8 @@ export async function loadAdventureArt(){
  paths['fire-breather-flat']='/arcade/sprites/enemies/fire-breather-flat.webp';
  paths['torch-clown']='/arcade/sprites/enemies/torch-clown.webp';
  paths['fire-wagon']='/arcade/sprites/enemies/fire-wagon-small-crew.webp';
- for(const key of ['ember-motion','ember-torchwalk','ember-balloon','ember-balloon-defeat','ember-torch-attack'])paths[key]='/arcade/sprites/enemies/'+key+'.webp';
+ paths['coaster-platform']='/arcade/sprites/effects/enchanted-coaster.webp';
+ for(const key of ['umbrella-clown','ember-motion','ember-torchwalk','ember-balloon','ember-balloon-defeat','ember-torch-attack'])paths[key]='/arcade/sprites/enemies/'+key+'.webp';
  for(const key of ['ember-jet','ember-captured'])paths[key]='/arcade/sprites/effects/'+key+'.webp';
  for(let i=0;i<8;i++)paths['forest-tree-'+i]='/arcade/maps/ember-trail/tree-clean-'+[0,1,2,0,3,4,5,3][i]+'.webp';
  for(let i=0;i<4;i++)paths['forest-outcrop-'+i]='/arcade/maps/ember-trail/outcrop-'+i+'.webp';
@@ -90,7 +120,48 @@ export async function loadAdventureArt(){
  paths['ember-flames']='/arcade/sprites/effects/ember-flames.webp';
  paths['ember-mechanisms']='/arcade/sprites/bosses/ember-fort/mechanisms.webp';
  paths['ember-bushes']='/arcade/maps/ember-trail/bushes.webp';
+ paths['wind-flags-painted']='/arcade/sprites/props/wind-flags-painted.webp';
+ paths['wind-tassels-painted']='/arcade/sprites/props/wind-tassels-painted.webp';
+ paths['fort-deploy-painted']='/arcade/sprites/bosses/ember-fort/deploy-painted.webp';
+ paths['barge-integrated-painted']='/arcade/sprites/bosses/barge/integrated-painted.webp';
+ paths['barge-pressure-barge']='/arcade/sprites/bosses/barge/pressure-barge.webp';
+ paths['barge-pressure-damage']='/arcade/sprites/bosses/barge/pressure-damage.webp';
+ paths['cannon-launcher-painted']='/arcade/sprites/enemies/cannon-launcher-painted.webp';
+ paths['acrobat-run-fluid']='/arcade/sprites/enemies/acrobat-run-fluid.webp';
+ paths['camp-wind-interior']='/arcade/maps/circus/camp-wind-interior.webp';
+ paths['outpost-wind-painted']='/arcade/sprites/props/outpost-wind-painted.webp';
+ paths['juggler-leg-cycle']='/arcade/sprites/enemies/juggler-leg-cycle.webp';
+ paths['juggler-walk-torso']='/arcade/sprites/enemies/juggler-walk-torso.webp';
+ paths['red-clown-flee']='/arcade/sprites/enemies/red-clown-flee.webp';
+ paths['nightmare-forest']='/arcade/maps/halloween/forest.webp';
+ paths['nightmare-graves']='/arcade/maps/halloween/graves.webp';
+ paths['nightmare-wind']='/arcade/maps/halloween/wind.webp';
+ paths['nightmare-props']='/arcade/maps/halloween/props.webp';
+ for(const name of ['depth-clouds-v2','depth-mountains-v2','depth-woods-v2','depth-bank-v2','cemetery-bank-v2','cemetery-path-v2','gate-complete-v2','crypt-side-v2','grave-arm-v2'])paths['nightmare-'+name]='/arcade/maps/halloween/'+name+'.webp';
+ paths['nightmare-path']='/arcade/maps/circus/camp-ash-ground.webp';
+ paths['nightmare-side-gate']='/arcade/maps/halloween/side-gate-solid.webp';
+ paths['nightmare-branch-trunk']='/arcade/maps/halloween/branch-tree-natural.webp';
+ paths['nightmare-bough']='/arcade/maps/halloween/branch-natural.webp';
+ paths['nightmare-depth-4']='/arcade/maps/halloween/depth-4.webp';
+ paths['nightmare-depth-0']='/arcade/maps/halloween/tree-solid-a.webp';
+ paths['nightmare-depth-1']='/arcade/maps/halloween/tree-solid-b.webp';
+ for(const name of ['actions','injured','fx','skeleton-parts','zombie-recover'])paths['nightmare-'+name]='/arcade/sprites/enemies/nightmare-'+name+'.webp';
+ paths['red-clown-fall']='/arcade/sprites/enemies/red-clown-fall.webp';
+ paths['nightmare-conversion-v5']='/arcade/sprites/enemies/nightmare-conversion-v5.webp';
+ for(const name of ['gate-oblique-v5','fence-bay-v5','crypt-opening-v5'])paths['nightmare-'+name]='/arcade/maps/halloween/'+name+'.webp';
+ for(const name of ['zombie-walk','crawler','bell','ghost','tall'])paths['nightmare-'+name]='/arcade/sprites/enemies/nightmare-'+name+'.webp';
+ paths['acrobat-air-painted']='/arcade/sprites/enemies/acrobat-air-painted.webp';
  paths['ember-fort']='/arcade/sprites/bosses/ember-fort/body.webp';
+ for(const name of ['collapse','wall'])paths['fort-'+name]='/arcade/sprites/bosses/ember-fort/'+name+'.webp';
+ paths['fort-wall']='/arcade/sprites/bosses/ember-fort/bulwark.webp';
+ paths['fort-grand-gate']='/arcade/sprites/bosses/ember-fort/grand-gate.webp';
+ paths['aqua-fx']='/arcade/sprites/effects/aqua.webp';paths['vital-heart']='/arcade/sprites/pickups/vital-heart.webp';
+ paths['jelly-fx']='/arcade/sprites/effects/jelly-cherry.webp';paths['prism-fx']='/arcade/sprites/effects/prism-peach.webp';paths['echo-fx']='/arcade/sprites/effects/echo-melon.webp';
+ paths['volt-fx']='/arcade/sprites/effects/volt-lychee.webp';paths['honey-fx']='/arcade/sprites/effects/honey-mango.webp';paths['orbit-fx']='/arcade/sprites/effects/orbit-orange.webp';
+ paths['aqua-quench']='/arcade/sprites/effects/aqua-quench.webp';
+ paths['camp-panorama']='/arcade/maps/circus/camp-panorama.webp';
+ for(const name of ['ash-ground','trunk','pines','brush','log','tent-open','tent-closed','grand-side'])paths['camp-'+name]='/arcade/maps/circus/camp-'+name+'.webp';
+ for(const name of ['side-open','side-closed','camp-red','camp-purple'])paths[name]='/arcade/sprites/props/'+name+'.webp';
  for(let i=0;i<4;i++)paths['ember-tree-'+i]='/arcade/maps/ember-trail/tree-'+i+'.webp';
  paths['ember-interior']='/arcade/maps/ring/background.webp';paths['ember-interior-ground']='/arcade/maps/ring/ground.webp';
  paths['ember-ground']='/arcade/maps/ember-trail/ground.webp';
@@ -109,8 +180,10 @@ export async function loadAdventureArt(){
  paths['pier-foam']='/arcade/sprites/effects/pier-foam.webp';
  paths['circus-supply']='/arcade/sprites/props/circus-supply.webp';paths['wand-burst']='/arcade/sprites/effects/wand-burst.webp';
  for(const name of ['acrobat-motion','acrobat-rings'])paths[name]='/arcade/sprites/enemies/'+name+'.webp';
+ paths['nightmare-crypt-opening-v7']='/arcade/maps/halloween/crypt-opening-v7.webp';
+ paths['nightmare-crypt-fog-v7']='/arcade/maps/halloween/crypt-fog-v7.webp';
  for(const name of ['balloon-damaged','balloon-crash'])paths[name]='/arcade/sprites/bosses/'+name+'.webp';
- for(const name of ['red-clown-walk','red-clown-air','red-clown-throw'])paths[name]='/arcade/sprites/enemies/'+name+'.webp';
+ for(const name of ['red-clown-walk','red-clown-air','red-clown-throw','clown-element-hits','clown-ribbon'])paths[name]='/arcade/sprites/enemies/'+name+'.webp';
  for(const name of ['clown-zeppelin','zeppelin-propeller'])paths[name]='/arcade/sprites/enemies/'+name+'.webp';
  paths['zeppelin-actions']='/arcade/sprites/enemies/zeppelin-actions.webp';
  paths['zeppelin-dust']='/arcade/sprites/effects/zeppelin-dust.webp';
@@ -124,8 +197,31 @@ export async function loadAdventureArt(){
  for(const key of Object.keys(RIVER_TREE_ART))paths[key]='/arcade/maps/riverwoods/trees/'+key.slice(11)+'.webp';
  paths['wagon-open']='/arcade/sprites/props/wagon-open.webp';
  paths['clown-outpost']='/arcade/sprites/props/clown-outpost.webp';
+ for(const name of ['bell-idle','bell-ring','bell-impact','bell-summon','wraith-idle','wraith-cast','wraith-dash','wraith-defeat','break'])paths['nightmare-'+name+'-v9']='/arcade/sprites/enemies/nightmare-'+name+'-v9.webp';
+ for(const name of ['nightmare-injured-v8','nightmare-clothed-limbs-v7','nightmare-zombie-reactions-v8','nightmare-skeleton-parts-v7','nightmare-spirit-v7','nightmare-skeleton-cartoon-v3','nightmare-skeleton-frames-v4','nightmare-zombie-defeat-v3','nightmare-clown-ghost-v3'])paths[name]='/arcade/sprites/enemies/'+name+'.webp';
+ for(const name of ['witch-absorb','witch-cast','soul-pumpkin','resistance','soul-effects'])paths['village-'+name+'-v5']='/arcade/sprites/enemies/village-'+name+'-v5.webp';
+ for(const name of ['berm','gate','country-road','road-entry'])paths['village-'+name+'-v5']='/arcade/maps/village/'+name+'-v5.webp';
+ for(const name of ['clouds','pillar-near','pillar-far'])paths['village-'+name+'-v6']='/arcade/maps/village/'+name+'-v6.webp';
+ for(const name of ['pumpkin','hexy-pumpkin'])paths['village-'+name+'-v6']='/arcade/sprites/enemies/village-'+name+'-v6.webp';
+ for(const name of ['pumpkin-clean','pumpkin-finish','witch-ground','witch-air','spell-fx','run-adults','run-children','run-elders','run-neighbors'])paths['village-'+name+'-v7']='/arcade/sprites/enemies/village-'+name+'-v7.webp';
+ for(const name of ['obstacles','absorb-fx','baker-run','baker-throw','blacksmith-run','blacksmith-throw'])paths['village-'+name+'-v8']='/arcade/sprites/enemies/village-'+name+'-v8.webp';
+ for(const name of ['hiding','orbit-pumpkin'])paths['village-'+name+'-v9']='/arcade/sprites/enemies/village-'+name+'-v9.webp';
+ for(const name of ['collapse','climb-adults','climb-children','climb-elders','climb-neighbors','warning'])paths['village-'+name+'-v10']='/arcade/sprites/enemies/village-'+name+'-v10.webp';
+ for(const name of ['run-adults','run-children','run-elders','run-neighbors','adults','children','elders','neighbors','witch-flight','candy-spell'])paths['village-'+name+'-v4']='/arcade/sprites/enemies/village-'+name+'-v4.webp';
+ for(const name of ['journey','night-sky','road-entry'])paths['village-'+name+'-v4']='/arcade/maps/village/'+(name==='journey'?'village-journey':name)+'-v4.webp';
+ for(const name of ['villagers','witch','pumpkin'])paths['village-'+name+'-v1']='/arcade/sprites/enemies/village-'+name+'-v1.webp';
+ for(const name of ['blocks','street','road'])paths['village-'+name+'-v3']='/arcade/maps/village/'+name+'-v3.webp';
+ paths['village-houses-v1']='/arcade/maps/village/village-houses-v1.webp';
+ paths['village-decor-v1']='/arcade/maps/village/village-decor-v1.webp';
+ paths['popcorn-defeat-v2']='/arcade/sprites/effects/popcorn-defeat-v2.webp';
+ paths['popcorn-fx']='/arcade/sprites/effects/popcorn-panic.webp';
+ for(const name of ['children','elders','neighbors','fire'])paths['village-'+name+'-v2']='/arcade/sprites/enemies/village-'+name+'-v2.webp';
+ paths['village-plazas-v2']='/arcade/maps/village/village-plazas-v2.webp';
+ for(const name of ['town-bank','orchard-bank'])paths['village-'+name+'-v2']='/arcade/maps/village/'+name+'-v2.webp';
+ paths['nightmare-mist-v4']='/arcade/maps/halloween/mist-v4.webp';
  for(const name of ACTOR_SHEETS)paths[name]='/arcade/sprites/'+(['boss-balloon','serio','alegre','agresivo','muta'].includes(name)?'bosses/':'enemies/')+name+'.webp';
  paths['boss-balloon']='/arcade/sprites/bosses/balloon-hd.webp';paths['balloon-damaged']='/arcade/sprites/bosses/balloon-damaged-hd.webp';
+ for(const name of ['volt-beam-v2','ribbon-satin','ribbon-whip','ribbon-slam','ribbon-bind','ribbon-dance'])paths[name]='/arcade/sprites/effects/'+name+'.webp';
  for(const name of HEXY_SHEETS)paths['hexy-'+name]='/arcade/sprites/hexy/'+name+'.webp';
  paths['hexy-air-super-release']+='?v=20261006-new-air-pose';
  // The rebuilt air pose also holds the windup: no return to the rejected
@@ -133,8 +229,9 @@ export async function loadAdventureArt(){
  paths['hexy-air-super']=paths['hexy-air-super-release'];
  for(const name of ['tent','wagon','trees','log','cannon-tower','rescue-cage'])paths[name]='/arcade/sprites/props/'+name+'.webp';
  paths.dragon='/arcade/sprites/effects/dragon.webp';
- for(const spec of SPECIALS.slice(1))paths['special-'+spec.key]='/arcade/sprites/effects/'+spec.key+'.webp';
+ for(const spec of SPECIALS.slice(1,6))paths['special-'+spec.key]='/arcade/sprites/effects/'+spec.key+'.webp';
  for(const name of ['bunny-shield','music-guard','super-star','super-beam'])paths[name]='/arcade/sprites/effects/'+name+'.webp';
+ paths['super-beam']='/arcade/sprites/effects/super-beam-rotation.webp?v=20261011';
  for(const name of ['serio-actions','alegre-actions','agresivo-actions','muta-actions'])paths[name]='/arcade/sprites/bosses/'+name+'.webp';
  paths['bunny-cast']='/arcade/sprites/bunnies/cast.webp';paths['bunny-movement']='/arcade/sprites/bunnies/movement.webp';
  paths['cannon-clown']='/arcade/sprites/enemies/cannon-clown.webp';
@@ -227,14 +324,16 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  else if(!reduced&&s.shake>0){const force=Math.min(1,s.shake/.12);c.translate(Math.sin(s.fxTime*137)*3*force,Math.cos(s.fxTime*113)*2*force);}
  const world=s.level.world,bg=art['world'+s.index],view=cameraView(s),outside=outsideCircus(s);
  c.fillStyle=s.level.sky[0];c.fillRect(0,0,W,H);
- if(outside)drawCircusOutsideBackdrop(c,s,art,reduced);
+ if(s.level.villageTrail)drawVillageBackdrop(c,s,art);
+ else if(s.level.nightmareTrail)drawNightmareBackdrop(c,s,art);
+ else if(outside)drawCircusOutsideBackdrop(c,s,art,reduced);
  else if(s.level.grandRing)drawGrandRingBackdrop(c,s,art,reduced);
  else if(s.level.emberTrail){drawEmberBackdrop(c,s,art);drawEmberDepth(c,s,art,reduced);}
  else if(s.level.harborRoute)drawHarborBackdrop(c,s,art,reduced);
  else if(s.level.riverRoute)drawRiverBackdrop(c,s,art,reduced);
  else if(s.level.groundRoute){drawMeadowSky(c,s,art,reduced);for(const plane of MEADOW_PLANES)paintMeadowPlane(c,art[plane.key],s.camera,plane,s.level.width);}
  else layer(c,bg,s.camera.x,world.farSpeed,-70-s.camera.y*.12,610);
- if(s.level.groundRoute&&!s.level.riverRoute&&!s.level.grandRing&&!s.level.emberTrail){
+ if(s.level.groundRoute&&!s.level.riverRoute&&!s.level.grandRing&&!s.level.emberTrail&&!s.level.nightmareTrail&&!s.level.villageTrail){
   // The forest enters from the right as solid cutouts. Crossfading entire
   // panoramas made trunks transparent against the hills behind them.
   const edge=s.level.forestEdge,img=art['forest-edge'],height=610,width=height*img.width/img.height;
@@ -249,10 +348,10 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   c.save();c.scale(view.zoom,view.zoom);
   for(const prop of s.level.scenery){if(prop.kind==='wagon')continue;const img=art[prop.kind],width=prop.h*img.width/img.height,{x,y}=sceneryPlacement(prop,s.camera);
    if(x+width/2< -50||x-width/2>view.width+50)continue;
-   c.save();c.translate(x,y);if(prop.flip)c.scale(-1,1);c.drawImage(img,-width/2,-prop.h,width,prop.h);c.restore();
+   c.save();c.translate(x,y);if(prop.flip)c.scale(-1,1);if(prop.kind==='tent')drawWindCloth(c,img,-width/2,-prop.h,width,prop.h,s.fxTime,{windArt:art,flags:TENT_FLAGS,reduced});else c.drawImage(img,-width/2,-prop.h,width,prop.h);c.restore();
   }c.restore();
- }else if(!s.level.riverRoute&&!s.level.grandRing&&!s.level.emberTrail)layer(c,art['mid'+s.index],s.camera.x,world.midSpeed,55-s.camera.y*.35,425);
- if(!s.level.grandRing&&!s.level.emberTrail)atmosphere(c,s,reduced);
+ }else if(!s.level.riverRoute&&!s.level.grandRing&&!s.level.emberTrail&&!s.level.nightmareTrail&&!s.level.villageTrail)layer(c,art['mid'+s.index],s.camera.x,world.midSpeed,55-s.camera.y*.35,425);
+ if(!s.level.grandRing&&!s.level.emberTrail&&!s.level.nightmareTrail&&!s.level.villageTrail)atmosphere(c,s,reduced);
  c.save();c.scale(view.zoom,view.zoom);c.translate(-s.camera.x,-s.camera.y);
  if(s.level.emberTrail){drawEmberScenery(c,s,art);drawEmberFort(c,s,art,reduced);}
  if(outside)drawCircusForecourt(c,s,art,reduced);
@@ -260,25 +359,38 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  if(s.level.riverRoute){
   drawRiverWater(c,s,art,reduced);
   if(s.level.harborRoute)drawHarborProps(c,s,art,reduced);
-  if(s.level.circusArrival)drawCircusFacade(c,s,art);
+  if(s.level.circusArrival)drawCircusFacade(c,s,art,reduced);
   if(s.index===2)drawBarge(c,s,art,reduced);
   for(const prop of s.level.scenery){
    const img=art[prop.kind],q=rootedSceneryPlacement(prop,s.platforms,img);
    if(q.x+q.w<s.camera.x||q.x>s.camera.x+view.width)continue;
-   c.save();c.translate(q.x,q.y);if(prop.flip){c.translate(q.w,0);c.scale(-1,1);}c.drawImage(img,0,0,q.w,q.h);c.restore();
+   c.save();c.translate(q.x,q.y);if(prop.flip){c.translate(q.w,0);c.scale(-1,1);}if(prop.kind==='tent')drawWindCloth(c,img,0,0,q.w,q.h,s.fxTime,{windArt:art,flags:TENT_FLAGS,reduced});else c.drawImage(img,0,0,q.w,q.h);c.restore();
   }
  }
  if(s.level.riverRoute)drawRiverPierWater(c,s,art,reduced,'back');
  for(const q of s.platforms)if(q.kind==='dock')drawHarborDockSupports(c,q,art);
  const terrainPlatforms=s.level.emberTrail?[...s.platforms.filter(q=>q.kind!=='stone'),...s.platforms.filter(q=>q.kind==='stone')]:s.platforms;
+ if(s.level.villageTrail)drawVillageGroundBank(c,s,art);
  if(!outside&&!(s.level.grandRing&&circusFloor==='dark'))for(const q of terrainPlatforms)if(q.x+q.w>s.camera.x-100&&q.x<s.camera.x+view.width+100){
   if(q.emberFallen)continue;
   if(q.bridge&&s.level.circusArrival&&q.x>=s.level.arena.right)drawCircusWalkway(c,q,art,s.level.circusArrival.doorX);
   else if(s.level.emberTrail&&!s.fortInside){
    drawForestTerrain(c,s,q,art);
-  }else terrain(c,s.level.emberTrail&&['stone','ember-bed'].includes(q.kind)?{...q,kind:'earth'}:q,s.fortInside?{...LEVELS[3].world,key:'ember-interior'}:world,art);
+  }else if(s.level.villageTrail){if(q.kind==='earth')drawVillageRoad(c,q,art);}
+  else if(s.level.nightmareTrail){if(q.kind==='earth')drawNightmareTerrain(c,s,q,art);}
+  else terrain(c,s.level.emberTrail&&['stone','ember-bed'].includes(q.kind)?{...q,kind:'earth'}:q,s.fortInside?{...LEVELS[3].world,key:'ember-interior'}:world,art);
  }
  if(s.level.emberTrail)drawEmberHazards(c,s,art,reduced);
+ if(s.level.nightmareTrail){
+  // Roots belong ON the painted floor. Drawing the soil over their lower
+  // trunks made the later branch sprites look like disconnected logs.
+  for(const q of s.platforms)if(q.kind!=='earth'&&q.x+q.w>s.camera.x-100&&q.x<s.camera.x+view.width+100)drawNightmareTerrain(c,s,q,art);
+  drawNightmareScenery(c,s,art);
+  drawNightmareGraves(c,s,art);
+  drawNightmareFog(c,s,art);
+ }
+ if(s.level.villageTrail){drawVillageScenery(c,s,art);drawVillageObstacles(c,s,art);drawVillageRubble(c,s,art);}
+ drawAquaGround(c,s,art,reduced);
  if(s.level.riverRoute)drawRiverPierWater(c,s,art,reduced);
  // Playable boats and swimmers occupy the channel in front of the supports.
  if(s.level.riverRoute)for(const e of s.enemies)if(e.type===9||diverInWater(e))drawAquaticEnemy(c,e,art,reduced);
@@ -289,22 +401,24 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  for(const q of s.outposts){
   if(q.x<s.camera.x-220||q.x>s.camera.x+view.width+220)continue;
   shadow(c,q.x,q.y,105,.16);c.save();if(q.flash>0)c.filter='brightness(1.65)';
-  sprite(c,art['clown-outpost'],outpostFrame(q),q.x,q.y+5,OUTPOST_SIZE);c.restore();
+  drawOutpost(c,s,q,art,reduced);c.restore();
  }
  for(const q of s.supplies){
   if(q.x<s.camera.x-100||q.x>s.camera.x+view.width+100)continue;
   shadow(c,q.x,q.landingY??q.y,32,q.falling?.08:.16,s.ringPerspective);c.save();if(q.flash>0)c.filter='brightness(1.7)';sprite(c,art['circus-supply'],supplyFrame(q),q.x,q.y,SUPPLY_SIZE);c.restore();
+  if(q.hp>0&&q.preview==='fullheal')drawVitalHeart(c,art,q.x-14,q.y-28,36);
  }
+ drawTrialTent(c,s,art,reduced);
  for(const h of s.hazards){
   const frame=reduced?0:Math.floor(s.time*4+h.x)%4;
   c.drawImage(art['thorn-spikes'],frame*256,0,256,256,h.x-3,h.y-8,h.w+6,h.h+13);
  }
- for(const q of s.stars)if(!outside&&!q.taken&&!q.hidden){
+ for(const q of s.stars)if((!outside||s.level.circusCamp)&&!q.taken&&!q.hidden){
   if(q.value===10){
    const pulse=reduced?1:1+Math.sin(s.time*2.5+q.x)*.06,size=52*pulse,img=art['treasure-star'];
    c.save();c.shadowColor='#ffe191';c.shadowBlur=reduced?10:18;c.drawImage(img,q.x-size/2,q.y-size/2,size,size);c.restore();
    c.save();c.textAlign='center';c.font='bold 12px Georgia';c.lineWidth=3;c.strokeStyle='#56304b';c.strokeText('10',q.x,q.y+39);c.fillStyle='#fff1b6';c.fillText('10',q.x,q.y+39);c.restore();
-  }else sprite(c,art['collectible-star'],reduced?0:Math.floor(s.time*7+q.x)%4,q.x,q.y,30,false,true);
+  }else sprite(c,art['collectible-star'],reduced?0:collectibleFrame(s.time,q.x),q.x,q.y,30,false,true);
  }
  for(const q of s.cages){
   if(q.carried||q.lost)continue;
@@ -324,38 +438,61 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
    if(q.boosted){const glow=c.createRadialGradient(q.x,q.y,5,q.x,q.y,55);glow.addColorStop(0,'#fff5b8b0');glow.addColorStop(1,'#ffe99300');c.fillStyle=glow;c.fillRect(q.x-55,q.y-55,110,110);}
    const scale=q.boosted?1.3:1;c.drawImage(art['drink'+q.kind],q.x-16*scale,q.y-27*scale+bob,32*scale,54*scale);
   }
+  else if(type==='fullheal')drawVitalHeart(c,art,q.x,q.y,58);
   else if(type==='shield'){const charges=shieldCharges(s,q),frame=charges===3?0:charges===2?4:6;sprite(c,art['bunny-shield'],frame+(reduced?0:Math.floor(s.time*5)%2),q.x,q.y,72,false,true);for(let i=0;i<charges;i++)sprite(c,art['collectible-star'],0,q.x+(i-(charges-1)/2)*14,q.y,16,false,true);}
   else sprite(c,art['loot-items'],type==='original'?(reduced?0:Math.floor(s.time*5)%4):6+(reduced?0:Math.floor(s.time*4)%2),q.x,q.y,62,false,true);
-  c.restore();sprite(c,art['collectible-star'],reduced?0:Math.floor(s.time*5)%4,q.x,q.y-38+bob,18,false,true);
+  c.restore();if(type!=='fullheal')sprite(c,art['collectible-star'],reduced?0:Math.floor(s.time*5)%4,q.x,q.y-38+bob,18,false,true);
   if(q.boosted)for(let i=0;i<3;i++){const angle=i*Math.PI*2/3+(reduced?0:s.time*1.6);sprite(c,art['collectible-star'],0,q.x+Math.cos(angle)*31,q.y+Math.sin(angle)*38,18,false,true);}
  }
- for(const cp of outside?[]:s.level.checkpoints||[s.level.checkpoint]){
+ for(const cp of outside&&!s.level.circusCamp?[]:s.level.checkpoints||[s.level.checkpoint]){
   const active=s.checkpointAt&&cp[0]<=s.checkpointAt[0];c.save();if(!active)c.filter='saturate(.4) brightness(.8)';
   drawCheckpoint(c,art['victory-flag'],reduced?0:Math.floor(s.time*7)%4,cp[0]+23,cp[1],96);c.restore();
  }
- for(const e of s.enemies){
-  if(e.type===9||diverInWater(e)||e.type===6||e.type===7&&!e.flightActive)continue;
+ // Entrants climb behind the barrel; its rim conceals their lower body.
+ if(s.level.villageTrail)drawVillagers(c,s,art,reduced);
+ const entrants=s.enemies.filter(e=>e.phase==='manifest').sort((a,b)=>(a.nightmareAge||0)-(b.nightmareAge||0));
+ const enemyOrder=[...entrants,...s.enemies.filter(e=>e.phase!=='manifest'&&e.type!==5&&!e.capture),...s.enemies.filter(e=>e.capture),...s.enemies.filter(e=>e.type===5)];
+ for(const e of s.level.villageTrail?villageEnemyOrder(enemyOrder):enemyOrder){
+  if(e.boosterHidden||e.nightmareHidden||e.type===22&&e.partsReleased||e.type===24&&e.remainsDropped)continue;
+  if(e.type===9||diverInWater(e)||e.type===6||e.type===7&&!e.flightActive||e.bargeCrew&&['exit','deploy'].includes(e.phase)&&e.hp>0)continue;
   if(Math.abs(e.x-s.camera.x-view.width/2)>view.width/2+200)continue;
+  if(e.hp<=0&&drawPumpkinDefeat(c,e,art))continue;
+  if(e.hp<=0&&drawFlyingWitchDefeat(c,e,art))continue;
+  if(e.hp<=0&&drawPopcornDefeat(c,e,art,reduced))continue;
   const {size,w,h}=enemyGeometry(e);
   shadow(c,e.x,e.type===2?e.baseY+120:e.type===7||e.type===13?groundY(s.level.route||s.platforms,e.x):e.baseY,w*.55,e.type===7?.06*(e.landed?e.deadTime/ZEPPELIN_DUST_DURATION:1):.15);
   if(e.hp>0&&[10,11].includes(e.type)){energyGlow(c,true,e.x+e.dir*28,e.y-67,62,.28);if(e.type===11)energyGlow(c,true,e.x-e.dir*30,e.y-64,55,.22);}
   c.save();if(e.hp<=0&&(!e.landed||e.type===13))c.globalAlpha=Math.min(1,e.deadTime*3);
-  if(e.emerging>0&&e.fortCrew){c.beginPath();c.rect(e.hatchX-500,e.y-150,518,160);c.clip();}
+  if(e.phase==='manifest'){c.beginPath();c.rect(e.x-size,e.baseY-size*1.3,size*2,size*1.3);c.clip();}
+  if(e.emerging>0&&e.fortCrew){c.beginPath();c.rect(e.hatchX-500,e.y-150,535,160);c.clip();c.filter='brightness('+(Math.min(1,.4+(e.hatchX-e.x)/125*.6))+')';}
+  else if(e.emerging>0&&e.campTent!==undefined)c.filter='brightness('+(1-e.emerging/1.1*.55)+')';
   else if(e.emerging>0)c.globalAlpha=Math.max(.2,1-e.emerging/.8);
-  if((e.flash>0&&(reduced||Math.floor(e.flash*25)%2===0))||([7,8,10,11,13].includes(e.type)?e.hp<=0&&(e.deathAge||0)<.08:e.deadTime>.47))c.filter='brightness(2.8) saturate(.15)';
+  if(!e.elementHit&&((e.flash>0&&(reduced||Math.floor(e.flash*25)%2===0))||([7,8,10,11,13,14,18,19,20,21,22,24].includes(e.type)?e.hp<=0&&(e.deathAge||0)<.08:e.deadTime>.47)))c.filter='brightness(2.8) saturate(.15)';
+  if(e.hp<=0&&e.type>=18)c.globalAlpha*=Math.max(0,Math.min(1,((e.type===22?3:[18,21].includes(e.type)?1.9:1.15)-(e.deathAge||0))/.45));
+  if(e.type===19&&e.ghostForm!=='sheet')c.globalAlpha*=.82;
+  if(e.type===19&&e.phase==='vanish')c.globalAlpha*=Math.max(0,e.timer/.5);
+  if(e.type===19&&['appear','soulRise'].includes(e.phase))c.globalAlpha*=Math.min(1,1-e.timer/(e.phase==='appear'?.75:1.3));
+  if(e.phase==='manifest'&&s.graves?.find(q=>q.index===e.graveId)?.kind==='crypt'){c.filter='brightness('+(Math.min(1,.25+e.nightmareAge*.6))+')';c.globalAlpha*=Math.min(1,e.nightmareAge/.3);}
   const drawing=enemyDrawing(e,reduced);
-  if(e.type===7)drawZeppelin(c,e,art,reduced);else if(e.type===8)drawAquaticEnemy(c,e,art,reduced);else sprite(c,art[drawing.key],drawing.frame,e.x,e.y,size,e.dir>0);c.restore();
+  if(e.hp>0&&(e.orbitEscort||e.rapidLantern&&e.phase==='windup'))paintMagicLight(c,e.x,e.y-(e.orbitEscort?25:76),e.orbitEscort?52:58,'#40cfff',e.phase==='windup'?.58:.22);
+  if(drawing.key==='juggler-walk-parts')drawJugglerWalk(c,e,art,size,reduced);
+  else if(e.type===7)drawZeppelin(c,e,art,reduced);else if(e.type===8)drawAquaticEnemy(c,e,art,reduced);else sprite(c,art[drawing.key],drawing.frame,e.x+(e.type===14?e.dir*size*.18:0),e.y+(e.type===14?1:0),(drawing.size||size)*(e.phase==='manifest'?(e.cryptScale||1):1)*(drawing.key==='clown-ribbon'?.8:1),e.dir>0);c.restore();
   if(e.trap){const frame=reduced?0:Math.floor(s.time*7)%4,bw=Math.max(w*1.65,h*1.35),bh=h*1.35;c.save();c.globalAlpha=.65;c.drawImage(art['trap-bubble'],frame*256,0,256,256,e.x-bw/2,e.y-h/2-bh/2,bw,bh);c.restore();}
-  if(e.snare>0){sprite(c,art['special-kiwi'],reduced?8:8+Math.floor(s.time*10)%4,e.x,e.y-8,42,false,true);}
+  if(s.level.nightmareTrail&&e.nightmareGrave>=0)drawNightmareGraveFront(c,s,e,art);
+
+  if(e.honeyed>0)drawHoneySlow(c,e,art);
+  else if(e.snare>0&&!(e.ribbonBound>0)){sprite(c,art['special-kiwi'],reduced?8:8+Math.floor(s.time*10)%4,e.x,e.y-8,42,false,true);}
  }
+ if(s.level.nightmareTrail){drawNightmareWind(c,s,art,reduced);drawNightmareTelegraphs(c,s,art,reduced);}
  const b=s.boss;
  if(s.index===1&&b.phase!=='sleep')drawOrgan(c,s,art,reduced);
- if(s.index!==5&&b.phase!=='sleep'&&(b.hp>0||b.defeat||(b.deadTime||0)<1.8)){
+ if(!s.level.villageTrail&&s.index!==5&&b.phase!=='sleep'&&(b.hp>0||b.defeat||(b.deadTime||0)<1.8)){
   if(!b.shattered&&s.index!==2)shadow(c,b.x,s.level.arena.y,s.index===0?85:40,.22,s.ringPerspective);
   c.save();if(b.hp<=0&&!b.defeat)c.globalAlpha=Math.max(0,1-(b.deadTime||0)/1.8);
   c.filter=bossHitFilter(b,reduced);
   const drawing=bossDrawing(s,reduced);
-  if(s.index===3)drawHarlequin(c,s,art,reduced);
+  if(s.level.nightmareTrail){if(b.hp<=0)c.globalAlpha=Math.min(1,Math.max(0,(2.3-(b.deathAge||0))/.55));sprite(c,art[drawing.key],drawing.frame,b.x+(b.dir>0?-drawing.offsetX:drawing.offsetX),b.y+drawing.offsetY,350,b.dir>0);}
+  else if(s.index===3)drawHarlequin(c,s,art,reduced);
   else if(s.index!==1&&s.index!==2)sprite(c,art[drawing.key],drawing.frame,b.x,b.y,s.index===0?BALLOON_SIZE:164,s.index===0?false:b.dir>0);
   if(s.index===0)drawBalloonDetails(c,s,art,reduced);
   if(s.index===0&&!b.defeat){
@@ -372,8 +509,17 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  // behind the balloon artwork during the first half of its jump.
  for(const e of s.enemies)if(e.type===6){const drawing=enemyDrawing(e,reduced);sprite(c,art[drawing.key],drawing.frame,e.x,e.y,enemyGeometry(e).size,e.dir>0);}
  if(s.clear&&s.clear.age>.5){const q=s.clear,drop=Math.max(0,1-(q.age-.5)/.7)*22;drawCheckpoint(c,art['victory-flag'],reduced?0:Math.floor(s.fxTime*7)%4,q.flagX,q.flagY-drop,125);}
+ drawCoaster(c,s,art);
+ drawCreativeFields(c,s,art,reduced);
+ drawPlacement(c,s,art,en);
+ for(const beam of s.voltBeam?.segments||[])drawDrinkArc(c,{x:beam.from.x,y:beam.from.y,toX:beam.to.x,toY:beam.to.y,age:s.time,strength:s.voltBeam.strength},art,reduced);
+ drawPaperDecoy(c,s,art,reduced);
+ drawProjectileLights(c,s);
  for(const q of s.shots){
-  if(q.super){
+  if(q.ribbonReflected){drawRibbonReturn(c,q,art);continue;}
+  if(q.hidden)continue;
+  if(q.reflected){drawReturnedBolt(c,q);continue;}
+  if(q.kind>=6){drawCreativeShot(c,q,art,reduced);}else if(q.kind===5){drawAquaShot(c,q,art,reduced);}else if(q.super){
    const angle=Math.atan2(q.vy,q.vx),size=230;
    sprite(c,art['super-star'],4+(reduced?1:Math.floor(q.age*13)%4),q.x-Math.cos(angle)*55,q.y-Math.sin(angle)*55,size,false,true,angle);
   }else if(q.heavy){
@@ -390,8 +536,13 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
    }
   }
  }
+ drawAquaJet(c,s,art,reduced);
  for(const q of s.hostile){
+  if(drawVillageProjectile(c,q,art,s))continue;
   if(q.life<=0||q.rain==='wait'||q.kind==='ember-blast')continue;
+  if(q.kind==='bone'){drawNightmareBone(c,art,q.boneFrame,q.x,q.y,q.boneFrame===11?30:23,q.age*8);continue;}
+  if(q.kind==='bell-wave'){sprite(c,art['nightmare-wind'],2+Math.floor(q.age*10)%4,q.x,q.y,q.drawSize||86,q.vx>0,true);continue;}
+  if(q.kind==='bell-soul'||q.kind==='bell-wisp'){sprite(c,art['nightmare-spirit-v7'],Math.floor(q.age*12)%8,q.x-Math.sign(q.vx)*18,q.y,q.drawSize||72,q.vx>0,true);continue;}
   if(q.ember){drawEmberProjectile(c,q,art,reduced);continue;}
   if(q.harlequin){drawHarlequinProjectile(c,q,art,reduced);continue;}
   if(q.barge||q.water||q.kind==='diver-hoop'){drawBargeProjectile(c,q,art,reduced);continue;}
@@ -403,33 +554,43 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   const circus=q.kind==='ball'||q.kind==='bomb',clown=q.kind==='clown';
   const size=q.drawSize||(clown?112:q.kind==='streamer'?48:q.kind==='wave'?52:q.kind==='bomb'?48:q.r*2.6);
   const rotation=clown?Math.atan2(q.vy,Math.abs(q.vx))*(q.vx<0?-1:1):q.kind==='streamer'?Math.atan2(q.vy,q.vx):q.kind==='ball'?q.age*5:0;
-  const frame=circus?(q.kind==='bomb'?2:0)+(reduced?0:Math.floor(q.age*8)%2):effectFrame(clown?0:HOSTILE_ROWS[q.kind]??0,q.age,reduced);
+  const frame=circus?(q.kind==='bomb'?2:0)+(reduced?0:Math.floor(q.age*8)%2):clown?(reduced?2:q.vy< -35?2:q.vy<80?3:4):effectFrame(HOSTILE_ROWS[q.kind]??0,q.age,reduced);
   c.save();if(q.carpetFire)c.globalAlpha=Math.min(1,q.life/.14);
-  sprite(c,circus?art['circus-projectiles']:clown?art['cannon-clown']:art.hostile,frame,q.x,q.y,size,clown&&q.vx<0,true,rotation);c.restore();
+  if(clown){
+   // Reuse the first boss's actual clown, without stretching its anatomy.
+   const centers={2:[128,162],3:[128,177],4:[128,148]},[cx,cy]=centers[frame];
+   c.translate(q.x,q.y);c.rotate(Math.max(-.5,Math.min(.5,rotation)));if(q.vx>0)c.scale(-1,1);
+   c.drawImage(art['red-clown-air'],frame%4*256,Math.floor(frame/4)*256,256,256,-cx/256*size,-cy/256*size,size,size);
+  }else sprite(c,circus?art['circus-projectiles']:art.hostile,frame,q.x,q.y,size,false,true,rotation);c.restore();
  }
  drawOrganDebris(c,s,art,reduced);
  if(!s.powerClash)superBackdrop(c,s,art,reduced);
  const p=s.player,shadowFloor=s.platforms.find(q=>p.x>=q.x&&p.x<=q.x+q.w&&surfaceY(q,p.x)>=p.y);
- paintOriginalTrail(c,s,reduced);
+ paintOriginalTrail(c,s,reduced);paintPowerAura(c,s,art,reduced);
+ drawRibbonPetals(c,s,art,reduced);drawRibbonOrbit(c,s,art,false,reduced);
  if(s.overdrive>0&&!p.drinkCast){c.save();const aura=c.createRadialGradient(p.x,p.y-43,12,p.x,p.y-43,83);aura.addColorStop(0,'#fff9be66');aura.addColorStop(.55,'#ffd78d40');aura.addColorStop(1,'#ec97ff00');c.fillStyle=aura;c.fillRect(p.x-85,p.y-128,170,170);c.restore();}
  shadow(c,p.x,p.ground!==null?p.y:shadowFloor?surfaceY(shadowFloor,p.x):p.y,24,p.ground!==null?.22:.1,s.ringPerspective);
  c.save();if(p.hurt&&!s.playerDefeat&&!s.superCinematic&&!s.clear&&!b.defeat&&Math.floor(s.time*12)%2&&!reduced)c.globalAlpha=.4;
  const pose=hexyPose(s);
+ if(ribbonActive(s)){c.shadowColor='#ff82c6';c.shadowBlur=reduced?8:18;c.filter='brightness(1.12) saturate(1.25)';}
  if(s.overdrive>0){c.shadowColor='#fff4af';c.shadowBlur=reduced?10:20+Math.sin(s.time*8)*4;c.filter=reduced?'brightness(1.16) saturate(1.25)':`hue-rotate(${s.time*160%360}deg) brightness(${1.14+Math.sin(s.time*Math.PI*3)*.09}) saturate(1.35)`;}
  if(p.charge>0){
   const amount=p.charge/SUPER_WINDUP;
   sprite(c,art['super-star'],Math.min(3,Math.floor(amount*4)),p.x,p.y-45,125+amount*28,false,true);
   c.shadowColor='#ffe9a0';c.shadowBlur=6+amount*15;c.filter='brightness('+(1+amount*.3)+')';
  }
- if(p.dash>0&&!reduced){c.globalAlpha=.13;hexy(c,art,pose,p.x-p.dashDir*30,p.y,p.dir<0);c.globalAlpha=.23;hexy(c,art,pose,p.x-p.dashDir*15,p.y,p.dir<0);c.globalAlpha=1;}
- if(s.circusEntry&&!s.circusEntry.inside){
+ if(p.dash>0&&!reduced){c.globalAlpha=.13;hexy(c,art,pose,p.x-p.dashDir*30,p.y-(p.dashY||0)*36,p.dir<0);c.globalAlpha=.23;hexy(c,art,pose,p.x-p.dashDir*15,p.y-(p.dashY||0)*18,p.dir<0);c.globalAlpha=1;}
+ if(drawCandyHexy(c,s,art,reduced)){/* Painted capture owns Hexy's silhouette. */}
+ else if(s.circusEntry&&!s.circusEntry.inside){
   const progress=circusEntryFigure(s);c.globalAlpha*=1-progress;
-  c.translate(p.x,p.y-progress*12);c.scale(1-progress*.15,1-progress*.15);hexy(c,art,pose,0,0,false);
+  c.translate(p.x,p.y-(s.level.circusCamp?0:progress*12));const scale=s.level.circusCamp?1:1-progress*.15;c.scale(scale,scale);hexy(c,art,pose,0,0,false);
  }else if(s.shopTransition&&['shop-enter','shop-exit'].includes(pose.sheet)){
   const q=s.shopTransition,progress=q.leaving?Math.max(0,1-q.age/.75):Math.max(0,Math.min(1,(q.age-q.walk-.4)/.6));
   c.globalAlpha*=1-progress*.85;c.translate(p.x+progress*12,p.y-progress*20);c.scale(1-progress*.12,1-progress*.12);hexy(c,art,pose,0,0,false);
  }else hexy(c,art,pose,p.x,p.y,p.dir<0);c.restore();
+ if(s.level.nightmareTrail){drawNightmareCryptMist(c,s,art,true);drawNightmareFog(c,s,art,true);drawNightmareSideGate(c,s,art,true);}
  drawHexyHeat(c,s,art,reduced);
+ drawRibbonOrbit(c,s,art,true,reduced);
  if(s.overdrive>0&&!p.drinkCast)for(let i=0;i<6;i++){const a=i*Math.PI/3+(reduced?0:s.time*2);c.save();c.globalAlpha=.75;sprite(c,art['collectible-star'],0,p.x+Math.cos(a)*55,p.y-43+Math.sin(a)*46,i%2?13:20,false,true);c.restore();}
  if(!s.powerClash)superBeam(c,s,art,reduced);
  drawPowerWorld(c,s,art,reduced);
@@ -442,9 +603,9 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   const frame=s.shieldBreak>0?8+Math.min(3,Math.floor((.4-s.shieldBreak)*10)):s.shield===3?(reduced?0:Math.floor(s.time*7)%4):4+(s.shield===2?0:2)+(reduced?0:Math.floor(s.time*6)%2);
   c.save();c.globalAlpha=s.shieldHit>0?.85:.68;sprite(c,art['bunny-shield'],frame,p.x,p.y-43,116,false,true);c.restore();
  }
- if(p.guarding||p.guardBreak>0){
+ if(!ribbonActive(s)&&(p.guarding||p.guardBreak>0)){
   const frame=p.guardBreak>0?8+Math.min(3,Math.floor((.4-p.guardBreak)*10)):p.guardHit>0?4+Math.min(3,Math.floor((.22-p.guardHit)*18)):reduced?2:1+Math.floor(s.time*6)%3;
-  c.save();c.globalAlpha=p.guardHit>0?.82:.58;sprite(c,art['music-guard'],frame,p.x+p.dir*48,p.y-43,115,p.dir<0,true);c.restore();
+  c.save();c.globalAlpha=p.guardHit>0?.82:.58;c.translate(p.x,p.y-43);c.rotate(Math.atan2(p.guardY||0,p.guardX??p.dir));sprite(c,art['music-guard'],frame,48,0,115,false,true);c.restore();
  }
  for(let i=0;i<s.rescued;i++){
   const pet=buddyPosition(s,i),frame=buddyFrame(s,i);
@@ -457,22 +618,28 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   if(pet.ground!==null)shadow(c,pet.x,pet.y,12,.13);
   sprite(c,drawing,pose,pet.x,pet.y-2,40,pet.dir<0);
  }
- for(const q of s.effects)if(q.waterDrop||q.waterDetail!==undefined)drawWaterEffect(c,art,q,reduced);else if(q.fireBurst)drawFireImpact(c,art,q,reduced);else if(q.cinematicSmoke)drawCinematicSmoke(c,art,q);else if(q.clashDust)drawClashDust(c,art,q);else if(q.harlequin)drawHarlequinFX(c,art,2,Math.min(3,Math.floor(q.age/.14)),q.x,q.y,q.size);else if(q.bargeSplash)drawBargeSplash(c,art,q,reduced);else if(!q.defense)sprite(c,q.armor?art['armor-ricochet']:q.super?art['super-star']:q.spell!==undefined?art[specialArt(q.spell)]:q.dragon?art.dragon:art.impacts,(q.armor?0:q.super?8:q.spell!==undefined||q.dragon?4:q.row*4)+Math.min(3,Math.floor(q.age/.08)),q.x,q.y,q.size,false,true);
- for(const q of s.particles){c.globalAlpha=Math.min(1,q.life*3);sprite(c,art['collectible-star'],0,q.x,q.y,11,false,true);}c.globalAlpha=1;c.restore();
+ if(s.level.villageTrail){drawVillageFog(c,s,art,reduced);drawVillageResistance(c,s,art);}
+ for(const q of s.effects)if(q.popcornPoof)drawPopcornPoof(c,q,art,reduced);else if(q.popcornBlast)drawPopcornBlast(c,q,art,reduced);else if(q.diveKick)drawDiveKick(c,q,art,reduced);else if(q.springBounce)drawSpringBounce(c,q);else if(q.confetti||q.reply)drawTacticalFX(c,q,reduced);else if(q.drinkArc)drawDrinkArc(c,q,art,reduced);else if(q.drinkFx!==undefined)drawCreativeImpact(c,q,art,reduced);else if(q.aqua||q.spell===5)drawAquaSplash(c,q,art,reduced);else if(q.fullheal)drawVitalHeart(c,art,q.x,q.y-q.age*35,q.size*(1-q.age/.8*.3));else if(q.waterDrop||q.waterDetail!==undefined)drawWaterEffect(c,art,q,reduced);else if(q.fireBurst)drawFireImpact(c,art,q,reduced);else if(q.cinematicSmoke)drawCinematicSmoke(c,art,q);else if(q.clashDust)drawClashDust(c,art,q);else if(q.harlequin)drawHarlequinFX(c,art,2,Math.min(3,Math.floor(q.age/.14)),q.x,q.y,q.size);else if(q.bargeSplash)drawBargeSplash(c,art,q,reduced);else if(!q.defense)sprite(c,q.armor?art['armor-ricochet']:q.super?art['super-star']:q.spell!==undefined?art[specialArt(q.spell)]:q.dragon?art.dragon:art.impacts,(q.armor?0:q.super?8:q.spell!==undefined||q.dragon?4:q.row*4)+Math.min(3,Math.floor(q.age/.08)),q.x,q.y,q.size,false,true);
+ for(const q of s.particles){c.globalAlpha=Math.min(1,q.life*3);sprite(c,art['collectible-star'],0,q.x,q.y,11,false,true);}c.globalAlpha=1;
+ // The close pillar occludes every world effect, including the large muzzle blast.
+ if(s.level.villageTrail)drawVillageGate(c,s,art,true);c.restore();
  c.restore();
+ if(s.level.villageTrail)drawVillageForeground(c,s,art);
  drawClashScreenFlash(c,s,reduced);
  drawInfernoForeground(c,s,art,reduced);
  if(s.level.emberTrail)drawEmberForeground(c,s,art,reduced);
+ if(outside)drawCampForeground(c,s,art);
+ if(s.level.nightmareTrail)drawNightmareForeground(c,s,art);
  if(b.phase!=='sleep'&&b.hp>0){
   if(b.phase==='intro'&&s.index<=3){c.save();c.globalAlpha=Math.min(1,Math.max(0,(b.arrival?.age||0)-1.8));c.textAlign='center';c.font='bold 22px sans-serif';c.lineWidth=5;c.strokeStyle='#382440';c.fillStyle='#fff0c7';c.strokeText(s.level.bossName[en?1:0],480,120);c.fillText(s.level.bossName[en?1:0],480,120);c.restore();}
-  else if(b.phase==='intro'){round(c,180,150,600,120,22,'#382440ed','#f2c187');c.textAlign='center';c.fillStyle='#ffdd97';c.font='bold 19px sans-serif';c.fillText(en?'THE NEXT ACT…':'EL SIGUIENTE NÚMERO…',480,186);c.fillStyle='#fff0c7';c.font='bold 28px sans-serif';c.fillText(s.level.bossName[en?1:0],480,227);}
+  else if(b.phase==='intro'&&!s.level.nightmareTrail){round(c,180,150,600,120,22,'#382440ed','#f2c187');c.textAlign='center';c.fillStyle='#ffdd97';c.font='bold 19px sans-serif';c.fillText(en?'THE NEXT ACTâ€¦':'EL SIGUIENTE NÃšMEROâ€¦',480,186);c.fillStyle='#fff0c7';c.font='bold 28px sans-serif';c.fillText(s.level.bossName[en?1:0],480,227);}
  }
- if(s.index===3)drawHarlequinMeter(c,s,art,en);
- paintOriginalScreen(c,s,art,reduced);
+ paintOriginalScreen(c,s,art,reduced);paintPowerScreen(c,s,art,reduced);
  const cutin=drawSuperCutin(c,s,art,reduced,en);
  if(!s.powerClash)superCaption(c,s,en,cutin);
  drawHarlequinCutin(c,s,art,reduced,en);drawClashMeter(c,s,art,en,reduced);
  drawClashPortraits(c,s,art,reduced);
+ drawMangaClashImpact(c,s,reduced);
  c.strokeStyle='#fff0c133';c.lineWidth=2;c.strokeRect(6,6,W-12,H-12);
  if(s.shopTransition?.alpha>0){c.save();c.globalAlpha=s.shopTransition.alpha;c.fillStyle='#000';c.fillRect(0,0,W,H);c.restore();}
  drawCircusTransition(c,s);drawFortFade(c,s,en);

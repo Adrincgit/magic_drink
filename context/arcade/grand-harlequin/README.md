@@ -66,3 +66,7 @@ Se conserva la textura de madera del prototipo circense y `ring.ogg` para la apr
 La revisión actual está en [clash.md](clash.md) y [finale.md](finale.md). Incluye el duelo de hasta veinte segundos, sonido de energía sostenido, derrota final, humo del superviviente, caída física de ambos personajes y suministros. Los resultados anteriores describen cada prueba local; el historial de Git registra su integración y publicación posterior.
 
 Revisión vigente de efectos y HUD: [efectos pintados, puntas, polvo, fuego y HUD](painted-effects.md).
+
+Actualización posterior: [actuación, carga, marcos ilustrados y rotación de los rayos](duel-rotation.md). Sustituye la barra de vida/fases visible, mantiene el indicador de forcejeo y documenta los fotogramas activos y el arte final.
+
+Revisión del 12 de octubre: [sonrisa inquietante, marcos envolventes e impacto manga](duel-anime-impact.md). Recupera la preparación heroica de Hexy y corrige las estrellas a cinco puntas redondeadas.

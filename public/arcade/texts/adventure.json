@@ -51,6 +51,10 @@
     "Necesitas 34,5 de magia para el ataque fuerte.",
     "You need 34.5 magic for a strong attack."
   ],
+  "lowVoltMagic": [
+    "El relámpago necesita 42 de magia.",
+    "The lightning burst needs 42 magic."
+  ],
   "superLow": [
     "El súper necesita 90 de magia y una estrella de súper lista.",
     "The super needs 90 magic and a ready super star."
@@ -59,14 +63,76 @@
     "Recuperación lenta: la magia fuerte volverá al terminar la cuenta.",
     "Slow recovery: strong magic returns when the countdown ends."
   ],
-  "superRecharging": ["La estrella del súper sigue recargándose.", "The super star is still recharging."],
-  "powerUp": ["¡Bebida potenciada!", "Powered drink!"],
-  "lootammo": ["¡Caramelos de recarga!", "Fizzy refill candies!"],
-  "lootshield": ["¡Una protección más!", "One more layer of protection!"],
-  "lootoriginal": ["¡Magic Drink Original!", "Magic Drink Original!"],
-  "basicLow": ["La chispa cercana necesita 17,25 de magia.", "Close spark needs 17.25 magic."],
+  "superRecharging": [
+    "La estrella del súper sigue recargándose.",
+    "The super star is still recharging."
+  ],
+  "powerUp": [
+    "¡Bebida potenciada!",
+    "Powered drink!"
+  ],
+  "lootammo": [
+    "¡Caramelos de recarga!",
+    "Fizzy refill candies!"
+  ],
+  "lootshield": [
+    "¡Una protección más!",
+    "One more layer of protection!"
+  ],
+  "lootoriginal": [
+    "¡Magic Drink Original!",
+    "Magic Drink Original!"
+  ],
+  "lootfullheal": [
+    "¡Corazón vital! Vida completamente restaurada.",
+    "Vital Heart! Health fully restored."
+  ],
+  "basicLow": [
+    "La chispa cercana necesita 17,25 de magia.",
+    "Close spark needs 17.25 magic."
+  ],
   "lowAmmo": [
     "La lata casi se termina: usa los disparos que quedan.",
     "The can is almost empty: use the remaining shots."
+  ],
+  "villageStart": [
+    "¡El pueblo está huyendo! Detén a las brujas antes de que disparen.",
+    "The villagers are fleeing! Stop the witches before they cast."
+  ],
+  "villageSquare": [
+    "Despeja la plaza de brujas, payasos y fantasmas para llegar al refugio.",
+    "Clear the witches, clowns and ghosts from the square to reach the refuge."
+  ],
+  "villageCandyEscape": [
+    "¡Te han convertido en dulce! ¡Pulsa rápido o mueve la palanca para liberarte!",
+    "You've been turned into candy! Tap fast or move the stick to break free!"
+  ],
+  "villageHexyAbsorbed": [
+    "¡La bruja te está absorbiendo! ¡Libérate antes de convertirte en calabaza!",
+    "The witch is pulling you in! Break free before you become a pumpkin!"
+  ],
+  "villageCandyFree": [
+    "¡Libre! Derrota a las brujas para rescatar a sus víctimas.",
+    "Free! Defeat the witches to rescue their victims."
+  ],
+  "villageWarning": [
+    "¡No vayas hacia el pueblo! ¡Las brujas se llevan a todos!",
+    "Don't go into town! The witches are taking everyone!"
+  ],
+  "villageBlockade": [
+    "¡Están atrapados! ¡Rompe el derrumbe antes de que las brujas se lleven a todos!",
+    "They're trapped! Break the rubble before the witches take everyone!"
+  ],
+  "villageTurned": [
+    "¡Los vecinos se han convertido en dulces! Derrota a su bruja para liberarlos antes de que los absorba.",
+    "The villagers have become candy! Defeat their witch to free them before she absorbs them."
+  ],
+  "villageRubbleFree": [
+    "¡Libre de los escombros! El vecino vuelve a huir.",
+    "Free of the rubble! The villager resumes escaping."
+  ],
+  "villagePumpkinRescue": [
+    "¡Rompe las calabazas voladoras para liberar a los vecinos atrapados!",
+    "Break the flying pumpkins to free the trapped villagers!"
   ]
 }

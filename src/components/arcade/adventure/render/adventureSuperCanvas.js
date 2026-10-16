@@ -1,7 +1,8 @@
-import {energyHead,paintedParticle} from './paintedDuelCanvas';
+import {energyHead,painted,paintedParticle} from './paintedDuelCanvas';
 import {SUPER_WINDUP,SUPER_DURATION} from '../engine/adventureMagic';
 import {cameraView} from './adventureCamera';
 import {hexyMuzzle} from '../actors/hexy/hexyAnimation';
+import {duelBeamPhase,drawDuelBeamTexture} from './duelBeamFrames';
 
 const clamp=n=>Math.max(0,Math.min(1,n));
 export function hexyChargeParticle(s,i,age){
@@ -14,7 +15,14 @@ export function drawHexyCharge(c,s,art,reduced=false){
  const age=q.age,h=hexyMuzzle(s);c.save();
  for(let i=0;i<(reduced?10:48);i++){
   const p=hexyChargeParticle(s,i,age),alpha=clamp(p.phase*10)*clamp((1-p.phase)*10)*clamp(age/.15);
-  paintedParticle(c,art,i%3,age+i*.13,p.x,p.y,13+i%4*6,age*4+i,alpha);
+  if(!reduced&&i%4===0){
+   for(let j=3;j>0;j--){
+    const tail=hexyChargeParticle(s,i,age-j*.025);if(tail.phase>p.phase)continue;
+    paintedParticle(c,art,i%3,age+i*.13,tail.x,tail.y,28-j*4,age+i,alpha*(1-j/4)*.6);
+   }
+   painted(c,art,'heads',Math.floor(age*24+i)%8,p.x,p.y,55-p.phase*20,48-p.phase*17,Math.atan2(h.y-p.y,h.x-p.x),alpha*.85,.71,.5);
+  }
+  paintedParticle(c,art,i%3,age+i*.13,p.x,p.y,18+i%4*6,age*4+i,alpha);
  }
  c.globalCompositeOperation='screen';const radius=28+clamp(age/SUPER_WINDUP)*35,g=c.createRadialGradient(h.x,h.y,1,h.x,h.y,radius);
  g.addColorStop(0,'#fff8c7df');g.addColorStop(.25,'#ffe29390');g.addColorStop(.65,'#fc78d240');g.addColorStop(1,'#ed68d100');c.fillStyle=g;c.fillRect(h.x-radius,h.y-radius,radius*2,radius*2);
@@ -53,16 +61,16 @@ export function superBackdrop(c,s,art,reduced){
 
 export function superBeam(c,s,art,reduced){
  const q=s.superCinematic;if(!q||q.age<SUPER_WINDUP)return;
- const age=q.age-SUPER_WINDUP,fade=clamp((SUPER_DURATION-q.age)/.3),grow=clamp(age/.12),frame=reduced?1:Math.floor(age*12)%4;
+ const age=q.age-SUPER_WINDUP,fade=clamp((SUPER_DURATION-q.age)/.3),grow=clamp(age/.12),frame=duelBeamPhase(s.fxTime,reduced);
  c.save();c.translate(q.origin.x,q.origin.y);c.scale(q.dir,1);c.globalAlpha=fade;
- // A broad four-pose corona expands behind the painted beam. Keep every
+ // A broad corona expands behind the painted beam. Keep every
  // layer attached to the measured wand tip rather than shaking her wrist.
- const swell=reduced?1:[.94,1.08,1.02,1.14][frame];
+ const swell=reduced?1:1+Math.sin(s.fxTime*12)*.06;
  c.save();c.globalAlpha=fade*.22;c.globalCompositeOperation='screen';
- c.drawImage(art['super-beam'],0,frame*256,1024,256,-22,-150*swell,1080*grow,300*swell);c.restore();
- // Four broad painted frames flow for two seconds instead of flying away.
+ drawDuelBeamTexture(c,art['super-beam'],frame,-22,-150*swell,1080*grow,300*swell);c.restore();
+ // Twelve rotation phases, shared with the duel and its meter.
  c.shadowColor='#f6c3ff';c.shadowBlur=reduced?8:20;
- c.drawImage(art['super-beam'],0,frame*256,1024,256,-22,-128,1080*grow,256);
+ drawDuelBeamTexture(c,art['super-beam'],frame,-22,-128,1080*grow,256);
  c.shadowBlur=0;
  if(grow<1)energyHead(c,art,false,age,1080*grow-22,0,0,195,reduced);
  const pulse=reduced?1:1+Math.max(0,1-(age%.24)/.1)*.18,coreSize=75*pulse;

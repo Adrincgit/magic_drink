@@ -1,0 +1,54 @@
+{
+  "tool": "image_gen built-in",
+  "date": "2026-10-12",
+  "sourceDirectory": "context/arcade/grand-harlequin/anime-sources",
+  "assets": {
+    "grin": {
+      "source": "exec-0149f35b-0650-4585-ba62-d62e6a1e1bed.png",
+      "generatedSource": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-0149f35b-0650-4585-ba62-d62e6a1e1bed.png",
+      "prompt": "Use case: stylized-concept / identity-preserve. Create a production anime cinematic PORTRAIT animation sheet of the referenced Harlequin villain. Reference is identity only; REPLACE his friendly confident smirk with a profoundly UNSETTLING MANIACAL GRIN. EXACTLY 18 HEAD-AND-SHOULDER BUST drawings in SIX columns by THREE rows on transparent background. Tight bust portraits, no full bodies, no legs: the FACE must be the dominant expressive subject. All angled three-quarter looking LEFT, slightly toward viewer so both eyes and all teeth are readable. Keep adult gaunt white clown face, pointed nose with small red clown nose, red diamond eye makeup, dark navy wild hair, single sweeping scarlet hat with gold bell, ivory ruff and scarlet cape. Face design: WIDE stretched CLOSED TOOTHY grin, clenched teeth bared in a long crescent curling up into cheeks, deep sharp cheek creases, near-black upper-face shadow, eyes intensely wide with TINY red pupils surrounded by visible white. A terrifying anime villain enjoying crushing his opponent, predatory manic delight; NOT a goofy laughing clown, NOT cute, NOT a polite narrow smirk, NOT a shouting open mouth. Strong angular ink strokes and dramatic maroon/black cel shadows under eyes and across brow, crimson fire rim light. Row1: restrained sinister teeth-baring smile and piercing eyes. Row2: unnervingly stretched grin, deeper shadows, smaller pupils. Row3: terrifying teeth-baring grin and crazed intense eyes, darkest brow shadow. Within EACH row draw SIX distinct successive loop poses of head subtly tilting, ruff fluttering, cape folds and hat tip swaying, hair moving; same face size and neck anchor, expression sustained, mouth never cycles open. All18 show the same adult villain, consistent hat and face. Complete hat INCLUDING bell visible in every cell, full ruff, short upper chest visible fading in silhouette at lower edge. No flames in front of face, no background, no rectangular panels, no text. Transparent generous gutters. Crisp hand-drawn anime production art, detailed teeth and eyes. Emphasize the expressive sinister face over costume detail.",
+      "columns": 6,
+      "rows": 3,
+      "output": "public/arcade/sprites/bosses/harlequin/clash-grin-malice.webp",
+      "cell": {
+        "width": 384,
+        "height": 448
+      },
+      "frames": 18
+    },
+    "surrounds": {
+      "source": "exec-2a42c3a0-cfb1-4827-b386-0c7c7915c344.png",
+      "rowEdges": [
+        0,
+        377,
+        755,
+        1117,
+        1536
+      ],
+      "generatedSource": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-2a42c3a0-cfb1-4827-b386-0c7c7915c344.png",
+      "revisionPrompt": "Use case: identity-preserve. Edit the FIRST image, the tall transparent 2-column 4-row anime cut-in frame atlas. ONLY change the GOLD STAR EMBLEMS in the RIGHT musical column in ALL FOUR FRAMES. Each large gold star must have EXACTLY FIVE BROAD ROUNDED POINTS, like the simple gold five-point star on Hexy's blue witch hat and wand in second reference. These are soft-tipped plump five-point stars with an inked outline and sculpted golden cel highlights, recognizable immediately as Hexy's symbol. NO eight-point compass stars, NO spiky cross extra points or inner eight-point highlights, no sparkle rays sprouting from those stars. Replace the tiny golden star decorations on that side with the same five-point round-tip star shape too. Preserve everything else: left column fire frames exactly unchanged; right column violet/cyan/pink wrapping energy and musical staff, notes and clef unchanged; all eight frame positions and shapes unchanged. Same tall 1024x1536 sheet, 512x384 cells, 2columns4rows. Preserve original true alpha around artwork AND in empty portrait centers. No background, no character, no new labels.",
+      "prompt": "Use case: stylized-concept. Production anime battle CUT-IN SURROUNDS, NOT straight banners. Transparent sprite sheet TWO columns by FOUR rows, 8 equal landscape cells, 2:1 cell ratio. Each cell is an asymmetric open U / C shaped SPECTACULAR ENERGY VORTEX framing a large EMPTY TRANSPARENT central portrait area. Upper and lower strokes connect only at far LEFT edge, RIGHT edge wide OPEN with tapered pointed energy tips. Left column four evolving frames of a SINISTER FIRE SURROUND: layered curling black-crimson flames behind brilliant orange and golden fire tongues, large sculptural tongues curling OUTWARD around the top, bottom and left edges, ember chips, inked harsh shadows creating dimensional anime fire. Right column four evolving frames of a HEROIC MUSICAL WITCH SURROUND: flowing thick dimensional violet-indigo magic with pink cyan highlights, bold golden stars at asymmetric top-left and lower-right corners, a sweeping musical stave with clear luminous notes curling around lower edge, broken comet streaks and bright celestial sparks. The central 70 percent must remain CLEAR alpha for a portrait to be placed there. NOT two thin identical horizontal lines. Vary thickness strongly, sweep diagonally, overlap different depths, foreshorten twisting curls. Rich hand-painted anime cel shading and black ink contours, glowing painted edges, aggressive expressive silhouette, like an anime ultimate cut-in effect. Four coherent animation phases down each column: vortex streams curl onward, fire tips grow and break, musical curls shift but key stars stay anchored. No characters, no faces, no text, no rectangular frame, no UI bar. Genuine alpha outside artwork AND in center. Each cell isolated by generous transparent gutters. Each row EXACTLY two surrounds; four rows.\nCRITICAL CANVAS SHAPE: the OVERALL SHEET must be TALL PORTRAIT 1024 pixels wide by 1536 pixels high, TWO columns FOUR rows. Each surround's cell is 512 wide by384 high, like a near-square portrait opening, NOT a very long horizontal strip. Redraw each open surround TALL ENOUGH to wrap around a head and shoulders; its transparent interior is 330x250. All8different frames must have this tall near-square silhouette. Use supplied image only for painted colors and fire/music identity; change their elongated aspect ratio completely. Clear center with real alpha.",
+      "columns": 2,
+      "rows": 4,
+      "output": "public/arcade/sprites/effects/painted-duel/cutin-surrounds.webp",
+      "cell": {
+        "width": 512,
+        "height": 384
+      },
+      "frames": 8
+    },
+    "impact": {
+      "source": "exec-11e1e790-ecf9-40b6-9626-4c0c911981a6.png",
+      "generatedSource": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-11e1e790-ecf9-40b6-9626-4c0c911981a6.png",
+      "prompt": "Use case: stylized-concept. Transparent 2D hand-painted ANIME BEAM COLLISION VFX SPRITE SHEET, EXACTLY FOUR columns by THREE rows =12 distinct equally sized square sprites. A spectacular white-hot STARBURST as cyan violet musical magic and red-gold fire beams first collide. NO beams in sheet, only collision energy and circular shockwave. Sequence ordered left to right row by row: frame1 small intensely white jagged contact spark, frame2 explosive large multi-point white-hot starburst with violet/cyan and orange/gold rim, frame3 thick translucent spherical shock front forming around brilliant jagged core, frame4 shock sphere expanding with sharply painted serrated edges, frames5-8 increasingly expanded shock sphere with three spiraling violet and amber broken energy arcs wrapping AROUND core in perspective, frames9-12 lingering large torn curling arcs, scattered spark shards and fading central starburst for sustained energy. Painterly anime cel effects with crisp hand-drawn irregular contours, no geometric perfect circles, no vector look, layered depth, sphere transparency lets scenery through, white core stays compact. Center registered identically every cell, each sprite completely contained with alpha gutters, consistent maximum circle diameter 85percent of cell. Isolated on genuine transparent background. No backdrop, no characters, no UI, no letters, no grid lines. Prefer bold readable silhouette and explosive force rather than tiny decorative detail.",
+      "columns": 4,
+      "rows": 3,
+      "output": "public/arcade/sprites/effects/painted-duel/contact-shock.webp",
+      "cell": {
+        "width": 384,
+        "height": 384
+      },
+      "frames": 12
+    }
+  }
+}

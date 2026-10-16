@@ -1,0 +1,60 @@
+{
+  "generator": "Built-in image_gen.imagegen",
+  "date": "2026-10-10",
+  "jobs": [
+    {
+      "key": "aquaCan",
+      "refs": [
+        "public/arcade/sprites/pickups/dragon-grape.webp",
+        "public/arcade/sprites/pickups/bubble-tape.webp"
+      ],
+      "transparent": true,
+      "prompt": "Generate a brand new Magic Drink soda can collectible for the same 2D hand drawn cartoon game as the reference cans. References are STYLE, SHAPE and BRAND layout only. Single complete upright can, straight front view, transparent background, no floor or cast shadow. Same stout gently tapered silhouette and silver rim. Ocean turquoise to cobalt blue label, cute smiling pale blue axolotl mascot holding the prominent yellow five point star above the stacked exact brand text \"MAGIC\" (yellow) \"DRINK\" (cyan with dark outline). Small berries, water droplets, curling waves, tiny music notes decorate the label. Flavor name \"AQUA BERRY\" in small clean lettering below the brand. Bold tidy black outlines, flat cel colors with only one simple highlight, same visual family as reference. High resolution polished game pickup asset; crisp silhouette, no photorealism, no extraneous background. Give can generous empty transparent margin.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-68ab595b-c6e8-412b-9ac0-0749a74def4b.png"
+    },
+    {
+      "key": "fortCollapse",
+      "refs": [
+        "public/arcade/sprites/bosses/ember-fort/body.webp"
+      ],
+      "transparent": true,
+      "prompt": "Game animation sprite sheet, exactly FOUR sequential destruction drawings arranged 2 columns by 2 rows, high resolution square 2048x2048 canvas. Reference is the exact red and gold circus fortress to animate: preserve its identity, proportions and frontal side-scroller view. Each cell 1024 square has the SAME fortress at the SAME scale with shared floor baseline 92% and same width 94%; never enlarge rubble to fill its cell. Frame reading order: (1) furnace core bursts open, windows broken, roof beginning to buckle, bright orange cracks and a few flying bolts; (2) central striped roof breaks and leans, left tower shears, fabric tears and large structure chunks start falling; (3) all three towers collapse downward amid drawn billowing charcoal and pale dust, scattered brass ribs and torn red canvas, visibly half previous height; (4) settled low recognizable heap of bent gold framing and red canvas, dead dark core, a little wispy smoke, remaining height less than 25% of original. Four genuinely different hand drawn deformation poses, not rotated copies. No clowns or cannons. No text labels, no cell grid, no background squares, actual transparent background around every frame. Crisp storybook cartoon ink outlines and restrained painted color matching reference, readable at game scale.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-c3c23247-dc66-4694-aaf0-ba16143c093c.png"
+    },
+    {
+      "key": "campTents",
+      "refs": [
+        "public/arcade/maps/grand-ring/exterior.webp"
+      ],
+      "transparent": true,
+      "prompt": "Create a transparent 2D side scrolling game scenery sprite sheet with FOUR assets in equal 2x2 cells, high resolution 2048x2048 square. Reference is style and circus identity only; change VIEWPOINT completely. Top left: large majestic red cream gold Grand Curtain tent seen FROM THE SIDE in shallow three quarter view, its long striped canvas side extends to the RIGHT, the narrow LEFT end wall has a sideways entrance opening facing LEFT along a horizontal path, open black doorway near 20% of total tent width with tied back crimson curtain. No broad front facing centered entrance. Top right: precisely same large side-view tent, same scale/registration and geometry, but left entrance curtains closed. Bottom left: smaller red and cream military circus bivouac tent, closed, side view, two poles, ropes, flat ground contact. Bottom right: different small purple and crimson quartermaster tent, shuttered, side view, pennants. All assets complete uncut, same floor baseline within cells, 6% transparent margins. No ground slabs, no trees, no characters, no flame, no text. Elegant hand drawn outlines, softly painted fabric with restrained shading, reference gold diamond motifs and lanterns. True alpha transparency, no backdrop.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-7a9a0f2a-096a-4b05-81e0-348243123e14.png"
+    },
+    {
+      "key": "campBackdrop",
+      "refs": [],
+      "transparent": false,
+      "prompt": "Wide panoramic 2D side scrolling game background, 3072x1024 landscape. A once lush forest completely consumed by an earlier fire, now cold and quiet under a smoky dusky blue violet sky. Many tall dark charcoal trunks, dead fir silhouettes and layers of distant ash gray woods create depth. An enemy circus camp occupies the forest: several small crimson-and-cream and burgundy striped circus tents tucked between trunks in the MIDDLE DISTANCE, dim golden lanterns, flags, rope lines. At the lower 20 percent, rough dark ash earth, burned bushes and fallen twigs. View from a human height horizontal side scrolling footpath, not top down. Trees at believable scale, distant tents smaller, no giant foreground roots, no large foreground objects. No living characters, no water, NO FLAMES, NO GLOWING EMBERS, NO ORANGE FIRE SKY. Hand drawn illustrated videogame background with clear ink outlines and restrained textured paint, same whimsical elegant red/gold circus universe. Full opaque continuous environment edge to edge, no borders or text.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-6071299d-ec72-4f46-b528-813719400838.png"
+    },
+    {
+      "key": "aquaFX",
+      "refs": [],
+      "transparent": true,
+      "prompt": "Transparent game sprite sheet, exactly 4 columns and 2 rows, eight separate animation cells on 1536x1024 canvas. Hand drawn clean cel animation with strong navy ink outlines, luminous cyan water and white pearly highlights, same visual universe as whimsical fantasy soda magic. Top row four consecutive poses of a compact magical WATER BOLT traveling RIGHT: elongated fluid crescent head and tapering curling tail with small drops, actual internal changing liquid shape each frame, fixed scale and center, not a round ball, not stretched single frame. Bottom row four consecutive impact poses: water splashes outward then breaks into drops with a small pale steam cloud as it quenches a flame; first compact, second broad crown splash, third fine drops, fourth dissipating mist. Each asset stays within its own equal cell with generous transparent margins. No text, no checkerboard, no ground, no environment, preserve real alpha. High contrast readable sprite suitable for bright cyan magic shots, flat illustration without heavy shadows.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-e6dcd34f-bace-4710-b3a9-b4dcf62fc684.png"
+    },
+    {
+      "key": "vitalHeart",
+      "refs": [],
+      "transparent": true,
+      "prompt": "Single 2D hand drawn game collectible icon on genuinely transparent background. A radiant rose pink HEART GEM cradled by a delicate small golden laurel wreath, three tiny rosy heart sparks above and a pearl white shine. A magical full health restoration item for an elegant whimsical cartoon witch game. Bold tidy dark violet outline, flat cel colors, restrained single highlight, clear recognizable silhouette, no text, no frame, no floor or cast shadow, no realism. Entire gem and wreath centered with 12 percent empty transparent margin. Designed to read cleanly at 50px in a game and above a treasure chest.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-9002c2e7-ae4d-452f-86b6-6ab5cfa6b80f.png"
+    },
+    {
+      "key": "fortWall",
+      "prompt": "Create a transparent videogame sprite sheet of FOUR damage states of ONE circus fortress outer barricade, matching the attached fortress's red wood, gold brass rivets, thick warm outlines and hand painted cel game art. 2 columns x 2 rows, exactly equal cells, 2048x2048. Each cell is a single tall fairly narrow defensive wall, slightly side view, 60 percent as wide as it is tall. A heavy red panel reinforced with brass braces, golden diamond badge, black iron feet, two short finials. NO doorway, no stairs. Pose 1 intact, pose 2 cracked wood and bent metal, pose 3 smashed open with planks breaking and pieces in air, pose 4 low pile of broken planks and brass rubble. ALL four poses same camera size, same floor at 90 percent height, same 72 percent width footprint. Last pose rubble remains at the bottom and only 20 percent cell height; do not enlarge rubble. Transparent background with clean alpha. No ground, no text, no flames, no people, no cast shadow.",
+      "source": "C:\\Users\\cabra\\.codex\\generated_images\\01a0b82d-f99d-7130-97af-f2af843b8646\\exec-40fc0349-60eb-46a2-b53b-0653a2eb5fb9.png"
+    }
+  ]
+}

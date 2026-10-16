@@ -1,9 +1,10 @@
+import {EXPLOSION_SCALE} from '../../engine/explosionScale';
 // One scale for the carried bomb, falling projectile and resulting fire.
 export const BOMB_SCALE=1.1;
 export const HELD_BOMB_SIZE=56*BOMB_SCALE;
 export const FALLING_BOMB_SIZE=48*BOMB_SCALE;
-export const BOMB_FLAME_SIZE=86*BOMB_SCALE*1.15;
-export const BOMB_FLAME_RADIUS=23*BOMB_SCALE*1.15;
+export const BOMB_FLAME_SIZE=86*BOMB_SCALE*1.15*EXPLOSION_SCALE;
+export const BOMB_FLAME_RADIUS=23*BOMB_SCALE*1.15*EXPLOSION_SCALE;
 
 export function bombFlames(bomb){
  return [-1,1].map(dir=>({

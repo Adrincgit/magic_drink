@@ -1,0 +1,188 @@
+{
+  "date": "2026-10-15",
+  "modelAndRegressionTests": 27,
+  "realSelectorPassed": true,
+  "browserRecordingsPassed": true,
+  "decodedAndVisuallyReviewed": true,
+  "buildComplete": true,
+  "zeroErrors": true,
+  "assets": [
+    {
+      "path": "public/arcade/sprites/enemies/village-children-v2.webp",
+      "bytes": 1451424,
+      "sha256": "46a8087bd4355dca9224fc5794c3b4cbacd23403ae8f2c1cd7878c4e9368af3d",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/village-elders-v2.webp",
+      "bytes": 1429038,
+      "sha256": "01d7519a5c988069186923abec7cb7e361ddf4ab4127353cfe92468b30d7a034",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/village-neighbors-v2.webp",
+      "bytes": 1580656,
+      "sha256": "19fd47075e1155245a25769c6f5c8b237da2b22983ecd4f662c2574d3d77adfa",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/sprites/enemies/village-fire-v2.webp",
+      "bytes": 490742,
+      "sha256": "c448f87c8376483ebdb1f97818b3a918b0bd7608b753d7182f7a54f24ce5ccd7",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/maps/village/village-plazas-v2.webp",
+      "bytes": 582784,
+      "sha256": "06f9d3e83f016583ed18a5e005fa7ef2349d64bb1205fcc0755eea8113f66c61",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/maps/village/town-bank-v2.webp",
+      "bytes": 208584,
+      "sha256": "4e8125c8d4504f18a5c503df51ecd92049299aef9315a33d8d2a1a335ade4376",
+      "distMatches": true
+    },
+    {
+      "path": "public/arcade/maps/village/orchard-bank-v2.webp",
+      "bytes": 412158,
+      "sha256": "fdeea36ddbd67366bfd0767e6170594cbc47b0f893056d0cdfcced2f149cec31",
+      "distMatches": true
+    }
+  ],
+  "scenes": [
+    {
+      "name": "arrival",
+      "simulationSeconds": 9.708333333333423,
+      "renderP95": 1.5999999940395355,
+      "visibleVillagerStyles": [
+        2,
+        0,
+        3,
+        1,
+        4,
+        5,
+        6
+      ],
+      "turned": 0,
+      "won": false
+    },
+    {
+      "name": "orchard",
+      "simulationSeconds": 9.00000000000013,
+      "renderP95": 1.3000000044703484,
+      "visibleVillagerStyles": [
+        7,
+        4,
+        1,
+        2,
+        0,
+        6,
+        5,
+        3
+      ],
+      "turned": 0,
+      "won": false
+    },
+    {
+      "name": "approach",
+      "simulationSeconds": 10.000000000000073,
+      "renderP95": 1.3000000044703484,
+      "visibleVillagerStyles": [
+        0,
+        6,
+        5,
+        3,
+        2,
+        7,
+        4,
+        1
+      ],
+      "turned": 0,
+      "won": false
+    },
+    {
+      "name": "fire",
+      "simulationSeconds": 7.000000000000138,
+      "renderP95": 1.3999999985098839,
+      "visibleVillagerStyles": [],
+      "turned": 0,
+      "won": false
+    },
+    {
+      "name": "candy",
+      "simulationSeconds": 8.000000000000187,
+      "renderP95": 1.3999999985098839,
+      "visibleVillagerStyles": [
+        6,
+        3,
+        0,
+        5
+      ],
+      "turned": 1,
+      "won": false
+    },
+    {
+      "name": "child-candy",
+      "simulationSeconds": 7.000000000000138,
+      "renderP95": 1.4000000059604645,
+      "visibleVillagerStyles": [
+        3
+      ],
+      "turned": 1,
+      "won": false
+    },
+    {
+      "name": "street",
+      "simulationSeconds": 10.000000000000073,
+      "renderP95": 1.5,
+      "visibleVillagerStyles": [
+        4,
+        7,
+        2,
+        6,
+        1,
+        5,
+        3,
+        0
+      ],
+      "turned": 2,
+      "won": false
+    },
+    {
+      "name": "market",
+      "simulationSeconds": 8.000000000000187,
+      "renderP95": 1.6000000014901161,
+      "visibleVillagerStyles": [
+        7,
+        4,
+        1,
+        2
+      ],
+      "turned": 1,
+      "won": false
+    },
+    {
+      "name": "refuge",
+      "simulationSeconds": 9.00000000000013,
+      "renderP95": 1.3000000044703484,
+      "visibleVillagerStyles": [],
+      "turned": 0,
+      "won": true
+    }
+  ],
+  "preserved": [
+    {
+      "path": "nightmare-injured-v8.webp",
+      "sha256": "810c7f987fbb2139a657a4eef5c3c125e649121f77bc1eb6c62885d97d9d14d9"
+    },
+    {
+      "path": "nightmare-zombie-reactions-v8.webp",
+      "sha256": "9cd51af40b08b39eeb872a80f349483150be278c5dbcc0de4070d99c4fe70174"
+    },
+    {
+      "path": "nightmare-clothed-limbs-v7.webp",
+      "sha256": "f81ea037b9b437a3a66f9cbd287800029dcf21e3be52ee4f6573c7498734d086"
+    }
+  ]
+}
