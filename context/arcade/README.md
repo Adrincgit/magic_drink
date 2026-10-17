@@ -1,5 +1,7 @@
 # Hexy & the Lost Chorus
 
+[Dirección de animación vigente: estilo anime caricaturesco, referencias selectivas para maquinaria y tiempos medidos de los GIF](DIRECCION_DE_ANIMACION.md).
+
 [Revisión vigente del jefe 1-3: torrentes y olas conectados físicamente, oleadas grandes, tambor visible, Hexy mojada y destrucción por piezas de maquinaria](barge-coherence/README.md).
 
 [Regla vigente: recorridos sin checkpoints, reinicio desde el inicio, una caja con un corazón a mitad del mapa y aire dibujado para la fase 2 del globo](balloon-air-restart/README.md).

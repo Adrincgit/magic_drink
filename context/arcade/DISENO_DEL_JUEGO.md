@@ -123,6 +123,8 @@ En el primer arlequín se reduce tamaño y colisión un **20%** inicialmente y o
 
 ## Imagen, profundidad y sonido
 
+**Dirección de animación decidida, 16/10/2026:** conservar el estilo anime caricaturesco. Usar las referencias de Metal Slug para estudiar peso, actuación mecánica, ataques y destrucción, especialmente en maquinaria, con diseños y dibujos propios. El detalle se aplica de forma selectiva; no todos los objetos necesitan ese grado de elaboración ni una cadencia uniforme. [Criterios y medición de los archivos de referencia](DIRECCION_DE_ANIMACION.md).
+
 **Decidido a partir de las revisiones:**
 
 - Potenciar fondos lejanos y capas intermedias con identidad y paleta propias para cada lugar.
