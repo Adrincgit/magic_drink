@@ -2,8 +2,10 @@ import {voltBurst} from './adventureVolt';
 import {surfaceY} from '../world/adventureTerrain';
 import {hexyMuzzle} from '../actors/hexy/hexyAnimation';
 import {drinkMastery} from './adventureDrinkMastery';
+import {canControlEnemy} from '../actors/enemies/adventureEnemyTraits';
+import {worldSound} from './adventureWorldAudio';
 export const VOLT=9,HONEY=10,ORBIT=11;
-const small=e=>[0,1,3,4,10,11,14].includes(e.type);
+const small=e=>canControlEnemy(e,'slow');
 const floorBelow=(s,x,y)=>s.platforms.filter(p=>x>=p.x&&x<=p.x+p.w&&surfaceY(p,x)>=y-12).sort((a,b)=>surfaceY(a,x)-surfaceY(b,x))[0];
 const burst=(s,kind,x,y,size=65)=>s.effects.push({drinkFx:kind,x,y,size,age:0,life:.36,duration:.36});
 const probe=(s,kind,x,y,r,damage,extra={})=>s.shots.push({kind,x,y,r,damage,vx:0,vy:0,age:0,life:.024,heavy:true,hidden:true,sustained:true,hits:[],scale:1,...extra});
@@ -69,7 +71,7 @@ export function stepExtraShot(s,q,dt){
  if(q.hidden||q.heavy||q.life<=0)return;
  if(q.kind===HONEY){
   q.vy+=620*dt;
-  for(const p of s.platforms){if(p.bridge)continue;const top=surfaceY(p,q.x);if(q.x>=p.x&&q.x<=p.x+p.w&&q.vy>0&&q.previousY+q.r<=top+10&&q.y+q.r>=top){q.life=0;honeyPatch(s,q.x,top,q.scale);s.events.push('honeyDrop');break;}}
+  for(const p of s.platforms){if(p.bridge)continue;const top=surfaceY(p,q.x);if(q.x>=p.x&&q.x<=p.x+p.w&&q.vy>0&&q.previousY+q.r<=top+10&&q.y+q.r>=top){q.life=0;honeyPatch(s,q.x,top,q.scale);worldSound(s,'impactHoney',q.x,top);break;}}
  }else if(q.kind===ORBIT&&!q.orbitLaunched){
   if(q.age<.46&&!q.prismSplit){
    const p=q.orbitAnchor||s.player,dir=Math.sign(q.orbitVX??q.vx)||1,a=-q.age/.46*Math.PI*1.7;

@@ -1,5 +1,7 @@
 # 1-3: La ribera de los redobles
 
+**Revisión vigente del combate, 16/10/2026:** [agua, percusión, transformación y destrucción coherentes](../barge-coherence/README.md). Esta revisión sustituye las descripciones antiguas de olas instantáneas y fragmentación en cuadrícula. Los checkpoints históricos mencionados abajo quedaron retirados por la [regla de reinicio desde el inicio](../balloon-air-restart/README.md).
+
 Implementado el 7 de octubre de 2026 y revisado el 9 de octubre. **Estado vigente:** la barcaza no embiste ni daña por contacto; sus tripulantes tienen sprites nuevos, cada arma brilla sólo al recibir su propio golpe y la popa desembarca buzos. El nuevo 1-4 lleva el recorrido a tierra y el Arlequín pasa al 1-5. [Revisión actual, recursos y guardados](../ember-fort/README.md).
 
 ## Recorrido

@@ -6,8 +6,7 @@ import {makeEnemy,updateEnemies} from '../src/components/arcade/adventure/actors
 import {outpostDrawing} from '../src/components/arcade/adventure/render/outpostCanvas';
 import {enemyDrawing} from '../src/components/arcade/adventure/render/adventureSprites';
 import {groundY} from '../src/components/arcade/adventure/world/adventureTerrain';
-import {jugglerWalkPose} from '../src/components/arcade/adventure/actors/enemies/adventureJugglerWalk';
-import {enemyGeometry} from '../src/components/arcade/adventure/actors/enemies/adventureEnemyGeometry';
+import {JUGGLER_WALK_FRAMES} from '../src/components/arcade/adventure/actors/enemies/adventureJugglerWalk';
 const folder='tests/artifacts/arcade/tent-motion/';
 const tick=(s,n)=>{for(let i=0;i<n;i++)updateEnemies(s,1/120,playerBody,()=>{});};
 
@@ -34,35 +33,32 @@ test('the meadow atlas contains different flag and cloth pixels, not a repeated 
 test('the exported tent sheet excludes both sideways poses',()=>{
  const r=JSON.parse(fs.readFileSync('context/arcade/tent-motion/registration.json')).filter(q=>q.name==='meadow');expect(r.map(q=>q.sourceFrame)).toEqual([0,1,2,1,4,5,6,5]);
 });
-test('juggler patrol completes twelve frames in 1.25 seconds without changing its travel speed',()=>{
+test('juggler patrol completes eight frames at its unchanged patrol speed without changing its travel speed',()=>{
  const s=createAdventure(0),e=makeEnemy(2700,480,3);s.damage=()=>{};s.player.x=2450;e.dir=-1;e.timer=10;s.enemies=[e];const frames=new Set();
- for(let i=0;i<150;i++){tick(s,1);frames.add(enemyDrawing(e).frame);}expect(frames.size).toBe(12);expect(e.x).toBeCloseTo(2655,4);
+ for(let i=0;i<220;i++){tick(s,1);frames.add(enemyDrawing(e).frame);}expect(frames.size).toBe(JUGGLER_WALK_FRAMES);expect(e.x).toBeCloseTo(2634,4);
 });
-for(const source of ['meadow','camp'])for(const direction of [-1,1])test(`${source}: juggling clown takes twelve walking poses while emerging towards ${direction}`,()=>{
+for(const source of ['meadow','camp'])for(const direction of [-1,1])test(`${source}: juggling clown takes eight walking poses while emerging towards ${direction}`,()=>{
  const s=createAdventure(source==='camp'?3:0),x=source==='camp'?-11550:2800,y=groundY(s.platforms,x),e=makeEnemy(x,y,3);s.damage=()=>{};s.player.x=x-direction*250;
  Object.assign(e,{dir:direction,emerging:1.1,timer:5,phase:'emerge',...(source==='camp'?{campTent:0}: {outpost:0})});s.enemies=[e];const poses=new Set();
- for(let i=0;i<125;i++){tick(s,1);const d=enemyDrawing(e);expect(d.key).toBe('juggler-walk-parts');poses.add(d.frame);expect(e.y).toBeCloseTo(groundY(s.platforms,e.x),4);}
- expect(poses.size).toBe(12);expect((e.x-x)*direction).toBeGreaterThan(55);expect(e.hp).toBe(e.maxHp);
+ for(let i=0;i<125;i++){tick(s,1);const d=enemyDrawing(e);expect(d.key).toBe('juggler-walk-v2');poses.add(d.frame);expect(e.y).toBeCloseTo(groundY(s.platforms,e.x),4);}
+ expect(poses.size).toBe(JUGGLER_WALK_FRAMES);expect((e.x-x)*direction).toBeGreaterThan(55);expect(e.hp).toBe(e.maxHp);
 });
 test('juggler walking stops in a bubble and its original three-ball volley resumes intact',()=>{
  const s=createAdventure(0),e=makeEnemy(2700,480,3);s.damage=()=>{};s.player.x=e.x-240;Object.assign(e,{dir:-1,timer:10});s.enemies=[e];tick(s,30);const x=e.x,gait=e.gait;e.trap=1;tick(s,80);
  expect(e.x).toBe(x);expect(e.gait).toBe(gait);expect(enemyDrawing(e).key).toBe('juggler-actions');e.trap=0;e.timer=0;tick(s,120);expect(s.hostile.filter(q=>q.kind==='juggle').map(q=>q.color)).toEqual([0,1,2]);expect(enemyDrawing(e).key).toBe('juggler-actions');
 });
 
-for(const direction of [-1,1])for(const emerging of [false,true])test(`juggler planted feet stay at the same world position: direction ${direction}, emerging ${emerging}`,()=>{
- const s=createAdventure(0),e=makeEnemy(2700,480,3);s.damage=()=>{};s.player.x=2450;
- Object.assign(e,{dir:direction,timer:10,...(emerging?{emerging:1.1,phase:'emerge'}:{})});s.enemies=[e];
- const anchors={},contacts={near:0,far:0};
- for(let i=0;i<120;i++){
-  tick(s,1);const pose=jugglerWalkPose(e.gait),scale=enemyGeometry(e).size/256;
-  expect(pose.near.supporting||pose.far.supporting).toBe(true);
-  for(const name of ['near','far']){
-   const foot=pose[name],x=e.x-direction*(foot.footX-128)*scale;
-   if(foot.supporting){expect(foot.lift).toBe(0);if(anchors[name]!==undefined)expect(x).toBeCloseTo(anchors[name],6);else contacts[name]++;anchors[name]=x;}
-   else delete anchors[name];
-  }
+test('full juggler drawings keep one scale and ground contact; both passing poses bring the boots together',async()=>{
+ const registration=JSON.parse(fs.readFileSync('context/arcade/juggler-gait/revision-2/registration.json'));
+ expect(new Set(registration.map(q=>q.scale)).size).toBe(1);expect(Math.max(...registration.map(q=>q.noseY))-Math.min(...registration.map(q=>q.noseY))).toBeLessThan(4);
+ const widths=[];
+ for(let i=0;i<8;i++){
+  const {data,info}=await sharp('public/arcade/sprites/enemies/juggler-walk-v2.webp').extract({left:i%4*256,top:Math.floor(i/4)*256,width:256,height:256}).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+  let left=256,right=0,bottom=0;
+  for(let y=216;y<256;y++)for(let x=0;x<256;x++)if(data[(y*info.width+x)*4+3]>160){left=Math.min(left,x);right=Math.max(right,x);bottom=Math.max(bottom,y);}
+  expect(bottom).toBeGreaterThanOrEqual(248);expect(bottom).toBeLessThanOrEqual(250);widths.push(right-left);
  }
- expect(contacts.near).toBeGreaterThan(0);expect(contacts.far).toBeGreaterThan(0);
+ expect(widths[2]).toBeLessThan(widths[0]*.8);expect(widths[6]).toBeLessThan(widths[4]*.8);
 });
 
 test('camp interiors are dark opaque artwork with transparent exterior and no black spill',async({page})=>{
@@ -96,7 +92,7 @@ test('record first-level cloth, juggler exits and camp interiors with production
  });
  for(const name of ['meadow-wind','meadow-juggler','camp-open','camp-juggler']){
   await page.evaluate(n=>{window.tentReview.setup(n);window.tentReview.paint();},name);await page.locator('#tent-review').screenshot({path:folder+name+'-before.png'});const data=await page.evaluate(()=>window.tentReview.record(4));fs.writeFileSync(folder+name+'.webm',Buffer.from(data,'base64'));await page.locator('#tent-review').screenshot({path:folder+name+'-after.png'});
-  const trace=await page.evaluate(()=>window.tentReview.trace);fs.writeFileSync(folder+name+'-trace.json',JSON.stringify(trace));if(name.endsWith('juggler'))expect(new Set(trace.filter(q=>q.phase==='emerge'&&q.key==='juggler-walk-parts').map(q=>q.frame)).size).toBe(12);
+  const trace=await page.evaluate(()=>window.tentReview.trace);fs.writeFileSync(folder+name+'-trace.json',JSON.stringify(trace));if(name.endsWith('juggler'))expect(new Set(trace.filter(q=>q.phase==='emerge'&&q.key==='juggler-walk-v2').map(q=>q.frame)).size).toBe(JUGGLER_WALK_FRAMES);
  }
  expect(errors).toEqual([]);
 });

@@ -9,9 +9,23 @@ export function stepBargeDefeat(s,dt){
  if(!b.defeat){b.defeat={age:0,ready:false};b.phase='defeated';b.flash=0;s.hostile=[];s.shots=[];s.enemies=s.enemies.filter(e=>e.x<a.left);s.arenaLocked=true;s.noticeTime=0;
   Object.assign(p,{vx:0,dash:0,spin:0,cast:0,specialCast:0,hitReact:0,knockdown:null,firing:false,guarding:false});s.events.push('bargeBreak');}
  const q=b.defeat;q.age+=dt;b.deadTime=q.age;s.time+=dt;p.hurt=1;
+ for(const [i,at]of [.12,.72,1.38].entries())if(q.age>=at&&!((q.ruptures||0)&(1<<i))){
+  q.ruptures=(q.ruptures||0)|(1<<i);const m=bargeRig(s),point=i===0?m.tank:i===1?m.drum:{x:b.x,y:m.waterY-45};
+  s.effects.push({x:point.x,y:point.y,bargeBurst:true,size:135+i*45,age:0,life:.65});s.events.push('bargePressureBurst');s.shake=Math.max(s.shake,.12+i*.035);
+ }
  if(q.age<2){q.steamClock=(q.steamClock||0)-dt;if(q.steamClock<=0){q.steamClock=.13;const m=bargeRig(s),i=q.steamCount=(q.steamCount||0)+1;s.effects.push({x:m.tank.x+(i%3-1)*65,y:m.tank.y+35,waterDetail:3,waterDrift:true,size:120+i%3*25,vx:(i%3-1)*38,vy:-35,age:0,life:1.25,duration:1.25});}}
  if(!b.shattered&&q.age>=1.55){
-  const m=bargeRig(s);bargeFragments(s,'barge-pressure-damage',m.body,7,5,.7);
+  const m=bargeRig(s);
+  // Separate along machinery and hull seams, with each fragment starting at
+  // the exact place its painted component occupied before the collapse.
+  const regions=[[570,35,540,285],[300,310,310,340],[615,320,430,330],[1060,290,450,350],[70,645,480,270],[550,650,610,270]];
+  for(const [i,[x,y,w,h]]of regions.entries()){
+   const rect={x:m.body.x+x*m.unit,y:m.body.y+y*m.unit,w:w*m.unit,h:h*m.unit};bargeFragments(s,'barge-phase-two',rect,1,1,.62);
+   const piece=s.organDebris.at(-1);piece.crop=[x/1536,y/1024,w/1536,h/1024];piece.vx=(i%2?1:-1)*(75+i*14);piece.vy=-170-i%3*45;piece.life=3;
+  }
+  for(const [art,point,w,h]of [['barge-wheel',m.wheel,m.wheel.r*2,m.wheel.r*2],['barge-cannon',m.cannon,150,90]]){
+   bargeFragments(s,art,{x:point.x-w/2,y:point.y-h/2,w,h},1,1,.8);const piece=s.organDebris.at(-1);piece.vx=art==='barge-wheel'?140:-160;piece.spin=art==='barge-wheel'?4:-2;
+  }
   b.shattered=true;s.shake=.3;s.events.push('bargeDestroy','bargeSplash');s.effects.push({x:b.x,y:a.y,bargeSplash:true,size:350,age:0,life:.75});
  }
  for(const [i,at]of [1.85,2.25,2.8].entries())if(q.age>=at&&!((q.blasts||0)&(1<<i))){q.blasts=(q.blasts||0)|(1<<i);s.effects.push({x:b.x-165+i*150,y:bargeWaterline(s),bargeSplash:true,size:170,age:0,life:.65});s.events.push(i===1?'bargeBreak':'bargeSplash');}

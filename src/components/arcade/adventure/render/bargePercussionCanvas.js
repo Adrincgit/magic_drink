@@ -5,8 +5,8 @@ import {bargeParts} from '../actors/bosses/bargeSystems';
 export function bargeHammerLift(b){
  if(b.move!=='drumroll'||!['warn','attack'].includes(b.phase))return .3;
  if(b.phase==='warn')return Math.min(1,Math.max(.3,1-b.timer/1.15));
- if(b.release>0)return Math.pow(1-b.release/.25,2)*.38;
- return Math.min(1,Math.max(0,1-(b.shotClock||0)/.4));
+ if(b.release>0)return Math.pow(1-b.release/.25,2)*.28;
+ return Math.min(1,Math.max(.28,1-(b.shotClock||0)/(b.beatInterval||.64)));
 }
 export function drawBargePercussion(c,s,art,m,t,reduced){
  const b=s.boss,k=m.scale,broken=bargeParts(s).drum.hp<=0;
@@ -24,6 +24,8 @@ export function drawBargePercussion(c,s,art,m,t,reduced){
   c.strokeStyle='#f0cf87';c.lineWidth=1.6*k;c.beginPath();c.moveTo(crank.x,crank.y);c.lineTo(pivot.x+14*k,pivot.y-72*k);c.lineTo(armX,armY);c.stroke();
   c.save();c.translate(pivot.x+14*k,pivot.y-72*k);c.rotate(reduced?0:t*2);c.drawImage(art['barge-wheel'],-13*k,-13*k,26*k,26*k);c.restore();
  }
+ // The small operator stays at the stern crank; the painted mechanical
+ // beater, not a stretched character arm, reaches the drum.
  const frame=broken?12:4+(reduced?0:Math.floor(t*(b.phase==='warn'?8:5))%2),size=88*k;
  c.drawImage(art['barge-crew'],frame%4*256,Math.floor(frame/4)*256,256,256,m.drummer.x-size*.61,m.drummer.y-size*250/256,size,size);
  c.restore();

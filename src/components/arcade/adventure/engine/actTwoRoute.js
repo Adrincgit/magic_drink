@@ -46,8 +46,6 @@ export function stepActTwoRoute(s,dt,makeEnemy){
   if(!q.warning){q.warning=1.25;worldSound(s,'woodHit',q.x+250,s.player.y);continue;}
   q.warning-=dt;if(q.warning<=0){q.fired=true;for(const [x,y,type]of q.enemies){const e=makeEnemy(x,y,type,80+s.enemies.length);e.timer=1.4;e.active=true;s.enemies.push(e);}}
  }
- const p=s.player;
- if(p.ground!==null&&Math.abs(p.vx)>90&&(s.time>(s.nextActTwoDust||0))){s.nextActTwoDust=s.time+.12;s.actTwoDust.push({x:p.x-p.dir*10,y:p.y,age:0,life:.4,size:s.level.cornfield?28:17});}
  for(const q of s.actTwoDebris){q.age+=dt;q.vy+=700*dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.rotation+=dt*4;}
  for(const q of s.actTwoDust)q.age+=dt;
  s.actTwoDebris=s.actTwoDebris.filter(q=>q.age<q.life);s.actTwoDust=s.actTwoDust.filter(q=>q.age<q.life);

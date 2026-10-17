@@ -1,4 +1,5 @@
 import {groundY} from '../world/adventureTerrain';
+import {worldSound} from './adventureWorldAudio';
 
 export function aquaFloor(s,x){
  const pit=s.level.emberPits?.find(p=>x>p.x&&x<p.x+p.w);
@@ -36,7 +37,7 @@ export function aquaImpact(s,x,y,size=75,steam=false){
    age:-delay,life:duration+delay,vx:(i-1)*13-6,rise:32+i*9,seed:i,opacity:.76,
   });
  }
- if(!s.events.includes('aquaSplash'))s.events.push('aquaSplash');
+ if(!s.events.some(q=>(typeof q==='string'?q:q.kind)==='impactWater'))worldSound(s,'impactWater',x,y);
 }
 export function aquaExtinction(s,x,y,width,height,strength=1){
  // This remnant has no hitbox: damage stops immediately, the painting settles

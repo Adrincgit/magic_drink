@@ -4,6 +4,7 @@ import {drinkMastery} from './adventureDrinkMastery';
 import {configureExtraShot,beginExtraSpecial,stepExtraField,stepExtraShot} from './adventureExtraDrinks';
 import {configureRibbonShot,stepRibbonShot,beginRibbonSlam} from './adventureRibbon';
 import {echoFuel} from './adventureEcho';
+import {canControlEnemy} from '../actors/enemies/adventureEnemyTraits';
 export const JELLY=6,PRISM=7,ECHO=8;
 export const creativeDrink=kind=>kind>=JELLY&&kind<=12;
 const fx=(s,kind,x,y,size=58)=>s.effects.push({drinkFx:kind,x,y,size,age:0,life:.36,duration:.36});
@@ -60,7 +61,7 @@ export function stepDrinkFields(s,dt){
    if(!f.playerWait&&p.vy>=0&&Math.abs(p.x-f.x)<42*f.scale&&p.y>=f.y-20&&p.y<=f.y+10){
     p.y=f.y-6;p.vy=-780;p.ground=null;p.jumps=1;p.jumpAge=0;p.spin=0;f.playerWait=.65;f.bounceAge=0;f.charges--;s.events.push('jellyBounce');
    }
-   for(const e of s.enemies)if(f.charges>0&&e.hp>0&&!e.fleeing&&[0,1,3,4,10,11,14].includes(e.type)&&!f.bounced.has(e)&&Math.abs(e.x-f.x)<52*f.scale&&Math.abs(e.y-f.y)<32){
+   for(const e of s.enemies)if(f.charges>0&&canControlEnemy(e,'launch')&&!f.bounced.has(e)&&Math.abs(e.x-f.x)<52*f.scale&&Math.abs(e.y-f.y)<32){
     f.bounced.add(e);e.jellyLift=1.5;e.vy=-440;e.y-=4;f.bounceAge=0;f.charges--;s.events.push('jellyBounce');
     s.shots.push({kind:JELLY,heavy:true,hidden:true,sustained:true,x:e.x,y:e.y-25,vx:0,vy:0,r:28,age:0,life:.024,damage:5,hits:f.hits,scale:f.scale});
    }

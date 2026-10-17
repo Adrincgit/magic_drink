@@ -80,9 +80,10 @@ export function stepVoltChannel(s,input,dt){
  if(!q){if(!s.ammo&&!(s.overdrive>0))return;q=s.voltBeam={age:0,bill:.22,pulse:drinkMastery(s,9)>=2?.28:.34,segments:[]};spendDrink(s);q.echoes=takeEchoVolley(s);s.events.push('voltShot');}
  q.age+=dt;q.bill-=dt;q.pulse-=dt;
  if(q.bill<=0){spendDrink(s);q.echoes=takeEchoVolley(s);q.bill+=.22;}
+ p.cast=.16;
  const from=hexyMuzzle(s),dir={x:p.aimX,y:p.aimY},path=beamPath(s,from,dir,false);
  const copies=(q.echoes||[]).filter(f=>f.life>0&&s.drinkFields.includes(f)).map(f=>({f,path:beamPath(s,f.muzzle,dir,false)}));
- q.segments=path.segments.concat(copies.flatMap(q=>q.path.segments));q.strength=Math.min(1,q.age/1.1);p.cast=.16;
+ q.segments=path.segments.concat(copies.flatMap(q=>q.path.segments));q.strength=Math.min(1,q.age/1.1);
  if(q.pulse<=0){
   q.pulse+=.12;const damage=.3+.65*Math.min(1,Math.max(0,q.age-(drinkMastery(s,9)>=2?.28:.34))/.85);pulse(s,path,damage,drinkScale(s)*modShotScale(s));s.events.push('voltPulse');
   for(const {f,path:copy}of copies)pulse(s,copy,damage*f.copyDamage,f.scale);

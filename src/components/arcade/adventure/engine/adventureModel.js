@@ -2,6 +2,8 @@ import {prepareActTwo,resolveActTwoWalls,stepActTwoRoute,hitActTwoObjects} from 
 import {damageActTwoBoss,stepActTwoHazards} from '../actors/bosses/adventureActTwoBosses';
 import {beginPopcornDefeat} from './adventurePopcornDefeat';
 import {creatureDeathSound} from './adventureWorldAudio';
+import {drinkImpactFeedback} from './adventureImpactFeedback';
+import {canControlEnemy} from '../actors/enemies/adventureEnemyTraits';
 import {beginPumpkinDefeat,isCandySpell} from './villagePumpkins';
 import {stepVillageResistance,hitVillageRubble} from './villageResistance';
 import {resolveVillageWalls,hitVillageObstacles} from './villageObstacles';
@@ -61,6 +63,7 @@ import {stepHarlequinDefeat} from '../actors/bosses/harlequinDefeat';
 import {stepHarlequinScorch} from './cinematicImpact';
 import {BARGE_HEALTH,bargeArmor,stepBargeProjectile,bargeWaterHitbox} from '../actors/bosses/adventureBarge';
 import {stepWorldEffects} from './adventureEffects';
+import {stepSurfaceFeedback,sampleFireTrail} from './adventureSurfaceFeedback';
 import {beginSuper,stepSuper} from './adventureSuper';
 import {spellFor,specialShots,updateSpecialShot,canSpecialHit,rememberSpecialHit,specialImpact} from './adventureMagic';
 import {SUPER_RECHARGE,collectAdventureStar,tickRewards} from './adventureRewards';
@@ -94,11 +97,11 @@ export function createAdventure(index=0,gentle=false,carry={}){
  cages:level.cages.map(([x,y,carrier],i)=>({x,y,hp:2,open:false,rescued:false,reward:i,...(carrier===undefined?{}:{carrier,carried:true})})),pickups:[],supplies:createSupplies(level),campTents:createCampTents(level),
  hazards:level.hazards.map(([x,y,w])=>({x,y,w,h:22})),
  player:{x:spawn[0],y:spawn[1],vx:0,vy:0,dir:1,ground:0,coyote:.1,jumps:0,jumpBuffer:0,hurt:0,hitReact:0,hitType:'physical',hitDuration:.32,knockdown:null,cast:0,land:0,dash:0,dashDuration:.34,dashDir:1,dashWait:0,crouch:false,aimX:1,aimY:0,aimAge:0,stride:0,jumpAge:0,charge:0,specialCast:0,specialWait:0,pendingSpecial:null,spin:0,superCast:0,gliding:false},
- boss:{x:level.boss[0],y:level.boss[1],home:level.boss[0],floor:level.boss[1],hp:maxHp,maxHp,clock:0,phase:'sleep',timer:1,flash:0,dir:-1,turn:0,stage:1,move:'',vulnerable:false},
+ boss:{combatClass:level.bossOnly||index===3?'boss':'miniboss',x:level.boss[0],y:level.boss[1],home:level.boss[0],floor:level.boss[1],hp:maxHp,maxHp,clock:0,phase:'sleep',timer:1,flash:0,dir:-1,turn:0,stage:1,move:'',vulnerable:false},
  arenaLocked:false,time:0,ticks:0,fxTime:0,popcornFlash:null,hitStop:0,shake:0,camera:{x:level.circusEntrance?Math.max(level.circusEntrance.left??-1400,spawn[0]-300):0,y:level.circusEntrance&&!level.circusCamp?-70:level.groundRoute?40:0,backdropY:level.groundRoute?40:0,zoom:level.circusEntrance&&!level.circusCamp?.8:1},hearts:clamp(carry.hearts??maxHearts,1,maxHearts),maxHearts,
- magic:clamp(carry.magic??100,0,100),exhaustion:carry.exhaustion||0,superCooldown:clamp(carry.superCooldown||0,0,SUPER_RECHARGE),starPulse:0,buddyCast:[0,0,0],buddyNext:0,shieldHit:0,shieldBreak:0,checkpointAt:null,
+ magic:clamp(carry.magic??100,0,100),exhaustion:carry.exhaustion||0,superCooldown:clamp(carry.superCooldown||0,0,SUPER_RECHARGE),starPulse:0,buddyCast:[0,0,0],buddyNext:0,shieldHit:0,shieldBreak:0,
  weapon,ammoWeapon:weapon,ammoCapacity:weapon>=0?Math.min(DRINK_SHOTS[weapon]*4.1,carry.ammoCapacity||DRINK_SHOTS[weapon]):0,ammo:weapon>=0?Math.min(carry.ammoCapacity||DRINK_SHOTS[weapon],carry.ammo??DRINK_SHOTS[weapon]):0,drinkTier:weapon>=0&&carry.drinkTier===2?2:1,overdrive:carry.overdrive||0,overdriveDuration:carry.overdriveDuration||8,lootSeed:(Math.random()*4294967296)>>>0,power:weapon>=0,doubleJump:true,shield:clamp(carry.shield||0,0,3),buff:0,buddyWait:2,
- shotWait:0,shots:[],hostile:[],particles:[],effects:[],aquaJet:null,drinkFields:[],drinkHistory:[],score:0,starMoney:0,rescued:0,checkpoint:false,done:false,won:false,combo:0,comboTime:0,events:[],lastInput:{},notice:'start',noticeTime:5};
+ shotWait:0,shots:[],hostile:[],particles:[],effects:[],surfaceDust:[],aquaJet:null,drinkFields:[],drinkHistory:[],score:0,starMoney:0,rescued:0,done:false,won:false,combo:0,comboTime:0,events:[],lastInput:{},notice:'start',noticeTime:5};
  s.coaster=null;s.coasterUsed=false;s.player.coasterGround=false;
  s.basicFire=!!carry.basicFire;s.basicCycle=carry.basicCycle||0;
  s.spareDrink=validSpare(carry.spareDrink);s.confettiDecoy=null;s.confettiWait=0;s.swapWait=0;
@@ -106,32 +109,25 @@ export function createAdventure(index=0,gentle=false,carry={}){
  prepareNightmares(s);prepareVillage(s);prepareActTwo(s);resetHarborAmbush(s);resetEmberEnvironment(s);bindCarriedBunnies(s);grantStartingDrink(s);return s;
 }
 export function adventureCarry(s){if(s.ribbonDance){const q=s.ribbonDance.stored;return adventureCarry({...s,ribbonDance:null,weapon:q?.kind??-1,ammo:q?.ammo||0,ammoCapacity:q?.capacity||0,drinkTier:q?.tier||1});}return {basicFire:!!s.basicFire,basicCycle:s.basicCycle||0,spareDrink:validSpare(s.spareDrink),arrivalFromHarbor:s.index===2&&s.won,mods:s.mods,modSlots:s.modSlots,modCategorySlots:s.modCategorySlots,overdriveDuration:s.overdriveDuration,modLevels:s.modLevels,starterClaimed:s.starterClaimed,ammoCapacity:s.ammoCapacity,superReserve:s.superReserve,reserveCooldown:s.reserveCooldown,hearts:s.hearts,weapon:s.weapon,ammo:s.ammo,drinkTier:s.drinkTier,overdrive:s.overdrive,shield:s.shield,doubleJump:s.doubleJump,magic:s.magic,superCooldown:s.superCooldown,exhaustion:s.exhaustion};}
-// Retry the encounter, keeping collected rewards and the same bank receipt.
-// Pickups, opened crates and cages stay claimed, so dying cannot mint money.
+// Restart the whole route while keeping reward receipts and claimed loot.
+// The single recovery heart is renewed for each attempt, never duplicated.
 export function retryAdventure(s){
  endRibbonDance(s);
- const fresh=createAdventure(s.index,s.gentle,adventureCarry(s)),at=s.checkpointAt||s.level.spawn||[85,s.platforms[0].y];
- Object.assign(s.player,fresh.player,{x:at[0],y:at[1]-2,hurt:2,ground:null});
- delete s.player.clashFlight;delete s.player.candy;delete s.player.popcornKick;delete s.player.popcornClearUntil;s.popcornFlash=null;
- delete s.buddies;delete s.buddyPath;
- // The ember route has enemies close to some checkpoints. A retry clears
- // that already reached pocket instead of respawning a clown on Hexy.
- const safeSpawn=(s.level.emberTrail||s.level.circusCamp)&&s.checkpointAt?220:-120;
- s.enemies=fresh.enemies.filter(e=>e.x>=at[0]+safeSpawn);s.boss=fresh.boss;
- if(s.level.actTwo)s.platforms=fresh.platforms;
- if(s.level.nightmareTrail){s.platforms=fresh.platforms;s.nightmarePurged=false;}
- prepareNightmares(s,at[0]);prepareVillage(s,at[0]);prepareActTwo(s,at[0]);
- s.campTents=createCampTents(s.level,at[0]);
- resetHarborAmbush(s,at[0]);
- resetEmberEnvironment(s,at[0]);
- for(const e of s.enemies)e.captive=null;bindCarriedBunnies(s);
- Object.assign(s,{hearts:s.maxHearts,magic:100,done:false,won:false,arenaLocked:false,shots:[],hostile:[],effects:[],particles:[],organDust:[],organDebris:[],lastInput:{},events:[],hitStop:0,shake:0,combo:0,notice:s.index===3?'start':'checkpoint',noticeTime:s.index===3?0:2});
- delete s.fortInside;delete s.fortEntry;delete s.fortExit;delete s.fortFade;
- delete s.clear;delete s.superCinematic;delete s.circusEntry;delete s.powerClash;delete s.clashRetreatBounds;delete s.playerDefeat;
- s.aquaJet=null;s.voltBeam=null;s.placement=null;s.player.aquaChannel=false;s.drinkFields=[];s.drinkHistory=[];s.confettiDecoy=null;s.confettiWait=0;s.swapWait=0;clearCoaster(s);s.coasterUsed=false;
- delete s.harlequinAidStages;s.supplies=s.supplies.filter(q=>!q.phaseAid);s.pickups=s.pickups.filter(q=>!q.phaseAid);
- const cameraY=at[1]-(s.level.cameraFloor||440);
- s.camera={x:Math.max(at[0]<0?s.level.circusEntrance.left:0,Math.min(s.level.width-960,at[0]-300)),y:cameraY,backdropY:s.level.emberTrail?cameraY:s.level.groundRoute?40:0,zoom:1};
+ const fresh=createAdventure(s.index,s.gentle,{...adventureCarry(s),hearts:s.maxHearts,magic:100});
+ for(const key of ['stars','pendingStars','score','starMoney','bankedStars','rescued'])if(s[key]!==undefined)fresh[key]=s[key];
+ const claimed=new Map(s.supplies.filter(q=>!q.phaseAid&&!q.midpointHeart).map(q=>[q.id,q]));
+ fresh.supplies=fresh.supplies.map(q=>q.midpointHeart?q:claimed.get(q.id)||q);
+ fresh.pickups=s.pickups.filter(q=>!q.phaseAid&&!q.midpointHeart);
+ fresh.cages=fresh.cages.map(q=>{
+  const old=s.cages.find(c=>c.reward===q.reward);
+  return old?.rescued?{...q,hp:0,open:true,rescued:true,carried:false}:q;
+ });
+ for(const e of fresh.enemies)e.captive=null;bindCarriedBunnies(fresh);
+ fresh.player.hurt=2;
+ // Drop every transient field (including stale checkpoints, curses and boss
+ // transitions) without replacing the state object held by the React engine.
+ for(const key of Object.keys(s))delete s[key];
+ Object.assign(s,fresh);
  return s;
 }
 function particles(s,x,y,color,n=8){for(let i=0;i<n;i++)s.particles.push({x,y,vx:Math.cos(i*2.4)*90,vy:-70-Math.sin(i)*65,life:.55,color});}
@@ -145,7 +141,7 @@ function hurt(s,fall=false,amount=1,clashLoss=false,source={}){
  if(isCandySpell(source))endRibbonDance(s);
  beginCandyCapture(s,source);
  if(s.hearts<=0&&!clashLoss){s.events=s.events.filter(e=>e!=='hit');beginPlayerDefeat(s,fall);return;}
- if(fall){clearCoaster(s);s.coasterUsed=false;p.knockdown=null;const at=s.harborAmbush?.state==='active'?[s.level.harborAmbush.left+100,s.level.harborAmbush.y]:s.arenaLocked?[s.level.arena.left+75,s.level.arena.y]:s.checkpointAt||(s.checkpoint?s.level.checkpoint:[85,s.level.platforms[0].y]);p.x=at[0];p.y=at[1]-10;p.vy=0;p.vx=0;p.dash=0;s.hostile=[];}
+ if(fall){clearCoaster(s);s.coasterUsed=false;p.knockdown=null;const at=s.harborAmbush?.state==='active'?[s.level.harborAmbush.left+100,s.level.harborAmbush.y]:s.arenaLocked?[s.level.arena.left+75,s.level.arena.y]:s.level.spawn||[85,s.level.platforms[0].y];p.x=at[0];p.y=at[1]-10;p.vy=0;p.vx=0;p.dash=0;s.hostile=[];}
  if(s.hearts<=0){s.done=true;s.won=false;s.events.push('death');}
 }
 function burst(s,x,y,row=0,size=52){s.effects.push({x,y,row,size:size*EXPLOSION_SCALE,age:0,life:.32});}
@@ -242,6 +238,8 @@ export function stepAdventure(s,input,dt){
  stepCampTents(s,dt);
  stepCoaster(s,dt);
  s.damage=(source={})=>hurt(s,false,1,false,source);const p=s.player,oldY=p.y,oldX=p.x,wasGround=p.ground!==null||p.coasterGround;
+ const previousContact={x:oldX,grounded:wasGround,vy:p.vy};
+ if(!input.jump||wasGround)p.hatCastUntil=0;
  stepNightmareBranches(s,dt);
  const onTrail=wasGround&&s.platforms[p.ground]?.kind==='earth'&&(!s.level.actTwo||s.level.groundRoute);
  const villageSupport=wasGround&&s.platforms[p.ground]?.villageObstacle?s.platforms[p.ground]:null;
@@ -292,7 +290,7 @@ export function stepAdventure(s,input,dt){
  if(p.hitReact>0||p.knockdown){p.vx*=Math.exp(-dt*(wasGround?7:1.5));p.vy+=1550*dt;}else if(p.dash>0){p.vx=p.dashDir*440*(s.overdrive>0?ORIGINAL_SPEED:1);p.vy=p.dashAir?(p.dashY||0)*440:wasGround?0:p.vy+500*dt;}else{const desired=(p.holding?0:axis)*(p.crouch?95:p.charge||p.superCast||p.guarding||p.aquaChannel?90:255)*(s.overdrive>0?ORIGINAL_SPEED:ribbonActive(s)?1.13+(ribbonLevel(s)-1)*.045:1)*movementRate(s);p.vx=p.holding?0:p.vx+clamp(desired-p.vx,-1700*dt,1700*dt);p.vy+=1550*dt;}
  const wasGliding=p.gliding;
  stepRibbonDance(s,dt);
- p.gliding=!!input.jump&&!p.coasterGround&&p.ground===null&&p.vy>40&&!p.aimY&&!p.dash&&!p.spin&&!p.specialCast&&!p.superCast&&!p.guarding&&!p.hitReact;
+ p.gliding=!!input.jump&&!p.coasterGround&&p.ground===null&&p.vy>40&&!p.dash&&!p.spin&&!p.superCast&&!p.charge&&!p.guarding&&!p.hitReact;
  if(p.gliding&&!wasGliding)s.events.push('glide');
  if(p.gliding)p.vy=Math.min(p.vy,95);
  // One full run is two steps. The registered boot travels ~38 world pixels
@@ -315,13 +313,13 @@ export function stepAdventure(s,input,dt){
   }
  }
  landOnCoaster(s,oldY);
+ stepSurfaceFeedback(s,dt,previousContact);
  if(p.candy?.tether){p.x=p.candy.tether.x;p.y=p.candy.tether.y;p.vx=0;p.vy=0;p.ground=null;}
  stepHitReaction(s,dt);stepOriginalTrail(s,dt);
  const fatalPit=s.hearts===1&&p.vy>0&&p.y>s.camera.y+540/(s.camera.zoom||1)-65&&!s.platforms.some(q=>!q.gone&&p.x>=q.x&&p.x<=q.x+q.w&&surfaceY(q,p.x)>p.y);
  if(p.y>(s.level.emberTrail?groundY(s.level.route,p.x)+380:850)||fatalPit)hurt(s,true);if(s.done||s.playerDefeat)return;
  if(p.pendingSip&&p.ground!==null){p.pendingSip=false;p.drinkCast=.7;}
  for(const q of s.pickups)if(!q.taken&&!(q.collectWait>0)&&Math.hypot(p.x-q.x,p.y-28-q.y)<38){const type=takeLoot(s,q);say(s,type==='drink'?(s.drinkTier===2?'powerUp':'power'):'loot'+type);particles(s,p.x,p.y-35,DRINKS[q.kind]?.color||'#ffe4a3',15);}
- for(const cp of s.level.checkpoints||[s.level.checkpoint])if(p.x>=cp[0]&&p.ground!==null&&(!s.level.actTwo||Math.abs(p.y-cp[1])<40)&&(!s.checkpointAt||cp[0]>s.checkpointAt[0])){s.checkpoint=true;s.checkpointAt=cp;s.hearts=Math.min(s.maxHearts,s.hearts+1);say(s,'checkpoint');s.events.push('coin');}
  for(const h of s.hazards)if(overlap(playerBody(p),h))hurt(s,false,1,false,h);
  stepEmberEnvironment(s,dt);
  if(s.playerDefeat)return;
@@ -351,6 +349,7 @@ export function stepAdventure(s,input,dt){
   const previousY=shot.y;shot.previousX=shot.x;shot.previousY=shot.y;shot.x+=shot.vx*dt;shot.y+=shot.vy*dt;
   stepPopcornShot(s,shot);
   stepCreativeShot(s,shot,dt);if(shot.ribbon)continue;refractShot(s,shot);
+  sampleFireTrail(shot,dt);
   stepWaterShot(s,shot,dt);
   igniteEmberFromAttack(s,shot,true);
   if(shot.heavy&&shot.kind===3&&shot.vy>0){
@@ -382,9 +381,9 @@ export function stepAdventure(s,input,dt){
   for(const e of s.enemies)if(shot.life>0&&e.hp>0&&!e.fleeing&&!e.nightmareHidden&&canSpecialHit(shot,e)&&(overlap(enemyBody(e,6),{x:shot.x-radius-.5,y:shot.y-radius-.5,w:radius*2+1,h:radius*2+1})||umbrellaBlocks(e,shot)&&overlap(umbrellaShield(e),{x:shot.x-radius,y:shot.y-radius,w:radius*2+1,h:radius*2+1}))){
    if(shot.chainTarget&&shot.chainTarget!==e)continue;
    if(umbrellaBlocks(e,shot)){rememberSpecialHit(shot,e);shot.life=0;e.umbrellaHit=.18;s.effects.push({x:shot.x,y:shot.y,armor:true,size:34,age:0,life:.24});s.events.push('umbrellaBlock');break;}
-   rememberSpecialHit(shot,e);extraDrinkHit(s,shot,e,true);reactToElement(e,shot);
-   if(shot.kind===3){if(canTrapEnemy(shot,e))trapEnemy(e,shot.heavy?5:4);e.hp-=shot.damage;e.flash=.22;if(e.hp<=0)defeat(s,e);}
-   else{e.hp-=shot.damage;e.flash=.15;if(shot.heavy&&shot.kind===2)e.snare=.65;if(shot.aquaProbe&&[0,1,3,4,10,11,14].includes(e.type))e.x+=shot.jetDir*4;if(e.hp<=0)defeat(s,e,shot);}
+   rememberSpecialHit(shot,e);extraDrinkHit(s,shot,e,true);reactToElement(e,shot);drinkImpactFeedback(s,shot,e);
+   if(shot.kind===3){if(canTrapEnemy(shot,e))trapEnemy(e,shot.heavy?5:4,s);else if(shot.heavy)shot.trapResisted=true;e.hp-=shot.damage;e.flash=.22;if(e.hp<=0)defeat(s,e);}
+   else{e.hp-=shot.damage;e.flash=.15;if(shot.heavy&&shot.kind===2&&canControlEnemy(e,'slow'))e.snare=.65;if(shot.aquaProbe&&canControlEnemy(e,'push'))e.x+=shot.jetDir*4;if(e.hp<=0)defeat(s,e,shot);}
    ribbonHit(s,shot,e);
    if(shot.popcorn)popcornImpact(s,shot,e);
    else if(shot.heavy&&shot.kind!==3||shot.kind>=6)specialImpact(s,shot,(shot.kind>=6?50:shot.kind===4?62:95)*(shot.scale||1));
@@ -397,10 +396,11 @@ export function stepAdventure(s,input,dt){
   if((target||shell)&&!shot.chainTarget&&shot.life>0&&b.hp>0&&b.phase!=='sleep'&&canSpecialHit(shot,b)){
    if(shot.heavy?[0,3,4].includes(shot.kind):shot.kind!==1)shot.life=0;rememberSpecialHit(shot,b);
    if(b.vulnerable&&target){
+    drinkImpactFeedback(s,shot,b);
     if(s.index===2)jamBargePressure(s,shot);
     let damage=(shot.kind===3&&!shot.heavy?4:shot.damage)*(s.index===2&&b.pressureStun>0?1.25:1);if(s.index===5)damage=fortPartHit(s,target.part,damage);b.trailHp=Math.max(b.trailHp||b.hp,b.hp);if(s.level.actTwo)damageActTwoBoss(s,damage);else if(s.level.nightmareTrail)damageBellkeeper(s,damage);else b.hp-=damage;if(s.index===2)bargePartHit(s,target.part,damage);bossHitFeedback(s,shot.heavy);b.recoil=Math.sign(shot.vx)||p.dir;
     const sustained=shot.sustained||shot.heavy&&[2,4].includes(shot.kind);s.hitStop=Math.max(s.hitStop,shot.sustained?0:shot.heavy&&!sustained?.07:.035);s.shake=shot.sustained?0:shot.heavy&&!sustained?.22:.12;
-    if(shot.popcorn)popcornImpact(s,shot,b);else if(shot.heavy)specialImpact(s,shot,sustained?88:140);else burst(s,shot.x,shot.y,0,76);
+    if(shot.popcorn)popcornImpact(s,shot,b);else if(shot.heavy||shot.kind>=6)specialImpact(s,shot,shot.heavy?(sustained?88:140):55);else burst(s,shot.x,shot.y,0,76);
     particles(s,shot.x,shot.y,s.level.color,shot.heavy?14:7);
    }else{shot.armorBlocked=true;s.effects.push({x:shot.x,y:shot.y,armor:true,size:52,age:0,life:.32});s.events.push('bossBlock');}
    finishBoss(s);
@@ -442,7 +442,7 @@ export function stepAdventure(s,input,dt){
    }
    const hearts=s.hearts;hurt(s,false,1,false,shot);
    if(shot.kind==='ember-blast'){if(s.hearts<hearts)shot.life=0;}
-   else if(!isHarlequinFireHazard(shot)&&!['barge-jet','ember-breath','fort-breath','witch-puddle'].includes(shot.kind)){shot.life=0;villageFireImpact(s,shot);if(shot.ember)burstEmberProjectile(s,shot);else if(shot.harlequin)fireImpact(s,shot.x,shot.y,.65);}
+   else if(!isHarlequinFireHazard(shot)&&!['barge-jet','barge-spout','ember-breath','fort-breath','witch-puddle'].includes(shot.kind)){shot.life=0;villageFireImpact(s,shot);if(shot.ember)burstEmberProjectile(s,shot);else if(shot.harlequin)fireImpact(s,shot.x,shot.y,.65);}
    if(impactKind(shot)==='water'&&s.hearts<hearts)waterSplash(s,p.x,p.y-30,115);
   }
  }

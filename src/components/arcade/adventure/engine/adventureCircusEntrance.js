@@ -3,7 +3,7 @@ import {stepWorldEffects} from './adventureEffects';
 
 const clamp=n=>Math.max(0,Math.min(1,n));
 // The outside occupies negative world coordinates. The combat floor stays in
-// its own coordinates. The completed camp becomes a checkpoint at the wings.
+// its own coordinates. Defeat always restarts outside at the camp entrance.
 export const outsideCircus=s=>!!s.level.circusEntrance&&s.player.x<0;
 export function circusEntryFade(s){
  const q=s.circusEntry;if(!q)return 0;
@@ -33,7 +33,6 @@ export function stepCircusEntrance(s,dt){
   if(q.age>=1.35){
    q.inside=true;p.x=spec.insideX;p.vx=0;p.ground=s.platforms.findIndex(t=>t.x<=p.x&&t.x+t.w>=p.x);
    s.camera={x:Math.max(0,p.x-300),y:p.y-440,backdropY:40,zoom:1};
-   if(s.level.circusCamp){s.checkpoint=true;s.checkpointAt=[spec.insideX,spec.floor];}
    s.events.push('doorClose');
   }
  }

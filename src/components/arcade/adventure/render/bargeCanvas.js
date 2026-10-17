@@ -6,6 +6,8 @@ import {bargeRig} from '../actors/bosses/adventureBarge';
 import {bossHitFilter} from '../actors/bosses/bossFeedback';
 import {drawHullWater} from './harborWaterCanvas';
 import {drawWaterDetail} from './paintedWaterCanvas';
+import {drawBargePercussion} from './bargePercussionCanvas';
+import {spoutPoint} from '../actors/bosses/bargeWaterAttacks';
 function part(c,img,x,y,w,h,angle=0){c.save();c.translate(x,y);c.rotate(angle);c.drawImage(img,-w/2,-h/2,w,h);c.restore();}
 export function drawAquaticFX(c,art,row,frame,x,y,w,h=w,angle=0){
  c.save();c.translate(x,y);c.rotate(angle);c.drawImage(art['harbor-aquatic'],frame*256,row*256,256,256,-w/2,-h/2,w,h);c.restore();
@@ -42,6 +44,7 @@ export function drawBarge(c,s,art,reduced=false){
  if(b.defeat){c.translate(b.x,m.waterY);c.rotate(reduced?0:Math.min(.06,b.defeat.age*.03));c.translate(-b.x,-m.waterY+Math.min(22,b.defeat.age*12));}
  c.filter=bossHitFilter(b,reduced);
  drawWindCloth(c,img,m.body.x,m.body.y,m.body.w,m.body.h,t,{flags:[[.11,.283,.069,.079],[.901,.326,.07,.078]],windArt:art,reduced});
+ if(b.hullOpened||b.defeat?.age>=.55)paintRegion(c,art['barge-phase-two'],m,[210,652,1185,260]);
  for(const [name,rect]of [['drum',DRUM_REGION],['tank',TANK_REGION]]){
   c.save();if(!b.flash)c.filter=bossHitFilter(parts[name],reduced);
   if(parts[name].hp<=0)paintRegion(c,damaged,m,rect);
@@ -49,6 +52,7 @@ export function drawBarge(c,s,art,reduced=false){
   c.restore();
  }
  c.restore();
+ if(!b.defeat)drawBargePercussion(c,s,art,m,t,reduced);
  // Real level divers leave the stern cabin on a supported deck. The front
  // rail occludes their feet, as the basket rim does for the first boss.
  for(const e of s.enemies)if(e.bargeCrew&&['exit','deploy'].includes(e.phase)&&e.hp>0){
@@ -74,7 +78,7 @@ export function drawBarge(c,s,art,reduced=false){
   for(let i=0;i<5;i++){const u=reduced?i/5:(t*1.6+i/5)%1;drawWaterDetail(c,art,0,(i+frame)%4,m.tank.x+Math.sin(i*2)*12,m.tank.y+m.tank.h*.35-u*m.tank.h*.7,12,18,0,.8);}
   c.restore();drawWaterDetail(c,art,3,frame,m.jetMuzzle.x-8,m.jetMuzzle.y,34,25,0,.5);
  }
- if(firing&&b.move==='tidal')drawCannonWater(c,art,m.muzzle.x,m.muzzle.y,Math.hypot(m.muzzle.x-m.wave.x,m.muzzle.y-m.wave.y),66,Math.atan2(m.muzzle.y-m.wave.y,m.muzzle.x-m.wave.x),t,reduced);
+ if(preparing&&b.move==='tidal')drawWaterDetail(c,art,3,frame,m.muzzle.x-12,m.muzzle.y,60,42,0,.8);
  drawHarborFX(c,art,2,frame,m.wheel.x,m.waterY,108,50);
  for(const [j,vent]of m.vents.entries())for(let i=0;i<(preparing?4:2);i++){
   const u=reduced?(i+.5)/4:(t*.85+i*.27+j*.1)%1;
@@ -95,8 +99,11 @@ function drawBargeEscape(c,s,art,reduced){
 export function drawBargeProjectile(c,q,art,reduced=false){
  const frame=reduced?1:Math.floor(q.age*12)%4,size=q.drawSize||65;
  if(q.kind==='barge-sonic'||q.kind==='barge-hoop'){c.save();c.globalAlpha*=.82*Math.min(1,q.life/.3);c.translate(q.x,q.y);if(q.vx>0)c.scale(-1,1);bargeCell(c,art['barge-sonic'],Math.min(3,Math.floor(q.age*7)),0,0,size,size*.9);c.restore();}
- else if(q.kind==='barge-wave')drawHarborFX(c,art,0,frame,q.x,q.y-9,size,size*.85,q.vx>0);
- else if(q.kind==='barge-surf')drawAquaticFX(c,art,3,frame,q.x,q.floor-size*.41,size,size*.9);
+ else if(q.kind==='barge-wave'||q.kind==='barge-surf'){
+  const h=size*.85,base=[246,250,250,248][frame]/256;
+  c.save();c.translate(q.x,q.floor);if(q.vx>0)c.scale(-1,1);
+  drawAquaticFX(c,art,3,frame,0,-h*(base-.5),size,h);c.restore();
+ }
  else if(q.kind==='barge-balloon'||q.kind==='barge-shell'){
   drawAquaticFX(c,art,0,frame,q.x,q.y,size,size,reduced?0:Math.sin(q.age*5)*.12);
  }else if(q.kind==='water-bolt'){
@@ -108,7 +115,25 @@ export function drawBargeProjectile(c,q,art,reduced=false){
   drawCannonWater(c,art,q.x,q.y,length,88,angle,q.age,reduced,fade);
   const tip={x:q.x-length*Math.cos(angle),y:q.y-length*Math.sin(angle)};
   drawWaterDetail(c,art,3,frame,tip.x+10,tip.y+12,85,64,0,.4*fade);
+ }else if(q.kind==='barge-spout'){
+  const front=Math.min(q.age,q.flight),segments=10,fade=Math.min(1,q.life/.16),height=q.large?88:72;
+  const points=Array.from({length:segments+1},(_,i)=>spoutPoint(q,front*i/segments)),lengths=points.slice(1).map((p,i)=>Math.hypot(p.x-points[i].x,p.y-points[i].y)),total=lengths.reduce((a,b)=>a+b,0),sourceWidth=Math.min(1450,Math.max(32,total*224/height)),cel=reduced?0:Math.floor(q.age*16)%5;
+  // Painted strips follow one ballistic centre line. The first tangent is
+  // horizontal at the real cannon; the front reaches the floor before a wave.
+  let travelled=0;
+  for(let i=0;i<segments&&total>0;i++){
+   const a=points[i],b=points[i+1],length=lengths[i],sw=sourceWidth*length/total,sx=1450-sourceWidth*(travelled+length)/total;
+   c.save();c.globalAlpha*=fade;c.translate(a.x,a.y);c.rotate(Math.atan2(a.y-b.y,a.x-b.x));
+   c.drawImage(art['harbor-jet'],sx,cel*224,Math.max(1,sw),224,-length-2,-height/2,length+5,height);c.restore();travelled+=length;
+  }
+  const tip=spoutPoint(q,front);drawWaterDetail(c,art,1,frame,tip.x,tip.y,55,q.large?65:45,0,fade*.65);
  }else{
   c.save();if(q.kind==='diver-hoop')c.filter='hue-rotate(130deg)';drawHarborFX(c,art,1,frame,q.x,q.y,size,size,false,Math.atan2(q.vy,q.vx)*.08);c.restore();
  }
+}
+
+export function drawBargeImpact(c,art,q,reduced=false){
+ const row=q.bargeBeat?0:1,frame=reduced?1:Math.min(3,Math.floor(q.age/(q.lifeSpan||q.age+q.life)*4)),size=q.size;
+ c.save();c.globalAlpha*=Math.min(1,q.life/.12);
+ c.drawImage(art['barge-impact'],frame*256,row*256,256,256,q.x-size/2,q.y-size/2,size,size);c.restore();
 }

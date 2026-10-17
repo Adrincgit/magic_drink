@@ -27,6 +27,7 @@ export function stepBargeSystems(s,dt){
  const b=s.boss,parts=bargeParts(s);
  for(const part of Object.values(parts))part.flash=Math.max(0,(part.flash||0)-dt);
  b.pressureStun=Math.max(0,(b.pressureStun||0)-dt);
+ b.drumKick=Math.max(0,(b.drumKick||0)-dt);
  if(b.portFlash)b.portFlash.age=Math.max(0,b.portFlash.age-dt);
  if(parts.tank.hp<=0)b.tankFill=0;
  else if(b.phase==='warn'&&b.move==='jet'){b.tankFill=Math.min(1,(b.tankFill||0)+dt/1.6*(1+.16*Math.sin(b.clock*13)));b.pumpClock=(b.pumpClock||0)-dt;if(b.pumpClock<=0){b.pumpClock=.32;s.events.push('bargePump');}}

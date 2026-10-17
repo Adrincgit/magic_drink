@@ -26,5 +26,5 @@ test('record the entire camp with finite squads, stationary smoke, reversals, ju
  await keys(['KeyZ']);await wait(1);await keys(['ArrowRight']);await page.waitForFunction(()=>window.campMotion.s.player.x>=660,null,{timeout:15000});await keys([]);await wait(1);
  const result=await page.evaluate(()=>{const w=window.campMotion;w.paused=true;return{hearts:w.s.hearts,x:w.s.player.x,checkpoint:w.s.checkpointAt,spawned:w.s.campTents.reduce((n,q)=>n+q.spawned,0),defeated:w.defeated.size,tents:w.s.campTents.map(q=>q.state),trace:w.trace};});
  const download=page.waitForEvent('download');await page.evaluate(()=>window.campMotion.recorder.stop());await(await download).saveAs(dir+'/camp-motion.webm');fs.writeFileSync(dir+'/motion-trace.json',JSON.stringify(result,null,2));expect(errors).toEqual([]);
- expect(result.hearts).toBe(5);expect(result.spawned).toBe(19);expect(result.defeated).toBe(19);expect(result.checkpoint).toEqual([660,480]);expect(result.tents.every(q=>q==='cleared')).toBe(true);
+ expect(result.hearts).toBe(5);expect(result.spawned).toBe(19);expect(result.defeated).toBe(19);expect(result.checkpoint).toBeUndefined();expect(result.tents.every(q=>q==='cleared')).toBe(true);
 });

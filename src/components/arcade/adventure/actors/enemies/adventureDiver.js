@@ -1,5 +1,6 @@
 import {enemyMuzzle} from './adventureEnemyGeometry';
 import {bargeRig} from '../bosses/bargeRig';
+import {worldSound} from '../../engine/adventureWorldAudio';
 export const DIVER_TYPE=8;
 export const WATER_BOLT='water-bolt';
 export const diverInWater=e=>e.type===8&&['hidden','emerge','swim','dive','submerged','surfaceFire'].includes(e.phase);
@@ -9,7 +10,7 @@ export function burstWaterProjectile(s,q){
 }
 export function waterSplash(s,x,y,size=100){
  s.effects.push({x,y,bargeSplash:true,size,age:0,life:.55});
- if(!s.events.includes('bargeSplash'))s.events.push('bargeSplash');
+ if(!s.events.some(q=>(typeof q==='string'?q:q.kind)==='bargeSplash'))worldSound(s,'bargeSplash',x,y);
 }
 export function updateDiver(s,e,dt,shoot){
  if(!e.aquatic){e.aquatic=true;e.phase='hidden';e.waterY=e.baseY+134;e.y=e.waterY+14;e.swimAge=0;e.swimClock=e.clock;e.deckAge=0;e.phaseAge=0;}
@@ -33,18 +34,18 @@ export function updateDiver(s,e,dt,shoot){
  if(e.phase==='submerged'){
   if(e.channelWaterY)e.waterY+=(e.channelWaterY-e.waterY)*(1-Math.exp(-dt*5));
   e.x+=Math.sign(s.player.x-e.x)*115*dt;e.y=e.waterY+14;
-  if(e.phaseAge>1.15){e.phase='emerge';e.phaseAge=0;e.home=e.x;e.swimAge=0;e.diveWait=4.5;}return;
+  if(e.phaseAge>1.15){e.phase='emerge';e.phaseAge=0;e.home=e.x;e.swimAge=0;e.diveWait=4.5;waterSplash(s,e.x,e.waterY,48);}return;
  }
  if(e.phase==='surfaceFire'){
-  if(e.phaseAge>=.35&&!e.surfaceFired){e.surfaceFired=true;const m={x:e.x+e.dir*29,y:e.waterY-41},a=Math.atan2(s.player.y-30-m.y,s.player.x-m.x);shoot(s,m.x,m.y,a,s.gentle?235:285,WATER_BOLT,{water:true,r:10,drawSize:46,life:3});s.events.push('diverThrow');}
-  if(e.phaseAge>=.85){e.phase=e.waterOnly?'dive':'swim';e.phaseAge=0;e.home=e.x;e.swimClock=e.clock;e.surfaceWait=2.1;}return;
+  if(e.phaseAge>=.35&&!e.surfaceFired){e.surfaceFired=true;const m={x:e.x+e.dir*29,y:e.waterY-41},a=Math.atan2(s.player.y-30-m.y,s.player.x-m.x);shoot(s,m.x,m.y,a,s.gentle?235:285,WATER_BOLT,{water:true,r:10,drawSize:46,life:3});}
+  if(e.phaseAge>=.85){e.phase=e.waterOnly?'dive':'swim';e.phaseAge=0;e.home=e.x;e.swimClock=e.clock;e.surfaceWait=2.1;if(e.waterOnly)waterSplash(s,e.x,e.waterY,42);}return;
  }
  if(e.phase==='swim'){
   const oldX=e.x;if(e.bargeCrew&&Math.abs(s.player.x-e.x)>430){e.x+=Math.sign(s.player.x-e.x)*130*dt;e.home=e.x;e.swimClock=e.clock;}else e.x=e.home+Math.sin((e.clock-e.swimClock)*1.4)*88;e.y=e.waterY+14+Math.sin(e.clock*4)*3;
   e.dir=Math.sign(e.x-oldX)||Math.sign(Math.cos((e.clock-e.swimClock)*1.4))||e.dir;
   if(Math.abs(s.player.x-e.x)<570)e.swimAge+=dt;
   e.surfaceWait=(e.surfaceWait??1.4)-dt;
-  if(!e.diveWait&&s.shots.some(q=>q.life>0&&Math.abs(q.x-e.x)<155&&Math.abs(q.y-e.waterY)<65)){e.phase='dive';e.phaseAge=0;e.diveWait=4.5;return;}
+  if(!e.diveWait&&s.shots.some(q=>q.life>0&&Math.abs(q.x-e.x)<155&&Math.abs(q.y-e.waterY)<65)){e.phase='dive';e.phaseAge=0;e.diveWait=4.5;waterSplash(s,e.x,e.waterY,42);return;}
   if(e.surfaceWait<=0&&Math.abs(s.player.x-e.x)<560){e.phase='surfaceFire';e.phaseAge=0;e.surfaceFired=false;return;}
   if(!e.waterOnly&&e.swimAge>2.8){e.phase='leap';e.leapAge=0;e.vy=-665;waterSplash(s,e.x,e.waterY,125);}
   return;
@@ -73,7 +74,7 @@ export function updateDiver(s,e,dt,shoot){
   while(e.volley<3&&e.volleyAge>=e.volley*.14){
    const m=enemyMuzzle(e),aim=Math.atan2(s.player.y-31-m.y,s.player.x-m.x);
    shoot(s,m.x,m.y,aim,s.gentle?250:315,WATER_BOLT,{r:10,drawSize:52,life:3,water:true});
-   e.volley++;e.action=.22;s.events.push('diverThrow');
+   e.volley++;e.action=.22;
   }
   if(e.volleyAge>.48){delete e.volleyAge;e.recovery=.35;}
  }

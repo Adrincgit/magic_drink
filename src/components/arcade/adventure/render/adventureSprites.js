@@ -1,4 +1,5 @@
 import {isVillageEnemy,villageEnemyDrawing} from '../engine/adventureVillage';
+import {canControlEnemy} from '../actors/enemies/adventureEnemyTraits';
 import {isActTwoEnemy,actTwoEnemyDrawing} from '../actors/enemies/adventureActTwoEnemies';
 import {actTwoBossDrawing} from '../actors/bosses/adventureActTwoBosses';
 import {umbrellaFrame} from '../actors/enemies/adventureUmbrella';
@@ -21,6 +22,15 @@ export const ENEMY_ART=['clown','acrobat','balloon','juggler','acrobat','cannon'
 // the sign, which otherwise sends the sprite source outside its atlas.
 export const collectibleFrame=(time,x=0)=>((Math.floor(time*7+x)%4)+4)%4;
 export function enemyDrawing(e,reduced=false){
+ // Hold the enemy's own Hit cel throughout the electrical reaction instead of
+ // returning to a walk/throw pose as soon as the ordinary hit flash expires.
+ if(e.hp>0&&!e.charred&&!e.fleeing&&e.elementHit?.element==='electric'&&canControlEnemy(e,'electric-stun')){
+  const hit={1:['acrobat-rings',10],4:['acrobat-rings',10],3:['juggler-actions',10],6:['clown',10],11:['ember-torch-attack',12],14:['umbrella-clown',10]}[e.type];
+  if(hit)return{key:hit[0],frame:hit[1]};
+  if(e.type>=29&&e.type<=31)return{key:'act-two-enemies',frame:(e.type-29)*8+6};
+  // Absorption remains uninterruptible; rendering must not replace its poses.
+  if(e.type===26&&!['absorb','absorb-player'].includes(e.phase))return{key:e.flying?'village-witch-air-v7':'village-witch-ground-v7',frame:12+(reduced?1:Math.min(3,Math.floor(e.elementHit.age/.13)))};
+ }
  if(isActTwoEnemy(e))return actTwoEnemyDrawing(e,reduced);
  if(isVillageEnemy(e))return villageEnemyDrawing(e,reduced);
  if(e.fleeing){
@@ -51,7 +61,7 @@ export function enemyDrawing(e,reduced=false){
   return{key:'cannon-launcher-painted',frame:e.boosterPassenger?.boosterHidden?(e.boosterAge>.64?1:0):2};
  }
  if(e.type===3){
-  if(e.hp>0&&!e.flash&&!(e.action>0)&&!(e.recovery>0)&&!(e.trap>0)&&e.volleyAge===undefined&&['patrol','emerge'].includes(e.phase)&&e.moving!==false)return{key:'juggler-walk-parts',frame:reduced?0:Math.floor((e.gait||0)*JUGGLER_WALK_FRAMES)%JUGGLER_WALK_FRAMES};
+  if(e.hp>0&&!e.flash&&!(e.action>0)&&!(e.recovery>0)&&!(e.trap>0)&&e.volleyAge===undefined&&['patrol','emerge'].includes(e.phase)&&e.moving!==false)return{key:'juggler-walk-v2',frame:reduced?0:Math.floor((e.gait||0)*JUGGLER_WALK_FRAMES)%JUGGLER_WALK_FRAMES};
   let frame=e.hp<=0?11:e.flash>0?10:e.phase==='windup'?4:e.phase==='patrol'?(reduced?0:Math.floor((e.gait||0)*8)%2):2;
   if(e.hp>0&&!e.flash&&e.volleyAge!==undefined)frame=e.action>0?5+(e.ballColor||0)*2:e.volleyCount<3?4+e.volleyCount*2:9;
   return{key:'juggler-actions',frame};

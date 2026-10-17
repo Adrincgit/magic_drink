@@ -12,7 +12,7 @@ export function readAdventureGamepad(pad,bindings=getGamepadBindings()){
  return{left:left&&!right,right:right&&!left,up:up&&!down,down:down&&!up,...Object.fromEntries(Object.entries(bindings).map(([name,indices])=>[name,indices.some(button)])),pause:button(9),confirm:button(0),back:button(1),tabPrevious:button(4),tabNext:button(5)};
 }
 const controls=root=>[...root.querySelectorAll('button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled)')].filter(el=>!el.closest('[inert]')&&el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');
-function focusControl(root,element){
+export function focusControl(root,element){
  root.querySelectorAll('[data-pad-focus]').forEach(el=>el.removeAttribute('data-pad-focus'));
  element.dataset.padFocus='true';element.focus({preventScroll:true});element.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});
 }

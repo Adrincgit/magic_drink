@@ -1,8 +1,9 @@
+import {surfaceY} from '../world/adventureTerrain';
 // Element controls acting; force controls whether the same hit knocks Hexy down.
 export function impactKind(source={}){
  if(source.element)return source.element;
  const kind=source.kind||'';
- if(source.water||/^barge-(jet|wave|surf|balloon|shell)$/.test(kind))return 'water';
+ if(source.water||/^barge-(jet|spout|wave|surf|balloon|shell)$/.test(kind))return 'water';
  if(/sound|sonic|note|barge-hoop/.test(kind))return 'sound';
  if(/fire|flame|pyre|ember|bomb|inferno/.test(kind))return 'fire';
  return 'physical';
@@ -15,9 +16,17 @@ export function beginHitReaction(s,source={}){
  p.dir=-direction;p.vx=direction*(heavy?300:type==='water'?185:type==='sound'?210:160);p.vy=heavy?-310:-180;p.ground=null;
  p.firing=false;p.gliding=false;p.crouch=false;p.cast=0;p.jumpBuffer=0;
  s.events.push(type==='physical'?'hit':'hit'+type[0].toUpperCase()+type.slice(1));
+ if(type==='water'){p.wetTime=1.65;p.wetClock=0;}
 }
 export function stepHitReaction(s,dt){
- const p=s.player,q=p.knockdown;if(!q)return;
+ const p=s.player,q=p.knockdown;
+ if(p.wetTime>0){
+  p.wetTime=Math.max(0,p.wetTime-dt);p.wetClock=(p.wetClock||0)-dt;
+  if(p.wetClock<=0){p.wetClock=.13;const n=p.wetDrops=(p.wetDrops||0)+1,floor=Math.min(...s.platforms.filter(t=>!t.gone&&p.x>=t.x&&p.x<=t.x+t.w).map(t=>surfaceY(t,p.x)).filter(y=>y>=p.y-5),s.level.arena.y+110);
+   s.effects.push({x:p.x+(n%3-1)*16,y:p.y-38-(n%2)*30,waterDrop:true,size:9+n%3,vx:p.vx*.12,vy:35,floor,age:0,life:.9,duration:.9});
+  }
+ }
+ if(!q)return;
  q.age+=dt;p.hurt=Math.max(p.hurt,.55);p.hitReact=Math.max(p.hitReact,.1);
  if(q.stage==='air'&&p.ground!==null){q.stage='ground';q.groundAge=0;s.events.push('hitLanding');s.shake=Math.max(s.shake,.12);}
  else if(q.stage==='ground'){

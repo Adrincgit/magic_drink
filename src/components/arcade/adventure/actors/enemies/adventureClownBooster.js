@@ -1,5 +1,6 @@
 import {surfaceY} from '../../world/adventureTerrain';
 import {enemyGeometry,enemyMuzzle} from './adventureEnemyGeometry';
+import {worldSound} from '../../engine/adventureWorldAudio';
 
 const GRAVITY=800,ENTRY_TIME=.42,LOAD_TIME=.38;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
@@ -57,7 +58,7 @@ export function stepClownBoosters(s,dt){
   e.vy=plan.vy;e.launchVx=(plan.x-e.x)/plan.time;e.boosterFlight={targetX:plan.x};
   e.clock=0;e.phase='jump';e.timer=2.5;e.gait=0;e.boosterCooldown=3;
   c.boosterPassenger=null;c.boosterAge=0;c.boosterCooldown=1.6;c.phase='rest';c.action=.18;
-  s.events.push('cannon');s.effects.push({x:m.x,y:m.y,row:1,size:48,age:0,life:.24});
+  worldSound(s,'cannon',m.x,m.y);s.effects.push({x:m.x,y:m.y,row:1,size:48,age:0,life:.24});
  }
 }
 

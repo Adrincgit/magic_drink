@@ -10,6 +10,7 @@ export function firePopcorn(s,muzzle,aim,scale=1,strong=false){
  const p=s.player,duration=popcornBlastDuration(strong);
  s.popcornFlash={at:s.fxTime,duration:strong?.17:.12,strong};
  if(p.ground===null&&!p.coasterGround){
+  if(p.gliding)p.hatCastUntil=s.time+.4;
   // Under 1550px/s² gravity, 2*v/g is the return time to the cast height.
   // Clear the entire painted burst plus 80ms before descending through it.
   const clearTime=duration+.08;p.vy=Math.min(p.vy,-1550*clearTime/2);

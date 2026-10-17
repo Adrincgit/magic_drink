@@ -1,6 +1,8 @@
 # Acto 2: maizal, mansión y carpa de los malos sueños
 
-Implementación del 16/10/2026. Continúa la [guía de campaña](../CAMPANA.md) después del cementerio y Villa Lumbre. Los cinco niveles de Halloween se identifican como 2-1 a 2-5.
+Prototipos jugables del 16/10/2026. Continúa la [guía de campaña](../CAMPANA.md) después del cementerio y Villa Lumbre. Los cinco niveles de Halloween se identifican como 2-1 a 2-5.
+
+**Estado actual:** 2-3, 2-4 y 2-5 sirven como prototipos para definir la dirección. Requieren un desarrollo mucho mayor antes de considerarlos niveles robustos. La prioridad actual es pulir los efectos globales y las acciones de Hexy.
 
 | Nivel | Recorrido y acciones | Encuentro final |
 | --- | --- | --- |

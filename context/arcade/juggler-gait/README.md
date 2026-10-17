@@ -1,5 +1,7 @@
 # Marcha del malabarista: continuidad de las piernas
 
+**Revisión vigente:** [ciclo completo de cuerpo y piernas, revisión 2](revision-2/README.md). La composición de torso y piernas descrita a continuación se conserva como historial; fue sustituida tras la nueva observación del usuario.
+
 La revisión fotograma por fotograma confirmó el problema señalado por el usuario. Tener doce imágenes diferentes no bastaba: la primera y la séptima repetían el mismo patrón de pierna adelantada, y las poses intermedias volvieron a levantar principalmente el mismo zapato. Los cambios de volumen y de manchas del pantalón hacían perder la identidad de cada pierna. El empaquetado anterior alineaba cada celda por su punto más bajo; la altura del cuerpo variaba entre y=40 y y=47 según el contorno de los zapatos. Las pruebas anteriores contaban poses y comprobaban desplazamiento, pero no verificaban la continuidad anatómica.
 
 La evidencia anterior está en [before-feet.png](before-feet.png). El atlas rechazado `juggler-walk-fluid.webp` y su fuente se conservan como referencia, pero ya no se cargan en el juego.

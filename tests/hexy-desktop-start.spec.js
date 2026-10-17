@@ -8,21 +8,22 @@ import {updateBoss,enemyShot} from '../src/components/arcade/adventure/actors/en
 import {bossDrawing} from '../src/components/arcade/adventure/render/adventureSprites';
 import {balloonSockets} from '../src/components/arcade/adventure/render/adventureCamera';
 import {balloonCrewDrawing} from '../src/components/arcade/adventure/actors/bosses/adventureBalloonCrew';
+import {EXPLOSION_SCALE} from '../src/components/arcade/adventure/engine/explosionScale';
 
-test('two authored flags, three spaced supply chests and no opening obstruction',()=>{
- const s=createAdventure(0),cp=s.level.checkpoints;
- expect(cp).toHaveLength(2);expect(cp[1][0]).toBeLessThan(s.level.arena.entry);
- expect(s.level.arena.left-cp[1][0]).toBe(260);
- expect(s.supplies.map(q=>q.x)).toEqual([1440,5920,s.level.arena.left-540]);
- for(const q of s.supplies)expect(cp.every(c=>Math.abs(c[0]-q.x)>200)).toBe(true);
+test('one midpoint heart alongside three supply chests and no opening obstruction',()=>{
+ const s=createAdventure(0);
+ expect(s.supplies.filter(q=>!q.midpointHeart).map(q=>q.x)).toEqual([1440,5920,s.level.arena.left-540]);
+ const hearts=s.supplies.filter(q=>q.midpointHeart);expect(hearts).toHaveLength(1);
+ expect(Math.abs(hearts[0].x-((s.level.spawn?.[0]??85)+s.level.exit[0])/2)).toBeLessThan(650);
+ expect(s.supplies.every(q=>q.x>1000)).toBe(true);
 });
-test('death retry returns to the flag, resets the boss and preserves claimed rewards and recharge',()=>{
+test('death retry returns to the start, resets the boss and preserves claimed rewards and recharge',()=>{
  const s=createAdventure(0);s.checkpointAt=s.level.checkpoints[1];s.checkpoint=true;s.player.x=s.level.arena.entry+10;s.player.y=1200;s.player.ground=null;s.hearts=1;
  s.stars[0].taken=true;s.supplies[0].hp=0;s.cages[0].rescued=true;s.rescued=1;s.starMoney=17;s.bankedStars=12;s.superCooldown=29;
  stepAdventure(s,{},1/120);expect(s.done).toBe(false);expect(s.playerDefeat).toBeTruthy();for(let i=0;i<650&&!s.done;i++)stepAdventure(s,{},1/120);expect(s.done).toBe(true);s.boss.hp=5;
- retryAdventure(s);expect(s.done).toBe(false);expect(s.player.x).toBe(s.checkpointAt[0]);expect(s.hearts).toBe(5);expect(s.boss.hp).toBe(s.boss.maxHp);expect(s.boss.phase).toBe('sleep');
+ retryAdventure(s);expect(s.done).toBe(false);expect(s.player.x).toBe(s.level.spawn?.[0]??85);expect(s.checkpointAt).toBeUndefined();expect(s.hearts).toBe(5);expect(s.boss.hp).toBe(s.boss.maxHp);expect(s.boss.phase).toBe('sleep');
  expect(s.starMoney).toBe(17);expect(s.bankedStars).toBe(12);expect(s.stars[0].taken).toBe(true);expect(s.supplies[0].hp).toBe(0);expect(s.rescued).toBe(1);expect(s.superCooldown).toBeGreaterThan(28);
- for(let i=0;i<120;i++)stepAdventure(s,{},1/120);expect(s.done).toBe(false);expect(s.player.x).toBeGreaterThan(10000);
+ for(let i=0;i<120;i++)stepAdventure(s,{},1/120);expect(s.done).toBe(false);expect(s.player.x).toBe(s.level.spawn?.[0]??85);
 });
 test('legacy bunnies receive fifty each exactly once and preserve purchases',()=>{
  const old={version:1,stars:7,coins:0,found:['shore','shore','festival','bad'],modsOwned:['bright-spark']};
@@ -43,7 +44,7 @@ test('ball release uses the held socket and same artwork size; drop leaves an em
 });
 test('normal bomb fire waves grow while bombardment keeps its safe lane open',()=>{
  const s=createAdventure(0);s.enemies=[];s.player.x=100;s.hostile=[{kind:'bomb',x:600,y:480,floor:480,vx:0,vy:0,age:0,life:2,r:15}];stepAdventure(s,{},1/120);
- const flames=s.hostile.filter(q=>q.kind==='wave');expect(flames).toHaveLength(2);for(const q of flames)expect(q.drawSize).toBeCloseTo(94.6*1.15);
+ const flames=s.hostile.filter(q=>q.kind==='wave');expect(flames).toHaveLength(2);for(const q of flames)expect(q.drawSize).toBeCloseTo(94.6*1.15*EXPLOSION_SCALE);
 });
 test('browser flow: skippable brand, title, in-game tutorial/options, chapter card, free play and pause',async({page})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.setViewportSize({width:1440,height:900});await page.goto('/arcade');
@@ -51,8 +52,8 @@ test('browser flow: skippable brand, title, in-game tutorial/options, chapter ca
  const title=page.locator('[data-title-screen]');await expect(title).toHaveAttribute('data-entrance','entering');await expect(page.locator('[data-title-menu]')).toHaveCount(0);
  await page.keyboard.press('Enter');await expect(title).toHaveAttribute('data-entrance','settled');await expect(page.locator('[data-title-menu]')).toHaveCount(0);
  await page.screenshot({path:'tests/artifacts/arcade/desktop-start/title-desktop.jpg'});
- await page.keyboard.press('Enter');await expect(page.locator('[data-title-menu]')).toBeVisible();await page.getByRole('button',{name:'Cómo jugar'}).click();await expect(page.locator('[data-tutorial]')).toContainText('bloquear');await page.keyboard.press('Escape');
- await page.locator('[data-open-settings]').click();await expect(page.locator('[data-adventure-settings]')).toBeVisible();await page.getByRole('button',{name:'Cerrar ajustes'}).click();
+ await page.keyboard.press('Enter');await expect(page.locator('[data-title-menu]')).toBeVisible();await page.getByRole('button',{name:'Cómo jugar'}).click();await expect(page.locator('[data-tutorial]')).toContainText('Camina por el escenario.');await page.keyboard.press('Escape');
+ await page.locator('[data-open-settings]').click();await expect(page.locator('[data-adventure-settings]')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('[data-adventure-settings]')).toBeHidden();
  const box=await page.locator('[data-game-frame]').boundingBox();expect(box.width).toBe(1440);expect(box.height).toBe(810);
  await page.screenshot({path:'tests/artifacts/arcade/desktop-start/menu-desktop.jpg'});
  await page.locator('[data-start-adventure]').click();await expect(page.locator('[data-chapter-intro]')).toContainText('1-1');await page.screenshot({path:'tests/artifacts/arcade/desktop-start/chapter-desktop.jpg'});
@@ -84,8 +85,9 @@ test('wallet grants 50 once per bunny; free start, settlement and recovery canno
   const found=await Promise.all([m.collectBunny('shore'),m.collectBunny('shore')]);const run=await m.beginRun(false,0);await m.bankAdventureStars(run.id,0,3);await m.bankAdventureStars(run.id,0,3);await m.finishRun(run.id,{stars:3,won:false,level:0});const next=await m.beginRun(false);await m.recoverRun();await m.recoverRun();return{found,run,next,save:JSON.parse(localStorage.getItem(m.SAVE_KEY))};
  });expect(result.found.sort()).toEqual([false,true]);expect(result.run).toBeTruthy();expect(result.next).toBeTruthy();expect(result.save.stars).toBe(53);expect(result.save.coins).toBe(0);
 });
-test('actual loss screen continues the same session at the last flag',async({page})=>{
- await page.route('**/src/components/arcade/adventure/engine/adventureModel.js*',async route=>{const response=await route.fetch();let code=await response.text();code=code.replace('function stepAdventure(s,input,dt){',`function stepAdventure(s,input,dt){if(s.ticks===20&&!s.testLost){s.testLost=true;s.checkpointAt=s.level.checkpoints[1];s.checkpoint=true;s.hearts=1;s.player.y=1800;s.player.ground=null;}`);await route.fulfill({response,body:code});});
- await page.goto('/arcade');await openAdventureMenu(page);await page.locator('[data-start-adventure]').click();await expect(page.locator('[data-retry-checkpoint]')).toBeVisible();
- const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('magic-drink-arcade-v1')).run.id);await page.locator('[data-retry-checkpoint]').click();await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','playing');expect(Number(await page.locator('[data-adventure-canvas]').getAttribute('data-player-x'))).toBeGreaterThan(10000);expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('magic-drink-arcade-v1')).run.id)).toBe(before);
+test('actual loss screen restarts the same paid session from the beginning',async({page})=>{
+ await page.route('**/src/components/arcade/adventure/engine/adventureModel.js*',async route=>{const response=await route.fetch();let code=await response.text();code=code.replace('function stepAdventure(s,input,dt){',`function stepAdventure(s,input,dt){if(s.ticks===20&&!window.testLost){window.testLost=true;s.checkpointAt=s.level.checkpoints[1];s.checkpoint=true;s.hearts=1;s.player.y=1800;s.player.ground=null;}`);await route.fulfill({response,body:code});});
+ await page.goto('/arcade');await openAdventureMenu(page);await page.locator('[data-start-adventure]').click();await expect(page.locator('[data-restart-level]')).toBeVisible();
+ await expect(page.getByText('Vuelve a intentarlo desde el inicio del nivel.')).toBeVisible();
+ const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('magic-drink-arcade-v1')).run.id);await page.locator('[data-restart-level]').click();await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','playing');expect(Number(await page.locator('[data-adventure-canvas]').getAttribute('data-player-x'))).toBeLessThan(150);expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('magic-drink-arcade-v1')).run.id)).toBe(before);
 });

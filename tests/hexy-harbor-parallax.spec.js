@@ -25,7 +25,7 @@ test('barge has exactly two stages and the damaged stage increases volleys and c
   expect(b.stage).toBe(stage);report[move+stage]=s.hostile;
  }
  expect(report.drumroll2.length).toBeGreaterThan(report.drumroll1.length);expect(report.mortar2.length).toBeGreaterThan(report.mortar1.length);
- expect(report.tidal1.every(q=>q.kind==='barge-wave')).toBe(true);expect(new Set(report.tidal2.map(q=>q.kind))).toEqual(new Set(['barge-wave','barge-sonic']));
+ for(const stage of [1,2]){expect(report['tidal'+stage].every(q=>q.kind==='barge-spout')).toBe(true);expect(report['tidal'+stage].map(q=>q.large)).toEqual([false,true]);}
  const s=createAdventure(2);s.damage=()=>{};Object.assign(s.boss,{hp:1,transformed:true,phase:'recover',timer:10});updateBoss(s,1/120,{body:playerBody,say:()=>{},particles:()=>{}});expect(s.boss.stage).toBe(2);
 });
 

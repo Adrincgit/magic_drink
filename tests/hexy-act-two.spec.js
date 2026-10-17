@@ -25,9 +25,9 @@ test('wreckage blocks walking, supports jumping and can be broken by actual wand
  tick(s,.55,{right:true,jump:true});expect(s.player.x).toBeGreaterThan(q.x+35);expect(s.player.y).toBeLessThan(380);
  s.player.x=q.x-110;s.player.y=480;s.player.vy=0;tick(s,6,{attack:true});expect(q.gone).toBe(true);tick(s,1,{right:true});expect(s.player.x).toBeGreaterThan(q.x+25);
 });
-test('checkpoint retry restores broken collision surfaces and resets encounter state',()=>{
+test('level retry restores broken collision surfaces and resets encounter state',()=>{
  const s=createAdventure(8),q=s.platforms.find(q=>q.solid);hitActTwoObjects(s,{x:q.x+q.w/2,y:q.y+40,damage:100,life:1,heavy:true},30);expect(q.gone).toBe(true);
- s.checkpointAt=s.level.checkpoints[1];retryAdventure(s);expect(s.platforms.filter(q=>q.solid).every(q=>!q.gone&&q.hp>0)).toBe(true);expect(s.player.x).toBe(s.level.checkpoints[1][0]);expect(s.boss.phase).toBe('sleep');expect(s.strawPiles).toEqual([]);
+ s.checkpointAt=s.level.checkpoints[1];retryAdventure(s);expect(s.platforms.filter(q=>q.solid).every(q=>!q.gone&&q.hp>0)).toBe(true);expect(s.player.x).toBe(s.level.spawn[0]);expect(s.boss.phase).toBe('sleep');expect(s.strawPiles).toEqual([]);
 });
 test('the mansion can be traversed through its upper galleries using real movement and jumps',()=>{
  const s=createAdventure(9);s.enemies=[];s.actTwoAmbushes=[];s.player.hurt=999;
@@ -44,7 +44,7 @@ test('the mansion can be traversed through its upper galleries using real moveme
   }
   expect(arrived,'unreachable gallery '+q.x+' / Hexy '+s.player.x+','+s.player.y).toBe(true);
  }
- tick(s,1,{right:true});expect(s.player.y).toBeCloseTo(180,0);expect(s.player.x).toBeGreaterThan(7240);expect(s.checkpointAt).toEqual([7130,180]);
+ tick(s,1,{right:true});expect(s.player.y).toBeCloseTo(180,0);expect(s.player.x).toBeGreaterThan(7240);expect(s.checkpointAt).toBeUndefined();
 });
 test('scarecrow ambushes warn before spawning and each trigger fires once',()=>{
  const s=createAdventure(8),a=s.actTwoAmbushes[0];s.enemies=[];s.player.hurt=999;s.player.x=a.x-200;tick(s,.2);expect(s.enemies).toHaveLength(0);expect(a.warning).toBeGreaterThan(0);tick(s,1.4);expect(s.enemies.filter(e=>e.type===29)).toHaveLength(2);tick(s,3);expect(s.enemies).toHaveLength(2);

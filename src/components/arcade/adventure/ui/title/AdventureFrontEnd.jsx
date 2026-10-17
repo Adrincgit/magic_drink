@@ -60,8 +60,8 @@ export function AdventurePresentation({onSkip,en}){
  useEffect(()=>{const timer=setTimeout(onSkip,3000);const key=e=>{if(e.repeat||e.metaKey||e.ctrlKey||e.altKey||e.key==='Tab')return;e.preventDefault();e.stopImmediatePropagation();onSkip();};window.addEventListener('keydown',key,true);return()=>{clearTimeout(timer);window.removeEventListener('keydown',key,true);};},[onSkip]);
  return <button className={css.presentation} data-presentation onClick={onSkip} aria-label={en?'Skip presentation':'Saltar presentación'}><img src="/arcade/sprites/ui/super-ready.webp" alt=""/><b>MAGIC DRINK</b><span>{en?'A little more magic':'Un poquito más de magia'}</span><small>{en?'Press any button':'Pulsa cualquier botón'}</small></button>;
 }
-export function AdventureChapterCard({index,en,onContinue,checkpoint=false}){
+export function AdventureChapterCard({index,en,onContinue}){
  useEffect(()=>{const timer=setTimeout(onContinue,1800);return()=>clearTimeout(timer);},[onContinue]);
- return <div className={css.chapterCard} data-chapter-intro onClick={onContinue}><div style={{backgroundImage:`url(${LEVELS[index].background})`}}/><section><span>{checkpoint?(en?'BACK TO YOUR FLAG':'DE VUELTA A TU BANDERA'):(en?'THE ADVENTURE CONTINUES':'QUE EMPIECE LA AVENTURA')}</span><b>{chapterNumber(index)}</b><h2>{LEVELS[index].name[en?1:0]}</h2><small>{en?'Let’s go, Hexy!':'¡Vamos, Hexy!'}</small></section></div>;
+ return <div className={css.chapterCard} data-chapter-intro onClick={onContinue}><div style={{backgroundImage:`url(${LEVELS[index].background})`}}/><section><span>{en?'THE ADVENTURE CONTINUES':'QUE EMPIECE LA AVENTURA'}</span><b>{chapterNumber(index)}</b><h2>{LEVELS[index].name[en?1:0]}</h2><small>{en?'Let’s go, Hexy!':'¡Vamos, Hexy!'}</small></section></div>;
 }
 export {default as AdventureTutorial} from './AdventureTutorial';

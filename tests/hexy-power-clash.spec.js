@@ -114,7 +114,7 @@ test('a lethal clash reaches the actual defeat screen with Hexy lying down until
  await expect(root).toHaveAttribute('data-phase','result',{timeout:16000});await expect(canvas).toHaveAttribute('data-pose','clash-fall:4');await expect(page.getByRole('heading',{name:'¡Una vez más, Hexy!'})).toBeVisible();
  const frame=await canvas.getAttribute('data-sim-frame');await page.waitForTimeout(400);expect(await canvas.getAttribute('data-sim-frame')).toBe(frame);await expect(canvas).toHaveAttribute('data-pose','clash-fall:4');
  await page.locator('[data-game-screen]').screenshot({path:folder+'lethal-defeat-prone.jpg'});
- await page.locator('[data-retry-checkpoint]').click();await expect(root).toHaveAttribute('data-phase','playing');await expect(canvas).not.toHaveAttribute('data-pose',/^clash-fall:/);
+ await page.locator('[data-restart-level]').click();await expect(root).toHaveAttribute('data-phase','playing');await expect(canvas).not.toHaveAttribute('data-pose',/^clash-fall:/);
 });
 
 test('the actual controller shows its button, supports a clash and pauses safely on disconnect',async({page})=>{

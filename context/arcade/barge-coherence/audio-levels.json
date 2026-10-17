@@ -1,0 +1,26 @@
+{
+  "peak": 0.640971839427948,
+  "levels": [
+    {
+      "kind": "bargeBeat",
+      "rms": 0.03485360022814433
+    },
+    {
+      "kind": "bargeJet",
+      "rms": 0.037555025694540084
+    },
+    {
+      "kind": "bargeSpout",
+      "rms": 0.02460354445715854
+    },
+    {
+      "kind": "bargeSurge",
+      "rms": 0.055947107680083145
+    },
+    {
+      "kind": "bargePressureBurst",
+      "rms": 0.08857805744430705
+    }
+  ],
+  "silent": 0
+}

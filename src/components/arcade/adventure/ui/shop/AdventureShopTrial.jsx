@@ -18,7 +18,7 @@ export default function AdventureShopTrial({mod,art,en,reduced,level,setLevel,on
   run.current=createTrial(mod,level);run.current.trial.ribbonDemo=demo;let raf,last=0,lag=0,publish=0;
   function frame(now){
    raf=requestAnimationFrame(frame);const dt=last?Math.min(.05,(now-last)/1000):0;last=now;
-   if(!live.current.art||document.hidden)return;
+   if(!live.current.art||document.hidden||!canvas.current)return;
    lag+=dt;let s=run.current;
    if(!live.current.playing&&s.time>7.5){s=run.current=createTrial(mod,level);s.trial.ribbonDemo=demo;}
    while(lag>=1/120){const pad=live.current.playing?readAdventureGamepad([...navigator.getGamepads?.()||[]].find(p=>p?.connected)):null;

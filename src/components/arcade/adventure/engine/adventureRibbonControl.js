@@ -1,7 +1,8 @@
 import {surfaceY} from '../world/adventureTerrain';
 import {ribbonLevel} from './adventureRibbonState';
+import {canControlEnemy} from '../actors/enemies/adventureEnemyTraits';
 
-export const ribbonSmall=e=>[0,1,3,4,10,11,14].includes(e.type)&&!e.trap;
+export const ribbonSmall=e=>[0,1,3,4,10,11,14].includes(e.type)&&canControlEnemy(e,'bind',true)&&!e.trap;
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 // Follow only connected floor. Neither a tug nor an automatic dance step can
 // carry an actor through a wall or across a gap to an unrelated platform.

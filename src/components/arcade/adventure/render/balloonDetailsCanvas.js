@@ -2,16 +2,11 @@ import {balloonBombSocket,balloonLeakJets} from '../actors/bosses/balloonHatch';
 
 export function drawBalloonDetails(c,s,art,reduced=false){
  const b=s.boss;if(b.hp<=0)return;
- if(b.transformed){
-  c.save();
-  for(const q of balloonLeakJets(s))for(let i=0;i<3;i++){
-   const t=reduced?(i+.5)/3:((s.time||0)*1.3+i/3)%1,x=q.x+q.dir*t*72,y=q.y-t*30;
-   c.globalAlpha=(1-t)*.38;c.strokeStyle='#fff6d9';c.lineWidth=1.4+(1-t)*1.8;
-   c.beginPath();c.moveTo(x,y);c.bezierCurveTo(x+q.dir*9,y-5,x+q.dir*21,y+7,x+q.dir*31,y-3);c.stroke();
-   const mist=c.createRadialGradient(x,y,0,x,y,10+t*12);mist.addColorStop(0,'#fff7dfaa');mist.addColorStop(1,'#fff7df00');
-   c.fillStyle=mist;c.fillRect(x-23,y-23,46,46);
-  }
-  c.restore();
+ if(b.transformed)for(const q of balloonLeakJets(s)){
+  const frame=reduced?2:(Math.floor((s.time||0)*12)+(q.dir<0?4:0))%8;
+  c.save();c.translate(q.x,q.y);c.scale(q.dir,1);c.rotate(-.16);
+  // All eight source tips are registered at (20,212), pinned to the tear.
+  c.globalAlpha=.88;c.drawImage(art['balloon-air'],frame%4*512,Math.floor(frame/4)*384,512,384,-6.4,-67.84,163.84,122.88);c.restore();
  }
  const q=balloonBombSocket(s),open=b.hatchOpen||0,w=76,h=19,img=art['balloon-hatch'];
  c.save();c.translate(q.x,q.y-6);

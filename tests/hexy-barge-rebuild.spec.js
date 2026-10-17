@@ -25,13 +25,14 @@ test('every second-phase cannon shell originates at the one mounted bow muzzle',
 test('boarding crew walk from the cabin to the stern ledge before diving into water',()=>{
  const s=scene();Object.assign(s.boss,{move:'boarding',phase:'attack',timer:4,shotClock:0,volley:0});
  updateBarge(s,1/120,{body:playerBody,makeEnemy},enemyShot);const e=s.enemies[0],m=bargeRig(s);
+ s.player.x=m.stern.x-100; // Keep this splash within the spatial sound range.
  expect(e.phase).toBe('exit');expect(e.x).toBeCloseTo(m.stern.x);expect(e.y).toBeCloseTo(m.stern.y);
  for(let i=0;i<60;i++)updateEnemies(s,1/120,playerBody,()=>{});
  expect(e.phase).toBe('exit');expect(e.x).toBeGreaterThan(m.stern.x);expect(e.x).toBeLessThan(m.ledge.x);
  for(let i=0;i<57;i++)updateEnemies(s,1/120,playerBody,()=>{});
  expect(e.phase).toBe('deploy');expect(e.x).toBeGreaterThanOrEqual(m.ledge.x);expect(e.vy).toBeLessThan(0);
  for(let i=0;i<130;i++)updateEnemies(s,1/120,playerBody,()=>{});
- expect(['submerged','emerge']).toContain(e.phase);expect(s.events).toContain('bargeSplash');
+ expect(['submerged','emerge']).toContain(e.phase);expect(s.events.map(q=>typeof q==='string'?q:q.kind)).toContain('bargeSplash');
 });
 test('real hits trigger white feedback on intact drum, tank and exposed core',()=>{
  const s=scene();for(const part of ['drum','tank']){

@@ -1,0 +1,30 @@
+[
+  {
+    "type": 0,
+    "role": "basic",
+    "trap": 4.616666666666648,
+    "hp": 3.5999999999999996,
+    "maxHp": 4.6
+  },
+  {
+    "type": 12,
+    "role": "strong",
+    "trap": 0,
+    "hp": 19.7,
+    "maxHp": 20.7
+  },
+  {
+    "type": 20,
+    "role": "strong",
+    "trap": 0,
+    "hp": 137,
+    "maxHp": 138
+  },
+  {
+    "type": 28,
+    "role": "miniboss",
+    "trap": 0,
+    "hp": 184,
+    "maxHp": 185
+  }
+]

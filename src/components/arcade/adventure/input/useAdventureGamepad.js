@@ -39,7 +39,7 @@ export default function useAdventureGamepad(options){
    }else{
     latest.current.onInput({},[]);
     if(!mode.startsWith('shop-')&&!mode.startsWith('tutorial-')&&!['loading','settling','between'].includes(mode)){
-     const tabs=['settings','tutorial'].includes(mode)&&['tabPrevious','tabNext'].find(key=>edges.includes(key));
+     const tabs=['settings','tutorial','shop'].includes(mode)&&['tabPrevious','tabNext'].find(key=>edges.includes(key));
      const action=tabs||(['presentation','title'].includes(mode)&&edges.length?'confirm':['pause','back','confirm','interact'].find(key=>edges.includes(key)));
      if(action)latest.current.onAction(action);
      else for(const key of ['left','right','up','down']){

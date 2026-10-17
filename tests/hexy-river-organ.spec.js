@@ -18,11 +18,11 @@ test('the woodland route is continuous and can be walked down to both bridges wi
  expect(s.player.x).toBeGreaterThan(10350);expect(crossed.size).toBe(2);expect(s.hearts).toBe(5);expect(s.boss.phase).toBe('sleep');
 });
 
-test('Miso is at the safe opening and both riverside checkpoints survive a full retry',()=>{
+test('Miso is at the safe opening and retries return from the river to the level start',()=>{
  const s=quiet(),shop=shopForLevel(s.level);expect(shop).toEqual({x:370,y:480});s.player.x=370;s.player.ground=0;expect(canEnterShop(s)).toBe(true);
  expect(s.level.scenery.some(q=>q.kind==='wagon')).toBe(false);
  expect(s.level.enemies.every(([x])=>x>900)).toBe(true);expect(s.level.checkpoints).toHaveLength(2);
- for(const cp of s.level.checkpoints){Object.assign(s.player,{x:cp[0],y:cp[1],ground:s.platforms.findIndex(q=>cp[0]>=q.x&&cp[0]<=q.x+q.w)});tick(s);expect(s.checkpointAt).toEqual(cp);s.hearts=0;s.done=true;retryAdventure(s);expect(s.player.x).toBe(cp[0]);expect(s.player.y).toBeLessThanOrEqual(cp[1]);expect(s.player.y).toBeGreaterThan(cp[1]-60);}
+ for(const cp of s.level.checkpoints){Object.assign(s.player,{x:cp[0],y:cp[1],ground:s.platforms.findIndex(q=>cp[0]>=q.x&&cp[0]<=q.x+q.w)});tick(s);expect(s.checkpointAt).toBeUndefined();s.hearts=0;s.done=true;retryAdventure(s);expect(s.player.x).toBe(s.level.spawn?.[0]??85);expect(s.player.y).toBe(s.level.spawn?.[1]??s.level.platforms[0].y);}
  expect(createAdventure(2).level.world.key).toBe('harbor');expect(s.level.world.key).toBe('riverwoods');
 });
 

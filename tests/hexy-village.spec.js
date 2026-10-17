@@ -53,9 +53,9 @@ test('actual basic shots defeat both new enemies and interrupt a witch windup',(
   const e=s.enemies[0];tick(s,4,{attack:true});expect(e.defeated).toBe(true);expect(e.hp).toBe(0);expect(s.boss.hp).toBe(1);
  }
 });
-test('checkpoint retries preserve resolved townspeople and completion opens after clearing the square',()=>{
+test('level retries reset townspeople and completion opens after clearing the square',()=>{
  const s=createAdventure(7);s.villagers[0].state='candy';s.villagers[1].state='safe';s.checkpointAt=s.level.checkpoints[1];retryAdventure(s);
- expect(s.villagers[0].state).toBe('candy');expect(s.villagers[1].state).toBe('safe');expect(s.village.turned).toBe(1);expect(s.player.x).toBe(s.level.checkpoints[1][0]);
+ expect(s.villagers[0].state).toBe('waiting');expect(s.villagers[1].state).toBe('waiting');expect(s.village.turned).toBe(0);expect(s.player.x).toBe(s.level.spawn[0]);
  s.player.x=s.level.arena.entry;s.player.y=480;s.player.hurt=999;tick(s,.1);expect(s.clear).toBeFalsy();
  s.enemies=[];tick(s,10);expect(s.won).toBe(true);expect(s.done).toBe(true);
 });

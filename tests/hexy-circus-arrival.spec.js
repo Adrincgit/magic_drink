@@ -22,14 +22,14 @@ test('the side doorway belongs to the 1-5 ash camp and fades into the preserved 
  const s=createAdventure(3),door=s.level.circusEntrance;s.player.x=door.trigger;s.player.y=480;s.player.ground=0;
  for(let i=0;i<180;i++)stepCircusEntrance(s,1/120);
  expect(s.circusEntry.inside).toBe(true);expect(s.player.x).toBe(660);expect(s.boss.phase).toBe('sleep');
- for(let i=0;i<90;i++)stepCircusEntrance(s,1/120);expect(s.circusEntry).toBeUndefined();expect(s.checkpointAt).toEqual([660,480]);
+ for(let i=0;i<90;i++)stepCircusEntrance(s,1/120);expect(s.circusEntry).toBeUndefined();expect(s.checkpointAt).toBeUndefined();
 });
 
 test('the Arlequin arena has no shop and retry restarts the boss',()=>{
  const s=createAdventure(3);expect(shopForLevel(s.level)).toBeNull();s.player.x=370;expect(canEnterShop(s)).toBe(false);
  s.boss.hp=32;s.boss.stage=3;s.done=true;retryAdventure(s);
  expect(s.player.x).toBe(s.level.spawn[0]);expect(s.boss.hp).toBe(720);expect(s.boss.stage).toBe(1);expect(s.level.circusEntrance.side).toBe(true);
- s.checkpointAt=[660,480];retryAdventure(s);for(let i=0;i<500&&s.boss.phase==='sleep';i++)tick(s,1,{right:true});expect(s.boss.phase).toBe('intro');expect(s.checkpointAt).toEqual([660,480]);
+ s.checkpointAt=[660,480];retryAdventure(s);expect(s.player.x).toBe(s.level.spawn[0]);expect(s.boss.phase).toBe('sleep');expect(s.checkpointAt).toBeUndefined();expect(s.campTents.every(t=>t.state==='closed')).toBe(true);
 });
 
 test('music retains the supplied harbor track and the fire Arlequin theme',()=>{
@@ -41,7 +41,7 @@ test('music retains the supplied harbor track and the fire Arlequin theme',()=>{
 test('the actual menu presents 1-4 before 1-5 and starts the new land chapter',async({page})=>{
  const folder='tests/artifacts/arcade/ember-revision/';fs.mkdirSync(folder,{recursive:true});
  await page.goto('/arcade');await openAdventureMenu(page);await page.getByRole('button',{name:/Elegir cap/}).click();
- expect(await page.locator('[data-level-choice]').evaluateAll(cards=>cards.map(c=>Number(c.dataset.levelChoice)))).toEqual([0,1,2,5,3,4]);
+ expect(await page.locator('[data-level-choice]').evaluateAll(cards=>cards.slice(0,5).map(c=>Number(c.dataset.levelChoice)))).toEqual([0,1,2,5,3]);
  await page.locator('[data-level-choice="5"]').scrollIntoViewIfNeeded();await page.locator('[data-chapter-picker]').screenshot({path:folder+'chapter-menu.jpg'});
  await page.locator('[data-level-choice="5"]').click();await page.locator('[data-practice]').click();await expect(page.locator('[data-hexy-adventure]')).toHaveAttribute('data-phase','playing');
  const c=page.locator('[data-adventure-canvas]');await expect(c).toHaveAttribute('data-level','5');const x=Number(await c.getAttribute('data-player-x'));

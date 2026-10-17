@@ -12,6 +12,7 @@ import AdventureSettings from './ui/settings/AdventureSettings';
 import useAdventureGamepad from './input/useAdventureGamepad';
 import AdventureClashPrompt from './ui/hud/AdventureClashPrompt';
 import {navigateGamepadMenu} from './input/adventureGamepad';
+import {navigateShopGamepad} from './input/adventureShopGamepad';
 import {useGamepadBindings} from './input/gamepadBindings';
 import {useArcadeAudioSettings,updateArcadeAudioSettings,adventureMusicVolume} from '../shared/arcadeAudioSettings';
 import {canEnterShop,beginShopTransition,stepShopTransition} from './engine/adventureShop';
@@ -135,7 +136,7 @@ export default function HexyAdventure(){
  shopAction.current=enterShop;
  function leaveShop(){arcadeSound('doorClose',!muted);updateMods(run.current,save.modsEquipped,save.modLevels,save.modCategorySlots);grantStartingDrink(run.current);beginShopTransition(run.current,true);engine.current.publish();engine.current.paint();setPhase('shop-leaving');}
  async function start(practice){if(busy||!art||inRun||phaseRef.current==='chapter-intro')return;setBusy(true);unlockArcadeAudio();muteArcadeSounds(muted);try{if(save.run&&!ticket.current)await recoverRun();const t=await beginRun(practice,selected,true);if(!t)return;ticket.current=t;setResult(null);engine.current.reset(selected,gentle,{mods:save.modsEquipped,modLevels:save.modLevels});input.current=empty();setPhase('chapter-intro');screen.current.focus({preventScroll:true});arcadeSound('start',!muted);}finally{setBusy(false);}}
- function retryCheckpoint(){engine.current.retry();setResult(null);input.current=empty();setPhase('chapter-intro');}
+ function restartLevel(){engine.current.retry();setResult(null);input.current=empty();setPhase('chapter-intro');}
  const enterChapter=useCallback(()=>{if(phaseRef.current!=='chapter-intro')return;input.current=empty();pressed.current.clear();setPhase('playing');engine.current?.wake();screen.current?.focus({preventScroll:true});},[setPhase]);
  function resume(){if(phaseRef.current==='paused')arcadeSound('resume',!muted);if(pendingChapter.current){nextChapter();return;}input.current=empty();setPhase('playing');engine.current.wake();screen.current.focus({preventScroll:true});}
  function openSettings(){engine.current?.pause();setSettingsTab('audio');setSettingsOpen(true);unlockArcadeAudio();}
@@ -156,7 +157,7 @@ export default function HexyAdventure(){
   if(current==='playing'){if(action==='pause')engine.current?.pause();else if(action==='interact')void enterShop();return;}
   if(current==='paused'&&(action==='pause'||action==='back')){resume();return;}
   const shop=machine.current?.querySelector('[data-adventure-shop]');
-  if(current==='shop'&&shop){const trial=shop.querySelector('[data-trial-playing="true"]');if(trial){if(action==='pause')trial.dispatchEvent(new Event('trial-exit'));return;}if(action==='back'||action==='pause'){shop.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));return;}navigateGamepadMenu(shop,action);return;}
+  if(current==='shop'&&shop){const trial=shop.querySelector('[data-trial-playing="true"]');if(trial){if(action==='pause')trial.dispatchEvent(new Event('trial-exit'));return;}if(action==='back'||action==='pause'){shop.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));return;}navigateShopGamepad(shop,action);return;}
   navigateGamepadMenu(machine.current?.querySelector('[data-chapter-picker]')||machine.current?.querySelector('[data-adventure-overlay]')||machine.current?.querySelector('[data-title-menu]')||machine.current?.querySelector('[data-title-screen]')||machine.current,action);
  }
  async function abandon(){if(busy)return;setBusy(true);try{await receipts.current;const t=ticket.current;if(t&&run.current)await finishRun(t.id,{stars:run.current.starMoney,won:false,level:run.current.index});else await recoverRun();ticket.current=null;pendingChapter.current=null;engine.current?.reset(selected,gentle);setResult(null);setPhase('ready');}finally{setBusy(false);}}
@@ -188,14 +189,14 @@ export default function HexyAdventure(){
      {phase==='shop'&&<AdventureShop art={art} save={save} en={en} reduced={reduced} muted={muted} onLeave={leaveShop} onSettings={openSettings} onSound={event=>event==='mute'?setMuted(!muted):arcadeSound(event,!muted)}/>}
      {phase==='ready'&&<AdventureFrontEnd en={en} save={save} selected={selected} onChoose={choose} onStart={practice=>{titleEntered.current=true;void start(practice);}} onSettings={openSettings} onTutorial={()=>setTutorial(true)} onEngage={()=>{unlockArcadeAudio();if(!muted)playMusic();}} busy={busy} gentle={gentle} onGentle={setGentle} reduced={reduced} active={!presentation} interactive={!presentation&&!settingsOpen&&!tutorial} returning={titleEntered.current}/>}
      {presentation&&phase==='ready'&&<AdventurePresentation en={en} onSkip={skipPresentation}/>}
-     {phase==='chapter-intro'&&<AdventureChapterCard index={selected} en={en} onContinue={enterChapter} checkpoint={!!run.current?.checkpointAt}/>}
+     {phase==='chapter-intro'&&<AdventureChapterCard index={selected} en={en} onContinue={enterChapter}/>}
      {tutorial&&<AdventureTutorial en={en} art={art} reduced={reduced} bindings={bindings} onSound={event=>arcadeSound(event,!muted)} onClose={()=>setTutorial(false)}/>}
      {['paused','result','loading','error','settling'].includes(phase)&&!(phase==='settling'&&run.current?.won)&&<div className={base.overlay} data-adventure-overlay data-paused={phase==='paused'}>
       {phase==='loading'&&<><span className={base.spinner}>✦</span><h2>{en?'Opening the story…':'Abriendo el cuento…'}</h2></>}
       {phase==='error'&&<><h2>{en?'The scenery needs a moment.':'El escenario necesita un momento.'}</h2><button onClick={()=>setRetry(n=>n+1)}>{en?'Try again':'Intentar otra vez'}</button></>}
       {phase==='paused'&&<><h2>{en?'PAUSE':'PAUSA'}</h2>{pad.state==='disconnected'&&<p className={css.padWarning} role="status">{en?'Controller disconnected. Reconnect it or use the keyboard.':'Mando desconectado. Reconéctalo o usa el teclado.'}</p>}<div className={css.pauseButtons}><SceneButton showArrow={false} data-pad-default onClick={resume}>{en?'Continue':'Continuar'} ▶</SceneButton><SceneButton showArrow={false} variant="violet" data-open-settings onClick={openSettings}>{en?'Options':'Opciones'}</SceneButton></div><button className={base.quiet} disabled={busy} onClick={abandon}>{ticket.current?.practice?(en?'End practice':'Terminar práctica'):(en?'Save coins and return to title':'Guardar monedas y volver al título')}</button></>}
       {phase==='settling'&&<h2>{en?'Saving the chorus…':'Guardando el coro…'}</h2>}
-      {phase==='result'&&result&&<><h2>{result.won?(en?'The chorus is back!':'¡El coro vuelve a cantar!'):(en?'One more try, Hexy!':'¡Una vez más, Hexy!')}</h2><p>{result.won?result.stars+' ★':run.current?.checkpointAt?(en?'Your last flag is waiting.':'Tu última bandera te está esperando.'):(en?'Let’s try this path again.':'Volvamos a intentarlo.')}</p>{!result.won&&<SceneButton data-pad-default data-retry-checkpoint onClick={retryCheckpoint}>{en?'Continue':'Continuar'} ▶</SceneButton>}<button onClick={abandon}>{en?'Return to title':'Volver al título'}</button></>}
+      {phase==='result'&&result&&<><h2>{result.won?(en?'The chorus is back!':'¡El coro vuelve a cantar!'):(en?'One more try, Hexy!':'¡Una vez más, Hexy!')}</h2><p>{result.won?result.stars+' ★':(en?'Try again from the beginning of the level.':'Vuelve a intentarlo desde el inicio del nivel.')}</p>{!result.won&&<SceneButton data-pad-default data-restart-level onClick={restartLevel}>{en?'Restart level':'Reiniciar nivel'} ▶</SceneButton>}<button onClick={abandon}>{en?'Return to title':'Volver al título'}</button></>}
 
      </div>}
      {settingsOpen&&<AdventureSettings en={en} bindings={bindings} onBindings={setBindings} onTabChange={setSettingsTab} onTutorial={()=>{closeSettings();setTutorial(true);}} onFullscreen={fullscreen} finish={finish} onFinish={setFinish} settings={audioSettings} pad={pad} onClose={closeSettings} onPreview={kind=>arcadeSound(kind||'power',!muted)}/>}

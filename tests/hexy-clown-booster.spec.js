@@ -28,7 +28,7 @@ for(const direction of [-1,1])for(const slope of [-.12,0,.12])test(`same clown l
   if(e.landing>0){seen.add('land');landX??=e.x;expect(e.y).toBeCloseTo(groundY(s.platforms,e.x),4);}
  }
  expect([...seen]).toEqual(['enter','loaded','flight','land']);expect(s.enemies).toEqual([c,e]);expect(e.hp).toBe(hp);expect(s.hostile.filter(q=>q.kind==='clown')).toHaveLength(0);
- expect((landX-launchX)*direction).toBeGreaterThan(160);expect((e.x-landX)*direction).toBeGreaterThan(15);expect((landX-initial)*direction).toBeGreaterThan(230);expect(e.home).toBeCloseTo(landX);expect(e.y).toBeCloseTo(groundY(s.platforms,e.x),4);expect(s.events.filter(k=>k==='cannon')).toHaveLength(1);
+ expect((landX-launchX)*direction).toBeGreaterThan(160);expect((e.x-landX)*direction).toBeGreaterThan(15);expect((landX-initial)*direction).toBeGreaterThan(230);expect(e.home).toBeCloseTo(landX);expect(e.y).toBeCloseTo(groundY(s.platforms,e.x),4);expect(s.events.filter(k=>(typeof k==='string'?k:k.kind)==='cannon')).toHaveLength(1);
 });
 
 test('a larger simulation step still catches the landing on sloped soil',()=>{

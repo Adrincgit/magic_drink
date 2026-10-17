@@ -3,6 +3,7 @@ import {createAdventure,stepAdventure,retryAdventure} from '../src/components/ar
 import {updateBoss,enemyShot} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
 import {balloonCrewDrawing} from '../src/components/arcade/adventure/actors/bosses/adventureBalloonCrew';
 import {prepareBombardment,stepBombardment} from '../src/components/arcade/adventure/actors/bosses/adventureBombardment';
+import {EXPLOSION_SCALE} from '../src/components/arcade/adventure/engine/explosionScale';
 const helpers={say:()=>{},particles:()=>{},body:()=>({x:0,y:0,w:0,h:0})};
 const clean=()=>{const s=createAdventure();for(const key of ['enemies','outposts','pickups','supplies','hazards','stars'])s[key]=[];return s;};
 
@@ -24,7 +25,7 @@ test('held, thrown and pass bombs gain ten percent while circus balls keep their
 test('ordinary bomb impacts emit two larger flames which still damage the player',()=>{
  const s=clean();s.player.x=570;s.player.y=480;s.player.ground=null;s.player.hurt=0;
  s.hostile=[{x:650,y:480,floor:480,kind:'bomb',vx:0,vy:0,r:19,life:2,age:0}];stepAdventure(s,{},1/120);
- const fire=s.hostile.filter(q=>q.kind==='wave');expect(fire).toHaveLength(2);for(const q of fire){expect(q.drawSize).toBeCloseTo(94.6*1.15);expect(q.r).toBeCloseTo(25.3*1.15);}
+ const fire=s.hostile.filter(q=>q.kind==='wave');expect(fire).toHaveLength(2);for(const q of fire){expect(q.drawSize).toBeCloseTo(94.6*1.15*EXPLOSION_SCALE);expect(q.r).toBeCloseTo(25.3*1.15*EXPLOSION_SCALE);}
  const hp=s.hearts;for(let i=0;i<80;i++)stepAdventure(s,{},1/120);expect(s.hearts).toBeLessThan(hp);
 });
 

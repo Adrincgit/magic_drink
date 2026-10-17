@@ -62,8 +62,8 @@ test('bellkeeper telegraphs its attacks, and its complete collapse opens the exi
  const s=quiet();s.enemies=[];s.graves=[];place(s,s.level.arena.entry);const states=new Set();for(let i=0;i<1700;i++){updateBoss(s,1/120,{body:playerBody,say:()=>{}});states.add(s.boss.phase);}expect([...states]).toEqual(expect.arrayContaining(['intro','ringWindup','ring','charge','rush','recover']));expect(s.hostile.some(q=>q.kind==='bell-wisp')).toBe(true);
  s.boss.hp=0;for(let i=0;i<300;i++)updateBoss(s,1/120,{body:playerBody});expect(s.boss.defeat.ready).toBe(true);expect(s.arenaLocked).toBe(false);expect(s.events.filter(e=>e==='bossDown')).toHaveLength(1);
 });
-test('checkpoint retry clears earlier graves and resets remaining encounters',()=>{
- const s=quiet();s.checkpointAt=[11200,groundY(s.platforms,11200)];retryAdventure(s);expect(s.graves.filter(q=>q.x<11200).every(q=>q.phase==='broken')).toBe(true);expect(s.graves.filter(q=>q.x>11200).every(q=>q.phase==='sealed')).toBe(true);expect(s.boss.type).toBe(23);expect(s.boss.phase).toBe('sleep');
+test('level retry reseals graves across the whole route and resets encounters',()=>{
+ const s=quiet();s.checkpointAt=[11200,groundY(s.platforms,11200)];retryAdventure(s);expect(s.graves.every(q=>q.phase==='sealed')).toBe(true);expect(s.player.x).toBe(s.level.spawn[0]);expect(s.boss.type).toBe(23);expect(s.boss.phase).toBe('sleep');
 });
 test('idle expressions work through the real game step and the full boss victory completes',()=>{
  const s=quiet();s.enemies=[];s.graves=[];place(s,3400);for(let i=0;i<625;i++)stepAdventure(s,{},1/120);expect(s.player.fearAge).toBeGreaterThanOrEqual(0);expect(hexyPose(s).sheet).toBe('fear');
@@ -73,7 +73,7 @@ test('miniboss camera contains Hexy and the bell from either end of the arena',(
  for(const side of [-1,1]){const s=quiet(),a=s.level.arena;s.arenaLocked=true;s.boss.phase='patrol';place(s,side<0?a.left+100:a.right-100);s.boss.x=side<0?s.player.x+500:s.player.x-500;for(let i=0;i<240;i++)followAdventureCamera(s,1/120);const v=cameraView(s);for(const x of [s.player.x,s.boss.x]){expect(x).toBeGreaterThan(s.camera.x);expect(x).toBeLessThan(s.camera.x+v.width);}}
 });
 test('the whole route can be traversed into the arena after shooting the two blocking crypts',()=>{
- const s=quiet();s.player.hurt=999;let maxEnemies=0;for(let i=0;i<18500&&!s.boss.engaged;i++){stepAdventure(s,{right:true,attack:true},1/120);maxEnemies=Math.max(maxEnemies,s.enemies.length);expect(Number.isFinite(s.player.y)).toBe(true);}expect(s.graves.filter(q=>q.kind==='crypt').every(q=>q.hp===0)).toBe(true);expect(s.boss.engaged).toBe(true);expect(s.player.x).toBeGreaterThan(s.level.arena.entry-3);expect(s.checkpointAt[0]).toBe(19520);expect(s.enemies.every(e=>!e.fleeing)).toBe(true);expect(maxEnemies).toBeLessThan(65);
+ const s=quiet();s.player.hurt=999;let maxEnemies=0;for(let i=0;i<18500&&!s.boss.engaged;i++){stepAdventure(s,{right:true,attack:true},1/120);maxEnemies=Math.max(maxEnemies,s.enemies.length);expect(Number.isFinite(s.player.y)).toBe(true);}expect(s.graves.filter(q=>q.kind==='crypt').every(q=>q.hp===0)).toBe(true);expect(s.boss.engaged).toBe(true);expect(s.player.x).toBeGreaterThan(s.level.arena.entry-3);expect(s.checkpointAt).toBeUndefined();expect(s.enemies.every(e=>!e.fleeing)).toBe(true);expect(maxEnemies).toBeLessThan(65);
 });
 
 test('production canvas renders and records graveyard motion without runtime errors',async({page})=>{

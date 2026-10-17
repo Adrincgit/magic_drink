@@ -21,14 +21,14 @@ Reservas base de una lata recogida, antes de amuletos. «Fuerte» indica gasto d
 | 0 | **Dragon Grape** | Fuego que atraviesa enemigos. | Gran llamarada penetrante. | 54 | 5 unidades + 34,5 de magia |
 | 1 | **Banna Drama** | Búmeran de ida y vuelta; recoge estrellas. | Búmeran grande con golpes de salida y regreso. | 42 | 5 + 34,5 |
 | 2 | **Witchy Kiwii** | Hojas mágicas. | Remolino que frena y golpea repetidamente. | 60 | 5 + 34,5 |
-| 3 | **Bubble Tape** | Burbujas que capturan proyectiles. | Burbujas grandes que también atrapan payasos pequeños; la maquinaria resiste. | 32 | 5 + 34,5 |
+| 3 | **Bubble Tape** | Burbujas que capturan proyectiles. | Burbujas grandes que también atrapan enemigos básicos; grandes, maquinaria, minijefes y jefes resisten la captura, pero reciben el daño permitido. | 32 | 5 + 34,5 |
 | 4 | **Sparkle Soda** | Estrellas mágicas. | Abanico de cinco estrellas que buscan blancos en la dirección de apuntado. | 45 | 5 + 34,5 |
 | 5 | **Aqua Berry** | Disparos de agua para atacar y apagar fuego. | Chorro orientable de 1,85 s, conectado a la varita; cae en arco y apaga por contacto sostenido. | 84 | 5 + 34,5 |
-| 6 | **Jelly Cherry** | Cerezas de gelatina que rebotan. | Trampolín real de 6 s y tres impulsos; no levanta maquinaria. Mantener fuerte permite colocarlo. | 48 | 5 + 34,5 |
+| 6 | **Jelly Cherry** | Cerezas de gelatina que rebotan. | Trampolín real de 6 s y tres impulsos; levanta básicos, incluidos zombis, y respeta a fuertes y jefes. Mantener fuerte permite colocarlo. | 48 | 5 + 34,5 |
 | 7 | **Prism Peach** | Agujas rápidas que reflejan en terreno. | Prisma colocado según la mira; divide tiros que lo atraviesan en tres ramas. | 56 | 5 + 28 |
 | 8 | **Echo Melon** | Onda que atraviesa enemigos y pierde fuerza con la distancia. | Activa ecos que siguen y copian ataques de Hexy. Otra pulsación los retira. | 48 | Activación: 5 + 34,5; cada eco consume además munición de Echo al copiar |
 | 9 | **Volt Lychee** | Rayo sostenido con consumo al iniciar y cada 0,22 s. | Descarga instantánea larga con ramificaciones. | 42 | 7 + 42 |
-| 10 | **Honey Mango** | Gotas que dejan zonas de miel para ralentizar payasos pequeños. | Panal con lluvia de gotas; mantener fuerte permite colocarlo y ajustar altura. | 48 | 5 + 34,5 |
+| 10 | **Honey Mango** | Gotas que dejan zonas de miel para ralentizar enemigos básicos, incluidos zombis. | Panal con lluvia de gotas; mantener fuerte permite colocarlo y ajustar altura. Fuertes y jefes resisten la ralentización. | 48 | 5 + 34,5 |
 | 11 | **Orbit Orange** | Proyectiles con movimiento orbital. | Satélites que protegen y se consumen al golpear o bloquear; desde II pueden lanzarse. | 40 | 5 + 34,5 al invocarlos |
 | 12 | **Ribbon Raspberry** | Danza de cinta con combos, agarres, levantamientos y remates. | Acciones de cinta según secuencia y dirección. | Transformación de 10 s; no se gestiona como una lata de 44 tiros | Fuerte: 34,5 de magia; no gasta munición |
 | 13 | **Popcorn Panic** | Descarga de siete dulces a corta distancia: alcance 240. | Los mismos siete dulces, mismo daño, alcance 480. | 24 | 1 + 45 |
@@ -36,6 +36,8 @@ Reservas base de una lata recogida, antes de amuletos. «Fuerte» indica gasto d
 Aunque algunos objetos de `SPECIALS` conservan costes antiguos en sus declaraciones, la función que construye el catálogo los normaliza. Los costes vigentes son los de la tabla, obtenidos del catálogo final; no copiar valores de revisiones anteriores.
 
 ### Reglas de munición y maestría
+
+Los controles de enemigos se consultan en la [clasificación común de básicos, fuertes, minijefes y jefes](global-combat-polish/README.md). La absorción ya iniciada de una bruja mantiene su protección hasta que termina o se derrota a la bruja. Miel, agua, fuego y Jelly tienen respuestas visuales y sonoras de contacto propias.
 
 - Una lata del mismo sabor, o una lata potenciada, activa el nivel de recogida II. Las compras de maestría se aplican también al sabor recogido, aunque no se lleve como bebida inicial.
 - Los sabores iniciales 0–5 comienzan con **2× / 2,5× / 3×** reserva en I / II / III.

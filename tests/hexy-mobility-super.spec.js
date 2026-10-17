@@ -62,7 +62,7 @@ test('one press commits a cinematic, freezes the world and protects airborne Hex
  const shot={x:s.player.x-5,y:240,vx:80,vy:20,r:9,life:4,age:0,kind:'ball'};s.hostile=[shot];
  const before={x:s.player.x,y:s.player.y,clock:s.time,camera:{...s.camera},platforms:structuredClone(s.platforms),enemy:{...e},shot:{...shot},hearts:s.hearts};
  tick(s,{super:true});expect(s.magic).toBe(100-SUPER_COST);expect(s.events).toContain('superCharge');expect(hexyPose(s).sheet).toBe('air-super');expect(hexyPose(s).frame).toBeLessThan(4);
- tick(s,{},Math.ceil(SUPER_WINDUP*120));expect(hexyPose(s).sheet).toBe('super-cast');expect(hexyPose(s).frame).toBeGreaterThanOrEqual(0);expect(s.superCinematic.pulses).toBeGreaterThan(0);
+ tick(s,{},Math.ceil(SUPER_WINDUP*120));expect(hexyPose(s).sheet).toBe('air-super-release');expect(hexyPose(s).frame).toBeGreaterThanOrEqual(0);expect(s.superCinematic.pulses).toBeGreaterThan(0);
  tick(s,{right:true,dash:true,jump:true,special:true,guard:true},200);
  expect(s.superCinematic).toBeTruthy();expect(s.player.x).toBeLessThan(before.x-35);expect(s.player.x).toBeGreaterThanOrEqual(before.x-40.001);expect(s.player.y).toBe(before.y);expect(s.time).toBe(before.clock);expect(s.camera).toEqual(before.camera);expect(s.platforms).toEqual(before.platforms);
  expect(e.x).toBe(before.enemy.x);expect(e.timer).toBe(before.enemy.timer);expect(shot.x).toBe(before.shot.x);expect(shot.age).toBe(0);expect(s.hearts).toBe(before.hearts);expect(s.magic).toBe(10);

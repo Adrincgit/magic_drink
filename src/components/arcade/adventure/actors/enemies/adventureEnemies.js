@@ -1,4 +1,5 @@
 import {enemyCastSound,stepCreatureVoice} from '../../engine/adventureWorldAudio';
+import {canControlEnemy} from './adventureEnemyTraits';
 import {isActTwoEnemy,stepActTwoEnemy} from './adventureActTwoEnemies';
 import {stepActTwoBoss,actTwoBossBody} from '../bosses/adventureActTwoBosses';
 import {stepFallingPumpkin} from '../../engine/villagePumpkins';
@@ -49,7 +50,7 @@ export function updateEnemies(s,dt,hit,defeat){
   if(stepRibbonControl(s,e,dt))continue;
   if(e.hp<=0){if(e.charred){e.deadTime=Math.max(0,e.deadTime-dt);e.deathAge+=dt;}else if(isNightmare(e))stepNightmareDefeat(s,e,dt,makeEnemy);else if(e.type===13&&e.defeated)stepEmberBalloonDefeat(s,e,dt);else if(e.type===ZEPPELIN_TYPE&&e.defeated)stepZeppelinDefeat(s,e,dt);else if(e.type===DIVER_TYPE&&e.defeated)stepDiverDefeat(s,e,dt);else if(e.type===RIVER_BOAT_TYPE&&e.defeated)stepRiverBoatDefeat(s,e,dt);else{e.deadTime=Math.max(0,e.deadTime-dt);e.deathAge=(e.deathAge||0)+dt;}continue;}
   if(e.boosterEntry||e.boosterHidden){e.flash=Math.max(0,e.flash-dt);continue;}
-  const previousX=e.x;e.previousY=e.y;const step=dt*(e.elementHit?.element==='electric'?.32:e.snare>0?.28:1);e.snare=Math.max(0,(e.snare||0)-dt);e.honeyed=Math.max(0,(e.honeyed||0)-dt);e.ribbonBound=Math.max(0,(e.ribbonBound||0)-dt);
+  const previousX=e.x;e.previousY=e.y;const step=dt*(e.elementHit?.element==='electric'&&canControlEnemy(e,'electric-stun')?.32:e.snare>0&&canControlEnemy(e,'slow')?.28:1);e.snare=Math.max(0,(e.snare||0)-dt);e.honeyed=Math.max(0,(e.honeyed||0)-dt);e.ribbonBound=Math.max(0,(e.ribbonBound||0)-dt);
   if(e.ribbonStagger>0){e.ribbonStagger=Math.max(0,e.ribbonStagger-dt);e.flash=Math.max(0,e.flash-dt);continue;}
   if(e.jellyLift>0){
    e.jellyLift-=dt;e.vy+=850*dt;e.y+=e.vy*dt;e.phase='jump';e.flash=Math.max(0,e.flash-dt);
@@ -63,6 +64,7 @@ export function updateEnemies(s,dt,hit,defeat){
    else if(e.fortCrew)e.y=e.baseY-21*Math.min(1,e.emerging/2.1);else if(e.campTent!==undefined)e.y=e.baseY-12*e.emerging/1.1;
    e.gait=(e.gait||0)+Math.abs(e.x-previousX)/(isAcrobat(e)?acrobatStride(e):e.type===3?JUGGLER_STRIDE:95);e.moving=true;e.phase='emerge';continue;
   }
+  if(e.trap>0&&!canControlEnemy(e,'bubble'))e.trap=0;
   const trapped=e.trap>0;if(trapped){e.trap=Math.max(0,e.trap-dt);e.trapX??=e.x;e.trapY??=e.y;e.x=e.trapX;e.y=e.trapY;}else{e.trapX=null;e.trapY=null;}
   if(e.landing>0){e.landing=Math.max(0,e.landing-dt);continue;}
   const floor=s.level.groundRoute?null:s.platforms.find(q=>e.x>=q.x&&e.x<=q.x+q.w&&Math.abs(q.baseY-e.baseY)<8);
@@ -129,7 +131,7 @@ export function updateEnemies(s,dt,hit,defeat){
     if(near)e.action=.32;e.timer=(s.gentle?3.4:2.5)+e.type*.18;
    }
   }
-  if(e.recovery>0&&e.type!==14&&e.type!==DIVER_TYPE)e.phase='recover';
+  if(e.recovery>0&&e.type!==14&&e.type!==DIVER_TYPE&&!['absorb','absorb-player'].includes(e.phase))e.phase='recover';
   if(e.practice&&!trapped){if(e.practiceEntering){if(e.x<=e.practiceRight)e.practiceEntering=false;}else if(e.x<e.practiceLeft){e.x=e.practiceLeft;e.dir=1;}else if(e.x>e.practiceRight){e.x=e.practiceRight;e.dir=-1;}}
   if(!isAcrobat(e)||!e.acrobatAir&&!(e.acrobatCrouch>0)&&!(e.landing>0))e.gait=(e.gait||0)+Math.abs(e.x-previousX)/(isAcrobat(e)?acrobatStride(e):e.type===3?JUGGLER_STRIDE:[10,11].includes(e.type)?64:e.type===14?72:95);
   if(e.type===3)e.moving=Math.abs(e.x-previousX)>.001;

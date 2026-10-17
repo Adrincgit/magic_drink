@@ -60,5 +60,5 @@ test('night arrives just beyond half way and cannot flicker back when reversing'
 });
 test('ordinary defeat still falls and checkpoint retries do not orphan candy hostages',()=>{
  const s=empty();s.hearts=1;enemyShot(s,s.player.x+25,s.player.y-30,Math.PI,160,'ball',{r:15,life:1});tick(s,.1);expect(s.playerDefeat.state).toBe('fall');expect(s.player.candy).toBeUndefined();tick(s,4);expect(s.done).toBe(true);
- const q=createAdventure(7),witch=q.enemies.find(e=>e.type===26),npc=q.villagers[0];Object.assign(npc,{state:'absorbed',curseOwner:witchId(witch),candyHomeX:witch.x-80});q.checkpointAt=q.level.checkpoints[3];retryAdventure(q);expect(npc.curseOwner).toBeTruthy();const restored=q.villagers.find(n=>n.id===npc.id);expect(restored.state).toBe('rescue');expect(restored.curseOwner).toBeUndefined();
+ const q=createAdventure(7),witch=q.enemies.find(e=>e.type===26),npc=q.villagers[0];Object.assign(npc,{state:'absorbed',curseOwner:witchId(witch),candyHomeX:witch.x-80});q.checkpointAt=q.level.checkpoints[3];retryAdventure(q);expect(npc.curseOwner).toBeTruthy();const restored=q.villagers.find(n=>n.id===npc.id);expect(restored.state).toBe('waiting');expect(restored.curseOwner).toBeUndefined();
 });

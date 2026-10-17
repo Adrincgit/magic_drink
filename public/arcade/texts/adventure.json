@@ -19,9 +19,9 @@
     "¡Nuevo poder!",
     "New power!"
   ],
-  "checkpoint": [
-    "Punto de control · +1 corazón",
-    "Checkpoint · +1 heart"
+  "lootheart": [
+    "¡Un corazón recuperado!",
+    "One heart restored!"
   ],
   "rescue": [
     "¡Un bunny a salvo!",

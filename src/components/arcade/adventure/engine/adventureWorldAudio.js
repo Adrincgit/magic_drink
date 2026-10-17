@@ -18,7 +18,7 @@ export function stepCreatureVoice(s,e,dt){
  worldSound(s,'zombieGroan',e.x,e.y,e);e.voiceWait=4.8+seed%5*.6;s.nextCreatureVoice=(s.time||0)+1.25;
 }
 export function enemyCastSound(s,kind,x,y){
- const sound={'act-two-straw':'stoneThrow','act-two-orb':'witchRay','act-two-mask':'witchRay','act-two-bat':'soulCast','candy-ray':'witchRay','witch-drop':'witchDrop','lantern-soul':'soulCast','soul-flame':'soulCast'}[kind];
+ const sound={ball:'enemyBall',streamer:'enemyStreamer',ring:'enemyRing',juggle:'enemyJuggle',bone:'enemyBone',bomb:'enemyBomb','water-bolt':'diverThrow','ember-torch':'enemyFlame','ember-mortar':'cannon','act-two-straw':'stoneThrow','act-two-orb':'witchRay','act-two-mask':'witchRay','act-two-bat':'soulCast','candy-ray':'witchRay','witch-drop':'witchDrop','lantern-soul':'soulCast','soul-flame':'soulCast'}[kind];
  if(!sound)return;
  // A fan is one launch, not three superimposed copies of the same sound.
  const key=sound+':'+Math.round(x)+':'+Math.round(y),at=s.time||0;

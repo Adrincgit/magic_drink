@@ -1,5 +1,6 @@
 import {hasMod} from './adventureMods';
-export const stompable=e=>[0,1,3,4,6,10,11,14].includes(e.type)&&!e.spiked&&!e.spikes&&!e.armored;
+import {canControlEnemy} from '../actors/enemies/adventureEnemyTraits';
+export const stompable=e=>[0,1,3,4,6,10,11,14].includes(e.type)&&canControlEnemy(e,'push')&&!e.spiked&&!e.spikes&&!e.armored;
 export function stompBounce(s,e){
  if(!stompable(e))return false;
  const p=s.player,boots=hasMod(s,'spring-boots');p.vy=boots?-690:-390;p.ground=null;p.coasterGround=false;

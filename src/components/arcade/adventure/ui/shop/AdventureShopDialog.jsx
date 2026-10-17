@@ -4,7 +4,8 @@ import {MOD_CATEGORIES,categorySlots,modCategory,categoryUsed} from '../../engin
 import {buyAdventureCategorySlot} from '../../../shared/arcadeStore';
 import AdventureEquipment from './AdventureEquipment';
 import {buyAdventureMod,upgradeAdventureMod,toggleAdventureMod} from '../../../shared/arcadeStore';
-import {navigateGamepadMenu} from '../../input/adventureGamepad';
+import {focusControl} from '../../input/adventureGamepad';
+import {navigateShopGamepad} from '../../input/adventureShopGamepad';
 import {DRINKS} from '../../world/adventureLevels';
 import {spellFor} from '../../engine/adventureMagic';
 import {strongShots} from '../../engine/adventureAmmo';
@@ -13,7 +14,7 @@ import AdventureShopTrial from './AdventureShopTrial';
 import {misoFrame} from './misoAnimation';
 import css from './adventureWorkshop.module.css';
 export default function AdventureShop({save,art,en,onLeave,onSettings,muted,onSound,reduced}){
- const root=useRef(null),working=useRef(false);
+ const root=useRef(null),working=useRef(false),pendingPadFocus=useRef(null);
  const [busy,setBusy]=useState(false),[selected,setSelected]=useState('starter-5'),[filter,setFilter]=useState('all'),[search,setSearch]=useState(''),[preview,setPreview]=useState(1),[frame,setFrame]=useState(0),[notice,setNotice]=useState('');
  const [tab,setTab]=useState('shop'),[category,setCategory]=useState('drinks');
  const t=(es,eng)=>en?eng:es,lang=en?1:0,owned=save.modsOwned||[],equipped=save.modsEquipped||[];
@@ -22,20 +23,39 @@ export default function AdventureShop({save,art,en,onLeave,onSettings,muted,onSo
  const families=categorySlots(save.modCategorySlots,save.modSlots,equipped),normalizedSave={...save,modCategorySlots:families};
  const full=!equipped.includes(mod.id)&&(categoryUsed(equipped,modCategory(mod))>=families[modCategory(mod)]||mod.drink!==undefined&&!mod.timed&&equipped.filter(id=>id.startsWith('starter-')&&id!=='starter-12').length>=2);
  useEffect(()=>{root.current?.focus();},[]);
+ useEffect(()=>{
+  const pending=pendingPadFocus.current,node=root.current;if(busy||!pending||!node)return;
+  const target=node.querySelector(pending.selector);
+  if(target&&!target.disabled){focusControl(node,target);pendingPadFocus.current=null;}
+  else if(target?.disabled||pending.tab!==tab){focusControl(node,node.querySelector('[role=tab][aria-selected=true]'));pendingPadFocus.current=null;}
+ },[save,busy,tab]);
+ useEffect(()=>{
+  const node=root.current,change=()=>{setTab(tab==='shop'?'equipment':'shop');requestAnimationFrame(()=>{if(root.current)focusControl(root.current,root.current.querySelector('[role=tab][aria-selected=true]'));});};
+  node.addEventListener('shop-tab',change);return()=>node.removeEventListener('shop-tab',change);
+ },[tab]);
  useEffect(()=>{if(reduced)return;const start=performance.now(),timer=setInterval(()=>setFrame(misoFrame(performance.now()-start,'talk')),100);return()=>clearInterval(timer);},[reduced]);
  function select(item){if(item.id===selected)return;setSelected(item.id);setPreview(owned.includes(item.id)?save.modLevels?.[item.id]||1:1);setNotice('');}
- async function action(work,success){if(working.current)return;working.current=true;setBusy(true);try{const ok=await work();setNotice(ok?success:t('No se pudo completar. Revisa tus estrellas y espacios.','Could not complete. Check your stars and slots.'));if(ok)onSound('coin');}finally{working.current=false;setBusy(false);}}
+ async function action(work,success){
+  if(working.current)return;
+  const focused=document.activeElement,pad=focused?.dataset.padFocus,attributes=['data-buy-mod','data-equip-mod','data-upgrade-mod','data-buy-category-slot','data-family-slot'],attribute=attributes.find(a=>focused?.hasAttribute(a)),value=attribute&&focused.getAttribute(attribute);
+  working.current=true;setBusy(true);let ok=false;
+  try{ok=await work();setNotice(ok?success:t('No se pudo completar. Revisa tus estrellas y espacios.','Could not complete. Check your stars and slots.'));if(ok)onSound('coin');}
+  finally{
+   if(pad&&attribute)pendingPadFocus.current={tab,selector:attribute==='data-buy-mod'&&ok?'[data-equip-mod="'+value+'"]':'['+attribute+'="'+value+'"]'};
+   working.current=false;setBusy(false);
+  }
+ }
  const equip=item=>action(()=>toggleAdventureMod(item.id),equipped.includes(item.id)?t('Guardado en tu colección.','Returned to your collection.'):t('Equipado para el camino.','Equipped for your adventure.'));
  function key(e){
   if(e.key==='Escape'){e.preventDefault();e.stopPropagation();const trial=root.current.querySelector('[data-trial-playing="true"]');if(trial)trial.dispatchEvent(new Event('trial-exit'));else if(!working.current)onLeave();}
   else if(e.key==='Tab'){const items=[...root.current.querySelectorAll('button:not(:disabled),input,select,canvas')].filter(el=>el.getClientRects().length),first=items[0],last=items.at(-1);if(e.shiftKey&&(document.activeElement===first||document.activeElement===root.current)){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}
-  else if(!e.target.matches('input,select,canvas')&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();navigateGamepadMenu(root.current,e.key.slice(5).toLowerCase());}
+  else if(!e.target.matches('input,select,canvas')&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();navigateShopGamepad(root.current,e.key.slice(5).toLowerCase());}
  }
  return <section ref={root} role="dialog" aria-modal="true" tabIndex={-1} className={css.workshop} data-adventure-shop data-shop-view="workshop" onKeyDown={key} aria-label={t('La tiendita viajera de Miso','Miso’s travelling shop')}>
   <header className={css.header}><div className={css.merchant} data-merchant-frame={frame} style={{backgroundPosition:(frame%3*50)+'% '+(Math.floor(frame/3)*100)+'%'}} role="img" aria-label="Miso"/><div className={css.heading}><small>MAGIC DRINK · BOUTIQUE</small><h2>{t('La tiendita de Miso','Miso’s travelling shop')}</h2><p>{t('Mira, experimenta y elige tu magia.','Browse, experiment and choose your magic.')}</p></div><div className={css.wallet}>★ <b data-shop-money>{save.stars}</b></div><nav><button onClick={()=>onSound('mute')} aria-label={t('Sonido de la tienda','Shop sound')} aria-pressed={!muted}>{muted?'♫ ×':'♫'}</button><button onClick={onSettings} aria-label={t('Ajustes de audio y mando','Audio and controller settings')}>⚙</button><button onClick={onLeave} disabled={busy} data-shop-leave>{t('Volver al camino','Back to the path')} ↗</button></nav></header>
-  <div className={css.workshopTabs} role="tablist" aria-label={t('Secciones del taller','Workshop sections')}><button role="tab" id="shop-tab" aria-controls="shop-panel" aria-selected={tab==='shop'} onClick={()=>setTab('shop')}>{t('Tienda y patio de pruebas','Shop and practice yard')}</button><button role="tab" id="equipment-tab" aria-controls="equipment-panel" aria-selected={tab==='equipment'} onClick={()=>setTab('equipment')}>{t('Equipamiento','Equipment')} <small>{equipped.length}</small></button><span>{t('Q / R3 · cambiar bebida','Q / R3 · swap flavor')}</span></div>
+  <div className={css.workshopTabs} role="tablist" aria-label={t('Secciones del taller','Workshop sections')}><button role="tab" id="shop-tab" aria-controls="shop-panel" aria-selected={tab==='shop'} onClick={()=>setTab('shop')}>{t('Tienda y patio de pruebas','Shop and practice yard')}</button><button role="tab" id="equipment-tab" aria-controls="equipment-panel" aria-selected={tab==='equipment'} onClick={()=>setTab('equipment')}>{t('Equipamiento','Equipment')} <small>{equipped.length}</small></button><span>{t('LB / RB · secciones · A elegir · B volver','LB / RB · sections · A select · B back')}</span></div>
   {tab==='equipment'?<div className={css.equipmentPanel} id="equipment-panel" role="tabpanel" aria-labelledby="equipment-tab"><AdventureEquipment save={normalizedSave} en={en} category={category} setCategory={setCategory} selected={selected} select={select} busy={busy} equip={equip} expand={(cat,count)=>action(()=>buyAdventureCategorySlot(cat,count),t('¡Familia ampliada!','Family expanded!'))} onShop={item=>{select(item);setSearch('');setFilter('all');setTab('shop');}} notice={notice}/></div>:<div className={css.body} id="shop-panel" role="tabpanel" aria-labelledby="shop-tab">
-   <aside className={css.catalog}><div className={css.catalogHeading}><h3>{t('Elige tu encanto','Choose your charm')}</h3><span>{catalog.length}</span></div><input type="search" aria-label={t('Buscar bebida o mod','Search drinks or mods')} placeholder={t('Buscar bebida o mod…','Search drinks or mods…')} value={search} onChange={e=>setSearch(e.target.value)}/><div className={css.filters}>{[['all',t('Todo','All')],['drinks',t('Bebidas','Drinks')],['mods','Mods'],['owned',t('Míos','Owned')]].map(([id,label])=><button key={id} aria-pressed={filter===id} onClick={()=>setFilter(id)}>{label}</button>)}</div>
+   <aside className={css.catalog}><div className={css.catalogHeading}><h3>{t('Elige tu encanto','Choose your charm')}</h3><span>{catalog.length}</span></div><input type="search" aria-label={t('Buscar bebida o mod','Search drinks or mods')} placeholder={t('Buscar bebida o mod…','Search drinks or mods…')} value={search} onChange={e=>setSearch(e.target.value)}/><div className={css.filters} data-catalog-filters>{[['all',t('Todo','All')],['drinks',t('Bebidas','Drinks')],['mods','Mods'],['owned',t('Míos','Owned')]].map(([id,label])=><button key={id} aria-pressed={filter===id} onClick={()=>setFilter(id)}>{label}</button>)}</div>
     <div className={css.items}>{catalog.map(item=>{const lv=owned.includes(item.id)?save.modLevels?.[item.id]||1:0;return <button key={item.id} data-mod={item.id} data-selected={selected===item.id} aria-pressed={selected===item.id} onFocus={()=>select(item)} onClick={()=>select(item)} aria-label={item.name[lang]}><ModIcon mod={item} className={css.catalogIcon}/><span><b>{item.name[lang]}</b><small>{lv?(equipped.includes(item.id)?t('Equipado','Equipped'):t('Tuyo','Owned'))+' · '+lv:availableMod(item,save)?item.price+' ★':t('Por desbloquear · prueba libre','Locked · free trial')}</small></span>{selected===item.id&&<i>✦</i>}</button>;})}{!catalog.length&&<p>{t('No hay encantos con ese nombre.','No charms found.')}</p>}</div>
    </aside>
    <article className={css.details} data-item-popup={mod.id} data-shop-description={mod.id} data-product-info><div className={css.itemHeading}><span>{mod.timed?t('MOD DE DANZA','DANCE MOD'):drink?'MAGIC DRINK':t('AMULETO','CHARM')}</span><h2>{mod.name[lang]}</h2></div><div className={css.itemArt}><ModIcon mod={mod} className={css.heroIcon}/><span>{level?t('Tu nivel ','Your level ')+level:t('Descúbrelo','Discover it')}</span></div>

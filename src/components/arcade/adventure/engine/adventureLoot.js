@@ -30,7 +30,7 @@ export function takeLoot(s,q){
  }else if(type==='ammo'){
   if(!refillDrink(s)){const pool=drinkLootPool(s),kind=s.lastDrink??pool[0];collectDrink(s,pool.includes(kind)?kind:pool[0]);}
  }else if(type==='shield'){s.shield=Math.min(3,(s.shield||0)+shieldCharges(s,q));s.shieldHit=.3;s.shieldBreak=0;}
- else if(type==='fullheal'){s.hearts=s.maxHearts;s.effects.push({x:p.x,y:p.y-40,fullheal:true,size:100,age:0,life:.8});}
+ else if(type==='heart'||type==='fullheal'){s.hearts=type==='heart'?Math.min(s.maxHearts,s.hearts+1):s.maxHearts;s.effects.push({x:p.x,y:p.y-40,fullheal:true,size:type==='heart'?72:100,age:0,life:.8});}
  else if(type==='original'){
   endRibbonDance(s);p.sipKind='original';
   s.overdrive=s.overdriveDuration=originalDuration(s);p.drinkCast=p.ground!==null?.7:0;p.pendingSip=p.ground===null;

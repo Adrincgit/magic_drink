@@ -73,5 +73,5 @@ test('adult defenders throw damaging stones while retreating, then join the esca
 });
 test('checkpoint retry cannot leave a victim in a removed dynamic pumpkin',()=>{
  const s=createAdventure(7),q=s.villagers[0];spawnSoulPumpkin(s,makeEnemy(500,480,26),q);s.checkpointAt=s.level.checkpoints[2];retryAdventure(s);
- const n=s.villagers.find(n=>n.id===q.id);expect(n.state).toBe('rescue');expect(n.curseOwner).toBeUndefined();
+ const n=s.villagers.find(n=>n.id===q.id);expect(n.state).toBe('waiting');expect(n.curseOwner).toBeUndefined();
 });

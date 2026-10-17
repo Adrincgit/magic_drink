@@ -26,7 +26,7 @@ test('the blockade camera opens smoothly around the same ground baseline and rec
 
 test('real basic shots wear down the resistant collapse and the crowd escapes through the broken opening',()=>{
  const {s,r}=encounter();s.villageBlockade.started=true;s.villageBlockade.waves=3;tick(s,2,{attack:true});expect(r.hp).toBeLessThan(96);expect(r.hp).toBeGreaterThan(50);expect(r.broken).toBeFalsy();tick(s,13,{attack:true});expect(r.broken).toBe(true);expect(s.villagers.some(q=>q.x<r.x-r.w/2)).toBe(true);
- retryAdventure(s);expect(s.villageObstacles.find(q=>q.blockade).broken).toBe(true);expect(s.villageBlockade.waves).toBe(3);
+ retryAdventure(s);expect(s.villageObstacles.find(q=>q.blockade).broken).toBeFalsy();expect(s.villageBlockade.waves).toBe(0);
 });
 
 test('delaying brings bounded attackers and real candy absorption creates additional enemies; early rescue prevents waves',()=>{

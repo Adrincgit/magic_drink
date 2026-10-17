@@ -5,6 +5,7 @@ import {skeletonThrowOrigin,skeletonFrame,SKELETON_PLUCK_TIME,SKELETON_THROW_TIM
 import {guardBlocks} from '../../engine/adventureDefense';
 import {prepareGraveyard,CRYPT_EXIT_TIME} from '../../engine/adventureGraveyard';
 import {prepareZombieVariant,zombieHasMissingLimb,beginNightmareDefeat} from '../../engine/adventureNightmareMotion';
+import {enemyCastSound} from '../../engine/adventureWorldAudio';
 export const NIGHTMARE_ZOMBIE=18,NIGHTMARE_GHOST=19,NIGHTMARE_TALL=20,NIGHTMARE_CRAWLER=21,NIGHTMARE_SKELETON=22,NIGHTMARE_BELL=23,NIGHTMARE_HAND=24;
 export const isNightmare=e=>e.type>=18&&e.type<=24;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
@@ -26,7 +27,7 @@ function skeleton(s,e,dt){
   if(e.timer<=0){e.phase='throw';e.timer=SKELETON_THROW_TIME;}return;
  }
  if(e.phase==='throw'){
-  if(e.timer<=0){const {x,y}=skeletonThrowOrigin(e),angle=Math.atan2(s.player.y-33-y,s.player.x-x);s.hostile.push({x,y,vx:Math.cos(angle)*260,vy:Math.sin(angle)*260-35,r:11,life:3.5,age:0,kind:'bone',boneFrame:9,gravity:85});e.heldBone=null;e.phase='recover';e.timer=SKELETON_RECOVER_TIME;}return;
+  if(e.timer<=0){const {x,y}=skeletonThrowOrigin(e),angle=Math.atan2(s.player.y-33-y,s.player.x-x);s.hostile.push({x,y,vx:Math.cos(angle)*260,vy:Math.sin(angle)*260-35,r:11,life:3.5,age:0,kind:'bone',boneFrame:9,gravity:85});enemyCastSound(s,'bone',x,y);e.heldBone=null;e.phase='recover';e.timer=SKELETON_RECOVER_TIME;}return;
  }
  if(e.phase==='recover'){if(e.timer<=0){if(e.volleyLeft>1){e.volleyLeft--;e.phase='pluck';e.timer=SKELETON_PLUCK_TIME;}else{e.phase='patrol';e.timer=1.7+(e.spawnSeed||0)%3*.25;}}return;}
  const dx=s.player.x-e.x;e.dir=Math.sign(dx)||e.dir;

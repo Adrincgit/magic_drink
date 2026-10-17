@@ -1,7 +1,9 @@
 import {foley,createTextureVoice} from './foleyTexture';
-export const WORLD_COMBAT_EVENTS=['witchRay','witchDrop','soulCast','magicImpact','magicSplash','candyTransform','candyRelease','witchAbsorb','pumpkinBirth','pumpkinBreak','rubbleHit','rubbleBreak','woodHit','woodBreak','wagonBreak','wallCollapse','stoneThrow','bodyFall','harvesterArrival','harvesterCast','harvesterCrack','break'];
+import {playMaterialCombatSound,MATERIAL_COMBAT_EVENTS} from './materialCombatSound';
+export const WORLD_COMBAT_EVENTS=['witchRay','witchDrop','soulCast','magicImpact','magicSplash','candyTransform','candyRelease','witchAbsorb','pumpkinBirth','pumpkinBreak','rubbleHit','rubbleBreak','woodHit','woodBreak','wagonBreak','wallCollapse','stoneThrow','bodyFall','harvesterArrival','harvesterCast','harvesterCrack','break',...MATERIAL_COMBAT_EVENTS];
 const kinds=new Set(WORLD_COMBAT_EVENTS);
 export function playWorldCombatSound(ctx,out,kind,at=ctx.currentTime,placement={}){
+ if(playMaterialCombatSound(ctx,out,kind,at,placement))return true;
  if(!kinds.has(kind))return false;const f=foley(ctx,out,at,{...placement,space:.32});
  switch(kind){
   case 'witchRay':case 'harvesterCast':f.air(.42,.24,1700,390,0,'breath',.012);f.air(.12,.14,4400,1300);f.grit(6,.11,3900,.026);f.body(106,38,.32,.11);break;

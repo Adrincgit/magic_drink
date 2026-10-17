@@ -18,9 +18,9 @@ Decisión vigente, **16/10/2026**: Halloween vuelve al **acto 2**, con cuatro re
 | --- | --- | --- |
 | 2-1 | Implementado; sujeto a pulido | Bosque de cenizas → cementerio → portón hacia el pueblo. Campanero Hueco como minijefe. |
 | 2-2 | Implementado; sujeto a pulido | Villa Lumbre: evacuación, destrucción, dulces y calabazas. Minijefe: la Cosechera de Dulces. [Revisión actual](../village-5-2/README.md). |
-| 2-3 | Implementado; sujeto a pulido | El maizal del último atardecer: surcos, graneros, molinos, emboscadas anunciadas y rutas sobre carros o tejados. Minijefe: el Rey de Paja. |
-| 2-4 | Implementado; sujeto a pulido | La mansión de las máscaras: jardín, salones, balcones y tejados; vampiros, murciélagos y armaduras. Minijefe: el Conde de Medianoche. |
-| 2-5 | Implementado; sujeto a pulido | La carpa de los malos sueños: enfrentamiento principal contra la arlequín de dos conos, con pesadillas e ilusiones que alteran la arena de forma anunciada. |
+| 2-3 | Prototipo jugable; pendiente de desarrollo y pulido | El maizal del último atardecer: surcos, graneros, molinos, emboscadas anunciadas y rutas sobre carros o tejados. Minijefe: el Rey de Paja. |
+| 2-4 | Prototipo jugable; pendiente de desarrollo y pulido | La mansión de las máscaras: jardín, salones, balcones y tejados; vampiros, murciélagos y armaduras. Minijefe: el Conde de Medianoche. |
+| 2-5 | Prototipo jugable; pendiente de desarrollo y pulido | La carpa de los malos sueños: enfrentamiento principal contra la arlequín de dos conos, con pesadillas e ilusiones que alteran la arena de forma anunciada. |
 
 La distribución de los cinco niveles fue aceptada como guía. Los nombres futuros pueden pulirse al producirlos. El cambio de noche a atardecer puede tratarse como otro escenario o una alteración del paisaje por la arlequín; su explicación narrativa sigue abierta.
 

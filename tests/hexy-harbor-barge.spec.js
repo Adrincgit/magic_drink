@@ -19,7 +19,7 @@ test('waterfront is continuous, has three rescues and a deliberate aquatic cast'
  // This test isolates terrain traversal; the gated fight has its own suite.
  s.harborAmbush.state='cleared';
  for(let i=0;i<7000&&s.player.x<level.arena.entry;i++){stepAdventure(s,{right:true},1/120);expect(s.player.ground).not.toBeNull();expect(s.hearts).toBe(s.maxHearts);}
- expect(s.player.x).toBeGreaterThan(level.arena.entry);expect(s.boss.phase).toBe('sleep');expect(s.checkpointAt[0]).toBe(12880);
+ expect(s.player.x).toBeGreaterThan(level.arena.entry);expect(s.boss.phase).toBe('sleep');expect(s.checkpointAt).toBeUndefined();
 });
 
 test('barge arrives over time and can be hit during each attack; lower hull is armor',()=>{
@@ -40,8 +40,8 @@ test('drumroll and tidal attacks hit standing Hexy; mortar breaks into short wav
 test('second phase keeps local armor, fires the mounted bow cannon and delays destruction for the crew',()=>{
  const s=battle();s.boss.hp=150;tick(s,1);expect(s.boss.phase).toBe('transform');tick(s,130);expect(s.boss.armorBroken).toBeFalsy();expect(s.boss.parts.drum.hp).toBe(80);tick(s,150);expect(s.boss.vulnerable).toBe(true);
  Object.assign(s.boss,{phase:'warn',move:'broadside',timer:1.4});const x=s.boss.x;tick(s,120);expect(s.boss.x).toBeCloseTo(x);tick(s,160);expect(s.boss.x).toBeCloseTo(x);expect(s.hostile.some(q=>q.kind==='barge-balloon')).toBe(true);
- s.boss.hp=0;s.boss.phase='defeated';tick(s,200);expect(s.boss.shattered).toBe(true);expect(s.organDebris.length).toBeGreaterThan(12);expect(s.clear).toBeFalsy();tick(s,360);expect(s.clear).toBeTruthy();
- retryAdventure(s);expect(s.boss.hp).toBe(320);expect(s.organDebris).toEqual([]);expect(s.boss.shattered).toBeUndefined();
+ s.boss.hp=0;s.boss.phase='defeated';tick(s,200);expect(s.boss.shattered).toBe(true);expect(s.organDebris.some(q=>q.art==='barge-wheel')).toBe(true);expect(s.organDebris.filter(q=>q.art==='barge-phase-two')).toHaveLength(6);expect(s.clear).toBeFalsy();tick(s,360);expect(s.clear).toBeTruthy();
+ retryAdventure(s);expect(s.boss.hp).toBe(320);expect(s.organDebris||[]).toEqual([]);expect(s.boss.shattered).toBeUndefined();
 });
 
 test('diver swims then leaps onto the bridge and fires a water pistol from its hand',()=>{

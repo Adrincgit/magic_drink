@@ -27,7 +27,7 @@ export function updateEmberTroop(s,e,dt,shoot){
    shoot(s,m.x,m.y,Math.atan2(vy,vx),Math.hypot(vx,vy),machine?'ember-mortar':'ember-torch',{
     ember:true,element:'fire',gravity,r:machine?20:13,drawSize:machine?76:58,life:4,floor:emberFloor(s,target),spin:e.dir*7,
    });
-   e.fired++;e.release=.2;s.events.push(machine?'cannon':'harlequinCast');
+   e.fired++;e.release=.2;
   }
   if(e.fireAge>(machine?1.12:.52))enter('recover');
  }else if(e.fireState==='recover'&&e.fireAge>(machine?.9:.65)){enter('patrol');e.timer=s.gentle?3.5:2.6;}

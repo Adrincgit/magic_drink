@@ -6,6 +6,8 @@ Guías relacionadas: [Magic Drinks y amuletos](MAGIC_DRINKS_Y_AMULETOS.md), [dis
 
 ## Estructura acordada
 
+Sin checkpoints: al perder se reinicia desde el inicio del nivel. Cada recorrido tiene una sola caja con un corazón cerca de la mitad, que recupera un corazón al romperla y recogerlo. Los niveles exclusivamente de jefe no añaden esta caja. [Implementación y validación](balloon-air-restart/README.md).
+
 - **6 actos, 5 niveles por acto: 30 niveles.**
 - Los niveles 1 a 4 de cada acto terminan con un minijefe propio: **24 minijefes** en total.
 - El nivel 5 se dedica al jefe principal: **6 enfrentamientos principales**.
@@ -39,9 +41,9 @@ Continúa desde el bosque quemado. Las criaturas de Halloween nacen de la mente 
 | --- | --- | --- | --- |
 | 2-1 | **El sendero de las risas.** Bosque de cenizas, cementerio, criptas y caminos sobre las tumbas. | El Campanero Hueco | Implementado; antes 5-1 |
 | 2-2 | **Villa Lumbre / El pueblo de los dulces.** Evacuación, barricadas, rescates y habitantes convertidos en dulces. | La Cosechera de Dulces | Implementado; antes 5-2 |
-| 2-3 | **El maizal del último atardecer.** Surcos, graneros, molinos y espantapájaros confundidos con el decorado; suelo, tejados y carros de cosecha. | El Rey de Paja: se recompone con partes del maizal | Implementado; sujeto a pulido |
-| 2-4 | **La mansión de las máscaras.** Jardín, salones, balcones y tejados; vampiros, murciélagos y armaduras animadas; recorrido vertical. | El Conde de Medianoche: se transforma en bandada | Implementado; sujeto a pulido |
-| 2-5 | **La carpa de los malos sueños.** Cambios anunciados de suelo, decorado y criaturas durante la batalla. | Arlequín de dos conos: pesadillas e ilusiones | Implementado; sujeto a pulido |
+| 2-3 | **El maizal del último atardecer.** Surcos, graneros, molinos y espantapájaros confundidos con el decorado; suelo, tejados y carros de cosecha. | El Rey de Paja: se recompone con partes del maizal | Prototipo jugable; pendiente de desarrollo y pulido |
+| 2-4 | **La mansión de las máscaras.** Jardín, salones, balcones y tejados; vampiros, murciélagos y armaduras animadas; recorrido vertical. | El Conde de Medianoche: se transforma en bandada | Prototipo jugable; pendiente de desarrollo y pulido |
+| 2-5 | **La carpa de los malos sueños.** Cambios anunciados de suelo, decorado y criaturas durante la batalla. | Arlequín de dos conos: pesadillas e ilusiones | Prototipo jugable; pendiente de desarrollo y pulido |
 
 Repartir las criaturas por escenario: zombis y esqueletos en el cementerio; brujas y calabazas en el pueblo; espantapájaros en el maizal; vampiros en la mansión. Evitar concentrar todos los tipos en cada recorrido.
 

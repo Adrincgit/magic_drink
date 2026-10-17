@@ -37,9 +37,9 @@ test('opening a civilian pocket releases its runners; incoming magic can reach t
  const n=s.villagers[0],shot={kind:'candy-ray',village:true,life:1,r:9,owner:'threat',previousX:n.x+30,previousY:n.y-40,x:n.x-30,y:n.y-40};resolveVillageProjectile(s,shot,{x:0,y:0,w:1,h:1});expect(s.villagers.some(q=>q.state==='turning')).toBe(true);
  const runner=s.villagers.find(q=>q.state==='flee'),old=runner.x;hitVillageObstacles(s,{x:r.x,y:r.y-40,life:1,damage:99,kind:0},0);tick(s,1);expect(runner.x).toBeLessThan(old-150);expect(runner.blocked).toBe(false);
 });
-test('blocked streets create bounded pumpkin reinforcements and destruction persists on retry',()=>{
+test('blocked streets create bounded pumpkin reinforcements and rebuild on retry',()=>{
  const s=quiet(),r=s.villageObstacles.find(q=>q.kind==='wagon');r.ambush=true;place(s,r.x-250);tick(s,.1);expect(s.enemies.filter(q=>q.villageAmbush===r.id)).toHaveLength(2);expect(s.enemies.some(q=>q.type===25)).toBe(true);tick(s,5.3);expect(r.waves).toBe(2);
- hitVillageObstacles(s,{x:r.x,y:r.y-50,life:1,damage:99,kind:0},0);expect(s.villageDebris.length).toBeGreaterThan(0);const count=s.villageDebris.length;hitVillageObstacles(s,{x:r.x,y:r.y-50,life:1,damage:99,kind:0},0);expect(s.villageDebris).toHaveLength(count);retryAdventure(s);expect(s.villageObstacles.find(q=>q.id===r.id).broken).toBe(true);expect(s.platforms.find(q=>q.villageObstacle===r.id).gone).toBe(true);
+ hitVillageObstacles(s,{x:r.x,y:r.y-50,life:1,damage:99,kind:0},0);expect(s.villageDebris.length).toBeGreaterThan(0);const count=s.villageDebris.length;hitVillageObstacles(s,{x:r.x,y:r.y-50,life:1,damage:99,kind:0},0);expect(s.villageDebris).toHaveLength(count);retryAdventure(s);expect(s.villageObstacles.find(q=>q.id===r.id).broken).toBeFalsy();expect(s.platforms.find(q=>q.villageObstacle===r.id).gone).toBeFalsy();
 });
 test('only one evacuation carriage belongs to the opening, with wrecks and extra pumpkin zombies later',()=>{
  const s=createAdventure(7);expect(s.carriages).toHaveLength(1);expect(s.carriages[0].wakeX).toBe(0);expect(s.carriages[0].x).toBeLessThan(1500);expect(s.level.obstacles.filter(q=>q.kind==='wagon')).toHaveLength(3);expect(s.enemies.filter(q=>q.type===25).length).toBeGreaterThanOrEqual(14);expect(s.level.width).toBe(23240);

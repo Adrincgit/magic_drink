@@ -1,4 +1,5 @@
 import popcornAtlas from './hexyPopcornAtlas';
+import feedbackAtlas from './hexyFeedbackAtlas';
 import combatV12Atlas from './hexyCombatV12Atlas';
 import {hitReactionPose} from '../../engine/adventureHitReactions';
 import ribbonAtlas from './hexyRibbonAtlas';
@@ -27,6 +28,7 @@ atlas['drink-original']=Array.from({length:4},()=>({tip:[236,250]}));
 atlas['clash-fall']=Array.from({length:8},()=>({tip:[220,215]}));
 atlas['popcorn-recoil']=popcornAtlas;
 Object.assign(atlas,combatV12Atlas);
+Object.assign(atlas,feedbackAtlas);
 atlas['super-cast']=superCastAtlas;
 atlas['ribbon-swing']=ribbonAtlas;
 atlas['ribbon-action']=ribbonActionAtlas;
@@ -41,6 +43,7 @@ export const HEXY_SHEETS=['air-aim','ground-aim','run','jump','crouch-walk','rol
 export const HEXY_SIZE=116;
 HEXY_SHEETS.push('popcorn-recoil','fear','clash-fall','super-cast','element-hits','knockdown','fire-hit','heat');
 HEXY_SHEETS.push('volt-cast','popcorn-air');
+HEXY_SHEETS.push(...Object.keys(feedbackAtlas));
 HEXY_SHEETS.push('ribbon-swing','ribbon-action','ribbon-spin','ribbon-dance','ribbon-mastery','guard-up','comet-kick');
 export const HEXY_RUN_FRAMES=atlas.run.length;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
@@ -66,12 +69,14 @@ export function hexyPose(s){
  if(p.dash>0)return {sheet:p.dashAir?'air-dash':'roll',frame:clamp(Math.floor((1-p.dash/p.dashDuration)*8),0,7)};
  if(p.hitReact>0)return {sheet:'reactions',frame:4+clamp(Math.floor((.32-p.hitReact)*12.5),0,3)};
  if(s.ribbonDance&&p.guarding)return{sheet:'ribbon-dance',frame:12+Math.floor(p.guardAge*12)%4};
+ if(p.guarding&&p.ground!==null&&Math.abs(p.vx)>20)return{sheet:'guard-walk-v1',frame:(p.guardY<0?8:0)+Math.floor(p.stride*8)%8};
  if(p.guarding&&p.guardY<0)return {sheet:'guard-up',frame:p.guardHit>0?3:p.guardAge<.1?0:1+Math.floor(s.time*5)%2};
  if(p.guarding)return {sheet:'guard-pose',frame:p.guardHit>0?4:2+Math.floor(s.time*5)%2};
- if(p.superCast>0)return {sheet:'super-cast',frame:(s.powerClash?clashPortraitFrames(s.powerClash).hexy:3)*3+castingWindFrame(s.fxTime)};
  if(s.superCinematic?.airborne){
+  if(p.superCast>0)return {sheet:'air-super-release',frame:Math.floor(s.fxTime*10)%4};
   if(p.charge>0)return {sheet:'air-super',frame:clamp(Math.floor(p.charge/.225),0,3)};
  }
+ if(p.superCast>0)return {sheet:'super-cast',frame:(s.powerClash?clashPortraitFrames(s.powerClash).hexy:3)*3+castingWindFrame(s.fxTime)};
  if(p.charge>0)return {sheet:'super-charge',frame:clamp(Math.floor(p.charge/.225),0,3)};
  if(p.ribbonSwing>0&&p.ribbonSpinning)return {sheet:'ribbon-spin',frame:Math.floor((p.ribbonSpinAge||0)/(p.ribbonSpinCel||.055))%8};
  if(p.ribbonSwing>0&&p.ribbonMasterMove)return{sheet:'ribbon-mastery',frame:(p.ribbonMasterMove==='wand-toss'?0:p.ribbonMasterMove==='reel-slam'?4:12)+clamp(Math.floor((1-p.ribbonSwing/p.ribbonDuration)*4),0,3)};
@@ -79,6 +84,17 @@ export function hexyPose(s){
  if(p.ribbonSwing>0)return {sheet:'ribbon-action',frame:ribbonFrame(1-p.ribbonSwing/p.ribbonDuration,p.ribbonStrong,p.ribbonCombo)};
  if(s.ribbonDance&&p.ribbonCharge?.age>.2)return{sheet:'ribbon-mastery',frame:p.ribbonCharge.age<.5?12:13};
  if(s.ribbonDance&&p.ribbonFlip>0&&p.ground===null)return{sheet:'ribbon-mastery',frame:8+clamp(Math.floor((.48-p.ribbonFlip)/.12),0,3)};
+ // Holding jump owns the hat hand even during a shot/channel/strong cast.
+ // Ordinary air-fire poses would otherwise make a slow fall look unsupported.
+ if((p.gliding||p.hatCastUntil>s.time)&&p.ground===null&&!p.coasterGround){
+  if(cast||p.firing||p.specialCast>0||s.voltBeam?.segments?.length){
+   const ay=p.specialCast>0?p.specialAimY:p.aimY,ax=p.specialCast>0?p.specialAimX:p.aimX;
+   const row=ay<0?(ax===0?2:1):ay>0?(ax===0?4:3):0;
+   const frame=s.weapon===9&&!s.basicFire?[0,1,2,3,2,1][Math.floor((s.voltBeam?.age||0)/.095)%6]:steadyFrame;
+   return{sheet:'glide-fire-v1',frame:row*4+frame};
+  }
+  return{sheet:'glide',frame:Math.floor(s.time*6)%4};
+ }
  if(p.popcornRecoilUntil>s.time&&!p.crouch&&p.aimY===0&&!p.guarding){
   const air=p.ground===null&&!p.coasterGround;
   if(air===p.popcornRecoilAir)return{sheet:air?'popcorn-air':'popcorn-recoil',frame:Math.min(7,Math.floor((s.time-p.popcornRecoilStart)/.08))};
@@ -120,6 +136,7 @@ export function hexyPose(s){
  if(cast||p.firing)return {sheet:'stand-fire',frame:steadyFrame};
  if(p.heatIdle>.65)return {sheet:'heat',frame:Math.floor((p.heatIdle-.65)/.55)%4};
  if(p.fearAge>=0)return{sheet:'fear',frame:p.fearVariant*4+Math.min(3,Math.floor(p.fearAge/.4))};
+ if(s.hearts<=Math.max(2,Math.floor(s.maxHearts*.45)))return{sheet:'health-idle-v1',frame:(s.hearts<=1?4:0)+Math.floor(s.time/(s.hearts<=1?.32:.45))%4};
  const phase=s.time%4;
  return {sheet:'reactions',frame:phase>3.7&&phase<3.82?2:phase<1.4?0:phase<2.6?1:3};
 }

@@ -35,12 +35,12 @@ test('the second bridge locks the camera and player until both staggered waves a
  s.player.x=room.trigger;tick(s,480);expect(s.enemies.some(e=>e.harborAmbush&&e.hp>0)).toBe(false);
 });
 
-test('ambush resets on retry, respects later checkpoints and pauses during a super',()=>{
+test('ambush resets on every level retry, ignores old checkpoints and pauses during a super',()=>{
  const s=setup();enter(s);tick(s,320);const before={...s.harborAmbush};
  stepAdventure(s,{super:true},1/120);expect(s.superCinematic).toBeTruthy();tick(s,20);expect(s.harborAmbush).toEqual(before);
  s.checkpointAt=[4530,500];retryAdventure(s);expect(s.harborAmbush.state).toBe('waiting');expect(s.enemies.some(e=>e.harborAmbush)).toBe(false);
  enter(s);tick(s,90);expect(s.enemies.filter(e=>e.harborAmbush)).toHaveLength(1);
- s.checkpointAt=[12880,490];retryAdventure(s);tick(s,10);expect(s.harborAmbush.state).toBe('cleared');expect(s.enemies.some(e=>e.harborAmbush)).toBe(false);
+ s.checkpointAt=[12880,490];retryAdventure(s);tick(s,10);expect(s.harborAmbush.state).toBe('waiting');expect(s.enemies.some(e=>e.harborAmbush)).toBe(false);
 });
 
 test('the ambush zeppelin turns, aims from the visible side, fires and never escapes',()=>{

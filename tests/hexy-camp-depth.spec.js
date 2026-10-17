@@ -29,14 +29,14 @@ test('all eight tent squads announce, emerge from their own door, and stop spawn
  }
  expect(s.enemies).toHaveLength(19);
  s.checkpointAt=[-3640,480];retryAdventure(s);
- expect(s.campTents.filter(q=>q.state==='closed').map(q=>q.x)).toEqual([-2980,-1730]);
+ expect(s.campTents.every(q=>q.state==='closed')).toBe(true);expect(s.player.x).toBe(s.level.spawn[0]);
  s.checkpointAt=[660,480];retryAdventure(s);tick(s,100);expect(s.enemies).toHaveLength(0);
 });
-test('the full heart is released only by breaking the marked crate, then heals on pickup',()=>{
- const s=createAdventure(3),box=s.supplies.find(q=>q.preview==='fullheal');s.checkpointAt=[-820,480];s.hearts=1;s.player.x=box.x-100;s.player.y=480;s.player.ground=0;
- tick(s,40);expect(s.hearts).toBe(1);expect(s.pickups.some(q=>q.type==='fullheal')).toBe(false);
- damageSupply(s,box,3);expect(s.pickups).toHaveLength(0);damageSupply(s,box,1);expect(s.pickups.filter(q=>q.type==='fullheal')).toHaveLength(1);
- s.player.x=box.x;tick(s,100);expect(s.hearts).toBe(s.maxHearts);
+test('the midpoint heart is released only by breaking the marked crate, then heals one heart on pickup',()=>{
+ const s=createAdventure(3),box=s.supplies.find(q=>q.preview==='heart');s.hearts=1;s.player.x=box.x-100;s.player.y=480;s.player.ground=0;
+ tick(s,40);expect(s.hearts).toBe(1);expect(s.pickups.some(q=>q.type==='heart')).toBe(false);
+ damageSupply(s,box,3);expect(s.pickups).toHaveLength(0);damageSupply(s,box,1);expect(s.pickups.filter(q=>q.type==='heart')).toHaveLength(1);
+ s.player.x=box.x;tick(s,100);expect(s.hearts).toBe(2);
  expect(campTentPlacement(s).w).toBeGreaterThan(2500);
 });
 test('depth planes separate laterally, keep their roots still, and smoke animates with a parked camera',()=>{
@@ -70,6 +70,6 @@ test('inspect the actual layered camp, tent emergence, healing crate and giant s
   await page.evaluate(x=>{const w=window.campReview;w.scene(x);w.paint();},x);await page.locator('#camp-review').screenshot({path:dir+'/'+name+'.jpg'});
  }
  await page.evaluate(()=>{const w=window.campReview;w.scene(-11550);for(let i=0;i<180;i++)w.stepAdventure(w.s,{},1/120);w.paint();});await page.locator('#camp-review').screenshot({path:dir+'/07-emergence.jpg'});
- await page.evaluate(()=>{const w=window.campReview;w.scene(-710);const q=w.s.supplies.find(q=>q.preview==='fullheal');w.damageSupply(w.s,q,4);for(let i=0;i<60;i++)w.stepAdventure(w.s,{},1/120);w.paint();});await page.locator('#camp-review').screenshot({path:dir+'/08-heart-released.jpg'});
+ await page.evaluate(()=>{const w=window.campReview,q=w.createAdventure(3).supplies.find(q=>q.preview==='heart');w.scene(q.x-140);const box=w.s.supplies.find(q=>q.preview==='heart');w.damageSupply(w.s,box,4);for(let i=0;i<60;i++)w.stepAdventure(w.s,{},1/120);w.paint();});await page.locator('#camp-review').screenshot({path:dir+'/08-heart-released.jpg'});
  expect(errors).toEqual([]);
 });

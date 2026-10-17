@@ -1,5 +1,13 @@
 # Hexy & the Lost Chorus
 
+[Revisión vigente del jefe 1-3: torrentes y olas conectados físicamente, oleadas grandes, tambor visible, Hexy mojada y destrucción por piezas de maquinaria](barge-coherence/README.md).
+
+[Regla vigente: recorridos sin checkpoints, reinicio desde el inicio, una caja con un corazón a mitad del mapa y aire dibujado para la fase 2 del globo](balloon-air-restart/README.md).
+
+[Pulido común vigente: roles y resistencias de enemigos, impactos por material, sonidos de proyectiles y agua, y ultimate aéreo con dibujos propios](global-combat-polish/README.md).
+
+[Revisión global vigente: sombrero y disparo simultáneos, marcha con escudo, contacto con el suelo, fuego, aura eléctrica caricaturesca intermitente y navegación de Miso con mando](global-feedback/README.md). [Marcha corregida del malabarista](juggler-gait/revision-2/README.md). Los niveles 2-3, 2-4 y 2-5 son prototipos pendientes de desarrollo.
+
 **Guías vigentes, 16/10/2026:** [campaña aprobada de seis actos y treinta niveles](CAMPANA.md) · [Magic Drinks, amuletos, mejoras y precios actuales](MAGIC_DRINKS_Y_AMULETOS.md). Halloween es el **acto 2**: cementerio 2-1, Villa Lumbre 2-2, maizal 2-3, mansión 2-4 y arlequín de dos conos 2-5. [Arte y funcionamiento de los últimos tres niveles](act-2-expansion/README.md). Las carpetas `halloween-5-1` y `village-5-2` conservan su nombre histórico.
 
 [Revisión vigente del 1-4: planos del bosque, raíces cubiertas, salida al mirador, animales huyendo y música entregada por el usuario](ember-fort/depth.md).
