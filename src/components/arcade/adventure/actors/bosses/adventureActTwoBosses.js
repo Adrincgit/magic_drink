@@ -1,8 +1,10 @@
 import {worldSound} from '../../engine/adventureWorldAudio';
+import {faceTarget} from '../enemies/enemyFacing';
 import {ACT_TWO_MUZZLES} from './actTwoAtlas';
+import {stepCornKing,cornKingBody,cornKingDrawing,cornKingMuzzle,stepCornHazards} from './cornfieldKing';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const enter=(b,phase,duration)=>Object.assign(b,{phase,timer:duration,phaseAge:0,phaseDuration:duration});
-export const actTwoBossBody=s=>({x:s.boss.x-(s.level.cornfield?57:39),y:s.boss.y-(s.level.cornfield?184:170),w:s.level.cornfield?114:78,h:s.level.cornfield?184:170});
+export const actTwoBossBody=s=>s.level.cornfield?cornKingBody(s):({x:s.boss.x-39,y:s.boss.y-170,w:78,h:170});
 export function damageActTwoBoss(s,damage){
  const b=s.boss;if(!b.vulnerable||b.hp<=0)return;
  const count=s.level.badDreams?3:2,stage=b.stage||1,boundary=stage<count?b.maxHp*(count-stage)/count:0;
@@ -10,6 +12,7 @@ export function damageActTwoBoss(s,damage){
  if(stage<count&&b.hp<=boundary){b.nextStage=stage+1;b.vulnerable=false;}
 }
 export function actTwoBossDrawing(s,reduced=false){
+ if(s.level.cornfield)return cornKingDrawing(s,reduced);
  const b=s.boss,base=s.level.cornfield?'straw':s.level.maskMansion?'count':'harlequin';
  let frame=b.phase==='dying'?b.phaseAge<.6?12:b.phaseAge<1.1?13:b.phaseAge<1.8?14:15:b.flash>0?12+Math.floor(b.flash*12)%2:Math.floor((b.gait||0)*4)%4;
  if((!b.flash||b.phase==='attack')&&b.hp>0){
@@ -24,6 +27,7 @@ export function actTwoBossDrawing(s,reduced=false){
  return{key:'act-two-'+base,frame:reduced&&b.phase==='patrol'?0:frame,size:s.level.cornfield?380:s.level.maskMansion?246:248};
 }
 export function actTwoBossMuzzle(s){
+ if(s.level.cornfield)return cornKingMuzzle(s);
  const b=s.boss,d=actTwoBossDrawing(s),[x,y]=ACT_TWO_MUZZLES[s.level.cornfield?'straw':s.level.maskMansion?'count':'harlequin'].point;
  return{x:b.x+(x/320-.5)*d.size*(b.dir>0?-1:1),y:b.y+(y/320-.975)*d.size};
 }
@@ -43,6 +47,7 @@ function beginTransform(s){
  if(s.level.badDreams){s.dreamPlatforms??=[];if(!s.dreamPlatforms.length)for(const x of [s.level.arena.left+330,s.level.arena.left+880,s.level.arena.left+1350]){const q={x,y:s.level.arena.y-120,w:150,h:24,kind:'act-two',art:10,baseX:x,baseY:s.level.arena.y-120,dx:0,dy:0,dream:true,gone:true};s.platforms.push(q);s.dreamPlatforms.push(q);}}
 }
 export function stepActTwoBoss(s,dt,{makeEnemy,shoot,say}){
+ if(s.level.cornfield)return stepCornKing(s,dt,{makeEnemy,shoot,say});
  const b=s.boss,p=s.player,a=s.level.arena;b.flash=Math.max(0,b.flash-dt);b.clock+=dt;b.muzzleTime=Math.max(0,(b.muzzleTime||0)-dt);
  if(b.hp<=0){
   if(!b.defeat){b.hp=0;b.defeat={ready:false};b.vulnerable=false;enter(b,'dying',2.7);s.hostile=[];s.dreamHazards=[];s.dreamMirrors=[];s.strawPiles=[];for(const e of s.enemies)if(e.summoned){e.hp=0;e.deadTime=.6;e.deathAge=0;}worldSound(s,'rubbleBreak',b.x,b.y);}
@@ -73,7 +78,7 @@ export function stepActTwoBoss(s,dt,{makeEnemy,shoot,say}){
   if(b.timer<=0){b.x=b.swarmTo;b.y=a.y-60;recover(b,1.4);}return;
  }
  if(b.phase==='patrol'){
-  b.dir=Math.sign(p.x-b.x)||b.dir;const before=b.x;
+  b.dir=faceTarget(b,p.x);const before=b.x;
   if(Math.abs(p.x-b.x)>310)b.x=clamp(b.x+b.dir*(s.level.badDreams?105:s.level.cornfield?65:85)*dt,a.left+130,a.right-150);
   b.gait=(b.gait||0)+Math.abs(b.x-before)/100;b.y=a.y;
   if(b.timer<=0){
@@ -114,6 +119,7 @@ export function stepActTwoBoss(s,dt,{makeEnemy,shoot,say}){
 }
 export function stepActTwoHazards(s,dt,shoot){
  if(!s.level.actTwo)return;
+ if(s.level.cornfield)stepCornHazards(s,dt);
  for(const q of s.dreamHazards){q.age+=dt;if(!q.safe&&q.age>=q.delay&&q.age<q.life&&s.player.x>q.x&&s.player.x<q.x+q.w&&s.player.y>q.y-45)s.damage({x:q.x+q.w/2,element:'magic'});}
  s.dreamHazards=s.dreamHazards.filter(q=>q.age<q.life);
  for(const q of s.dreamMirrors)if(q.hp>0){q.age+=dt;q.timer-=dt;q.flash=Math.max(0,(q.flash||0)-dt);if(q.timer<=0){shoot(s,q.x,q.y-85,q.dir>0?0:Math.PI,230,'act-two-mask',{actTwo:true,r:12,life:3,element:'magic'});q.timer=1.5;}if(q.age>5.2)q.hp=0;}

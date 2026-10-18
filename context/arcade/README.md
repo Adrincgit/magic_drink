@@ -1,5 +1,27 @@
 # Hexy & the Lost Chorus
 
+[Música entregada para título, tienda y jefes 1-2/1-3/1-4; salida de FX aumentada un diez por ciento](music-refresh/README.md).
+
+[Zeppelín: retirados los fragmentos aislados del atlas que aparecían como rayas junto al cañón al preparar y disparar](zeppelin-strip/README.md).
+
+[Carga del Arlequín de fuego: brasas iluminadas con estelas rojas y naranjas, recogidas en las manos antes de disparar](harlequin-charge-light/README.md).
+
+[Derrota sin recarga anticipada, once lecciones con patrullas estables y escudo continuo, orientación de enemigos y nuevos controles de cine vintage](rehearsal-cinema/README.md).
+
+[Carrera del herrero de camisa roja: doce dibujos de zancada y apoyos sincronizados con la distancia recorrida](blacksmith-run/README.md).
+
+[Carga del Encore: energía pintada en la varita sin indicador circular y preparación acelerada de 1,9 a 1,7 segundos](encore-charge-energy/README.md).
+
+[Corrección vigente: proporciones infantiles y brazo de los ultimates hacia abajo, nueve ilustraciones grandes independientes y centradas, e impacto manga sincronizado con el choque del Arlequín](hexy-down-repair/README.md).
+
+[Corrección vigente: Encore clásico restaurado, expresiones de carrera retiradas, ilustraciones según postura, energía con estela, fuego sin fragmentos y ronda del payaso mientras Hexy es dulce](encore-repair/README.md).
+
+[Revisión vigente: ultimate con preparación y cabello animado, continuidad de la mano, locomoción herida, escombros destruidos y disparos que alcanzan a los enemigos bajo el puente](hexy-acting/README.md).
+
+[Pulido vigente de Hexy y recorridos: reinicios completos sin seguidores heredados, cajas con espacio, contacto con tierra y agua, ultimate direccional de una mano y barcaza autónoma sin barrera en el puente](route-polish/README.md).
+
+[Revisión de animación del 1-1 al 2-2: ciclos completos por distancia, cuatro marchas nuevas de doce dibujos y cadencia del Arlequín corregida](enemy-cadence/README.md).
+
 [Dirección de animación vigente: estilo anime caricaturesco, referencias selectivas para maquinaria y tiempos medidos de los GIF](DIRECCION_DE_ANIMACION.md).
 
 [Revisión vigente del jefe 1-3: torrentes y olas conectados físicamente, oleadas grandes, tambor visible, Hexy mojada y destrucción por piezas de maquinaria](barge-coherence/README.md).
@@ -8,7 +30,7 @@
 
 [Pulido común vigente: roles y resistencias de enemigos, impactos por material, sonidos de proyectiles y agua, y ultimate aéreo con dibujos propios](global-combat-polish/README.md).
 
-[Revisión global vigente: sombrero y disparo simultáneos, marcha con escudo, contacto con el suelo, fuego, aura eléctrica caricaturesca intermitente y navegación de Miso con mando](global-feedback/README.md). [Marcha corregida del malabarista](juggler-gait/revision-2/README.md). Los niveles 2-3, 2-4 y 2-5 son prototipos pendientes de desarrollo.
+[Revisión global vigente: sombrero y disparo simultáneos, marcha con escudo, contacto con el suelo, fuego, aura eléctrica caricaturesca intermitente y navegación de Miso con mando](global-feedback/README.md). [Marcha corregida del malabarista](juggler-gait/revision-2/README.md). [2-3: maizal ampliado, parallax, emboscadas y Rey de Paja con dos formas](cornfield-v2/README.md). Los niveles 2-4 y 2-5 son prototipos pendientes de desarrollo.
 
 **Guías vigentes, 16/10/2026:** [campaña aprobada de seis actos y treinta niveles](CAMPANA.md) · [Magic Drinks, amuletos, mejoras y precios actuales](MAGIC_DRINKS_Y_AMULETOS.md). Halloween es el **acto 2**: cementerio 2-1, Villa Lumbre 2-2, maizal 2-3, mansión 2-4 y arlequín de dos conos 2-5. [Arte y funcionamiento de los últimos tres niveles](act-2-expansion/README.md). Las carpetas `halloween-5-1` y `village-5-2` conservan su nombre histórico.
 

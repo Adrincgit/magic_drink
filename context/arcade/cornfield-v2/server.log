@@ -1,0 +1,98 @@
+20:38:02 [types] Generated 1ms
+20:38:02 [content] Syncing content
+20:38:03 [content] Synced content
+
+ astro  v5.10.0 ready in 6230 ms
+
+┃ Local    http://127.0.0.1:4322/
+
+20:38:04 watching for file changes...
+20:46:54 [watch] src/components/arcade/adventure/render/cornfieldCanvas.js
+20:46:54 [watch] src/components/arcade/adventure/render/adventureSprites.js
+20:48:25 [watch] src/components/arcade/adventure/actors/enemies/adventureActTwoEnemies.js
+20:48:25 [watch] src/components/arcade/adventure/engine/actTwoRoute.js
+20:48:55 [watch] src/components/arcade/adventure/engine/actTwoRoute.js
+20:48:55 [watch] src/components/arcade/adventure/world/adventureActTwo.js
+20:50:55 [watch] src/components/arcade/adventure/actors/enemies/adventureEnemies.js
+20:50:55 [watch] src/components/arcade/adventure/actors/bosses/cornfieldKing.js
+20:53:19 [watch] src/components/arcade/adventure/actors/bosses/cornfieldKing.js
+20:53:19 [watch] src/components/arcade/adventure/render/cornfieldCanvas.js
+20:56:36 [watch] src/components/arcade/adventure/render/adventureCamera.js
+20:56:55 [200] /arcade 890ms
+20:56:59 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+20:57:05 [200] /arcade 13ms
+20:57:05 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+20:57:12 [200] /arcade 12ms
+20:57:12 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+20:57:42 [200] /arcade 13ms
+20:57:42 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+20:57:53 [200] /arcade 14ms
+20:57:53 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+20:58:43 [watch] /node_modules/@astrojs/tailwind/base.css, /src/components/arcade/adventure/HexyAdventure.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopTrial.jsx, /src/components/arcade/adventure/ui/title/AdventureTutorial.jsx, /src/components/arcade/adventure/ui/hud/AdventureHUD.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopDialog.jsx
+20:58:43 [watch] src/components/arcade/adventure/actors/bosses/cornfieldKing.js
+20:58:43 [watch] /node_modules/@astrojs/tailwind/base.css, /src/components/arcade/adventure/HexyAdventure.jsx, /src/components/arcade/adventure/ui/title/AdventureTutorial.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopTrial.jsx
+20:58:43 [watch] src/components/arcade/adventure/render/adventureSprites.js
+20:58:43 [watch] /node_modules/@astrojs/tailwind/base.css, /src/components/arcade/adventure/HexyAdventure.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopTrial.jsx, /src/components/arcade/adventure/ui/title/AdventureTutorial.jsx
+20:58:43 [watch] src/components/arcade/adventure/actors/enemies/adventureActTwoEnemies.js
+20:58:43 [watch] /node_modules/@astrojs/tailwind/base.css, /src/components/arcade/adventure/HexyAdventure.jsx, /src/components/arcade/adventure/ui/title/AdventureTutorial.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopTrial.jsx
+20:58:43 [watch] src/components/arcade/adventure/render/cornfieldCanvas.js
+20:59:16 [200] /arcade 93ms
+20:59:16 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+20:59:23 [200] /arcade 11ms
+20:59:23 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+20:59:30 [200] /arcade 10ms
+20:59:30 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+20:59:56 [200] /arcade 12ms
+20:59:56 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+21:00:06 [200] /arcade 15ms
+21:00:06 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+21:00:15 [watch] /node_modules/@astrojs/tailwind/base.css, /src/components/arcade/adventure/HexyAdventure.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopTrial.jsx, /src/components/arcade/adventure/ui/title/AdventureTutorial.jsx, /src/components/arcade/adventure/ui/hud/AdventureHUD.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopDialog.jsx
+21:00:15 [watch] src/components/arcade/adventure/actors/bosses/cornfieldKing.js
+21:02:06 [watch] /node_modules/@astrojs/tailwind/base.css, /src/components/arcade/adventure/HexyAdventure.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopTrial.jsx, /src/components/arcade/adventure/ui/title/AdventureTutorial.jsx, /src/components/arcade/adventure/ui/hud/AdventureHUD.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopDialog.jsx
+21:02:06 [watch] src/components/arcade/adventure/actors/bosses/cornfieldKing.js
+21:02:06 [watch] /node_modules/@astrojs/tailwind/base.css, /src/components/arcade/adventure/HexyAdventure.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopTrial.jsx, /src/components/arcade/adventure/ui/title/AdventureTutorial.jsx
+21:02:07 [watch] src/components/arcade/adventure/actors/enemies/adventureActTwoEnemies.js
+21:02:07 [watch] /node_modules/@astrojs/tailwind/base.css, /src/components/arcade/adventure/HexyAdventure.jsx, /src/components/arcade/adventure/ui/title/AdventureTutorial.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopTrial.jsx
+21:02:07 [watch] src/components/arcade/adventure/render/adventureSprites.js
+21:02:07 [watch] /node_modules/@astrojs/tailwind/base.css, /src/components/arcade/adventure/HexyAdventure.jsx, /src/components/arcade/adventure/ui/title/AdventureTutorial.jsx, /src/components/arcade/adventure/ui/shop/AdventureShopTrial.jsx
+21:02:07 [watch] src/components/arcade/adventure/render/cornfieldCanvas.js
+21:02:19 [200] /arcade 96ms
+21:02:19 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+21:02:26 [200] /arcade 13ms
+21:02:26 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+21:02:33 [200] /arcade 13ms
+21:02:33 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+21:02:59 [200] /arcade 12ms
+21:02:59 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.
+21:03:09 [200] /arcade 14ms
+21:03:09 [WARN] [vite] Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/arcade/texts/adventure.json instead of /public/arcade/texts/adventure.json.
+If you intend to use the URL of that asset, use /arcade/texts/adventure.json?url.

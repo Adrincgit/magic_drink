@@ -22,7 +22,7 @@ function rayBox(o,d,b,range){
 }
 function wallDistance(s,o,d,length){
  for(let t=8;t<=length;t+=8){const x=o.x+d.x*t,y=o.y+d.y*t;
-  if(s.platforms.some(p=>!p.bridge&&x>p.x&&x<p.x+p.w&&y>surfaceY(p,x)+2&&y<surfaceY(p,x)+(p.h||120)))return t;
+  if(s.platforms.some(p=>!p.gone&&!p.bridge&&x>p.x&&x<p.x+p.w&&y>surfaceY(p,x)+2&&y<surfaceY(p,x)+(p.h||120)))return t;
  }
  return length;
 }
@@ -30,6 +30,10 @@ export function beamPath(s,o,d,strong){
  const mastery=drinkMastery(s,9),jump=mastery===3?(strong?340:200):(strong?290:165);
  const reach=wallDistance(s,o,d,mastery===3?(strong?1150:650):(strong?850:315)),candidates=s.enemies.filter(e=>e.hp>0&&!e.fleeing&&!e.emerging).map(e=>({target:e,enemy:true,box:umbrellaOpen(e)?{...enemyBody(e),x:Math.min(enemyBody(e).x,umbrellaShield(e).x),w:99}:enemyBody(e)}));
  candidates.push(...(s.graves||[]).filter(q=>q.hp>0).map(q=>({target:q,box:graveBody(q)})));
+ // Destructible scenery participates in the same ray query as enemies.
+ // Its retained platform is only solid until the obstacle actually breaks.
+ candidates.push(...(s.villageObstacles||[]).filter(q=>!q.broken&&q.hp>0).map(q=>({target:q,box:{x:q.x-q.w/2,y:q.y-q.h,w:q.w,h:q.h}})));
+ candidates.push(...(s.villageRubble||[]).filter(q=>!q.freed&&q.hp>0).map(q=>({target:q,box:{x:q.x-65,y:q.y-(q.shelter?86:60),w:130,h:q.shelter?86:60}})));
  if(s.level.actTwo)candidates.push(...s.platforms.filter(q=>q.solid&&!q.gone).map(q=>({target:q,box:actTwoObstacleBody(q)})),...[...s.strawPiles,...s.dreamMirrors].filter(q=>q.hp>0).map(q=>({target:q,box:{x:q.x-40,y:q.y-q.h,w:80,h:q.h}})));
  candidates.push(...s.supplies.filter(q=>q.hp>0).map(q=>({target:q,box:supplyBody(q)})),...s.outposts.filter(q=>q.hp>0).map(q=>({target:q,box:outpostBody(q)})),...s.cages.filter(q=>!q.open&&!q.carried&&!q.lost).map(q=>({target:q,box:{x:q.x-30,y:q.y-62,w:60,h:62}})));
  if(s.boss.hp>0&&!['sleep','defeated','dying'].includes(s.boss.phase))candidates.push(...bossTargets(s).map(box=>({target:s.boss,box})));

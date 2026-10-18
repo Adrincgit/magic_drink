@@ -12,12 +12,12 @@ const helpers={body:playerBody,say:()=>{},particles:()=>{}};
 function battle(move='fan',stage=1){const s=createAdventure(3),a=s.level.arena;s.supplies=[];s.stars=[];s.arenaLocked=true;s.damage=()=>{};Object.assign(s.player,{x:a.left+260,y:a.y,ground:1});Object.assign(s.boss,{phase:'warn',timer:.01,engaged:true,vulnerable:true,move,stage,hp:stage===1?720:stage===2?420:180});return s;}
 function tick(s,n,input={}){for(let i=0;i<n;i++)stepAdventure(s,input,1/120);}
 
-test('the camp leads to a safe interior checkpoint and the same gradual boss arrival',()=>{
+test('the camp leads through the interior without a checkpoint and keeps the gradual boss arrival',()=>{
  const s=createAdventure(3);expect(s.level.bossOnly).toBe(false);expect(s.campTents.length).toBeGreaterThan(0);expect(s.enemies).toHaveLength(0);expect(s.cages).toHaveLength(0);expect(s.stars.filter(q=>q.value===10)).toHaveLength(5);
  tick(s,400,{right:true});expect(s.boss.phase).toBe('sleep');expect(s.player.x).toBeLessThan(0);
  s.player.x=s.level.circusEntrance.trigger;s.player.y=480;s.player.ground=0;s.player.hurt=999;s.hearts=s.maxHearts;
  for(let i=0;i<1100&&s.boss.phase==='sleep';i++)tick(s,1,{right:true});
- expect(s.boss.phase).toBe('intro');expect(s.checkpointAt).toEqual([660,480]);
+ expect(s.boss.phase).toBe('intro');expect(s.checkpointAt).toBeUndefined();
  const y=s.boss.y;tick(s,180);expect(s.boss.y).toBeGreaterThan(y);expect(s.boss.phase).toBe('intro');expect(s.hearts).toBe(s.maxHearts);tick(s,380);expect(s.boss.phase).not.toBe('intro');
  expect(HARLEQUIN_HEALTH.normal).toBeGreaterThan(createAdventure(2).boss.maxHp*2);expect(createAdventure(3,true).boss.hp).toBe(480);
 });
@@ -68,7 +68,7 @@ test('camera keeps both fighters visible and zoom does not lift the distant arch
 test('defeat falls, lands, vanishes and only then starts victory; retry restores all stages',()=>{
  const s=battle('fan',3);s.checkpointAt=[660,480];s.boss.hp=0;tick(s,90);expect(harlequinFrame(s.boss)).toBe(7);expect(s.boss.shattered).toBeFalsy();expect(s.clear).toBeFalsy();
  tick(s,330);expect(s.boss.shattered).toBe(true);expect(s.effects.some(q=>q.cinematicSmoke)).toBe(true);tick(s,220);expect(s.clear).toBeTruthy();
- retryAdventure(s);expect(s.boss.hp).toBe(720);expect(s.boss.stage).toBe(1);expect(s.boss.shattered).toBeUndefined();expect(s.player.x).toBe(660);expect(s.hostile).toHaveLength(0);
+ retryAdventure(s);expect(s.boss.hp).toBe(720);expect(s.boss.stage).toBe(1);expect(s.boss.shattered).toBeUndefined();expect(s.player.x).toBe(s.level.spawn[0]);expect(s.checkpointAt).toBeUndefined();expect(s.hostile).toHaveLength(0);
 });
 
 test('an airborne ultimate can defeat the final phase without skipping the exit animation',()=>{

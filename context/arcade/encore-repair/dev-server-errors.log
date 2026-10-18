@@ -1,0 +1,6 @@
+Port 4322 is already in use
+  Location:
+    G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\node_modules\vite\dist\node\chunks\dep-DBxKXgDP.js:25023:18
+  Stack trace:
+    at Server.onError (file:///G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:25023:18)
+    at emitErrorNT (node:net:1976:8)

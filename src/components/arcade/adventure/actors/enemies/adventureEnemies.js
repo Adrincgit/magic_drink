@@ -12,6 +12,8 @@ import {stepElementHit} from './adventureElementHits';
 import {stepClownBoosters,tryClownBooster,stepBoostedClown} from './adventureClownBooster';
 import {isAcrobat,acrobatSpeed,acrobatStride,prepareAcrobat,stepAcrobatMotion} from './adventureAcrobat';
 import {JUGGLER_STRIDE} from './adventureJugglerWalk';
+import {advanceEnemyStride,enemyStride} from './actorCadence';
+import {faceTarget} from './enemyFacing';
 import {stepGraveyard,stepFleeingClown,ZOMBIE_HEALTH,GHOST_HEALTH,HAND_HEALTH} from '../../engine/adventureGraveyard';
 import {shedZombieParts,stepNightmareDefeat} from '../../engine/adventureNightmareMotion';
 import {isNightmare,stepNightmare,updateNightmareBoss} from './adventureNightmares';
@@ -30,7 +32,7 @@ import {BOMB_SCALE,HELD_BOMB_SIZE} from '../bosses/adventureBombs';
 import {ORGAN_MOVES,organMouths,organTargets,organCollision,updateOrganFortress} from '../bosses/adventureOrganFortress';
 import {ZEPPELIN_TYPE,ZEPPELIN_HEALTH,updateZeppelin,stepZeppelinDefeat} from './adventureZeppelin';
 import {updateBalloonHatch} from '../bosses/balloonHatch';
-import {BARGE_MOVES,bargeTargets,bargeCollision,updateBarge,resolveBargeContact} from '../bosses/adventureBarge';
+import {BARGE_MOVES,bargeTargets,bargeCollision,updateBarge} from '../bosses/adventureBarge';
 import {DIVER_TYPE,updateDiver,stepDiverDefeat} from './adventureDiver';
 import {RIVER_BOAT_TYPE,updateRiverBoat,stepRiverBoatDefeat} from './adventureRiverBoat';
 import {HARLEQUIN_MOVES,harlequinBody,updateHarlequin} from '../bosses/adventureHarlequin';
@@ -59,10 +61,10 @@ export function updateEnemies(s,dt,hit,defeat){
   }
   e.clock+=step;e.timer-=step;e.flash=Math.max(0,e.flash-dt);const wasAttacking=e.action>0;e.action=Math.max(0,e.action-step);e.recovery=Math.max(0,(e.recovery||0)-step);if(wasAttacking&&!e.action&&e.type!==3)e.recovery=.45;
   if(e.emerging>0&&!(e.trap>0)){
-   e.emerging=Math.max(0,e.emerging-step);e.x+=e.dir*(e.fortCrew?190:55)*step;
+   e.emerging=Math.max(0,e.emerging-step);if(!e.cornEmerge)e.x+=e.dir*(e.fortCrew?190:55)*step;
    if(s.level.groundRoute&&!e.fortCrew){e.baseY=groundY(s.platforms,e.x,e.baseY);e.y=e.baseY;}
    else if(e.fortCrew)e.y=e.baseY-21*Math.min(1,e.emerging/2.1);else if(e.campTent!==undefined)e.y=e.baseY-12*e.emerging/1.1;
-   e.gait=(e.gait||0)+Math.abs(e.x-previousX)/(isAcrobat(e)?acrobatStride(e):e.type===3?JUGGLER_STRIDE:95);e.moving=true;e.phase='emerge';continue;
+   advanceEnemyStride(e,e.x-previousX,step,isAcrobat(e)?acrobatStride(e):e.type===3?JUGGLER_STRIDE:enemyStride(e));e.phase='emerge';continue;
   }
   if(e.trap>0&&!canControlEnemy(e,'bubble'))e.trap=0;
   const trapped=e.trap>0;if(trapped){e.trap=Math.max(0,e.trap-dt);e.trapX??=e.x;e.trapY??=e.y;e.x=e.trapX;e.y=e.trapY;}else{e.trapX=null;e.trapY=null;}
@@ -85,14 +87,14 @@ export function updateEnemies(s,dt,hit,defeat){
   else if(e.type===2){ // Balloon clown: drifting flight, then a visible breath before the streamer.
    if(!trapped){e.x=e.home+Math.sin(e.clock*.75)*75;e.y=e.baseY+Math.sin(e.clock*1.7)*22;}
    if(e.timer<.65)e.phase='windup';
-   e.dir=Math.sign(aim.x-e.x)||-1;
+   e.dir=faceTarget(e,aim.x);
    if(e.timer<=0&&near){const m=enemyMuzzle(e),a=Math.atan2(aim.y-25-m.y,aim.x-m.x);enemyShot(s,m.x,m.y,a,175,'streamer');e.timer=s.gentle?3.4:2.6;e.phase='float';e.action=.35;}
   }else if(e.type===5){
    e.y=e.baseY;
-   if(!e.boosterPassenger){e.dir=Math.sign(aim.x-e.x)||e.dir;e.phase='rest';tryClownBooster(s,e);}
+   if(!e.boosterPassenger){e.dir=faceTarget(e,aim.x);e.phase='rest';tryClownBooster(s,e);}
   }else if(e.type===3){
    e.phase=e.timer<.55?'windup':'patrol';
-   if(e.phase==='windup'||e.volleyAge!==undefined)e.dir=Math.sign(aim.x-e.x)||e.dir;
+   if(e.phase==='windup'||e.volleyAge!==undefined)e.dir=faceTarget(e,aim.x);
    if(e.timer<=0&&near&&e.volleyAge===undefined){e.volleyAge=0;e.volleyCount=0;e.timer=s.gentle?4:3.3;}
    if(e.volleyAge!==undefined){
     e.volleyAge+=step;e.phase='attack';
@@ -111,8 +113,8 @@ export function updateEnemies(s,dt,hit,defeat){
   }else{
    const acrobat=isAcrobat(e);if(acrobat)prepareAcrobat(e,trapped);
    e.phase=acrobat&&e.acrobatAir?'jump':acrobat&&e.acrobatCrouch>0?'crouchJump':e.timer<.55?'windup':'patrol';
-   if(aim!==p&&!trapped&&e.phase==='patrol')e.dir=Math.sign(aim.x-e.x)||e.dir;
-   if(near&&e.phase==='windup'&&(e.type===1||e.type===4))e.dir=Math.sign(aim.x-e.x)||e.dir;
+   if(aim!==p&&!trapped&&e.phase==='patrol')e.dir=faceTarget(e,aim.x);
+   if(near&&e.phase==='windup'&&(e.type===1||e.type===4))e.dir=faceTarget(e,aim.x);
    if(!trapped&&['patrol','jump'].includes(e.phase)&&e.action<=0&&e.recovery<=0)e.x+=e.dir*(acrobat?acrobatSpeed(e):40)*step;
    if(floor){if(e.x<floor.x+24){e.x=floor.x+24;e.dir=1;}if(e.x>floor.x+floor.w-24){e.x=floor.x+floor.w-24;e.dir=-1;}}
    if(s.level.emberTrail&&s.level.emberPits.some(q=>e.x>q.x-26&&e.x<q.x+q.w+26)){e.x=previousX;e.dir*=-1;}
@@ -133,12 +135,15 @@ export function updateEnemies(s,dt,hit,defeat){
   }
   if(e.recovery>0&&e.type!==14&&e.type!==DIVER_TYPE&&!['absorb','absorb-player'].includes(e.phase))e.phase='recover';
   if(e.practice&&!trapped){if(e.practiceEntering){if(e.x<=e.practiceRight)e.practiceEntering=false;}else if(e.x<e.practiceLeft){e.x=e.practiceLeft;e.dir=1;}else if(e.x>e.practiceRight){e.x=e.practiceRight;e.dir=-1;}}
-  if(!isAcrobat(e)||!e.acrobatAir&&!(e.acrobatCrouch>0)&&!(e.landing>0))e.gait=(e.gait||0)+Math.abs(e.x-previousX)/(isAcrobat(e)?acrobatStride(e):e.type===3?JUGGLER_STRIDE:[10,11].includes(e.type)?64:e.type===14?72:95);
-  if(e.type===3)e.moving=Math.abs(e.x-previousX)>.001;
+  // Village actors own their stride inside their state machines. Adding it
+  // here as well doubled the pumpkin/witch cycle for the same displacement.
+  if(e.cornImp)advanceEnemyStride(e,e.x-previousX,step,95);
+  else if(isActTwoEnemy(e))e.gait=(e.gait||0)+Math.abs(e.x-previousX)/95;
+  else if(!isVillageEnemy(e)&&(!isAcrobat(e)||!e.acrobatAir&&!(e.acrobatCrouch>0)&&!(e.landing>0)))advanceEnemyStride(e,e.x-previousX,step,isAcrobat(e)?acrobatStride(e):e.type===3?JUGGLER_STRIDE:enemyStride(e));
   decoyContact(s,e);
   const a=hit(p),b=enemyBody(e);
   if(a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y&&p.dash<=0){
-   if(p.vy>130&&p.y-p.vy*dt<b.y+9&&stompable(e)){defeat(s,e);stompBounce(s,e);}
+   if(p.vy>130&&p.y-p.vy*dt<b.y+9&&stompable(e)){stompBounce(s,e);defeat(s,e);}
    else if(guardBlocks(s,{x:e.x,y:e.y-30,r:23,life:1})){if(!trapped)e.x=p.x+p.dir*67;e.timer=Math.max(e.timer,.7);}
    else s.damage({x:e.x});
   }
@@ -161,9 +166,9 @@ export function updateBoss(s,dt,helpers){
   s.arenaLocked=true;s.hostile=[];s.enemies=s.enemies.filter(e=>e.x<a.left||s.index===5&&e.x>a.right);s.hearts=Math.min(s.maxHearts,s.hearts+(s.gentle?2:1));b.phase='intro';b.timer=2.2;say(s,'boss');s.events.push('boss');
   if(s.index<=3)beginBossArrival(s);
  }
- if(s.index<=3&&stepBossArrival(s,dt)){if(s.index===2)resolveBargeContact(s,helpers.body,false);return;}
+ if(s.index<=3&&stepBossArrival(s,dt))return;
  if(s.index===3)return updateHarlequin(s,dt,helpers,enemyShot);
- b.clock+=dt;b.timer-=dt;b.release=Math.max(0,(b.release||0)-dt);if(b.phase!=='attack'){b.dir=Math.sign(p.x-b.x)||-1;b.crewDir=b.dir;}
+ b.clock+=dt;b.timer-=dt;b.release=Math.max(0,(b.release||0)-dt);if(b.phase!=='attack'){b.dir=faceTarget(b,p.x);b.crewDir=b.dir;}
  b.stage=s.index===5?(b.coreOpened?2:1):s.index<=2?(b.hp<=b.maxHp*.5?2:1):b.hp/b.maxHp<.32?3:b.hp/b.maxHp<.64?2:1;
  if(b.stage>(b.lastStage||1)){
   b.lastStage=b.stage;

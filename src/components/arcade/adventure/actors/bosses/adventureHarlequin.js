@@ -1,4 +1,5 @@
 import {harlequinArrivalFrame} from './harlequinEntrance';
+import {faceTarget} from '../enemies/enemyFacing';
 import {beginHarlequinUltimate} from './harlequinUltimate';
 import {HARLEQUIN_SCALE} from './harlequinMetrics';
 import {clashPortraitSprite,castingWindFrame,chargingWindFrame} from '../../engine/clashActing';
@@ -6,10 +7,20 @@ import {castHarlequinFire,stepHarlequinFire,leaveHarlequinFire,fireImpact,harleq
 import {stepBurningCloth} from './harlequinChaos';
 import {impactSmoke} from '../../engine/cinematicImpact';
 import {fluidSockets} from './harlequinFluidSockets';
+import {travelFrame,loopFrame,ACTOR_MAX_FPS} from '../enemies/actorCadence';
 export const HARLEQUIN_HEALTH={normal:720,gentle:480};
 export const HARLEQUIN_MOVES=['fan','ribbon','dash','vault','curtain','embers','pyre'];
+// Twelve complete drawings: 18 / 21 / 24 cels per second at normal rush speed.
+// Movement, collision, warning time and the fire trail retain their own timing.
+export const HARLEQUIN_SPRINT_STRIDE=580;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const smooth=t=>t*t*(3-2*t);
+function nextVolleyFrame(b){
+ const rest=Math.max(.001,(b.shotInterval||.7)-.3),count=clamp(Math.floor(rest*ACTOR_MAX_FPS+1e-7),1,4),ready=clamp(1-b.shotClock/rest,0,1);
+ // Short phase-III intervals retain the last three preparation drawings,
+ // rather than squeezing four through a gap shorter than four cel holds.
+ return 4-count+Math.min(count-1,Math.floor(ready*count));
+}
 export function harlequinFrame(b){
  if(b.hp<=0)return 7;
  if(b.phase==='intro')return b.arrival?.age<2.8?5:b.arrival?.age<3.5?3:0;
@@ -18,14 +29,18 @@ export function harlequinFrame(b){
  if(b.phase==='attack')return b.move==='dash'?4:b.move==='vault'?5:b.move==='curtain'?6:b.move==='ribbon'?3:b.release>0?2:1;
  return 0;
 }
-export function harlequinDrawing(s){
+export function harlequinDrawing(s,reduced=false){
  const b=s.boss,q=b.ultimate;
  if(b.defeat)return{key:'harlequin-fire-actions',frame:b.defeat.frame};
  if(b.clashFlight)return{key:'harlequin-fire-actions',frame:12+b.clashFlight.frame};
  if(b.phase==='intro')return{key:'harlequin-arrival',frame:harlequinArrivalFrame(b.arrival?.age||0)};
- if(b.move==='dash'&&b.phase==='attack')return{key:b.stage===3?'harlequin-sprint-final':b.stage===2?'harlequin-sprint-mid':'harlequin-sprint',frame:Math.floor((b.sprintDistance||0)/23)%12};
+ if(b.move==='dash'&&b.phase==='attack')return{key:b.stage===3?'harlequin-sprint-final':b.stage===2?'harlequin-sprint-mid':'harlequin-sprint',frame:travelFrame((b.sprintDistance||0)/HARLEQUIN_SPRINT_STRIDE,12,reduced)};
  if(b.exhausted>0&&b.hp>0)return{key:'harlequin-fire-actions',frame:19};
  const fluid=b.stage===3?'harlequin-motion-fluid-final':b.stage===2?'harlequin-motion-fluid-mid':'harlequin-motion-fluid';
+ if(b.phase==='recover'&&!q&&['fan','ribbon','vault'].includes(b.recoverFrom)&&(b.recoverAge||0)<.22){
+  const offset={fan:16,ribbon:24,vault:8}[b.recoverFrom];
+  return{key:fluid,frame:offset+((b.recoverAge||0)<.11?6:7),scale:1.5};
+ }
  if(q?.state==='leap')return{key:fluid,frame:8+Math.min(7,Math.floor(q.age/.85*8)),scale:1.5};
  if(q&&q.state!=='recover'&&b.hp>0){
   if(q.state==='fire'){
@@ -39,7 +54,7 @@ export function harlequinDrawing(s){
   const key=b.stage===3?'harlequin-inferno-final':b.stage===2?'harlequin-inferno-mid':'harlequin-inferno';
   const ready=clamp(1-b.timer/(b.warnDuration||1),0,1);
   if(b.move==='dash')return{key,frame:Math.min(11,Math.floor(ready*12))};
-  const frame=b.phase==='warn'?Math.min(4,Math.floor(ready*5)):b.attackClock<.32?5+Math.min(3,Math.floor(b.attackClock/.08)):b.attackClock<.65?9+Math.min(2,Math.floor((b.attackClock-.32)/.11)):[9,10,11,10][Math.floor(b.clock*14)%4];
+  const frame=b.phase==='warn'?Math.min(4,Math.floor(ready*5)):b.attackClock<.32?5+Math.min(3,Math.floor(b.attackClock/.08)):b.attackClock<.65?9+Math.min(2,Math.floor((b.attackClock-.32)/.11)):[9,10,11,10][loopFrame(b.attackClock-.65,4,12,reduced)];
   return{key,frame:12+frame};
  }
  if(['dash','vault','fan','ribbon'].includes(b.move)&&['warn','attack'].includes(b.phase)){
@@ -47,7 +62,7 @@ export function harlequinDrawing(s){
   if(b.phase==='warn')frame=b.move==='dash'?1:b.move==='vault'?0:Math.min(3,Math.floor((1-b.timer/(b.warnDuration||1))*4));
   else if(b.move==='dash')frame=Math.floor(b.attackClock*18)%8;
   else if(b.move==='vault'){const t=b.attackClock/b.duration;frame=b.release>0?4:t<.16?1:t<.32?2:t<.58?3:t<.75?5:t<.9?6:7;}
-  else frame=b.release>0?Math.min(7,4+Math.floor((.3-b.release)*16)):b.volley===0?3:Math.max(0,3-Math.floor(b.shotClock/.085));
+  else frame=b.release>0?Math.min(7,4+Math.floor(Math.max(0,.3-b.release)/.075)):b.volley===0?3:nextVolleyFrame(b);
   return{key:fluid,frame:offset+frame,scale:1.5};
  }
  if(['embers','pyre'].includes(b.move)&&['warn','attack'].includes(b.phase)){
@@ -56,9 +71,9 @@ export function harlequinDrawing(s){
   return{key:b.stage===2?'harlequin-fire-actions-mid':'harlequin-fire-actions',frame:offset+frame};
  }
  const key=b.stage===3?'harlequin-motion-final':b.stage===2?'harlequin-motion-mid':'harlequin-motion';
- let frame=Math.floor(b.clock*6)%4;
+ let frame=loopFrame(b.clock,4,4,reduced);
  if(b.phase==='intro')frame=(b.arrival?.age||0)<2.8?16:(b.arrival?.age||0)<3.5?19:frame;
- else if(b.phase==='transform')frame=20+Math.floor(b.clock*7)%4;
+ else if(b.phase==='transform')frame=20+loopFrame(1.8-b.timer,4,6,reduced);
  else if(b.phase==='warn'){
   const ready=b.timer<(b.warnDuration||1)*.5;
   frame=b.move==='fan'?4+Number(ready):b.move==='ribbon'?8+Number(ready):b.move==='curtain'?20+Number(ready):b.move==='vault'?16:12;
@@ -88,7 +103,7 @@ export function harlequinHand(b,low=false){
 export function harlequinPuff(s,x,y,size=110){s.effects.push({x,y,harlequin:true,size:size*1.25,age:0,life:.55});if(size>=100)impactSmoke(s,x,y+12,size/150);}
 function card(s,shoot,x,y,angle,speed,extra={}){shoot(s,x,y,angle,speed,'harlequin-card',{harlequin:true,r:13,drawSize:66,life:9,...extra});}
 function ribbon(s,shoot,x,y,dir,stage){shoot(s,x,y,dir>0?0:Math.PI,300+(stage-1)*32,'harlequin-ribbon',{harlequin:true,r:17,drawSize:122,life:9,floor:s.level.arena.y,startY:y});}
-function recover(b,s){b.phase='recover';b.timer=(s.gentle?1.2:.88)-(b.stage-1)*.18;b.y=s.level.arena.y;b.driveSpeed=0;}
+function recover(b,s){b.recoverFrom=b.move;b.recoverAge=0;b.phase='recover';b.timer=(s.gentle?1.2:.88)-(b.stage-1)*.18;b.y=s.level.arena.y;b.driveSpeed=0;}
 export function updateHarlequin(s,dt,helpers,shoot){
  const b=s.boss,p=s.player,a=s.level.arena;
  if(b.backdropBlend!==undefined)b.backdropBlend=Math.min(1,b.backdropBlend+dt/1.4);
@@ -96,6 +111,7 @@ export function updateHarlequin(s,dt,helpers,shoot){
  if(b.ultimate){b.vulnerable=!s.powerClash;return;}
  b.ultimateCooldown=Math.max(0,(b.ultimateCooldown??8)-dt);
  b.clock+=dt;b.timer-=dt;b.release=Math.max(0,(b.release||0)-dt);
+ if(b.phase==='recover')b.recoverAge=(b.recoverAge||0)+dt;
  const desired=b.hp<=b.maxHp*.34?3:b.hp<=b.maxHp*.67?2:1;
  if(desired>b.stage&&b.phase!=='transform'){
   b.nextStage=b.stage+1;b.phase='transform';b.timer=1.8;b.vulnerable=false;b.transitionBurst=false;
@@ -108,7 +124,7 @@ export function updateHarlequin(s,dt,helpers,shoot){
   return;
  }
  b.vulnerable=true;
- if(b.phase!=='attack')b.dir=Math.sign(p.x-b.x)||-1;
+ if(b.phase!=='attack')b.dir=faceTarget(b,p.x);
  if(b.phase==='warn'&&b.timer<=0){
   b.phase='attack';b.attackClock=0;b.sprintDistance=0;b.fireDistance=0;b.shotClock=b.move==='pyre'?.13:b.move==='embers'?.38:.24;b.volley=0;b.originX=b.x;b.originY=b.y;b.targetX=clamp(p.x,a.left+80,a.right-80);
   if(['dash','vault'].includes(b.move)){const margin=b.move==='dash'?190:a.throwMargin||155;b.endX=b.dir<0?a.left+margin:a.right-margin;b.travel=Math.abs(b.endX-b.x);}
@@ -139,12 +155,12 @@ export function updateHarlequin(s,dt,helpers,shoot){
    if(b.shotClock<=0)castHarlequinFire(s,b,shoot);
   }else if(b.shotClock<=0){
    if(b.move==='fan'){
-    b.dir=Math.sign(p.x-b.x)||b.dir;
+    b.dir=faceTarget(b,p.x);
     const h=harlequinHand(b),angle=Math.atan2(p.y-32-h.y,p.x-h.x),count=b.stage===3?5:3;
     for(let n=0;n<count;n++)card(s,shoot,h.x,h.y,angle+(n-(count-1)/2)*.17,(335+(b.stage-1)*48)*fast);
-    b.shotClock=(.70-(b.stage-1)*.13)*(s.gentle?1.2:1);b.release=.3;
+    b.shotClock=(.70-(b.stage-1)*.13)*(s.gentle?1.2:1);b.shotInterval=b.shotClock;b.release=.3;
    }else{
-    const h=harlequinHand(b,true);ribbon(s,shoot,h.x,h.y,b.dir,b.stage);b.shotClock=(.85-(b.stage-1)*.12)*(s.gentle?1.2:1);b.release=.3;
+    const h=harlequinHand(b,true);ribbon(s,shoot,h.x,h.y,b.dir,b.stage);b.shotClock=(.85-(b.stage-1)*.12)*(s.gentle?1.2:1);b.shotInterval=b.shotClock;b.release=.3;
    }
    b.volley++;s.events.push(b.move==='ribbon'?'harlequinSilk':'harlequinCast');
   }

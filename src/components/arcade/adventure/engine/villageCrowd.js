@@ -20,10 +20,10 @@ export function stepVillageCrowd(s,dt){
   if(q.state==='flee'){
    q.runAge??=0;
    if(q.warning&&!q.warned&&q.x<s.level.entrance.x&&s.player.x<q.x-35&&Math.abs(s.player.x-q.x)<280){q.warned=true;q.warningDir=-1;q.warningFrom=q.x;q.state='warning';q.age=0;s.notice='villageWarning';s.noticeTime=3;continue;}
-   const old=q.x,oldAge=q.runAge,profile=villageVillagerProfile(q.style);q.x=blockVillageEscape(s,q,q.x-q.speed*dt);const dx=old-q.x;if(dx>.001)q.runAge+=dt;q.gait+=dx/profile.stride;q.y=groundY(s.level.route,q.x,q.y);
+   const old=q.x,oldAge=q.runAge,oldGait=q.gait,profile=villageVillagerProfile(q.style);q.x=blockVillageEscape(s,q,q.x-q.speed*dt);const dx=old-q.x;if(dx>.001)q.runAge+=dt;q.gait+=dx/profile.stride;q.y=groundY(s.level.route,q.x,q.y);
    const step=(s.villageObstacles||[]).find(r=>r.kind==='step'&&!r.broken&&Math.abs(q.x-r.x)<r.w/2+30);if(step)q.y-=Math.sin(Math.PI*(q.x-step.x+step.w/2+30)/(step.w+60))*(step.h+16);
    stepBlockedVillager(s,q,dt);
-   villageFootDust(s,q,oldAge,profile,groundY(s.level.route,q.x));
+   villageFootDust(s,q,oldAge,profile,groundY(s.level.route,q.x),oldGait);
    if(q.x<=q.safeX){q.state='safe';q.active=false;s.village.safe++;}
   }else if(['warning','recover','rescue'].includes(q.state)){
    q.age+=dt;

@@ -9,11 +9,11 @@ function puff(s,x,y,size,kind){
 export function stepVillageDust(s,dt){
  s.villageDust=(s.villageDust||[]).filter(q=>{q.age+=dt;q.x+=q.vx*dt;q.y+=q.vy*dt;return q.age<q.life;});
 }
-export function villageFootDust(s,q,oldAge,profile,floor){
- // Two planted poses in each eight-pose cycle; advance only with real travel.
+export function villageFootDust(s,q,oldAge,profile,floor,oldGait=q.gait){
+ // Compression follows each of the two contacts in the painted run cycle.
  if(q.blocked||Math.abs(q.y-floor)>5||q.runAge<=oldAge)return;
- const a=Math.floor(oldAge/profile.runDuration*8),b=Math.floor(q.runAge/profile.runDuration*8);
- for(let step=a+1;step<=b;step++)if(step%4===1)puff(s,q.x-profile.w*.18,q.y,profile.size*.3,'foot');
+ const frames=profile.runFrames||8,a=Math.floor((profile.runByDistance?oldGait:oldAge/profile.runDuration)*frames),b=Math.floor((profile.runByDistance?q.gait:q.runAge/profile.runDuration)*frames);
+ for(let step=a+1;step<=b;step++)if(step%(frames/2)===1)puff(s,q.x-profile.w*.18,q.y,profile.size*.3,'foot');
 }
 export function villageCarriageDust(s,q,oldGait,distance){
  // Wheel contact is continuous. Hoof strikes follow the drawn gallop.

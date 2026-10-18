@@ -6,13 +6,6 @@ import {bargePartBroken,stepBargeSystems} from './bargeSystems';
 import {spoutFront,waterSegmentBody,waveBody,releaseTidalWave} from './bargeWaterAttacks';
 export {bargeRig} from './bargeRig';
 export function bargeCollision(s){const m=bargeRig(s);return{x:s.boss.x-295,y:m.body.y+145,w:604,h:m.waterY-m.body.y-145};}
-export function resolveBargeContact(s,bodyOf,damage=true){
- const p=s.player,body=bargeCollision(s),player=bodyOf(p);
- if(player.x<body.x+body.w&&player.x+player.w>body.x&&player.y<body.y+body.h&&player.y+player.h>body.y){
-  // The hull is solid scenery. Only clearly launched attacks can hurt Hexy.
-  p.x=body.x-(player.x+player.w-p.x)-1;p.vx=Math.min(0,p.vx);
- }
-}
 // Only the solid lower hull blocks shots. The contact box includes empty
 // space ahead of the drum and must not intercept shots aimed at that drum.
 export function bargeArmor(s){const m=bargeRig(s);return{x:s.boss.x-300,y:s.level.arena.y-20,w:625,h:m.waterY-s.level.arena.y+20};}
@@ -34,17 +27,16 @@ export function updateBarge(s,dt,helpers,shoot){
   b.transformAge=(b.transformAge||0)+dt;
   if(b.transformAge>=.55&&!b.hullOpened){
    b.hullOpened=true;const m=bargeRig(s);
-   for(const x of [390,700,1010]){const rect={x:m.body.x+x*m.unit,y:m.body.y+700*m.unit,w:190*m.unit,h:140*m.unit};bargeFragments(s,'barge-pressure-barge',rect,1,1,.65);s.organDebris.at(-1).crop=[x/1536,700/1024,190/1536,140/1024];}
+   for(const x of [390,700,1010]){const rect={x:m.body.x+x*m.unit,y:m.body.y+700*m.unit,w:190*m.unit,h:140*m.unit};bargeFragments(s,'barge-pressure-barge',rect,1,1,.65);s.organDebris.at(-1).crop=[x/1536,700/1024,190/1536,140/1024];s.organDebris.at(-1).jagged=true;}
    s.effects.push({x:b.x-40,y:m.body.y+740*m.unit,bargeBurst:true,size:210,age:0,life:.65});s.events.push('bargePressureBurst');s.shake=.24;
   }
-  resolveBargeContact(s,helpers.body,false);
   b.vulnerable=false;
   if(b.timer<1.25&&!b.phaseVented){b.phaseVented=true;s.events.push('bargeRev');splash(s,b.x,bargeWaterline(s),150);}
   if(b.timer<=0){b.phase='recover';b.timer=1.3;b.vulnerable=true;}return;
  }
  b.vulnerable=true;
  if((b.move==='drumroll'&&bargePartBroken(s,'drum')||b.move==='jet'&&bargePartBroken(s,'tank'))&&['warn','attack'].includes(b.phase)){b.phase='recover';b.timer=.9;}
- b.x+=(home-b.x)*Math.min(1,dt*.75);
+ if(b.phase==='recover')b.x+=(home+Math.sin(b.clock*.65)*85-b.x)*Math.min(1,dt*.8);
  if(b.phase==='warn'&&b.timer<=0){if(b.move==='jet')b.jetAngle=bargeRig(s).nozzle.angle;b.phase='attack';b.attackClock=0;b.shotClock=.09;b.volley=0;b.targetX=clamp(p.x-70,a.left+140,b.x-360);b.timer=b.move==='drumroll'?3.4:b.move==='mortar'?4.0:b.move==='boarding'?2.8:['jet','tidal'].includes(b.move)?2.35:2.7;}
  else if(b.phase==='attack'){
   b.attackClock=(b.attackClock||0)+dt;b.shotClock=(b.shotClock||0)-dt;
@@ -70,7 +62,7 @@ export function updateBarge(s,dt,helpers,shoot){
     shoot(s,m.muzzle.x,m.muzzle.y,0,0,'barge-balloon',{vx:(targetX-m.muzzle.x)/flight,vy:(a.y-22-m.muzzle.y-.5*gravity*flight*flight)/flight,gravity,floor:a.y,r:24,drawSize:76,life:5,barge:true,water:true});
     b.shotClock=(b.transformed?.68:.93)*(s.gentle?1.2:1);s.events.push('bargeCannon');
    }else if(b.move==='jet'){
-    shoot(s,m.jetMuzzle.x,m.jetMuzzle.y,Math.PI+m.nozzle.angle,0,'barge-jet',{r:26,life:1.75,barge:true,water:true,length:0,angle:m.nozzle.angle});
+    shoot(s,m.jetMuzzle.x,m.jetMuzzle.y,Math.PI+m.nozzle.angle,0,'barge-jet',{r:26,life:1.75,emission:.68,barge:true,water:true,length:0,angle:m.nozzle.angle});
     b.shotClock=3;s.events.push('bargeJet');
    }else{
     const large=n===1,flight=large?.6:.48;
@@ -80,21 +72,24 @@ export function updateBarge(s,dt,helpers,shoot){
   }
   if(b.timer<=0){b.phase='recover';b.timer=s.gentle?1.65:1.15;b.driveSpeed=0;}
  }else if(b.timer<=0){const moves=(b.transformed?['tidal','drumroll','broadside','boarding','jet']:BARGE_MOVES).filter(move=>move!=='drumroll'||!bargePartBroken(s,'drum')).filter(move=>move!=='jet'||!bargePartBroken(s,'tank'));b.move=moves[b.turn++%moves.length];b.phase='warn';b.timer=b.move==='boarding'?1.5:b.move==='jet'?1.6:b.move==='tidal'?1.45:b.move==='broadside'?1.4:1.15;b.targetX=p.x;if(b.move==='jet')b.tankFill=0;s.events.push(b.move==='jet'?'bargePump':'bargeReady');}
- resolveBargeContact(s,helpers.body);
 }
 
 export function stepBargeProjectile(s,q,dt,additions){
  if(!q.barge)return false;
  if(q.kind==='barge-jet'){
-  if(s.boss.hp<=0||s.boss.phase!=='attack'||s.boss.move!=='jet'){q.life=0;return true;}
-  const m=bargeRig(s);q.x=m.jetMuzzle.x;q.y=m.jetMuzzle.y;q.angle=m.nozzle.angle;
-  const deck=Math.sin(q.angle)<-.005?(q.y-s.level.arena.y)/Math.sin(q.angle):Infinity;
-  q.length=Math.max(0,Math.min(s.gentle?820:1050,q.age*1200,deck));
-  if(q.length>=deck-1&&(q.impactClock=(q.impactClock||0)-dt)<=0){q.impactClock=.12;s.effects.push({x:q.x-q.length*Math.cos(q.angle),y:s.level.arena.y,surfaceY:s.level.arena.y,bargeSplash:true,size:85,age:0,life:.36});}
+  const m=bargeRig(s);q.source??={...m.jetMuzzle};q.angle??=m.nozzle.angle;
+  const emission=q.emission??.68,speed=1200;
+  const deck=Math.sin(q.angle)<-.005?(q.source.y-s.level.arena.y)/Math.sin(q.angle):Infinity;
+  const limit=Math.min(s.gentle?820:1050,deck),front=Math.min(limit,q.age*speed),tail=Math.max(0,(q.age-emission)*speed);
+  q.x=q.source.x-tail*Math.cos(q.angle);q.y=q.source.y-tail*Math.sin(q.angle);
+  q.length=Math.max(0,front-tail);
+  if(tail>=limit){q.life=0;return true;}
+  if(front>=deck-1&&(q.impactClock=(q.impactClock||0)-dt)<=0){q.impactClock=.12;s.effects.push({x:q.source.x-front*Math.cos(q.angle),y:s.level.arena.y,surfaceY:s.level.arena.y,bargeSplash:true,size:85,age:0,life:.36});}
   waterTrail(s,q,dt);return true;
  }
  if(q.kind==='barge-spout'){
-  const m=bargeRig(s);q.x=m.muzzle.x;q.y=m.muzzle.y;q.gravity=2*(q.floor-q.y)/(q.flight*q.flight);
+  q.tailTime=Math.min(q.flight,Math.max(0,q.age-.2));
+  if(q.tailTime>=q.flight){q.life=0;return true;}
   if(q.age>=q.flight)releaseTidalWave(s,q,additions);
   const at=spoutFront(q);if(q.age<q.flight&&Math.floor(q.age*24)!==(q.dropFrame||0)){q.dropFrame=Math.floor(q.age*24);s.effects.push({x:at.x,y:at.y,waterDrop:true,size:13,vx:q.vx*.1,vy:30,floor:q.floor+110,age:0,life:.8,duration:.8});}
   return true;

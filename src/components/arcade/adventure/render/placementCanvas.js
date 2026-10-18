@@ -6,6 +6,7 @@ export function drawPlacement(c,s,art,en=false){
  c.beginPath();c.moveTo(p.x,p.y-38);c.quadraticCurveTo((p.x+q.x)/2,Math.min(p.y,q.y)-115,q.x,q.y-12);c.stroke();
  c.setLineDash([]);c.globalAlpha=.2;c.beginPath();c.ellipse(q.x,q.floor-3,q.kind===6?50:72,9,0,0,Math.PI*2);c.fill();c.globalAlpha=.9;c.stroke();
  c.beginPath();c.moveTo(q.x-12,q.y-12);c.lineTo(q.x+12,q.y-12);c.moveTo(q.x,q.y-24);c.lineTo(q.x,q.y);c.stroke();
+ if(!s.trial&&!s.tutorial){c.restore();return;}
  c.font='bold 13px sans-serif';c.textAlign='center';c.fillStyle='#fff5da';c.strokeStyle='#27162e';c.lineWidth=4;
  const label=en?'Arrows: aim · release C · V: cancel':q.kind===6?'← → Colocar · suelta C · V cancela':'Flechas: posición y altura · suelta C · V cancela';
  const y=q.y-(q.kind===6?124:74),width=c.measureText(label).width+16;c.fillStyle='#26162de6';c.fillRect(q.x-width/2,y-16,width,23);c.fillStyle='#fff5da';c.fillText(label,q.x,y);c.restore();

@@ -1,4 +1,6 @@
 import {clashContact} from '../engine/adventurePowerClash';
+import {superMangaActive,MANGA_IMPACT_DURATION} from '../engine/adventureSuperTiming';
+import {inkMangaFrame} from './mangaImpactFrame';
 const clamp=n=>Math.max(0,Math.min(1,n));
 let backdrop,manga;
 
@@ -8,18 +10,30 @@ export function clashImpactTiming(q,reduced=false){
  if(!q||!['contest','resolve','flight'].includes(q.state))return{heat:0,burst:0,shock:0,manga:0};
  const heat=q.state==='flight'?1-clamp(q.age/.45):.78+clamp((.5-q.pressure)*2)*.22;
  const first=q.state==='contest'&&!reduced;
- return{heat,burst:first?clamp(1-q.age/.18):0,shock:first?clamp(1-q.age/.72):0,manga:first?clamp((.105-q.age)/.04):0};
+ return{heat,burst:first?clamp(1-q.age/.18):0,shock:first?clamp(1-q.age/.72):0,manga:first?clamp((MANGA_IMPACT_DURATION-q.age)/.04):0};
 }
 
 export function drawMangaClashImpact(c,s,reduced=false){
  const ink=clashImpactTiming(s.powerClash,reduced).manga;if(!ink)return;
+ drawMangaFrame(c,ink);
+}
+
+export function superMangaTiming(s,reduced=false){
+ // A duel gets its impact cels only when the two beams actually meet.
+ return superMangaActive(s,reduced)?1:0;
+}
+export function drawSuperMangaImpact(c,s,reduced=false){
+ if(superMangaTiming(s,reduced))drawMangaFrame(c,1,true);
+}
+function drawMangaFrame(c,ink,textured=false){
  manga??=new OffscreenCanvas(960,540);
  const b=manga.getContext('2d',{willReadFrequently:true});
  b.drawImage(c.canvas,0,0,960,540);
  const pixels=b.getImageData(0,0,960,540),data=pixels.data;
  // A few actual black/white impact cels, not a desaturated grey overlay.
  // This is a screen treatment of the existing drawings, not replacement art.
- for(let i=0;i<data.length;i+=4){const v=data[i]*.2126+data[i+1]*.7152+data[i+2]*.0722>83?255:8;data[i]=data[i+1]=data[i+2]=v;}
+ if(textured)inkMangaFrame(pixels);
+ else for(let i=0;i<data.length;i+=4){const v=data[i]*.2126+data[i+1]*.7152+data[i+2]*.0722>83?255:8;data[i]=data[i+1]=data[i+2]=v;}
  b.putImageData(pixels,0,0);c.save();c.globalAlpha=ink;c.drawImage(manga,0,0,960,540);c.restore();
 }
 

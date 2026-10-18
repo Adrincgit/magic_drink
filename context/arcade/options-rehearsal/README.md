@@ -14,7 +14,7 @@ Se retiran Wonderpop y la firma inferior Magic Drink de la pantalla principal de
 
 ## Cómo jugar
 
-El ensayo tiene 12 lecciones: movimiento, agacharse, doble salto, planeo, apuntar quieta, disparo, rodar/dash, escudo, bebida/varita, magia fuerte, súper y posavasos.
+El ensayo tiene 11 lecciones: movimiento, agacharse, doble salto, planeo, apuntar quieta, disparo, rodar/dash, escudo, bebida/varita, magia fuerte y súper. El posavasos se aprende en las demos de mods de la tienda de Miso. La [revisión de patrullas, escudo y controles vintage](../rehearsal-cinema/README.md) recoge el comportamiento vigente.
 
 Cada lección ejecuta una demostración con la física, los proyectiles y los sprites originales. Probar yo habilita teclado, mando y controles de pantalla, confirma el objetivo y reproduce los efectos de sonido. Esc/Menu devuelve a la demostración; LB/RB cambian lecciones cuando se está mirando. Cada simulación es independiente de la partida y de su economía.
 

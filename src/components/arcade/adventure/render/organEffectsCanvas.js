@@ -59,6 +59,12 @@ export function drawOrganDebris(c,s,art,reduced=false){
   c.save();c.globalAlpha=Math.min(1,q.life/.7);
   if(q.water){c.beginPath();c.rect(q.x-q.w-q.h,q.floor-2000,(q.w+q.h)*2,2000);c.clip();}
   c.translate(q.x,q.y);c.rotate(reduced?0:q.rotation);
+  if(q.mask){
+   c.beginPath();
+   if(q.mask==='ellipse')c.ellipse(0,0,q.w/2,q.h/2,0,0,Math.PI*2);
+   else{q.mask.forEach(([px,py])=>c.lineTo((px-.5)*q.w,(py-.5)*q.h));c.closePath();}
+   c.clip();
+  }
   if(q.jagged){
    const edge=[[-.5,-.47],[-.1,-.5],[.12,-.43],[.48,-.5],[.44,-.1],[.5,.19],[.43,.5],[-.13,.45],[-.5,.5],[-.44,.13],[-.5,-.1]];
    c.beginPath();edge.forEach(([px,py])=>c.lineTo(px*q.w,py*q.h));c.closePath();c.clip();

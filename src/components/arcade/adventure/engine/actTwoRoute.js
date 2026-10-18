@@ -8,6 +8,15 @@ export function prepareActTwo(s,at=0){
  for(const q of s.platforms)if(q.solid){q.hp=q.maxHp??q.hp;q.maxHp=q.hp;q.gone=false;q.hitIds=new Set();}
  s.strawPiles=[];s.dreamMirrors=[];s.dreamHazards=[];
  s.dreamPlatforms=[];
+ s.cornBursts=[];s.cornHazards=[];
+ if(s.level.cornfield){s.village={pumpkinSerial:0,rescued:0};for(const e of s.enemies)prepareCornEnemy(e);}
+}
+export function prepareCornEnemy(e){
+ if(e.type===32)e.cornCrow=true;
+ if(e.type===26){e.flying=true;e.flightHeight=165;e.conjurer=false;e.baseY=480;}
+ if(e.type===25){e.timer=1.4;e.phaseAge=0;}
+ if(e.type===29){e.cornImp=true;e.cornRole=e.spawnSeed%3===1?'runner':'thrower';e.timer=Math.min(e.timer,1.7);}
+ return e;
 }
 export function resolveActTwoWalls(s,oldX,oldY){
  if(!s.level.actTwo)return;
@@ -44,8 +53,11 @@ export function stepActTwoRoute(s,dt,makeEnemy){
  for(const q of s.actTwoAmbushes){
   if(q.fired||s.player.x<q.x-340)continue;
   if(!q.warning){q.warning=1.25;worldSound(s,'woodHit',q.x+250,s.player.y);continue;}
-  q.warning-=dt;if(q.warning<=0){q.fired=true;for(const [x,y,type]of q.enemies){const e=makeEnemy(x,y,type,80+s.enemies.length);e.timer=1.4;e.active=true;s.enemies.push(e);}}
+  q.warning-=dt;if(q.warning<=0){q.fired=true;for(const [x,y,type]of q.enemies){const e=makeEnemy(x,y,type,80+s.enemies.length);e.timer=1.4;e.active=true;
+   if(s.level.cornfield){prepareCornEnemy(e);e.emerging=.8;e.cornEmerge=true;e.dir=s.player.x<x?-1:1;s.cornBursts.push({x,y,age:0,life:1.1,seed:e.spawnSeed});worldSound(s,'woodBreak',x,y);}
+   s.enemies.push(e);}}
  }
+ for(const q of s.cornBursts)q.age+=dt;s.cornBursts=s.cornBursts.filter(q=>q.age<q.life);
  for(const q of s.actTwoDebris){q.age+=dt;q.vy+=700*dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.rotation+=dt*4;}
  for(const q of s.actTwoDust)q.age+=dt;
  s.actTwoDebris=s.actTwoDebris.filter(q=>q.age<q.life);s.actTwoDust=s.actTwoDust.filter(q=>q.age<q.life);

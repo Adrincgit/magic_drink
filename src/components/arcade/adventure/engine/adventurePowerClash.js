@@ -7,6 +7,7 @@ import {emitClashSparks,stepClashSparks} from './clashParticles';
 import {followAdventureCamera} from '../render/adventureCamera';
 import {clashPressureWave,clashResistance} from './clashActing';
 import {updateSupplies} from '../world/adventureSupplies';
+import {stepSuperSurface} from './adventureSuperSurface';
 export {clashPortraitFrames} from './clashActing';
 
 export const CLASH_DURATION=20;
@@ -15,8 +16,9 @@ export const CLASH_TRAVEL=.34;
 export const CLASH_TAP_STRENGTH={normal:.0215,gentle:.02795};
 export function canPowerClash(s){return s.index===3&&s.boss.hp>0&&s.boss.stage===3&&s.boss.ultimate?.state==='charge';}
 export function beginPowerClash(s){
- if(!s.superCinematic||!canPowerClash(s))return false;
+ if(!s.superCinematic||s.superCinematic.aim?.y||!canPowerClash(s))return false;
  const p=s.player,b=s.boss;p.dir=Math.sign(b.x-p.x)||1;s.superCinematic.dir=p.dir;
+ s.superCinematic.aim={x:p.dir,y:0};
  Object.assign(p,{vx:0,vy:0,dash:0,spin:0,gliding:false,guarding:false,firing:false,hitReact:0});
  s.powerClash={state:'windup',age:0,contestAge:0,pressure:.5,taps:0,lastTap:-1,tapPulse:0,won:null,rally:0,sparks:[],sparkSeed:0,sparkClock:0};
  s.shots=[];s.hostile=[];s.hitStop=0;b.vulnerable=false;return true;
@@ -75,5 +77,6 @@ export function stepPowerClash(s,input,dt,{hurt,finishBoss}){
   followAdventureCamera(s,dt);
   if(q.age>=.35){launchClashLoser(s);emitClashSparks(q,q.explosion.x,q.explosion.y,65);}
  }else stepClashAftermath(s,dt,{hurt,finishBoss});
+ if(s.superCinematic)stepSuperSurface(s,dt);
  if(s.powerClash&&['windup','travel','contest'].includes(s.powerClash.state))followAdventureCamera(s,dt);
 }

@@ -1,0 +1,179 @@
+{
+  "cases": [
+    {
+      "name": "run-tap",
+      "frames": 64,
+      "maxDust": 2,
+      "maxSplashes": 0,
+      "sheets": [
+        "run",
+        "run-fire"
+      ]
+    },
+    {
+      "name": "forest-dust",
+      "frames": 59,
+      "maxDust": 3,
+      "maxSplashes": 0,
+      "sheets": [
+        "run",
+        "jump"
+      ]
+    },
+    {
+      "name": "cemetery-dust",
+      "frames": 59,
+      "maxDust": 3,
+      "maxSplashes": 0,
+      "sheets": [
+        "run",
+        "jump"
+      ]
+    },
+    {
+      "name": "water-surface",
+      "frames": 71,
+      "maxDust": 0,
+      "maxSplashes": 2,
+      "sheets": [
+        "ground-aim"
+      ]
+    },
+    {
+      "name": "barge-drum",
+      "frames": 95,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "reactions"
+      ]
+    },
+    {
+      "name": "barge-jet",
+      "frames": 80,
+      "maxDust": 0,
+      "maxSplashes": 3,
+      "sheets": [
+        "reactions"
+      ]
+    },
+    {
+      "name": "barge-tidal",
+      "frames": 95,
+      "maxDust": 0,
+      "maxSplashes": 1,
+      "sheets": [
+        "reactions"
+      ]
+    },
+    {
+      "name": "barge-pass",
+      "frames": 71,
+      "maxDust": 1,
+      "maxSplashes": 1,
+      "sheets": [
+        "run"
+      ]
+    },
+    {
+      "name": "barge-collapse",
+      "frames": 105,
+      "maxDust": 0,
+      "maxSplashes": 7,
+      "sheets": [
+        "reactions"
+      ]
+    },
+    {
+      "name": "ultimate-up-ground",
+      "frames": 50,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-directional-v1"
+      ]
+    },
+    {
+      "name": "ultimate-up-diagonal-ground",
+      "frames": 57,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-directional-v1"
+      ]
+    },
+    {
+      "name": "ultimate-down-diagonal-ground",
+      "frames": 57,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-directional-v1"
+      ]
+    },
+    {
+      "name": "ultimate-down-ground",
+      "frames": 57,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-directional-v1"
+      ]
+    },
+    {
+      "name": "ultimate-down-left-ground",
+      "frames": 57,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-directional-v1"
+      ]
+    },
+    {
+      "name": "ultimate-up-air",
+      "frames": 57,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-directional-v1"
+      ]
+    },
+    {
+      "name": "ultimate-up-diagonal-air",
+      "frames": 57,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-directional-v1"
+      ]
+    },
+    {
+      "name": "ultimate-down-diagonal-air",
+      "frames": 57,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-directional-v1"
+      ]
+    },
+    {
+      "name": "ultimate-down-air",
+      "frames": 57,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-directional-v1"
+      ]
+    },
+    {
+      "name": "ultimate-down-left-air",
+      "frames": 57,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-directional-v1"
+      ]
+    }
+  ],
+  "runtimeErrors": []
+}

@@ -44,7 +44,7 @@ test('one to four hearts means a prone defeat; only a surviving Hexy can sit up 
  for(const hearts of [1,2,3,4,5]){
   const s=collide();s.hearts=hearts;contest(s,0);const landingFrames=new Set();let deaths=0,n=0;
   while(s.powerClash&&n++<850){tick(s,1,{jump:true,right:true});if(s.powerClash?.state==='land')landingFrames.add(hexyPose(s).frame);deaths+=s.events.filter(e=>e==='death').length;}
-  expect(s.powerClash).toBeUndefined();expect(s.hearts).toBe(Math.max(0,hearts-4));
+  expect(s.powerClash).toBeUndefined();expect(s.hearts).toBe(hearts<=4?0:hearts-4);
   if(hearts<=4){
    expect([...landingFrames]).toEqual([4]);expect(s.done).toBe(true);expect(s.won).toBe(false);expect(deaths).toBe(1);expect(hexyPose(s)).toEqual({sheet:'clash-fall',frame:4});
    const position={x:s.player.x,y:s.player.y,ticks:s.ticks};tick(s,240,{jump:true,attack:true,right:true});expect({x:s.player.x,y:s.player.y,ticks:s.ticks}).toEqual(position);expect(hexyPose(s).frame).toBe(4);
@@ -86,7 +86,7 @@ test('phase changes and retries preserve a duel without supply crates inside the
  expect(s.boss.stage).toBe(2);expect(s.supplies).toHaveLength(0);expect(s.pickups).toHaveLength(0);
  s.boss.hp=240;for(let n=0;n<400&&s.boss.stage<3;n++)tick(s,1);
  expect(s.boss.stage).toBe(3);expect(s.supplies).toHaveLength(0);expect(s.pickups).toHaveLength(0);
- retryAdventure(s);expect(s.supplies).toHaveLength(0);expect(s.pickups).toHaveLength(0);expect(s.starMoney).toBe(0);
+ retryAdventure(s);expect(s.player.x).toBe(s.level.spawn[0]);expect(s.supplies.every(q=>q.x<s.level.arena.left)).toBe(true);expect(s.pickups).toHaveLength(0);expect(s.starMoney).toBe(0);
 });
 
 test('ribbon has a windup, an actual release from the hand and a visible descent to the floor',()=>{
@@ -94,7 +94,7 @@ test('ribbon has a windup, an actual release from the hand and a visible descent
  const shoot=(s,x,y,angle,speed,kind,extra)=>shots.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,kind,age:0,...extra});
  updateHarlequin(s,.02,helpers,shoot);expect(harlequinDrawing(s).frame).toBe(27);updateHarlequin(s,.12,helpers,shoot);expect(harlequinDrawing(s).frame).toBe(27);expect(shots).toHaveLength(0);
  updateHarlequin(s,.13,helpers,shoot);expect(harlequinDrawing(s).frame).toBe(28);expect(shots).toHaveLength(1);const shot=shots[0],h=harlequinHand(b,true);expect([shot.x,shot.y]).toEqual([h.x,h.y]);
- updateHarlequin(s,.13,helpers,shoot);expect(harlequinDrawing(s).frame).toBe(30);shot.age=.12;stepHarlequinProjectile(s,shot,.12);expect(shot.y).toBeGreaterThan(h.y);expect(shot.y).toBeLessThan(shot.floor-shot.r);
+ updateHarlequin(s,.16,helpers,shoot);expect(harlequinDrawing(s).frame).toBe(30);shot.age=.12;stepHarlequinProjectile(s,shot,.12);expect(shot.y).toBeGreaterThan(h.y);expect(shot.y).toBeLessThan(shot.floor-shot.r);
  shot.age=.3;stepHarlequinProjectile(s,shot,.18);expect(shot.y).toBe(shot.floor-shot.r-1);
  expect(harlequinBody(s).w).toBeCloseTo(84*.72);expect(harlequinBody(s).h).toBeCloseTo(200*.72);
 });
@@ -107,7 +107,8 @@ test('all 72 normal motion cells and both falls retain visible native transparen
 });
 
 test('real renderer shows release gestures, sustained portraits, both flights and landing dust',async({page})=>{
- fs.mkdirSync(folder,{recursive:true});await page.setViewportSize({width:1440,height:810});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/arcade');
+ fs.mkdirSync(folder,{recursive:true});await page.setViewportSize({width:1440,height:810});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.route('**/__clash_spectacle_review',r=>r.fulfill({contentType:'text/html',body:'<body style="margin:0"></body>'}));await page.goto('/__clash_spectacle_review');
  await page.evaluate(async()=>{
   const [{createAdventure,stepAdventure},{loadAdventureArt,renderAdventure},{followAdventureCamera},{beginHarlequinUltimate}]=await Promise.all([import('/src/components/arcade/adventure/engine/adventureModel.js'),import('/src/components/arcade/adventure/render/adventureCanvas.js'),import('/src/components/arcade/adventure/render/adventureCamera.js'),import('/src/components/arcade/adventure/actors/bosses/harlequinUltimate.js')]);
   const art=await loadAdventureArt(),c=document.createElement('canvas');c.id='spectacle-review';c.style='position:fixed;inset:0;z-index:99999;width:1440px;height:810px';document.body.append(c);

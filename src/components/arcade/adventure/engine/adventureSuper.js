@@ -13,6 +13,7 @@ import {bossHitFeedback} from '../actors/bosses/bossFeedback';
 import {SUPER_RECHARGE} from './adventureRewards';
 import {superCapacity,reserveRecharge} from './adventureMods';
 import {stepSuperRecoil} from './adventureSuperRecoil';
+import {stepSuperSurface} from './adventureSuperSurface';
 
 // R commits immediately. The cinematic owns simulation time until it ends;
 // enemies, ordinary bullets, platforms and the camera remain exactly frozen.
@@ -26,7 +27,9 @@ export function beginSuper(s,input){
  if(s.magic<SUPER_COST){s.notice='superLow';s.noticeTime=3;return false;}
  if(p.dash||p.hitReact||p.guarding||p.specialCast||p.drinkCast>0)return false;
  const axis=(input.right?1:0)-(input.left?1:0);if(axis)p.dir=axis;
- s.superCinematic={age:0,pulses:0,origin:{x:p.x+p.dir*28,y:p.y-44},dir:p.dir,airborne:p.ground===null};
+ const vertical=input.up?-1:input.down?1:0;
+ const aim=vertical?{x:axis*Math.SQRT1_2,y:vertical*(axis?Math.SQRT1_2:1)}:{x:p.dir,y:0};
+ s.superCinematic={age:0,pulses:0,origin:{x:p.x+p.dir*28,y:p.y-44},dir:p.dir,aim,airborne:p.ground===null};
  if(s.superCooldown>0){s.superReserve=0;s.reserveCooldown=reserveRecharge(s);}else s.superCooldown=SUPER_RECHARGE;
  s.magic-=SUPER_COST;p.charge=.001;p.superCast=0;p.spin=0;p.gliding=false;p.cast=0;p.firing=false;p.pendingSpecial=null;
  s.hitStop=0;s.events.push('superCharge');return true;
@@ -37,10 +40,16 @@ export function stepSuper(s,dt,{defeat,particles,burst,say}){
  p.charge=q.age<SUPER_WINDUP?q.age:0;
  p.superCast=q.age>=SUPER_WINDUP?.32:0;
  stepSuperRecoil(s,previous);
- if(previous<SUPER_WINDUP&&q.age>=SUPER_WINDUP){q.origin=hexyMuzzle(s);s.events.push('superCast');s.shake=.26;}
+ stepSuperSurface(s,dt);
+ if(previous<SUPER_WINDUP&&q.age>=SUPER_WINDUP){q.released=true;q.origin=hexyMuzzle(s);s.events.push('superCast');s.shake=.26;}
  if(q.age>=SUPER_WINDUP)q.origin=hexyMuzzle(s);
- const inBeam=(x,y,pad=0)=>{const distance=(x-q.origin.x)*q.dir;return distance>=-50-pad&&distance<=1050+pad&&Math.abs(y-q.origin.y)<110+pad;};
- const bodyInBeam=t=>{const ends=[(t.x-q.origin.x)*q.dir,(t.x+t.w-q.origin.x)*q.dir];return Math.max(...ends)>-50&&Math.min(...ends)<1050&&t.y<q.origin.y+110&&t.y+t.h>q.origin.y-110;};
+ const aim=q.aim||{x:q.dir,y:0};
+ const inBeam=(x,y,pad=0)=>{const dx=x-q.origin.x,dy=y-q.origin.y,distance=dx*aim.x+dy*aim.y;return distance>=-50-pad&&distance<=1050+pad&&Math.abs(-dx*aim.y+dy*aim.x)<110+pad;};
+ const bodyInBeam=t=>{
+  const dx=t.x+t.w/2-q.origin.x,dy=t.y+t.h/2-q.origin.y;
+  const along=dx*aim.x+dy*aim.y,across=-dx*aim.y+dy*aim.x;
+  return along+Math.abs(aim.x)*t.w/2+Math.abs(aim.y)*t.h/2>-50&&along-Math.abs(aim.x)*t.w/2-Math.abs(aim.y)*t.h/2<1050&&Math.abs(across)<110+Math.abs(aim.y)*t.w/2+Math.abs(aim.x)*t.h/2;
+ };
  const due=q.age<SUPER_WINDUP?0:Math.min(8,1+Math.floor((q.age-SUPER_WINDUP)/.24));
  while(q.pulses<due){
   q.pulses++;s.events.push('superPulse');s.shake=Math.max(s.shake,.16);

@@ -1,0 +1,27 @@
+﻿[
+    {
+        "Source":  "shop.mp3",
+        "Target":  "shop.mp3",
+        "SHA256":  "D78E0DCBCA7F615EB36A1C78B007BEE7E470A83B6B5CF1307EC13EDEE714A1A5"
+    },
+    {
+        "Source":  "main_title_screen.mp3",
+        "Target":  "title.mp3",
+        "SHA256":  "5087EBFED732317D780E3D22E1F1771C08126932FA7253CE580053DD99C8A6AB"
+    },
+    {
+        "Source":  "Jefe 1-2.mp3",
+        "Target":  "bosses/organ-1-2.mp3",
+        "SHA256":  "D251F986A0AAA13F9F8B6A47193D41336A18A38F41043BC91C9CF7524B40528C"
+    },
+    {
+        "Source":  "jefe 1-3.mp3",
+        "Target":  "bosses/barge-1-3.mp3",
+        "SHA256":  "C59E3B17AA88EF74B93BF8B14668BEB8DCB3D89F6A65FD0825E9572D42891CEC"
+    },
+    {
+        "Source":  "Jefe 1-4.mp3",
+        "Target":  "bosses/ember-1-4.mp3",
+        "SHA256":  "7A1B127C3CFCB1DE81CB697550D5506C6A2B678C75905A3EA5F35C00BFCA0C5E"
+    }
+]

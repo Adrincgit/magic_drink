@@ -8,6 +8,8 @@ import {stepSoulPumpkin} from './villagePumpkins';
 
 export function beginPlayerDefeat(s,pit=false){
  const p=s.player;
+ // Keep the defeated HUD until a new attempt begins on the chapter card.
+ s.resultRescued=s.rescued;
  s.playerDefeat={state:p.candy?.pumpkin?'pumpkin':p.candy?'candy':'fall',age:0,total:0,pit};s.won=false;s.hitStop=0;
  p.clashFlight={frame:0};p.hurt=0;p.hitReact=0;p.firing=false;p.gliding=false;p.crouch=false;
  p.vx=pit?0:-p.dir*145;p.vy=pit?Math.max(150,p.vy):-265;

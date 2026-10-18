@@ -1,4 +1,5 @@
 .hud{position:absolute;inset:0;z-index:3;pointer-events:none;color:#fff0b6}
+@media(hover:hover) and (pointer:fine){.pause{display:none!important}}
 .ambush{position:absolute;top:3%;left:31%;width:38%;padding:.65cqw 1cqw;text-align:center;background:linear-gradient(90deg,transparent,#271a38da 15% 85%,transparent);text-shadow:0 2px 2px #21172c}
 .ambush b{display:block;font:400 1.65cqw BakeSoda,serif}.ambush span{display:block;margin:.25cqw 0;font:600 1cqw Inter,sans-serif;color:#fce5ae}.ambush small{font:500 .82cqw Inter,sans-serif;color:#e1d3e1}
 .vitals{position:absolute;top:2.4%;left:2%;width:clamp(105px,25cqw,340px);filter:drop-shadow(0 2px 1px #382337b3)}

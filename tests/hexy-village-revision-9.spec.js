@@ -49,11 +49,11 @@ test('rapid pumpkin zombies have shorter windup and faster fire without shifting
  expect(times[1]).toBeLessThan(times[0]-.1);expect(speeds.slice(0,3)).toEqual([245,245,245]);expect(speeds.slice(3)).toEqual([325,325,325]);
 });
 
-test('four crouched shelters need real shots to release their occupants and preserve rescue on retry',()=>{
+test('four crouched shelters need real shots and retry reconstructs their rescue encounter',()=>{
  const s=createAdventure(7),r=s.villageRubble.find(q=>q.shelter),n=s.villagers.find(q=>q.id===r.villager);expect(s.villageRubble.filter(q=>q.shelter)).toHaveLength(4);
  s.enemies=[];s.villagers=[n];s.villageRubble=[r];s.villageObstacles=[];s.platforms=s.platforms.filter(q=>!q.villageObstacle);place(s,r.x-145);s.player.dir=1;s.player.hurt=999;
  tick(s,.8);expect(n.state).toBe('hiding');expect(r.freed).toBeFalsy();tick(s,2.6,{attack:true});expect(r.freed).toBe(true);expect(n.state).toBe('flee');expect(n.x).toBeLessThan(r.x-50);expect(n.hidingCover).toBeNull();expect(s.village.rescued).toBe(1);
- retryAdventure(s);expect(s.villageRubble.find(q=>q.id===r.id).freed).toBe(true);expect(s.villagers.find(q=>q.id===n.id).state).toBe('flee');
+ retryAdventure(s);expect(s.villageRubble.find(q=>q.id===r.id).freed).toBeFalsy();expect(s.villagers.find(q=>q.id===n.id).state).toBe('waiting');expect(s.player.x).toBe(s.level.spawn[0]);
 });
 
 test('a low actual spell collision can still curse a crouched civilian',()=>{

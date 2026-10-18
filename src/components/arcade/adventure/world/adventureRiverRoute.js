@@ -12,7 +12,7 @@ export function shapeRiverRoute(level){
  Object.assign(level,{groundRoute:true,riverRoute:true,cameraFloor:400,themeStart:true,width:riverRouteX(12000),arena:{left:riverRouteX(10400),right:riverRouteX(12000),y:650,entry:riverRouteX(10520)},boss:[riverRouteX(11655),650],exit:[riverRouteX(11910),650]});
  level.platforms=points.slice(0,-1).map(([x,y],i)=>({x,y,w:points[i+1][0]-x,yEnd:points[i+1][1],h:24,kind:'earth',bridge:RIVER_BRIDGE_SPANS.some(([start])=>riverRouteX(start)===x)}));
  const floor=x=>groundY(level.platforms,x);
- level.rivers=level.platforms.filter(q=>q.bridge).map(q=>({x:q.x,w:q.w,y:q.y+62}));
+ level.rivers=level.platforms.filter(q=>q.bridge).map(q=>({x:q.x,w:q.w,y:q.y+62,shotSurfaceY:q.y+159}));
  // The middle rescue travels with the first zeppelin; the other two stay on the trail.
  level.cages=[1720,3420,9220].map((at,i)=>{const x=riverRouteX(at);return[x,floor(x),...(i===1?[3420]:[])];});
  level.checkpoints=[4520,10100].map(at=>{const x=riverRouteX(at);return[x,floor(x)];});level.checkpoint=level.checkpoints[0];

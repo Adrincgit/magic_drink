@@ -41,7 +41,7 @@ test('the intake fills before a dedicated nozzle fires; breaking the tank stops 
  const s=battle();Object.assign(s.boss,{phase:'warn',move:'jet',timer:1.6,tankFill:0});tick(s,90);
  expect(s.boss.tankFill).toBeGreaterThan(.43);expect(s.boss.tankFill).toBeLessThan(.7);expect(s.hostile.some(q=>q.kind==='barge-jet')).toBe(false);
  tick(s,160);const jet=s.hostile.find(q=>q.kind==='barge-jet'),m=bargeRig(s);expect(jet).toBeTruthy();expect(jet.x).toBeCloseTo(m.jetMuzzle.x);expect(Math.abs(jet.x-m.muzzle.x)).toBeGreaterThan(90);expect(s.boss.tankFill).toBeLessThan(.9);
- hitPart(s,'tank',96);expect(bargeParts(s).tank.hp).toBe(0);expect(s.hostile.some(q=>q.kind==='barge-jet'&&q.life>0)).toBe(false);expect(s.boss.tankFill).toBe(0);
+ hitPart(s,'tank',96);expect(bargeParts(s).tank.hp).toBe(0);expect(jet.emission).toBeLessThanOrEqual(jet.age);expect(s.boss.tankFill).toBe(0);tick(s,160);expect(s.hostile.some(q=>q.kind==='barge-jet'&&q.life>0)).toBe(false);
  s.boss.timer=0;const moves=new Set();for(let i=0;i<4500;i++){stepAdventure(s,{},1/120);if(s.boss.phase==='warn')moves.add(s.boss.move);}expect(moves.has('jet')).toBe(false);
 });
 

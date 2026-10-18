@@ -25,7 +25,7 @@ for(const weapon of [-1,0,9,13])for(const aim of ['right','up','down'])test(`hel
  const muzzle=hexyMuzzle(s);expect(Number.isFinite(muzzle.x+muzzle.y)).toBe(true);
  if(weapon===9)expect(Math.hypot(s.voltBeam.segments[0].from.x-muzzle.x,s.voltBeam.segments[0].from.y-muzzle.y)).toBeLessThan(2);
  else{expect(s.shots.length).toBeGreaterThan(0);const shot=s.shots[0];expect(Math.hypot(shot.previousX-muzzle.x,shot.previousY-muzzle.y)).toBeLessThan(4);}
- if(weapon===13){expect(s.player.vy).toBeLessThan(0);tick(s,.4,input);}else tick(s,.1,input);
+ if(weapon===13){if(aim==='down')expect(s.player.vy).toBeLessThan(0);else expect(s.player.vy).toBeGreaterThanOrEqual(0);tick(s,.4,input);}else tick(s,.1,input);
  expect(s.player.gliding).toBe(true);expect(s.player.vy).toBe(95);expect(hexyPose(s).sheet).toBe('glide-fire-v1');
  tick(s,.1,{});expect(s.player.gliding).toBe(false);expect(hexyPose(s).sheet).not.toBe('glide-fire-v1');
 });

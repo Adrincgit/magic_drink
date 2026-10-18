@@ -4,6 +4,7 @@ import {villageTarget,villageAim} from './villageTargeting';
 import {worldSound} from './adventureWorldAudio';
 import {HARVESTER_AIR_SIZE,harvesterInRitual,harvesterTransition,HARVESTER_SIZE} from '../actors/harvesterRegistration';
 import {harvesterFlightWand} from '../actors/harvesterFlightAtlas';
+import {advanceEnemyStride,travelFrame} from '../actors/enemies/actorCadence';
 export {HARVESTER_SIZE} from '../actors/harvesterRegistration';
 export const HARVESTER=28,HARVESTER_HEALTH=185;
 const change=(e,phase)=>{e.phase=phase;e.phaseAge=0;};
@@ -56,6 +57,7 @@ function fireHarvester(s,e,shoot){
  e.releasePulse=.32;s.events.push('harvesterCast');
 }
 export function stepHarvester(s,e,dt,shoot){
+ e.moving=false;
  const a=s.level.arena;
  if(e.phase==='sleep'){
   if(s.player.x<e.home-680)return;
@@ -85,7 +87,7 @@ export function stepHarvester(s,e,dt,shoot){
  e.dir=Math.sign(s.player.x-e.x)||e.dir;
  if(!e.flying){
   const destination=clamp(s.player.x-e.dir*420,a.left+320,a.right-230),dx=destination-e.x;
-  if(Math.abs(dx)>20){e.x+=Math.sign(dx)*Math.min(Math.abs(dx),dt*52);e.gait=(e.gait||0)+dt;}
+  if(Math.abs(dx)>20){const old=e.x;e.x+=Math.sign(dx)*Math.min(Math.abs(dx),dt*52);advanceEnemyStride(e,e.x-old,dt,64);}
  }
  if(e.timer>0)return;
  const target=villageTarget(s,e,1800);if(!target){e.timer=.3;return;}
@@ -110,5 +112,7 @@ export function harvesterDrawing(e,reduced=false){
  if(e.hurtAge<.4&&e.phase!=='attack')return{key:'harvester-combat',frame:12+Math.min(3,Math.floor(e.hurtAge/.1))};
  if(e.phase==='attack')return{key:'harvester-combat',frame:8};
  if(e.phase==='windup')return{key:'harvester-combat',frame:4+Math.min(3,Math.floor(t/1.05*4))};
+ if(e.phase==='recover')return{key:'harvester-combat',frame:9+Math.min(2,Math.floor(t/.22))};
+ if(e.moving&&e.phase==='patrol')return{key:'harvester-walk-v1',frame:travelFrame(e.gait,12,reduced)};
  return{key:'harvester-combat',frame:cycle};
 }

@@ -36,7 +36,13 @@ function paintRegion(c,img,m,rect){
 const DRUM_REGION=[316,314,285,340],TANK_REGION=[753,322,174,317];
 export function drawBarge(c,s,art,reduced=false){
  const b=s.boss;if(b.phase==='sleep')return;
- if(b.shattered){drawBargeEscape(c,s,art,reduced);return;}
+ if(b.shattered){
+  const m=bargeRig(s),u=Math.min(1,(b.defeat.age-1.55)/2.6);
+  c.save();c.beginPath();c.rect(m.body.x-250,m.body.y-400,m.body.w+500,m.waterY-m.body.y+400);c.clip();
+  c.translate(b.x,m.waterY);c.rotate(reduced?0:u*.2);c.translate(-b.x,-m.waterY+u*u*170);
+  paintRegion(c,art['barge-phase-two'],m,[45,634,1470,300]);c.restore();
+  drawBargeEscape(c,s,art,reduced);return;
+ }
  const m=bargeRig(s),t=s.fxTime||s.time||0,parts=bargeParts(s),img=art['barge-pressure-barge'],damaged=art['barge-pressure-damage'];
  const preparing=b.phase==='warn',firing=b.release>0,frame=reduced?0:Math.floor(t*10)%4;
  drawHullWater(c,img,b.x,m.waterY,m.body.w,m.body.h,t,reduced,art);
@@ -101,7 +107,7 @@ export function drawBargeProjectile(c,q,art,reduced=false){
  if(q.kind==='barge-sonic'||q.kind==='barge-hoop'){c.save();c.globalAlpha*=.82*Math.min(1,q.life/.3);c.translate(q.x,q.y);if(q.vx>0)c.scale(-1,1);bargeCell(c,art['barge-sonic'],Math.min(3,Math.floor(q.age*7)),0,0,size,size*.9);c.restore();}
  else if(q.kind==='barge-wave'||q.kind==='barge-surf'){
   const h=size*.85,base=[246,250,250,248][frame]/256;
-  c.save();c.translate(q.x,q.floor);if(q.vx>0)c.scale(-1,1);
+  c.save();c.translate(q.x,q.floor+9);if(q.vx>0)c.scale(-1,1);
   drawAquaticFX(c,art,3,frame,0,-h*(base-.5),size,h);c.restore();
  }
  else if(q.kind==='barge-balloon'||q.kind==='barge-shell'){
@@ -116,8 +122,8 @@ export function drawBargeProjectile(c,q,art,reduced=false){
   const tip={x:q.x-length*Math.cos(angle),y:q.y-length*Math.sin(angle)};
   drawWaterDetail(c,art,3,frame,tip.x+10,tip.y+12,85,64,0,.4*fade);
  }else if(q.kind==='barge-spout'){
-  const front=Math.min(q.age,q.flight),segments=10,fade=Math.min(1,q.life/.16),height=q.large?88:72;
-  const points=Array.from({length:segments+1},(_,i)=>spoutPoint(q,front*i/segments)),lengths=points.slice(1).map((p,i)=>Math.hypot(p.x-points[i].x,p.y-points[i].y)),total=lengths.reduce((a,b)=>a+b,0),sourceWidth=Math.min(1450,Math.max(32,total*224/height)),cel=reduced?0:Math.floor(q.age*16)%5;
+  const front=Math.min(q.age,q.flight),tail=q.tailTime||0,segments=10,fade=Math.min(1,q.life/.1),height=q.large?88:72;
+  const points=Array.from({length:segments+1},(_,i)=>spoutPoint(q,tail+(front-tail)*i/segments)),lengths=points.slice(1).map((p,i)=>Math.hypot(p.x-points[i].x,p.y-points[i].y)),total=lengths.reduce((a,b)=>a+b,0),sourceWidth=Math.min(1450,Math.max(32,total*224/height)),cel=reduced?0:Math.floor(q.age*16)%5;
   // Painted strips follow one ballistic centre line. The first tangent is
   // horizontal at the real cannon; the front reaches the floor before a wave.
   let travelled=0;

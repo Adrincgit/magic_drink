@@ -1,0 +1,179 @@
+{
+  "cases": [
+    {
+      "name": "accepted-run",
+      "frames": 59,
+      "maxDust": 2,
+      "maxSplashes": 0,
+      "sheets": [
+        "run"
+      ]
+    },
+    {
+      "name": "fire-reaction",
+      "frames": 52,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "reactions",
+        "stand-fire"
+      ]
+    },
+    {
+      "name": "candy-patrol",
+      "frames": 143,
+      "maxDust": 1,
+      "maxSplashes": 0,
+      "sheets": [
+        "reactions",
+        "fear",
+        "stand-fire"
+      ]
+    },
+    {
+      "name": "ultimate-meadow-grass",
+      "frames": 105,
+      "maxDust": 35,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-charge",
+        "super-cast",
+        "run"
+      ]
+    },
+    {
+      "name": "ultimate-bridge-wood",
+      "frames": 108,
+      "maxDust": 35,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-charge",
+        "super-cast",
+        "run"
+      ]
+    },
+    {
+      "name": "ultimate-right-ground",
+      "frames": 108,
+      "maxDust": 35,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-charge",
+        "super-cast",
+        "run"
+      ]
+    },
+    {
+      "name": "ultimate-up-ground",
+      "frames": 108,
+      "maxDust": 35,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-up-v2",
+        "ground-aim"
+      ]
+    },
+    {
+      "name": "ultimate-up-diagonal-ground",
+      "frames": 108,
+      "maxDust": 35,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-diagonal-up-v2",
+        "run-diagonal-up"
+      ]
+    },
+    {
+      "name": "ultimate-down-diagonal-ground",
+      "frames": 108,
+      "maxDust": 35,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-diagonal-down-v2",
+        "crouch-walk"
+      ]
+    },
+    {
+      "name": "ultimate-down-ground",
+      "frames": 108,
+      "maxDust": 35,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-down-v2",
+        "ground-aim"
+      ]
+    },
+    {
+      "name": "ultimate-down-left-ground",
+      "frames": 108,
+      "maxDust": 35,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-diagonal-down-v2",
+        "crouch-walk"
+      ]
+    },
+    {
+      "name": "ultimate-right-air",
+      "frames": 108,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-horizontal-charge-v2",
+        "air-super-release",
+        "jump"
+      ]
+    },
+    {
+      "name": "ultimate-up-air",
+      "frames": 108,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-up-v2",
+        "air-aim"
+      ]
+    },
+    {
+      "name": "ultimate-up-diagonal-air",
+      "frames": 108,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-diagonal-up-v2",
+        "air-aim"
+      ]
+    },
+    {
+      "name": "ultimate-down-diagonal-air",
+      "frames": 108,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-diagonal-down-v2",
+        "aim-down-diagonal"
+      ]
+    },
+    {
+      "name": "ultimate-down-air",
+      "frames": 108,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-down-v2",
+        "aim-down"
+      ]
+    },
+    {
+      "name": "ultimate-down-left-air",
+      "frames": 108,
+      "maxDust": 0,
+      "maxSplashes": 0,
+      "sheets": [
+        "super-diagonal-down-v2",
+        "aim-down-diagonal"
+      ]
+    }
+  ],
+  "runtimeErrors": []
+}

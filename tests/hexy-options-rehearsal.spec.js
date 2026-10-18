@@ -16,7 +16,9 @@ for(const lesson of TUTORIAL_LESSONS)test(`rehearsal demonstrates ${lesson.id} u
  const s=createTutorial(lesson.id);for(let i=0;i<820;i++)stepTutorial(s,tutorialDemoInput(s),1/120);expect(s.tutorial.complete).toBe(true);expect(s.hearts).toBe(s.maxHearts);expect(s.boss.engaged).toBeFalsy();expect(Number.isFinite(s.player.x)).toBe(true);
 });
 async function fakePad(page){await page.addInitScript(()=>{window.optionsPad={id:'Xbox options review',index:0,mapping:'standard',connected:true,axes:[0,0,0,0],buttons:Array.from({length:17},()=>({pressed:false,value:0}))};Object.defineProperty(navigator,'getGamepads',{value:()=>[window.optionsPad]});});}
-async function press(page,index){await page.evaluate(i=>{window.optionsPad.buttons[i]={pressed:true,value:1};},index);await page.waitForTimeout(110);await page.evaluate(i=>{window.optionsPad.buttons[i]={pressed:false,value:0};},index);await page.waitForTimeout(110);}
+// A simulated hardware state must survive a browser poll, even while the first
+// optical frame compiles on a narrow viewport.
+async function press(page,index){for(const pressed of [true,false])await page.evaluate(async({index,pressed})=>{window.optionsPad.buttons[index]={pressed,value:pressed?1:0};await Promise.all([new Promise(resolve=>setTimeout(resolve,110)),new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))]);},{index,pressed});}
 for(const width of [390,1440,2048])test(`compact options fit their frame and Xbox tabs reach classic mode at ${width}px`,async({page})=>{
  fs.mkdirSync(dir,{recursive:true});await page.setViewportSize({width,height:width===2048?1152:900});await fakePad(page);await page.goto('/arcade');await openAdventureMenu(page);await page.locator('[data-open-settings]').click();
  await expect(page.getByRole('button',{name:'Cerrar ajustes'})).toHaveCount(0);await expect(page.locator('[data-title-menu] a')).toHaveCount(0);await expect(page.locator('[data-title-screen]')).not.toContainText('MAGIC DRINK');

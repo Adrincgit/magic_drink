@@ -7,6 +7,9 @@
 .lens { z-index: 10000; opacity: var(--lens-opacity); backdrop-filter: url('#hexy-film-optics'); -webkit-backdrop-filter: url('#hexy-film-optics'); }
 .lens[data-ready=false] { visibility: hidden; }
 .grain { z-index: 10001; display: block; opacity: var(--grain-opacity); mix-blend-mode: soft-light; }
+.wear{z-index:10002;display:block}
+body:has([data-game-screen][data-manga-impact=true]) .finish[data-arcade-optics=true] .lens{backdrop-filter:grayscale(1);-webkit-backdrop-filter:grayscale(1)}
+body:has([data-game-screen][data-manga-impact=true]) .finish[data-arcade-optics=true] :is(.wear,.vignette){filter:grayscale(1)}
 .vignette { z-index: 10002; opacity: var(--vignette-opacity); background: radial-gradient(ellipse at 50% 48%, transparent 44%, #271d3308 72%, #21162d2e 100%); filter: grayscale(var(--finish-monochrome, 0)); }
 @media (max-width: 900px) {
   .lens { opacity: calc(var(--lens-opacity) * .65); }

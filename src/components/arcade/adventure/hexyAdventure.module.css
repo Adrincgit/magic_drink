@@ -44,3 +44,6 @@
 .pauseButtons{display:flex;align-items:center;justify-content:center;gap:12px}.padHint{font:600 10px/1.5 Inter,sans-serif;text-align:center;color:#ffe2a5;padding:0 12px;margin:10px 0}.padWarning{font-size:11px!important}
 .audioUnlock{position:absolute;bottom:2%;left:50%;translate:-50%;z-index:25;border:0;background:url('/arcade/shop/ui/button-plum.webp') center/100% 100% no-repeat;padding:10px 25px;color:#fff0c1;font:400 clamp(9px,1.2vw,14px) BakeSoda,serif;white-space:nowrap}
 @media(max-width:700px){.chapterActions{gap:3px}.chapterActions button{width:31px;height:34px;font-size:19px}.chapter h2{font-size:19px}.padHint{font-size:8px}.pauseButtons{gap:5px}.pauseButtons [data-scene-control]{min-height:38px;padding-block:6px;font-size:10px}.padWarning{font-size:8px!important;line-height:1.2!important}}
+.screen[data-manga-impact=true]{filter:grayscale(1)}
+.machine .message{bottom:4%;max-width:84%;padding:5px 10px;color:#ffe46e;font:800 clamp(13px,2.15cqw,28px)/1.28 Arial,sans-serif;letter-spacing:.005em;text-align:center;text-wrap:balance;text-shadow:-1px -1px #21131c,1px -1px #21131c,-1px 1px #21131c,1px 1px #21131c,0 2px 2px #130d18;background:none;border:0}
+.machine .message small{display:block;margin-top:4px;font:700 .72em/1.3 Arial,sans-serif;color:#fff0b3}

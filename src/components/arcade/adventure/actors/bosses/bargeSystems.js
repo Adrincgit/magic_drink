@@ -17,7 +17,7 @@ export function bargePartHit(s,name,amount){
  // other crew's projectiles. The exposed tank frame remains a core target.
  if(name==='drum'&&b.move==='drumroll'||name==='tank'&&b.move==='jet'){
   b.phase='recover';b.timer=1.5;b.driveSpeed=0;
-  for(const q of s.hostile)if(name==='tank'&&q.kind==='barge-jet')q.life=0;
+  for(const q of s.hostile)if(name==='tank'&&q.kind==='barge-jet')q.emission=Math.min(q.emission??.68,q.age);
  }
  const at=name==='drum'?m.drum:m.tank;
  for(let i=0;i<5;i++)(s.organDebris??=[]).push({art:name==='drum'?'barge-shield':'barge-tank',crop:name==='drum'?[i/5,0,1/5,1]:[.75+i/20,0,1/20,1],x:at.x+(i-2)*15,y:at.y,w:26,h:name==='drum'?90:130,vx:(i-2)*75,vy:-130-i%2*60,rotation:0,spin:(i%2?1:-1)*2,age:0,life:2.2,floor:bargeWaterline(s),water:true,jagged:true});

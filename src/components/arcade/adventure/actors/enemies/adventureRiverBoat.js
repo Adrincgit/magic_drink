@@ -1,4 +1,5 @@
 import {enemyMuzzle} from './adventureEnemyGeometry';
+import {faceTarget} from './enemyFacing';
 import {WATER_BOLT,waterSplash} from './adventureDiver';
 export const RIVER_BOAT_TYPE=9;
 export function updateRiverBoat(s,e,dt,shoot){
@@ -10,7 +11,7 @@ export function updateRiverBoat(s,e,dt,shoot){
  if(e.trap>0)return;
  e.x+=e.sailDir*(s.gentle?60:82)*dt;
  if(e.x<e.left&&e.sailDir<0){e.x=e.left;e.sailDir=1;}if(e.x>e.right&&e.sailDir>0){e.x=e.right;e.sailDir=-1;}
- e.y=e.waterY+Math.sin(e.clock*3)*2;e.dir=Math.sign(s.player.x-e.x)||-1;
+ e.y=e.waterY+Math.sin(e.clock*3)*2;e.dir=faceTarget(e,s.player.x);
  e.phase=e.timer<.65?'windup':e.action>0?'attack':'sail';
  if(e.timer<=0&&Math.abs(e.x-s.player.x)<670){
   for(const offset of [-29,20]){const m={x:e.x+e.dir*offset*1.15,y:e.y-54*1.15},aim=Math.atan2(s.player.y-34-m.y,s.player.x-m.x);shoot(s,m.x,m.y,aim,s.gentle?245:295,WATER_BOLT,{r:9,drawSize:40,life:3.3,water:true});}

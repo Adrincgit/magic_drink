@@ -25,7 +25,7 @@ export function dismissEcho(s){
  s.drinkFields=s.drinkFields.filter(f=>f.kind!==ECHO);s.events.push('echoPulse');return true;
 }
 function floorBelow(s,x,y){
- return s.platforms.filter(q=>x>=q.x&&x<=q.x+q.w&&surfaceY(q,x)>=y-10).sort((a,b)=>surfaceY(a,x)-surfaceY(b,x))[0];
+ return s.platforms.filter(q=>!q.gone&&x>=q.x&&x<=q.x+q.w&&surfaceY(q,x)>=y-10).sort((a,b)=>surfaceY(a,x)-surfaceY(b,x))[0];
 }
 export function beginCreativeSpecial(s,kind,scale,placement){
  if(!creativeDrink(kind))return false;
@@ -53,6 +53,7 @@ export function stepDrinkFields(s,dt){
  for(const f of s.drinkFields||[]){
   f.age+=dt;if(f.kind!==ECHO)f.life-=dt;else if(!echoFuel(s))f.life=0;f.flash=Math.max(0,(f.flash||0)-dt);if(f.life<=0)continue;
   if(f.kind===JELLY){
+   if(f.platform?.gone)f.platform=null;
    if(f.platform){f.x+=f.platform.dx||0;f.y=surfaceY(f.platform,f.x);}
    else{f.vy+=850*dt;f.y+=f.vy*dt;if(f.y>s.player.y+500)f.life=0;continue;}
    f.bounceAge+=dt;f.playerWait=Math.max(0,f.playerWait-dt);
@@ -109,7 +110,7 @@ export function stepCreativeShot(s,q,dt){
   const left=s.level.circusEntrance&&q.x<0?s.level.circusEntrance.left:0;
   if(!wall&&(q.x<left+4||q.x>s.level.width-4)){q.x=Math.max(left+4,Math.min(s.level.width-4,q.x));reflect(s,q,1,0);wall=true;}
   if(!wall)for(const p of s.platforms){
-   if(p.bridge)continue;
+   if(p.gone||p.bridge)continue;
    const top=surfaceY(p,q.x);
    if(q.x>=p.x&&q.x<=p.x+p.w&&q.vy>0&&q.previousY+q.r<=top+8&&q.y+q.r>=top){
     q.y=top-q.r-1;const slope=((p.yEnd??p.y)-p.y)/p.w,n=Math.hypot(slope,1);reflect(s,q,-slope/n,1/n);break;

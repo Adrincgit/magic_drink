@@ -1,5 +1,6 @@
 import {enemyMuzzle} from './adventureEnemyGeometry';
 import {emberFloor} from '../../engine/adventureEmberFire';
+import {faceTarget} from './enemyFacing';
 export function beginEmberBalloonDefeat(e){e.deadTime=4;e.deathAge=0;e.vy=-35;e.deathVx=e.dir*35;e.trap=0;e.landed=false;}
 export function stepEmberBalloonDefeat(s,e,dt){
  e.deathAge+=dt;
@@ -19,7 +20,7 @@ export function updateEmberBalloon(s,e,dt,shoot){
  const near=Math.abs(s.player.x-e.x)<580;
  if(e.fireState==='float'){
   e.x=e.home+Math.sin(e.clock*.4)*110;e.y=e.baseY+Math.sin(e.clock*1.2)*18;
-  e.dir=Math.sign(s.player.x-e.x)||-1;
+  e.dir=faceTarget(e,s.player.x);
   if(near&&e.timer<=0){e.fireState='windup';e.fireAge=0;s.events.push('emberInhale');}
  }else if(e.fireState==='windup'&&e.fireAge>=1.3){e.fireState='attack';e.fireAge=0;e.shotClock=0;}
  else if(e.fireState==='attack'){

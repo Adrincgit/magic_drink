@@ -3,30 +3,57 @@ import {SUPER_WINDUP,SUPER_DURATION} from '../engine/adventureMagic';
 import {cameraView} from './adventureCamera';
 import {hexyMuzzle} from '../actors/hexy/hexyAnimation';
 import {duelBeamPhase,drawDuelBeamTexture} from './duelBeamFrames';
+import {paintMagicLight} from './projectileLightsCanvas';
+import {drawChargeStreak} from './chargeEnergyCanvas';
+import {superMangaActive,superChargeAge,SUPER_CHARGE_RATE} from '../engine/adventureSuperTiming';
 
 const clamp=n=>Math.max(0,Math.min(1,n));
 export function hexyChargeParticle(s,i,age){
- const h=hexyMuzzle(s),view=cameraView(s),phase=(age*(1.25+i%5*.12)+i*.618)%1,t=phase*phase,angle=i*2.399;
+ const h=hexyMuzzle(s),view=cameraView(s),order=(i*17)%48;
+ // Scale the entire journey, including its delay and final settling beat.
+ age=superChargeAge(age);
+ const start=.03+order/47*.42,arrival=superChargeAge(SUPER_WINDUP)-.22-order/47*.38;
+ const phase=clamp((age-start)/(arrival-start)),t=phase*phase,angle=i*2.399;
  const from={x:s.camera.x+view.width*(.5+Math.cos(angle)*.48),y:s.camera.y+view.height*(.46+Math.sin(angle)*.43)};
  return{x:from.x+(h.x-from.x)*t,y:from.y+(h.y-from.y)*t+Math.sin(phase*Math.PI)*Math.cos(angle)*55,phase,tip:h,from};
 }
+export function hexyChargeTrail(s,i,age,reduced=false){
+ const head=hexyChargeParticle(s,i,age),points=[];
+ for(let j=reduced?4:8;j>=0;j--){
+  const at=age-j*.012/SUPER_CHARGE_RATE;if(at<0)continue;const p=hexyChargeParticle(s,i,at);
+  // Sample the same finite journey, including its final approach to the wand.
+  if(p.phase<=head.phase)points.push(p);
+ }
+ return points;
+}
 export function drawHexyCharge(c,s,art,reduced=false){
  const q=s.superCinematic;if(!q||q.age>=SUPER_WINDUP)return;
- const age=q.age,h=hexyMuzzle(s);c.save();
+ const age=superChargeAge(q.age),h=hexyMuzzle(s);c.save();
  for(let i=0;i<(reduced?10:48);i++){
-  const p=hexyChargeParticle(s,i,age),alpha=clamp(p.phase*10)*clamp((1-p.phase)*10)*clamp(age/.15);
+  const p=hexyChargeParticle(s,i,q.age),alpha=clamp(p.phase*10)*clamp((1-p.phase)*10)*clamp(age/.15);
+  drawChargeStreak(c,hexyChargeTrail(s,i,q.age,reduced),alpha,reduced);
   if(!reduced&&i%4===0){
-   for(let j=3;j>0;j--){
-    const tail=hexyChargeParticle(s,i,age-j*.025);if(tail.phase>p.phase)continue;
-    paintedParticle(c,art,i%3,age+i*.13,tail.x,tail.y,28-j*4,age+i,alpha*(1-j/4)*.6);
-   }
    painted(c,art,'heads',Math.floor(age*24+i)%8,p.x,p.y,55-p.phase*20,48-p.phase*17,Math.atan2(h.y-p.y,h.x-p.x),alpha*.85,.71,.5);
   }
   paintedParticle(c,art,i%3,age+i*.13,p.x,p.y,18+i%4*6,age*4+i,alpha);
  }
- c.globalCompositeOperation='screen';const radius=28+clamp(age/SUPER_WINDUP)*35,g=c.createRadialGradient(h.x,h.y,1,h.x,h.y,radius);
- g.addColorStop(0,'#fff8c7df');g.addColorStop(.25,'#ffe29390');g.addColorStop(.65,'#fc78d240');g.addColorStop(1,'#ed68d100');c.fillStyle=g;c.fillRect(h.x-radius,h.y-radius,radius*2,radius*2);
- for(let i=0;i<(reduced?2:5);i++){const angle=i*Math.PI*.4+age*7,r=10+Math.sin(age*8+i)*5;paintedParticle(c,art,i%3,age,h.x+Math.cos(angle)*r,h.y+Math.sin(angle)*r,12+age*9,angle,.8);}
+ c.restore();
+}
+// Paint the gathered energy over the wand, using the spell's animated artwork.
+// Soft light and irregular flares replace the circular progress indicator.
+export function drawHexyChargeCore(c,s,art,reduced=false){
+ const q=s.superCinematic;if(!q||q.age>=SUPER_WINDUP)return;
+ const age=superChargeAge(q.age),progress=clamp(q.age/SUPER_WINDUP),h=hexyMuzzle(s);
+ const fade=clamp(age/.12),pulse=reduced?1:1+Math.sin(age*27)*.06;
+ paintMagicLight(c,h.x,h.y,(28+progress*24)*pulse,'#ffb9e7',fade*(.35+progress*.3));
+ paintMagicLight(c,h.x,h.y,15+progress*17,'#ffe69c',fade*.8);
+ c.save();c.globalCompositeOperation='screen';
+ const angle=Math.atan2(q.aim?.y||0,q.aim?.x??q.dir)+(reduced?0:Math.sin(age*11)*.2),size=(36+progress*25)*pulse;
+ painted(c,art,'heads',reduced?2:Math.floor(age*24)%8,h.x,h.y,size,size*.875,angle,fade*(.5+progress*.35),.71,.5);
+ for(let i=0;i<(reduced?1:3);i++){
+  const t=reduced?i:age*(1.3+i*.17)+i*2.4,x=h.x+Math.sin(t*5+i)*(5+i*2),y=h.y+Math.cos(t*3+i*2)*(4+i*3);
+  paintedParticle(c,art,2,reduced?0:age+i*.19,x,y,(10+progress*11)*(1+i*.12),t,fade*(.35+progress*.3));
+ }
  c.restore();
 }
 export function superCameraOffset(s,reduced=false){
@@ -50,8 +77,8 @@ export function superCameraOffset(s,reduced=false){
 // The world has already been painted. Shade it before drawing Hexy, so her
 // silhouette and the hand-painted spell remain the brightest parts of the act.
 export function superBackdrop(c,s,art,reduced){
- const q=s.superCinematic;if(!q)return;
- const fade=clamp(q.age/.18)*clamp((SUPER_DURATION-q.age)/.3),p=s.player;
+ const q=s.superCinematic;if(!q||superMangaActive(s,reduced))return;
+ const fade=clamp(superChargeAge(q.age)/.18)*clamp((SUPER_DURATION-q.age)/.3),p=s.player;
  const view=cameraView(s);
  c.save();c.fillStyle=`rgba(19,7,45,${.67*fade})`;c.fillRect(s.camera.x-8,s.camera.y-8,view.width+16,view.height+16);
  const g=c.createRadialGradient(p.x,p.y-48,5,p.x,p.y-48,210);g.addColorStop(0,'#eec4ff60');g.addColorStop(.45,'#aa49c529');g.addColorStop(1,'#662ea500');c.fillStyle=g;c.fillRect(p.x-210,p.y-258,420,420);
@@ -62,7 +89,7 @@ export function superBackdrop(c,s,art,reduced){
 export function superBeam(c,s,art,reduced){
  const q=s.superCinematic;if(!q||q.age<SUPER_WINDUP)return;
  const age=q.age-SUPER_WINDUP,fade=clamp((SUPER_DURATION-q.age)/.3),grow=clamp(age/.12),frame=duelBeamPhase(s.fxTime,reduced);
- c.save();c.translate(q.origin.x,q.origin.y);c.scale(q.dir,1);c.globalAlpha=fade;
+ c.save();c.translate(q.origin.x,q.origin.y);c.rotate(Math.atan2(q.aim?.y||0,q.aim?.x??q.dir));c.globalAlpha=fade;
  // A broad corona expands behind the painted beam. Keep every
  // layer attached to the measured wand tip rather than shaking her wrist.
  const swell=reduced?1:1+Math.sin(s.fxTime*12)*.06;
@@ -83,13 +110,13 @@ export function superBeam(c,s,art,reduced){
  const beat=reduced?.2:age%.24,radius=20+beat*145;
  c.save();c.globalAlpha=fade*(reduced?.35:Math.max(0,1-beat/.24)*.65);
  for(let i=0;i<8;i++){const a=i*Math.PI/4;paintedParticle(c,art,i%3,age,Math.cos(a)*radius,Math.sin(a)*radius,16+beat*22,a);}c.restore();
- if(!reduced&&age<.16){const view=cameraView(s);c.globalAlpha=Math.pow(1-age/.16,2)*.32;c.fillStyle='#fff1d5';const left=q.dir>0?s.camera.x-q.origin.x:q.origin.x-s.camera.x-view.width;c.fillRect(left,s.camera.y-q.origin.y,view.width,view.height);}
  c.restore();
+ if(!reduced&&age<.16){const view=cameraView(s);c.save();c.globalAlpha=Math.pow(1-age/.16,2)*.32;c.fillStyle='#fff1d5';c.fillRect(s.camera.x,s.camera.y,view.width,view.height);c.restore();}
 }
 
 export function superCaption(c,s,en,cutin=false){
  const q=s.superCinematic;if(!q||cutin)return;
- const fade=clamp(q.age/.15)*clamp((SUPER_DURATION-q.age)/.25);
+ const fade=clamp(superChargeAge(q.age)/.15)*clamp((SUPER_DURATION-q.age)/.25);
  c.save();c.globalAlpha=fade;c.textAlign='center';c.lineJoin='round';
  const y=c.canvas.clientWidth<600?270:114;c.font='400 36px BakeSoda, sans-serif';c.lineWidth=7;c.strokeStyle='#2a153e';c.fillStyle='#fff0aa';
  const title=en?'STARLIGHT ENCORE!':'¡ENCORE ESTELAR!';c.strokeText(title,480,y);c.fillText(title,480,y);

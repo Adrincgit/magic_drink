@@ -1,6 +1,7 @@
 import {cameraView,followAdventureCamera} from '../render/adventureCamera';
 import {stepWorldEffects} from './adventureEffects';
 import {nightmareGuardianAlive} from '../actors/enemies/adventureNightmares';
+import {restoreRoundResources} from './adventureRoundReset';
 // Completion is part of the world: land, plant, salute and leave the frame.
 // It starts after victory even if the player did not rescue a single bunny.
 export function beginCompletion(s){
@@ -14,6 +15,7 @@ export function beginCompletion(s){
  if(s.index===2&&!s.boss.defeat?.ready)return;
  if(s.index===3&&!s.boss.defeat?.ready)return;
  const p=s.player,a=s.level.arena;
+ s.resultRescued=s.rescued;restoreRoundResources(s);
  s.clear={age:0,stage:'land',flagX:p.x+51,flagY:a.y};
  s.hostile=[];s.shots=[];s.noticeTime=0;s.arenaLocked=false;
  s.enemies=s.enemies.filter(e=>e.x<a.left);

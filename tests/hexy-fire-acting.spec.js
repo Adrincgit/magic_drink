@@ -11,13 +11,14 @@ import {followAdventureCamera} from '../src/components/arcade/adventure/render/a
 import {castHarlequinFire} from '../src/components/arcade/adventure/actors/bosses/harlequinFire';
 import {enemyShot} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
 import tips from '../src/components/arcade/adventure/actors/hexy/hexySuperCastAtlas';
+import {SUPER_WINDUP} from '../src/components/arcade/adventure/engine/adventureSuperTiming';
 const tick=(s,input={})=>stepAdventure(s,input,1/120);
 function scene(reverse=false,y=480){const s=createAdventure(3);s.arenaLocked=true;s.supplies=[];s.stars=[];s.noticeTime=0;Object.assign(s.player,{x:reverse?2460:1460,y,ground:y===480?2:null});Object.assign(s.boss,{x:reverse?1460:2460,y:480,phase:'recover',timer:100,engaged:true,stage:3,hp:240,turn:3});for(let i=0;i<600;i++)followAdventureCamera(s,1/120);return s;}
 function clash(reverse=false,y=480){const s=scene(reverse);beginHarlequinUltimate(s);while(s.boss.ultimate.state==='leap')tick(s);s.player.y=y;s.player.ground=y===480?2:null;tick(s,{super:true});while(['windup','travel'].includes(s.powerClash.state))tick(s);return s;}
 
-test('default ultimate uses the shared one-handed drawings in the air and on every level',()=>{
- for(let level=0;level<4;level++)for(const airborne of [false,true]){const s=createAdventure(level);s.superCinematic={age:1.3,airborne};s.player.superCast=.32;s.player.ground=airborne?null:0;
-  const poses=new Set();for(let i=0;i<3;i++){s.fxTime=i/18;const pose=hexyPose(s);expect(pose.sheet).toBe('super-cast');expect(pose.frame).toBeGreaterThanOrEqual(9);poses.add(pose.frame);}expect(poses.size).toBe(3);
+test('default ultimate keeps its grounded cast and uses dedicated flying release drawings in the air',()=>{
+ for(let level=0;level<4;level++)for(const airborne of [false,true]){const s=createAdventure(level);s.superCinematic={age:SUPER_WINDUP+.4,airborne};s.player.superCast=.32;s.player.ground=airborne?null:0;
+  const poses=new Set(),count=airborne?4:3;for(let i=0;i<count;i++){s.fxTime=i/(airborne?10:18);const pose=hexyPose(s);expect(pose.sheet).toBe(airborne?'air-super-release':'super-cast');expect(pose.frame).toBeGreaterThanOrEqual(airborne?0:9);poses.add(pose.frame);}expect(poses.size).toBe(count);
  }
 });
 test('all twelve measured wand sockets are on the actual golden star, including mirrored casting',async()=>{
@@ -69,6 +70,6 @@ test('review ground and aerial duels, fast acting, reflected light and all fire 
  }
  for(const move of ['embers','pyre']){await page.evaluate(move=>{const w=window.fireReview,s=w.fresh();Object.assign(s.boss,{phase:'warn',move,timer:.01,warnDuration:1});},move);for(const [name,frames]of [['windup',15],['release',36],['active',95],['eruption',36]]){await page.evaluate(frames=>{const w=window.fireReview;for(let i=0;i<frames;i++)w.tick();w.paint();},frames);await canvas.screenshot({path:folder+move+'-'+name+'.jpg'});}}
  for(const stage of [1,2,3]){await page.evaluate(stage=>{const w=window.fireReview,s=w.fresh();s.boss.stage=stage;s.boss.hp=s.boss.maxHp*(stage===1?1:stage===2?.5:.3);w.paint();},stage);await canvas.screenshot({path:folder+'phase-'+stage+'.jpg'});}
- await page.evaluate(()=>{const w=window.fireReview;w.fresh();w.tick({super:true});for(let i=0;i<190;i++)w.tick();w.paint();});await canvas.screenshot({path:folder+'default-ultimate.jpg'});
+ await page.evaluate(windup=>{const w=window.fireReview;w.fresh();w.tick({super:true});while(w.s.superCinematic.age<windup+.65)w.tick();w.paint();},SUPER_WINDUP);await canvas.screenshot({path:folder+'default-ultimate.jpg'});
  expect(errors).toEqual([]);
 });

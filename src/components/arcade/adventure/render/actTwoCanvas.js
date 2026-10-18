@@ -1,8 +1,9 @@
 import {actTwoBossDrawing,actTwoBossMuzzle} from '../actors/bosses/adventureActTwoBosses';
 import {paintMagicLight} from './projectileLightsCanvas';
+import {cornfieldArtPaths,drawCornDepth,drawCornScenery,drawCornTerrain,drawCornEncounter,drawCornProjectile} from './cornfieldCanvas';
 const root='/arcade/act-two/';
 export function actTwoArtPaths(){
- const paths={};for(const name of ['straw','count','harlequin','enemies','effects'])paths['act-two-'+name]=root+name+'-v1.webp';
+ const paths=cornfieldArtPaths();for(const name of ['straw','count','harlequin','enemies','effects'])paths['act-two-'+name]=root+name+'-v1.webp';
  paths['act-two-garden']=root+'garden-v1.webp';
  for(let i=0;i<12;i++)paths['act-two-prop-'+i]=root+'prop-'+i+'-v1.webp';return paths;
 }
@@ -22,10 +23,12 @@ export function drawActTwoBackdrop(c,s,art,reduced){
  else paint(art['world'+s.index]);
  if(s.level.cornfield){
   // Clouds have independent drift; the landscape keeps its own slow parallax.
-  const clouds=art['nightmare-depth-clouds-v2'];if(clouds){c.globalAlpha=.12;c.globalCompositeOperation='screen';const w=1300,shift=(s.camera.x*.035+(reduced?0:s.time*4))%w;for(let i=-1;i<2;i++)c.drawImage(clouds,i*w-shift,-100,w,220);}
+  const clouds=art['nightmare-depth-clouds-v2'];if(clouds){c.save();c.globalAlpha=.12;c.globalCompositeOperation='screen';const w=1300,shift=(s.camera.x*.035+(reduced?0:s.time*4))%w;for(let i=-1;i<2;i++)c.drawImage(clouds,i*w-shift,-100,w,220);c.restore();}
+  drawCornDepth(c,s,art,reduced);
  }c.restore();
 }
 export function drawActTwoScenery(c,s,art,reduced){
+ if(s.level.cornfield){drawCornScenery(c,s,art,reduced);return;}
  const left=s.camera.x-400,right=s.camera.x+960/(s.camera.zoom||1)+400;
  if(s.level.cornfield){
   for(let i=Math.floor(left/240);i<right/240;i++){
@@ -39,6 +42,7 @@ export function drawActTwoScenery(c,s,art,reduced){
 }
 export function drawActTwoTerrain(c,s,q,art){
  if(q.gone)return;
+ if(s.level.cornfield&&drawCornTerrain(c,s,q,art))return;
  if(q.kind==='earth'){
   const img=art['act-two-prop-'+(s.level.cornfield?8:s.level.maskMansion?9:10)],h=s.level.cornfield?190:185,w=h*img.width/img.height;
   c.save();c.beginPath();c.rect(q.x,q.y-8,q.w,1200);c.clip();
@@ -57,6 +61,7 @@ export function drawActTwoTerrain(c,s,q,art){
  if(q.art===5||q.art===6)prop(c,art,9,q.x,q.y,q.w,17);
 }
 export function drawActTwoEncounter(c,s,art,reduced){
+ if(s.level.cornfield){drawCornEncounter(c,s,art,reduced);return;}
  const b=s.boss,a=s.level.arena;
  for(const q of s.strawPiles){if(q.hp<=0)continue;prop(c,art,1,q.x-54,q.y-65,108,65);if(b.phase==='rebuild'){
   const t=(b.phaseAge*.65+q.x*.003)%1,x=q.x+(b.x-q.x)*t,y=q.y-30+(b.y-100-q.y+30)*t-Math.sin(t*Math.PI)*70;paintMagicLight(c,x,y,42,'#ffc86b',.35);cel(c,art['act-two-effects'],Math.floor(s.time*8)%4,x,y,44,false,true,Math.atan2(b.y-100-y,b.x-x)+Math.PI);
@@ -81,6 +86,7 @@ export function drawActTwoEncounter(c,s,art,reduced){
 }
 export function drawActTwoProjectile(c,q,art){
  if(!q.actTwo)return false;if(q.life<=0)return true;
+ if(drawCornProjectile(c,q,art))return true;
  if(q.kind==='act-two-slash'){
   c.save();c.strokeStyle='#d1e8ff';c.lineWidth=5;c.beginPath();c.arc(q.x,q.y,32,-1.3,1.3);c.stroke();c.restore();return true;
  }

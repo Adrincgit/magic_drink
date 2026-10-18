@@ -18,6 +18,8 @@ import standingDownAtlas from './hexyStandingDownAtlas';
 import crouchRestAtlas from './hexyCrouchRestAtlas';
 import actionAtlas from './hexyActionAtlas';
 import superCastAtlas from './hexySuperCastAtlas';
+import actingAtlas from './hexyActingAtlas';
+import {SUPER_WINDUP} from '../../engine/adventureSuperTiming';
 import {clashPortraitFrames,castingWindFrame} from '../../engine/clashActing';
 import {hexyRegistration} from './hexyPoseRegistration';
 import {shopEntryPose} from '../../engine/adventureShop';
@@ -30,6 +32,10 @@ atlas['popcorn-recoil']=popcornAtlas;
 Object.assign(atlas,combatV12Atlas);
 Object.assign(atlas,feedbackAtlas);
 atlas['super-cast']=superCastAtlas;
+const activeActingAtlas=Object.fromEntries(Object.entries(actingAtlas).filter(([name])=>!name.startsWith('tired-')));
+Object.assign(atlas,activeActingAtlas);
+// Horizontal aerial charge holds the accepted one-handed discharge drawing.
+atlas['air-super']=airSuperAtlas['air-super-release'];
 atlas['ribbon-swing']=ribbonAtlas;
 atlas['ribbon-action']=ribbonActionAtlas;
 atlas['ribbon-spin']=ribbonSpinAtlas;
@@ -44,12 +50,16 @@ export const HEXY_SIZE=116;
 HEXY_SHEETS.push('popcorn-recoil','fear','clash-fall','super-cast','element-hits','knockdown','fire-hit','heat');
 HEXY_SHEETS.push('volt-cast','popcorn-air');
 HEXY_SHEETS.push(...Object.keys(feedbackAtlas));
+HEXY_SHEETS.push(...Object.keys(activeActingAtlas));
 HEXY_SHEETS.push('ribbon-swing','ribbon-action','ribbon-spin','ribbon-dance','ribbon-mastery','guard-up','comet-kick');
 export const HEXY_RUN_FRAMES=atlas.run.length;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
 // Select drawings from physical state; jump poses never loop on a wall clock.
 export function hexyPose(s){
+ return hexyActionPose(s);
+}
+function hexyActionPose(s){
  const p=s.player,cast=p.cast>0,castFrame=[1,2,0,3][clamp(Math.floor((.24-p.cast)/.06),0,3)];
  if(p.clashFlight)return{sheet:'clash-fall',frame:p.clashFlight.frame};
  const entering=circusEntryPose(s)||shopEntryPose(s);if(entering)return entering;
@@ -72,12 +82,23 @@ export function hexyPose(s){
  if(p.guarding&&p.ground!==null&&Math.abs(p.vx)>20)return{sheet:'guard-walk-v1',frame:(p.guardY<0?8:0)+Math.floor(p.stride*8)%8};
  if(p.guarding&&p.guardY<0)return {sheet:'guard-up',frame:p.guardHit>0?3:p.guardAge<.1?0:1+Math.floor(s.time*5)%2};
  if(p.guarding)return {sheet:'guard-pose',frame:p.guardHit>0?4:2+Math.floor(s.time*5)%2};
+ if(s.superCinematic?.aim?.y){
+  const q=s.superCinematic,direction=q.aim.y<0?(q.aim.x===0?'up':'diagonal-up'):(q.aim.x===0?'down':'diagonal-down');
+  const charging=q.age<SUPER_WINDUP;
+  return{sheet:'super-'+direction+'-v2',frame:(q.airborne?8:0)+(charging?Math.min(3,Math.floor(q.age/SUPER_WINDUP*4)):4+Math.floor((q.age-SUPER_WINDUP)*12)%4)};
+ }
+ if(s.superCinematic&&p.charge>0){
+  // The original grounded anticipation raises the wand overhead heroically.
+  // Directional/aerial variations must not replace this accepted sequence.
+  if(!s.superCinematic.airborne)return{sheet:'super-charge',frame:clamp(Math.floor(p.charge/SUPER_WINDUP*4),0,3)};
+  return{sheet:'super-horizontal-charge-v2',frame:4+Math.min(3,Math.floor(s.superCinematic.age/SUPER_WINDUP*4))};
+ }
  if(s.superCinematic?.airborne){
   if(p.superCast>0)return {sheet:'air-super-release',frame:Math.floor(s.fxTime*10)%4};
-  if(p.charge>0)return {sheet:'air-super',frame:clamp(Math.floor(p.charge/.225),0,3)};
+  if(p.charge>0)return {sheet:'air-super',frame:clamp(Math.floor(p.charge/SUPER_WINDUP*4),0,3)};
  }
  if(p.superCast>0)return {sheet:'super-cast',frame:(s.powerClash?clashPortraitFrames(s.powerClash).hexy:3)*3+castingWindFrame(s.fxTime)};
- if(p.charge>0)return {sheet:'super-charge',frame:clamp(Math.floor(p.charge/.225),0,3)};
+ if(p.charge>0)return {sheet:'super-charge',frame:clamp(Math.floor(p.charge/SUPER_WINDUP*4),0,3)};
  if(p.ribbonSwing>0&&p.ribbonSpinning)return {sheet:'ribbon-spin',frame:Math.floor((p.ribbonSpinAge||0)/(p.ribbonSpinCel||.055))%8};
  if(p.ribbonSwing>0&&p.ribbonMasterMove)return{sheet:'ribbon-mastery',frame:(p.ribbonMasterMove==='wand-toss'?0:p.ribbonMasterMove==='reel-slam'?4:12)+clamp(Math.floor((1-p.ribbonSwing/p.ribbonDuration)*4),0,3)};
  if(p.ribbonSwing>0&&(p.ribbonFinisher==='launch'||p.ribbonFinisher==='airbind'||p.ribbonAcrobat))return{sheet:'ribbon-dance',frame:(p.ribbonFinisher==='launch'?0:p.ribbonFinisher==='airbind'?8:4)+clamp(Math.floor((1-p.ribbonSwing/p.ribbonDuration)*4),0,3)};
@@ -95,7 +116,7 @@ export function hexyPose(s){
   }
   return{sheet:'glide',frame:Math.floor(s.time*6)%4};
  }
- if(p.popcornRecoilUntil>s.time&&!p.crouch&&p.aimY===0&&!p.guarding){
+ if(p.popcornRecoilUntil>s.time&&!p.crouch&&p.aimY===0&&!p.guarding&&(p.ground===null||Math.abs(p.vx)<20)){
   const air=p.ground===null&&!p.coasterGround;
   if(air===p.popcornRecoilAir)return{sheet:air?'popcorn-air':'popcorn-recoil',frame:Math.min(7,Math.floor((s.time-p.popcornRecoilStart)/.08))};
  }
@@ -106,6 +127,7 @@ export function hexyPose(s){
  }
  if(p.specialCast>0){
   const frame=[1,2,2,3][clamp(Math.floor((.36-p.specialCast)/.09),0,3)];
+  if(p.ground!==null&&!p.crouch&&Math.abs(p.vx)>20&&p.specialAimY<=0&&p.specialAimX!==0)return{sheet:p.specialAimY<0?'run-diagonal-up':'run-fire',frame:Math.floor(p.stride*HEXY_RUN_FRAMES)%HEXY_RUN_FRAMES};
   if(p.crouch)return {sheet:'ground-aim',frame:8+frame};
   if(p.specialAimY>0&&(p.ground!==null||p.coasterGround))return {sheet:'ground-aim',frame:12+frame};
   if(p.specialAimY>0)return {sheet:p.specialAimX===0?'aim-down':'aim-down-diagonal',frame};
@@ -131,7 +153,7 @@ export function hexyPose(s){
   return {sheet:'ground-aim',frame:(p.aimX===0?4:0)+steadyFrame};
  }
  if(p.aimY>0)return {sheet:'ground-aim',frame:12+steadyFrame};
- if(p.land>0&&!cast)return {sheet:'jump',frame:p.land>.075?6:7};
+ if(p.land>0&&!cast&&Math.abs(p.vx)<20)return {sheet:'jump',frame:p.land>.075?6:7};
  if(Math.abs(p.vx)>20)return {sheet:cast||p.firing?'run-fire':'run',frame:Math.floor(p.stride*HEXY_RUN_FRAMES)%HEXY_RUN_FRAMES};
  if(cast||p.firing)return {sheet:'stand-fire',frame:steadyFrame};
  if(p.heatIdle>.65)return {sheet:'heat',frame:Math.floor((p.heatIdle-.65)/.55)%4};

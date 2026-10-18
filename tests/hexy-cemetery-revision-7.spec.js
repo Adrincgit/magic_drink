@@ -45,7 +45,7 @@ test('4: skeletal fragments settle after a bounded lifetime and never spawn duri
 });
 
 test('6: zombie health is x3 normal, ghosts remain two hits; five crates include two guaranteed level-2 drinks; claimed crates stay claimed on retry',()=>{
- const s=createAdventure(6);expect(makeEnemy(0,0,18).hp).toBeCloseTo(makeEnemy(0,0,0).hp*3);expect(makeEnemy(0,0,19).hp).toBe(4);expect(s.supplies).toHaveLength(5);const crates=s.supplies.filter(q=>q.loot?.boosted);expect(crates).toHaveLength(2);
+ const s=createAdventure(6);expect(makeEnemy(0,0,18).hp).toBeCloseTo(makeEnemy(0,0,0).hp*3);expect(makeEnemy(0,0,19).hp).toBe(4);expect(s.supplies.filter(q=>!q.midpointHeart)).toHaveLength(5);expect(s.supplies.filter(q=>q.midpointHeart)).toHaveLength(1);const crates=s.supplies.filter(q=>q.loot?.boosted);expect(crates).toHaveLength(2);
  for(const q of crates){damageSupply(s,q,4);const drop=s.pickups.at(-1);expect(drop.boosted).toBe(true);takeLoot(s,drop);expect(s.drinkTier).toBe(2);}
  retryAdventure(s);expect(s.supplies.filter(q=>q.loot?.boosted&&q.hp>0)).toHaveLength(0);expect(createAdventure(6).supplies.filter(q=>q.loot?.boosted)).toHaveLength(2);expect(s.enemies.filter(e=>e.type===18).length).toBeGreaterThanOrEqual(10);
 });

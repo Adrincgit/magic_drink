@@ -1,22 +1,45 @@
 import {cameraView} from './adventureCamera';
-import {ultimateHand} from '../actors/bosses/harlequinUltimate';
+import {ultimateHand,HARLEQUIN_ULTIMATE} from '../actors/bosses/harlequinUltimate';
+import {SUPER_WINDUP} from '../engine/adventureMagic';
 import {clashContact} from '../engine/adventurePowerClash';
 import {clashEffect} from './clashSpectacleCanvas';
 import {painted,paintedParticle} from './paintedDuelCanvas';
 import {opponentLight} from '../engine/clashActing';
+import {drawChargeStreak} from './chargeEnergyCanvas';
+import {paintMagicLight} from './projectileLightsCanvas';
 const clamp=n=>Math.max(0,Math.min(1,n));
+export function harlequinChargeAge(s){
+ const age=s.boss.ultimate?.age||0,q=s.powerClash;
+ // A counterattack freezes the boss clock. Continue each existing journey
+ // smoothly and gather its last embers before both casters release together.
+ return q?.state==='windup'?age+Math.max(0,HARLEQUIN_ULTIMATE.charge-age)*clamp(q.age/SUPER_WINDUP):age;
+}
+export function harlequinChargeParticle(s,i,age=harlequinChargeAge(s)){
+ const tip=ultimateHand(s.boss),v=cameraView(s),order=(i*17)%48,angle=i*2.399;
+ const start=.03+order/47*.42,arrival=HARLEQUIN_ULTIMATE.charge-.2-order/47*.5;
+ const phase=clamp((age-start)/(arrival-start)),t=phase*phase;
+ const from={x:s.camera.x+v.width*(.5+Math.cos(angle)*.49),y:s.camera.y+v.height*(.47+Math.sin(angle)*.46)};
+ return{x:from.x+(tip.x-from.x)*t,y:from.y+(tip.y-from.y)*t+Math.sin(phase*Math.PI)*Math.sin(angle)*80,phase,tip,from};
+}
+export function harlequinChargeTrail(s,i,age=harlequinChargeAge(s),reduced=false){
+ const points=[];
+ for(let j=reduced?4:8;j>=0;j--){const at=age-j*.012;if(at>=0)points.push(harlequinChargeParticle(s,i,at));}
+ return points;
+}
 export function drawChargeStreams(c,s,art,reduced){
  const u=s.boss.ultimate;if(u?.state!=='charge')return;
- const h=ultimateHand(s.boss),v=cameraView(s),age=u.age+(s.powerClash?.age||0),count=reduced?10:48;
+ const h=ultimateHand(s.boss),age=harlequinChargeAge(s),count=reduced?10:48;
  c.save();
  for(let i=0;i<count;i++){
-  const phase=(age*(.65+(i%5)*.06)+i*.618)%1,t=phase*phase,angle=i*2.399;
-  // Spawn around the viewport perimeter, converge on the actual hands.
-  const startX=s.camera.x+v.width*(.5+Math.cos(angle)*.49),startY=s.camera.y+v.height*(.47+Math.sin(angle)*.46);
-  const x=startX+(h.x-startX)*t,y=startY+(h.y-startY)*t+Math.sin(phase*Math.PI)*Math.sin(angle)*80;
-  const size=15+i%4*5,alpha=clamp(phase*8)*clamp((1-phase)*8)*clamp(age/.2);
-  paintedParticle(c,art,i%7===0?4:3,age+i*.1,x,y,size,angle+age*3,alpha);
- }c.restore();
+  const p=harlequinChargeParticle(s,i,age),alpha=clamp(p.phase*10)*clamp((1-p.phase)*10)*clamp(age/.2),angle=Math.atan2(h.y-p.y,h.x-p.x);
+  drawChargeStreak(c,harlequinChargeTrail(s,i,age,reduced),alpha,reduced,true);
+  if(!reduced&&i%4===0)painted(c,art,'heads',8+Math.floor(age*24+i)%8,p.x,p.y,55-p.phase*20,48-p.phase*17,angle,alpha*.85,.71,.5);
+  paintedParticle(c,art,i%7===0?4:3,age+i*.1,p.x,p.y,18+i%4*6,angle+age*3,alpha);
+ }
+ const progress=clamp(age/HARLEQUIN_ULTIMATE.charge),fade=clamp(age/.15),pulse=reduced?1:1+Math.sin(age*27)*.06;
+ paintMagicLight(c,h.x,h.y,(42+progress*50)*pulse,'#ff522b',fade*(.3+progress*.35));
+ paintMagicLight(c,h.x,h.y,20+progress*19,'#ffb460',fade*(.45+progress*.3));
+ c.restore();
 }
 export function drawClashAtmosphere(c,s,art,reduced){
  const q=s.powerClash;if(!q||!['contest','resolve'].includes(q.state))return;

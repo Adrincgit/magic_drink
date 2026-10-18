@@ -1,5 +1,6 @@
 import {isVillageEnemy,villageEnemyDrawing} from '../engine/adventureVillage';
 import {canControlEnemy} from '../actors/enemies/adventureEnemyTraits';
+import {travelFrame} from '../actors/enemies/actorCadence';
 import {isActTwoEnemy,actTwoEnemyDrawing} from '../actors/enemies/adventureActTwoEnemies';
 import {actTwoBossDrawing} from '../actors/bosses/adventureActTwoBosses';
 import {umbrellaFrame} from '../actors/enemies/adventureUmbrella';
@@ -27,6 +28,7 @@ export function enemyDrawing(e,reduced=false){
  if(e.hp>0&&!e.charred&&!e.fleeing&&e.elementHit?.element==='electric'&&canControlEnemy(e,'electric-stun')){
   const hit={1:['acrobat-rings',10],4:['acrobat-rings',10],3:['juggler-actions',10],6:['clown',10],11:['ember-torch-attack',12],14:['umbrella-clown',10]}[e.type];
   if(hit)return{key:hit[0],frame:hit[1]};
+  if(e.cornImp)return{key:'corn-imp',frame:12,size:184*4/3};
   if(e.type>=29&&e.type<=31)return{key:'act-two-enemies',frame:(e.type-29)*8+6};
   // Absorption remains uninterruptible; rendering must not replace its poses.
   if(e.type===26&&!['absorb','absorb-player'].includes(e.phase))return{key:e.flying?'village-witch-air-v7':'village-witch-ground-v7',frame:12+(reduced?1:Math.min(3,Math.floor(e.elementHit.age/.13)))};
@@ -52,7 +54,7 @@ export function enemyDrawing(e,reduced=false){
   return{key:'fire-breather-flat',frame:fireBreatherFrame(e,reduced)};
  }
  if(e.type===8)return diverDrawing(e,reduced);
- if(e.type===9)return{key:'river-boat-crew',frame:e.hp<=0?(e.deathAge<.35?4:5):e.action>0?2+(reduced?0:Math.floor(e.clock*14)%2):e.phase==='windup'?1:0,columns:3};
+ if(e.type===9)return{key:'river-boat-crew',frame:e.hp<=0?(e.deathAge<.35?4:5):e.action>0?2+(reduced?0:Math.min(1,Math.floor((.3-e.action)/.15))):e.phase==='windup'?1:0,columns:3};
  if(e.type===7)return{key:'clown-zeppelin',frame:0};
  if(e.balloonCrew||e.type===0)return redClownDrawing(e,reduced);
  if(e.type===6)return redClownDrawing(e,reduced);
@@ -61,7 +63,7 @@ export function enemyDrawing(e,reduced=false){
   return{key:'cannon-launcher-painted',frame:e.boosterPassenger?.boosterHidden?(e.boosterAge>.64?1:0):2};
  }
  if(e.type===3){
-  if(e.hp>0&&!e.flash&&!(e.action>0)&&!(e.recovery>0)&&!(e.trap>0)&&e.volleyAge===undefined&&['patrol','emerge'].includes(e.phase)&&e.moving!==false)return{key:'juggler-walk-v2',frame:reduced?0:Math.floor((e.gait||0)*JUGGLER_WALK_FRAMES)%JUGGLER_WALK_FRAMES};
+  if(e.hp>0&&!e.flash&&!(e.action>0)&&!(e.recovery>0)&&!(e.trap>0)&&e.volleyAge===undefined&&['patrol','emerge'].includes(e.phase)&&e.moving!==false)return{key:'juggler-walk-v2',frame:travelFrame(e.gait,JUGGLER_WALK_FRAMES,reduced)};
   let frame=e.hp<=0?11:e.flash>0?10:e.phase==='windup'?4:e.phase==='patrol'?(reduced?0:Math.floor((e.gait||0)*8)%2):2;
   if(e.hp>0&&!e.flash&&e.volleyAge!==undefined)frame=e.action>0?5+(e.ballColor||0)*2:e.volleyCount<3?4+e.volleyCount*2:9;
   return{key:'juggler-actions',frame};
@@ -73,7 +75,7 @@ export function enemyDrawing(e,reduced=false){
  if(e.action>0)return rings(4+(reduced?0:Math.min(1,Math.floor((.32-e.action)/.16))));
  if(e.recovery>0)return rings(e.recovery>.22?6:7);
  if(e.phase==='windup')return rings(reduced?2:Math.max(0,Math.min(3,Math.floor((.55-e.timer)/.55*4))));
- if(['patrol','emerge'].includes(e.phase)&&!(e.trap>0)&&e.moving!==false)return{key:'acrobat-run-fluid',frame:reduced?1:Math.floor((e.gait||0)*8)%8};
+ if(['patrol','emerge'].includes(e.phase)&&!(e.trap>0)&&e.moving!==false)return{key:'acrobat-run-fluid',frame:reduced?1:travelFrame(e.gait,8)};
  return rings(reduced?8:8+Math.floor(e.clock*2)%2);
 }
 export const BOSS_ART=['boss-balloon','organ-machine','barge-body','harlequin/poses','muta'];
@@ -84,7 +86,7 @@ export function bossDrawing(s,reduced=false){
  if(s.index===0)return balloonShellDrawing(s);
  if(s.index===1)return organShellDrawing(s);
  if(s.index===2)return bargeDrawing(s);
- if(s.index===3)return harlequinDrawing(s);
+ if(s.index===3)return harlequinDrawing(s,reduced);
  if(!s.index||b.hp<=0||b.flash>0||!['warn','attack','transform'].includes(b.phase))return {key,frame:actorFrame(b,reduced,key)};
  if(b.phase==='transform')return {key:key+'-actions',frame:b.timer>1.2?8:9};
  const row={serio:{cannons:0,crossfire:1,charge:1},alegre:{juggle:0,rings:1,mirrors:2},agresivo:{slam:0,charge:1,clowns:2},muta:{spiral:0,rain:1,silence:2}}[key][b.move]||0;

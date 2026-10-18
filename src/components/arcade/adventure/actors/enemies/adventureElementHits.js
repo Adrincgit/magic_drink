@@ -21,7 +21,9 @@ export function stepElementHit(e,dt){
 export function elementDrawing(e,reduced=false){
  const hit=e.elementHit;if(!hit||e.type!==0||e.charred)return null;
  if(hit.element==='electric'&&!canControlEnemy(e,'electric-stun'))return null;
- return{key:'clown-element-hits',frame:rows[hit.element]*4+(reduced?1:Math.min(3,Math.floor(hit.age/.13)))};
+ // The fire row has a detached sliver from the row above at y=20..23.
+ // Trim only that unused strip; preserve the original body/foot registration.
+ return{key:'clown-element-hits',frame:rows[hit.element]*4+(reduced?1:Math.min(3,Math.floor(hit.age/.13))),sourceTop:hit.element==='fire'?28:0};
 }
 export function beginElectricDefeat(s,e,shot){
  if(shot?.kind!==9||!electricTroop(e)||enemyClass(e)!=='basic')return;

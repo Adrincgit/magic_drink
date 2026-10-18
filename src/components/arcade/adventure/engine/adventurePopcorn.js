@@ -13,8 +13,10 @@ export function firePopcorn(s,muzzle,aim,scale=1,strong=false){
   if(p.gliding)p.hatCastUntil=s.time+.4;
   // Under 1550px/s² gravity, 2*v/g is the return time to the cast height.
   // Clear the entire painted burst plus 80ms before descending through it.
-  const clearTime=duration+.08;p.vy=Math.min(p.vy,-1550*clearTime/2);
-  p.popcornClearUntil=s.time+clearTime;p.gliding=false;
+  const clearTime=duration+.08;
+  if(aim.y>0){p.vy=Math.min(p.vy,-1550*clearTime/2*aim.y);p.popcornClearUntil=s.time+clearTime;}
+  else if(aim.y<0){p.vy-=aim.y*(strong?235:150);p.popcornClearUntil=0;p.popcornDownKickUntil=s.time+.16;}
+  p.gliding=false;
  }
  if(strong){
   p.popcornKick={speed:-aim.x*150,age:0,duration:.2};

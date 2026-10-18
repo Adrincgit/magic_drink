@@ -19,7 +19,7 @@ test('portrait enters from the left, stays there and fades before the beam witho
   }
  }
  s.superCinematic.age=SUPER_WINDUP-1e-6;expect(superCutinState(s).alpha).toBeLessThan(.00001);
- for(const age of [SUPER_WINDUP,1,2,SUPER_DURATION]){s.superCinematic.age=age;expect(superCutinState(s)).toBeNull();}
+ for(const age of [SUPER_WINDUP,SUPER_WINDUP+.1,3,SUPER_DURATION]){s.superCinematic.age=age;expect(superCutinState(s)).toBeNull();}
 });
 
 test('reduced motion fades a stationary portrait; facing left does not reverse the entrance and rendering state is pure',()=>{
@@ -27,10 +27,10 @@ test('reduced motion fades a stationary portrait; facing left does not reverse t
  const right=superCutinState(s);s.superCinematic.dir=-1;expect(superCutinState(s)).toEqual(right);
  for(const age of [.01,.08,.3,.6,.8,.89]){s.superCinematic.age=age;const q=superCutinState(s,true);expect(q.x).toBe(0);expect(q.alpha).toBeGreaterThan(0);expect(q.alpha).toBeLessThanOrEqual(1);}
  s.superCinematic.age=0;expect(superCutinState(s,true).alpha).toBe(0);
- s.superCinematic.age=.89;expect(superCutinState(s,true).alpha).toBeLessThan(.06);
+ s.superCinematic.age=SUPER_WINDUP-.01;expect(superCutinState(s,true).alpha).toBeLessThan(.06);
 });
 
-test('the illustrated portrait has real alpha and the cinematic retains its original duration, cost, recharge and eight damage pulses',async()=>{
+test('the illustrated portrait has real alpha and the longer charge preserves cost, recharge and eight damage pulses',async()=>{
  const file='public/arcade/sprites/ui/hexy-encore-full.webp',m=await sharp(file).metadata();expect(m.hasAlpha).toBe(true);expect(m.width).toBe(1024);expect(m.height).toBe(1536);
  const alpha=await sharp(file).extractChannel('alpha').raw().toBuffer();expect(alpha[0]).toBe(0);expect(alpha[Math.floor(m.height/2)*m.width+Math.floor(m.width*.62)]).toBeGreaterThan(230);
  const s=createAdventure();s.enemies=[];s.hostile=[];const events=[];let time=0;
@@ -39,9 +39,10 @@ test('the illustrated portrait has real alpha and the cinematic retains its orig
 });
 
 test('real canvas renders the cut-in on desktop, mobile, left-facing and reduced motion with no portrait over the released beam',async({page})=>{
- fs.mkdirSync(dir,{recursive:true});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/arcade');
+ fs.mkdirSync(dir,{recursive:true});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.route('**/__encore_cutin_review',r=>r.fulfill({contentType:'text/html',body:'<body style="margin:0"></body>'}));await page.goto('/__encore_cutin_review');
  const result=await page.evaluate(async()=>{
-  const [{createAdventure,stepAdventure},{renderAdventure,loadAdventureArt},{drawSuperCutin}]=await Promise.all([import('/src/components/arcade/adventure/engine/adventureModel.js'),import('/src/components/arcade/adventure/render/adventureCanvas.js'),import('/src/components/arcade/adventure/render/adventureSuperCutin.js')]);
+  const [{createAdventure,stepAdventure},{renderAdventure,loadAdventureArt},{drawSuperCutin},{SUPER_WINDUP}]=await Promise.all([import('/src/components/arcade/adventure/engine/adventureModel.js'),import('/src/components/arcade/adventure/render/adventureCanvas.js'),import('/src/components/arcade/adventure/render/adventureSuperCutin.js'),import('/src/components/arcade/adventure/engine/adventureSuperTiming.js')]);
   const art=await loadAdventureArt(),canvas=document.createElement('canvas');document.body.append(canvas);canvas.style='position:fixed;inset:0;width:1280px;height:720px;z-index:999999';
   await document.fonts.ready;const captures=[],checks=[];
   const isolation=document.createElement('canvas');isolation.width=960;isolation.height=540;const isolated=isolation.getContext('2d');let strayPixels=0;
@@ -49,7 +50,7 @@ test('real canvas renders the cut-in on desktop, mobile, left-facing and reduced
    const mobile=variant==='mobile',reduced=variant==='reduced',en=variant==='english';canvas.style.width=mobile?'390px':'1280px';canvas.style.height=mobile?'219.375px':'720px';
    const s=createAdventure();for(const k of ['enemies','hostile','outposts','supplies','hazards','stars','cages'])s[k]=[];
    Object.assign(s.player,{x:600,y:variant==='left-air'?290:480,ground:variant==='left-air'?null:0,dir:variant==='left-air'?-1:1});s.camera={x:120,y:40,backdropY:40,zoom:1};stepAdventure(s,{super:true},1/120);
-   for(const [name,target] of [['enter',.1],['hold',.42],['exit',.79],['beam',1.02]]){
+   for(const [name,target] of [['enter',.1],['hold',SUPER_WINDUP-.35],['exit',SUPER_WINDUP-.11],['beam',SUPER_WINDUP+.12]]){
     while(s.superCinematic.age<target)stepAdventure(s,{},1/120);
     renderAdventure(canvas,s,art,{reduced,en});const age=s.superCinematic.age;
     captures.push({name:variant+'-'+name,data:canvas.toDataURL('image/jpeg',.93)});
@@ -73,7 +74,7 @@ for(const width of [390,1280])test(`${width}: the real game pauses the portrait 
  const charge=Number(await canvas.getAttribute('data-charge'));expect(charge).toBeGreaterThan(.2);expect(charge).toBeLessThan(.9);
  const image=await canvas.evaluate(c=>c.toDataURL('image/jpeg',.94));fs.writeFileSync(dir+`live-${width}-portrait.jpg`,Buffer.from(image.split(',')[1],'base64'));
  await page.waitForTimeout(250);expect(Number(await canvas.getAttribute('data-charge'))).toBe(charge);
- await page.getByRole('button',{name:'Continuar ▶',exact:true}).click();await expect(root).toHaveAttribute('data-phase','playing');await expect(canvas).toHaveAttribute('data-pose',/super-release:/);
+ await page.getByRole('button',{name:'Continuar ▶',exact:true}).click();await expect(root).toHaveAttribute('data-phase','playing');await expect(canvas).toHaveAttribute('data-pose',/super-cast:/);
  await expect(canvas).toHaveAttribute('data-super-active','false',{timeout:6000});
  expect(Number(await page.getByRole('meter',{name:'Energía de magia',exact:true}).getAttribute('value'))).toBeLessThan(20);expect(errors).toEqual([]);
 });

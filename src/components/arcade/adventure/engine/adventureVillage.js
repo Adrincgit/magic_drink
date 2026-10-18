@@ -1,4 +1,5 @@
 import {worldSound} from './adventureWorldAudio';
+import {advanceEnemyStride,travelFrame,loopFrame} from '../actors/enemies/actorCadence';
 import {groundY} from '../world/adventureTerrain';
 import {villageVillagerBody} from '../actors/villageVillagers';
 import {witchId,stepWitchAbsorption} from './villageRescue';
@@ -61,7 +62,7 @@ function flyVillageWitch(s,e,dt){
  if(!e.flying||['absorb','absorb-player'].includes(e.phase))return;
  e.flightDir??=e.spawnSeed%2?1:-1;
  const range=310;if(e.x>=e.home+range)e.flightDir=-1;if(e.x<=e.home-range)e.flightDir=1;
- const old=e.x;e.x+=e.flightDir*112*dt*(e.phase==='windup'?.65:1);e.moving=true;e.baseY=groundY(s.level.route,e.x,e.baseY);e.gait=(e.gait||0)+Math.abs(e.x-old)/90;
+ const old=e.x;e.x+=e.flightDir*112*dt*(e.phase==='windup'?.65:1);e.baseY=groundY(s.level.route,e.x,e.baseY);advanceEnemyStride(e,e.x-old,dt,90);
 }
 function phase(e,key){e.phase=key;e.phaseAge=0;}
 export function stepVillageEnemy(s,e,dt,shoot){
@@ -99,6 +100,16 @@ export function stepVillageEnemy(s,e,dt,shoot){
  if(e.phase==='recover'){if(e.timer<=0){phase(e,'patrol');e.timer=e.flying?.28:.8;}return;}
  // Select only at commitment, so alternating priorities do not churn each tick.
  const range=e.type===26||e.rapidLantern?580:470,near=villageClosestCivilian(s,e,range),approach=near||s.player,dx=approach.x-e.x;
+ // Candy cannot be attacked again. With no civilian target, keep the clown
+ // guarding on a short travelling patrol instead of freezing on a null aim.
+ if(e.type===PUMPKIN_CLOWN&&s.player.candy&&!near){
+  e.candyPatrolCenter??=e.x;e.candyPatrolDir??=Math.sign(e.x-s.player.x)||e.dir;
+  const left=Math.max(24,e.home-210,e.candyPatrolCenter-80),right=Math.min(s.level.width-24,e.home+210,e.candyPatrolCenter+80);
+  if(e.x<=left)e.candyPatrolDir=1;if(e.x>=right)e.candyPatrolDir=-1;
+  const old=e.x;e.dir=e.candyPatrolDir;e.x=Math.max(left,Math.min(right,e.x+e.dir*44*dt));
+  advanceEnemyStride(e,e.x-old,dt,90);e.baseY=groundY(s.level.route,e.x,e.baseY);e.y=e.baseY;return;
+ }
+ delete e.candyPatrolCenter;delete e.candyPatrolDir;
  if(Math.abs(dx)>24)e.dir=Math.sign(dx);
  if(Math.abs(dx)<range&&e.timer<=0){
   const target=villageTarget(s,e,range);if(!target)return;
@@ -109,7 +120,7 @@ export function stepVillageEnemy(s,e,dt,shoot){
   e.candyAim=villageAim(s,e,target,e.type===26?(e.flying?.62:1.1):villageClownWindup(e),e.type===26?610:e.rapidLantern?325:245);
   e.dir=Math.sign(e.candyAim.x-e.x)||e.dir;return;
  }
- if(!e.flying&&Math.abs(dx)>265){const old=e.x;e.x=Math.max(e.home-210,Math.min(e.home+210,e.x+e.dir*(e.type===VILLAGE_WITCH?34:44)*dt));e.moving=Math.abs(e.x-old)>.001;e.gait=(e.gait||0)+Math.abs(e.x-old)/90;e.baseY=groundY(s.level.route,e.x,e.baseY);e.y=e.baseY;}
+ if(!e.flying&&Math.abs(dx)>265){const old=e.x;e.x=Math.max(e.home-210,Math.min(e.home+210,e.x+e.dir*(e.type===VILLAGE_WITCH?34:44)*dt));advanceEnemyStride(e,e.x-old,dt,90);e.baseY=groundY(s.level.route,e.x,e.baseY);e.y=e.baseY;}
 }
 // Slab intersection catches a fast beam between simulation frames.
 export function villageSegmentHit(x0,y0,x1,y1,box){
@@ -165,11 +176,13 @@ export function villageEnemyDrawing(e,reduced=false){
   else if(e.phase==='windup')frame=4+Math.min(3,Math.floor(e.phaseAge/(e.flying?.62:1.1)*4));
   else if(e.phase==='attack')frame=e.flying?9+Math.min(1,Math.floor(e.phaseAge/.19)):8+Math.min(2,Math.floor(e.phaseAge/.127));
   else if(e.phase==='recover')frame=11;
-  else frame=reduced?0:Math.floor(e.clock*7)%4;
+  else if(!e.flying&&e.moving)return{key:'village-witch-walk-v1',frame:travelFrame(e.gait,12,reduced)};
+  else frame=loopFrame(e.clock,4,4,reduced);
   return{key,frame};
  }
  if(e.type===26)return{key:'village-witch-v1',frame:20+Math.min(3,Math.floor((e.deathAge||0)/.22))};
  const key='village-pumpkin-clean-v7';
+ if(e.hp>0&&e.moving&&['patrol','emerge'].includes(e.phase))return{key:'village-pumpkin-walk-v1',frame:travelFrame(e.gait,12,reduced)};
  const frame=e.hp<=0?20+Math.min(3,Math.floor((e.deathAge||0)/.22)):e.phase==='windup'?8+Math.min(3,Math.floor(e.phaseAge/villageClownWindup(e)*4)):e.phase==='attack'?12+Math.min(3,Math.floor(e.phaseAge/.38*4)):e.phase==='recover'?16+Math.min(3,Math.floor(e.phaseAge/.25)):reduced?0:Math.floor((e.gait||0)*8)%8;
  return{key,frame};
 }

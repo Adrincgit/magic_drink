@@ -22,5 +22,5 @@ export function fireBreatherFrame(e,reduced=false){
  if(e.phase==='windup')return 8+Math.min(3,Math.floor((e.fireAge||0)/1.15*4));
  if(e.phase==='attack')return 12+(reduced?2:Math.floor((e.fireAge||0)*11)%8);
  if(e.phase==='recover')return 20+Math.min(3,Math.floor((e.fireAge||0)/.85*4));
- return reduced?0:Math.floor((e.gait||0)*12)%8;
+ return reduced?0:Math.floor((e.gait||0)*8)%8;
 }

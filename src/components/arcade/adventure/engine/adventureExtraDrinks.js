@@ -6,7 +6,7 @@ import {canControlEnemy} from '../actors/enemies/adventureEnemyTraits';
 import {worldSound} from './adventureWorldAudio';
 export const VOLT=9,HONEY=10,ORBIT=11;
 const small=e=>canControlEnemy(e,'slow');
-const floorBelow=(s,x,y)=>s.platforms.filter(p=>x>=p.x&&x<=p.x+p.w&&surfaceY(p,x)>=y-12).sort((a,b)=>surfaceY(a,x)-surfaceY(b,x))[0];
+const floorBelow=(s,x,y)=>s.platforms.filter(p=>!p.gone&&x>=p.x&&x<=p.x+p.w&&surfaceY(p,x)>=y-12).sort((a,b)=>surfaceY(a,x)-surfaceY(b,x))[0];
 const burst=(s,kind,x,y,size=65)=>s.effects.push({drinkFx:kind,x,y,size,age:0,life:.36,duration:.36});
 const probe=(s,kind,x,y,r,damage,extra={})=>s.shots.push({kind,x,y,r,damage,vx:0,vy:0,age:0,life:.024,heavy:true,hidden:true,sustained:true,hits:[],scale:1,...extra});
 export function configureExtraShot(q){
@@ -49,6 +49,7 @@ export function releaseOrbit(s){
 export function stepExtraField(s,f,dt){
  if(f.kind===HONEY){
   if(f.puddle){
+   if(f.platform.gone){f.life=0;return;}
    f.x+=f.platform.dx||0;f.y=surfaceY(f.platform,f.x);
    for(const e of s.enemies)if(e.hp>0&&!e.fleeing&&small(e)&&Math.abs(e.x-f.x)<45*f.scale&&Math.abs(e.y-f.y)<20){e.snare=Math.max(e.snare||0,.3);e.honeyed=Math.max(e.honeyed||0,.3);}
   }else while(f.at<(f.drops||6)&&f.age>=.18+f.at*(f.interval||.34)){
@@ -71,7 +72,7 @@ export function stepExtraShot(s,q,dt){
  if(q.hidden||q.heavy||q.life<=0)return;
  if(q.kind===HONEY){
   q.vy+=620*dt;
-  for(const p of s.platforms){if(p.bridge)continue;const top=surfaceY(p,q.x);if(q.x>=p.x&&q.x<=p.x+p.w&&q.vy>0&&q.previousY+q.r<=top+10&&q.y+q.r>=top){q.life=0;honeyPatch(s,q.x,top,q.scale);worldSound(s,'impactHoney',q.x,top);break;}}
+  for(const p of s.platforms){if(p.gone||p.bridge)continue;const top=surfaceY(p,q.x);if(q.x>=p.x&&q.x<=p.x+p.w&&q.vy>0&&q.previousY+q.r<=top+10&&q.y+q.r>=top){q.life=0;honeyPatch(s,q.x,top,q.scale);worldSound(s,'impactHoney',q.x,top);break;}}
  }else if(q.kind===ORBIT&&!q.orbitLaunched){
   if(q.age<.46&&!q.prismSplit){
    const p=q.orbitAnchor||s.player,dir=Math.sign(q.orbitVX??q.vx)||1,a=-q.age/.46*Math.PI*1.7;

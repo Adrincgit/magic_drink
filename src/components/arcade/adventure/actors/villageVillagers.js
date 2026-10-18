@@ -11,8 +11,9 @@ const profiles=[
 profiles.forEach((p,i)=>{p.actionKey='village-'+['adults','children','elders','neighbors'][Math.floor(i/2)]+'-v4';p.runKey=p.actionKey.replace('village-','village-run-').replace('-v4','-v7');p.runBase=i%2*8;p.runDuration=.78+i*.012;p.stride*=1.22;});
 for(const [i,name] of [[0,'baker'],[6,'blacksmith']])Object.assign(profiles[i],{runKey:'village-'+name+'-run-v8',runBase:0,defendKey:'village-'+name+'-throw-v8'});
 profiles[0].throwTip=[242,82];profiles[6].throwTip=[244,100];
-profiles[6].runDuration=.72;
+Object.assign(profiles[6],{runKey:'village-blacksmith-run-v9',runFrames:12,runByDistance:true,runFlip:true});
 export const villageVillagerProfile=style=>profiles[style]||profiles[0];
-// Translation remains fast; hold each full-cycle drawing about 100 ms.
-export const villageVillagerRunFrame=(npc,reduced=false)=>{const p=villageVillagerProfile(npc.style);return p.runBase+(reduced?0:Math.floor((npc.runAge||0)/p.runDuration*8)%8);};
+// The blacksmith's two alternating steps follow actual travel, including stops.
+export const villageVillagerRunPhase=npc=>{const p=villageVillagerProfile(npc.style);return p.runByDistance?(npc.gait||0):(npc.runAge||0)/p.runDuration;};
+export const villageVillagerRunFrame=(npc,reduced=false)=>{const p=villageVillagerProfile(npc.style),frames=p.runFrames||8;return p.runBase+(reduced?0:Math.floor(villageVillagerRunPhase(npc)*frames)%frames);};
 export function villageVillagerBody(npc,padding=0){const p=villageVillagerProfile(npc.style),h=p.h*(npc.state==='hiding'?.8:1);return{x:npc.x-p.w/2-padding,y:npc.y-h-padding,w:p.w+padding*2,h:h+padding*2};}

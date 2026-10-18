@@ -49,8 +49,8 @@ export function drawGrandRingStage(c,s,art,reduced){
  }
  c.restore();
 }
-function pose(c,s,art,x,y,alpha=1){
- const b=s.boss,q=harlequinDrawing(s),img=art[q.key],size=HARLEQUIN_SIZE*(q.scale||1);
+function pose(c,s,art,x,y,alpha=1,reduced=false){
+ const b=s.boss,q=harlequinDrawing(s,reduced),img=art[q.key],size=HARLEQUIN_SIZE*(q.scale||1);
  c.save();c.globalAlpha=alpha;c.translate(x,y);if(b.dir>0)c.scale(-1,1);
  if(b.exhausted>0)c.scale(1,1-Math.sin(b.clock*3.5)*.008);
  c.drawImage(img,(q.frame%4)*512,Math.floor(q.frame/4)*512,512,512,-size/2,-size*490/512,size,size);c.restore();
@@ -61,7 +61,7 @@ export function drawHarlequin(c,s,art,reduced=false){
  drawHarlequinHeat(c,s,art,reduced);
  if(!reduced&&b.phase==='attack'&&b.move==='dash')for(let i=3;i>0;i--)pose(c,s,art,b.x-b.dir*i*26,b.y,.045*(4-i));
  c.save();const hit=bossHitFilter(b,reduced),burn=b.scorched?`brightness(${1-b.scorched}) saturate(.88)`:'';
- c.filter=[hit==='none'?'':hit,burn].filter(Boolean).join(' ')||'none';pose(c,s,art,b.x,b.y);c.restore();
+ c.filter=[hit==='none'?'':hit,burn].filter(Boolean).join(' ')||'none';pose(c,s,art,b.x,b.y,1,reduced);c.restore();
 }
 export function drawHarlequinFX(c,art,row,frame,x,y,w,h=w,flip=false,angle=0){
  c.save();c.translate(x,y);c.rotate(angle);if(flip)c.scale(-1,1);

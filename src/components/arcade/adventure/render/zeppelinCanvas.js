@@ -1,6 +1,9 @@
 import {ZEPPELIN_WIDTH,ZEPPELIN_HEIGHT,ZEPPELIN_CELL_ASPECT,ZEPPELIN_DUST_DURATION,zeppelinMuzzle,zeppelinFrame} from '../actors/enemies/adventureZeppelin';
 import {AIR_ENEMY_SCALE} from '../actors/enemies/adventureEnemyGeometry';
 
+// Detached atlas fragments beside the launcher, in native cell coordinates.
+// Keep the full cell registration and the painted muzzle flash unchanged.
+const launcherFragments={1:[482,202,13,36],2:[470,202,12,34]};
 export function drawZeppelin(c,e,art,reduced=false){
  const w=ZEPPELIN_WIDTH,h=ZEPPELIN_HEIGHT,left=e.x-w/2,top=e.y-h;
  if(e.landed){
@@ -10,7 +13,14 @@ export function drawZeppelin(c,e,art,reduced=false){
  }
  const frame=zeppelinFrame(e,reduced),fieldWidth=w*466/429.25,cellHeight=fieldWidth*ZEPPELIN_CELL_ASPECT;
  c.save();if(e.dir<0){c.translate(e.x*2,0);c.scale(-1,1);}
+ c.save();
+ const fragment=launcherFragments[frame];
+ if(fragment){
+  const x=e.x-fieldWidth/2,y=e.y-cellHeight*.848,[sx,sy,sw,sh]=fragment;
+  c.beginPath();c.rect(x,y,fieldWidth,cellHeight);c.rect(x+sx/512*fieldWidth,y+sy/384*cellHeight,sw/512*fieldWidth,sh/384*cellHeight);c.clip('evenodd');
+ }
  c.drawImage(art['zeppelin-actions'],frame%4*512,Math.floor(frame/4)*384,512,384,e.x-fieldWidth/2,e.y-cellHeight*.848,fieldWidth,cellHeight);
+ c.restore();
  if(e.hp<=0){c.restore();return;}
  const scale=w/1512,scaleY=h/805,pivot={x:left+31*scale,y:top+258*scaleY};
  c.save();c.translate(pivot.x,pivot.y);c.rotate(reduced?0:e.clock*29);

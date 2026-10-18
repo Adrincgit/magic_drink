@@ -1,4 +1,5 @@
 import {playEnergyAccent} from './energyVoice';
+import {SUPER_WINDUP,SUPER_CHARGE_RATE} from '../../adventure/engine/adventureSuperTiming';
 // Crystal partials, a filtered swell and a resonant release. Scheduled on the
 // same charge/cast/pulse events as the visual; no downloaded samples or voices.
 export function playEncoreSound(context,output,kind,at){
@@ -21,8 +22,8 @@ export function playEncoreSound(context,output,kind,at){
   source.connect(filter);filter.connect(amp);amp.connect(output);source.start(start);source.onended=()=>{source.disconnect();filter.disconnect();amp.disconnect();};
  };
  if(kind==='superCharge'){
-  [523.25,659.25,783.99,1046.5,1318.5,1568,2093].forEach((hz,i)=>bell(hz,.036+i*.002,.38,[0,.08,.17,.28,.4,.54,.69][i]));
-  tone(196,392,.85,.03);swell(.86,.07,420,3600);
+  [523.25,659.25,783.99,1046.5,1318.5,1568,2093].forEach((hz,i)=>bell(hz,.036+i*.002,.38/SUPER_CHARGE_RATE,[0,.08,.17,.28,.4,.54,.69][i]*SUPER_WINDUP/.9));
+  tone(196,392,SUPER_WINDUP-.05/SUPER_CHARGE_RATE,.03);swell(SUPER_WINDUP-.04/SUPER_CHARGE_RATE,.07,420,3600);
  }else if(kind==='superCast'){
   playEnergyAccent(context,output,kind,at);
   tone(130.81,55,.42,.105);[261.63,392,523.25,783.99].forEach((hz,i)=>tone(hz,hz,.7,.022,i*.014));

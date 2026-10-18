@@ -1,16 +1,30 @@
 import {SUPER_WINDUP} from '../engine/adventureMagic';
+import {superChargeAge} from '../engine/adventureSuperTiming';
 import {drawDuelCharge} from './duelCutinCanvas';
+import portraits from './hexyEncorePortraits';
 
 const clamp=n=>Math.max(0,Math.min(1,n));
+export function superCutinPortrait(s){
+ const q=s.superCinematic,aim=q?.aim;
+ // Keep the accepted full illustration for the classic grounded Encore.
+ if(!q?.airborne&&!aim?.y)return{classic:true};
+ const direction=aim?.y<0?(aim.x===0?'up':'diagonal-up'):aim?.y>0?(aim.x===0?'down':'diagonal-down'):'horizontal';
+ return{...portraits[(q.airborne?'air-':'ground-')+direction],flip:(aim?.x||q.dir)<0};
+}
 export function superCutinState(s,reduced=false){
- const age=s.superCinematic?.age;
- if(age===undefined||age<0||age>=SUPER_WINDUP)return null;
- const enter=clamp(age/.2),exit=clamp((age-.66)/(SUPER_WINDUP-.66));
+ const elapsed=s.superCinematic?.age;
+ if(elapsed===undefined||elapsed<0||elapsed>=SUPER_WINDUP)return null;
+ const age=superChargeAge(elapsed),exitAt=superChargeAge(SUPER_WINDUP)-.24,enter=clamp(age/.2),exit=clamp((age-exitAt)/.24);
  return{
   x:reduced?0:-370*Math.pow(1-enter,3),
   alpha:(reduced?clamp(age/.16):1)*(1-exit),
-  phase:age<.2?'enter':age<.66?'hold':'exit',
+  phase:age<.2?'enter':age<exitAt?'hold':'exit',
  };
+}
+
+export function superCutinPortraitRect(pose){
+ const [, ,sw,sh]=pose.crop,scale=Math.min(426/sh,342/sw),w=sw*scale,h=sh*scale;
+ return{x:24+(342-w)/2,y:76+(426-h)/2,w,h};
 }
 
 function ribbon(c,y,width,height){
@@ -25,12 +39,19 @@ function ribbon(c,y,width,height){
 // Confined to the left side. It fades there instead of crossing the battlefield.
 export function drawSuperCutin(c,s,art,reduced=false,en=false){
  if(s.powerClash)return drawDuelCharge(c,s,art,false,reduced);
- const q=superCutinState(s,reduced),portrait=art['hexy-encore-portrait'];
+ const q=superCutinState(s,reduced),pose=superCutinPortrait(s),classic=pose.classic||!art[pose.key];
+ const portrait=art[classic?'hexy-encore-portrait':pose.key];
  if(!q||!portrait)return false;
  c.save();c.translate(q.x,0);c.globalAlpha=q.alpha;
  ribbon(c,141,360,34);ribbon(c,497,376,38);
  // Full image, with uniform scale: neither the raised wand nor shoes are cut.
- const height=426;c.drawImage(portrait,24,76,height*portrait.width/portrait.height,height);
+ const height=426;
+ if(classic)c.drawImage(portrait,24,76,height*portrait.width/portrait.height,height);
+ else{
+  const [sx,sy,sw,sh]=pose.crop,{x,y,w,h}=superCutinPortraitRect(pose);
+  c.save();if(pose.flip){c.translate(x+w,y);c.scale(-1,1);}else c.translate(x,y);
+  c.drawImage(portrait,sx,sy,sw,sh,0,0,w,h);c.restore();
+ }
  c.textAlign='left';c.lineJoin='round';c.strokeStyle='#291735';c.lineWidth=4;c.fillStyle='#fff0b6';
  c.save();c.translate(12,163);c.rotate(-.1);c.font='400 18px BakeSoda, sans-serif';c.strokeText('HEXY',0,0);c.fillText('HEXY',0,0);c.restore();
  c.save();c.translate(9,525);c.rotate(-.1);c.font='400 24px BakeSoda, sans-serif';const title=en?'STARLIGHT ENCORE!':'¡ENCORE ESTELAR!';c.strokeText(title,0,0,327);c.fillText(title,0,0,327);c.restore();

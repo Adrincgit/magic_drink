@@ -1,0 +1,20 @@
+{
+  "uniqueTests": 229,
+  "testFiles": 22,
+  "passedRuns": [
+    {
+      "log": "tests-final.log",
+      "passed": 222
+    },
+    {
+      "log": "tests-walk-final.log",
+      "passed": 81
+    },
+    {
+      "log": "tests-arlequin-final.log",
+      "passed": 47
+    }
+  ],
+  "reviewScenes": 19,
+  "runtimeErrors": []
+}

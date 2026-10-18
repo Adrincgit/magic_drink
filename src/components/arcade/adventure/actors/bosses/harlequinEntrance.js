@@ -1,4 +1,5 @@
 import {fireImpact} from './harlequinFire';
+import {faceTarget} from '../enemies/enemyFacing';
 export const HARLEQUIN_ENTRANCE={duration:4.5,dropStart:.65,land:1.6};
 const clamp=n=>Math.max(0,Math.min(1,n));
 export function harlequinArrivalFrame(age){
@@ -16,7 +17,7 @@ export function beginHarlequinArrival(s){
 export function stepHarlequinArrival(s,dt){
  const b=s.boss,q=b.arrival,t=clamp((q.age-.65)/.95),ease=t*t;
  b.clock+=dt;b.x=q.fromX+(q.toX-q.fromX)*(t*t*(3-2*t));b.y=q.fromY+(q.toY-q.fromY)*ease;
- b.timer=q.duration-q.age;b.dir=Math.sign(s.player.x-b.x)||-1;b.vulnerable=false;
+ b.timer=q.duration-q.age;b.dir=faceTarget(b,s.player.x);b.vulnerable=false;
  if(q.age>=1.6&&!q.landed){q.landed=true;fireImpact(s,b.x,q.toY,1.7,true);s.shake=Math.max(s.shake,.3);s.events.push('harlequinEntranceLand');}
  if(q.age>=2.7&&!q.revealed){q.revealed=true;s.events.push('harlequinReady');}
  if(q.age===q.duration){b.x=q.toX;b.y=q.toY;b.phase='recover';b.timer=1;b.vulnerable=true;}

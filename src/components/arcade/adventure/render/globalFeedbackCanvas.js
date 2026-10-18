@@ -6,11 +6,22 @@ function cel(c,img,frame,x,y,w,h=w,rotation=0,baseline=.5){
  if(!img)return;c.save();c.translate(x,y);c.rotate(rotation);
  c.drawImage(img,frame%4*320,Math.floor(frame/4)*320,320,320,-w/2,-h*baseline,w,h);c.restore();
 }
-export function drawSurfaceDust(c,s,art,reduced){
- for(const q of s.surfaceDust||[]){
+export function drawSurfaceDust(c,s,art,reduced,dust=s.surfaceDust||[]){
+ const crops={2:[[99,172,121,98],[89,208,143,62]],3:[[76,202,170,68],[66,182,188,88],[93,188,145,82]],4:[[95,224,131,46],[75,194,170,76],[44,180,232,90],[73,176,174,94]]};
+ for(const q of dust){
+  if(q.kind){
+   const u=q.age/q.life;c.save();c.globalAlpha=q.opacity*(1-u)*(reduced?.65:1);c.translate(q.x,q.y);c.rotate(q.angle+q.age*q.spin);
+   c.fillStyle=q.kind==='grass'?'#91ad58':q.kind==='wood'?'#bd8b56':q.kind==='stone'?'#a39b9c':'#947354';c.strokeStyle=q.kind==='grass'?'#475d3d':'#554744';c.lineWidth=.8;
+   c.beginPath();
+   if(q.kind==='grass'){c.moveTo(0,3);c.quadraticCurveTo(-q.size*.65,-q.size*.4,-q.size*.45,-q.size);c.quadraticCurveTo(1,-q.size*.6,1,0);c.quadraticCurveTo(q.size*.2,-q.size*.7,q.size*.6,-q.size*.8);c.quadraticCurveTo(q.size*.4,-1,0,3);}
+   else{c.moveTo(-q.size,-q.size*.4);c.lineTo(q.size*.3,-q.size*.7);c.lineTo(q.size,q.size*.3);c.lineTo(-q.size*.6,q.size*.6);c.closePath();}
+   c.fill();c.stroke();c.restore();continue;
+  }
   const u=q.age/q.life,row=q.material==='sand'?2:q.material==='soil'?3:4;
+  const frame=row===2?[1,2,2,2][Math.min(3,Math.floor(u*4))]:row===3?[1,2,3,3][Math.min(3,Math.floor(u*4))]:Math.min(3,Math.floor(u*4));
+  const [sx,sy,sw,sh]=crops[row][row===4?frame:frame-1],w=q.size*(1+u*.35),h=w*sh/sw*.75;
   c.save();c.globalAlpha=q.opacity*(1-u)*(reduced?.65:1);
-  cel(c,art['feedback-elements'],row*4+Math.min(3,Math.floor(u*4)),q.x,q.y,q.size*(1+u*.35),q.size*.65,0,270/320);c.restore();
+  c.drawImage(art['feedback-elements'],frame*320+sx,row*320+sy,sw,sh,q.x-w/2,q.y-h,w,h);c.restore();
  }
 }
 export function drawFireTrails(c,s,art,reduced){

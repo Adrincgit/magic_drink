@@ -2,7 +2,7 @@ import {surfaceY} from '../world/adventureTerrain';
 export const placedDrink=kind=>kind===6||kind===10;
 export function placementPoint(s,q){
  const x=s.player.x+q.dir*q.distance;
- const platform=s.platforms.filter(p=>x>=p.x&&x<=p.x+p.w&&surfaceY(p,x)>=s.player.y-65).sort((a,b)=>surfaceY(a,x)-surfaceY(b,x))[0];
+ const platform=s.platforms.filter(p=>!p.gone&&x>=p.x&&x<=p.x+p.w&&surfaceY(p,x)>=s.player.y-65).sort((a,b)=>surfaceY(a,x)-surfaceY(b,x))[0];
  const floor=platform?surfaceY(platform,x):s.player.y+100;
  return {x,y:q.kind===10?floor-q.height:floor,floor,platform,valid:!!platform&&floor-s.player.y<330};
 }

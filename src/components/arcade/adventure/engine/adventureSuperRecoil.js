@@ -20,10 +20,10 @@ export function stepSuperRecoil(s,previousAge){
  if(q.recoilStopped)return;
  const distance=superRecoilDistance(q.age,q.airborne)-superRecoilDistance(previousAge,q.airborne);
  if(distance<=0)return;
- const bounds=adventureBounds(s),count=Math.ceil(distance),step=-q.dir*distance/count;
- const solidBoss=s.boss.hp>0&&!['sleep','intro','defeated'].includes(s.boss.phase)?bossHitbox(s):null;
+ const bounds=adventureBounds(s),count=Math.ceil(distance),aim=q.aim||{x:q.dir,y:0},step=-aim.x*distance/count;
+ const solidBoss=s.index!==2&&s.boss.hp>0&&!['sleep','intro','defeated'].includes(s.boss.phase)?bossHitbox(s):null;
  for(let i=0;i<count;i++){
-  const x=p.x+step;let y=p.y,ground=p.ground;
+  const x=p.x+step;let y=p.y-(q.airborne?aim.y*distance/count:0),ground=p.ground;
   let blocked=x<bounds.left||x>bounds.right;
   if(!q.airborne){
    ground=supportAt(s,x,p.y);
@@ -35,6 +35,7 @@ export function stepSuperRecoil(s,previousAge){
    }
   }else{
    blocked ||= s.platforms.some(t=>t.kind==='earth'&&x>=t.x&&x<=t.x+t.w&&surfaceY(t,x)<y-2);
+   blocked ||= s.platforms.some(t=>!t.gone&&x>=t.x&&x<=t.x+t.w&&p.y<=surfaceY(t,x)+2&&y>surfaceY(t,x));
   }
   if(solidBoss)blocked ||= x+15>solidBoss.x&&x-15<solidBoss.x+solidBoss.w&&y>solidBoss.y&&y-58<solidBoss.y+solidBoss.h;
   if(blocked){q.recoilStopped=true;break;}

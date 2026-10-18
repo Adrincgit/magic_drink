@@ -1,8 +1,8 @@
 import {test,expect} from '@playwright/test';
 import fs from 'node:fs';
-import {createAdventure,stepAdventure,retryAdventure,playerBody} from '../src/components/arcade/adventure/engine/adventureModel';
+import {createAdventure,stepAdventure,retryAdventure} from '../src/components/arcade/adventure/engine/adventureModel';
 import {fortTargets,fortSystems} from '../src/components/arcade/adventure/actors/bosses/adventureEmberFort';
-import {resolveBargeContact,BARGE_MOVES} from '../src/components/arcade/adventure/actors/bosses/adventureBarge';
+import {BARGE_MOVES} from '../src/components/arcade/adventure/actors/bosses/adventureBarge';
 import {makeEnemy,enemyShot} from '../src/components/arcade/adventure/actors/enemies/adventureEnemies';
 import {updateDiver} from '../src/components/arcade/adventure/actors/enemies/adventureDiver';
 import {guardBlocks} from '../src/components/arcade/adventure/engine/adventureDefense';
@@ -14,11 +14,11 @@ function strike(s,part,damage){while(s.hitStop>0)tick(s,1);const t=fortTargets(s
 
 test('barge never rams, touching its hull is harmless and boarding deploys visible divers',()=>{
  const s=battle(2);expect(BARGE_MOVES).not.toContain('surge');const hp=s.hearts;
- s.player.x=s.boss.x;s.player.hurt=0;resolveBargeContact(s,playerBody);expect(s.hearts).toBe(hp);expect(s.player.x).toBeLessThan(s.boss.x-290);
+ s.player.x=s.boss.x;s.player.hurt=0;tick(s,30,{right:true});expect(s.hearts).toBe(hp);expect(s.player.x).toBeGreaterThan(s.boss.x+30);
  s.player.x=s.level.arena.left+500;s.player.hurt=999;s.boss.phase='attack';s.boss.move='boarding';s.boss.timer=2.8;s.boss.shotClock=0;s.boss.volley=0;
- tick(s,2);const diver=s.enemies.find(e=>e.bargeCrew);expect(diver.phase).toBe('deploy');expect(diver.y).toBeLessThan(diver.waterY);
+ tick(s,2);const diver=s.enemies.find(e=>e.bargeCrew);expect(diver.phase).toBe('exit');expect(diver.y).toBeLessThan(diver.waterY);
  const states=new Set();for(let i=0;i<1800;i++){stepAdventure(s,{},1/120);if(s.enemies.includes(diver))states.add(diver.phase);}
- expect(states.has('submerged')).toBe(true);expect(states.has('emerge')).toBe(true);expect(states.has('surfaceFire')).toBe(true);expect(s.enemies.filter(e=>e.bargeCrew&&e.hp>0).length).toBeLessThanOrEqual(3);
+ expect(states.has('deploy')).toBe(true);expect(states.has('submerged')).toBe(true);expect(states.has('emerge')).toBe(true);expect(states.has('surfaceFire')).toBe(true);expect(s.enemies.filter(e=>e.bargeCrew&&e.hp>0).length).toBeLessThanOrEqual(3);
 });
 test('diver peeks out, dives to dodge, and faces its actual swimming direction',()=>{
  const s=battle(2),e=makeEnemy(s.player.x+100,s.player.y,8);e.clock=0;updateDiver(s,e,.01,enemyShot);expect(e.phase).toBe('emerge');
@@ -76,7 +76,7 @@ test('forest, scorched approach, fortress, backstage and revised crews render in
   const s=w.createAdventure(2);Object.assign(s.boss,{phase:'recover',clock:1,flash:0});s.time=1;s.fxTime=1;
   const c=document.createElement('canvas');c.width=1000;c.height=720;const ctx=c.getContext('2d',{willReadFrequently:true});
   const draw=()=>{ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,1000,720);ctx.translate(500-s.boss.x,0);drawBarge(ctx,s,w.art,true);return ctx.getImageData(0,0,1000,720).data;};
-  const before=draw();s.boss.flash=.3;const p=bargeParts(s);p.drum.flash=.23;const after=draw();let local=0,remote=0;
+  const before=draw();const p=bargeParts(s);p.drum.flash=.23;const after=draw();let local=0,remote=0;
   for(let y=0;y<720;y++)for(let x=0;x<1000;x++){const k=(y*1000+x)*4,d=Math.abs(before[k]-after[k])+Math.abs(before[k+1]-after[k+1])+Math.abs(before[k+2]-after[k+2]);if(d>15){if(x<450)local++;else remote++;}}
   return{local,remote};
  });

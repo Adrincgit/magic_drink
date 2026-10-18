@@ -1,6 +1,7 @@
 import {test,expect} from '@playwright/test';
 import {mkdirSync,writeFileSync} from 'node:fs';
 import {createAdventure,stepAdventure} from '../src/components/arcade/adventure/engine/adventureModel';
+import {SUPER_WINDUP} from '../src/components/arcade/adventure/engine/adventureSuperTiming';
 
 const folder='tests/artifacts/arcade/effects-mix';
 mkdirSync(folder,{recursive:true});
@@ -22,6 +23,7 @@ async function render(page,events,options={}){
    window.AudioContext=function(){return proxy;};
    const sound=await import(`/src/components/arcade/shared/audio/sounds.js?render=${crypto.randomUUID()}`);
    sound.setArcadeSoundsVolume(options.master??1,options.effects??1);sound.muteArcadeSounds(options.muted??false);sound.unlockArcadeAudio();
+   if(options.previousOutput)gains[0].gain.value=.7*(options.master??1)*(options.effects??1);
    if(options.legacyGain){gains[1].gain.value=1.15;gains[1].disconnect();gains[1].connect(gains[0]);}
    for(const [at,kind] of events){time=at;sound.arcadeSound(kind);}
   }finally{window.AudioContext=original;}
@@ -51,6 +53,12 @@ test('ordinary shots gain audible headroom; master, effects and mute still silen
  writeFileSync(`${folder}/gain.json`,JSON.stringify({before,after,gainDb},null,2));
 });
 
+test('effects output is exactly ten percent louder after compression with the same volume settings',async({page})=>{
+ await page.goto('/arcade');const events=[[.1,'coin'],[.6,'coin'],[1.1,'coin']],previous=await render(page,events,{previousOutput:true}),current=await render(page,events);
+ expect(current.rms/previous.rms).toBeCloseTo(1.1,4);expect(current.peak/previous.peak).toBeCloseTo(1.1,4);expect(current.peak).toBeLessThan(1);expect(current.nonFinite).toBe(0);
+ writeFileSync(`${folder}/ten-percent-output.json`,JSON.stringify({previous,current,ratio:current.rms/previous.rms},null,2));
+});
+
 test('special coin uses a longer bell arpeggio distinct from the ordinary pickup and respects mute',async({page})=>{
  await page.goto('/arcade');const coin=await render(page,[[.1,'coin']]),treasure=await render(page,[[.1,'treasureCoin']],{export:true});
  expect(treasure.last).toBeGreaterThan(coin.last+.15);expect(treasure.rms).toBeGreaterThan(.003);expect(treasure.peak).toBeLessThan(.9);expect(treasure.nonFinite).toBe(0);
@@ -67,13 +75,13 @@ test('encore charge, release and beam have a complete audible envelope',async({p
  expect(events.filter(([,kind])=>kind==='superPulse')).toHaveLength(8);
  const result=await render(page,events,{export:true});
  expect(result.nonFinite).toBe(0);expect(result.peak).toBeGreaterThan(.12);expect(result.peak).toBeLessThan(.9);
- expect(result.windows.slice(0,6).every(rms=>rms>.004)).toBe(true);expect(result.last).toBeGreaterThan(2.7);expect(result.last).toBeLessThan(3.2);
+ expect(result.windows.slice(0,Math.floor((SUPER_WINDUP+2)/.5)).every(rms=>rms>.004)).toBe(true);expect(result.last).toBeGreaterThan(SUPER_WINDUP+1.8);expect(result.last).toBeLessThan(SUPER_WINDUP+2.3);
  writeFileSync(`${folder}/encore.wav`,Buffer.from(result.wav,'base64'));delete result.wav;writeFileSync(`${folder}/encore.json`,JSON.stringify(result,null,2));
 });
 
 test('dense boss combat and simultaneous explosions stay below digital clipping',async({page})=>{
  await page.goto('/arcade');
- const events=[[0,'superCharge'],[.9,'superCast']];
+ const events=[[0,'superCharge'],[SUPER_WINDUP,'superCast']];
  for(let at=.1;at<4;at+=.1)events.push([at,'cast'],[at,'bossHit']);
  for(let at=.95;at<4;at+=.39)events.push([at,'superPulse'],[at,'bossHeavyHit'],[at,'organBlast'],[at,'organClatter']);
  events.push([2,'organDestroy'],[2,'towerTransform'],[2,'zeppelinBurst']);events.sort((a,b)=>a[0]-b[0]);

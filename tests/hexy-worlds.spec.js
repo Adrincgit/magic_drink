@@ -65,13 +65,17 @@ test('all ten active tracks, including the replacement MP3s, decode to non-silen
  for(const r of report){expect(r.channels).toBe(2);expect(r.duration).toBeGreaterThan(24);expect(r.peak).toBeLessThan(.98);expect(r.rms).toBeGreaterThan(.05);}
 });
 
-test('user arrangements map to field, forest and both opening bosses while shop and other chapters retain their tracks',()=>{
+test('user arrangements map to the title, shop and the correct first-act bosses',()=>{
  expect(adventureMusic(0,'playing').src).toBe('/arcade/music/exploration/meadow.mp3');
  expect(adventureMusic(1,'playing').src).toBe('/arcade/music/exploration/woods.mp3');
  expect(adventureMusic(0,'playing',true).src).toBe('/arcade/music/bosses/troupe.mp3');
- expect(adventureMusic(1,'playing',true).src).toBe('/arcade/music/bosses/serio.mp3');
- expect(adventureMusic(0,'shop').src).toBe('/arcade/music/shop.ogg');
- expect(adventureMusic(2,'playing').src).toBe('/arcade/music/exploration/canopy.ogg');
+ expect(adventureMusic(1,'playing',true).src).toBe('/arcade/music/bosses/organ-1-2.mp3');
+ expect(adventureMusic(2,'playing',true).src).toBe('/arcade/music/bosses/barge-1-3.mp3');
+ expect(adventureMusic(5,'playing',true).src).toBe('/arcade/music/bosses/ember-1-4.mp3');
+ expect(adventureMusic(3,'playing',true).src).toBe('/arcade/music/bosses/arlequin_fuego.mp3');
+ expect(adventureMusic(0,'shop').src).toBe('/arcade/music/shop.mp3');
+ expect(adventureMusic(0,'ready').src).toBe('/arcade/music/title.mp3');
+ expect(adventureMusic(2,'playing').src).toBe('/arcade/music/exploration/harbor.mp3');
 });
 
 test('parallax remains continuous when the camera crosses a mirrored tile boundary',async({page})=>{

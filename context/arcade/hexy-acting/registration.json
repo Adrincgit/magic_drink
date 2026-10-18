@@ -1,0 +1,2666 @@
+{
+  "super-diagonal-up-v2": [
+    {
+      "frame": 0,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-charge-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 405,
+        "b": 366,
+        "w": 406,
+        "h": 367
+      },
+      "sourceStar": [
+        380.93028846153845,
+        205.41346153846155
+      ],
+      "sourceBow": [
+        232.34111543450064,
+        186.53566796368352
+      ],
+      "faceHeight": 83,
+      "left": 35,
+      "top": 76,
+      "scale": 0.6110400558107087,
+      "tip": [
+        267.76,
+        201.52
+      ]
+    },
+    {
+      "frame": 1,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-charge-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 385,
+        "b": 382,
+        "w": 386,
+        "h": 383
+      },
+      "sourceStar": [
+        348.4330357142857,
+        99.76450892857143
+      ],
+      "sourceBow": [
+        224.74968233799237,
+        189.79161372299873
+      ],
+      "faceHeight": 84,
+      "left": 40,
+      "top": 66,
+      "scale": 0.6110400558107087,
+      "tip": [
+        252.91,
+        126.96
+      ]
+    },
+    {
+      "frame": 2,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-charge-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 419,
+        "b": 387,
+        "w": 420,
+        "h": 388
+      },
+      "sourceStar": [
+        394.54137931034484,
+        22.350574712643677
+      ],
+      "sourceBow": [
+        228.8627935723115,
+        197.36217552533992
+      ],
+      "faceHeight": 83,
+      "left": 37,
+      "top": 63,
+      "scale": 0.6110400558107087,
+      "tip": [
+        278.08,
+        76.66
+      ]
+    },
+    {
+      "frame": 3,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-charge-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 425,
+        "b": 411,
+        "w": 426,
+        "h": 412
+      },
+      "sourceStar": [
+        399.7430478309233,
+        21.82536151279199
+      ],
+      "sourceBow": [
+        243.87484035759897,
+        210.67943805874842
+      ],
+      "faceHeight": 84,
+      "left": 28,
+      "top": 48,
+      "scale": 0.6110400558107087,
+      "tip": [
+        272.26,
+        61.34
+      ]
+    },
+    {
+      "frame": 4,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 306,
+        "b": 271,
+        "w": 307,
+        "h": 272
+      },
+      "sourceStar": [
+        287.1697722567288,
+        16.03933747412008
+      ],
+      "sourceBow": [
+        176.3684210526316,
+        129.97719298245613
+      ],
+      "faceHeight": 49,
+      "left": 14,
+      "top": 46,
+      "scale": 0.9221556886227545,
+      "tip": [
+        278.82,
+        60.79
+      ]
+    },
+    {
+      "frame": 5,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 317,
+        "b": 273,
+        "w": 318,
+        "h": 274
+      },
+      "sourceStar": [
+        300.2054507337526,
+        18.19706498951782
+      ],
+      "sourceBow": [
+        184.82432432432432,
+        127.25337837837837
+      ],
+      "faceHeight": 53,
+      "left": 7,
+      "top": 48,
+      "scale": 0.9221556886227545,
+      "tip": [
+        283.84,
+        64.78
+      ]
+    },
+    {
+      "frame": 6,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 324,
+        "b": 272,
+        "w": 325,
+        "h": 273
+      },
+      "sourceStar": [
+        305.46835443037975,
+        16.457805907172997
+      ],
+      "sourceBow": [
+        198.7928802588997,
+        119.66990291262135
+      ],
+      "faceHeight": 55,
+      "left": 3,
+      "top": 55,
+      "scale": 0.9221556886227545,
+      "tip": [
+        284.69,
+        70.18
+      ]
+    },
+    {
+      "frame": 7,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 320,
+        "b": 272,
+        "w": 321,
+        "h": 273
+      },
+      "sourceStar": [
+        302.34090909090907,
+        16.537190082644628
+      ],
+      "sourceBow": [
+        189.35611510791367,
+        127.52877697841727
+      ],
+      "faceHeight": 46,
+      "left": 3,
+      "top": 48,
+      "scale": 0.9221556886227545,
+      "tip": [
+        281.81,
+        63.25
+      ]
+    },
+    {
+      "frame": 8,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-charge-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 396,
+        "b": 347,
+        "w": 397,
+        "h": 348
+      },
+      "sourceStar": [
+        370.5227524972253,
+        206.8157602663707
+      ],
+      "sourceBow": [
+        233.4885290148448,
+        186.4561403508772
+      ],
+      "faceHeight": 78,
+      "left": 35,
+      "top": 88,
+      "scale": 0.6084326192974875,
+      "tip": [
+        260.44,
+        213.83
+      ]
+    },
+    {
+      "frame": 9,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-charge-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 387,
+        "b": 370,
+        "w": 388,
+        "h": 371
+      },
+      "sourceStar": [
+        363.4206974128234,
+        94.59955005624298
+      ],
+      "sourceBow": [
+        242.1239470517449,
+        188.74729241877256
+      ],
+      "faceHeight": 83,
+      "left": 30,
+      "top": 74,
+      "scale": 0.6084326192974875,
+      "tip": [
+        251.12,
+        131.56
+      ]
+    },
+    {
+      "frame": 10,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-charge-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 425,
+        "b": 365,
+        "w": 426,
+        "h": 366
+      },
+      "sourceStar": [
+        402.519906323185,
+        21.398126463700233
+      ],
+      "sourceBow": [
+        239.2635046113307,
+        187.18708827404478
+      ],
+      "faceHeight": 81,
+      "left": 31,
+      "top": 77,
+      "scale": 0.6084326192974875,
+      "tip": [
+        275.91,
+        90.02
+      ]
+    },
+    {
+      "frame": 11,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-charge-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 430,
+        "b": 387,
+        "w": 431,
+        "h": 388
+      },
+      "sourceStar": [
+        404.4796030871003,
+        21.197353914002203
+      ],
+      "sourceBow": [
+        245.5077519379845,
+        202.55426356589146
+      ],
+      "faceHeight": 81,
+      "left": 28,
+      "top": 64,
+      "scale": 0.6084326192974875,
+      "tip": [
+        274.1,
+        76.9
+      ]
+    },
+    {
+      "frame": 12,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 306,
+        "b": 256,
+        "w": 307,
+        "h": 257
+      },
+      "sourceStar": [
+        288.31589958159,
+        17.43305439330544
+      ],
+      "sourceBow": [
+        178.92936802973978,
+        132.94795539033458
+      ],
+      "faceHeight": 43,
+      "left": 12,
+      "top": 64,
+      "scale": 0.9221556886227545,
+      "tip": [
+        277.87,
+        80.08
+      ]
+    },
+    {
+      "frame": 13,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 320,
+        "b": 251,
+        "w": 321,
+        "h": 252
+      },
+      "sourceStar": [
+        301.80924855491327,
+        17.678227360308284
+      ],
+      "sourceBow": [
+        192.52851711026616,
+        130.2699619771863
+      ],
+      "faceHeight": 51,
+      "left": 3,
+      "top": 66,
+      "scale": 0.9221556886227545,
+      "tip": [
+        281.32,
+        82.3
+      ]
+    },
+    {
+      "frame": 14,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 333,
+        "b": 255,
+        "w": 334,
+        "h": 256
+      },
+      "sourceStar": [
+        314.63327032136107,
+        17.62192816635161
+      ],
+      "sourceBow": [
+        208.81666666666666,
+        131.66666666666666
+      ],
+      "faceHeight": 42,
+      "left": 3,
+      "top": 65,
+      "scale": 0.9221556886227545,
+      "tip": [
+        293.14,
+        81.25
+      ]
+    },
+    {
+      "frame": 15,
+      "source": "context/arcade/hexy-acting/ultimate-diagonal-up-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 317,
+        "b": 252,
+        "w": 318,
+        "h": 253
+      },
+      "sourceStar": [
+        298.7033195020747,
+        16.62240663900415
+      ],
+      "sourceBow": [
+        197.84050632911394,
+        126.66329113924051
+      ],
+      "faceHeight": 42,
+      "left": 3,
+      "top": 69,
+      "scale": 0.9221556886227545,
+      "tip": [
+        278.45,
+        84.33
+      ]
+    }
+  ],
+  "super-up-v2": [
+    {
+      "frame": 0,
+      "source": "context/arcade/hexy-acting/ultimate-up-charge-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 353,
+        "b": 336,
+        "w": 354,
+        "h": 337
+      },
+      "sourceStar": [
+        325.06489675516224,
+        155.49852507374632
+      ],
+      "sourceBow": [
+        212.68683274021353,
+        150.20284697508896
+      ],
+      "faceHeight": 80,
+      "left": 52,
+      "top": 102,
+      "scale": 0.5882352941176471,
+      "tip": [
+        243.21,
+        193.47
+      ]
+    },
+    {
+      "frame": 1,
+      "source": "context/arcade/hexy-acting/ultimate-up-charge-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 360,
+        "b": 350,
+        "w": 361,
+        "h": 351
+      },
+      "sourceStar": [
+        304.2676056338028,
+        62.897887323943664
+      ],
+      "sourceBow": [
+        227.02727272727273,
+        142.98181818181817
+      ],
+      "faceHeight": 77,
+      "left": 43,
+      "top": 94,
+      "scale": 0.5882352941176471,
+      "tip": [
+        221.98,
+        131
+      ]
+    },
+    {
+      "frame": 2,
+      "source": "context/arcade/hexy-acting/ultimate-up-charge-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 361,
+        "b": 409,
+        "w": 362,
+        "h": 410
+      },
+      "sourceStar": [
+        254.92974588938714,
+        22.242152466367713
+      ],
+      "sourceBow": [
+        227.3317683881064,
+        197.25508607198748
+      ],
+      "faceHeight": 79,
+      "left": 43,
+      "top": 59,
+      "scale": 0.5882352941176471,
+      "tip": [
+        192.96,
+        72.08
+      ]
+    },
+    {
+      "frame": 3,
+      "source": "context/arcade/hexy-acting/ultimate-up-charge-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 355,
+        "b": 492,
+        "w": 356,
+        "h": 493
+      },
+      "sourceStar": [
+        232.22021116138762,
+        22.92609351432881
+      ],
+      "sourceBow": [
+        224.1602564102564,
+        275.75961538461536
+      ],
+      "faceHeight": 71,
+      "left": 45,
+      "top": 10,
+      "scale": 0.5882352941176471,
+      "tip": [
+        181.6,
+        23.49
+      ]
+    },
+    {
+      "frame": 4,
+      "source": "context/arcade/hexy-acting/ultimate-up-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 275,
+        "b": 324,
+        "w": 276,
+        "h": 325
+      },
+      "sourceStar": [
+        189.0859872611465,
+        16.71019108280255
+      ],
+      "sourceBow": [
+        179.4990291262136,
+        175.20970873786408
+      ],
+      "faceHeight": 52,
+      "left": 17,
+      "top": 6,
+      "scale": 0.8923076923076924,
+      "tip": [
+        185.72,
+        20.91
+      ]
+    },
+    {
+      "frame": 5,
+      "source": "context/arcade/hexy-acting/ultimate-up-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 281,
+        "b": 324,
+        "w": 282,
+        "h": 325
+      },
+      "sourceStar": [
+        194.75404530744336,
+        15.864077669902912
+      ],
+      "sourceBow": [
+        205.93424036281178,
+        167.70521541950114
+      ],
+      "faceHeight": 45,
+      "left": 3,
+      "top": 13,
+      "scale": 0.8923076923076924,
+      "tip": [
+        176.78,
+        27.16
+      ]
+    },
+    {
+      "frame": 6,
+      "source": "context/arcade/hexy-acting/ultimate-up-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 273,
+        "b": 323,
+        "w": 274,
+        "h": 324
+      },
+      "sourceStar": [
+        181.6656050955414,
+        15.761146496815286
+      ],
+      "sourceBow": [
+        174.8930817610063,
+        169.1069182389937
+      ],
+      "faceHeight": 50,
+      "left": 21,
+      "top": 12,
+      "scale": 0.8923076923076924,
+      "tip": [
+        183.1,
+        26.06
+      ]
+    },
+    {
+      "frame": 7,
+      "source": "context/arcade/hexy-acting/ultimate-up-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 280,
+        "b": 324,
+        "w": 281,
+        "h": 325
+      },
+      "sourceStar": [
+        200.89589905362777,
+        15.690851735015773
+      ],
+      "sourceBow": [
+        186.4345238095238,
+        171.0297619047619
+      ],
+      "faceHeight": 50,
+      "left": 11,
+      "top": 10,
+      "scale": 0.8923076923076924,
+      "tip": [
+        190.26,
+        24
+      ]
+    },
+    {
+      "frame": 8,
+      "source": "context/arcade/hexy-acting/ultimate-up-charge-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 355,
+        "b": 315,
+        "w": 356,
+        "h": 316
+      },
+      "sourceStar": [
+        328.9143179255919,
+        138.83765501691093
+      ],
+      "sourceBow": [
+        219.89894736842106,
+        156.55157894736843
+      ],
+      "faceHeight": 75,
+      "left": 50,
+      "top": 118,
+      "scale": 0.5761986892031735,
+      "tip": [
+        239.52,
+        198
+      ]
+    },
+    {
+      "frame": 9,
+      "source": "context/arcade/hexy-acting/ultimate-up-charge-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 317,
+        "b": 324,
+        "w": 318,
+        "h": 325
+      },
+      "sourceStar": [
+        297.91279069767444,
+        59.07945736434109
+      ],
+      "sourceBow": [
+        233.6216216216216,
+        148.33243243243243
+      ],
+      "faceHeight": 69,
+      "left": 42,
+      "top": 113,
+      "scale": 0.5761986892031735,
+      "tip": [
+        213.66,
+        147.04
+      ]
+    },
+    {
+      "frame": 10,
+      "source": "context/arcade/hexy-acting/ultimate-up-charge-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 306,
+        "b": 387,
+        "w": 307,
+        "h": 388
+      },
+      "sourceStar": [
+        254.52575488454707,
+        20.898756660746002
+      ],
+      "sourceBow": [
+        228.98076923076923,
+        199.82051282051282
+      ],
+      "faceHeight": 71,
+      "left": 45,
+      "top": 76,
+      "scale": 0.5761986892031735,
+      "tip": [
+        191.66,
+        88.04
+      ]
+    },
+    {
+      "frame": 11,
+      "source": "context/arcade/hexy-acting/ultimate-up-charge-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 289,
+        "b": 445,
+        "w": 290,
+        "h": 446
+      },
+      "sourceStar": [
+        234.62025316455697,
+        20.873417721518987
+      ],
+      "sourceBow": [
+        227.05347593582889,
+        277.4420677361854
+      ],
+      "faceHeight": 71,
+      "left": 46,
+      "top": 43,
+      "scale": 0.5761986892031735,
+      "tip": [
+        181.19,
+        55.03
+      ]
+    },
+    {
+      "frame": 12,
+      "source": "context/arcade/hexy-acting/ultimate-up-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 218,
+        "b": 293,
+        "w": 219,
+        "h": 294
+      },
+      "sourceStar": [
+        188.0788643533123,
+        16.725552050473187
+      ],
+      "sourceBow": [
+        186.34985422740525,
+        172.55685131195335
+      ],
+      "faceHeight": 45,
+      "left": 11,
+      "top": 39,
+      "scale": 0.8923076923076924,
+      "tip": [
+        178.82,
+        53.92
+      ]
+    },
+    {
+      "frame": 13,
+      "source": "context/arcade/hexy-acting/ultimate-up-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 239,
+        "b": 286,
+        "w": 240,
+        "h": 287
+      },
+      "sourceStar": [
+        194.6310975609756,
+        16.5640243902439
+      ],
+      "sourceBow": [
+        186.56906077348066,
+        164.22651933701658
+      ],
+      "faceHeight": 47,
+      "left": 11,
+      "top": 46,
+      "scale": 0.8923076923076924,
+      "tip": [
+        184.67,
+        60.78
+      ]
+    },
+    {
+      "frame": 14,
+      "source": "context/arcade/hexy-acting/ultimate-up-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 249,
+        "b": 283,
+        "w": 250,
+        "h": 284
+      },
+      "sourceStar": [
+        199.49498327759198,
+        16.775919732441473
+      ],
+      "sourceBow": [
+        198.30967741935484,
+        170.86451612903227
+      ],
+      "faceHeight": 48,
+      "left": 3,
+      "top": 40,
+      "scale": 0.8923076923076924,
+      "tip": [
+        181.01,
+        54.97
+      ]
+    },
+    {
+      "frame": 15,
+      "source": "context/arcade/hexy-acting/ultimate-up-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 261,
+        "b": 287,
+        "w": 262,
+        "h": 288
+      },
+      "sourceStar": [
+        207.66996699669966,
+        16.168316831683168
+      ],
+      "sourceBow": [
+        198.88888888888889,
+        166.90555555555557
+      ],
+      "faceHeight": 51,
+      "left": 3,
+      "top": 44,
+      "scale": 0.8923076923076924,
+      "tip": [
+        188.31,
+        58.43
+      ]
+    }
+  ],
+  "super-diagonal-down-v2": [
+    {
+      "frame": 0,
+      "source": "context/arcade/hexy-down-repair/diagonal-ground-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 333,
+        "b": 370,
+        "w": 334,
+        "h": 371
+      },
+      "sourceStar": [
+        302.24296435272043,
+        278.0891181988743
+      ],
+      "sourceBow": [
+        183.40834141610088,
+        210.74296799224055
+      ],
+      "faceHeight": 74,
+      "left": 47,
+      "top": 36,
+      "scale": 0.7113163972286374,
+      "tip": [
+        261.99,
+        233.81
+      ]
+    },
+    {
+      "frame": 1,
+      "source": "context/arcade/hexy-down-repair/diagonal-ground-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 330,
+        "b": 370,
+        "w": 331,
+        "h": 371
+      },
+      "sourceStar": [
+        227.80293501048217,
+        56.843815513626836
+      ],
+      "sourceBow": [
+        180.4281938325991,
+        211.6
+      ],
+      "faceHeight": 86,
+      "left": 49,
+      "top": 36,
+      "scale": 0.7113163972286374,
+      "tip": [
+        211.04,
+        76.43
+      ]
+    },
+    {
+      "frame": 2,
+      "source": "context/arcade/hexy-down-repair/diagonal-ground-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 391,
+        "b": 356,
+        "w": 392,
+        "h": 357
+      },
+      "sourceStar": [
+        360.35495495495496,
+        255.63603603603605
+      ],
+      "sourceBow": [
+        196.77040358744395,
+        198.0798206278027
+      ],
+      "faceHeight": 65,
+      "left": 37,
+      "top": 46,
+      "scale": 0.7113163972286374,
+      "tip": [
+        293.33,
+        227.84
+      ]
+    },
+    {
+      "frame": 3,
+      "source": "context/arcade/hexy-down-repair/diagonal-ground-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 393,
+        "b": 352,
+        "w": 394,
+        "h": 353
+      },
+      "sourceStar": [
+        361.63318777292574,
+        296.4829694323144
+      ],
+      "sourceBow": [
+        206.0577819198509,
+        201.3690587138863
+      ],
+      "faceHeight": 65,
+      "left": 30,
+      "top": 49,
+      "scale": 0.7113163972286374,
+      "tip": [
+        287.24,
+        259.89
+      ]
+    },
+    {
+      "frame": 4,
+      "source": "context/arcade/hexy-down-repair/diagonal-ground-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 397,
+        "b": 342,
+        "w": 398,
+        "h": 343
+      },
+      "sourceStar": [
+        364.14156378600825,
+        292.67572016460906
+      ],
+      "sourceBow": [
+        207.89333333333335,
+        195.25047619047618
+      ],
+      "faceHeight": 72,
+      "left": 29,
+      "top": 59,
+      "scale": 0.7113163972286374,
+      "tip": [
+        288.02,
+        267.19
+      ]
+    },
+    {
+      "frame": 5,
+      "source": "context/arcade/hexy-down-repair/diagonal-ground-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 420,
+        "b": 346,
+        "w": 421,
+        "h": 347
+      },
+      "sourceStar": [
+        387.754230459307,
+        295.03223207091054
+      ],
+      "sourceBow": [
+        229.81436567164178,
+        201.80223880597015
+      ],
+      "faceHeight": 60,
+      "left": 14,
+      "top": 54,
+      "scale": 0.7113163972286374,
+      "tip": [
+        289.82,
+        263.86
+      ]
+    },
+    {
+      "frame": 6,
+      "source": "context/arcade/hexy-down-repair/diagonal-ground-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 432,
+        "b": 347,
+        "w": 433,
+        "h": 348
+      },
+      "sourceStar": [
+        400.5674110835401,
+        298.8775847808106
+      ],
+      "sourceBow": [
+        241.98091603053436,
+        205.78435114503816
+      ],
+      "faceHeight": 61,
+      "left": 5,
+      "top": 51,
+      "scale": 0.7113163972286374,
+      "tip": [
+        289.93,
+        263.6
+      ]
+    },
+    {
+      "frame": 7,
+      "source": "context/arcade/hexy-down-repair/diagonal-ground-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 429,
+        "b": 349,
+        "w": 430,
+        "h": 350
+      },
+      "sourceStar": [
+        397.9622475856014,
+        309.61369622475854
+      ],
+      "sourceBow": [
+        250.03861386138612,
+        212.07821782178218
+      ],
+      "faceHeight": 53,
+      "left": 3,
+      "top": 47,
+      "scale": 0.7113163972286374,
+      "tip": [
+        286.08,
+        267.23
+      ]
+    },
+    {
+      "frame": 8,
+      "source": "context/arcade/hexy-down-repair/down-air-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 335,
+        "b": 363,
+        "w": 336,
+        "h": 364
+      },
+      "sourceStar": [
+        292.9513358778626,
+        306.2881679389313
+      ],
+      "sourceBow": [
+        189.02806652806652,
+        208.46569646569645
+      ],
+      "faceHeight": 75,
+      "left": 34,
+      "top": 24,
+      "scale": 0.7579600954075645,
+      "tip": [
+        256.05,
+        256.15
+      ]
+    },
+    {
+      "frame": 9,
+      "source": "context/arcade/hexy-down-repair/down-air-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 335,
+        "b": 377,
+        "w": 336,
+        "h": 378
+      },
+      "sourceStar": [
+        306.5143139190523,
+        106.66140177690029
+      ],
+      "sourceBow": [
+        196.06521739130434,
+        206.0395256916996
+      ],
+      "faceHeight": 75,
+      "left": 28,
+      "top": 13,
+      "scale": 0.7579600954075645,
+      "tip": [
+        260.33,
+        93.85
+      ]
+    },
+    {
+      "frame": 10,
+      "source": "context/arcade/hexy-down-repair/down-air-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 366,
+        "b": 367,
+        "w": 367,
+        "h": 368
+      },
+      "sourceStar": [
+        309.6584766584767,
+        284.22768222768224
+      ],
+      "sourceBow": [
+        202.99425287356323,
+        217.32758620689654
+      ],
+      "faceHeight": 63,
+      "left": 23,
+      "top": 21,
+      "scale": 0.7579600954075645,
+      "tip": [
+        257.71,
+        236.43
+      ]
+    },
+    {
+      "frame": 11,
+      "source": "context/arcade/hexy-down-repair/diagonal-air-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 394,
+        "b": 344,
+        "w": 395,
+        "h": 345
+      },
+      "sourceStar": [
+        365.8722334004024,
+        283.59758551307846
+      ],
+      "sourceBow": [
+        206.4320843091335,
+        204.05269320843092
+      ],
+      "faceHeight": 49,
+      "left": 18,
+      "top": 39,
+      "scale": 0.7579600954075645,
+      "tip": [
+        295.32,
+        253.96
+      ]
+    },
+    {
+      "frame": 12,
+      "source": "context/arcade/hexy-down-repair/diagonal-air-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 394,
+        "b": 344,
+        "w": 395,
+        "h": 345
+      },
+      "sourceStar": [
+        365.8722334004024,
+        283.59758551307846
+      ],
+      "sourceBow": [
+        206.4320843091335,
+        204.05269320843092
+      ],
+      "faceHeight": 49,
+      "left": 18,
+      "top": 39,
+      "scale": 0.7579600954075645,
+      "tip": [
+        295.32,
+        253.96
+      ]
+    },
+    {
+      "frame": 13,
+      "source": "context/arcade/hexy-down-repair/diagonal-air-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 396,
+        "b": 359,
+        "w": 397,
+        "h": 360
+      },
+      "sourceStar": [
+        368.541313559322,
+        297.25
+      ],
+      "sourceBow": [
+        208.1126436781609,
+        212.44252873563218
+      ],
+      "faceHeight": 45,
+      "left": 16,
+      "top": 33,
+      "scale": 0.7579600954075645,
+      "tip": [
+        295.34,
+        258.3
+      ]
+    },
+    {
+      "frame": 14,
+      "source": "context/arcade/hexy-down-repair/diagonal-air-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 404,
+        "b": 351,
+        "w": 405,
+        "h": 352
+      },
+      "sourceStar": [
+        374.376264949402,
+        322.3017479300828
+      ],
+      "sourceBow": [
+        207.04283054003724,
+        211.54934823091247
+      ],
+      "faceHeight": 45,
+      "left": 10,
+      "top": 34,
+      "scale": 0.7579600954075645,
+      "tip": [
+        293.76,
+        278.29
+      ]
+    },
+    {
+      "frame": 15,
+      "source": "context/arcade/hexy-down-repair/diagonal-air-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 400,
+        "b": 352,
+        "w": 401,
+        "h": 353
+      },
+      "sourceStar": [
+        372.9146722164412,
+        323.53381893860563
+      ],
+      "sourceBow": [
+        222.52004454342983,
+        216.57015590200444
+      ],
+      "faceHeight": 51,
+      "left": 8,
+      "top": 30,
+      "scale": 0.7579600954075645,
+      "tip": [
+        290.65,
+        275.23
+      ]
+    }
+  ],
+  "super-down-v2": [
+    {
+      "frame": 0,
+      "source": "context/arcade/hexy-down-repair/diagonal-ground-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 333,
+        "b": 370,
+        "w": 334,
+        "h": 371
+      },
+      "sourceStar": [
+        302.24296435272043,
+        278.0891181988743
+      ],
+      "sourceBow": [
+        183.40834141610088,
+        210.74296799224055
+      ],
+      "faceHeight": 74,
+      "left": 70,
+      "top": 84,
+      "scale": 0.5827705485093065,
+      "tip": [
+        246.14,
+        246.06
+      ]
+    },
+    {
+      "frame": 1,
+      "source": "context/arcade/hexy-down-repair/diagonal-ground-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 330,
+        "b": 370,
+        "w": 331,
+        "h": 371
+      },
+      "sourceStar": [
+        227.80293501048217,
+        56.843815513626836
+      ],
+      "sourceBow": [
+        180.4281938325991,
+        211.6
+      ],
+      "faceHeight": 86,
+      "left": 72,
+      "top": 84,
+      "scale": 0.5827705485093065,
+      "tip": [
+        204.76,
+        117.13
+      ]
+    },
+    {
+      "frame": 2,
+      "source": "context/arcade/hexy-down-repair/diagonal-ground-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 391,
+        "b": 356,
+        "w": 392,
+        "h": 357
+      },
+      "sourceStar": [
+        360.35495495495496,
+        255.63603603603605
+      ],
+      "sourceBow": [
+        196.77040358744395,
+        198.0798206278027
+      ],
+      "faceHeight": 65,
+      "left": 62,
+      "top": 92,
+      "scale": 0.5827705485093065,
+      "tip": [
+        272,
+        240.98
+      ]
+    },
+    {
+      "frame": 3,
+      "source": "context/arcade/hexy-down-repair/down-ground-source.png",
+      "sourceRow": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 359,
+        "b": 352,
+        "w": 360,
+        "h": 353
+      },
+      "sourceStar": [
+        227.74082313681868,
+        324.8298109010011
+      ],
+      "sourceBow": [
+        223.36434108527132,
+        194.08527131782947
+      ],
+      "faceHeight": 54,
+      "left": 23,
+      "top": 57,
+      "scale": 0.6887288300564532,
+      "tip": [
+        179.85,
+        280.72
+      ]
+    },
+    {
+      "frame": 4,
+      "source": "context/arcade/hexy-down-repair/down-ground-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 367,
+        "b": 344,
+        "w": 368,
+        "h": 345
+      },
+      "sourceStar": [
+        292.4421168687982,
+        316.3329658213892
+      ],
+      "sourceBow": [
+        208.10154525386312,
+        196.98013245033113
+      ],
+      "faceHeight": 51,
+      "left": 34,
+      "top": 65,
+      "scale": 0.6887288300564532,
+      "tip": [
+        235.41,
+        282.87
+      ]
+    },
+    {
+      "frame": 5,
+      "source": "context/arcade/hexy-down-repair/down-ground-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 382,
+        "b": 364,
+        "w": 383,
+        "h": 365
+      },
+      "sourceStar": [
+        301.0335861321777,
+        337.4225352112676
+      ],
+      "sourceBow": [
+        223.43974630021143,
+        219.28752642706132
+      ],
+      "faceHeight": 53,
+      "left": 23,
+      "top": 49,
+      "scale": 0.6887288300564532,
+      "tip": [
+        230.33,
+        281.39
+      ]
+    },
+    {
+      "frame": 6,
+      "source": "context/arcade/hexy-down-repair/down-ground-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 416,
+        "b": 370,
+        "w": 417,
+        "h": 371
+      },
+      "sourceStar": [
+        328.1877172653534,
+        343.8679026651217
+      ],
+      "sourceBow": [
+        259.14540466392316,
+        227.6378600823045
+      ],
+      "faceHeight": 58,
+      "left": 3,
+      "top": 44,
+      "scale": 0.6887288300564532,
+      "tip": [
+        229.03,
+        280.83
+      ]
+    },
+    {
+      "frame": 7,
+      "source": "context/arcade/hexy-down-repair/down-ground-source.png",
+      "sourceRow": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 425,
+        "b": 386,
+        "w": 426,
+        "h": 387
+      },
+      "sourceStar": [
+        334.91472868217056,
+        359.7198228128461
+      ],
+      "sourceBow": [
+        270.82758620689657,
+        242.9727011494253
+      ],
+      "faceHeight": 35,
+      "left": 3,
+      "top": 33,
+      "scale": 0.6887288300564532,
+      "tip": [
+        233.67,
+        280.75
+      ]
+    },
+    {
+      "frame": 8,
+      "source": "context/arcade/hexy-down-repair/down-air-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 335,
+        "b": 363,
+        "w": 336,
+        "h": 364
+      },
+      "sourceStar": [
+        292.9513358778626,
+        306.2881679389313
+      ],
+      "sourceBow": [
+        189.02806652806652,
+        208.46569646569645
+      ],
+      "faceHeight": 75,
+      "left": 60,
+      "top": 74,
+      "scale": 0.6209850107066381,
+      "tip": [
+        241.92,
+        264.2
+      ]
+    },
+    {
+      "frame": 9,
+      "source": "context/arcade/hexy-down-repair/down-air-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 335,
+        "b": 377,
+        "w": 336,
+        "h": 378
+      },
+      "sourceStar": [
+        306.5143139190523,
+        106.66140177690029
+      ],
+      "sourceBow": [
+        196.06521739130434,
+        206.0395256916996
+      ],
+      "faceHeight": 75,
+      "left": 55,
+      "top": 65,
+      "scale": 0.6209850107066381,
+      "tip": [
+        245.34,
+        131.24
+      ]
+    },
+    {
+      "frame": 10,
+      "source": "context/arcade/hexy-down-repair/down-air-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 366,
+        "b": 367,
+        "w": 367,
+        "h": 368
+      },
+      "sourceStar": [
+        309.6584766584767,
+        284.22768222768224
+      ],
+      "sourceBow": [
+        202.99425287356323,
+        217.32758620689654
+      ],
+      "faceHeight": 63,
+      "left": 51,
+      "top": 71,
+      "scale": 0.6209850107066381,
+      "tip": [
+        243.29,
+        247.5
+      ]
+    },
+    {
+      "frame": 11,
+      "source": "context/arcade/hexy-down-repair/down-air-source.png",
+      "sourceRow": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 365,
+        "b": 373,
+        "w": 366,
+        "h": 374
+      },
+      "sourceStar": [
+        238.68965517241378,
+        346.8762157382847
+      ],
+      "sourceBow": [
+        222.68027210884352,
+        205.0952380952381
+      ],
+      "faceHeight": 55,
+      "left": 39,
+      "top": 68,
+      "scale": 0.6209850107066381,
+      "tip": [
+        187.22,
+        283.4
+      ]
+    },
+    {
+      "frame": 12,
+      "source": "context/arcade/hexy-down-repair/down-air-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 368,
+        "b": 379,
+        "w": 369,
+        "h": 380
+      },
+      "sourceStar": [
+        245.93508936970838,
+        353.0489181561618
+      ],
+      "sourceBow": [
+        200.06430155210643,
+        208.029933481153
+      ],
+      "faceHeight": 58,
+      "left": 53,
+      "top": 63,
+      "scale": 0.6209850107066381,
+      "tip": [
+        205.72,
+        282.24
+      ]
+    },
+    {
+      "frame": 13,
+      "source": "context/arcade/hexy-down-repair/down-air-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 382,
+        "b": 407,
+        "w": 383,
+        "h": 408
+      },
+      "sourceStar": [
+        268.5550373134328,
+        381.16977611940297
+      ],
+      "sourceBow": [
+        223.30498177399758,
+        233.1093560145808
+      ],
+      "faceHeight": 57,
+      "left": 38,
+      "top": 47,
+      "scale": 0.6209850107066381,
+      "tip": [
+        204.77,
+        283.7
+      ]
+    },
+    {
+      "frame": 14,
+      "source": "context/arcade/hexy-down-repair/down-air-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 410,
+        "b": 452,
+        "w": 411,
+        "h": 453
+      },
+      "sourceStar": [
+        300.9498580889309,
+        425.8476821192053
+      ],
+      "sourceBow": [
+        252.98982188295165,
+        278.98473282442745
+      ],
+      "faceHeight": 58,
+      "left": 20,
+      "top": 19,
+      "scale": 0.6209850107066381,
+      "tip": [
+        206.89,
+        283.45
+      ]
+    },
+    {
+      "frame": 15,
+      "source": "context/arcade/hexy-down-repair/down-air-source.png",
+      "sourceRow": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 380,
+        "b": 466,
+        "w": 381,
+        "h": 467
+      },
+      "sourceStar": [
+        274.39912663755456,
+        439.764192139738
+      ],
+      "sourceBow": [
+        232.50615763546799,
+        286.33251231527095
+      ],
+      "faceHeight": 61,
+      "left": 33,
+      "top": 14,
+      "scale": 0.6209850107066381,
+      "tip": [
+        203.4,
+        287.09
+      ]
+    }
+  ],
+  "super-horizontal-charge-v2": [
+    {
+      "frame": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 376,
+        "b": 363,
+        "w": 377,
+        "h": 364
+      },
+      "left": 45,
+      "top": 65,
+      "scale": 0.645933014354067,
+      "tip": [
+        275.19,
+        147.33
+      ]
+    },
+    {
+      "frame": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 349,
+        "b": 417,
+        "w": 350,
+        "h": 418
+      },
+      "left": 69,
+      "top": 30,
+      "scale": 0.645933014354067,
+      "tip": [
+        245.18,
+        124.98
+      ]
+    },
+    {
+      "frame": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 371,
+        "b": 376,
+        "w": 372,
+        "h": 377
+      },
+      "left": 45,
+      "top": 56,
+      "scale": 0.645933014354067,
+      "tip": [
+        270.09,
+        155.61
+      ]
+    },
+    {
+      "frame": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 383,
+        "b": 386,
+        "w": 384,
+        "h": 387
+      },
+      "left": 49,
+      "top": 50,
+      "scale": 0.645933014354067,
+      "tip": [
+        282.42,
+        141.9
+      ]
+    },
+    {
+      "frame": 4,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 375,
+        "b": 359,
+        "w": 376,
+        "h": 360
+      },
+      "left": 28,
+      "top": 67,
+      "scale": 0.645933014354067,
+      "tip": [
+        256.95,
+        161.6
+      ]
+    },
+    {
+      "frame": 5,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 306,
+        "b": 399,
+        "w": 307,
+        "h": 400
+      },
+      "left": 63,
+      "top": 42,
+      "scale": 0.645933014354067,
+      "tip": [
+        247.29,
+        135.49
+      ]
+    },
+    {
+      "frame": 6,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 374,
+        "b": 367,
+        "w": 375,
+        "h": 368
+      },
+      "left": 38,
+      "top": 62,
+      "scale": 0.645933014354067,
+      "tip": [
+        265.54,
+        169.57
+      ]
+    },
+    {
+      "frame": 7,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 386,
+        "b": 375,
+        "w": 387,
+        "h": 376
+      },
+      "left": 46,
+      "top": 57,
+      "scale": 0.645933014354067,
+      "tip": [
+        280.88,
+        152.84
+      ]
+    }
+  ],
+  "tired-run-v1": [
+    {
+      "frame": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 257,
+        "b": 282,
+        "w": 258,
+        "h": 283
+      },
+      "left": 33,
+      "top": 54,
+      "scale": 0.8671328671328671,
+      "tip": [
+        239.02,
+        135.43
+      ]
+    },
+    {
+      "frame": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 259,
+        "b": 273,
+        "w": 260,
+        "h": 274
+      },
+      "left": 28,
+      "top": 61,
+      "scale": 0.8671328671328671,
+      "tip": [
+        235.05,
+        146.99
+      ]
+    },
+    {
+      "frame": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 260,
+        "b": 276,
+        "w": 261,
+        "h": 277
+      },
+      "left": 32,
+      "top": 59,
+      "scale": 0.8671328671328671,
+      "tip": [
+        239.93,
+        144.78
+      ]
+    },
+    {
+      "frame": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 250,
+        "b": 282,
+        "w": 251,
+        "h": 283
+      },
+      "left": 39,
+      "top": 54,
+      "scale": 0.8671328671328671,
+      "tip": [
+        239.48,
+        142.75
+      ]
+    },
+    {
+      "frame": 4,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 258,
+        "b": 256,
+        "w": 259,
+        "h": 257
+      },
+      "left": 29,
+      "top": 42,
+      "scale": 0.8671328671328671,
+      "tip": [
+        235.33,
+        130.85
+      ]
+    },
+    {
+      "frame": 5,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 247,
+        "b": 282,
+        "w": 248,
+        "h": 283
+      },
+      "left": 33,
+      "top": 46,
+      "scale": 0.8671328671328671,
+      "tip": [
+        230.53,
+        130.91
+      ]
+    },
+    {
+      "frame": 6,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 243,
+        "b": 290,
+        "w": 244,
+        "h": 291
+      },
+      "left": 36,
+      "top": 47,
+      "scale": 0.8671328671328671,
+      "tip": [
+        230.21,
+        134.02
+      ]
+    },
+    {
+      "frame": 7,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 247,
+        "b": 275,
+        "w": 248,
+        "h": 276
+      },
+      "left": 43,
+      "top": 60,
+      "scale": 0.8671328671328671,
+      "tip": [
+        239.7,
+        150.02
+      ]
+    },
+    {
+      "frame": 8,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 253,
+        "b": 277,
+        "w": 254,
+        "h": 278
+      },
+      "left": 30,
+      "top": 58,
+      "scale": 0.8671328671328671,
+      "tip": [
+        231.92,
+        147.83
+      ]
+    },
+    {
+      "frame": 9,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 262,
+        "b": 285,
+        "w": 263,
+        "h": 286
+      },
+      "left": 30,
+      "top": 51,
+      "scale": 0.8671328671328671,
+      "tip": [
+        239.3,
+        140.8
+      ]
+    },
+    {
+      "frame": 10,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 256,
+        "b": 274,
+        "w": 257,
+        "h": 275
+      },
+      "left": 32,
+      "top": 49,
+      "scale": 0.8671328671328671,
+      "tip": [
+        236.73,
+        136.25
+      ]
+    },
+    {
+      "frame": 11,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 261,
+        "b": 281,
+        "w": 262,
+        "h": 282
+      },
+      "left": 27,
+      "top": 46,
+      "scale": 0.8671328671328671,
+      "tip": [
+        235.72,
+        133.7
+      ]
+    }
+  ],
+  "tired-run-fire-v1": [
+    {
+      "frame": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 267,
+        "b": 267,
+        "w": 268,
+        "h": 268
+      },
+      "left": 37,
+      "top": 60,
+      "scale": 0.8868613138686131,
+      "tip": [
+        257.63,
+        146.1
+      ]
+    },
+    {
+      "frame": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 286,
+        "b": 267,
+        "w": 287,
+        "h": 268
+      },
+      "left": 32,
+      "top": 60,
+      "scale": 0.8868613138686131,
+      "tip": [
+        269.82,
+        146.01
+      ]
+    },
+    {
+      "frame": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 278,
+        "b": 270,
+        "w": 279,
+        "h": 271
+      },
+      "left": 38,
+      "top": 58,
+      "scale": 0.8868613138686131,
+      "tip": [
+        268.93,
+        144.95
+      ]
+    },
+    {
+      "frame": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 277,
+        "b": 274,
+        "w": 278,
+        "h": 275
+      },
+      "left": 39,
+      "top": 55,
+      "scale": 0.8868613138686131,
+      "tip": [
+        268.44,
+        146.61
+      ]
+    },
+    {
+      "frame": 4,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 273,
+        "b": 246,
+        "w": 274,
+        "h": 247
+      },
+      "left": 39,
+      "top": 45,
+      "scale": 0.8868613138686131,
+      "tip": [
+        265.89,
+        134.82
+      ]
+    },
+    {
+      "frame": 5,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 276,
+        "b": 274,
+        "w": 277,
+        "h": 275
+      },
+      "left": 33,
+      "top": 47,
+      "scale": 0.8868613138686131,
+      "tip": [
+        261.61,
+        141.44
+      ]
+    },
+    {
+      "frame": 6,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 275,
+        "b": 273,
+        "w": 276,
+        "h": 274
+      },
+      "left": 32,
+      "top": 55,
+      "scale": 0.8868613138686131,
+      "tip": [
+        259.37,
+        144.3
+      ]
+    },
+    {
+      "frame": 7,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 279,
+        "b": 268,
+        "w": 280,
+        "h": 269
+      },
+      "left": 38,
+      "top": 60,
+      "scale": 0.8868613138686131,
+      "tip": [
+        268.77,
+        150.12
+      ]
+    },
+    {
+      "frame": 8,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 271,
+        "b": 276,
+        "w": 272,
+        "h": 277
+      },
+      "left": 2,
+      "top": 53,
+      "scale": 0.8868613138686131,
+      "tip": [
+        226.21,
+        148.74
+      ]
+    },
+    {
+      "frame": 9,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 286,
+        "b": 279,
+        "w": 287,
+        "h": 280
+      },
+      "left": 31,
+      "top": 50,
+      "scale": 0.8868613138686131,
+      "tip": [
+        268.7,
+        142.36
+      ]
+    },
+    {
+      "frame": 10,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 287,
+        "b": 273,
+        "w": 288,
+        "h": 274
+      },
+      "left": 32,
+      "top": 43,
+      "scale": 0.8868613138686131,
+      "tip": [
+        270.43,
+        137.65
+      ]
+    },
+    {
+      "frame": 11,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 288,
+        "b": 278,
+        "w": 289,
+        "h": 279
+      },
+      "left": 25,
+      "top": 44,
+      "scale": 0.8868613138686131,
+      "tip": [
+        264.21,
+        141.37
+      ]
+    }
+  ],
+  "tired-run-diagonal-up-v1": [
+    {
+      "frame": 0,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 263,
+        "b": 285,
+        "w": 264,
+        "h": 286
+      },
+      "left": 35,
+      "top": 54,
+      "scale": 0.8581314878892734,
+      "tip": [
+        242.33,
+        72.15
+      ]
+    },
+    {
+      "frame": 1,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 271,
+        "b": 284,
+        "w": 272,
+        "h": 285
+      },
+      "left": 32,
+      "top": 53,
+      "scale": 0.8581314878892734,
+      "tip": [
+        246.71,
+        70.54
+      ]
+    },
+    {
+      "frame": 2,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 267,
+        "b": 284,
+        "w": 268,
+        "h": 285
+      },
+      "left": 36,
+      "top": 54,
+      "scale": 0.8581314878892734,
+      "tip": [
+        246.97,
+        71.44
+      ]
+    },
+    {
+      "frame": 3,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 275,
+        "b": 288,
+        "w": 276,
+        "h": 289
+      },
+      "left": 34,
+      "top": 51,
+      "scale": 0.8581314878892734,
+      "tip": [
+        251.72,
+        68.68
+      ]
+    },
+    {
+      "frame": 4,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 265,
+        "b": 258,
+        "w": 266,
+        "h": 259
+      },
+      "left": 37,
+      "top": 43,
+      "scale": 0.8581314878892734,
+      "tip": [
+        246.25,
+        60.35
+      ]
+    },
+    {
+      "frame": 5,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 277,
+        "b": 286,
+        "w": 278,
+        "h": 287
+      },
+      "left": 28,
+      "top": 45,
+      "scale": 0.8581314878892734,
+      "tip": [
+        247.26,
+        62.27
+      ]
+    },
+    {
+      "frame": 6,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 273,
+        "b": 295,
+        "w": 274,
+        "h": 296
+      },
+      "left": 28,
+      "top": 44,
+      "scale": 0.8581314878892734,
+      "tip": [
+        243.59,
+        61.53
+      ]
+    },
+    {
+      "frame": 7,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 277,
+        "b": 292,
+        "w": 278,
+        "h": 293
+      },
+      "left": 28,
+      "top": 47,
+      "scale": 0.8581314878892734,
+      "tip": [
+        246.71,
+        64.7
+      ]
+    },
+    {
+      "frame": 8,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 270,
+        "b": 295,
+        "w": 271,
+        "h": 296
+      },
+      "left": 34,
+      "top": 44,
+      "scale": 0.8581314878892734,
+      "tip": [
+        247.21,
+        61.55
+      ]
+    },
+    {
+      "frame": 9,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 274,
+        "b": 299,
+        "w": 275,
+        "h": 300
+      },
+      "left": 31,
+      "top": 41,
+      "scale": 0.8581314878892734,
+      "tip": [
+        247.96,
+        59.44
+      ]
+    },
+    {
+      "frame": 10,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 279,
+        "b": 290,
+        "w": 280,
+        "h": 291
+      },
+      "left": 30,
+      "top": 36,
+      "scale": 0.8581314878892734,
+      "tip": [
+        251.3,
+        54.34
+      ]
+    },
+    {
+      "frame": 11,
+      "sourceBounds": {
+        "l": 0,
+        "t": 0,
+        "r": 282,
+        "b": 290,
+        "w": 283,
+        "h": 291
+      },
+      "left": 26,
+      "top": 40,
+      "scale": 0.8581314878892734,
+      "tip": [
+        249.59,
+        57.78
+      ]
+    }
+  ]
+}

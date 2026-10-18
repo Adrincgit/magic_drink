@@ -131,7 +131,8 @@ export function drawVillagers(c,s,art,reduced){
   const size=(candy?sweet:turn?p.size-(p.size-sweet)*u:p.size)*(q.state==='absorbing'?1-(q.absorbProgress||0)*.65:1);
   c.fillStyle='#15162350';c.beginPath();c.ellipse(q.x,q.y+1,candy?18:p.w*.48,5,0,0,Math.PI*2);c.fill();
   const key=turn||candy?p.key:acting!==undefined?p.actionKey:p.runKey;
-  cel(c,art[key],frame,q.x,q.y-(candy?3+(reduced?0:Math.sin(q.age*3)*2):0),size,q.state==='help');
+  const running=!turn&&!candy&&acting===undefined;
+  cel(c,art[key],frame,q.x,q.y-(candy?3+(reduced?0:Math.sin(q.age*3)*2):0),size,q.state==='help'||running&&p.runFlip);
  }
 }
 export function drawCandyHexy(c,s,art,reduced){

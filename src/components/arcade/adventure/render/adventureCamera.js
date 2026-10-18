@@ -23,12 +23,12 @@ export function adventureBounds(s){
 export function followAdventureCamera(s,dt){
  if(s.level.actTwo){
   const a=s.level.arena,b=s.boss,battle=s.arenaLocked||!!s.clear||!!b.defeat,ease=1-Math.exp(-dt*4);
-  const zoom=battle?Math.max(.68,Math.min(.88,960/(Math.abs(s.player.x-b.x)+510))):1;
+  const zoom=battle?s.level.cornfield?Math.max(.5,Math.min(.86,960/(Math.abs(s.player.x-b.x)+520))):Math.max(.68,Math.min(.88,960/(Math.abs(s.player.x-b.x)+510))):1;
   const previousFloor=(a.y-s.camera.y)*(s.camera.zoom||1);s.camera.zoom+=(zoom-s.camera.zoom)*ease;
   const width=960/s.camera.zoom,targetX=battle?Math.max(a.left,Math.min(a.right-width,(s.player.x+b.x)/2-width/2)):Math.max(0,Math.min(s.level.width-width,s.player.x-width*.32));
   s.camera.x+=(targetX-s.camera.x)*ease;s.camera.x=Math.max(0,Math.min(Math.max(0,s.level.width-width),s.camera.x));
   if(battle)s.camera.y=a.y-(previousFloor+(440-previousFloor)*ease)/s.camera.zoom;
-  else {const targetY=s.level.maskMansion?Math.max(-320,Math.min(180,s.player.y-385)):40;s.camera.y+=(targetY-s.camera.y)*Math.min(1,dt*3);}
+  else {const targetY=s.level.maskMansion?Math.max(-320,Math.min(180,s.player.y-385)):s.level.cornfield?groundY(s.level.route,s.player.x)-440:40;s.camera.y+=(targetY-s.camera.y)*Math.min(1,dt*3);}
   s.camera.backdropY+=(40-s.camera.backdropY)*Math.min(1,dt);return;
  }
 

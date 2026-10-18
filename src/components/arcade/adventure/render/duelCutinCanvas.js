@@ -1,4 +1,5 @@
 import {chargingWindFrame} from '../engine/clashActing';
+import {superChargeAge} from '../engine/adventureSuperTiming';
 import {paintedParticle} from './paintedDuelCanvas';
 const clamp=n=>Math.max(0,Math.min(1,n));
 // Local x always points into the duel. Wind travels out, behind the caster.
@@ -30,7 +31,7 @@ export function drawDuelBorders(c,art,{right,boss,age,reduced=false,x=8,y=28,w=3
 export function drawDuelCharge(c,s,art,boss,reduced=false){
  const u=s.boss.ultimate,clash=s.powerClash;
  if(boss?u?.state!=='charge':clash?.state!=='windup')return false;
- const age=boss?u.age+(clash?.state==='windup'?clash.age:0):clash.age,right=duelSide(s,boss),alpha=clamp(age/.13);
+ const age=boss?u.age+(clash?.state==='windup'?clash.age:0):superChargeAge(clash.age),right=duelSide(s,boss),alpha=clamp(age/.13);
  const enter=reduced?0:(right?1:-1)*330*Math.pow(1-clamp(age/.22),3);
  const pose=boss?{key:'harlequin-clash-charge',cols:3,frame:chargingWindFrame(age,reduced)}:null,img=art[boss?pose.key:'hexy-encore-portrait'];if(!img)return false;
  const border={right,boss,age,reduced};

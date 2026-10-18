@@ -11,7 +11,7 @@ const tick=(s,time)=>{for(let i=0;i<time*120;i++)stepAdventure(s,{},1/120);};
 test('all eight villagers hold distinct sequential gait phases while translating fast',()=>{
  for(let style=0;style<8;style++){
   const s=quiet(),p=villageVillagerProfile(style),n={...s.level.villagers.find(q=>q.style===style),x:8000,y:452,state:'flee',age:0,gait:0,runAge:0,warned:true,tripped:true,trip:false};s.villagers=[n];s.player.x=7900;
-  const phases=Array.from({length:8},(_,i)=>villageVillagerRunFrame({...n,runAge:(i+.1)*p.runDuration/8}));expect(phases).toEqual(Array.from({length:8},(_,i)=>p.runBase+i));expect(p.runDuration/8).toBeGreaterThanOrEqual(.085);
+  const count=p.runFrames||8,phases=Array.from({length:count},(_,i)=>villageVillagerRunFrame({...n,gait:(i+.1)/count,runAge:(i+.1)*p.runDuration/count}));expect(phases).toEqual(Array.from({length:count},(_,i)=>p.runBase+i));if(!p.runByDistance)expect(p.runDuration/count).toBeGreaterThanOrEqual(.085);
   const start=n.x;tick(s,.5);expect(start-n.x).toBeGreaterThan(80);expect(n.runAge).toBeCloseTo(.5,1);
  }
 });

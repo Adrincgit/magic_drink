@@ -1,7 +1,6 @@
 import {POPCORN_COST} from './adventurePopcorn';
 // Both attacks start on a press. R plays its own uninterruptible preparation.
-export const SUPER_WINDUP=.9;
-export const SUPER_DURATION=3.15;
+export {SUPER_WINDUP,SUPER_DURATION} from './adventureSuperTiming';
 export const STRONG_COST=34.5;
 export const SUPER_COST=90;
 export const SUPER_EXHAUSTION=8;

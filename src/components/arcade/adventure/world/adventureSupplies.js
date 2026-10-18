@@ -1,6 +1,7 @@
 import {rollLoot} from '../engine/adventureLoot';
 import {worldSound} from '../engine/adventureWorldAudio';
 import {midpointRecovery} from './adventureRecovery';
+import {safeSupplyPosition} from './supplyPlacement';
 export const SUPPLY_SIZE=110;
 export const supplyBody=q=>({x:q.x-33,y:q.y-62,w:66,h:62});
 export function createSupplies(level){
@@ -9,7 +10,9 @@ export function createSupplies(level){
  for(const q of positions)if(q.fixed&&!selected.includes(q))selected.push(q);
  const supplies=selected.map((q,id)=>({x:q.x,y:q.y+28,kind:q.kind,loot:q.loot&&{...q.loot},preview:q.preview,id,hp:4,maxHp:4,flash:0,age:0})),recovery=midpointRecovery(level);
  if(recovery)supplies.push(recovery);
- return supplies;
+ const placed=[];
+ for(const q of supplies){const at=safeSupplyPosition(level,q.x,q.y,placed);if(at)placed.push({...q,x:at.x,y:at.y});}
+ return placed;
 }
 export function releaseItem(s,x,floor,item){
  const drop={x,y:floor-35,...item,taken:false,vy:-165,floor:floor-28,collectWait:.18,dropAge:0};s.pickups.push(drop);return drop;

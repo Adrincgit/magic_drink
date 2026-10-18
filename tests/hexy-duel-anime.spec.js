@@ -35,7 +35,8 @@ test('new portraits, surrounds and contact sphere have unique transparent animat
 
 test('actual contact turns to ink then colour, preserves heroic windup, and does not mutate the fight',async({page})=>{
  const folder='tests/artifacts/arcade/duel-anime/';fs.mkdirSync(folder,{recursive:true});
- await page.setViewportSize({width:1440,height:810});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/arcade');
+ await page.setViewportSize({width:1440,height:810});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.route('**/__duel_ink_review',r=>r.fulfill({contentType:'text/html',body:'<body style="margin:0"></body>'}));await page.goto('/__duel_ink_review');
  const result=await page.evaluate(async()=>{
   const base='/src/components/arcade/adventure/';
   const w=window.animeReview=Object.assign({},...await Promise.all(['engine/adventureModel.js','render/adventureCanvas.js','render/adventureCamera.js','actors/bosses/harlequinUltimate.js'].map(p=>import(base+p))));

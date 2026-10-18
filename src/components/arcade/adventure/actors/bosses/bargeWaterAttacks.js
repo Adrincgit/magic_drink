@@ -4,11 +4,11 @@ export function spoutFront(q){return spoutPoint(q,Math.min(q.flight,q.age));}
 export function waveBody(q){
  // Use the dense water body shared by all four cels, leaving the spray tips
  // forgiving instead of damaging above a shorter animation frame.
- const size=q.drawSize||100;return{x:q.x-size*.3,y:q.floor-size*.58,w:size*.6,h:size*.58};
+ const size=q.drawSize||100;return{x:q.x-size*.3,y:q.floor+9-size*.58,w:size*.6,h:size*.58};
 }
 export function waterSegmentBody(q,player){
- const curved=q.kind==='barge-spout',end=curved?spoutFront(q):{x:q.x-q.length*Math.cos(q.angle||0),y:q.y-q.length*Math.sin(q.angle||0)};
- const left=Math.min(end.x,q.x),right=Math.max(end.x,q.x),radius=q.r||22;
+ const curved=q.kind==='barge-spout',start=curved?spoutPoint(q,q.tailTime||0):q,end=curved?spoutFront(q):{x:q.x-q.length*Math.cos(q.angle||0),y:q.y-q.length*Math.sin(q.angle||0)};
+ const left=Math.min(end.x,start.x),right=Math.max(end.x,start.x),radius=q.r||22;
  if(player&&(player.x+16<left-radius||player.x-16>right+radius))return{x:0,y:0,w:0,h:0};
  const at=x=>curved?spoutPoint(q,Math.max(0,Math.min(q.flight,q.age,(x-q.x)/q.vx))).y:q.y-(q.x-x)*Math.tan(q.angle||0);
  const x1=player?Math.max(left,Math.min(right,player.x-15)):left,x2=player?Math.max(left,Math.min(right,player.x+15)):right;

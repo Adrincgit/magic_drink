@@ -12,16 +12,16 @@ export const TUTORIAL_LESSONS=[
  {id:'guard',title:['El ritmo te protege','Rhythm protects you'],text:['Mantén el escudo musical para bloquear. Consume magia: suéltalo para recuperarla.','Hold the musical shield to block. It uses magic: release it to recover.'],keys:'V',actions:['guard'],goal:['Levanta tu escudo.','Raise your shield.']},
  {id:'drink',title:['Un sabor, otra magia','A flavor, a new spell'],text:['Las bebidas cambian tus disparos. Alterna a la varita básica para conservar la munición; la bebida sigue contigo.','Drinks change your shots. Switch to the basic wand to save ammo; your drink stays with you.'],keys:'Q',actions:['swap','attack'],goal:['Alterna a la varita básica.','Switch to the basic wand.']},
  {id:'strong',title:['Un acento más fuerte','A stronger accent'],text:['La magia fuerte consume parte del medidor. Con una bebida también usa munición.','Strong magic uses part of your magic meter. A drink also uses ammo.'],keys:'C / L',actions:['special'],goal:['Lanza magia fuerte.','Cast strong magic.']},
- {id:'super',title:['Tu gran momento','Your big moment'],text:['Con la carga lista y 90 de magia, libera el súper. Hexy está protegida durante la secuencia.','With a ready charge and 90 magic, unleash your super. Hexy is protected during the sequence.'],keys:'R',actions:['super'],goal:['Activa el súper.','Activate your super.']},
- {id:'coaster',title:['Una pausa en el aire','A pause in the air'],text:['Con el posavasos encantado, crea una plataforma temporal durante el salto. En la tienda puedes descubrir más encantos.','With the enchanted coaster, create a temporary platform during a jump. Discover more charms in the shop.'],keys:'B',actions:['jump','coaster'],goal:['Crea el posavasos en el aire.','Create an airborne coaster.']}
+ {id:'super',title:['Tu gran momento','Your big moment'],text:['Con la carga lista y 90 de magia, libera el súper. Hexy está protegida durante la secuencia.','With a ready charge and 90 magic, unleash your super. Hexy is protected during the sequence.'],keys:'R',actions:['super'],goal:['Activa el súper.','Activate your super.']}
 ];
 export function createTutorial(id){
  const s=createTrial({id:'tutorial'},1);s.tutorial={id,complete:false,startX:260};s.trial.tentX=2000;
  s.level={...s.level,width:960,arena:{entry:2000,left:2000,right:3000,y:480},shop:null};s.boss.x=2900;s.boss.home=2900;
  s.platforms=[{x:0,y:480,baseX:0,baseY:480,w:960,h:180,kind:'earth',dx:0,dy:0}];s.level.platforms=s.platforms;
  Object.assign(s.player,{x:260,y:480,ground:0,dir:1});
- if(!['fire','strong','super','drink','aim'].includes(id))s.enemies=[];else s.enemies=s.enemies.slice(0,2).map((e,i)=>({...e,x:610+i*100,home:610+i*100,practiceLeft:610+i*100,practiceRight:610+i*100}));
- if(id==='drink'){equipDrink(s,0);s.trial.primary=0;}if(id==='coaster')s.mods=['enchanted-coaster'];
+ if(!['fire','strong','super','drink','aim'].includes(id))s.enemies=[];else s.enemies=s.enemies.slice(0,2).map((e,i)=>({...e,x:610+i*100,home:610+i*100,practiceLeft:574+i*100,practiceRight:646+i*100}));
+ if(id==='drink'){equipDrink(s,0);s.trial.primary=0;}
+ if(id==='guard')Object.assign(s.tutorial,{projectileAt:.35,blocks:0,breaks:0});
  s.camera={x:60,y:480-465/1.4,backdropY:0,zoom:1.4};return s;
 }
 export function tutorialDemoInput(s){
@@ -34,19 +34,20 @@ export function tutorialDemoInput(s){
   case 'aim':return{hold:t>.5&&t<3.2,up:t>.5&&t<1.5,down:t>1.9&&t<3.2,right:t>1.9&&t<3.2,attack:t>.6&&t<3.2};
   case 'fire':return{attack:t>.5&&t<3};
   case 'dash':return{right:t>.3&&t<.9||t>1.7&&t<2.3,dash:pulse(.55)||pulse(2.1),jump:pulse(1.6,.15)};
-  case 'guard':return{guard:t>.65&&t<2.8};
+  case 'guard':return{guard:t>.55&&t<4.1||t>6.2&&t<7.7};
   case 'drink':return{attack:t>.4&&t<1||t>1.8&&t<2.5||t>3.7&&t<4.3,swap:pulse(1.3)||pulse(3)};
   case 'strong':return{special:pulse(.8)};
   case 'super':return{super:pulse(.5)};
-  case 'coaster':return{jump:pulse(.4,.2),coaster:pulse(.88),right:t>1.3&&t<1.8};
   default:return{};
  }
 }
 export function stepTutorial(s,input,dt){
  s.trial.spawnWait=999;
- if(s.tutorial.id==='guard'&&!s.tutorial.projectile&&s.time>.3){s.tutorial.projectile=true;enemyShot(s,560,448,Math.PI,160,'streamer');}
- stepTrial(s,input,dt);s.player.x=Math.max(45,Math.min(865,s.player.x));s.camera={x:Math.max(0,Math.min(274,s.player.x-200)),y:480-465/1.4,backdropY:0,zoom:1.4};s.magic=Math.max(95,s.magic);s.player.hurt=0;
+ const guard=s.tutorial.id==='guard';
+ if(guard&&s.time>=s.tutorial.projectileAt){s.tutorial.projectileAt+=.65;enemyShot(s,s.player.x+300,s.player.y-32,Math.PI,220,'streamer');}
+ stepTrial(s,input,dt);s.player.x=Math.max(45,Math.min(865,s.player.x));s.camera={x:Math.max(0,Math.min(274,s.player.x-200)),y:480-465/1.4,backdropY:0,zoom:1.4};if(!guard)s.magic=Math.max(95,s.magic);s.player.hurt=0;
+ if(guard){s.tutorial.blocks+=s.events.filter(e=>e==='guardBlock').length;s.tutorial.breaks+=s.events.filter(e=>e==='guardBreak').length;}
  const p=s.player,id=s.tutorial.id;
- const done={move:Math.abs(p.x-s.tutorial.startX)>60,duck:p.crouch,jump:p.jumps>=2,glide:p.gliding,aim:p.holding&&p.aimY<0,fire:s.shots.length>0,dash:p.dash>0,guard:p.guarding,drink:s.basicFire,strong:p.specialCast>0||s.shots.some(q=>q.heavy),super:!!s.superCinematic,coaster:!!s.coaster};
+ const done={move:Math.abs(p.x-s.tutorial.startX)>60,duck:p.crouch,jump:p.jumps>=2,glide:p.gliding,aim:p.holding&&p.aimY<0,fire:s.shots.length>0,dash:p.dash>0,guard:p.guarding,drink:s.basicFire,strong:p.specialCast>0||s.shots.some(q=>q.heavy),super:!!s.superCinematic};
  s.tutorial.complete ||= !!done[id];
 }

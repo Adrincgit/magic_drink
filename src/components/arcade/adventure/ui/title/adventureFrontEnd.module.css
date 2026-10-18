@@ -1,4 +1,12 @@
 .title{position:absolute;inset:0;z-index:6;overflow:hidden;background:#111726;color:#fff0bc;text-align:center;container-type:inline-size;isolation:isolate}
+.chapterCard[data-vintage=true]{background:#201d20;color:#eee3c9}
+.chapterCard[data-vintage=true]>div{opacity:.12;filter:grayscale(.7) sepia(.35);animation:none}
+.chapterCard[data-vintage=true] section{width:88%;padding:3cqw 4cqw;background:radial-gradient(ellipse,#322b2ce8,#211e22e8);transform:none;border:1px solid #bda47788;box-shadow:inset 0 0 0 .55cqw #211e22,inset 0 0 0 .65cqw #a28a6244;animation:filmCard .4s ease-out both}
+.chapterCard[data-vintage=true] span{font:600 1.25cqw Georgia,serif;letter-spacing:.3em;color:#d7c5a2}
+.chapterCard[data-vintage=true] b{font:italic 700 7.3cqw/1.1 Georgia,serif;margin:1cqw 0;color:#f1e7cc;text-shadow:0 .15cqw #6b5845}
+.chapterCard[data-vintage=true] h2{font:700 3.8cqw/1.15 Georgia,serif;letter-spacing:.06em;text-transform:uppercase;margin:1cqw auto 2.2cqw;max-width:95%;text-wrap:balance}
+.chapterCard[data-vintage=true] small{display:block;color:#ffe083;font:800 2.1cqw/1.3 Arial,sans-serif;letter-spacing:.02em;text-shadow:1px 2px 1px #100b12}
+@keyframes filmCard{from{opacity:0;filter:blur(1px)}to{opacity:1;filter:blur(0)}}
 .landscape{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 36%,transparent 38%,#080c2044 90%),linear-gradient(0deg,#0d152877,transparent 30%);pointer-events:none}
 .emblem{position:absolute;top:4%;left:50%;width:57%;transform:translateX(-50%);transition:width .65s cubic-bezier(.2,.7,.2,1),top .65s;pointer-events:none;filter:drop-shadow(0 .6cqw 1cqw #10132b88)}

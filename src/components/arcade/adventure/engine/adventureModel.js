@@ -1,6 +1,8 @@
 import {prepareActTwo,resolveActTwoWalls,stepActTwoRoute,hitActTwoObjects} from './actTwoRoute';
 import {damageActTwoBoss,stepActTwoHazards} from '../actors/bosses/adventureActTwoBosses';
 import {beginPopcornDefeat} from './adventurePopcornDefeat';
+import {restoreRoundResources} from './adventureRoundReset';
+import {projectileWaterContact} from './adventureWaterContact';
 import {creatureDeathSound} from './adventureWorldAudio';
 import {drinkImpactFeedback} from './adventureImpactFeedback';
 import {canControlEnemy} from '../actors/enemies/adventureEnemyTraits';
@@ -63,7 +65,7 @@ import {stepHarlequinDefeat} from '../actors/bosses/harlequinDefeat';
 import {stepHarlequinScorch} from './cinematicImpact';
 import {BARGE_HEALTH,bargeArmor,stepBargeProjectile,bargeWaterHitbox} from '../actors/bosses/adventureBarge';
 import {stepWorldEffects} from './adventureEffects';
-import {stepSurfaceFeedback,sampleFireTrail} from './adventureSurfaceFeedback';
+import {stepSurfaceFeedback,stepActorSurfaceFeedback,surfaceTakeoff,sampleFireTrail} from './adventureSurfaceFeedback';
 import {beginSuper,stepSuper} from './adventureSuper';
 import {spellFor,specialShots,updateSpecialShot,canSpecialHit,rememberSpecialHit,specialImpact} from './adventureMagic';
 import {SUPER_RECHARGE,collectAdventureStar,tickRewards} from './adventureRewards';
@@ -114,15 +116,11 @@ export function adventureCarry(s){if(s.ribbonDance){const q=s.ribbonDance.stored
 export function retryAdventure(s){
  endRibbonDance(s);
  const fresh=createAdventure(s.index,s.gentle,{...adventureCarry(s),hearts:s.maxHearts,magic:100});
- for(const key of ['stars','pendingStars','score','starMoney','bankedStars','rescued'])if(s[key]!==undefined)fresh[key]=s[key];
+ for(const key of ['stars','pendingStars','score','starMoney','bankedStars'])if(s[key]!==undefined)fresh[key]=s[key];
  const claimed=new Map(s.supplies.filter(q=>!q.phaseAid&&!q.midpointHeart).map(q=>[q.id,q]));
  fresh.supplies=fresh.supplies.map(q=>q.midpointHeart?q:claimed.get(q.id)||q);
  fresh.pickups=s.pickups.filter(q=>!q.phaseAid&&!q.midpointHeart);
- fresh.cages=fresh.cages.map(q=>{
-  const old=s.cages.find(c=>c.reward===q.reward);
-  return old?.rescued?{...q,hp:0,open:true,rescued:true,carried:false}:q;
- });
- for(const e of fresh.enemies)e.captive=null;bindCarriedBunnies(fresh);
+ restoreRoundResources(fresh);
  fresh.player.hurt=2;
  // Drop every transient field (including stale checkpoints, curses and boss
  // transitions) without replacing the state object held by the React engine.
@@ -142,7 +140,7 @@ function hurt(s,fall=false,amount=1,clashLoss=false,source={}){
  beginCandyCapture(s,source);
  if(s.hearts<=0&&!clashLoss){s.events=s.events.filter(e=>e!=='hit');beginPlayerDefeat(s,fall);return;}
  if(fall){clearCoaster(s);s.coasterUsed=false;p.knockdown=null;const at=s.harborAmbush?.state==='active'?[s.level.harborAmbush.left+100,s.level.harborAmbush.y]:s.arenaLocked?[s.level.arena.left+75,s.level.arena.y]:s.level.spawn||[85,s.level.platforms[0].y];p.x=at[0];p.y=at[1]-10;p.vy=0;p.vx=0;p.dash=0;s.hostile=[];}
- if(s.hearts<=0){s.done=true;s.won=false;s.events.push('death');}
+ if(s.hearts<=0){s.resultRescued=s.rescued;s.done=true;s.won=false;s.events.push('death');}
 }
 function burst(s,x,y,row=0,size=52){s.effects.push({x,y,row,size:size*EXPLOSION_SCALE,age:0,life:.32});}
 function defeat(s,e,shot){if(e.defeated)return;e.defeated=true;creatureDeathSound(s,e);e.hp=0;e.flash=0;e.deadTime=[10,13].includes(e.type)?1.55:e.type===11?1.1:e.type===14?1:.55;e.deathAge=0;if(isVillageEnemy(e))e.deadTime=1.15;if(isNightmare(e))beginNightmareDefeat(s,e);if(e.type===10)s.events.push('emberDefeat');if(e.type===13)beginEmberBalloonDefeat(e);if(e.type===ZEPPELIN_TYPE)beginZeppelinDefeat(s,e);if(e.type===DIVER_TYPE)beginDiverDefeat(e);if(e.type===RIVER_BOAT_TYPE)beginRiverBoatDefeat(s,e);beginPopcornDefeat(s,e,shot);releaseWitchVictims(s,e);beginPumpkinDefeat(s,e);beginElectricDefeat(s,e,shot);beginHarvesterDefeat(s,e);s.combo++;s.comboTime=3;s.score+=3+Math.min(5,s.combo);if(e.type===DIVER_TYPE||e.type===RIVER_BOAT_TYPE)waterSplash(s,e.x,e.y-30,90);else{particles(s,e.x,e.y-30,'#ffdda0',12);burst(s,e.x,e.y-30,e.trap?2:1,72);if(!e.deathVoicePlayed)s.events.push('pop');}burstTrappedEnemy(s,e,defeat);}
@@ -260,7 +258,7 @@ export function stepAdventure(s,input,dt){
  const aimAxis=vertical>0&&p.holding?(axis||p.dir):axis;
  const oldAim=p.aimY;p.aimX=vertical?(aimAxis?aimAxis/Math.SQRT2:0):p.dir;p.aimY=vertical?(aimAxis?vertical/Math.SQRT2:vertical):0;p.aimAge=oldAim===p.aimY?p.aimAge+dt:0;
  if(input.jump&&!s.lastInput.jump)p.jumpBuffer=.13;
- if(p.jumpBuffer&&p.dash<=0&&(p.coyote>0||(s.doubleJump&&p.jumps<2))){p.vy=-600;p.ground=null;p.coasterGround=false;p.crouch=false;p.coyote=0;p.jumpBuffer=0;p.jumps++;p.jumpAge=0;p.spin=p.jumps===2?.5:0;if(ribbonActive(s)){p.ribbonFlip=.48;p.ribbonJumpHits=[];p.ribbonAirLinks=0;p.ribbonAirCount=0;p.ribbonHop=false;if(p.ribbonJumpLink>0)p.vy=-650;}s.events.push(p.jumps===2?'doubleJump':'jump');particles(s,p.x,p.y,'#fce8bc',5);}
+ if(p.jumpBuffer&&p.dash<=0&&(p.coyote>0||(s.doubleJump&&p.jumps<2))){p.vy=-600;p.ground=null;p.coasterGround=false;p.crouch=false;p.coyote=0;p.jumpBuffer=0;p.jumps++;p.jumpAge=0;p.spin=p.jumps===2?.5:0;if(ribbonActive(s)){p.ribbonFlip=.48;p.ribbonJumpHits=[];p.ribbonAirLinks=0;p.ribbonAirCount=0;p.ribbonHop=false;if(p.ribbonJumpLink>0)p.vy=-650;}s.events.push(p.jumps===2?'doubleJump':'jump');if(p.jumps===2)particles(s,p.x,p.y,'#fce8bc',5);else surfaceTakeoff(s);}
  if(!input.jump&&s.lastInput.jump&&!p.springBounce&&!(p.popcornClearUntil>s.time)&&p.vy< -260)p.vy=-260;
  startDash(s,input,wasGround&&!p.coasterGround);
  ribbonInput(s,input,dt);
@@ -290,7 +288,7 @@ export function stepAdventure(s,input,dt){
  if(p.hitReact>0||p.knockdown){p.vx*=Math.exp(-dt*(wasGround?7:1.5));p.vy+=1550*dt;}else if(p.dash>0){p.vx=p.dashDir*440*(s.overdrive>0?ORIGINAL_SPEED:1);p.vy=p.dashAir?(p.dashY||0)*440:wasGround?0:p.vy+500*dt;}else{const desired=(p.holding?0:axis)*(p.crouch?95:p.charge||p.superCast||p.guarding||p.aquaChannel?90:255)*(s.overdrive>0?ORIGINAL_SPEED:ribbonActive(s)?1.13+(ribbonLevel(s)-1)*.045:1)*movementRate(s);p.vx=p.holding?0:p.vx+clamp(desired-p.vx,-1700*dt,1700*dt);p.vy+=1550*dt;}
  const wasGliding=p.gliding;
  stepRibbonDance(s,dt);
- p.gliding=!!input.jump&&!p.coasterGround&&p.ground===null&&p.vy>40&&!p.dash&&!p.spin&&!p.superCast&&!p.charge&&!p.guarding&&!p.hitReact;
+ p.gliding=!!input.jump&&!(p.popcornDownKickUntil>s.time)&&!p.coasterGround&&p.ground===null&&p.vy>40&&!p.dash&&!p.spin&&!p.superCast&&!p.charge&&!p.guarding&&!p.hitReact;
  if(p.gliding&&!wasGliding)s.events.push('glide');
  if(p.gliding)p.vy=Math.min(p.vy,95);
  // One full run is two steps. The registered boot travels ~38 world pixels
@@ -330,6 +328,7 @@ export function stepAdventure(s,input,dt){
  stepRibbonDash(s,oldX,oldY);
  stepActTwoRoute(s,dt,makeEnemy);stepActTwoHazards(s,dt,enemyShot);
  stepVillagers(s,dt);stepVillageResistance(s,dt,defeat);updateOutposts(s,dt);updateEnemies(s,dt,playerBody,defeat);updateBoss(s,dt,{say,particles,body:playerBody});stepNightmareGate(s);stepSpookyIdle(s,input,dt);
+ stepActorSurfaceFeedback(s,dt);
  stepHarlequinChaos(s,dt,enemyShot);
  checkUltimateHit(s,playerBody,()=>hurt(s,false,2,false,{element:'fire',heavyImpact:true,x:s.boss.x}));
  if(s.playerDefeat)return;
@@ -347,6 +346,7 @@ export function stepAdventure(s,input,dt){
    if(shot.kind===2)shot.vy+=Math.sin(shot.age*18)*dt*190;
   }
   const previousY=shot.y;shot.previousX=shot.x;shot.previousY=shot.y;shot.x+=shot.vx*dt;shot.y+=shot.vy*dt;
+  if(projectileWaterContact(s,shot))continue;
   stepPopcornShot(s,shot);
   stepCreativeShot(s,shot,dt);if(shot.ribbon)continue;refractShot(s,shot);
   sampleFireTrail(shot,dt);
@@ -417,6 +417,7 @@ export function stepAdventure(s,input,dt){
   if(shot.organ&&shot.growthTime)shot.r=shot.fullRadius*organShotScale(shot);
   if(shot.kind==='ring'&&shot.arc!==undefined){const angle=shot.launchAngle+shot.arc*Math.sin(shot.age*3.7)*.68;shot.vx=Math.cos(angle)*shot.speed;shot.vy=Math.sin(angle)*shot.speed;}
   if(stepEmberFire(s,shot,dt)||stepHarlequinProjectile(s,shot,dt,additions)||stepBargeProjectile(s,shot,dt,additions)){/* Dedicated encounter projectiles own their motion. */}else if(shot.kind==='sound-wave')stepOrganWave(shot,dt);else if(shot.rain)stepOrganRain(shot,s,dt);else{shot.vy+=(shot.gravity||0)*dt;shot.x+=shot.vx*dt;shot.y+=shot.vy*dt;}
+  if(projectileWaterContact(s,shot))continue;
   clearPowerProjectiles(s,s.shots,[shot]);if(shot.life<=0)continue;
   if(resolveVillageProjectile(s,shot,playerBody(p)))continue;
   if(s.level.actTwo&&(shot.actTwo||shot.village)&&shot.kind!=='witch-puddle'&&shot.y>=(shot.floor??groundY(s.level.route||s.platforms,shot.x))-5){shot.life=0;s.effects.push({x:shot.x,y:shot.y,row:2,size:58,age:0,life:.32});continue;}

@@ -32,8 +32,8 @@ test('the Arlequin arena has no shop and retry restarts the boss',()=>{
  s.checkpointAt=[660,480];retryAdventure(s);expect(s.player.x).toBe(s.level.spawn[0]);expect(s.boss.phase).toBe('sleep');expect(s.checkpointAt).toBeUndefined();expect(s.campTents.every(t=>t.state==='closed')).toBe(true);
 });
 
-test('music retains the supplied harbor track and the fire Arlequin theme',()=>{
- for(const [index,boss,path]of [[2,false,'exploration/harbor.mp3'],[2,true,'exploration/harbor.mp3'],[5,false,'exploration/ember-trail.mp3'],[3,true,'bosses/arlequin_fuego.mp3']]){
+test('music retains the supplied harbor exploration and Arlequin, with new barge and ember boss tracks',()=>{
+ for(const [index,boss,path]of [[2,false,'exploration/harbor.mp3'],[2,true,'bosses/barge-1-3.mp3'],[5,false,'exploration/ember-trail.mp3'],[5,true,'bosses/ember-1-4.mp3'],[3,true,'bosses/arlequin_fuego.mp3']]){
   const track=adventureMusic(index,'playing',boss);expect(track.src).toBe('/arcade/music/'+path);expect(fs.statSync('public'+track.src).size).toBeGreaterThan(10000);
  }
 });

@@ -12,7 +12,7 @@ export function shapeHarborRoute(level){
  delete level.circusArrival;
  level.platforms=points.slice(0,-1).map(([x,y],i)=>({x,y,yEnd:points[i+1][1],w:points[i+1][0]-x,h:24,kind:'earth',bridge:bridges.has(x)}));
  const floor=x=>groundY(level.platforms,x);
- level.rivers=level.platforms.filter(q=>q.bridge).map(q=>({x:q.x,w:q.w,y:q.y+62}));
+ level.rivers=level.platforms.filter(q=>q.bridge).map(q=>({x:q.x,w:q.w,y:q.y+62,shotSurfaceY:q.y+159}));
  // Alternate rescue route: three connected little docks with short, visible jumps.
  level.platforms.push(...[[5170,435,230],[5480,365,230],[5790,300,350],[6190,380,250],[10040,420,260],[10380,340,320]].map(([x,y,w])=>({x,y,w,h:24,kind:'dock',footY:floor(x)})));
  level.cages=[[1850,floor(1850)],[5960,300],[10540,340]];

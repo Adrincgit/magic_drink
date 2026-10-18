@@ -22,7 +22,7 @@ test('there are exactly three bunnies: two trail cages and one taller, higher ze
  expect(ZEPPELIN_HEIGHT/ZEPPELIN_WIDTH).toBeGreaterThan(.69);expect(createAdventure(0).cages).toHaveLength(3);
 });
 
-test('defeating the carrier frees its bunny, which falls, joins Hexy once and stays rescued after retry',()=>{
+test('defeating the carrier frees its bunny, which falls, joins Hexy once and returns to its original cage on retry',()=>{
  for(const fps of [60,120,240]){
   const s=createAdventure(1),e=s.enemies.find(e=>e.captive),c=e.captive;
   for(const k of ['outposts','supplies','pickups','hazards','stars'])s[k]=[];s.enemies=[e];
@@ -33,18 +33,18 @@ test('defeating the carrier frees its bunny, which falls, joins Hexy once and st
   expect(c.falling).toBe(false);expect(c.y).toBe(groundY(s.platforms,c.x));
   Object.assign(s.player,{x:c.x,y:c.y,ground:s.platforms.findIndex(p=>c.x>=p.x&&c.x<p.x+p.w),vy:0});stepAdventure(s,{},1/fps);
   expect(c.rescued).toBe(true);expect(s.rescued).toBe(1);const score=s.score;
-  retryAdventure(s);expect(s.enemies.some(e=>e.captive)).toBe(false);expect(s.rescued).toBe(1);
-  Object.assign(s.player,{x:c.x,y:c.y,ground:1});stepAdventure(s,{},1/fps);expect(s.rescued).toBe(1);expect(s.score).toBe(score);
+  retryAdventure(s);expect(s.enemies.some(e=>e.captive)).toBe(true);expect(s.rescued).toBe(0);
+  Object.assign(s.player,{x:c.x,y:c.y,ground:1});stepAdventure(s,{},1/fps);expect(s.rescued).toBe(0);expect(s.score).toBe(score);
  }
 });
 
-test('an escaping carrier permanently loses that rescue within the run, including a checkpoint retry',()=>{
+test('an escaping carrier loses that rescue for this attempt and returns on a full retry',()=>{
  for(const fps of [60,120,240]){
   const s=createAdventure(1),e=s.enemies.find(e=>e.captive),c=e.captive;s.enemies=[e];
   Object.assign(s.player,{x:e.home-300,y:groundY(s.platforms,e.home-300)});s.camera.x=s.player.x-300;s.damage=()=>{};
   for(let i=0;i<fps*10&&s.enemies.includes(e);i++)updateEnemies(s,1/fps,playerBody,()=>{throw new Error('Escaping is not a defeat');});
   expect(e.escaped).toBe(true);expect(c.lost).toBe(true);expect(c.open).toBe(false);expect(s.rescued).toBe(0);expect(s.score).toBe(0);
-  retryAdventure(s);expect(s.enemies.some(e=>e.captive)).toBe(false);expect(c.lost).toBe(true);
+  retryAdventure(s);expect(s.enemies.some(e=>e.captive)).toBe(true);expect(s.cages.find(q=>q.carrier!==undefined).lost).toBeFalsy();
   const normal=s.cages.filter(c=>c.carrier===undefined);for(const q of normal){q.open=true;Object.assign(s.player,{x:q.x,y:q.y,ground:s.platforms.findIndex(p=>q.x>=p.x&&q.x<p.x+p.w)});stepAdventure(s,{},1/fps);}
   expect(s.rescued).toBe(2);
  }

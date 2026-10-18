@@ -38,7 +38,7 @@ test('voices migrate, persist and adjust independently from effects and music',a
  await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(0,3);
  await expect.poll(()=>page.evaluate(()=>window.arcadeGains[2].gain.value)).toBeCloseTo(.7*.4*.25,3);
  await expect(page.getByRole('button',{name:'Probar voces'})).toBeEnabled();await page.getByRole('button',{name:'Probar voces'}).click();
- await range(page,'voices',0);await range(page,'effects',80);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[2].gain.value)).toBeCloseTo(0,3);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(.7*.4*.8,3);
+ await range(page,'voices',0);await range(page,'effects',80);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[2].gain.value)).toBeCloseTo(0,3);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(.77*.4*.8,3);
  await range(page,'voices',35);await page.getByRole('button',{name:'Silenciar todo'}).click();await expect.poll(()=>page.evaluate(()=>window.arcadeGains[2].gain.value)).toBeCloseTo(0,3);
  await page.getByRole('button',{name:'Activar sonido'}).click();await page.reload();await openAdventureMenu(page);await page.locator('[data-open-settings]').click();await expect(page.locator('[data-audio-volume=voices]')).toHaveValue('35');
  await page.locator('[data-adventure-settings]').screenshot({path:folder+'voices-settings.png'});
@@ -98,8 +98,8 @@ for(const width of [1440,390])test(width+': audio mixer remains inside the game,
  const bounds=await page.evaluate(()=>['[data-adventure-canvas]','[data-adventure-settings]'].map(s=>{const r=document.querySelector(s).getBoundingClientRect();return{x:r.x,y:r.y,width:r.width,height:r.height};}));for(const key of ['x','y','width','height'])expect(Math.abs(bounds[0][key]-bounds[1][key])).toBeLessThan(1);
  await range(page,'master',100);await range(page,'music',100);await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBe(1);
  await range(page,'master',40);await range(page,'music',60);await range(page,'effects',25);
- await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBeCloseTo(.24,5);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(.07,3);
- await range(page,'music',0);await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBe(0);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(.07,3);await range(page,'music',60);
+ await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBeCloseTo(.24,5);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(.077,3);
+ await range(page,'music',0);await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBe(0);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(.077,3);await range(page,'music',60);
  await range(page,'effects',0);await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBeCloseTo(.24,5);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(0,3);await range(page,'effects',25);
  await page.getByRole('button',{name:'Probar sonido'}).click();await expect.poll(()=>page.evaluate(()=>window.arcadeGains.length)).toBeGreaterThan(1);
  await page.getByRole('button',{name:'Silenciar todo'}).click();await expect.poll(()=>page.locator('audio').evaluate(a=>a.volume)).toBe(0);await expect.poll(()=>page.evaluate(()=>window.arcadeGains[0].gain.value)).toBeCloseTo(0,3);

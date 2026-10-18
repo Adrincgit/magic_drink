@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { createFilmGrain, createLensMap } from './components/filmGrain';
+import {createFilmWear} from './components/filmWear';
+import {vintageColorMatrix} from '../global/illustratedFinishState';
 import styles from './HexyFinish.module.css';
 
 // One optical pass above both the artwork and the UI. Filtering an ancestor of
@@ -8,6 +10,7 @@ import styles from './HexyFinish.module.css';
 export default function HexyFinish({ enabled, reduced, intensity = 60, expanded = false, target = null, monochrome = 0, chromatic = 1, settings = null, arcade = false }) {
   const canvas = useRef(null);
   const renderer = useRef(null);
+  const wearCanvas=useRef(null),wearRenderer=useRef(null);
   const [lensMap, setLensMap] = useState('');
   const [viewport, setViewport] = useState({ width: 1, height: 1 });
   const [surface, setSurface] = useState(null);
@@ -15,7 +18,9 @@ export default function HexyFinish({ enabled, reduced, intensity = 60, expanded 
   const amount = intensity / 100;
   const grainOpacity = settings ? settings.grain / 100 * .35 : .08 + amount * .25;
   const vignetteOpacity = settings ? Math.pow(settings.vignette / 100,arcade?1.35:1) : .35 + amount * .4;
-  const lensOpacity = settings ? (settings.chromatic > 0 || monochrome ? (arcade?1:.2275) : 0) : .14 + amount * .25;
+  const vintage=arcade&&!monochrome&&settings?.vintage?(settings.vintageStrength??65)/100:0;
+  const wear=arcade?(settings?.filmWear||0)/100:0;
+  const lensOpacity = settings ? (settings.chromatic > 0 || monochrome || vintage ? (arcade?1:.2275) : 0) : .14 + amount * .25;
   const strength=(settings?.chromatic||0)/100,opticalScale=Math.max(.5,viewport.width/1440);
   const registration = arcade ? (strength*.6+strength*strength*3.4)*opticalScale : settings ? settings.chromatic / 100 * 4.1 : (1.2 + amount) * chromatic;
   const dispersion = arcade ? strength*strength*8*opticalScale : settings ? settings.chromatic / 100 * 3.6 : (.8 + amount * 1.6) * chromatic;
@@ -46,10 +51,13 @@ export default function HexyFinish({ enabled, reduced, intensity = 60, expanded 
     return () => { observer.disconnect(); renderer.current?.dispose(); renderer.current = null; };
   }, [surface]);
   useEffect(() => { renderer.current?.update({ enabled: enabled && grainOpacity > 0, reduced }); }, [enabled, reduced, surface, grainOpacity]);
-  const finish = <div className={styles.finish} data-hexy-finish data-enabled={enabled} data-arcade-optics={arcade} aria-hidden="true"
+  useEffect(()=>{if(!wearCanvas.current)return;wearRenderer.current=createFilmWear(wearCanvas.current);return()=>{wearRenderer.current?.dispose();wearRenderer.current=null;};},[surface,arcade]);
+  useEffect(()=>{wearRenderer.current?.update({enabled:enabled&&wear>0,reduced,strength:wear});},[enabled,reduced,wear,surface,arcade]);
+  const finish = <div className={styles.finish} data-hexy-finish data-enabled={enabled} data-arcade-optics={arcade} data-vintage-colors={vintage>0} aria-hidden="true"
     style={{ '--finish-clip': clip, '--finish-monochrome': monochrome, '--grain-opacity': grainOpacity, '--lens-opacity': lensOpacity, '--vignette-opacity': vignetteOpacity }}>
     <div className={styles.lens} data-finish-lens data-ready={Boolean(lensMap)} style={{ display: lensOpacity === 0 ? 'none' : undefined }} />
     <canvas ref={canvas} className={styles.grain} data-finish-grain />
+    {arcade&&<canvas ref={wearCanvas} className={styles.wear} data-finish-wear style={{opacity:wear}}/>}
     <div className={styles.vignette} data-finish-vignette />
     {!arcade&&<div className={styles.monochrome} data-finish-monochrome style={{display:monochrome?'block':'none'}} />}
   </div>;
@@ -58,7 +66,8 @@ export default function HexyFinish({ enabled, reduced, intensity = 60, expanded 
       <defs>
         <filter id="hexy-film-optics" filterUnits="userSpaceOnUse" x="0" y="0" width={viewport.width} height={viewport.height} colorInterpolationFilters="sRGB">
           <feImage href={lensMap || undefined} x="0" y="0" width={viewport.width} height={viewport.height} preserveAspectRatio="none" result="dispersion" />
-          <feColorMatrix in="SourceGraphic" type="saturate" values={arcade?1-monochrome:1} result="filmBase" />
+          <feColorMatrix in="SourceGraphic" type="matrix" values={vintageColorMatrix(vintage)} result="vintageBase" />
+          <feColorMatrix in="vintageBase" type="saturate" values={arcade?1-monochrome:1} result="filmBase" />
           <feColorMatrix in="filmBase" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red" />
           <feOffset in="red" dx={registration} dy={verticalShift} result="redRegistered" />
           <feDisplacementMap in="redRegistered" in2="dispersion" scale={dispersion} xChannelSelector="R" yChannelSelector="G" result="redShift" />

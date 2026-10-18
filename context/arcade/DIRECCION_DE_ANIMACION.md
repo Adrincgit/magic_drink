@@ -1,8 +1,12 @@
 # Dirección de animación y referencias
 
+La [revisión de Hexy: preparación, agotamiento y colisiones](hexy-acting/README.md) sustituye las poses estáticas direccionales del ultimate por preparación y descarga con viento dibujado. Conserva la mano de la varita entre fases y doce dibujos de marcha también al estar herida. Las reacciones cortas y el ciclo de viento del lanzamiento pueden usar cuatro dibujos; el número se elige por acción, sin imponer la misma longitud a todas las secuencias.
+
 **Decidido por el usuario, 16/10/2026.** Magic Drink conserva su estilo **anime caricaturesco**. Las referencias de Metal Slug sirven para estudiar movimiento, peso y puesta en escena, especialmente en maquinaria. El nivel de detalle se elige según la acción y su importancia; no es una exigencia para todos los personajes, objetos o efectos.
 
 Se desarrollan diseños, dibujos y efectos propios. La referencia ayuda a entender cómo funciona una animación; no se copia su trabajo artístico ni se cambia la identidad visual del juego para imitarlo.
+
+**Coherencia del elenco, aclaración del usuario del 17/10/2026.** Los payasos existentes son la referencia de estilo artístico, calidad y nivel de detalle de los personajes del juego: anime cartoon con acabado ilustrado. Los enemigos y las dos formas de un minijefe deben compartir su lenguaje de contornos, proporciones expresivas y sombreado. Revisar los personajes nuevos junto a los payasos a escala de juego y durante sus acciones. [Corrección del elenco del maizal](cornfield-cartoon-v3/README.md).
 
 ## Criterios de trabajo
 
@@ -14,6 +18,10 @@ Se desarrollan diseños, dibujos y efectos propios. La referencia ayuda a entend
 - Sincronizar sonidos y efectos con la acción visible. Revisar el resultado en movimiento dentro del juego, a su escala habitual y durante el combate.
 
 Estos criterios orientan el pulido. No establecen una cantidad fija de sprites, FPS o fases para todos los enemigos.
+
+**Afinación aprobada después de medir Hexy:** tomar 12–14 dibujos por ciclo como referencia para carreras y marchas expresivas, y 24 cambios de dibujo por segundo como techo habitual. Conservar ciclos útiles de cuatro, seis y ocho dibujos para acciones más sencillas, reposo, vuelo y efectos; los fondos pueden llevar ritmos más pausados. El número de dibujos puede variar entre personajes. Sincronizar apoyos, salida de proyectiles, impactos y sonidos con su acción, sin hacer que todos repitan un mismo reloj o una misma cantidad de poses. El desplazamiento y la cámara conservan su fluidez entre los cambios de dibujo.
+
+[Revisión aplicada a enemigos y jefes del 1-1 al 2-2, con atención especial al Arlequín del 1-5](enemy-cadence/README.md).
 
 ## Cadencia medida de las referencias locales
 

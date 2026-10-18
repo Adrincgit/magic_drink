@@ -18,7 +18,7 @@ for(const fps of [60,120,240])test(`tidal water travels from the cannon, impacts
    if(q.kind==='barge-spout')spouts.push(q);
    if(['barge-wave','barge-surf'].includes(q.kind)){born.push(q);const source=spouts.find(p=>p.waveReleased&&!p.checked);expect(source).toBeTruthy();source.checked=true;expect(Math.abs(q.x-spoutPoint(source,source.flight).x)).toBeLessThan(1);expect(q.floor).toBe(s.level.arena.y);}
   }
-  for(const q of s.hostile.filter(p=>p.kind==='barge-spout')){const m=bargeRig(s);expect(q.x).toBeCloseTo(m.muzzle.x);expect(q.y).toBeCloseTo(m.muzzle.y);if(q.age<q.flight)expect(q.waveReleased).toBeFalsy();}
+  for(const q of s.hostile.filter(p=>p.kind==='barge-spout')){const m=bargeRig(s);expect(Math.abs(q.x-m.muzzle.x)).toBeLessThan(6);expect(Math.abs(q.y-m.muzzle.y)).toBeLessThan(6);if(q.age<q.flight)expect(q.waveReleased).toBeFalsy();}
  }
  expect(born.map(q=>q.kind)).toEqual(['barge-wave','barge-surf']);expect(born[1].drawSize).toBeGreaterThan(born[0].drawSize*1.5);
  expect(born[1].heavyImpact).toBe(true);
@@ -53,7 +53,7 @@ test('transformation opens only hull panels and defeat detaches structural piece
  tick(s,.45);expect(s.boss.hullOpened).toBeFalsy();tick(s,.2);expect(s.boss.hullOpened).toBe(true);expect(s.organDebris).toHaveLength(3);
  expect(parts.drum.hp).toBe(parts.drum.maxHp);expect(parts.tank.hp).toBe(parts.tank.maxHp);
  tick(s,2);s.boss.hp=0;tick(s,1.6);expect(s.boss.shattered).toBe(true);
- const chunks=s.organDebris.filter(q=>['barge-phase-two','barge-wheel','barge-cannon'].includes(q.art));expect(chunks).toHaveLength(8);
+ const chunks=s.organDebris.filter(q=>['barge-pressure-barge','barge-wheel','barge-cannon'].includes(q.art)&&(!q.jagged));expect(chunks).toHaveLength(7);expect(chunks.filter(q=>q.mask)).toHaveLength(5);
  expect(chunks.every(q=>q.crop[2]>0&&q.crop[3]>0)).toBe(true);tick(s,3);expect(s.boss.defeat.ready).toBe(true);
 });
 

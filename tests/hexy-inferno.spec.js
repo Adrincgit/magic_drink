@@ -13,6 +13,7 @@ import {hexyMuzzle} from '../src/components/arcade/adventure/actors/hexy/hexyAni
 import {launchClashLoser,stepClashAftermath} from '../src/components/arcade/adventure/engine/clashAftermath';
 import {CLASH_THROW_DISTANCE} from '../src/components/arcade/adventure/engine/clashGeometry';
 import {fallingEmber} from '../src/components/arcade/adventure/render/infernoBackdropCanvas';
+import {HARLEQUIN_SIZE} from '../src/components/arcade/adventure/actors/bosses/harlequinMetrics';
 
 function fresh(stage=2){const s=createAdventure(3);s.arenaLocked=true;s.supplies=[];s.stars=[];s.noticeTime=0;Object.assign(s.player,{x:1500,y:480,ground:2});Object.assign(s.boss,{x:2430,y:480,phase:'recover',timer:100,engaged:true,vulnerable:true,debrisClock:100,stage,hp:stage===1?720:stage===2?420:240});return s;}
 const tick=(s,n=1,input={})=>{for(let i=0;i<n;i++)stepAdventure(s,input,1/120);};
@@ -23,9 +24,9 @@ test('burning column bases persist at the same positions and eventually disappea
  s.player.x=positions[0];tick(s);expect(s.hearts).toBe(4);s.player.x=2060;tick(s,440);expect(s.hostile).toHaveLength(0);
 });
 
-test('phase transitions use fire explosions and both aid crates contain Witchy Kiwii',()=>{
- const s=fresh(1);s.boss.hp=480;tick(s,120);expect(s.boss.stage).toBe(2);expect(s.effects.some(q=>q.fireBurst)).toBe(true);expect(s.effects.some(q=>q.harlequin)).toBe(false);expect(s.supplies[0].loot.kind).toBe(2);
- tick(s,120);s.boss.hp=240;tick(s,120);expect(s.boss.stage).toBe(3);expect(s.supplies.map(q=>q.loot.kind)).toEqual([2,2]);expect(s.effects.some(q=>q.harlequin)).toBe(false);
+test('phase transitions use fire explosions without adding retired phase-aid crates',()=>{
+ const s=fresh(1);s.boss.hp=480;tick(s,120);expect(s.boss.stage).toBe(2);expect(s.effects.some(q=>q.fireBurst)).toBe(true);expect(s.effects.some(q=>q.harlequin)).toBe(false);expect(s.supplies).toHaveLength(0);
+ tick(s,120);s.boss.hp=240;tick(s,120);expect(s.boss.stage).toBe(3);expect(s.supplies).toHaveLength(0);expect(s.effects.some(q=>q.harlequin)).toBe(false);
 });
 
 test('rush anticipation uses all twelve drawings and the ground strike reaches impact before columns heat',()=>{
@@ -51,7 +52,7 @@ test('charge particles converge toward the measured wand in the air and mirrored
 });
 
 test('winning scorches a surviving boss, produces a large explosion and retry restores the costume',()=>{
- const s=fresh(3);s.powerClash={won:true};launchClashLoser(s);expect(s.boss.hp).toBe(48);expect(s.boss.scorched).toBeGreaterThan(.2);expect(s.effects.find(q=>q.fireBurst).size).toBeGreaterThan(450);expect(s.effects.filter(q=>q.cinematicSmoke).length).toBeGreaterThan(8);retryAdventure(s);expect(s.boss.scorched).toBeUndefined();
+ const s=fresh(3);s.powerClash={won:true};launchClashLoser(s);expect(s.boss.hp).toBe(48);expect(s.boss.scorched).toBeGreaterThan(.2);expect(s.effects.find(q=>q.fireBurst).size).toBeGreaterThan(HARLEQUIN_SIZE*1.8);expect(s.effects.filter(q=>q.cinematicSmoke).length).toBeGreaterThan(8);retryAdventure(s);expect(s.boss.scorched).toBeUndefined();
 });
 
 test('either loser is violently thrown within the wider fire walls and stays inside the lens',()=>{

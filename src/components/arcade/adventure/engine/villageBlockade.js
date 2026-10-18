@@ -1,5 +1,6 @@
 import {groundY} from '../world/adventureTerrain';
 import {makeEnemy} from '../actors/enemies/adventureEnemies';
+import {advanceEnemyStride} from '../actors/enemies/actorCadence';
 export function prepareVillageBlockade(s){
  const previous=s.villageBlockade,wall=s.villageObstacles.find(q=>q.blockade);
  s.villageBlockade=wall?{age:0,waves:0,started:false,...previous,wallId:wall.id}:null;
@@ -21,7 +22,7 @@ export function stepVillageBlockade(s,dt){
 }
 export function stepBlockadeArrival(s,e,dt){
  const entry=e.blockadeEntry;if(!entry)return false;
- entry.age+=dt;const u=Math.min(1,entry.age/1.6);e.x=entry.from+(entry.to-entry.from)*u;e.baseY=groundY(s.level.route,e.x);
+ entry.age+=dt;const u=Math.min(1,entry.age/1.6),old=e.x;e.x=entry.from+(entry.to-entry.from)*u;e.baseY=groundY(s.level.route,e.x);advanceEnemyStride(e,e.x-old,dt,90);
  e.y=e.baseY-([26,27].includes(e.type)?e.flightHeight+Math.sin(e.clock*2)*8:0);e.moving=true;
  if(u>=1){delete e.blockadeEntry;e.phase='patrol';e.phaseAge=0;e.timer=.35;}
  return true;

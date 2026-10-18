@@ -2,6 +2,7 @@
 // held props, emitted shots and the clown that actually leaves the basket.
 import {HELD_BOMB_SIZE} from './adventureBombs';
 import {RED_CLOWN_SCALE} from '../enemies/adventureEnemyGeometry';
+import {travelFrame} from '../enemies/actorCadence';
 export const BALLOON_SIZE=400;
 export const CREW_SIZE=148*RED_CLOWN_SCALE;
 export const BALLOON_RIM_Y=-84;
@@ -74,5 +75,5 @@ export function redClownDrawing(e,reduced=false){
  if(e.phase==='windup')return{key:'clown',frame:e.timer>.27?6:7};
  if(e.trap>0||reduced)return{key:'red-clown-throw',frame:6};
  // Gait follows travelled distance, so a stopped or trapped clown cannot skate.
- return{key:'red-clown-walk',frame:Math.floor((e.gait||0)*16)%8};
+ return{key:'red-clown-walk',frame:travelFrame(e.gait,8,reduced)};
 }

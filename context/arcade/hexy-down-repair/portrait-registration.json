@@ -1,0 +1,110 @@
+{
+  "ground-diagonal-up": {
+    "key": "hexy-encore-ground-diagonal-up",
+    "src": "/arcade/sprites/ui/encore/ground-diagonal-up-v1.webp?v=20261017-illustration",
+    "width": 1024,
+    "height": 1536,
+    "crop": [
+      15,
+      111,
+      999,
+      1382
+    ]
+  },
+  "air-diagonal-up": {
+    "key": "hexy-encore-air-diagonal-up",
+    "src": "/arcade/sprites/ui/encore/air-diagonal-up-v1.webp?v=20261017-illustration",
+    "width": 1024,
+    "height": 1536,
+    "crop": [
+      9,
+      58,
+      1008,
+      1411
+    ]
+  },
+  "ground-up": {
+    "key": "hexy-encore-ground-up",
+    "src": "/arcade/sprites/ui/encore/ground-up-v1.webp?v=20261017-illustration",
+    "width": 1024,
+    "height": 1536,
+    "crop": [
+      18,
+      22,
+      998,
+      1501
+    ]
+  },
+  "air-up": {
+    "key": "hexy-encore-air-up",
+    "src": "/arcade/sprites/ui/encore/air-up-v1.webp?v=20261017-illustration",
+    "width": 1024,
+    "height": 1536,
+    "crop": [
+      12,
+      26,
+      988,
+      1451
+    ]
+  },
+  "ground-diagonal-down": {
+    "key": "hexy-encore-ground-diagonal-down",
+    "src": "/arcade/sprites/ui/encore/ground-diagonal-down-v1.webp?v=20261017-illustration",
+    "width": 1024,
+    "height": 1536,
+    "crop": [
+      3,
+      99,
+      1018,
+      1367
+    ]
+  },
+  "air-diagonal-down": {
+    "key": "hexy-encore-air-diagonal-down",
+    "src": "/arcade/sprites/ui/encore/air-diagonal-down-v1.webp?v=20261017-illustration",
+    "width": 1024,
+    "height": 1536,
+    "crop": [
+      6,
+      126,
+      1015,
+      1139
+    ]
+  },
+  "ground-down": {
+    "key": "hexy-encore-ground-down",
+    "src": "/arcade/sprites/ui/encore/ground-down-v1.webp?v=20261017-illustration",
+    "width": 1024,
+    "height": 1536,
+    "crop": [
+      9,
+      72,
+      1015,
+      1404
+    ]
+  },
+  "air-down": {
+    "key": "hexy-encore-air-down",
+    "src": "/arcade/sprites/ui/encore/air-down-v1.webp?v=20261017-illustration",
+    "width": 1024,
+    "height": 1536,
+    "crop": [
+      14,
+      80,
+      1003,
+      1322
+    ]
+  },
+  "air-horizontal": {
+    "key": "hexy-encore-air-horizontal",
+    "src": "/arcade/sprites/ui/encore/air-horizontal-v1.webp?v=20261017-illustration",
+    "width": 1024,
+    "height": 1536,
+    "crop": [
+      8,
+      199,
+      1009,
+      1087
+    ]
+  }
+}

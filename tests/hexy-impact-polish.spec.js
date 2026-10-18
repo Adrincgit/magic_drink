@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import sharp from 'sharp';
 import {createAdventure,stepAdventure,retryAdventure,playerBody} from '../src/components/arcade/adventure/engine/adventureModel';
 import {surfaceY} from '../src/components/arcade/adventure/world/adventureTerrain';
-import {dropHarlequinSupply,damageSupply,updateSupplies} from '../src/components/arcade/adventure/world/adventureSupplies';
-import {harlequinDrawing,updateHarlequin} from '../src/components/arcade/adventure/actors/bosses/adventureHarlequin';
+import {damageSupply,updateSupplies} from '../src/components/arcade/adventure/world/adventureSupplies';
+import {harlequinDrawing,updateHarlequin,HARLEQUIN_SPRINT_STRIDE} from '../src/components/arcade/adventure/actors/bosses/adventureHarlequin';
 import {harlequinFireHitbox,PYRE_HEIGHT} from '../src/components/arcade/adventure/actors/bosses/harlequinFire';
 import {beginHarlequinUltimate} from '../src/components/arcade/adventure/actors/bosses/harlequinUltimate';
 import {fluidSockets} from '../src/components/arcade/adventure/actors/bosses/harlequinFluidSockets';
@@ -18,9 +18,9 @@ function safe(level=0,air=false){
 function lethal(s){const p=s.player;s.hostile.push({x:p.x,y:p.y-25,vx:0,vy:0,r:12,life:1,age:0,kind:'test'});tick(s);}
 test('all four levels play a slow falling defeat on ground and in the air, then stay prone',()=>{
  for(let level=0;level<4;level++)for(const air of [false,true]){
-  const s=safe(level,air);lethal(s);expect(s.playerDefeat?.state).toBe('fall');expect(s.done).toBe(false);expect(s.hearts).toBe(0);expect(s.events).toContain('hexyDefeatLaunch');
+  const s=safe(level,air);lethal(s);expect(s.playerDefeat?.state).toBe('fall');expect(s.done).toBe(false);expect(s.hearts).toBe(s.maxHearts);expect(s.events).toContain('hexyDefeatLaunch');
   const frames=new Set(),ys=[];let deaths=0,lands=0,n=0;
-  while(!s.done&&n++<700){tick(s,{right:true,jump:true,attack:true,super:true});frames.add(s.player.clashFlight.frame);ys.push(s.player.y);deaths+=s.events.filter(k=>k==='death').length;lands+=s.events.filter(k=>k==='hexyDefeatLand').length;expect(s.hearts).toBe(0);expect(s.superCinematic).toBeFalsy();}
+  while(!s.done&&n++<700){tick(s,{right:true,jump:true,attack:true,super:true});frames.add(s.player.clashFlight.frame);ys.push(s.player.y);deaths+=s.events.filter(k=>k==='death').length;lands+=s.events.filter(k=>k==='hexyDefeatLand').length;expect(s.hearts).toBe(s.maxHearts);expect(s.superCinematic).toBeFalsy();}
   expect(s.done).toBe(true);expect(s.won).toBe(false);expect(n/120).toBeGreaterThan(2);expect(n/120).toBeLessThan(5.5);expect(Math.max(...ys)-Math.min(...ys)).toBeGreaterThan(25);expect(frames.size).toBeGreaterThanOrEqual(4);expect(lands).toBe(1);expect(deaths).toBe(1);expect(s.player.clashFlight.frame).toBe(4);
   const x=s.player.x;tick(s,{jump:true});expect(s.player.x).toBe(x);retryAdventure(s);expect(s.playerDefeat).toBeUndefined();expect(s.player.clashFlight).toBeUndefined();expect(s.done).toBe(false);
  }
@@ -31,16 +31,19 @@ test('bottomless defeat animates without teleporting to a checkpoint or inventin
  tick(s);expect(s.player.y).toBeGreaterThan(y);expect(s.player.x).toBe(x);let landed=false;
  for(let i=0;i<400&&!s.done;i++){tick(s);landed ||= s.events.includes('hexyDefeatLand');}expect(s.done).toBe(true);expect(landed).toBe(false);
 });
-test('destroying each aid crate at several fall heights never suspends debris or its drink',()=>{
+// Automatic phase aid drops were retired with the checkpoint revision. Keep
+// testing the generic falling-crate physics with an explicit authored fixture.
+function fallingCrate(s,slot=0){s.supplies.push({x:s.player.x+150+slot*50,y:s.level.arena.y-460,landingY:s.level.arena.y,falling:true,fallSpeed:0,loot:{type:'drink',kind:2},hp:4,maxHp:4,flash:0,age:0});}
+test('destroying a falling crate at several heights never suspends debris or its drink',()=>{
  for(const stage of [2,3])for(const delay of [0,45,115]){
-  const s=createAdventure(3);s.supplies=[];s.player.x=1600;dropHarlequinSupply(s,stage);for(let i=0;i<delay;i++)updateSupplies(s,1/120);
+  const s=createAdventure(3);s.supplies=[];s.player.x=1600;fallingCrate(s,stage);for(let i=0;i<delay;i++)updateSupplies(s,1/120);
   const q=s.supplies[0];damageSupply(s,q,99);const start=q.y;updateSupplies(s,1/120);expect(q.y).toBeGreaterThan(start);damageSupply(s,q,99);expect(s.pickups).toHaveLength(1);
   for(let i=0;i<480;i++)updateSupplies(s,1/120);expect(q.y).toBe(s.level.arena.y);expect(q.falling).toBe(false);expect(q.hp).toBe(0);expect(s.pickups[0].y).toBe(s.level.arena.y-28);expect(s.pickups[0].vy).toBe(0);
  }
 });
 test('new running cycle has twelve drawings and a long surviving-boss recovery holds arms down',()=>{
  for(const stage of [1,2,3]){const s=createAdventure(3),b=s.boss;b.stage=stage;b.phase='attack';b.move='dash';const frames=new Set();
-  for(let i=0;i<12;i++){b.sprintDistance=i*23;const pose=harlequinDrawing(s);expect(pose.key).toContain('sprint');frames.add(pose.frame);}expect(frames.size).toBe(12);
+  for(let i=0;i<12;i++){b.sprintDistance=(i+.01)*HARLEQUIN_SPRINT_STRIDE/12;const pose=harlequinDrawing(s);expect(pose.key).toContain('sprint');frames.add(pose.frame);}expect(frames.size).toBe(12);
  }
  const s=createAdventure(3);s.arenaLocked=true;s.enemies=[];s.outposts=[];s.stars=[];s.supplies=[];Object.assign(s.player,{x:1500,y:480,ground:2});Object.assign(s.boss,{phase:'recover',timer:100,engaged:true,stage:3,hp:240,turn:3});beginHarlequinUltimate(s);while(s.boss.ultimate.state==='leap')tick(s);tick(s,{super:true});while(['windup','travel'].includes(s.powerClash.state))tick(s);
  for(let i=0;s.powerClash.state==='contest'&&i<1900;i++)tick(s,{attack:i%15===0});expect(s.powerClash.won).toBe(true);
@@ -80,7 +83,7 @@ test('review actual death, release, eruption, smoke and cinematic recovery in mo
   ['air-death','s.hearts=1;s.player.y=300;s.player.ground=null;s.hostile.push({x:s.player.x,y:275,vx:0,vy:0,r:14,age:0,life:1,kind:"test"});',[1,45,80,130,130]],
   ['pyre','Object.assign(s.boss,{phase:"warn",move:"pyre",timer:.01,warnDuration:1});',[40,55,40,30]],
   ['ribbon','Object.assign(s.boss,{phase:"warn",move:"ribbon",timer:.15,warnDuration:1});',[15,25,10,10,10]],
-  ['crate','w.supplies.dropHarlequinSupply(s,2);w.supplies.damageSupply(s,s.supplies[0],1);',[1,90,130]],
+  ['crate','s.supplies.push({x:s.player.x+150,y:20,landingY:480,falling:true,fallSpeed:0,loot:{type:"drink",kind:2},hp:4,maxHp:4,flash:0,age:0});w.supplies.damageSupply(s,s.supplies[0],1);',[1,90,130]],
  ]){
   await page.evaluate(setup=>{const w=window.impact,s=w.fresh();Function('w','s',setup)(w,s);},setup);
   for(let i=0;i<frames.length;i++){await page.evaluate(n=>{const w=window.impact;w.tick(n);w.paint();},frames[i]);await canvas.screenshot({path:dir+name+'-'+i+'.jpg'});}

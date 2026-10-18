@@ -1,6 +1,7 @@
 import {surfaceY} from '../../world/adventureTerrain';
 import {enemyGeometry,enemyMuzzle} from './adventureEnemyGeometry';
 import {worldSound} from '../../engine/adventureWorldAudio';
+import {faceTarget} from './enemyFacing';
 
 const GRAVITY=800,ENTRY_TIME=.42,LOAD_TIME=.38;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
@@ -48,7 +49,7 @@ export function stepClownBoosters(s,dt){
   e.dir=c.dir;
   if(u>=1){
    delete e.boosterEntry;e.boosterHidden=true;c.phase='loaded';
-   c.dir=Math.sign(s.player.x-c.x)||c.dir;e.dir=c.dir;
+   c.dir=faceTarget(c,s.player.x);e.dir=c.dir;
    const seat=enemyMuzzle(c);e.x=seat.x;e.y=seat.y+enemyGeometry(e).h*.48;
   }
   if(c.boosterAge<ENTRY_TIME+LOAD_TIME)continue;

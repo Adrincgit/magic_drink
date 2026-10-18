@@ -1,5 +1,6 @@
 import {beginNightmareDefeat,spawnNightmareSoul} from '../../engine/adventureNightmareMotion';
 import {BELLKEEPER_OFFSETS} from './bellkeeperRegistration';
+import {faceTarget} from '../enemies/enemyFacing';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 export const BELL_BREAK_TIME=2.04;
 export const BELL_DEFEAT_TIME=2.3;
@@ -66,7 +67,7 @@ export function stepBellkeeper(s,dt,helpers){
  }
  const spooky=!!b.bellBroken;
  if(b.phase==='patrol'){
-  b.dir=Math.sign(p.x-b.x)||b.dir;
+  b.dir=faceTarget(b,p.x);
   if(Math.abs(p.x-b.x)>230)b.x=clamp(b.x+b.dir*(spooky?90:55)*dt,a.left+140,a.right-180);
   b.y+=(b.baseY-(spooky?30:22)+Math.sin(b.clock*2.2)*7-b.y)*Math.min(1,dt*3);
   if(b.timer<=0){

@@ -11,7 +11,8 @@ export {EFFECTS_BOOST} from './effectsBus';
 let context,master,voiceMaster,effectsInput,creaturePlayer,energyVoice,emberVoice,hexyVoice,villageVoice,muted=false,volume=1,generalVolume=1,voiceVolume=.6;const last=new Map();
 // The user's controls follow compression, so zero and mute remain absolute
 // and changing volume does not change the balance between quiet/loud effects.
-const outputGain=()=>muted?0:.7*volume;
+// Ten percent more effects at the output; compression and voice gain stay put.
+const outputGain=()=>muted?0:.77*volume;
 const outputVoiceGain=()=>muted?0:.7*generalVolume*voiceVolume;
 export function unlockArcadeAudio(){
  if(typeof window==='undefined')return;

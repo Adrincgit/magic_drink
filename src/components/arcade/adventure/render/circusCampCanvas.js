@@ -57,6 +57,7 @@ export function drawCampForecourt(c,s,art,reduced=false){
  drawCampGround(c,s,art);
  for(let i=Math.floor(left/710);i*710<right;i++){
   const x=i*710+Math.sin(i*4.6)*90;if(x>-1000)continue;
+  if((s.campTents||[]).some(q=>Math.abs(x-q.x)<q.w/2+110))continue;
   shadow(c,x,ground-55,130,10,.19);rooted(c,art[mod(i,3)?'camp-brush':'camp-log'],x,ground-40,56+mod(i,3)*8,i%2===0);
  }
  for(const q of s.campTents||[]){
@@ -65,8 +66,6 @@ export function drawCampForecourt(c,s,art,reduced=false){
   shadow(c,q.x,ground-7,q.w*.57,24,.38);
   // The common sprite cells include a narrow transparent bottom margin.
   c.save();c.filter='saturate(.73) brightness(.83)';drawCampWindTent(c,s,art,q.x-q.w/2,ground+10-h,q.w,h,open,reduced);c.restore();
-  rooted(c,art['camp-brush'],q.x-q.w*.43,ground-6,45);
-  rooted(c,art['camp-log'],q.x+q.w*.4,ground-4,35,true);
  }
  const q=campTentPlacement(s);if(q.x<right&&q.x+q.w>left){
   shadow(c,q.x+q.w*.42,ground+2,q.w*.5,50,.36);

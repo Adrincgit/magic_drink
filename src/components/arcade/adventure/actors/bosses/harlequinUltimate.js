@@ -1,5 +1,6 @@
 import {fireImpact,leaveUltimateFire} from './harlequinFire';
 import {impactSmoke} from '../../engine/cinematicImpact';
+import {faceTarget} from '../enemies/enemyFacing';
 export const HARLEQUIN_ULTIMATE={leap:.85,charge:2.8,travel:.28,fire:.95,recover:2.4,cooldown:28,slow:.34};
 export function ultimateHand(b,charging=b.ultimate?.state==='charge'){
  // Cupped hands in the six charging drawings: about (155,245) in the
@@ -22,7 +23,7 @@ export function stepHarlequinUltimate(s,dt){
  if(q.state==='leap'){
   const t=Math.min(1,q.age/HARLEQUIN_ULTIMATE.leap),ease=t*t*(3-2*t);
   b.x=q.fromX+(q.toX-q.fromX)*ease;b.y=s.level.arena.y-Math.sin(t*Math.PI)*240;
-  b.dir=Math.sign(s.player.x-b.x)||b.dir;
+  b.dir=faceTarget(b,s.player.x);
   if(t===1){q.state='charge';q.age=0;b.phase='ultimate-charge';b.y=s.level.arena.y;q.target={x:s.player.x,y:s.player.y-28};s.events.push('harlequinPower','clashLand');s.shake=.16;}
   return;
  }
