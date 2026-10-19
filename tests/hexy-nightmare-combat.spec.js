@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import {createAdventure,stepAdventure} from '../src/components/arcade/adventure/engine/adventureModel';
 import {beginNightmareUltimate} from '../src/components/arcade/adventure/actors/bosses/nightmareUltimate';
-import {nightmareContact} from '../src/components/arcade/adventure/engine/nightmarePowerClash';
+import {nightmareContact,nightmareClashRemaining,NIGHTMARE_CLASH} from '../src/components/arcade/adventure/engine/nightmarePowerClash';
 import {nightmarePressureFrame} from '../src/components/arcade/adventure/engine/nightmarePressureActing';
 import {startNightmareGame} from '../src/components/arcade/adventure/actors/bosses/nightmareGames';
 import {damageActTwoBoss,actTwoBossDrawing} from '../src/components/arcade/adventure/actors/bosses/adventureActTwoBosses';
@@ -16,15 +16,43 @@ function duel(){const s=battle();s.boss.x=5250;beginNightmareUltimate(s);tick(s,
 test('the surprise surge waits for the beam to nearly reach her, including clock expiry while ahead',()=>{
  const s=duel(),q=s.powerClash;tick(s,2);expect(q.bossBoost).toBe(false);
  q.pressure=.87;stepAdventure(s,{attack:true},1/120);expect(q.state).toBe('boss-boost');expect(q.boostPressure).toBeGreaterThan(.88);
- const late=duel(),z=late.powerClash;z.contestAge=z.limit-.001;z.pressure=.65;stepAdventure(late,{},1/120);expect(z.state).toBe('boss-boost');expect(z.won).toBeNull();
+ const late=duel(),z=late.powerClash;z.contestAge=z.limit-.001;z.pressure=.65;stepAdventure(late,{},1/120);expect(z.state).toBe('breakthrough');expect(z.won).toBeNull();
+ tick(late,.35);expect(z.pressure).toBeGreaterThan(.65);expect(z.pressure).toBeLessThan(.91);expect(z.bossBoost).toBe(false);expect(late.boss.hp).toBe(234);
+ tick(late,.4);expect(z.state).toBe('boss-boost');expect(z.boostPressure).toBeCloseTo(.91);expect(z.won).toBeNull();
 });
 
-test('expiry never kills Hexy or awards a victory with the beams still in the arena',()=>{
- for(const pressure of [.18,.45,.7]){const s=duel(),q=s.powerClash;Object.assign(q,{bossBoost:true,hexyBoost:true,hexyReleased:true,pressure,contestAge:80,limit:1});tick(s,.08);expect(q.state).toBe('contest');expect(q.won).toBeNull();expect(s.hearts).toBe(5);}
+test('expiry commits the leading side, then travels to the target before damage',()=>{
+ for(const pressure of [.18,.45,.7]){
+  const s=duel(),q=s.powerClash;Object.assign(q,{bossBoost:true,hexyBoost:true,hexyReleased:true,pressure,contestAge:q.limit-.001});
+  stepAdventure(s,{},1/120);expect(q.state).toBe('resolve');expect(q.won).toBe(pressure>.5);expect(q.resolutionReason).toBe('time');expect(s.hearts).toBe(5);expect(s.boss.hp).toBe(234);
+  tick(s,.12,{super:true,attack:true});expect(q.state).toBe('resolve');expect(q.pressure).toBeGreaterThan(0);expect(q.pressure).toBeLessThan(1);expect(s.hearts).toBe(5);
+  for(let i=0;i<120&&q.state==='resolve';i++)stepAdventure(s,{},1/120);
+  expect(q.state).toBe('flight');expect(q.pressure).toBe(q.won?1:0);expect(q.won?s.boss.hp:s.hearts).toBe(0);
+ }
 });
 
 test('loss starts only at Hexy actual endpoint and victory only at the boss endpoint',()=>{
- for(const won of [false,true]){const s=duel(),q=s.powerClash;Object.assign(q,{bossBoost:true,hexyBoost:true,hexyReleased:true,pressure:won?.985:.006,contestAge:2,limit:1});const before=nightmareContact(s);expect(Math.hypot(before.x-before.a.x,before.y-before.a.y)).toBeGreaterThan(1);stepAdventure(s,won?{attack:true}:{},1/120);if(!won)tick(s,.06);expect(q.state).toBe('resolve');expect(q.won).toBe(won);const h=nightmareContact(s),end=won?h.b:h.a;expect(Math.hypot(h.x-end.x,h.y-end.y)).toBeLessThan(.01);}
+ for(const won of [false,true]){const s=duel(),q=s.powerClash;Object.assign(q,{bossBoost:true,hexyBoost:true,hexyReleased:true,pressure:won?.985:.006,contestAge:2});const before=nightmareContact(s);expect(Math.hypot(before.x-before.a.x,before.y-before.a.y)).toBeGreaterThan(1);stepAdventure(s,won?{attack:true}:{},1/120);if(!won)tick(s,.06);expect(q.state).toBe('resolve');expect(q.won).toBe(won);expect(q.resolutionReason).toBe('contact');const h=nightmareContact(s),end=won?h.b:h.a;expect(Math.hypot(h.x-end.x,h.y-end.y)).toBeLessThan(.01);}
+});
+
+test('each discharged counter adds ten seconds capped at twenty, and cinematic charge pauses the clock',()=>{
+ for(const left of [3,17]){
+  const s=duel(),q=s.powerClash;expect(q.limit).toBe(20);q.contestAge=q.limit-left;q.pressure=.9;stepAdventure(s,{},1/120);
+  const before=nightmareClashRemaining(q);tick(s,.7);expect(nightmareClashRemaining(q)).toBe(before);
+  while(!q.bossReleased)stepAdventure(s,{},1/120);
+  expect(nightmareClashRemaining(q)).toBeCloseTo(Math.min(20,before+10)-1/120,5);
+  while(q.state==='boss-boost')stepAdventure(s,{},1/120);
+  q.limit=q.contestAge+left;stepAdventure(s,{super:true},1/120);expect(q.state).toBe('hexy-boost');const remaining=nightmareClashRemaining(q);
+  tick(s,.6);expect(nightmareClashRemaining(q)).toBe(remaining);
+  while(!q.hexyReleased)stepAdventure(s,{},1/120);
+  expect(nightmareClashRemaining(q)).toBeCloseTo(Math.min(20,remaining+10)-1/120,5);
+  while(q.state==='hexy-boost')stepAdventure(s,{},1/120);expect(q.pressure).toBe(.5);
+ }
+});
+
+test('expiry while losing before her counter resolves a loss, and a final rally grants no hidden overtime',()=>{
+ const s=duel(),q=s.powerClash;q.pressure=.4;q.contestAge=q.limit-.001;stepAdventure(s,{},1/120);expect(q.state).toBe('resolve');expect(q.won).toBe(false);expect(q.bossBoost).toBe(false);expect(s.hearts).toBe(5);
+ const t=duel(),r=t.powerClash;Object.assign(r,{bossBoost:true,hexyBoost:true,hexyReleased:true,pressure:.86,age:.6,contestAge:19.5});const limit=r.limit;stepAdventure(t,{},1/120);expect(r.finalSurgeUsed).toBe(true);expect(r.limit).toBe(limit);
 });
 
 test('double Encore recenters the contact but stopping presses can still lose and shows effortful joy',()=>{

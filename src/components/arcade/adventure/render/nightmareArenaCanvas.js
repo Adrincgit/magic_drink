@@ -1,11 +1,11 @@
 export const NIGHTMARE_CONTACT_Y=470;
 export function nightmareFloorView(s){
  if(!s.level.openNightmare)return s;
- if(s.powerClash?.focus&&['travel','contest','boss-boost','hexy-boost','resolve'].includes(s.powerClash.state))return{...s,ringPerspective:true,nightmarePerspective:true};
+ if(s.powerClash?.focus&&['travel','contest','boss-boost','hexy-boost','breakthrough','resolve'].includes(s.powerClash.state))return{...s,ringPerspective:true,nightmarePerspective:true};
  return{...s,ringPerspective:true,nightmarePerspective:true,camera:{...s.camera,y:s.level.arena.y-NIGHTMARE_CONTACT_Y/(s.camera.zoom||1)}};
 }
 export function nightmareFloorPlacement(s,img){
- const z=s.camera.zoom||1,cinematic=s.powerClash?.focus&&['travel','contest','boss-boost','hexy-boost','resolve'].includes(s.powerClash.state),floor=cinematic?(s.level.arena.y-s.camera.y)*z:NIGHTMARE_CONTACT_Y,h=Math.max(620,(cinematic?2700:760)*z),w=Math.max(h*img.width/img.height,960+s.level.width*.075),rearY=floor-140*z;
+ const z=s.camera.zoom||1,cinematic=s.powerClash?.focus&&['travel','contest','boss-boost','hexy-boost','breakthrough','resolve'].includes(s.powerClash.state),floor=cinematic?(s.level.arena.y-s.camera.y)*z:NIGHTMARE_CONTACT_Y,h=Math.max(620,(cinematic?2700:760)*z),w=Math.max(h*img.width/img.height,960+s.level.width*.075),rearY=floor-140*z;
  const center=s.camera.x+480/z,ring=(s.level.arena.left+s.level.arena.right)/2;
  return{x:Math.max(960-w,Math.min(0,480+(ring-center)*z*.18-w/2)),y:rearY-h*.785,w,h,rearY,contactY:floor};
 }

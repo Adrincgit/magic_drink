@@ -1,0 +1,283 @@
+
+> users-adrinc-documents-adrinc-proyectos-astro-ui-web@0.0.1 build
+> astro check && astro build
+
+18:15:31 [content] Syncing content
+18:15:31 [content] Synced content
+18:15:31 [types] Generated 197ms
+18:15:31 [check] Getting diagnostics for Astro files in G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink...
+src/components/Page_404/Page_404.jsx:1:1 - warning ts(6133): 'React' is declared but its value is never read.
+
+1 import React from "react";
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/arcade/adventure/HexyAdventure.jsx:58:69 - warning ts(6133): 'level' is declared but its value is never read.
+
+58  opts.current={reduced,muted,en,circusFloor:GRAND_RING_FLOOR};const level=LEVELS[selected],playing=phase==='playing',inRun=playing||phase==='paused'||phase==='between'||phase==='shop'||phase.startsWith('shop-'),lang=en?1:0;
+                                                                       ~~~~~
+src/components/arcade/adventure/HexyAdventure.jsx:57:79 - warning ts(6133): 'open' is declared but its value is never read.
+
+57  const [finish,setFinish]=useIllustratedFinish('arcade'),dialog=useRef(null),{open,close}=usePlazaDialog(dialog);
+                                                                                 ~~~~
+
+src/components/arcade/adventure/actors/bosses/adventureOrganFortress.js:19:33 - warning ts(6133): 's' is declared but its value is never read.
+
+19 export function stepOrganRain(q,s,dt){
+                                   ~
+src/components/arcade/adventure/actors/bosses/adventureOrganFortress.js:1:9 - warning ts(6133): 'organAnchor' is declared but its value is never read.
+
+1 import {organAnchor,organPipes,organMouths,organBassMouth,organMechanism,organDriveRect} from './organMechanism';
+          ~~~~~~~~~~~
+
+src/components/arcade/adventure/actors/enemies/adventureClownBooster.js:33:27 - warning ts(6133): 's' is declared but its value is never read.
+
+33 function releasePassenger(s,c){
+                             ~
+
+src/components/arcade/adventure/actors/enemies/adventureRiverBoat.js:1:1 - warning ts(6133): 'enemyMuzzle' is declared but its value is never read.
+
+1 import {enemyMuzzle} from './adventureEnemyGeometry';
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/arcade/adventure/actors/hexy/hexyAnimation.js:67:33 - warning ts(6133): 'castFrame' is declared but its value is never read.
+
+67  const p=s.player,cast=p.cast>0,castFrame=[1,2,0,3][clamp(Math.floor((.24-p.cast)/.06),0,3)];
+                                   ~~~~~~~~~
+
+src/components/arcade/adventure/engine/adventureExtraDrinks.js:49:36 - warning ts(6133): 'dt' is declared but its value is never read.
+
+49 export function stepExtraField(s,f,dt){
+                                      ~~
+
+src/components/arcade/adventure/engine/adventureModel.js:54:84 - warning ts(6133): 'swapDrink' is declared but its value is never read.
+
+54 import {DRINK_SHOTS,strongShots,syncDrink,spendDrink,drinkScale,grantStartingDrink,swapDrink,validSpare,cycleShotMode,activeWeapon} from './adventureAmmo';
+                                                                                      ~~~~~~~~~
+
+src/components/arcade/adventure/engine/adventureNightmareMotion.js:50:38 - warning ts(6133): 's' is declared but its value is never read.
+
+50 export function beginNightmareDefeat(s,e){
+                                        ~
+
+src/components/arcade/adventure/render/actTwoCanvas.js:140:106 - warning ts(6133): 'spiral' is declared but its value is never read.
+
+140   const angle=Math.atan2(q.vy,q.vx),shear=q.windShape==='wind-shear',rain=q.windShape==='nightmare-rain',spiral=q.windShape==='spiral-volley',length=shear?175:rain?140:115;
+                                                                                                             ~~~~~~
+
+src/components/arcade/adventure/render/adventureRiverCanvas.js:25:29 - warning ts(6133): 'river' is declared but its value is never read.
+
+25 export function riverFlow(s,river,reduced=false){
+                               ~~~~~
+src/components/arcade/adventure/render/adventureRiverCanvas.js:1:1 - warning ts(6133): 'groundY' is declared but its value is never read.
+
+1 import {groundY} from '../world/adventureTerrain';
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/arcade/adventure/render/bargeCanvas.js:11:10 - warning ts(6133): 'part' is declared but its value is never read.
+
+11 function part(c,img,x,y,w,h,angle=0){c.save();c.translate(x,y);c.rotate(angle);c.drawImage(img,-w/2,-h/2,w,h);c.restore();}
+            ~~~~
+
+src/components/arcade/adventure/render/bargePercussionCanvas.js:11:47 - warning ts(6133): 't' is declared but its value is never read.
+
+11 export function drawBargePercussion(c,s,art,m,t,reduced){
+                                                 ~
+
+src/components/arcade/adventure/render/circusCampCanvas.js:1:40 - warning ts(6133): 'CAMP_FLAGS' is declared but its value is never read.
+
+1 import {drawWindCloth,drawCampWindTent,CAMP_FLAGS,SIDE_FLAGS} from './windClothCanvas';
+                                         ~~~~~~~~~~
+
+src/components/arcade/adventure/render/cornfieldCanvas.js:80:22 - warning ts(6133): 's' is declared but its value is never read.
+
+80 function leafBurst(c,s,art,q,reduced){
+                        ~
+
+src/components/arcade/adventure/render/electricEnemyCanvas.js:22:46 - warning ts(6133): 'reduced' is declared but its value is never read.
+
+22 export function drawElectricReaction(c,e,art,reduced){
+                                                ~~~~~~~
+src/components/arcade/adventure/render/electricEnemyCanvas.js:22:42 - warning ts(6133): 'art' is declared but its value is never read.
+
+22 export function drawElectricReaction(c,e,art,reduced){
+                                            ~~~
+
+src/components/arcade/adventure/render/episodeTwoCanvas.js:123:39 - warning ts(6133): 'art' is declared but its value is never read.
+
+123 export function drawEpisodeScreen(c,s,art,en){
+                                          ~~~
+
+src/components/arcade/adventure/render/harlequinCanvas.js:41:44 - warning ts(6133): 'reduced' is declared but its value is never read.
+
+41 export function drawGrandRingStage(c,s,art,reduced){
+                                              ~~~~~~~
+src/components/arcade/adventure/render/harlequinCanvas.js:41:40 - warning ts(6133): 'art' is declared but its value is never read.
+
+41 export function drawGrandRingStage(c,s,art,reduced){
+                                          ~~~
+
+src/components/arcade/adventure/render/nightmareComboCanvas.js:16:43 - warning ts(6133): 'reduced' is declared but its value is never read.
+
+16 export function drawNightmareSlam(c,s,art,reduced=false){
+                                             ~~~~~~~
+src/components/arcade/adventure/render/nightmareComboCanvas.js:1:1 - warning ts(6133): 'drawNightmareMote' is declared but its value is never read.
+
+1 import {drawNightmareMote} from './nightmareMotesCanvas';
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/arcade/adventure/render/nightmareEnergyCanvas.js:57:68 - warning ts(6133): 'reduced' is declared but its value is never read.
+
+57 export function drawNightmareStormStream(c,art,frame,from,to,width,reduced=false){
+                                                                      ~~~~~~~
+
+src/components/arcade/adventure/render/nightmarePressureAtmosphere.js:22:57 - warning ts(6133): 'h' is declared but its value is never read.
+
+22 export function drawNightmareWind(c,s,art,reduced=false,h){
+                                                           ~
+
+src/components/arcade/adventure/render/nightmareSpeechBubbles.js:15:49 - warning ts(6133): 'reduced' is declared but its value is never read.
+
+15 export function drawNightmareClashSpeech(c,s,en,reduced,art){
+                                                   ~~~~~~~
+
+src/components/arcade/adventure/render/powerClashCanvas.js:99:40 - warning ts(6133): 'en' is declared but its value is never read.
+
+99 export function drawClashMeter(c,s,art,en,reduced){
+                                          ~~
+src/components/arcade/adventure/render/powerClashCanvas.js:38:39 - warning ts(6133): 'reduced' is declared but its value is never read.
+
+38 export function drawPowerBackdrop(c,s,reduced){
+                                         ~~~~~~~
+
+src/components/arcade/adventure/ui/settings/AdventureSettings.jsx:3:25 - warning ts(6133): 'GAMEPAD_BUTTON_NAMES' is declared but its value is never read.
+
+3 import {GAMEPAD_ACTIONS,GAMEPAD_BUTTON_NAMES,DEFAULT_GAMEPAD_BINDINGS,assignGamepadButton,bindingName} from '../../input/gamepadBindings';
+                          ~~~~~~~~~~~~~~~~~~~~
+
+src/components/arcade/adventure/world/adventureActTwo.js:13:7 - warning ts(6133): 'ledge' is declared but its value is never read.
+
+13 const ledge=(x,y,w,art=5,extra={})=>({x,y,w,h:25,kind:'act-two',art,...extra});
+         ~~~~~
+
+src/components/arcade/shared/audio/sounds.js:19:51 - warning ts(2568): Property 'webkitAudioContext' may not exist on type 'Window & typeof globalThis'. Did you mean 'AudioContext'?
+
+19  try{context ||= new (window.AudioContext||window.webkitAudioContext)();if(!master){master=context.createGain();master.gain.value=outputGain();master.connect(context.destination);effectsInput=createEffectsBus(context,master);voiceMaster=context.createGain();voiceMaster.gain.value=outputVoiceGain();voiceMaster.connect(context.destination);creaturePlayer=createCreaturePlayer(context,effectsInput,createEffectsBus(context,voiceMaster));void creaturePlayer.preload();}if(context.state==='suspended')void context.resume();}catch{}
+                                                     ~~~~~~~~~~~~~~~~~~
+
+src/components/global/animations/riveComponent.jsx:58:15 - warning ts(6133): 'state' is declared but its value is never read.
+
+58         const state = event.data[0];
+                 ~~~~~
+src/components/global/animations/riveComponent.jsx:17:5 - warning ts(6133): 'ingles' is declared but its value is never read.
+
+17     ingles = false,
+       ~~~~~~
+src/components/global/animations/riveComponent.jsx:1:27 - warning ts(6133): 'Fit' is declared but its value is never read.
+
+1 import { useRive, Layout, Fit, Alignment, useStateMachineInput } from "@rive-app/react-canvas";
+                            ~~~
+
+src/components/hexy/HexyWorld.jsx:111:21 - warning ts(6133): 'reduced' is declared but its value is never read.
+
+111 function Hero({ en, reduced }) {
+                        ~~~~~~~
+
+src/components/hexy/components/HexyAudioProvider.jsx:1:8 - warning ts(6133): 'React' is declared but its value is never read.
+
+1 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+         ~~~~~
+
+src/components/hexy/components/HexyPlayer.jsx:1:8 - warning ts(6133): 'React' is declared but its value is never read.
+
+1 import React, { useEffect, useId, useRef, useState } from 'react';
+         ~~~~~
+
+src/components/index/animations/audioReaction.js:18:49 - warning ts(2568): Property 'webkitAudioContext' may not exist on type 'Window & typeof globalThis'. Did you mean 'AudioContext'?
+
+18   const Context = window.AudioContext || window.webkitAudioContext;
+                                                   ~~~~~~~~~~~~~~~~~~
+
+Result (424 files):
+- 0 errors
+- 0 warnings
+- 40 hints
+
+18:15:59 [content] Syncing content
+18:15:59 [content] Synced content
+18:15:59 [types] Generated 236ms
+18:15:59 [build] output: "static"
+18:15:59 [build] mode: "static"
+18:15:59 [build] directory: G:\TRABAJO\ASTRO\ADRINC_WEBS\magicdrink\dist\
+18:15:59 [build] Collecting build info...
+18:15:59 [build] ✓ Completed in 563ms.
+18:16:00 [build] Building static entrypoints...
+node.exe : Browserslist: browsers data (caniuse-lite) is 17 months old. Please run:
+En línea: 1 Carácter: 1
++ & "C:\nvm4w\nodejs/node.exe" "C:\nvm4w\nodejs/node_modules/npm/bin/np ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Browserslist: b...ld. Please run::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+18:16:29 [vite] ✓ built in 28.54s
+18:16:29 [build] ✓ Completed in 28.61s.
+
+ building client (vite)
+18:16:29 [vite] transforming...
+18:16:37 [vite] ✓ 2174 modules transformed.
+18:16:38 [vite] rendering chunks...
+18:16:39 [vite] computing gzip size...
+18:16:39 [vite] dist/_astro/bebidas.DqgdlSq8.css               10.94 kB │ gzip:   3.38 kB
+18:16:39 [vite] dist/_astro/arcade.DLysdei0.css                12.09 kB │ gzip:   3.58 kB
+18:16:39 [vite] dist/_astro/bebidas.DWdxdeAQ.css               17.96 kB │ gzip:   4.69 kB
+18:16:39 [vite] dist/_astro/hexy.CXoKt53D.css                  87.35 kB │ gzip:  19.52 kB
+18:16:39 [vite] dist/_astro/arcade.CRNRvBnJ.css               103.11 kB │ gzip:  22.56 kB
+18:16:39 [vite] dist/_astro/index.tTYXhE1P.css                112.37 kB │ gzip:  25.52 kB
+18:16:39 [vite] dist/_astro/IndexExperience.Cyub2-Ux.js         0.34 kB │ gzip:   0.24 kB
+18:16:39 [vite] dist/_astro/hexyPlaylist.B8nPPW3s.js            0.98 kB │ gzip:   0.36 kB
+18:16:39 [vite] dist/_astro/arcade.1e0481da.CqKgK4Hd.js         1.08 kB │ gzip:   0.56 kB
+18:16:39 [vite] dist/_astro/bebidas.2598042d.DLX_BJ4f.js        1.11 kB │ gzip:   0.51 kB
+18:16:39 [vite] dist/_astro/bebidas.864e6ef5.CrBNUkvs.js        1.61 kB │ gzip:   0.72 kB
+18:16:39 [vite] dist/_astro/client.g3m__AEg.js                  1.87 kB │ gzip:   0.92 kB
+18:16:39 [vite] dist/_astro/useReducedMotion.BwjYSKNM.js        2.10 kB │ gzip:   0.92 kB
+18:16:39 [vite] dist/_astro/variables.CxPxvKRg.js               2.48 kB │ gzip:   1.25 kB
+18:16:39 [vite] dist/_astro/waterMotion.BVNHj5CQ.js             2.72 kB │ gzip:   1.35 kB
+18:16:39 [vite] dist/_astro/crowdMotion.LRXDqSbE.js             3.34 kB │ gzip:   1.64 kB
+18:16:39 [vite] dist/_astro/wonderpopFilm.BkdTkMTE.js           5.42 kB │ gzip:   2.59 kB
+18:16:39 [vite] dist/_astro/atriumWorld.Bw5ClRls.js             5.43 kB │ gzip:   2.59 kB
+18:16:39 [vite] dist/_astro/gardenWorld.DOi_HbLb.js             5.50 kB │ gzip:   2.62 kB
+18:16:39 [vite] dist/_astro/arcade.180d3b5d.O0iwtmSa.js         5.63 kB │ gzip:   2.27 kB
+18:16:39 [vite] dist/_astro/hexy.b41d93b9.B-XOgGOD.js           6.79 kB │ gzip:   2.70 kB
+18:16:39 [vite] dist/_astro/index.DK-fsZOb.js                   6.81 kB │ gzip:   2.73 kB
+18:16:39 [vite] dist/_astro/index.95d291e9.DZuZ3aD1.js          9.53 kB │ gzip:   4.02 kB
+18:16:39 [vite] dist/_astro/MagicDrinkExperience.DhEEEPij.js   11.75 kB │ gzip:   4.40 kB
+18:16:39 [vite] dist/_astro/HexyShowcase.BzgZ_8jd.js           43.56 kB │ gzip:  13.68 kB
+18:16:39 [vite] dist/_astro/Page_404.DJKbpbXu.js              125.49 kB │ gzip:  41.10 kB
+18:16:39 [vite] dist/_astro/index.BoiOKwrL.js                 134.64 kB │ gzip:  43.22 kB
+18:16:39 [vite] dist/_astro/HexyFinish.Bj5HSqc5.js            161.92 kB │ gzip:  59.79 kB
+18:16:39 [vite] dist/_astro/IndexExperience.3eKIbJqr.js       246.97 kB │ gzip:  91.81 kB
+18:16:39 [vite] dist/_astro/three.module.CxCtQbCr.js          459.38 kB │ gzip: 115.13 kB
+18:16:39 [vite] dist/_astro/HexyAdventure.fQetiVzx.js         804.07 kB │ gzip: 268.55 kB
+18:16:39 [WARN] [vite]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+18:16:39 [vite] ✓ built in 9.79s
+
+ generating static routes
+18:16:40 ▶ src/pages/404.astro
+18:16:40   └─ /404.html (+12ms)
+18:16:40 ▶ src/pages/arcade.astro
+18:16:40   └─ /arcade/index.html (+15ms)
+18:16:40 ▶ src/pages/bebidas.astro
+18:16:40   └─ /bebidas/index.html (+13ms)
+18:16:40 ▶ src/pages/hexy.astro
+18:16:40   └─ /hexy/index.html (+16ms)
+18:16:40 ▶ src/pages/index.astro
+18:16:40   └─ /index.html (+16ms)
+18:16:40 ✓ Completed in 312ms.
+
+18:16:40 [build] 5 page(s) built in 41.19s
+18:16:40 [build] Complete!

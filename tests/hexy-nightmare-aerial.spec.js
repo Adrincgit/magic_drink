@@ -38,7 +38,7 @@ test('both orientations and an air response register the beam to the actual star
 test('the boss enlarges once, adds ten seconds, and then allows a fresh second ultimate near defeat',()=>{
  const s=duel(),magic=s.magic,cooldown=s.superCooldown;
  until(s,s=>s.powerClash?.boostReady,(s,i)=>({attack:i%12<6}));const q=s.powerClash;
- expect(q.limit).toBe(24);expect(q.bossAmplification).toBe(1);expect(nightmareResistance({...q,surgeAge:2},false)).toBeGreaterThan(nightmareResistance({...q,bossBoost:false},false));
+ expect(q.limit-q.contestAge).toBeLessThanOrEqual(20);expect(q.limit-q.contestAge).toBeGreaterThan(18);expect(q.bossAmplification).toBe(1);expect(nightmareResistance({...q,surgeAge:2},false)).toBeGreaterThan(nightmareResistance({...q,bossBoost:false},false));
  until(s,s=>s.powerClash?.pressure<.1);expect(s.powerClash).toBeTruthy();expect(q.windFlow).toBe(-1);expect(nightmareEffort({...q,portraitPressure:.09},true)).toBe(2);
  stepAdventure(s,{super:true},1/120);expect(q.state).toBe('hexy-boost');until(s,s=>s.powerClash?.state==='contest');expect(q.hexyAmplification).toBe(1);expect(q.windFlow).toBe(1);expect(q.pressure).toBe(.5);
  expect(s.magic).toBe(magic);expect(s.superCooldown).toBe(cooldown);expect(nightmareEffort(q)).toBe(4);

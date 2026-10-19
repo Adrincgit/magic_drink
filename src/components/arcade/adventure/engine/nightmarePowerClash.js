@@ -9,7 +9,14 @@ import {nightmarePressureWave,nightmareResistance} from './nightmareActing';
 import {impactSmoke} from './cinematicImpact';
 import {worldSound} from './adventureWorldAudio';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
-export const NIGHTMARE_CLASH={duration:14,extension:10,min:8.5,bossCharge:1.25,bossRelease:.85,boostCharge:.85,boostRelease:.28,damage:260,flight:1.45,land:2.4};
+export const NIGHTMARE_CLASH={duration:20,extension:10,maxRemaining:20,bossCharge:1.25,bossRelease:.85,boostCharge:.85,boostRelease:.28,damage:260,flight:1.45,land:2.4};
+export const nightmareClashRemaining=q=>Math.max(0,q.limit-q.contestAge);
+function extendClock(q){q.limit=q.contestAge+Math.min(NIGHTMARE_CLASH.maxRemaining,nightmareClashRemaining(q)+NIGHTMARE_CLASH.extension);}
+function bossCounter(s){const q=s.powerClash;q.bossBoost=true;q.boostPressure=q.pressure;q.state='boss-boost';q.age=0;s.events.push('harlequinPowerPulse');}
+function resolve(s,won,reason){
+ const q=s.powerClash;q.state='resolve';q.age=0;q.won=won;q.resolutionReason=reason;q.resolveFrom=q.pressure;
+ q.resolveDuration=.22+Math.abs((won?1:0)-q.pressure)*.65;s.events.push(won?'clashWin':'clashLose');
+}
 export const canNightmareClash=s=>!!s.level.badDreams&&s.boss.hp>0&&s.boss.nightmareUltimate?.state==='charge';
 export function beginNightmareClash(s){
  if(!s.superCinematic||!canNightmareClash(s))return false;
@@ -68,24 +75,31 @@ export function stepNightmareClash(s,input,dt,{hurt}){
   if(input.attack&&!s.lastInput.attack&&q.contestAge-q.lastTap>=.045){q.lastTap=q.contestAge;q.taps++;q.pressure+=s.gentle?.037:.029;q.tapPulse=.12;s.events.push('clashTap');}
   q.pressure=clamp(q.pressure-dt*nightmareResistance(q,s.gentle),0,1);
   if(q.hexyBoost&&!q.finalSurgeUsed&&q.pressure>=.82&&q.age>.4){
-   q.finalSurgeUsed=true;q.finalSurgeAge=0;q.pressure=Math.max(.5,q.pressure-(s.gentle?.055:.085));q.limit=Math.max(q.limit,q.contestAge+4);
+   q.finalSurgeUsed=true;q.finalSurgeAge=0;q.pressure=Math.max(.5,q.pressure-(s.gentle?.055:.085));
    q.tapPulse=.16;s.events.push('harlequinPowerPulse','clashPulse');
   }
-  // She refuses defeat at the brink, including a clock expiry while Hexy
-  // is ahead. The deadline is dramatic pacing, never a hidden verdict.
-  if(!q.bossBoost&&(q.pressure>=.88||q.contestAge>=q.limit&&q.pressure>=.5)){
-   q.bossBoost=true;q.boostPressure=q.pressure;q.limit+=NIGHTMARE_CLASH.extension;q.state='boss-boost';q.age=0;s.events.push('harlequinPowerPulse');
+  // The clock commits a winner, but the beam must visibly travel to its
+  // target before damage. Her one surprise intercepts that apparent win.
+  if(!q.bossBoost&&q.pressure>=.88){
+   bossCounter(s);
+  }else if(nightmareClashRemaining(q)<=0){
+   if(!q.bossBoost&&q.pressure>=.5){q.state='breakthrough';q.age=0;q.breakthroughFrom=q.pressure;}
+   else resolve(s,q.pressure>=.5,'time');
+  }else if(q.pressure<=0||q.pressure>=1){
+   resolve(s,q.pressure>=1,'contact');
   }else if(q.boostReady&&!q.hexyBoost&&input.super&&!s.lastInput.super){
    q.hexyBoost=true;q.boostReady=false;q.boostPressure=q.pressure;q.state='hexy-boost';q.age=0;s.events.push('superCharge');
-  }else{
-   if(q.pressure<=0||q.pressure>=1){q.state='resolve';q.age=0;q.won=q.pressure>=1;s.events.push(q.won?'clashWin':'clashLose');}
   }
   q.dustClock=(q.dustClock||0)+dt;if(q.dustClock>.48){q.dustClock=0;const direction=q.windFlow;for(let i=0;i<3;i++)s.effects.push({cinematicSmoke:true,x:p.x+direction*(80+i*90),y:s.level.arena.y-4,size:50+i*16,vx:direction*(130+i*25),vy:-25,age:0,life:1.1,duration:1.1,seed:i,alpha:.5});}
   const h=nightmareContact(s);q.sparkClock+=dt;while(q.sparkClock>=.035){q.sparkClock-=.035;emitClashSparks(q,h.x,h.y,2);}
   if(q.contestAge>=(q.nextArc??.3)){q.nextArc=q.contestAge+[.32,.48,.27,.61][q.taps%4];s.events.push('clashArc','clashPulse');}
+ }else if(q.state==='breakthrough'){
+  p.charge=0;p.superCast=.32;
+  const t=clamp(q.age/.72,0,1),ease=t*t*(3-2*t);q.pressure=q.breakthroughFrom+(.91-q.breakthroughFrom)*ease;
+  if(t>=1)bossCounter(s);
  }else if(q.state==='boss-boost'){
   p.charge=0;p.superCast=.32;q.bossAmplification=clamp((q.age-NIGHTMARE_CLASH.bossCharge)/NIGHTMARE_CLASH.bossRelease,0,1);
-  if(q.age>=NIGHTMARE_CLASH.bossCharge&&!q.bossReleased){q.bossReleased=true;impact(s,'boss-surge');s.events.push('harlequinRelease');}
+  if(q.age>=NIGHTMARE_CLASH.bossCharge&&!q.bossReleased){q.bossReleased=true;extendClock(q);impact(s,'boss-surge');s.events.push('harlequinRelease');}
   if(q.bossReleased){q.contestAge+=dt;q.surgeAge+=dt;if(input.attack&&!s.lastInput.attack&&q.contestAge-q.lastTap>=.045){q.lastTap=q.contestAge;q.taps++;q.bossReleaseTaps=(q.bossReleaseTaps||0)+1;q.tapPulse=.12;s.events.push('clashTap');}}
   q.pressure=clamp(q.boostPressure+(Math.max(.16,Math.min(.34,q.boostPressure-.4))-q.boostPressure)*q.bossAmplification+Math.min(.13,(q.bossReleaseTaps||0)*.016),0,1);
   if(q.age>=NIGHTMARE_CLASH.bossCharge+NIGHTMARE_CLASH.bossRelease){q.boostReady=true;contest(s);}
@@ -93,13 +107,14 @@ export function stepNightmareClash(s,input,dt,{hurt}){
   const charge=clamp(q.age/NIGHTMARE_CLASH.boostCharge,0,1),release=clamp((q.age-NIGHTMARE_CLASH.boostCharge)/NIGHTMARE_CLASH.boostRelease,0,1);
   q.hexyAmplification=release;q.windFlow=-1+2*release;
   s.superCinematic.age=charge*SUPER_WINDUP;p.charge=charge*SUPER_WINDUP;p.superCast=0;
-  if(charge>=1&&!q.hexyReleased){q.hexyReleased=true;q.counterReactionAge=0;impact(s,'hexy-reversal');s.events.push('superCast');}
+  if(charge>=1&&!q.hexyReleased){q.hexyReleased=true;extendClock(q);q.counterReactionAge=0;impact(s,'hexy-reversal');s.events.push('superCast');}
   if(q.hexyReleased)q.contestAge+=dt;
   const ease=release*release*(3-2*release);q.pressure=q.boostPressure+(.5-q.boostPressure)*ease;
   if(release>=1){stepSuperSurface(s,dt);for(const d of s.superCinematic.surfaceDust||[]){d.vx*=1.8;d.vy*=1.3;d.size*=1.25;}q.pressure=.5;q.portraitPressure=.5;contest(s);}
  }else if(q.state==='resolve'){
-  p.charge=0;p.superCast=.32;q.pressure+=(q.won?1-q.pressure:-q.pressure)*Math.min(1,dt*7);
-  if(q.age>=.4)launch(s);
+  p.charge=0;p.superCast=.32;
+  const t=clamp(q.age/q.resolveDuration,0,1),ease=t*t*(3-2*t);q.pressure=q.resolveFrom+((q.won?1:0)-q.resolveFrom)*ease;
+  if(t>=1)launch(s);
  }else if(q.state==='flight'){
   p.charge=0;p.superCast=0;const loser=q.won?b:p,t=clamp(q.age/NIGHTMARE_CLASH.flight,0,1),ease=1-(1-t)**2;
   loser.x=q.flight.x+(q.flight.toX-q.flight.x)*ease;loser.y=q.flight.y+(s.level.arena.y-q.flight.y)*t-Math.sin(t*Math.PI)*(q.won?330:260);loser.clashFlight.frame=Math.min(3,Math.floor(t*4));

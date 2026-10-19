@@ -52,7 +52,7 @@ test('one boss reversal and one fresh ultimate amplify the clash without chargin
  for(let i=0;i<120*35&&s.powerClash;i++){
   const q=s.powerClash,input={attack:i%12<6,super:!!q.boostReady&&!q.hexyBoost};const before=q.state;stepAdventure(s,input,1/120);states.add(s.powerClash?.state);
   if(before!=='hexy-boost'&&s.powerClash?.state==='hexy-boost')boostStarted++;
-  if(q.bossBoost)expect(q.limit).toBe(NIGHTMARE_CLASH.duration+NIGHTMARE_CLASH.extension);
+  if(q.bossBoost)expect(Math.max(0,q.limit-q.contestAge)).toBeLessThanOrEqual(NIGHTMARE_CLASH.maxRemaining);
  }
  expect(states.has('boss-boost')).toBe(true);expect(states.has('hexy-boost')).toBe(true);expect(boostStarted).toBe(1);expect(s.powerClash).toBeNull();expect(s.magic).toBe(magic);expect(s.superCooldown).toBe(cooldown);expect(s.superReserve).toBe(0);expect(s.boss.hp).toBe(0);expect(s.dreamRoofTorn).toBe(true);
  tick(s,4);expect(s.boss.defeat.ready).toBe(true);expect(s.clear).toBeTruthy();

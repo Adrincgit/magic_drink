@@ -61,7 +61,7 @@ test('after double Encore the boss has one finite frustrated rally and steady ta
 });
 test('the manga explosion flash starts when the losing actor is hit, including a boss victory',()=>{
  for(const won of [true,false]){
-  const s=reversal(),q=s.powerClash;q.state='resolve';q.age=.39;q.won=won;q.impactAge=99;tick(s,.025);
+  const s=reversal(),q=s.powerClash;q.state='resolve';q.resolveDuration=.4;q.resolveFrom=q.pressure;q.age=.39;q.won=won;q.impactAge=99;tick(s,.025);
   expect(q.state).toBe('flight');expect(q.impactCause).toBe('explosion');expect(q.explosion).toEqual({x:q.flight.x,y:q.flight.y-70});expect(clashImpactTiming(q).manga).toBeGreaterThan(.9);expect(clashImpactTiming(q,true).manga).toBe(0);
  }
 });

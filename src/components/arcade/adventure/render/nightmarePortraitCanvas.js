@@ -29,7 +29,7 @@ export function drawNightmareScreen(c,s,art,en,reduced){
   if(q)hexyHero(c,s,art,flip?615:10,20,490,flip,clamp(q.age/.16)*clamp((q.windup-q.age)/.25));
   return;
  }
- if(['travel','contest','boss-boost','hexy-boost','resolve'].includes(q.state)){
+ if(['travel','contest','boss-boost','hexy-boost','breakthrough','resolve'].includes(q.state)){
   drawNightmarePressurePanels(c,s,art,reduced);drawNightmareGleeCutin(c,s,art,reduced);drawNightmarePressureMeter(c,s,art,reduced);
   drawNightmareClashSpeech(c,s,en,reduced,art);
  }

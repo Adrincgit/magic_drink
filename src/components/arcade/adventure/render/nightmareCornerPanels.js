@@ -31,7 +31,7 @@ function magic(c,s,art,p,reduced){
  c.restore();
 }
 export function drawNightmarePressurePanels(c,s,art,reduced=false){
- const q=s.powerClash;if(!q||!['travel','contest','boss-boost','hexy-boost','resolve'].includes(q.state))return;
+ const q=s.powerClash;if(!q||!['travel','contest','boss-boost','hexy-boost','breakthrough','resolve'].includes(q.state))return;
  const glee=nightmareGleeActive(q);
  for(const boss of [false,true])if(!boss||!glee)magic(c,s,art,nightmareCornerLayout(s,boss),reduced);
  c.save();c.strokeStyle='#08050c';c.lineWidth=9;c.lineCap='round';

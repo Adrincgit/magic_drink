@@ -1,5 +1,6 @@
 import {drawNightmareWind,drawNightmarePressureLight} from './nightmarePressureAtmosphere';
 import {NIGHTMARE_PERFORMANCE_VORTEX} from '../actors/bosses/nightmarePerformanceRegistration';
+import {NIGHTMARE_STAR_CORES,NIGHTMARE_VORTEX_CORES,NIGHTMARE_PLASMA_CORES} from './nightmareContactRegistration';
 import {nightmareContact} from '../engine/nightmarePowerClash';
 import {nightmareCrown,NIGHTMARE_ULTIMATE} from '../actors/bosses/nightmareUltimate';
 import {episodeCel} from './episodeTwoCanvas';
@@ -33,15 +34,23 @@ export function drawNightmareBackdrop(c,s){
  const z=s.camera.zoom||1;c.save();c.fillStyle=q?.hexyBoost?'#2b173e33':'#160e2f55';c.fillRect(s.camera.x,s.camera.y,960/z,540/z);c.restore();if(q?.kind==='nightmare')drawNightmarePressureLight(c,s,nightmareContact(s));
 }
 export function drawNightmareVortex(c,art,frame,from,to,width,alpha=1){
- const img=art['aerial-candy-vortex'];if(!img)return;const side=img.width/4,socket=NIGHTMARE_PERFORMANCE_VORTEX[frame];if(!socket)return;const f=socket.front,t=socket.tail;
+ const img=art['aerial-candy-vortex'];if(!img)return;const side=img.width/4,socket=NIGHTMARE_PERFORMANCE_VORTEX[frame];if(!socket)return;const f=NIGHTMARE_VORTEX_CORES[frame],t=socket.tail;
  const dx=f[0]-t[0],dy=f[1]-t[1],nativeLength=Math.hypot(dx,dy),length=Math.hypot(to.x-from.x,to.y-from.y);
  if(length<1)return;
  c.save();c.globalAlpha=alpha;c.translate(from.x,from.y);c.rotate(Math.atan2(to.y-from.y,to.x-from.x));c.scale(length/nativeLength,width/side);c.rotate(-Math.atan2(dy,dx));
  c.drawImage(img,frame%4*side,Math.floor(frame/4)*side,side,side,-t[0],-t[1],side,side);c.restore();
 }
-function starBeam(c,img,phase,a,b,width){
- const length=Math.hypot(b.x-a.x,b.y-a.y);c.save();c.translate(a.x,a.y);c.rotate(Math.atan2(b.y-a.y,b.x-a.x));
- drawDuelBeamTexture(c,img,phase,-4,-width/2,length+8,width,1);c.restore();
+export function drawNightmareStarBeam(c,img,phase,a,b,width){
+ const base=Math.floor(phase)%12,mix=phase-Math.floor(phase),one=NIGHTMARE_STAR_CORES[base],two=NIGHTMARE_STAR_CORES[(base+1)%12];
+ const core=[one[0]+(two[0]-one[0])*mix,one[1]+(two[1]-one[1])*mix],dx=core[0]-24,dy=core[1]-128,length=Math.hypot(b.x-a.x,b.y-a.y);
+ if(length<1)return;
+ c.save();c.translate(a.x,a.y);c.rotate(Math.atan2(b.y-a.y,b.x-a.x));c.scale(length/Math.hypot(dx,dy),width/256);c.rotate(-Math.atan2(dy,dx));
+ drawDuelBeamTexture(c,img,phase,-24,-128,1024,256,1);c.restore();
+}
+export function drawNightmareContactCore(c,art,frame,point,size,angle){
+ const img=art['nightmare-clash-plasma'];if(!img)return;const side=img.width/4,core=NIGHTMARE_PLASMA_CORES[frame];
+ c.save();c.translate(point.x,point.y);c.rotate(angle);c.scale(size/side,size/side);
+ c.drawImage(img,frame%4*side,Math.floor(frame/4)*side,side,side,-core[0],-core[1],side,side);c.restore();
 }
 // The new drawings already taper to the palm. Paint the ENTIRE source cel:
 // its curved contact rim and all outer filaments survive every camera zoom.
@@ -69,7 +78,7 @@ export function drawNightmareWorld(c,s,art,reduced){
  const travel=q.state==='travel'?clamp(q.age/.55):1,contact={x:h.a.x+(h.x-h.a.x)*travel,y:h.a.y+(h.y-h.a.y)*travel},bossFront={x:h.b.x+(h.x-h.b.x)*travel,y:h.b.y+(h.y-h.b.y)*travel};
  paintMagicLight(c,h.a.x,h.a.y,85,'#ffe8b2',.85);
  const visual=q.visualTime??s.fxTime,phase=duelBeamPhase(visual,reduced),swell=1+(q.wave||0)*.08+(q.tapPulse>0?.035:0),width=(470+q.hexyAmplification*480)*swell,rally=q.finalSurgeAge!==undefined?Math.sin(Math.PI*clamp(q.finalSurgeAge/1.2)):0,bossWidth=(520+q.bossAmplification*630)*(1+rally*.12);
- c.save();c.globalCompositeOperation='screen';c.globalAlpha=.24;starBeam(c,art['super-beam'],phase,h.a,contact,width*1.55);c.restore();starBeam(c,art['super-beam'],phase,h.a,contact,width);
+ c.save();c.globalCompositeOperation='screen';c.globalAlpha=.24;drawNightmareStarBeam(c,art['super-beam'],phase,h.a,contact,width*1.55);c.restore();drawNightmareStarBeam(c,art['super-beam'],phase,h.a,contact,width);
  drawNightmareStormStream(c,art,nightmareStormFrame(art,visual,reduced),h.b,bossFront,bossWidth,reduced);
  if(q.state==='boss-boost'&&q.age<NIGHTMARE_CLASH.bossCharge){
   const gathering=clamp(q.age/NIGHTMARE_CLASH.bossCharge);paintMagicLight(c,h.b.x,h.b.y,80+gathering*90,'#c16eff',.7);
@@ -82,7 +91,7 @@ export function drawNightmareWorld(c,s,art,reduced){
  else{
   energyGlow(c,false,contact.x,contact.y,230+q.hexyAmplification*150,.85);
   const size=250+q.hexyAmplification*110+(q.wave||0)*30;
-  nightmareFX(c,art,'clash-plasma',reduced?2:Math.floor(visual*24)%8,contact.x,contact.y,size,size,false,1,Math.atan2(h.b.y-h.a.y,h.b.x-h.a.x)+Math.PI/4);
+  drawNightmareContactCore(c,art,reduced?2:Math.floor(visual*24)%8,contact,size,Math.atan2(h.b.y-h.a.y,h.b.x-h.a.x)+Math.PI/4);
  }
  if(q.state==='resolve')nightmareFX(c,art,'clash-plasma',Math.min(7,Math.floor(q.age*20)),h.x,h.y,500+q.age*850);
  drawNightmareWind(c,s,art,reduced,h);drawClashSparks(c,q,art,reduced);

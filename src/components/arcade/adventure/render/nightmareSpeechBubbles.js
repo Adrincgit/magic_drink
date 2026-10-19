@@ -1,8 +1,8 @@
+import {nightmareClashRemaining} from '../engine/nightmarePowerClash';
 export function nightmareClashSpeech(q,en=false){
  if(q.state==='hexy-boost')return{boss:false,lines:[en?'DOUBLE ENCORE!':'¡ENCORE DOBLE!']};
  if(q.state==='boss-boost'||q.bossBoost&&!q.hexyBoost&&(q.surgeAge||0)<1.3)return{boss:true,lines:en?['YOU WILL BE','MY CANDY!']:['¡SERÁS','MI DULCE!']};
  if(q.hexyBoost&&q.state==='contest'&&(q.age<1.25||q.finalSurgeAge<1.2))return{boss:true,lines:en?['MORE MAGIC?!']:['¿¡MÁS MAGIA!?']};
- if(q.lastStandUntil-q.contestAge>1.2&&!q.hexyBoost)return{boss:true,lines:en?['I WILL','DEVOUR YOU!']:['¡TE VOY A','DEVORAR!']};
  if(q.state==='contest'&&q.contestAge<1.5)return{boss:true,lines:en?['WHAT A SWEET','TREAT!']:['¡QUÉ DULCE','VAS A SER!']};
  return null;
 }
@@ -13,7 +13,7 @@ export function nightmareBubbleLayout(s,speech){
  return speech.boss?{x:right?585:125,y:62,w,h,tip:{x:right?835:125,y:62},right}: {x:right?490:200,y:285,w,h,tip:{x:right?716:200,y:426},right};
 }
 export function drawNightmareClashSpeech(c,s,en,reduced,art){
- const q=s.powerClash,speech=nightmareClashSpeech(q,en);c.save();c.textAlign='center';c.font='bold 13px sans-serif';c.lineWidth=3;c.strokeStyle='#160c22';c.fillStyle='#fff4b6';const timer=q.contestAge>=q.limit?(en?'KEEP PUSHING!':'¡SIGUE EMPUJANDO!'):Math.max(0,q.limit-q.contestAge).toFixed(1)+' s';c.strokeText(timer,480,72);c.fillText(timer,480,72);
+ const q=s.powerClash,speech=nightmareClashSpeech(q,en);c.save();c.textAlign='center';c.font='bold 13px sans-serif';c.lineWidth=3;c.strokeStyle='#160c22';c.fillStyle='#fff4b6';const timer=nightmareClashRemaining(q).toFixed(1)+' s';c.strokeText(timer,480,72);c.fillText(timer,480,72);
  if(!speech){c.restore();return;}
  const p=nightmareBubbleLayout(s,speech),img=art?.['nightmare-speech-balloons'],frame=speech.boss?q.state==='boss-boost'&&q.bossReleased?1:0:2;
  const forward=speech.boss?p.right:!p.right;
