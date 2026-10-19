@@ -1,5 +1,19 @@
 # Hexy & the Lost Chorus
 
+[Auditoría visual del 2-5: conteo por movimiento, escalas incoherentes, poses mantenidas, comparación con el arlequín de fuego y prioridades de animación](nightmare-animation-audit/README.md).
+
+[Revisión actual del 2-5: ciclos de sprites para el esfuerzo y la locura, figura aérea animada, varita sin brillo recortado, pelea individual y pausa dramática antes del refuerzo rival](nightmare-sprites-v6/README.md).
+
+[Revisión anterior del choque: poses con disparo más paralelo, paneles manga en esquinas, globos de diálogo y cámara que sigue el impacto](nightmare-corners-v5/README.md).
+
+[Choque de pesadillas: anatomía de Hexy corregida, sorpresa y apoyo con ambas manos, retratos animados en esquinas, medidor propio y viento con luz rosada y violeta](nightmare-pressure-v4/README.md).
+
+[Revisi?n vigente del 2-5: arena abierta, salto extremo, tormenta desde el aire, actuaci?n durante el choque y Encore doble con viento inverso](nightmare-aerial-v3/README.md).
+
+[Arlequín de dos conos: personalidad de Halloween, tres fases visuales, mirada en espiral, ataques nuevos y bodega de dulces de Villa Lumbre](nightmare-madness-v2/README.md).
+
+[Acto 2: un castillo circo como destino común, noche revelada en el maizal, 2-4 ampliado con el Conde y la Condesa y 2-5 con choque diagonal y Encore doble](episode-two-v1/README.md).
+
 [Música entregada para título, tienda y jefes 1-2/1-3/1-4; salida de FX aumentada un diez por ciento](music-refresh/README.md).
 
 [Zeppelín: retirados los fragmentos aislados del atlas que aparecían como rayas junto al cañón al preparar y disparar](zeppelin-strip/README.md).
@@ -30,7 +44,7 @@
 
 [Pulido común vigente: roles y resistencias de enemigos, impactos por material, sonidos de proyectiles y agua, y ultimate aéreo con dibujos propios](global-combat-polish/README.md).
 
-[Revisión global vigente: sombrero y disparo simultáneos, marcha con escudo, contacto con el suelo, fuego, aura eléctrica caricaturesca intermitente y navegación de Miso con mando](global-feedback/README.md). [Marcha corregida del malabarista](juggler-gait/revision-2/README.md). [2-3: maizal ampliado, parallax, emboscadas y Rey de Paja con dos formas](cornfield-v2/README.md). Los niveles 2-4 y 2-5 son prototipos pendientes de desarrollo.
+[Revisión global vigente: sombrero y disparo simultáneos, marcha con escudo, contacto con el suelo, fuego, aura eléctrica caricaturesca intermitente y navegación de Miso con mando](global-feedback/README.md). [Marcha corregida del malabarista](juggler-gait/revision-2/README.md). [2-3: maizal ampliado, parallax, emboscadas y Rey de Paja con dos formas](cornfield-v2/README.md). Los niveles 2-4 y 2-5 recibieron la [revisi?n del castillo circo y el Encore doble](episode-two-v1/README.md).
 
 **Guías vigentes, 16/10/2026:** [campaña aprobada de seis actos y treinta niveles](CAMPANA.md) · [Magic Drinks, amuletos, mejoras y precios actuales](MAGIC_DRINKS_Y_AMULETOS.md). Halloween es el **acto 2**: cementerio 2-1, Villa Lumbre 2-2, maizal 2-3, mansión 2-4 y arlequín de dos conos 2-5. [Arte y funcionamiento de los últimos tres niveles](act-2-expansion/README.md). Las carpetas `halloween-5-1` y `village-5-2` conservan su nombre histórico.
 

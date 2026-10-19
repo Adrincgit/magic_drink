@@ -9,3 +9,6 @@
 @keyframes tap-kick{0%,100%{transform:rotate(-3deg) scale(1)}37.5%{transform:translateY(4px) rotate(2deg) scale(.95,.91)}62.5%{transform:translateY(-3px) rotate(-2deg) scale(1.06,1.08)}}
 @keyframes tap-label{0%,100%{top:32%}12.5%{top:35%}25%{top:40%}37.5%{top:47%}50%{top:44%}62.5%{top:21%}75%{top:30%}87.5%{top:34%}}
 @media(prefers-reduced-motion:reduce){.illustration,.key{animation:none}}
+.doubleEncore{position:absolute;z-index:9;right:3%;bottom:8%;max-width:34%;padding:.7em 1em;border:2px solid #ffe991;border-radius:16px;background:#48294be8;color:#fff1af;box-shadow:0 0 24px #ff89d066;font:800 clamp(12px,1.6cqw,21px) sans-serif;cursor:pointer;touch-action:none}.doubleEncore b,.doubleEncore span{display:block}.doubleEncore span{font-size:.65em;margin-top:.4em;color:#fff8de}.doubleEncore:focus-visible{outline:3px solid #aff5ff;outline-offset:3px}
+
+.doubleEncore[data-hexy-right=true]{right:auto;left:3%}

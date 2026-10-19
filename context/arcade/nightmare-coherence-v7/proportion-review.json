@@ -1,0 +1,11 @@
+{
+  "worldCels": 92,
+  "reference": {
+    "hexyHeight": 88.0875,
+    "targetHeight": 101.300625,
+    "ratio": 1.15,
+    "targetFaceWidth": 18.993867187499998,
+    "method": "Standing hat-to-sole height versus Hexy reactions:0. Equivalent idle/cast poses match across phases. Older poses use reviewed skull width when spiral eyes fragment the skin mask; a common scale within loops preserves breathing, bent limbs and raised props."
+  },
+  "errors": []
+}

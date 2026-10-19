@@ -1,0 +1,82 @@
+{
+  "totalCells": 68,
+  "report": [
+    {
+      "name": "boss-air-actions",
+      "cells": 16,
+      "size": [
+        2048,
+        2048
+      ],
+      "alpha": true,
+      "minOpaque": 0.2219390869140625,
+      "maxOpaque": 0.2734184265136719
+    },
+    {
+      "name": "hexy-ground-effort",
+      "cells": 12,
+      "size": [
+        1280,
+        960
+      ],
+      "alpha": true,
+      "minOpaque": 0.263076171875,
+      "maxOpaque": 0.312578125
+    },
+    {
+      "name": "candy-vortex",
+      "cells": 8,
+      "size": [
+        2048,
+        1024
+      ],
+      "alpha": true,
+      "minOpaque": 0.38346099853515625,
+      "maxOpaque": 0.4002952575683594
+    },
+    {
+      "name": "boss-air-effort",
+      "cells": 12,
+      "size": [
+        2048,
+        1536
+      ],
+      "alpha": true,
+      "minOpaque": 0.11882781982421875,
+      "maxOpaque": 0.1287841796875
+    },
+    {
+      "name": "hexy-air-effort",
+      "cells": 12,
+      "size": [
+        1280,
+        960
+      ],
+      "alpha": true,
+      "minOpaque": 0.25619140625,
+      "maxOpaque": 0.2722265625
+    },
+    {
+      "name": "boss-effort-portraits",
+      "cells": 4,
+      "size": [
+        1536,
+        1536
+      ],
+      "alpha": true,
+      "minOpaque": 0.3980831570095486,
+      "maxOpaque": 0.4150950113932292
+    },
+    {
+      "name": "hexy-effort-portraits",
+      "cells": 4,
+      "size": [
+        1536,
+        1536
+      ],
+      "alpha": true,
+      "minOpaque": 0.320465087890625,
+      "maxOpaque": 0.3755289713541667
+    }
+  ]
+}

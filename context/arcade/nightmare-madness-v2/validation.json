@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-18",
+  "tests": {
+    "files": ["tests/hexy-nightmare-madness.spec.js", "tests/hexy-episode-two.spec.js", "tests/hexy-act-two.spec.js"],
+    "passed": 36,
+    "failed": 0,
+    "log": ".git/nightmare-madness-final-tests.log"
+  },
+  "art": {"characterCels": 56, "propCels": 8, "celSize": 512, "clippedCelBorders": 0, "portraitSize": [1024, 1536], "favoriteChargeVisiblePixelDifference": 0},
+  "review": {
+    "directory": "tests/artifacts/arcade/nightmare-madness-v2",
+    "compositions": 15,
+    "decodedVideos": ["candy-walk", "phase-two-games", "phase-three-games", "three-phases", "double-encore"],
+    "browserErrors": [],
+    "missingAssets": [],
+    "method": "Headless local Chrome canvas recordings decoded into JPEG contact sheets; invulnerability and prepared phase states for visual inspection, not a human balance playthrough."
+  },
+  "build": {"command": "npm run build", "result": "Complete!", "errors": 0, "log": ".git/nightmare-madness-final-build.log"},
+  "publication": "Local changes on paralax; earlier checkpoint 7a89d0f was pushed before the episode expansion."
+}

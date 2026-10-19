@@ -1,0 +1,739 @@
+{
+  "date": "2026-10-18",
+  "tests": {
+    "comparativeSuite": 72,
+    "finalAerialSuite": 9,
+    "totalUnique": 74,
+    "allPassed": true,
+    "logs": [
+      "tests/artifacts/arcade/nightmare-aerial-v3/test-log.txt",
+      "tests/artifacts/arcade/nightmare-aerial-v3/aerial-test-log.txt"
+    ]
+  },
+  "build": {
+    "command": "npm run build",
+    "exitCode": 0,
+    "errors": 0,
+    "diagnosticWarnings": 0,
+    "hints": 34,
+    "complete": true,
+    "log": "tests/artifacts/arcade/nightmare-aerial-v3/build-log.txt"
+  },
+  "browser": {
+    "errors": [],
+    "missing": []
+  },
+  "recordings": {
+    "extreme-leap": {
+      "samples": [
+        {
+          "t": 0.5046000000000002,
+          "wall": 0.5758000000000001,
+          "state": "nightmare-leap",
+          "bossY": -157.29847891728446,
+          "zoom": 0.36245206691803816
+        },
+        {
+          "t": 2.010800000000003,
+          "wall": 2.1394,
+          "state": "nightmare-charge",
+          "bossY": -963.6950333928737,
+          "zoom": 0.20095716305486536
+        },
+        {
+          "t": 3.5198000000000063,
+          "wall": 3.6484,
+          "state": "nightmare-charge",
+          "bossY": -975.8819898702943,
+          "zoom": 0.1732428110532498
+        },
+        {
+          "t": 5.000099999999996,
+          "wall": 5.1453999999999995,
+          "state": "nightmare-fall",
+          "bossY": -970.4978764160305,
+          "zoom": 0.23370046092785166
+        },
+        {
+          "t": 6.502999999999979,
+          "wall": 6.648299999999999,
+          "state": "nightmare-fall",
+          "bossY": -970.4978764160305,
+          "zoom": 0.2484294922814879
+        },
+        {
+          "t": 8.005999999999956,
+          "wall": 8.151299999999999,
+          "state": "recover",
+          "bossY": 480,
+          "zoom": 0.43132187958298085
+        }
+      ],
+      "states": [
+        "nightmare-leap",
+        "nightmare-charge",
+        "nightmare-fall",
+        "nightmare-descend",
+        "recover"
+      ],
+      "hp": 260,
+      "hearts": 5
+    },
+    "double-reversal": {
+      "samples": [
+        {
+          "t": 0.5059999999999999,
+          "wall": 0.9695999999999999,
+          "state": "windup",
+          "pressure": 0.5,
+          "hexyBoost": false,
+          "bossBoost": false,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.2033447113959504
+        },
+        {
+          "t": 2.006099999999999,
+          "wall": 2.4907999999999997,
+          "state": "windup",
+          "pressure": 0.5,
+          "hexyBoost": false,
+          "bossBoost": false,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.2033447113959504
+        },
+        {
+          "t": 3.5000999999999904,
+          "wall": 4.490799999999999,
+          "state": "contest",
+          "pressure": 0.5499541666666666,
+          "hexyBoost": false,
+          "bossBoost": false,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.42935880766025497
+        },
+        {
+          "t": 5.00309999999997,
+          "wall": 5.993799999999999,
+          "state": "contest",
+          "pressure": 0.65207916666667,
+          "hexyBoost": false,
+          "bossBoost": false,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.3872733309765513
+        },
+        {
+          "t": 6.505999999999947,
+          "wall": 7.496700000000001,
+          "state": "contest",
+          "pressure": 0.6887278880892764,
+          "hexyBoost": false,
+          "bossBoost": false,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.37409365473031203
+        },
+        {
+          "t": 8.002999999999924,
+          "wall": 8.9937,
+          "state": "contest",
+          "pressure": 0.26940629817096384,
+          "hexyBoost": false,
+          "bossBoost": true,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.46289145128718273
+        },
+        {
+          "t": 9.507399999999915,
+          "wall": 10.5269,
+          "state": "hexy-boost",
+          "pressure": 0.0974883056143615,
+          "hexyBoost": true,
+          "bossBoost": true,
+          "wind": 0.6684705882352913,
+          "bossY": -964.589990988358,
+          "zoom": 0.5933328035260502
+        },
+        {
+          "t": 11.004299999999908,
+          "wall": 12.023800000000001,
+          "state": "contest",
+          "pressure": 0.6650535310943664,
+          "hexyBoost": true,
+          "bossBoost": true,
+          "wind": 1,
+          "bossY": -964.589990988358,
+          "zoom": 0.3337308561802169
+        },
+        {
+          "t": 12.501299999999897,
+          "wall": 13.520800000000001,
+          "state": "contest",
+          "pressure": 0.7089500076265965,
+          "hexyBoost": true,
+          "bossBoost": true,
+          "wind": 1,
+          "bossY": -964.589990988358,
+          "zoom": 0.324857285892381
+        },
+        {
+          "t": 14.004299999999885,
+          "wall": 15.023800000000001,
+          "state": "contest",
+          "pressure": 0.8110750076266002,
+          "hexyBoost": true,
+          "bossBoost": true,
+          "wind": 1,
+          "bossY": -964.589990988358,
+          "zoom": 0.30176883473448773
+        },
+        {
+          "t": 15.501199999999871,
+          "wall": 16.520699999999998,
+          "state": "contest",
+          "pressure": 0.8231565868597681,
+          "hexyBoost": true,
+          "bossBoost": true,
+          "wind": 1,
+          "bossY": -964.589990988358,
+          "zoom": 0.2997370560165344
+        },
+        {
+          "t": 17.00419999999997,
+          "wall": 18.023699999999998,
+          "state": "contest",
+          "pressure": 0.9100875281148738,
+          "hexyBoost": true,
+          "bossBoost": true,
+          "wind": 1,
+          "bossY": -964.589990988358,
+          "zoom": 0.2834518661998363
+        },
+        {
+          "t": 18.50110000000016,
+          "wall": 19.520599999999998,
+          "state": "flight",
+          "pressure": 0.9985670003544602,
+          "hexyBoost": true,
+          "bossBoost": true,
+          "wind": 1,
+          "bossY": -786.7156847705942,
+          "zoom": 0.21233242420595072
+        },
+        {
+          "t": 20.004000000000346,
+          "wall": 21.0235,
+          "state": "land",
+          "pressure": 0.9985670003544602,
+          "hexyBoost": true,
+          "bossBoost": true,
+          "wind": 1,
+          "bossY": 480,
+          "zoom": 0.2805235905924001
+        },
+        {
+          "t": 21.501000000000502,
+          "wall": 22.5205,
+          "state": "land",
+          "pressure": 0.9985670003544602,
+          "hexyBoost": true,
+          "bossBoost": true,
+          "wind": 1,
+          "bossY": 480,
+          "zoom": 0.28070130743066257
+        },
+        {
+          "t": 23.004100000000687,
+          "wall": 24.0236,
+          "state": "dying",
+          "bossY": 480,
+          "zoom": 0.2807017532917264
+        },
+        {
+          "t": 24.500900000000872,
+          "wall": 25.5204,
+          "state": "dying",
+          "bossY": 480,
+          "zoom": 0.28070175438321765
+        },
+        {
+          "t": 26.005400000001043,
+          "wall": 27.047699999999995,
+          "state": "defeated",
+          "bossY": 480,
+          "zoom": 0.2807017543841892
+        },
+        {
+          "t": 27.50230000000123,
+          "wall": 28.5446,
+          "state": "defeated",
+          "bossY": 480,
+          "zoom": 0.2807017543841892
+        },
+        {
+          "t": 29.0052000000014,
+          "wall": 30.0475,
+          "state": "defeated",
+          "bossY": 480,
+          "zoom": 0.2807017543841892
+        }
+      ],
+      "states": [
+        "windup",
+        "travel",
+        "contest",
+        "boss-boost",
+        "hexy-boost",
+        "resolve",
+        "flight",
+        "land",
+        "recover",
+        "dying",
+        "defeated"
+      ],
+      "hp": 0,
+      "hearts": 5
+    },
+    "candy-loss": {
+      "samples": [
+        {
+          "t": 0.5045999999999987,
+          "wall": 0.5391999999999971,
+          "state": "windup",
+          "pressure": 0.5,
+          "hexyBoost": false,
+          "bossBoost": false,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.2033447113959504
+        },
+        {
+          "t": 2.0256999999999974,
+          "wall": 2.060299999999996,
+          "state": "windup",
+          "pressure": 0.5,
+          "hexyBoost": false,
+          "bossBoost": false,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.2033447113959504
+        },
+        {
+          "t": 3.504499999999993,
+          "wall": 3.5390999999999986,
+          "state": "contest",
+          "pressure": 0.4628750000000001,
+          "hexyBoost": false,
+          "bossBoost": false,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.45177383526935566
+        },
+        {
+          "t": 5.0013999999999905,
+          "wall": 5.036,
+          "state": "contest",
+          "pressure": 0.2757625000000015,
+          "hexyBoost": false,
+          "bossBoost": false,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.5645332562437871
+        },
+        {
+          "t": 6.504399999999987,
+          "wall": 6.539,
+          "state": "contest",
+          "pressure": 0.02,
+          "hexyBoost": false,
+          "bossBoost": false,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.6197789607416259
+        },
+        {
+          "t": 8.001299999999977,
+          "wall": 8.035899999999994,
+          "state": "contest",
+          "pressure": 0.02,
+          "hexyBoost": false,
+          "bossBoost": false,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.6199994452621808
+        },
+        {
+          "t": 9.504299999999951,
+          "wall": 9.538899999999995,
+          "state": "boss-boost",
+          "pressure": 0.02,
+          "hexyBoost": false,
+          "bossBoost": true,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.6199999986413443
+        },
+        {
+          "t": 11.001199999999928,
+          "wall": 11.035799999999997,
+          "state": "contest",
+          "pressure": 0.02,
+          "hexyBoost": false,
+          "bossBoost": true,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.6199999999965902
+        },
+        {
+          "t": 12.504199999999901,
+          "wall": 12.538799999999995,
+          "state": "contest",
+          "pressure": 0.02,
+          "hexyBoost": false,
+          "bossBoost": true,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.6199999999999914
+        },
+        {
+          "t": 14.001099999999873,
+          "wall": 14.035699999999997,
+          "state": "flight",
+          "pressure": 0.0011363508850850436,
+          "hexyBoost": false,
+          "bossBoost": true,
+          "wind": -1,
+          "bossY": -964.589990988358,
+          "zoom": 0.2033447113959504
+        },
+        {
+          "t": 15.510199999999845,
+          "wall": 15.544799999999995,
+          "state": "land",
+          "pressure": 0.0011363508850850436,
+          "hexyBoost": false,
+          "bossBoost": true,
+          "wind": -1,
+          "bossY": -524.1517976883985,
+          "zoom": 0.23532291331825061
+        },
+        {
+          "t": 17.000999999999944,
+          "wall": 17.0356,
+          "state": "recover",
+          "bossY": 480,
+          "zoom": 0.2805642528029459
+        },
+        {
+          "t": 18.504000000000094,
+          "wall": 18.5386,
+          "state": "recover",
+          "bossY": 480,
+          "zoom": 0.2807014176191628
+        },
+        {
+          "t": 20.00090000000026,
+          "wall": 20.0355,
+          "state": "windup",
+          "bossY": 480,
+          "zoom": 0.2875582327065226
+        },
+        {
+          "t": 21.50390000000041,
+          "wall": 21.5385,
+          "state": "attack",
+          "bossY": 480,
+          "zoom": 0.28776926604400266
+        },
+        {
+          "t": 23.00090000000054,
+          "wall": 23.0355,
+          "state": "patrol",
+          "bossY": 480,
+          "zoom": 0.2916373044511868
+        },
+        {
+          "t": 24.511500000000716,
+          "wall": 24.562699999999996,
+          "state": "attack",
+          "bossY": 480,
+          "zoom": 0.29521445655205925
+        }
+      ],
+      "states": [
+        "windup",
+        "travel",
+        "contest",
+        "boss-boost",
+        "resolve",
+        "flight",
+        "land",
+        "recover",
+        "patrol",
+        "attack"
+      ],
+      "hp": 260,
+      "hearts": 1
+    },
+    "fire-reference": {
+      "samples": [
+        {
+          "t": 0.5045000000000002,
+          "wall": 1.1265,
+          "state": "windup",
+          "pressure": 0.5,
+          "bossY": 480,
+          "zoom": 0.5700103512195166
+        },
+        {
+          "t": 2.004399999999994,
+          "wall": 2.962899999999994,
+          "state": "travel",
+          "pressure": 0.5,
+          "bossY": 480,
+          "zoom": 0.5714204800175333
+        },
+        {
+          "t": 3.504399999999965,
+          "wall": 4.647699999999997,
+          "state": "contest",
+          "pressure": 0.5828220000000001,
+          "bossY": 480,
+          "zoom": 0.5714285247432699
+        },
+        {
+          "t": 5.00129999999996,
+          "wall": 6.144599999999992,
+          "state": "contest",
+          "pressure": 0.6093534939219666,
+          "bossY": 480,
+          "zoom": 0.5714285711570019
+        },
+        {
+          "t": 6.504399999999998,
+          "wall": 7.647699999999997,
+          "state": "contest",
+          "pressure": 0.6139142650225959,
+          "bossY": 480,
+          "zoom": 0.5714285714270213
+        },
+        {
+          "t": 8.001300000000025,
+          "wall": 9.144599999999992,
+          "state": "contest",
+          "pressure": 0.6494578997075686,
+          "bossY": 480,
+          "zoom": 0.5714285714285622
+        },
+        {
+          "t": 9.504199999999997,
+          "wall": 10.6475,
+          "state": "contest",
+          "pressure": 0.6235482826349665,
+          "bossY": 480,
+          "zoom": 0.5714285714285695
+        },
+        {
+          "t": 11.025499999999962,
+          "wall": 12.168799999999989,
+          "state": "contest",
+          "pressure": 0.700311782634969,
+          "bossY": 480,
+          "zoom": 0.5714285714285695
+        },
+        {
+          "t": 12.516299999999944,
+          "wall": 13.65959999999999,
+          "state": "contest",
+          "pressure": 0.6332696718584739,
+          "bossY": 480,
+          "zoom": 0.5714285714285695
+        },
+        {
+          "t": 14.000999999999918,
+          "wall": 15.144299999999989,
+          "state": "contest",
+          "pressure": 0.712545315206941,
+          "bossY": 480,
+          "zoom": 0.5714285714285695
+        },
+        {
+          "t": 15.50409999999991,
+          "wall": 16.647399999999994,
+          "state": "contest",
+          "pressure": 0.6860162241722856,
+          "bossY": 480,
+          "zoom": 0.5714285714285695
+        },
+        {
+          "t": 17.006999999999934,
+          "wall": 18.150299999999987,
+          "state": "contest",
+          "pressure": 0.8075565482913626,
+          "bossY": 480,
+          "zoom": 0.5714285714285695
+        },
+        {
+          "t": 18.504000000000104,
+          "wall": 19.647299999999987,
+          "state": "contest",
+          "pressure": 0.8868715482913634,
+          "bossY": 480,
+          "zoom": 0.5714285714285695
+        },
+        {
+          "t": 20.000900000000254,
+          "wall": 21.144199999999998,
+          "state": "contest",
+          "pressure": 0.9446970482913625,
+          "bossY": 480,
+          "zoom": 0.5714285714285695
+        },
+        {
+          "t": 21.50550000000041,
+          "wall": 22.713899999999995,
+          "state": "flight",
+          "pressure": 0.9986321550028691,
+          "bossY": 289.9647167407597,
+          "zoom": 0.42237515080766064
+        },
+        {
+          "t": 23.002300000000623,
+          "wall": 24.210699999999996,
+          "state": "land",
+          "pressure": 0.9986321550028691,
+          "bossY": 480,
+          "zoom": 0.4210559520069906
+        },
+        {
+          "t": 24.50530000000079,
+          "wall": 25.713699999999996,
+          "state": "land",
+          "pressure": 0.9986321550028691,
+          "bossY": 480,
+          "zoom": 0.4210526397112897
+        },
+        {
+          "t": 26.002300000000943,
+          "wall": 27.210699999999996,
+          "state": "recover",
+          "bossY": 480,
+          "zoom": 0.4383561643835616
+        },
+        {
+          "t": 27.505300000001125,
+          "wall": 28.713699999999996,
+          "state": "recover",
+          "bossY": 480,
+          "zoom": 0.4383561643835616
+        },
+        {
+          "t": 29.002200000001295,
+          "wall": 30.210599999999992,
+          "state": "warn",
+          "bossY": 480,
+          "zoom": 0.4383561643835616
+        }
+      ],
+      "states": [
+        "windup",
+        "travel",
+        "contest",
+        "resolve",
+        "flight",
+        "land",
+        "recover",
+        "warn"
+      ],
+      "hp": 48,
+      "hearts": 5
+    }
+  },
+  "art": {
+    "totalCells": 68,
+    "report": [
+      {
+        "name": "boss-air-actions",
+        "cells": 16,
+        "size": [
+          2048,
+          2048
+        ],
+        "alpha": true,
+        "minOpaque": 0.2219390869140625,
+        "maxOpaque": 0.2734184265136719
+      },
+      {
+        "name": "hexy-ground-effort",
+        "cells": 12,
+        "size": [
+          1280,
+          960
+        ],
+        "alpha": true,
+        "minOpaque": 0.263076171875,
+        "maxOpaque": 0.312578125
+      },
+      {
+        "name": "candy-vortex",
+        "cells": 8,
+        "size": [
+          2048,
+          1024
+        ],
+        "alpha": true,
+        "minOpaque": 0.38346099853515625,
+        "maxOpaque": 0.4002952575683594
+      },
+      {
+        "name": "boss-air-effort",
+        "cells": 12,
+        "size": [
+          2048,
+          1536
+        ],
+        "alpha": true,
+        "minOpaque": 0.11882781982421875,
+        "maxOpaque": 0.1287841796875
+      },
+      {
+        "name": "hexy-air-effort",
+        "cells": 12,
+        "size": [
+          1280,
+          960
+        ],
+        "alpha": true,
+        "minOpaque": 0.25619140625,
+        "maxOpaque": 0.2722265625
+      },
+      {
+        "name": "boss-effort-portraits",
+        "cells": 4,
+        "size": [
+          1536,
+          1536
+        ],
+        "alpha": true,
+        "minOpaque": 0.3980831570095486,
+        "maxOpaque": 0.4150950113932292
+      },
+      {
+        "name": "hexy-effort-portraits",
+        "cells": 4,
+        "size": [
+          1536,
+          1536
+        ],
+        "alpha": true,
+        "minOpaque": 0.320465087890625,
+        "maxOpaque": 0.3755289713541667
+      }
+    ]
+  },
+  "limits": "Recordings initialize phase three and use invulnerability for visual inspection; no human balance or fun rating is inferred."
+}

@@ -41,13 +41,15 @@ Continúa desde el bosque quemado. Las criaturas de Halloween nacen de la mente 
 | --- | --- | --- | --- |
 | 2-1 | **El sendero de las risas.** Bosque de cenizas, cementerio, criptas y caminos sobre las tumbas. | El Campanero Hueco | Implementado; antes 5-1 |
 | 2-2 | **Villa Lumbre / El pueblo de los dulces.** Evacuación, barricadas, rescates y habitantes convertidos en dulces. | La Cosechera de Dulces | Implementado; antes 5-2 |
-| 2-3 | **El maizal del último atardecer.** Surcos, graneros, molinos y espantapájaros confundidos con el decorado; suelo, tejados y carros de cosecha. | El Rey de Paja: se recompone con partes del maizal | Prototipo jugable; pendiente de desarrollo y pulido |
-| 2-4 | **La mansión de las máscaras.** Jardín, salones, balcones y tejados; vampiros, murciélagos y armaduras animadas; recorrido vertical. | El Conde de Medianoche: se transforma en bandada | Prototipo jugable; pendiente de desarrollo y pulido |
-| 2-5 | **La carpa de los malos sueños.** Cambios anunciados de suelo, decorado y criaturas durante la batalla. | Arlequín de dos conos: pesadillas e ilusiones | Prototipo jugable; pendiente de desarrollo y pulido |
+| 2-3 | **El maizal del ?ltimo atardecer.** 15.600 unidades, graneros, rescates, emboscadas y revelaci?n del falso atardecer. El castillo circo se acerca en el horizonte. | El Rey de Paja: dos formas y reconstrucci?n interrumpible | Implementado; ampliado el 17/10/2026 |
+| 2-4 | **El castillo del gran telón.** 15.200 unidades de jardines, entrada con fundido, galerías, salones y estructuras de lona; tres rescates y rutas a distintas alturas. | El Conde y la Condesa del Telón: dos fases coordinadas | Implementado; revisión del 18/10/2026 |
+| 2-5 | **La carpa de los malos sueños.** Bodega de dulces de los vecinos, subida hasta la cúpula y tres fases con actuación y ataques propios. Rueda de máscaras desde arriba, choque diagonal y Encore doble. | Arlequín de dos conos: anfitriona infantil de Halloween; frustración y locura en espiral al perder | Implementado; revisión del 18/10/2026 |
 
 Repartir las criaturas por escenario: zombis y esqueletos en el cementerio; brujas y calabazas en el pueblo; espantapájaros en el maizal; vampiros en la mansión. Evitar concentrar todos los tipos en cada recorrido.
 
 Implementación de 2-3 a 2-5, arte, mecánicas y comprobaciones: [ampliación del acto 2](act-2-expansion/README.md).
+
+La [revisión de las tres fases y la colección de Halloween](nightmare-madness-v2/README.md) conserva su apariencia joven y conecta los dulces con Villa Lumbre. Los diálogos con retratos quedan previstos para una etapa posterior.
 
 Referencias conservadas: [cementerio](halloween-5-1/README.md), [pueblo y revisión actual](village-5-2/README.md). Sus carpetas mantienen los nombres históricos para conservar enlaces y recursos.
 
@@ -126,8 +128,10 @@ Se conservan los IDs anteriores, música, estrellas, cofres y partidas. Los nuev
 | 6 | 2-1 | Cementerio; antes 5-1 |
 | 7 | 2-2 | Pueblo; antes 5-2 |
 | 8 | 2-3 | Maizal del último atardecer |
-| 9 | 2-4 | Mansión de las máscaras |
+| 9 | 2-4 | El castillo del gran telón |
 | 10 | 2-5 | Arlequín de dos conos |
 | 4 | 6-1 | Prototipo heredado; todavía no representa el 6-1 planificado arriba |
 
 Orden técnico vigente: `0, 1, 2, 5, 3, 6, 7, 8, 9, 10, 4`. La campaña 5 migra las versiones 2, 3 y 4 conservando capítulos activos, estrellas, compras y recibos. Quien ya tenía el prototipo heredado desbloqueado lo conserva, incluidos los tres nuevos niveles intermedios. Las reglas de compra siguen usando el rango técnico existente.
+
+La [revisi?n a?rea del 2-5](nightmare-aerial-v3/README.md) ampl?a la arena, aprovecha el suelo del fondo pintado y sustituye la rueda por una tormenta de pesadillas sostenida desde gran altura.

@@ -14,7 +14,7 @@ export default function AdventureHUD({hud,en,playing,inRun,onPause,onSwap,onCoas
  const nextDrink=hud.basicFire?(spareFlavor&&hud.basicCycle?spareFlavor:drink):spareFlavor&&!hud.basicCycle?spareFlavor:null,nextBasic=!hud.basicFire&&!nextDrink;
  const nextLabel=nextBasic?(en?'basic shot':'disparo b?sico'):nextDrink?.name||(en?'basic shot':'disparo b?sico');
  const status=hud.superActive?(en?'STARLIGHT ENCORE':'ENCORE ESTELAR'):cooldown>0&&!reserve?(en?'Super recharging':'Recargando el súper'):hud.exhaustion>0?(en?'RECOVERY':'RECUPERACIÓN'):ready?(en?'SUPER READY':'SÚPER LISTO'):(en?'Super charged; needs 90 magic':'Súper cargado; necesita 90 de magia');
- return <div className={css.hud} data-game-hud style={hidden?{visibility:'hidden'}:undefined}>
+ return <div className={css.hud} data-game-hud data-nightmare-right={!!hud.nightmareClash&&hud.nightmarePlayerRight} style={hidden?{visibility:'hidden'}:undefined}>
   {hud.ambush&&<div className={css.ambush} data-harbor-ambush role="status"><b>{en?'Bridge ambush!':'¡Emboscada en el puente!'}</b><span>{en?'Wave':'Oleada'} {hud.ambush.wave} / {hud.ambush.total} · {hud.ambush.remaining} {en?'remaining':'restantes'}</span><small>{en?'Aim down to sink the boats':'Apunta hacia abajo para hundir las lanchas'}</small></div>}
   <div className={css.vitals} data-exhausted={hud.exhaustion>0}>
    <div className={css.hearts} role="img" aria-label={`${en?'Life':'Vida'}: ${hud.hearts} / ${max}`} data-life>

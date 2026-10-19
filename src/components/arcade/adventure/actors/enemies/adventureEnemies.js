@@ -1,7 +1,7 @@
 import {enemyCastSound,stepCreatureVoice} from '../../engine/adventureWorldAudio';
 import {canControlEnemy} from './adventureEnemyTraits';
 import {isActTwoEnemy,stepActTwoEnemy} from './adventureActTwoEnemies';
-import {stepActTwoBoss,actTwoBossBody} from '../bosses/adventureActTwoBosses';
+import {stepActTwoBoss,actTwoBossBody,actTwoBossTargets} from '../bosses/adventureActTwoBosses';
 import {stepFallingPumpkin} from '../../engine/villagePumpkins';
 import {stepFallingWitch} from '../../engine/villageRescue';
 import {stepPopcornDefeat} from '../../engine/adventurePopcornDefeat';
@@ -152,7 +152,7 @@ export function updateEnemies(s,dt,hit,defeat){
 }
 export const BOSS_MOVES=[['streamers','balls','bombs','drop'],ORGAN_MOVES,BARGE_MOVES,HARLEQUIN_MOVES,['spiral','rain','silence']];
 export const towerSockets=organMouths;
-export function bossTargets(s){return s.level.nightmareTrail?[enemyBody(s.boss)]:s.index===5?fortTargets(s):s.index===2?bargeTargets(s):s.index===1?organTargets(s):[bossHitbox(s)];}
+export function bossTargets(s){return s.level.actTwo?actTwoBossTargets(s):s.level.nightmareTrail?[enemyBody(s.boss)]:s.index===5?fortTargets(s):s.index===2?bargeTargets(s):s.index===1?organTargets(s):[bossHitbox(s)];}
 export function updateBoss(s,dt,helpers){
  if(s.level.actTwo)return stepActTwoBoss(s,dt,{...helpers,makeEnemy,shoot:enemyShot});
  if(s.level.villageTrail)return;

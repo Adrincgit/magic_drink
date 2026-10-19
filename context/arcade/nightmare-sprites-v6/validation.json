@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-18",
+  "local": true,
+  "published": false,
+  "artMode": "built-in ImageGen",
+  "prompts": [
+    "prompts.json",
+    "reaction-prompts.json",
+    "madness-prompts.json",
+    "glee-prompt.json"
+  ],
+  "art": {
+    "report": [
+      {
+        "name": "hexy-portraits",
+        "dimensions": [
+          2816,
+          3520
+        ],
+        "expressionLoops": 5,
+        "celsPerLoop": 4,
+        "distinctWithinEachLoop": true,
+        "transparentCorners": true
+      },
+      {
+        "name": "boss-portraits",
+        "dimensions": [
+          2816,
+          2816
+        ],
+        "expressionLoops": 4,
+        "celsPerLoop": 4,
+        "distinctWithinEachLoop": true,
+        "transparentCorners": true
+      }
+    ],
+    "starSockets": "registered per cel, with more than 40 native pixels to the portrait edge",
+    "animation": "drawImage of distinct painted cels; no living-ink deformation in active renderer",
+    "note": "Pixel checks do not establish anatomy or motion quality; inspect decoded recordings."
+  },
+  "tests": {
+    "passed": 58,
+    "log": "tests/artifacts/arcade/nightmare-sprites-v6/test-log.txt"
+  },
+  "build": {
+    "complete": true,
+    "diagnosticErrors": 0,
+    "diagnosticWarnings": 0,
+    "hints": 35,
+    "log": "tests/artifacts/arcade/nightmare-sprites-v6/build-log.txt",
+    "note": "Existing Browserslist and chunk-size notices remain."
+  },
+  "browser": {
+    "errors": [],
+    "missing": []
+  },
+  "clips": [
+    {
+      "name": "double-reversal",
+      "states": [
+        "windup",
+        "travel",
+        "contest",
+        "boss-boost",
+        "hexy-boost",
+        "resolve",
+        "flight",
+        "land",
+        "dying",
+        "defeated"
+      ],
+      "hp": 0,
+      "hearts": 5,
+      "decodedSheet": "double-reversal-playback.jpg",
+      "reviewed": true
+    },
+    {
+      "name": "candy-loss",
+      "states": [
+        "windup",
+        "travel",
+        "contest",
+        "boss-boost",
+        "resolve",
+        "flight",
+        "land",
+        "recover",
+        "patrol",
+        "game-windup",
+        "game-attack"
+      ],
+      "hp": 260,
+      "hearts": 1,
+      "decodedSheet": "candy-loss-playback.jpg",
+      "reviewed": true
+    },
+    {
+      "name": "phase-two-moves",
+      "states": [
+        "patrol",
+        "game-windup",
+        "game-attack",
+        "recover",
+        "windup",
+        "attack"
+      ],
+      "hp": 520,
+      "hearts": 5,
+      "decodedSheet": "phase-two-moves-playback.jpg",
+      "reviewed": true
+    },
+    {
+      "name": "phase-three-moves",
+      "states": [
+        "patrol",
+        "game-windup",
+        "game-attack",
+        "recover"
+      ],
+      "hp": 260,
+      "hearts": 5,
+      "decodedSheet": "phase-three-moves-playback.jpg",
+      "reviewed": true
+    }
+  ],
+  "details": [
+    "sprite-motion-playback.jpg",
+    "boost-closeup-playback.jpg",
+    "actual-counter-1.jpg",
+    "actual-counter--1.jpg"
+  ],
+  "manualVisualReview": [
+    "Inspected all generated sheets: consistent youthful Hexy, two arms, normal/surprise/two-hand strain/comeback; coherent hair and clothing changes within four-cel loops.",
+    "Reviewed decoded close samples separated by 0.1 seconds: direct cel changes, not mesh warping.",
+    "Inspected Harlequin laughter, spiral-eyed cheek gesture during charge, manic casting while winning and teeth-clenched/shouting strain when countered.",
+    "Reviewed world aerial caster with moving hair/hat and spiral eyes during the charge close-up; speech no longer covers the world face.",
+    "Checked smaller Hexy portrait and opaque wand star with soft separately rendered light and no rectangular glow cut.",
+    "Reviewed both clash outcomes and ordinary phases 2 and 3: purple wind projectiles, warned blink/reappearance, no summoned combatants or independent shooting mirrors.",
+    "Reviewed actual UI screenshots at 1440 and 780 pixels: mirrored portraits, player HUD and genuine double Encore control."
+  ],
+  "balance": {
+    "normalEquilibriumTapsPerSecond": 4.310344827586206,
+    "uncounteredSurgeEquilibriumTapsPerSecond": 16.03448275862069,
+    "afterDoubleEncoreEquilibriumTapsPerSecond": 4.310344827586206,
+    "waveNote": "Temporal pressure waves add demand; gentle mode uses its own lower resistance and higher tap gain.",
+    "minimumTapInterval": 0.045,
+    "bossChargeHold": 1.25,
+    "bossAmplificationRamp": 0.85,
+    "extension": 10
+  },
+  "verificationNotes": [
+    "Updated an old calm-face expectation to the new sadistic winning expression.",
+    "A live source edit reset one actual UI check to the title screen through HMR; reran the entire suite after edits and all 58 passed."
+  ],
+  "limitations": [
+    "Controlled starts and temporary invulnerability are used for visual recordings. Human perceived difficulty and accessibility are not established by the equation or these clips."
+  ],
+  "runtimeHashes": {
+    "boss-air.webp": "492f2fd8f2cc2eca0f29cf55cfe8e6643943ca6ad3133cd37da7938debb4f8ea",
+    "boss-portraits.webp": "89b155cfee23a112ccec2a145182a90bc49d6bbefd5600cb310c3fceca62d94e",
+    "hexy-air.webp": "af3ec5905c06fe70e034d17b4efc49c19e01fd7c17ddc065553a7aa13db97666",
+    "hexy-ground.webp": "af3ec5905c06fe70e034d17b4efc49c19e01fd7c17ddc065553a7aa13db97666",
+    "hexy-portraits.webp": "5ef88d2e3e08a05505d1c0b5124367c18b46b42f460ce6797d37dffea7c515fc"
+  },
+  "sourceHashes": {
+    "boss-air-mad.png": "e54f5edaa6bcfb03130c6fc0a2b6650de56b8caa8156e9d13697a3480de5f24c",
+    "boss-cast-master.png": "0ab5bec7d7547480e5cde509161ada6eacd3b1bec4a1adfdecc1662c8ddfef9f",
+    "boss-glee.png": "3c1ddc3301a640015701943a2a085ad126ec86b364642173fe8f0da524a4246c",
+    "boss-laugh.png": "dc25f918974046df4873bb8576d0ed7dc215ba6a1ef8e6ea7f28b31a76aa5c9b",
+    "boss-mad.png": "0a680bdfd150bf387d0e5ef6980ec84936f49d31131a61cd3562cf82ed37d3dd",
+    "boss-strain.png": "7cdcc025cb5316d7971f53bf6c6f45104345b311f8331900494b6534f32daac6",
+    "boss-surge.png": "097baacd36f0c2b29035599e6497719fdd29b08c9a53a28ae1c560f514297e48",
+    "hexy-brace-master.png": "6c8c1c738601b05a152857064ee85c02cce3fbb14e131340cfbffac4a9240d7d",
+    "hexy-cast-master.png": "8579529c64ad4fd42aacba432c9a93ad14452a84e632e6fdf4e14c080ec3070d",
+    "hexy-focus.png": "5a0850ec57f0b543a53a0d6242148efcc67ed67e599725634dbe7e61b49fb61b",
+    "hexy-rally.png": "b262504894e1edf8ca15c9e0c53902448f4d1f8f454f315fdf8c19690ac94ec9",
+    "hexy-shock-master.png": "7530048266bc3b8d3ac894cca086ae6aed69c638aa0d164d521f751138c379ed",
+    "hexy-shock.png": "c4d7a5d13efae856df393a5bf67f339e5353ecf4823fbee515de3ec5819ae540",
+    "hexy-strain.png": "0eee88c5d019c07cdbc65be8238e8b663cb167096ec65b951687eaa6df5f5170"
+  }
+}

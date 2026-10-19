@@ -1,6 +1,7 @@
 import {groundY} from '../world/adventureTerrain';
 import {clashThrowTarget} from '../engine/clashGeometry';
 import {balloonVolleySockets} from '../actors/bosses/adventureBalloonCrew';
+import {followNightmareCamera} from './nightmareCamera';
 export {BALLOON_SIZE} from '../actors/bosses/adventureBalloonCrew';
 export const cameraView=s=>({zoom:s.camera.zoom||1,width:960/(s.camera.zoom||1),height:540/(s.camera.zoom||1)});
 export function adventureBounds(s){
@@ -8,6 +9,7 @@ export function adventureBounds(s){
  if(s.level.circusEntrance&&s.player.x<0)return{left:(s.level.circusEntrance.left??-1400)+18,right:s.level.circusEntrance.doorX+18};
  if(!s.arenaLocked)return{left:18,right:s.level.width-18};
  const a=s.level.arena,view=cameraView(s);
+ if(s.level.openNightmare)return{left:24,right:s.level.width-24};
  if(s.level.nightmareTrail)return{left:a.left+24,right:s.level.nightmareGate.x-44};
  if(s.level.villageTrail||s.level.actTwo)return{left:a.left+24,right:a.right-24};
  if(s.index===3&&s.clashRetreatBounds){
@@ -21,14 +23,17 @@ export function adventureBounds(s){
  return{left:center-450,right:center+450};
 }
 export function followAdventureCamera(s,dt){
+ if(s.level.openNightmare)return followNightmareCamera(s,dt);
  if(s.level.actTwo){
   const a=s.level.arena,b=s.boss,battle=s.arenaLocked||!!s.clear||!!b.defeat,ease=1-Math.exp(-dt*4);
-  const zoom=battle?s.level.cornfield?Math.max(.5,Math.min(.86,960/(Math.abs(s.player.x-b.x)+520))):Math.max(.68,Math.min(.88,960/(Math.abs(s.player.x-b.x)+510))):1;
+  const nightmare=s.level.badDreams&&(s.boss.nightmareUltimate||s.powerClash?.kind==='nightmare');
+  const near=Math.min(s.player.x,b.x,b.countess?.x??b.x),far=Math.max(s.player.x,b.x,b.countess?.x??b.x);
+  const zoom=nightmare?.59:battle?s.level.cornfield?Math.max(.5,Math.min(.86,960/(Math.abs(s.player.x-b.x)+520))):Math.max(.5,Math.min(.88,960/(far-near+400))):1;
   const previousFloor=(a.y-s.camera.y)*(s.camera.zoom||1);s.camera.zoom+=(zoom-s.camera.zoom)*ease;
-  const width=960/s.camera.zoom,targetX=battle?Math.max(a.left,Math.min(a.right-width,(s.player.x+b.x)/2-width/2)):Math.max(0,Math.min(s.level.width-width,s.player.x-width*.32));
+  const width=960/s.camera.zoom,targetX=battle?Math.max(a.left,Math.min(a.right-width,(near+far)/2-width/2)):Math.max(0,Math.min(s.level.width-width,s.player.x-width*.32));
   s.camera.x+=(targetX-s.camera.x)*ease;s.camera.x=Math.max(0,Math.min(Math.max(0,s.level.width-width),s.camera.x));
   if(battle)s.camera.y=a.y-(previousFloor+(440-previousFloor)*ease)/s.camera.zoom;
-  else {const targetY=s.level.maskMansion?Math.max(-320,Math.min(180,s.player.y-385)):s.level.cornfield?groundY(s.level.route,s.player.x)-440:40;s.camera.y+=(targetY-s.camera.y)*Math.min(1,dt*3);}
+  else {const targetY=s.level.maskMansion?Math.max(-320,Math.min(180,s.player.y-385)):s.level.cornfield||s.level.badDreams?groundY(s.level.route,s.player.x)-440:40;s.camera.y+=(targetY-s.camera.y)*Math.min(1,dt*3);}
   s.camera.backdropY+=(40-s.camera.backdropY)*Math.min(1,dt);return;
  }
 

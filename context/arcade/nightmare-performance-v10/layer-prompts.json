@@ -1,0 +1,18 @@
+[
+  {
+    "file": "arena-cutout",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/act-two/episode-two-v1/ring.webp"
+    ],
+    "transparent": true,
+    "prompt": "Use case: background-extraction. EXACT CUTOUT of the supplied arena, preserving its FULL original 1536x1024 image framing, both the left and RIGHT pillars complete and at exactly the same positions. Do not redesign, zoom, pan or change any foreground drawing. ONLY remove the city/night sky/round natural moon/clouds visible in the central torn opening to alpha0 transparency, and remove the entire bottom arena FLOOR below the back railing to alpha0 transparency. Keep all tent roof, curtains, both pillars, all ropes/lanterns, decorative golden smiling moon and masks, back railing unchanged. This is a transparent foreground cutout to composite over the separate city plate. Real transparent holes, no brown/gray fill and no checkerboard. Same complete full scene crop as reference."
+  },
+  {
+    "file": "cloth-cels",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/act-two/episode-two-v1/ring.webp"
+    ],
+    "transparent": true,
+    "prompt": "Use case: precise-object-edit. Produce FOUR aligned animation cells on a 3072x2048 sheet, 2x2 grid; each cell reproduces the FULL original 1536x1024 arena framing and coordinate system. Layer extraction: retain ONLY the PURPLE and TEAL TENT FABRIC and SIDE CURTAINS. Everything else must be alpha0: REMOVE both pillars, gold crescent ornament, masks, lanterns, ropes, tassels, railings, floor, city, moon and sky. The shape of the tent fabric is an exact cutout at the same scale and position as original, with transparent holes where the fixed ornaments/pillars were. Draw FOUR coherent consecutive variations of cloth folds and torn hems rippling in wind. Keep the top attachment points and outer composition aligned, no zoom or camera changes. Four subtle hand-painted distinct folds animation, not four redesigns. Real clean transparency around/inside fabric; no flat backdrop, no fake checkerboard. No text/gridline."
+  }
+]

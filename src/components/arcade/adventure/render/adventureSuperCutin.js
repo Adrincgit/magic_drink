@@ -38,6 +38,7 @@ function ribbon(c,y,width,height){
 // A screen-space illustration, independent of world zoom and Hexy's facing.
 // Confined to the left side. It fades there instead of crossing the battlefield.
 export function drawSuperCutin(c,s,art,reduced=false,en=false){
+ if(s.powerClash?.kind==='nightmare')return false;
  if(s.powerClash)return drawDuelCharge(c,s,art,false,reduced);
  const q=superCutinState(s,reduced),pose=superCutinPortrait(s),classic=pose.classic||!art[pose.key];
  const portrait=art[classic?'hexy-encore-portrait':pose.key];

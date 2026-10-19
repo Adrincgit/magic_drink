@@ -1,3 +1,4 @@
+import {drawNightmareBackdrop,drawNightmareWorld} from './nightmareClashCanvas';
 import {painted,energyHead,energyGlow,paintedParticle,paintedMeter} from './paintedDuelCanvas';
 import {cameraView} from './adventureCamera';
 import {clashContact,CLASH_DURATION,CLASH_TRAVEL} from '../engine/adventurePowerClash';
@@ -35,6 +36,7 @@ function beamFilaments(c,art,a,b,age,boss,reduced){
  }c.restore();
 }
 export function drawPowerBackdrop(c,s,reduced){
+ if(s.level.badDreams)return drawNightmareBackdrop(c,s);
  const q=s.boss.ultimate,clash=s.powerClash;if(!q&&!clash)return;
  const view=cameraView(s),fade=clash?1:q.state==='charge'?clamp(q.age/.3):q.state==='recover'?1-clamp(q.age/.4):.8;
  c.save();c.fillStyle=`rgba(17,9,37,${fade*.52})`;c.fillRect(s.camera.x-10,s.camera.y-10,view.width+20,view.height+20);c.restore();
@@ -46,6 +48,7 @@ export function drawPowerBackdrop(c,s,reduced){
  }
 }
 export function drawPowerWorld(c,s,art,reduced){
+ if(s.level.badDreams)return drawNightmareWorld(c,s,art,reduced);
  const u=s.boss.ultimate,q=s.powerClash;if(!u&&!q)return;
  const age=q?.age??u.age,frame=reduced?1:Math.floor(age*12)%4,beamFrame=duelBeamPhase(s.fxTime,reduced);
  drawChargeStreams(c,s,art,reduced);
@@ -92,8 +95,9 @@ export function drawPowerWorld(c,s,art,reduced){
  drawClashAtmosphere(c,s,art,reduced);
  if(q)drawClashSparks(c,q,art,reduced);
 }
-export function drawHarlequinCutin(c,s,art,reduced){drawDuelCharge(c,s,art,true,reduced);}
+export function drawHarlequinCutin(c,s,art,reduced){if(s.level.badDreams)return;drawDuelCharge(c,s,art,true,reduced);}
 export function drawClashMeter(c,s,art,en,reduced){
+ if(s.powerClash?.kind==='nightmare')return;
  const q=s.powerClash;if(!q||!['contest','resolve'].includes(q.state))return;
  paintedMeter(c,art,328,83,304,49,q.pressure,s.player.x<s.boss.x,reduced?0:s.fxTime);
  if(q.state==='contest'){c.save();c.font='bold 11px sans-serif';c.textAlign='center';c.fillStyle='#ffe9c0';c.fillText(Math.max(0,CLASH_DURATION-q.contestAge).toFixed(1)+' s',480,141);c.restore();}

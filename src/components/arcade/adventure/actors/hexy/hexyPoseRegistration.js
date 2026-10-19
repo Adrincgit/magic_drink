@@ -18,4 +18,5 @@ Object.assign(HEXY_REGISTRATION,combatV12Registration);
 // The overhead wand uses cell space; it must not reduce the walking body.
 for(let i=0;i<16;i++)HEXY_REGISTRATION['guard-walk-v1:'+i]={scale:1.075,x:0};
 for(let i=0;i<20;i++)HEXY_REGISTRATION['glide-fire-v1:'+i]={scale:1.1,x:0};
+for(const sheet of ['aerial-hexy-ground-effort','aerial-hexy-air-effort','nightmare-pressure-ground','nightmare-pressure-air'])for(let i=0;i<(sheet.startsWith('nightmare-')?20:12);i++)HEXY_REGISTRATION[sheet+':'+i]={scale:1.08,x:0};
 export const hexyRegistration=pose=>actingRegistration[pose.sheet+':'+pose.frame]||ACTION_REGISTRATION[pose.sheet+':'+pose.frame]||HEXY_REGISTRATION[pose.sheet+':'+pose.frame]||{scale:1,x:0};

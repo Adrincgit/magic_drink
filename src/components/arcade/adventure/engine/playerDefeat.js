@@ -5,6 +5,7 @@ import {impactSmoke} from './cinematicImpact';
 import {updateSupplies} from '../world/adventureSupplies';
 import {stepHarlequinUltimate} from '../actors/bosses/harlequinUltimate';
 import {stepSoulPumpkin} from './villagePumpkins';
+import {stepNightmareBlast} from './nightmareStormImpact';
 
 export function beginPlayerDefeat(s,pit=false){
  const p=s.player;
@@ -18,7 +19,7 @@ export function beginPlayerDefeat(s,pit=false){
 }
 export function stepPlayerDefeat(s,dt){
  const q=s.playerDefeat;if(!q)return false;
- const p=s.player,slow=dt*.42;q.age+=dt;q.total+=dt;s.time+=slow;
+ const p=s.player,slow=dt*.42;q.age+=dt;q.total+=dt;s.time+=slow;stepNightmareBlast(s,slow);
  updateSupplies(s,slow);
  // Existing projectiles/effects continue through the slow motion, without hits.
  for(const shot of s.hostile){shot.age+=slow;shot.vy+=(shot.gravity||0)*slow;shot.x+=(shot.vx||0)*slow;shot.y+=(shot.vy||0)*slow;shot.life-=slow;}

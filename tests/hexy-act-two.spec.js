@@ -44,7 +44,8 @@ test('the mansion can be traversed through its upper galleries using real moveme
   }
   expect(arrived,'unreachable gallery '+q.x+' / Hexy '+s.player.x+','+s.player.y).toBe(true);
  }
- tick(s,1,{right:true});expect(s.player.y).toBeCloseTo(180,0);expect(s.player.x).toBeGreaterThan(7240);expect(s.checkpointAt).toBeUndefined();
+ for(let i=0;i<120*24&&s.player.x<s.level.arena.entry;i++)stepAdventure(s,{right:true,attack:true},1/120);
+ expect(s.player.y).toBeCloseTo(s.level.arena.y,0);expect(s.player.x).toBeGreaterThan(s.level.arena.left);expect(s.castleInside).toBe(true);expect(s.checkpointAt).toBeUndefined();
 });
 test('scarecrow ambushes warn before spawning and each trigger fires once',()=>{
  const s=createAdventure(8),a=s.actTwoAmbushes[0];s.enemies=[];s.player.hurt=999;s.player.x=a.x-200;tick(s,.2);expect(s.enemies).toHaveLength(0);expect(a.warning).toBeGreaterThan(0);tick(s,1.4);expect(s.enemies.filter(e=>e.type===29)).toHaveLength(2);tick(s,3);expect(s.enemies).toHaveLength(2);
@@ -55,9 +56,9 @@ test('the Straw King reconstructs once, and destroying the piles prevents healin
 test('the Count turns into bats, crosses the arena, then returns vulnerable within bounds',()=>{
  const s=battle(9),b=s.boss;Object.assign(b,{phase:'patrol',timer:0,turn:1});tick(s,.1);expect(b.move).toBe('swarm');const x=b.x;tick(s,1);expect(b.phase).toBe('swarm');tick(s,2);expect(b.phase).toBe('recover');expect(b.vulnerable).toBe(true);expect(Math.abs(b.x-x)).toBeGreaterThan(100);expect(b.x).toBeGreaterThan(s.level.arena.left);
 });
-test('harlequin phase boundaries survive huge attacks and visibly add persistent safe platforms',()=>{
+test('harlequin phase boundaries survive huge attacks and keep all three phases without obstructing the open floor',()=>{
  const s=battle(10),b=s.boss;
- for(const stage of [2,3]){b.vulnerable=true;damageActTwoBoss(s,10000);expect(b.hp).toBeCloseTo(b.maxHp*(4-stage)/3,5);tick(s,.1);expect(b.phase).toBe('transform');expect(s.clear).toBeFalsy();tick(s,2.1);expect(b.stage).toBe(stage);expect(s.dreamPlatforms.filter(q=>!q.gone)).toHaveLength(3);}
+ for(const stage of [2,3]){b.vulnerable=true;damageActTwoBoss(s,10000);expect(b.hp).toBeCloseTo(b.maxHp*(4-stage)/3,5);tick(s,.1);expect(b.phase).toBe('transform');expect(s.clear).toBeFalsy();tick(s,2.1);expect(b.stage).toBe(stage);expect(s.dreamPlatforms.filter(q=>!q.gone)).toHaveLength(0);expect(s.platforms.filter(q=>q.kind==='earth').every(q=>q.y===480)).toBe(true);}
  b.vulnerable=true;damageActTwoBoss(s,10000);tick(s,1);expect(s.clear).toBeFalsy();tick(s,2.1);expect(b.defeat.ready).toBe(true);expect(s.clear).toBeTruthy();tick(s,15);expect(s.won).toBe(true);
 });
 test('floor nightmares give over a second of warning and always leave a safe lane',()=>{
@@ -80,7 +81,7 @@ test('every new boss can be defeated with the real basic wand throughout its pha
   const s=battle(id),b=s.boss;const stages=new Set();s.supplies=[];
   for(let i=0;i<120*180&&!s.clear;i++){
    s.player.hurt=999;const dx=b.x-s.player.x,aim=dx>0?1:-1;
-   stepAdventure(s,{attack:true,right:dx>270,left:dx< -270,up:b.y<s.player.y-180},1/120);stages.add(b.stage);
+   stepAdventure(s,{attack:true,right:dx>270||s.player.dir!==aim&&dx>0,left:dx< -270||s.player.dir!==aim&&dx<0,up:b.y<s.player.y-180},1/120);stages.add(b.stage);
   }
   expect(b.hp,'wand could not defeat '+id+' / '+b.phase+' / HP '+b.hp).toBe(0);expect(stages.size).toBe(id===10?3:2);expect(s.clear).toBeTruthy();
  }

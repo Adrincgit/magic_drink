@@ -28,6 +28,7 @@ export function updateGuard(s,input,dt){
  }else{p.guarding=false;p.parryWindow=0;p.guardAge=0;}
 }
 export function breakGuard(s){const p=s.player;p.guarding=false;p.guardExhausted=true;p.guardBreak=.4;p.magicDelay=1;s.events.push('guardBreak');}
+export function meleeGuardImpact(s,heavy=false){s.player.guardHit=.24;s.magic=Math.max(0,s.magic-GUARD_HIT_COST*guardEfficiency(s)*(heavy?1.4:1));if(!s.magic)breakGuard(s);}
 export function guardBlocks(s,shot){
  const p=s.player;if(!p.guarding||shot.life<=0)return false;
  if(ribbonActive(s))return ribbonReflect(s,shot);
@@ -48,7 +49,7 @@ export const clearsHostileProjectiles=q=>!!(q.heavy&&!q.hidden||q.kind===3||q.po
 export function clearPowerProjectiles(s,shots=s.shots,hostile=s.hostile){
  for(const q of shots)if(clearsHostileProjectiles(q)&&q.life>0){
   let cleared=false;
-  for(const h of hostile)if(h.life>0&&!['ember-blast','ember-breath','fort-breath','barge-jet'].includes(h.kind)){
+  for(const h of hostile)if(h.life>0&&!['ember-blast','ember-breath','fort-breath','barge-jet','nightmare-wheel','nightmare-storm'].includes(h.kind)){
    const x0=(q.previousX??q.x)-(h.previousX??h.x),y0=(q.previousY??q.y)-(h.previousY??h.y),dx=q.x-h.x-x0,dy=q.y-h.y-y0;
    const t=Math.max(0,Math.min(1,-(x0*dx+y0*dy)/(dx*dx+dy*dy||1)));
    if(Math.hypot(x0+dx*t,y0+dy*t)>(q.r||8)+(h.r||10)+(q.popcornStrong?8:0))continue;

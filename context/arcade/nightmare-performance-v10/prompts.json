@@ -1,0 +1,87 @@
+{
+  "mode": "built-in ImageGen",
+  "jobs": [
+    {
+      "file": "jump-2",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-storm-v8/sources/staff-phase-2.png"
+      ],
+      "transparent": true,
+      "prompt": "Use case: identity-preserve. Real transparent alpha. Match the supplied reference EXACT same chibi girl Harlequin: lavender hair, purple and deep teal two-cone jester hat, gold bells/ruff, diamond purple/teal costume, curled boots, white gloves, ONE black-shaft staff with ONE gold crescent. Two arms/two hands only. Same face/body proportions and hand-painted polished anime cartoon art. Full silhouettes including hat/hair/staff INSIDE every cell, generous transparent padding, no labels/grid/borders/backdrop, no redesign. Normal MAGENTA irises, NO spirals. TWELVE sequential drawn cels, strict 4 columns by 3 rows, facing LEFT. Animate a COMPLETE regular jump: 0 standing ready knees starting bend, 1 deep anticipation crouch hair settling, 2 takeoff legs pushing off ground staff tucked, 3 early ascent legs extending behind, 4 middle ascent knees draw in hair trailing down, 5 late ascent curl, 6 apex body opens and hair lifts, 7 falling posture boots point down and staff balances, 8 faster descent knees brace, 9 first landing compressed knees, 10 deep landing follow-through hair falling, 11 rising back to ready. No same held airborne drawing: EACH successive cel changes legs, arms, hair and bells coherently. Staff is kept safely tucked/balanced, not attacking. No FX/floor."
+    },
+    {
+      "file": "jump-3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-storm-v8/sources/staff-phase-3.png"
+      ],
+      "transparent": true,
+      "prompt": "Use case: identity-preserve. Real transparent alpha. Match the supplied reference EXACT same chibi girl Harlequin: lavender hair, purple and deep teal two-cone jester hat, gold bells/ruff, diamond purple/teal costume, curled boots, white gloves, ONE black-shaft staff with ONE gold crescent. Two arms/two hands only. Same face/body proportions and hand-painted polished anime cartoon art. Full silhouettes including hat/hair/staff INSIDE every cell, generous transparent padding, no labels/grid/borders/backdrop, no redesign. Eyes must keep CYAN irises with MAGENTA SPIRALS in EVERY frame. TWELVE sequential drawn cels, strict 4 columns by 3 rows, facing LEFT. Animate a COMPLETE regular jump: 0 standing ready knees starting bend, 1 deep anticipation crouch hair settling, 2 takeoff legs pushing off ground staff tucked, 3 early ascent legs extending behind, 4 middle ascent knees draw in hair trailing down, 5 late ascent curl, 6 apex body opens and hair lifts, 7 falling posture boots point down and staff balances, 8 faster descent knees brace, 9 first landing compressed knees, 10 deep landing follow-through hair falling, 11 rising back to ready. No same held airborne drawing: EACH successive cel changes legs, arms, hair and bells coherently. Staff is kept safely tucked/balanced, not attacking. No FX/floor."
+    },
+    {
+      "file": "staff-defense-2",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-storm-v8/sources/staff-phase-2.png"
+      ],
+      "transparent": true,
+      "prompt": "Use case: identity-preserve. Real transparent alpha. Match the supplied reference EXACT same chibi girl Harlequin: lavender hair, purple and deep teal two-cone jester hat, gold bells/ruff, diamond purple/teal costume, curled boots, white gloves, ONE black-shaft staff with ONE gold crescent. Two arms/two hands only. Same face/body proportions and hand-painted polished anime cartoon art. Full silhouettes including hat/hair/staff INSIDE every cell, generous transparent padding, no labels/grid/borders/backdrop, no redesign. Normal magenta eyes, NO spirals. SIXTEEN sequential real drawings in a strict 4 by 4 sheet facing LEFT. Row 1 frames 0-3 and row 2 frames 4-7 form an eight-phase DEFENSIVE WINDMILL STAFF SPIN in front of her torso: shaft rotates clockwise through horizontal/diagonal/vertical orientations, wrists smoothly exchange the grip, ONE crescent travels around the circle. Knees planted, hair/bells animate. NO drawn circles, shields or energy. Row 3 frames 8-11 are a heavy physical strike BOUNCING BACK from a shield to the LEFT (do not draw shield): 8 shaft halted at forward contact, elbows nearly straight; 9 elbows forcefully buckle, shoulders jolted back; 10 torso recoils backwards, face surprised/grimacing, staff raised back; 11 recovering grip knees braced. Row 4 frames12-15 are a coherent rapid repeated forward staff beating sequence with same planted stance: windup, forward hit, short recoil bent elbows, windup. These are distinct drawn poses, no extra arms, no multiple staffs, no broad motion smears replacing anatomy."
+    },
+    {
+      "file": "staff-defense-3",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-storm-v8/sources/staff-phase-3.png"
+      ],
+      "transparent": true,
+      "prompt": "Use case: identity-preserve. Real transparent alpha. Match the supplied reference EXACT same chibi girl Harlequin: lavender hair, purple and deep teal two-cone jester hat, gold bells/ruff, diamond purple/teal costume, curled boots, white gloves, ONE black-shaft staff with ONE gold crescent. Two arms/two hands only. Same face/body proportions and hand-painted polished anime cartoon art. Full silhouettes including hat/hair/staff INSIDE every cell, generous transparent padding, no labels/grid/borders/backdrop, no redesign. Keep CYAN irises with MAGENTA SPIRALS in every frame. SIXTEEN sequential real drawings in a strict 4 by 4 sheet facing LEFT. Row 1 frames 0-3 and row 2 frames 4-7 form an eight-phase DEFENSIVE WINDMILL STAFF SPIN in front of her torso: shaft rotates clockwise through horizontal/diagonal/vertical orientations, wrists smoothly exchange the grip, ONE crescent travels around the circle. Knees planted, hair/bells animate. NO drawn circles, shields or energy. Row 3 frames 8-11 are a heavy physical strike BOUNCING BACK from a shield to the LEFT (do not draw shield): 8 shaft halted at forward contact, elbows nearly straight; 9 elbows forcefully buckle, shoulders jolted back; 10 torso recoils backwards, face surprised/grimacing, staff raised back; 11 recovering grip knees braced. Row 4 frames12-15 are a coherent rapid repeated forward staff beating sequence with same planted stance: windup, forward hit, short recoil bent elbows, windup. These are distinct drawn poses, no extra arms, no multiple staffs, no broad motion smears replacing anatomy."
+    },
+    {
+      "file": "despair",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-storm-v8/sources/boss-air-strain.png"
+      ],
+      "transparent": true,
+      "prompt": "Use case: identity-preserve. Real transparent alpha. Match the supplied reference EXACT same chibi girl Harlequin: lavender hair, purple and deep teal two-cone jester hat, gold bells/ruff, diamond purple/teal costume, curled boots, white gloves, ONE black-shaft staff with ONE gold crescent. Two arms/two hands only. Same face/body proportions and hand-painted polished anime cartoon art. Full silhouettes including hat/hair/staff INSIDE every cell, generous transparent padding, no labels/grid/borders/backdrop, no redesign. FOUR continuous casting cels in a strict 2x2 grid. Supporting reference is the EXACT pose to preserve. Change expression ONLY into unmistakable worried DESPERATION near defeat: arched inner brows, wide cyan/magenta spiral eyes, sweat bead, mouth open in shocked breath or clenched with fear, she realizes she is losing. Preserve her outward-facing palm firmly EXTENDED to LEFT with exactly FOUR fingers plus THUMB, keep the same casting shoulder/elbow and other hand gripping staff at hip. Hair, sleeves and bells have subtle progressive drawn follow-through across four cels. No arm lowering, no cheek touching, no unrelated pose, NO adult body, no broad eye color change."
+    },
+    {
+      "file": "clash-plasma",
+      "refs": [],
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Game FX atlas, EIGHT sequential hand-painted anime MAGIC BEAM CONTACT cels in strict 4x2 grid on REAL transparent alpha. A brilliant pressurized white-hot contact core, violet plasma pressing from upper right, pink/cyan energy from lower left. Swirling smooth energy turbulence and tapered lightning wisps, compact round irregular contact head, strong drawn volume, successive phases rotate and pulse coherently. NO objects at all: NO confetti, NO paper, NO stars, NO moons, NO crystals, NO musical notes, NO symbols, NO faces. Only pure luminous plasma and force. Fully visible energy silhouettes with generous transparent padding on all sides, no boxed glow, no text."
+    },
+    {
+      "file": "fast-wind",
+      "refs": [],
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. EIGHT sequential hand-painted anime WIND GUST sprites, 4 columns by 2 rows on real transparent background. A FAST horizontal rush of pale icy wind with translucent smoky violet edges, elongated torn brush strokes, whipping air, tiny dust flecks, sharp leading curl to LEFT. Progress from first tight fast gust into broad rush then trailing air dissipating; eight distinct chronological cels. Feels like AIR PRESSURE, not music or magic icons. No moons, no notes, no clefs, no stars, no confetti, no geometric line diagram, no concentric vector circles, no faces. Genuine painted texture/soft alpha with padded complete silhouettes."
+    },
+    {
+      "file": "halloween-vortex-16",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/act-two/nightmare-aerial-v3/candy-vortex.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: identity-preserve. Extend the APPROVED reference magical purple Halloween tornado into SIXTEEN hand-painted animation frames, strict 4 columns x4 rows on real TRANSPARENT alpha. Keep its EXACT visual concept: huge violent violet/magenta spiral wind funnel with glowing WHITE GHOSTS, smiling orange HALLOWEEN PUMPKINS, crescent accents and wrapped sweets embedded IN the rotating vortex. These are part of its texture; no separate scattered icon burst. Left side is the broad rounded flaring impact mouth, right side is the narrow emission tail. Rotate the corkscrew internal ribbons/ghosts/pumpkins smoothly across sixteen closely related phases, coherent outer silhouette and palette, no redesign into plain gem tornado. All 16 forms fully visible and well separated with large transparent gutters. No faces/masks outside the tornado, no rectangular glow backdrop, no text, no clipped edge. Real painted anime volume like reference, same spooky playful intensity."
+    },
+    {
+      "file": "city-plate",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/act-two/episode-two-v1/ring.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: precise-object-edit. Create the CLEAN BACKGROUND PLATE for parallax from the referenced painted arena, same 3:2 landscape composition. Keep the beautiful purple moonlit city castle architecture and natural round moon at exactly their existing positions/scale behind the opening. Remove ONLY all FOREGROUND circus tent, curtains, ceiling fabric, hanging ornaments, masks, pillars, ropes, railings and arena floor, completing the hidden areas as the same deep blue purple starless cloudy night sky, distant city silhouettes and low dark distant landscape. No new moon, no moved moon, no enlarged moon, no new perspective. Entire result is the distant sky/city layer without foreground objects. Preserve painterly color/style and the reference city in lower-middle-right. No text, no interface."
+    },
+    {
+      "file": "tent-cels",
+      "refs": [
+        "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/act-two/episode-two-v1/ring.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: precise-object-edit. FOUR aligned hand-painted animation cels of ONLY the FOREGROUND circus tent from the reference arena, 2x2 grid, REAL transparent background. Each landscape 3:2 cel reproduces EXACTLY the same framing: purple/teal overhead fabric with the large golden smiling decorative crescent at top center, two ornate side pillars at the same coordinates, side curtains, hanging gold lanterns/ropes/ornaments and low back railing. Remove the ENTIRE distant blue sky, moon, clouds and castle city to genuine transparency in the big central opening; remove the bottom arena floor to transparency. Keep the tent/ornaments ONLY. Across four consecutive looping cels, DRAW subtle changes to fabric folds/torn drapes, tassels and lantern flames fluttering in strong wind. Keep pillar and railing positions rigid and IDENTICAL across frames. All four cels share identical camera/scale, no perspective shifts, no extra objects, no floor, no city/moon pixels. This is a layered game environment animation, no labels, no borders."
+    },
+    {
+      "file": "speech-tails",
+      "refs": [],
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. FOUR blank cartoon anime speech balloons on real transparent background, 2x2 grid, each 512x320 proportion, generous separation. Hand-painted warm ivory paper, rich dark violet expressive ink outline, subtle brush/shaded edge, organic rounded funny shapes, NOT clean SVG. Upper-left: main rounded ivory speech BODY centered left/bottom, with ONE CLEAR LONG TAPERED SPEECH TAIL connected to its upper-right edge and pointing at upper-right corner. Upper-right: same layout but excited shout body, matching upper-right long tail. Lower-left: softer dialogue balloon body at top/right with ONE connected tapered TAIL pointing bottom-left (Hexy). Lower-right: rounded one-line boss speech body lower-left with connected tail pointing upper-right. Entire tails visible and part of outline. Absolutely NO words, NO letters, no decorative stars/notes, no fake checkerboard, no rectangles, no UI mockup."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "rigging",
+    "prompt": "Use case: stylized-concept. Production transparent game prop atlas, FOUR columns TWO rows, exactly EIGHT separate fully isolated objects. Richly hand painted detailed anime cartoon theatrical castle circus props with crisp organic dark outlines, warm wood grain, brass wear and textured cloth; match the supplied colorful clown game style. Each whole object entirely inside its cell, wide transparent gutters. Row1: 1 a tall thick weathered wooden circus mast with carved brass collars and rope bindings, 2 a different tall wooden mast with diagonal brace and block pulley at top, 3 a hanging thick hemp rope with detailed wooden pulley and brass hook, 4 a loose hanging coil of thick rope. Row2: 5 a hanging purple teal velvet curtain gathered at top, 6 a torn striped canvas curtain with ragged holes, 7 a thick carved wooden balcony beam supported by angled braces, 8 a cracked theatrical crescent moon prop decorated with brass stars. Objects ONLY, absolutely transparent background and margins. No vector look, flat rectangles, geometric outlines, text, grid, shadows, checkerboard, backdrop or connecting lines.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/enemies/clown.webp"
+    ]
+  },
+  {
+    "name": "minions",
+    "prompt": "Use case: stylized-concept. Professional transparent sprite atlas with FOUR columns and SIX rows, exactly 24 whole-body separated characters, clean wide transparent gutters. Hand drawn anime CARTOON platform game style matching red clown reference: expressive round shapes, crisp dark outlines, rich cel shading, consistent scale. All figures face LEFT. TOP THREE ROWS are one vampire FOOTMAN, male black swept hair, pointed ears, pale face, bottle green waistcoat, small burgundy cape, white gloves, brown boots, short cute 4-head-tall proportions, distinct from silver-haired red-waistcoat Count. Top first two rows are EIGHT consecutive chronological walk poses, full two-step alternating leg cycle with coherent knee bends, planted feet and opposite arm swing. Third row four actions: raise casting hand, cast blue orb left with that same hand, hurt flinch, kneeling defeated. BOTTOM THREE ROWS are one haunted rounded steel KNIGHT armor with short red plume, dark visor with tiny blue eyes and a short broad sword in forward hand. Rows4-5 eight chronological walk cycle poses with alternating legs and coherent weight, same sword hand. Last row: raise sword anticipation, sword slash LEFT, hurt recoil, collapsed empty armor. Each figure completely inside its own equal cell including cape, full plume, sword and all shoes. No scenery, lettering, grid, colored stripes or connecting lines. Genuine transparent alpha.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/enemies/clown.webp",
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/act-two/episode-two-v1/couple.webp"
+    ]
+  }
+]

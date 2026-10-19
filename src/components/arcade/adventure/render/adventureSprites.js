@@ -29,6 +29,7 @@ export function enemyDrawing(e,reduced=false){
   const hit={1:['acrobat-rings',10],4:['acrobat-rings',10],3:['juggler-actions',10],6:['clown',10],11:['ember-torch-attack',12],14:['umbrella-clown',10]}[e.type];
   if(hit)return{key:hit[0],frame:hit[1]};
   if(e.cornImp)return{key:'corn-imp',frame:12,size:184*4/3};
+  if(e.type===30||e.type===31)return{key:'episode-minions',frame:e.type===30?10:22};
   if(e.type>=29&&e.type<=31)return{key:'act-two-enemies',frame:(e.type-29)*8+6};
   // Absorption remains uninterruptible; rendering must not replace its poses.
   if(e.type===26&&!['absorb','absorb-player'].includes(e.phase))return{key:e.flying?'village-witch-air-v7':'village-witch-ground-v7',frame:12+(reduced?1:Math.min(3,Math.floor(e.elementHit.age/.13)))};

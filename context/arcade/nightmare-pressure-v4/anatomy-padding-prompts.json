@@ -1,0 +1,12 @@
+[
+  {
+    "name": "hexy-ground-anatomy-clean",
+    "file": "exec-b347f493-d3b0-456c-ae2d-e9b3c4af365c.png",
+    "prompt": "Edit target: supplied 12-cel Hexy animation sheet. Change ONLY layout/padding: REDUCE EACH OF THE TWELVE INDIVIDUAL DRAWINGS TO 74% of its present size about its own cel center. Redraw missing clipped hat tips, hair tips and boot tips to complete each figure. Preserve the EXACT TWO-ARM CHEST GRIP, face, youthful appearance, poses, outfit, rendering and four-cel acting of each row. Output the SAME 4 columns by 3 rows sheet, but with very large 12% empty transparent margins on ALL FOUR SIDES OF EVERY CELL. No pixel of a character may touch an image edge or a neighbouring cell. Every full-body drawing must be complete, including all hat, wand star, hair and both boots. Genuine transparent background, no grid, no labels, no background, no new limbs."
+  },
+  {
+    "name": "hexy-air-anatomy-clean",
+    "file": "exec-f687da46-282f-455a-93ba-ba96d367aa13.png",
+    "prompt": "Edit target: supplied 12-cel Hexy animation sheet. Change ONLY layout/padding: REDUCE EACH OF THE TWELVE INDIVIDUAL DRAWINGS TO 74% of its present size about its own cel center. Redraw missing clipped hat tips, hair tips and boot tips to complete each figure. Preserve the EXACT TWO-ARM CHEST GRIP, face, youthful appearance, poses, outfit, rendering and four-cel acting of each row. Output the SAME 4 columns by 3 rows sheet, but with very large 12% empty transparent margins on ALL FOUR SIDES OF EVERY CELL. No pixel of a character may touch an image edge or a neighbouring cell. Every full-body drawing must be complete, including all hat, wand star, hair and both boots. Genuine transparent background, no grid, no labels, no background, no new limbs."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "staff-defense-2-spaced",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-performance-v10/sources/staff-defense-2.png"
+    ],
+    "transparent": true,
+    "prompt": "Use case: precise-object-edit. RE-LAYOUT ONLY this sixteen-character animation sheet so ALL SIXTEEN cels are fully isolated and keep their original drawings exactly. Output a SQUARE 2048x2048 transparent sprite sheet, strict 4x4 grid. Scale EACH complete character uniformly smaller so the WIDEST full silhouette including crescent staff and trailing hair uses at most 70% of its 512x512 cell width and at most 75% height, with AT LEAST 50 pixels clear transparent gutter on each cell side. Keep exact same sixteen poses and reading order, same proportions, costume and expressions, no new art, no altered anatomy. Staff, hair and bells must NEVER touch another character, including diagonally. Keep each entire connected silhouette with all staff tips and cape edges. Preserve normal MAGENTA eyes. Real alpha, no painted backdrop, no added glow plate, no labels or gridlines."
+  },
+  {
+    "file": "staff-defense-3-spaced",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-performance-v10/sources/staff-defense-3.png"
+    ],
+    "transparent": true,
+    "prompt": "Use case: precise-object-edit. RE-LAYOUT ONLY this sixteen-character animation sheet so ALL SIXTEEN cels are fully isolated and keep their original drawings exactly. Output a SQUARE 2048x2048 transparent sprite sheet, strict 4x4 grid. Scale EACH complete character uniformly smaller so the WIDEST full silhouette including crescent staff and trailing hair uses at most 70% of its 512x512 cell width and at most 75% height, with AT LEAST 50 pixels clear transparent gutter on each cell side. Keep exact same sixteen poses and reading order, same proportions, costume and expressions, no new art, no altered anatomy. Staff, hair and bells must NEVER touch another character, including diagonally. Keep each entire connected silhouette with all staff tips and cape edges. Preserve CYAN irises with MAGENTA SPIRALS. Real alpha, no painted backdrop, no added glow plate, no labels or gridlines."
+  }
+]

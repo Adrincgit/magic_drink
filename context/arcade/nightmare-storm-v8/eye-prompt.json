@@ -1,0 +1,10 @@
+{
+  "name": "aerial-spiral-eyes",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-aerial-v3/sources/boss-air-actions.png",
+    "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-sprites-v6/sources/boss-air-mad.png"
+  ],
+  "prompt": "EDIT ONLY THE EYES in the FIRST referenced sixteen-cel character sheet. Keep its EXACT FOUR COLUMNS by FOUR ROWS layout, all sixteen poses, staff orientation, all hands, body anatomy, hair, costume, palette, outlines and transparent background. The SECOND reference demonstrates the eye treatment only. In EVERY character of the first sheet replace the plain pink-purple irises with prominent CYAN-BLUE AND MAGENTA SPIRAL irises identical to the second reference. The character has unhinged spiral eyes throughout her phase-three jump, overhead charge, descent and knockback. The cyan outer iris and magenta spiral must both be clearly visible. Preserve each existing eyelid direction and mouth expression. Do NOT redesign or move the poses, do not add energy or particles, no captions, no background; retain genuine transparency and the full separated characters. Make this a surgical consistent eye correction of an existing game atlas.",
+  "mode": "built-in image_gen"
+}

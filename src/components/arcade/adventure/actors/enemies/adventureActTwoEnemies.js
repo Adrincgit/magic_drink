@@ -4,10 +4,12 @@ import {ACT_TWO_ENEMY_MUZZLES} from '../bosses/actTwoAtlas';
 import {enemyGeometry} from './adventureEnemyGeometry';
 import {faceTarget} from './enemyFacing';
 import {CORN_CARTOON_CELL,CORN_CARTOON_MUZZLES} from '../cornfieldCartoonRegistration';
+import {EPISODE_TWO_MUZZLES} from '../bosses/episodeTwoRegistration';
 export const isActTwoEnemy=e=>e.type>=29&&e.type<=32;
 export function actTwoEnemyDrawing(e,reduced=false){
  if(e.cornCrow)return{key:'corn-flock',frame:reduced?2:Math.floor(e.clock*12)%8,size:112*4/3};
  if(e.cornImp)return{key:'corn-imp',frame:e.hp<=0?15:e.phase==='emerge'?12:e.phase==='windup'?13:e.phase==='attack'?14:reduced||!e.moving?0:Math.floor((e.gait||0)*12)%12,size:184*4/3};
+ if(e.type===30||e.type===31){const base=e.type===30?0:12;return{key:'episode-minions',frame:base+(e.hp<=0?11:e.flash>0?10:e.phase==='windup'?8:e.phase==='attack'?9:reduced||!e.moving?0:Math.floor((e.gait||0)*8)%8)};}
  if(e.type===32)return{key:'act-two-effects',frame:8+(reduced?0:Math.floor(e.clock*9)%4),size:78};
  const row=(e.type-29)*8;
  return{key:'act-two-enemies',frame:row+(e.hp<=0?7:e.flash>0?6:e.phase==='windup'?4:e.phase==='attack'?5:reduced?0:Math.floor((e.gait||0)*4)%4)};
@@ -32,7 +34,7 @@ export function stepActTwoEnemy(s,e,dt,shoot){
   if(e.flash>0)return;
   e.windup-=dt;
   if(e.windup<=0){e.phase='attack';e.action=.4;
-   const point=ACT_TWO_ENEMY_MUZZLES[e.type],size=enemyGeometry(e).size,x=e.x+(point[0]/320-.5)*size*(e.dir>0?-1:1),y=e.y+(point[1]/320-.975)*size,a=Math.atan2(e.aim.y-y,e.aim.x-x);
+   const cartoon=e.type===30||e.type===31,point=cartoon?EPISODE_TWO_MUZZLES.minions[e.type===30?9:21]:ACT_TWO_ENEMY_MUZZLES[e.type],cell=cartoon?512:320,size=enemyGeometry(e).size,x=e.x+(point[0]/cell-.5)*size*(e.dir>0?-1:1),y=e.y+(point[1]/cell-.975)*size,a=Math.atan2(e.aim.y-y,e.aim.x-x);
    if(e.type===31){shoot(s,x,y,e.dir>0?0:Math.PI,285,'act-two-slash',{actTwo:true,r:20,life:.32,element:'physical'});worldSound(s,'stoneThrow',x,y);}
    else shoot(s,x,y,a,e.type===29?245:265,e.type===29?'act-two-straw':'act-two-orb',{actTwo:true,element:'magic',r:12});
    e.timer=e.type===31?2.7:2.3;

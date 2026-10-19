@@ -7,7 +7,7 @@ export function prepareActTwo(s,at=0){
  s.villagers=[];s.villageFire=[];s.villageDust=[];
  for(const q of s.platforms)if(q.solid){q.hp=q.maxHp??q.hp;q.maxHp=q.hp;q.gone=false;q.hitIds=new Set();}
  s.strawPiles=[];s.dreamMirrors=[];s.dreamHazards=[];
- s.dreamPlatforms=[];
+ s.dreamPlatforms=[];s.curtainChandeliers=[];
  s.cornBursts=[];s.cornHazards=[];
  if(s.level.cornfield){s.village={pumpkinSerial:0,rescued:0};for(const e of s.enemies)prepareCornEnemy(e);}
 }
@@ -21,7 +21,7 @@ export function prepareCornEnemy(e){
 export function resolveActTwoWalls(s,oldX,oldY){
  if(!s.level.actTwo)return;
  const p=s.player;
- if(s.level.maskMansion&&oldX<7240&&p.x>=7240&&p.y>220){p.x=7226;p.vx=0;}
+ if(s.level.maskMansion&&!s.level.castleCircus&&oldX<7240&&p.x>=7240&&p.y>220){p.x=7226;p.vx=0;}
  for(const q of s.platforms)if(q.solid&&!q.gone&&p.y>q.y+7&&oldY>q.y+4&&p.y-55<q.y+q.h){
   if(oldX+14<=q.x&&p.x+14>q.x){p.x=q.x-14;p.vx=0;}
   else if(oldX-14>=q.x+q.w&&p.x-14<q.x+q.w){p.x=q.x+q.w+14;p.vx=0;}

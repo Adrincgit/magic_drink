@@ -1,3 +1,4 @@
+import {canNightmareClash,beginNightmareClash,stepNightmareClash,nightmareContact} from './nightmarePowerClash';
 import {SUPER_WINDUP} from './adventureMagic';
 import {hexyMuzzle} from '../actors/hexy/hexyAnimation';
 import {ultimateHand} from '../actors/bosses/harlequinUltimate';
@@ -14,8 +15,9 @@ export const CLASH_DURATION=20;
 export const CLASH_MIN_DURATION=6;
 export const CLASH_TRAVEL=.34;
 export const CLASH_TAP_STRENGTH={normal:.0215,gentle:.02795};
-export function canPowerClash(s){return s.index===3&&s.boss.hp>0&&s.boss.stage===3&&s.boss.ultimate?.state==='charge';}
+export function canPowerClash(s){return canNightmareClash(s)||s.index===3&&s.boss.hp>0&&s.boss.stage===3&&s.boss.ultimate?.state==='charge';}
 export function beginPowerClash(s){
+ if(canNightmareClash(s))return beginNightmareClash(s);
  if(!s.superCinematic||s.superCinematic.aim?.y||!canPowerClash(s))return false;
  const p=s.player,b=s.boss;p.dir=Math.sign(b.x-p.x)||1;s.superCinematic.dir=p.dir;
  s.superCinematic.aim={x:p.dir,y:0};
@@ -24,6 +26,7 @@ export function beginPowerClash(s){
  s.shots=[];s.hostile=[];s.hitStop=0;b.vulnerable=false;return true;
 }
 export function clashContact(s){
+ if(s.powerClash?.kind==='nightmare')return nightmareContact(s);
  const q=s.powerClash,a=hexyMuzzle(s),b=ultimateHand(s.boss,false),t=q?.pressure??.5;
  return{x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t,a,b};
 }
@@ -32,6 +35,7 @@ function resolve(s,won){
  s.events.push(won?'clashWin':'clashLose');s.shake=.3;
 }
 export function stepPowerClash(s,input,dt,{hurt,finishBoss}){
+ if(s.powerClash?.kind==='nightmare')return stepNightmareClash(s,input,dt,{hurt,finishBoss});
  const q=s.powerClash,p=s.player,b=s.boss;if(!q)return;
  q.portraitPressure=(q.portraitPressure??.5)+(q.pressure-(q.portraitPressure??.5))*(1-Math.exp(-dt*7));
  updateSupplies(s,dt);

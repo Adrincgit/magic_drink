@@ -1,0 +1,18 @@
+[
+  {
+    "name": "hexy-parallel-alpha",
+    "prompt": "Use case: background-extraction. Remove ONLY the background and every coloured glow/aura/vignette behind this character. Preserve the EXACT character pixels, pose, face, clothing, hair, fingers, wand/star/staff, silhouette, position, scale, canvas size and aspect ratio. Do NOT redraw, restyle, resize or reposition any character part. The output must be a clean isolated cutout with a TRUE transparent alpha channel: every pixel outside the physical character and its held weapon fully transparent alpha zero, including the blue, pink, gold or purple haze and black/grey gradient. No shadow, rim glow, nebula, particles, coloured backdrop, checkerboard picture or black rectangle. Keep all physical hair strands and ink outlines intact. This is strictly a background-removal pass on approved artwork, not a new illustration."
+  },
+  {
+    "name": "hexy-shock-alpha",
+    "prompt": "Use case: background-extraction. Remove ONLY the background and every coloured glow/aura/vignette behind this character. Preserve the EXACT character pixels, pose, face, clothing, hair, fingers, wand/star/staff, silhouette, position, scale, canvas size and aspect ratio. Do NOT redraw, restyle, resize or reposition any character part. The output must be a clean isolated cutout with a TRUE transparent alpha channel: every pixel outside the physical character and its held weapon fully transparent alpha zero, including the blue, pink, gold or purple haze and black/grey gradient. No shadow, rim glow, nebula, particles, coloured backdrop, checkerboard picture or black rectangle. Keep all physical hair strands and ink outlines intact. This is strictly a background-removal pass on approved artwork, not a new illustration."
+  },
+  {
+    "name": "hexy-support-alpha",
+    "prompt": "Use case: background-extraction. Remove ONLY the background and every coloured glow/aura/vignette behind this character. Preserve the EXACT character pixels, pose, face, clothing, hair, fingers, wand/star/staff, silhouette, position, scale, canvas size and aspect ratio. Do NOT redraw, restyle, resize or reposition any character part. The output must be a clean isolated cutout with a TRUE transparent alpha channel: every pixel outside the physical character and its held weapon fully transparent alpha zero, including the blue, pink, gold or purple haze and black/grey gradient. No shadow, rim glow, nebula, particles, coloured backdrop, checkerboard picture or black rectangle. Keep all physical hair strands and ink outlines intact. This is strictly a background-removal pass on approved artwork, not a new illustration."
+  },
+  {
+    "name": "boss-held-alpha",
+    "prompt": "Use case: background-extraction. Remove ONLY the background and every coloured glow/aura/vignette behind this character. Preserve the EXACT character pixels, pose, face, clothing, hair, fingers, wand/star/staff, silhouette, position, scale, canvas size and aspect ratio. Do NOT redraw, restyle, resize or reposition any character part. The output must be a clean isolated cutout with a TRUE transparent alpha channel: every pixel outside the physical character and its held weapon fully transparent alpha zero, including the blue, pink, gold or purple haze and black/grey gradient. No shadow, rim glow, nebula, particles, coloured backdrop, checkerboard picture or black rectangle. Keep all physical hair strands and ink outlines intact. This is strictly a background-removal pass on approved artwork, not a new illustration."
+  }
+]

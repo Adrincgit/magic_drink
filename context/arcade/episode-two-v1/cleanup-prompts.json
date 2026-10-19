@@ -1,0 +1,12 @@
+[
+  {
+    "name": "hexy-double-clean",
+    "ref": "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/act-two/episode-two-v1/hexy-double.webp",
+    "prompt": "Precise cleanup of this full body Hexy cinematic illustration. Keep the entire character, same face, youthful proportions, pose, clothes, full raised wand and golden star and both boots exactly as drawn. Remove ALL external magical swirls, glows, particles, floating stars, pink background haze, rectangular colored stripes and every background pixel. There must be ONLY the clean, crisp outlined character holding her star wand on genuine transparent alpha. No background decorations at all. Do not put a checkerboard in the image. Preserve the high detailed anime cartoon character drawing without cropping. This is a clean full-body cutout for compositing over a moving game scene."
+  },
+  {
+    "name": "harlequin-portrait-clean",
+    "ref": "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/act-two/episode-two-v1/harlequin-portrait.webp",
+    "prompt": "Precise cleanup of this full body two-cone harlequin cinematic illustration. Keep the entire lavender-haired cartoon character, identical face and desperate laughing expression, exactly TWO hat cones, raised open hand, crescent staff, full costume and both curled boots exactly as drawn. Remove ALL external magical swirls, purple energy, haze, stars, colored rectangular bands, blue lines and every background pixel. There must be ONLY the clean crisp outlined character with her staff on genuine transparent alpha. No background decorations or glows at all. Do not paint a checkerboard. Preserve the high detailed anime cartoon character, no cropping. Clean full-body character cutout to composite over a moving game."
+  }
+]

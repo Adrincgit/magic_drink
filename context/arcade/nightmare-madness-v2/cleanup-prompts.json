@@ -1,0 +1,12 @@
+[
+  {
+    "name": "phase-two-alpha",
+    "path": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-0b892c6b-2e8c-4761-a475-57aec8e1864f.png",
+    "prompt": "Edit this exact 16-pose character sprite atlas: keep the SAME sixteen full body drawings, chronological order, 4 columns by 4 rows, exact youthful character, two hat cones, costume, staff and expressions. Remove the entire colored gradient backdrop and every background-colored pixel. TRUE TRANSPARENT ALPHA everywhere outside the character silhouettes, no checkerboard, no solid backdrop, no colored rectangular haze. Remove the large purple spell arcs / swirls around staff in attack cells; keep the GOLD crescent staff and character itself, magic is added at runtime. The cyan/magenta light should only remain painted on hair and costume. Increase empty transparent gutters so each entire figure, both cones, feet, staff and bells fits fully inside its own cell and never touches neighboring figures or canvas edges. No cutoffs. Do not add, remove or reorder any figures. Professional clean alpha sprite atlas."
+  },
+  {
+    "name": "phase-three-alpha",
+    "path": "C:/Users/cabra/.codex/generated_images/01a0b82d-f99d-7130-97af-f2af843b8646/exec-400be291-dc78-40a8-ae2d-c0e8ee3bbfde.png",
+    "prompt": "Edit this exact 16-pose character sprite atlas: keep the SAME sixteen full body drawings, chronological order, 4 columns by 4 rows, exact youthful character, two hat cones, costume, staff and expressions. Remove the entire colored gradient backdrop and every background-colored pixel. TRUE TRANSPARENT ALPHA everywhere outside the character silhouettes, no checkerboard, no solid backdrop, no colored rectangular haze. Remove the large purple spell arcs / swirls around staff in attack cells; keep the GOLD crescent staff and character itself, magic is added at runtime. The cyan/magenta light should only remain painted on hair and costume. Increase empty transparent gutters so each entire figure, both cones, feet, staff and bells fits fully inside its own cell and never touches neighboring figures or canvas edges. No cutoffs. Do not add, remove or reorder any figures. Professional clean alpha sprite atlas."
+  }
+]

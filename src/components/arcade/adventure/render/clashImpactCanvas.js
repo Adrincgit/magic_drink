@@ -7,6 +7,10 @@ let backdrop,manga;
 // The contact burst happens once, on arrival. Holding the clash does not
 // retrigger a full-screen flash or the opening shock wave.
 export function clashImpactTiming(q,reduced=false){
+ if(q?.kind==='nightmare'){
+  const age=q.impactAge??99,active=['contest','boss-boost','hexy-boost','resolve','flight'].includes(q.state);
+  return{heat:0,burst:active?clamp(1-age/.18):0,shock:active?clamp(1-age/.72):0,manga:active&&!reduced?clamp((MANGA_IMPACT_DURATION-age)/.04):0};
+ }
  if(!q||!['contest','resolve','flight'].includes(q.state))return{heat:0,burst:0,shock:0,manga:0};
  const heat=q.state==='flight'?1-clamp(q.age/.45):.78+clamp((.5-q.pressure)*2)*.22;
  const first=q.state==='contest'&&!reduced;
@@ -15,7 +19,7 @@ export function clashImpactTiming(q,reduced=false){
 
 export function drawMangaClashImpact(c,s,reduced=false){
  const ink=clashImpactTiming(s.powerClash,reduced).manga;if(!ink)return;
- drawMangaFrame(c,ink);
+ drawMangaFrame(c,ink,s.powerClash?.kind==='nightmare'&&s.powerClash.impactCause==='explosion');
 }
 
 export function superMangaTiming(s,reduced=false){

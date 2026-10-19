@@ -1,0 +1,92 @@
+{
+  "browser": {
+    "errors": [],
+    "missing": []
+  },
+  "videos": [
+    {
+      "name": "staff-acrobatics",
+      "states": [
+        "game-windup",
+        "game-attack",
+        "recover",
+        "patrol"
+      ],
+      "moves": [
+        "staff-sweep",
+        "staff-vault"
+      ],
+      "lastHearts": 5
+    },
+    {
+      "name": "attacking-illusions",
+      "states": [
+        "game-windup",
+        "game-attack",
+        "recover"
+      ],
+      "moves": [
+        "prism-mirage"
+      ],
+      "lastHearts": 5
+    },
+    {
+      "name": "uncountered-blast",
+      "states": [
+        "nightmare-charge",
+        "nightmare-fall",
+        "nightmare-descend",
+        "recover"
+      ],
+      "moves": [],
+      "lastHearts": 5
+    },
+    {
+      "name": "double-encore-can-lose",
+      "states": [
+        "contest",
+        "resolve",
+        "flight",
+        "land",
+        "recover"
+      ],
+      "moves": [],
+      "lastHearts": 0
+    },
+    {
+      "name": "near-defeat-surprise",
+      "states": [
+        "windup",
+        "travel",
+        "contest",
+        "boss-boost",
+        "hexy-boost",
+        "flight",
+        "land",
+        "defeated"
+      ],
+      "moves": [],
+      "lastHearts": 5
+    },
+    {
+      "name": "ai-deck",
+      "states": [
+        "patrol",
+        "game-attack",
+        "recover",
+        "game-windup"
+      ],
+      "moves": [
+        "staff-vault",
+        "staff-chain",
+        "wind-shear",
+        "staff-counter",
+        "prism-mirage",
+        "double-pounce",
+        "staff-sweep",
+        "wind-push"
+      ],
+      "lastHearts": 5
+    }
+  ]
+}

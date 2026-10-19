@@ -4,6 +4,7 @@ import {drawPortraitPressure} from './clashPortraitPressure';
 import {drawDuelBorders} from './duelCutinCanvas';
 import {clashPortraitLayout} from './clashPortraitLayout';
 import {clashImpactTiming} from './clashImpactCanvas';
+import {nightmareFX} from './nightmarePaintedFX';
 export {clashPortraitLayout} from './clashPortraitLayout';
 let portraitBuffer;
 const clamp=n=>Math.max(0,Math.min(1,n));
@@ -29,10 +30,12 @@ export function smokePuff(c,art,frame,x,y,size,alpha=1){c.save();c.globalAlpha=a
 export function drawClashSparks(c,q,art,reduced){
  for(let i=0;i<q.sparks.length;i++){
   if(reduced&&i%5)continue;const p=q.sparks[i];
+  if(q.kind==='nightmare'){nightmareFX(c,art,'clash-plasma',Math.floor(p.age*24)%8,p.x,p.y,p.size*3+4,p.size*2+3,false,clamp(p.life/.16),Math.atan2(p.vy,p.vx));continue;}
   paintedParticle(c,art,p.kind??i%5,p.age,p.x,p.y,p.size*4+5,p.age*(i%2?4:-4)+i,clamp(p.life/.16));
  }
 }
 export function drawClashPortraits(c,s,art,reduced=false){
+ if(s.powerClash?.kind==='nightmare')return;
  const q=s.powerClash;if(!q||q.state==='windup')return;
  const fade=q.state==='flight'?1-clamp(q.age/.45):q.state==='land'?0:1;if(fade<=0)return;
  c.save();c.globalAlpha=fade;
@@ -73,6 +76,6 @@ export function drawClashScreenFlash(c,s,reduced){
  }
  const q=s.powerClash;if(!q||reduced)return;
  const timing=clashImpactTiming(q);
- const flash=q.state==='contest'?timing.manga>0?0:Math.max(timing.burst**1.5*.56,(q.flashPulse||0)/.075*.09):q.state==='flight'?clamp(1-q.age/.2)*.32:0;
+ const flash=timing.manga>0?0:q.state==='contest'?Math.max(timing.burst**1.5*.56,(q.flashPulse||0)/.075*.09):q.state==='flight'?clamp(1-q.age/.2)*.32:0;
  if(flash){c.save();c.fillStyle=`rgba(255,244,218,${flash})`;c.fillRect(0,0,960,540);c.restore();}
 }

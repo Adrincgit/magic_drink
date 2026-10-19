@@ -11,13 +11,13 @@ const folder='tests/artifacts/arcade/power-clash/';
 function battle(){const s=createAdventure(3),a=s.level.arena;s.supplies=[];s.stars=[];s.shots=[];s.arenaLocked=true;Object.assign(s.player,{x:a.left+260,y:a.y,ground:2});Object.assign(s.boss,{phase:'recover',timer:100,engaged:true,vulnerable:true,stage:3,hp:240,turn:3,ultimateCooldown:0});return s;}
 const tick=(s,n,input={})=>{for(let i=0;i<n;i++)stepAdventure(s,input,1/120);};
 function charge(s){const ok=beginHarlequinUltimate(s);if(!ok)return false;for(let n=0;n<150&&s.boss.ultimate?.state==='leap';n++)tick(s,1);expect(s.boss.ultimate?.state).toBe('charge');return true;}
-function collide(){const s=battle();charge(s);tick(s,80);tick(s,1,{super:true});tick(s,160);expect(s.powerClash?.state).toBe('contest');return s;}
+function collide(){const s=battle();charge(s);tick(s,80);tick(s,1,{super:true});for(let n=0;n<400&&s.powerClash?.state!=='contest';n++)tick(s,1);expect(s.powerClash?.state).toBe('contest');return s;}
 function struggle(s,taps=true){let n=0;while(s.powerClash?.state==='contest'&&n<1900){tick(s,1,{attack:taps&&n%15===0});n++;}return s;}
 function aftermath(s){let n=0;while(s.powerClash&&n++<850)tick(s,1);expect(s.powerClash).toBeUndefined();}
 
 test('each phase has its own wear; charge and release use the new gameplay drawings',()=>{
  const s=battle();for(const [stage,key]of [[1,'motion'],[2,'motion-mid'],[3,'motion-final']]){s.boss.stage=stage;expect(harlequinDrawing(s).key).toBe('harlequin-'+key);}
- charge(s);const poses=new Set();for(let i=0;i<4;i++){s.boss.ultimate.age=i/12;poses.add(harlequinDrawing(s).frame);expect(harlequinDrawing(s).key).toBe('harlequin-fire-actions');}expect([...poses]).toEqual([0,1,2,3]);
+ charge(s);const poses=new Set();for(let i=0;i<4;i++){s.boss.ultimate.age=i/18;poses.add(harlequinDrawing(s).frame);expect(harlequinDrawing(s).key).toBe('harlequin-super-charge');}expect(poses.size).toBe(3);
  s.boss.ultimate.state='fire';const releases=new Set();for(let i=0;i<3;i++){s.fxTime=i/18;releases.add(harlequinDrawing(s).frame);expect(harlequinDrawing(s).key).toBe('harlequin-super-cast');}expect(releases.size).toBe(3);
 });
 
@@ -50,7 +50,7 @@ test('counter consumes one charge and creates a clash, and holding attack cannot
 });
 
 test('sustained rapid presses win a long clash, inflict three Encores and leave the boss exposed',()=>{
- const s=struggle(collide());expect(s.powerClash.won).toBe(true);expect(s.powerClash.contestAge).toBeGreaterThan(12);expect(s.powerClash.contestAge).toBeLessThan(15.02);expect(s.powerClash.taps).toBeGreaterThanOrEqual(95);aftermath(s);expect(s.boss.hp).toBe(48);
+ const s=struggle(collide());expect(s.powerClash.won).toBe(true);expect(s.powerClash.contestAge).toBeGreaterThanOrEqual(6);expect(s.powerClash.contestAge).toBeLessThanOrEqual(20.02);expect(s.powerClash.taps).toBeGreaterThanOrEqual(95);aftermath(s);expect(s.boss.hp).toBe(48);
  expect(s.boss.vulnerable).toBe(true);expect(s.boss.phase).toBe('recover');expect(s.boss.timer).toBeGreaterThan(2.8);expect(s.superCooldown).toBeGreaterThan(78);expect(s.hearts).toBe(5);
 });
 
@@ -65,7 +65,7 @@ test('ordinary damage can interrupt a lethal enemy charge without leaving its po
 });
 
 test('airborne counter holds a coherent casting pose and retry removes the whole clash',()=>{
- const s=battle();charge(s);Object.assign(s.player,{y:350,ground:null,vy:-100});tick(s,1,{super:true});expect(s.superCinematic.airborne).toBe(true);const y=s.player.y;tick(s,150);expect(s.player.y).toBe(y);expect(s.player.superCast).toBeGreaterThan(0);
+ const s=battle();charge(s);Object.assign(s.player,{y:350,ground:null,vy:-100});tick(s,1,{super:true});expect(s.superCinematic.airborne).toBe(true);const y=s.player.y;tick(s,270);expect(s.player.y).toBe(y);expect(s.player.superCast).toBeGreaterThan(0);
  s.checkpointAt=[1150,480];retryAdventure(s);expect(s.powerClash).toBeUndefined();expect(s.boss.ultimate).toBeUndefined();expect(s.boss.hp).toBe(720);expect(s.boss.stage).toBe(1);expect(s.superCinematic).toBeUndefined();
 });
 

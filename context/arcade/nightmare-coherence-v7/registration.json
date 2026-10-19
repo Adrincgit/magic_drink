@@ -1,0 +1,3935 @@
+{
+  "reference": {
+    "hexyHeight": 88.0875,
+    "targetHeight": 101.300625,
+    "ratio": 1.15,
+    "targetFaceWidth": 18.993867187499998,
+    "method": "Standing hat-to-sole height versus Hexy reactions:0. Equivalent idle/cast poses match across phases. Older poses use reviewed skull width when spiral eyes fragment the skin mask; a common scale within loops preserves breathing, bent limbs and raised props."
+  },
+  "registration": {
+    "nightmare-phase-1-idle": [
+      {
+        "size": 124.67769,
+        "offsetX": -9.71534,
+        "faceWidth": 71,
+        "worldFaceWidth": 17.2893,
+        "visibleHeight": 101.3006
+      },
+      {
+        "size": 124.67769,
+        "offsetX": -9.71534,
+        "faceWidth": 81,
+        "worldFaceWidth": 19.7244,
+        "visibleHeight": 100.8136
+      },
+      {
+        "size": 124.67769,
+        "offsetX": -9.71534,
+        "faceWidth": 78,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 100.8136
+      },
+      {
+        "size": 124.67769,
+        "offsetX": -9.71534,
+        "faceWidth": 74,
+        "worldFaceWidth": 18.0198,
+        "visibleHeight": 101.5441
+      }
+    ],
+    "nightmare-phase-1-cast": [
+      {
+        "size": 113.64561,
+        "offsetX": -8.74679,
+        "faceWidth": 86,
+        "worldFaceWidth": 19.0889,
+        "visibleHeight": 95.2226
+      },
+      {
+        "size": 113.64561,
+        "offsetX": -8.74679,
+        "faceWidth": 87,
+        "worldFaceWidth": 19.3109,
+        "visibleHeight": 95.4446
+      },
+      {
+        "size": 113.64561,
+        "offsetX": -8.74679,
+        "faceWidth": 86,
+        "worldFaceWidth": 19.0889,
+        "visibleHeight": 95.0006
+      },
+      {
+        "size": 113.64561,
+        "offsetX": -8.74679,
+        "faceWidth": 78,
+        "worldFaceWidth": 17.3132,
+        "visibleHeight": 95.0006
+      }
+    ],
+    "nightmare-phase-2-idle": [
+      {
+        "size": 130.97455,
+        "offsetX": -10.44142,
+        "faceWidth": 72,
+        "worldFaceWidth": 18.4183,
+        "visibleHeight": 101.3006
+      },
+      {
+        "size": 130.97455,
+        "offsetX": -10.44142,
+        "faceWidth": 68,
+        "worldFaceWidth": 17.3951,
+        "visibleHeight": 101.3006
+      },
+      {
+        "size": 130.97455,
+        "offsetX": -10.44142,
+        "faceWidth": 71,
+        "worldFaceWidth": 18.1625,
+        "visibleHeight": 100.5332
+      },
+      {
+        "size": 130.97455,
+        "offsetX": -10.44142,
+        "faceWidth": 72,
+        "worldFaceWidth": 18.4183,
+        "visibleHeight": 100.5332
+      }
+    ],
+    "nightmare-phase-2-cast": [
+      {
+        "size": 115.53072,
+        "offsetX": -8.2572,
+        "faceWidth": 77,
+        "worldFaceWidth": 17.3747,
+        "visibleHeight": 95.2226
+      },
+      {
+        "size": 115.53072,
+        "offsetX": -8.2572,
+        "faceWidth": 91,
+        "worldFaceWidth": 20.5338,
+        "visibleHeight": 97.0278
+      },
+      {
+        "size": 115.53072,
+        "offsetX": -8.2572,
+        "faceWidth": 92,
+        "worldFaceWidth": 20.7594,
+        "visibleHeight": 94.9969
+      },
+      {
+        "size": 115.53072,
+        "offsetX": -8.2572,
+        "faceWidth": 86,
+        "worldFaceWidth": 19.4056,
+        "visibleHeight": 94.9969
+      }
+    ],
+    "nightmare-phase-3-idle": [
+      {
+        "size": 120.61842,
+        "offsetX": -8.6464,
+        "faceWidth": 103,
+        "worldFaceWidth": 24.265,
+        "visibleHeight": 101.3006
+      },
+      {
+        "size": 120.61842,
+        "offsetX": -8.6464,
+        "faceWidth": 101,
+        "worldFaceWidth": 23.7939,
+        "visibleHeight": 100.8295
+      },
+      {
+        "size": 120.61842,
+        "offsetX": -8.6464,
+        "faceWidth": 102,
+        "worldFaceWidth": 24.0295,
+        "visibleHeight": 100.5939
+      },
+      {
+        "size": 120.61842,
+        "offsetX": -8.6464,
+        "faceWidth": 101,
+        "worldFaceWidth": 23.7939,
+        "visibleHeight": 101.3006
+      }
+    ],
+    "nightmare-phase-3-cast": [
+      {
+        "size": 113.64561,
+        "offsetX": -19.2236,
+        "faceWidth": 96,
+        "worldFaceWidth": 21.3086,
+        "visibleHeight": 93.6688
+      },
+      {
+        "size": 113.64561,
+        "offsetX": -19.2236,
+        "faceWidth": 93,
+        "worldFaceWidth": 20.6427,
+        "visibleHeight": 95.2226
+      },
+      {
+        "size": 113.64561,
+        "offsetX": -19.2236,
+        "faceWidth": 93,
+        "worldFaceWidth": 20.6427,
+        "visibleHeight": 95.0006
+      },
+      {
+        "size": 113.64561,
+        "offsetX": -19.2236,
+        "faceWidth": 93,
+        "worldFaceWidth": 20.6427,
+        "visibleHeight": 95.4446
+      }
+    ],
+    "nightmare-phase-one": [
+      {
+        "size": 121.56075,
+        "offsetX": -11.94698,
+        "faceWidth": 78,
+        "worldFaceWidth": 18.519,
+        "visibleHeight": 75.0258
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 10.62868,
+        "faceWidth": 70,
+        "worldFaceWidth": 16.6196,
+        "visibleHeight": 73.8387
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 0.43033,
+        "faceWidth": 65,
+        "worldFaceWidth": 15.4325,
+        "visibleHeight": 73.6012
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 9.31858,
+        "faceWidth": 63,
+        "worldFaceWidth": 14.9577,
+        "visibleHeight": 75.0258
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -9.84672,
+        "faceWidth": 75,
+        "worldFaceWidth": 17.8068,
+        "visibleHeight": 68.3779
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -20.74533,
+        "faceWidth": 67,
+        "worldFaceWidth": 15.9074,
+        "visibleHeight": 68.3779
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -9.17431,
+        "faceWidth": 53,
+        "worldFaceWidth": 12.5834,
+        "visibleHeight": 74.3135
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -16.63247,
+        "faceWidth": 69,
+        "worldFaceWidth": 16.3822,
+        "visibleHeight": 67.6657
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -8.57561,
+        "faceWidth": 66,
+        "worldFaceWidth": 15.6699,
+        "visibleHeight": 68.8528
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 1.60286,
+        "faceWidth": 69,
+        "worldFaceWidth": 16.3822,
+        "visibleHeight": 72.889
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 1.0195,
+        "faceWidth": 71,
+        "worldFaceWidth": 16.8571,
+        "visibleHeight": 66.9534
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -7.83608,
+        "faceWidth": 78,
+        "worldFaceWidth": 18.519,
+        "visibleHeight": 102.092
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 8.19747,
+        "faceWidth": 47,
+        "worldFaceWidth": 11.1589,
+        "visibleHeight": 66.2411
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 22.1694,
+        "faceWidth": 59,
+        "worldFaceWidth": 14.008,
+        "visibleHeight": 64.1043
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 4.72283,
+        "faceWidth": 68,
+        "worldFaceWidth": 16.1448,
+        "visibleHeight": 55.7945
+      },
+      {
+        "size": 147.34636,
+        "offsetX": 15.61919,
+        "faceWidth": 56,
+        "worldFaceWidth": 16.116,
+        "visibleHeight": 47.4847
+      }
+    ],
+    "nightmare-phase-two": [
+      {
+        "size": 121.56075,
+        "offsetX": -11.94698,
+        "faceWidth": 78,
+        "worldFaceWidth": 18.519,
+        "visibleHeight": 75.0258
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 10.62868,
+        "faceWidth": 70,
+        "worldFaceWidth": 16.6196,
+        "visibleHeight": 73.8387
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 0.43033,
+        "faceWidth": 65,
+        "worldFaceWidth": 15.4325,
+        "visibleHeight": 73.6012
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 9.31858,
+        "faceWidth": 63,
+        "worldFaceWidth": 14.9577,
+        "visibleHeight": 75.0258
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -9.84672,
+        "faceWidth": 75,
+        "worldFaceWidth": 17.8068,
+        "visibleHeight": 68.3779
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -20.74533,
+        "faceWidth": 67,
+        "worldFaceWidth": 15.9074,
+        "visibleHeight": 68.3779
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -9.17431,
+        "faceWidth": 53,
+        "worldFaceWidth": 12.5834,
+        "visibleHeight": 74.3135
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -16.63247,
+        "faceWidth": 69,
+        "worldFaceWidth": 16.3822,
+        "visibleHeight": 67.6657
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -8.57561,
+        "faceWidth": 66,
+        "worldFaceWidth": 15.6699,
+        "visibleHeight": 68.8528
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 1.60286,
+        "faceWidth": 69,
+        "worldFaceWidth": 16.3822,
+        "visibleHeight": 72.889
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 1.0195,
+        "faceWidth": 71,
+        "worldFaceWidth": 16.8571,
+        "visibleHeight": 66.9534
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -7.83608,
+        "faceWidth": 78,
+        "worldFaceWidth": 18.519,
+        "visibleHeight": 102.092
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 8.19747,
+        "faceWidth": 47,
+        "worldFaceWidth": 11.1589,
+        "visibleHeight": 66.2411
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 22.1694,
+        "faceWidth": 59,
+        "worldFaceWidth": 14.008,
+        "visibleHeight": 64.1043
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 4.72283,
+        "faceWidth": 68,
+        "worldFaceWidth": 16.1448,
+        "visibleHeight": 55.7945
+      },
+      {
+        "size": 147.34636,
+        "offsetX": 15.61919,
+        "faceWidth": 56,
+        "worldFaceWidth": 16.116,
+        "visibleHeight": 47.4847
+      }
+    ],
+    "nightmare-phase-three": [
+      {
+        "size": 121.56075,
+        "offsetX": -12.74516,
+        "faceWidth": 51,
+        "worldFaceWidth": 12.1086,
+        "visibleHeight": 73.1264
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -1.16067,
+        "faceWidth": 86,
+        "worldFaceWidth": 20.4184,
+        "visibleHeight": 72.6515
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 8.54665,
+        "faceWidth": 78,
+        "worldFaceWidth": 18.519,
+        "visibleHeight": 71.7018
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -4.84407,
+        "faceWidth": 63,
+        "worldFaceWidth": 14.9577,
+        "visibleHeight": 73.1264
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -12.64696,
+        "faceWidth": 76,
+        "worldFaceWidth": 18.0442,
+        "visibleHeight": 70.9896
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -2.75549,
+        "faceWidth": 34,
+        "worldFaceWidth": 8.0724,
+        "visibleHeight": 66.2411
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 2.6883,
+        "faceWidth": 72,
+        "worldFaceWidth": 17.0945,
+        "visibleHeight": 72.6515
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -0.1517,
+        "faceWidth": 45,
+        "worldFaceWidth": 10.6841,
+        "visibleHeight": 66.4785
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 0.17375,
+        "faceWidth": 77,
+        "worldFaceWidth": 18.2816,
+        "visibleHeight": 70.7522
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -11.63414,
+        "faceWidth": 39,
+        "worldFaceWidth": 9.2595,
+        "visibleHeight": 73.3638
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 7.93505,
+        "faceWidth": 39,
+        "worldFaceWidth": 9.2595,
+        "visibleHeight": 75.0258
+      },
+      {
+        "size": 121.56075,
+        "offsetX": 24.35214,
+        "faceWidth": 78,
+        "worldFaceWidth": 18.519,
+        "visibleHeight": 80.7239
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -21.02325,
+        "faceWidth": 72,
+        "worldFaceWidth": 17.0945,
+        "visibleHeight": 72.4141
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -26.81286,
+        "faceWidth": 42,
+        "worldFaceWidth": 9.9718,
+        "visibleHeight": 73.8387
+      },
+      {
+        "size": 121.56075,
+        "offsetX": -21.49675,
+        "faceWidth": 77,
+        "worldFaceWidth": 18.2816,
+        "visibleHeight": 64.8166
+      },
+      {
+        "size": 147.34636,
+        "offsetX": -50.64925,
+        "faceWidth": 66,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 54.6793
+      }
+    ],
+    "nightmare-phase-one-walk": [
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 87,
+        "worldFaceWidth": 19.2147,
+        "visibleHeight": 89.4479
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 88,
+        "worldFaceWidth": 19.4356,
+        "visibleHeight": 94.0859
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 86,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 90.1104
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 86,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 92.7607
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 85,
+        "worldFaceWidth": 18.773,
+        "visibleHeight": 89.8896
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 85,
+        "worldFaceWidth": 18.773,
+        "visibleHeight": 86.5767
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 87,
+        "worldFaceWidth": 19.2147,
+        "visibleHeight": 90.9939
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 87,
+        "worldFaceWidth": 19.2147,
+        "visibleHeight": 90.5522
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 87,
+        "worldFaceWidth": 19.2147,
+        "visibleHeight": 89.6687
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 86,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 94.0859
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 85,
+        "worldFaceWidth": 18.773,
+        "visibleHeight": 94.9693
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 86,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 89.4479
+      }
+    ],
+    "nightmare-phase-two-walk": [
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 87,
+        "worldFaceWidth": 19.2147,
+        "visibleHeight": 89.4479
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 88,
+        "worldFaceWidth": 19.4356,
+        "visibleHeight": 94.0859
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 86,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 90.1104
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 86,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 92.7607
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 85,
+        "worldFaceWidth": 18.773,
+        "visibleHeight": 89.8896
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 85,
+        "worldFaceWidth": 18.773,
+        "visibleHeight": 86.5767
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 87,
+        "worldFaceWidth": 19.2147,
+        "visibleHeight": 90.9939
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 87,
+        "worldFaceWidth": 19.2147,
+        "visibleHeight": 90.5522
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 87,
+        "worldFaceWidth": 19.2147,
+        "visibleHeight": 89.6687
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 86,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 94.0859
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 85,
+        "worldFaceWidth": 18.773,
+        "visibleHeight": 94.9693
+      },
+      {
+        "size": 113.07977,
+        "offsetX": -7.37238,
+        "faceWidth": 86,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 89.4479
+      }
+    ],
+    "nightmare-phase-three-walk": [
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 84,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 89.9948
+      },
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 87,
+        "worldFaceWidth": 19.6722,
+        "visibleHeight": 94.0649
+      },
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 82,
+        "worldFaceWidth": 18.5416,
+        "visibleHeight": 93.8387
+      },
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 44,
+        "worldFaceWidth": 9.9492,
+        "visibleHeight": 93.3865
+      },
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 52,
+        "worldFaceWidth": 11.7581,
+        "visibleHeight": 89.7686
+      },
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 56,
+        "worldFaceWidth": 12.6626,
+        "visibleHeight": 93.8387
+      },
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 44,
+        "worldFaceWidth": 9.9492,
+        "visibleHeight": 92.0298
+      },
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 46,
+        "worldFaceWidth": 10.4014,
+        "visibleHeight": 92.2559
+      },
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 75,
+        "worldFaceWidth": 16.9588,
+        "visibleHeight": 89.9948
+      },
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 83,
+        "worldFaceWidth": 18.7677,
+        "visibleHeight": 97.2305
+      },
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 39,
+        "worldFaceWidth": 8.8186,
+        "visibleHeight": 91.1253
+      },
+      {
+        "size": 115.77214,
+        "offsetX": -15.15895,
+        "faceWidth": 43,
+        "worldFaceWidth": 9.7231,
+        "visibleHeight": 91.3515
+      }
+    ],
+    "aerial-boss-air-actions": [
+      {
+        "size": 123.09949,
+        "offsetX": -0.11248,
+        "faceWidth": 79,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 69.4839
+      },
+      {
+        "size": 123.09949,
+        "offsetX": -0.11248,
+        "faceWidth": 79,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 89.9203
+      },
+      {
+        "size": 123.09949,
+        "offsetX": -0.11248,
+        "faceWidth": 54,
+        "worldFaceWidth": 12.9831,
+        "visibleHeight": 94.4885
+      },
+      {
+        "size": 123.09949,
+        "offsetX": -0.11248,
+        "faceWidth": 64,
+        "worldFaceWidth": 15.3874,
+        "visibleHeight": 97.1332
+      },
+      {
+        "size": 129.6648,
+        "offsetX": -0.22367,
+        "faceWidth": 66,
+        "worldFaceWidth": 16.7146,
+        "visibleHeight": 103.5799
+      },
+      {
+        "size": 129.6648,
+        "offsetX": -0.22367,
+        "faceWidth": 75,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 104.0864
+      },
+      {
+        "size": 129.6648,
+        "offsetX": -0.22367,
+        "faceWidth": 75,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 109.4047
+      },
+      {
+        "size": 129.6648,
+        "offsetX": -0.22367,
+        "faceWidth": 65,
+        "worldFaceWidth": 16.4614,
+        "visibleHeight": 110.9242
+      },
+      {
+        "size": 129.6648,
+        "offsetX": -0.22367,
+        "faceWidth": 78,
+        "worldFaceWidth": 19.7536,
+        "visibleHeight": 111.1774
+      },
+      {
+        "size": 129.6648,
+        "offsetX": -0.22367,
+        "faceWidth": 77,
+        "worldFaceWidth": 19.5004,
+        "visibleHeight": 110.4177
+      },
+      {
+        "size": 123.09949,
+        "offsetX": -0.13869,
+        "faceWidth": 53,
+        "worldFaceWidth": 12.7427,
+        "visibleHeight": 89.9203
+      },
+      {
+        "size": 123.09949,
+        "offsetX": -0.13869,
+        "faceWidth": 80,
+        "worldFaceWidth": 19.2343,
+        "visibleHeight": 93.2863
+      },
+      {
+        "size": 123.09949,
+        "offsetX": -0.13869,
+        "faceWidth": 79,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 91.6033
+      },
+      {
+        "size": 123.09949,
+        "offsetX": -0.13869,
+        "faceWidth": 80,
+        "worldFaceWidth": 19.2343,
+        "visibleHeight": 87.2756
+      },
+      {
+        "size": 151.95094,
+        "offsetX": -11.05952,
+        "faceWidth": 61,
+        "worldFaceWidth": 18.1035,
+        "visibleHeight": 122.8666
+      },
+      {
+        "size": 151.95094,
+        "offsetX": -11.05952,
+        "faceWidth": 64,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 107.4341
+      }
+    ],
+    "pressure-boss-air": [
+      {
+        "size": 164.82814,
+        "offsetX": 0.02373,
+        "faceWidth": 59,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 86.9211
+      },
+      {
+        "size": 164.82814,
+        "offsetX": 0.02373,
+        "faceWidth": 59,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 84.6676
+      },
+      {
+        "size": 164.82814,
+        "offsetX": 0.02373,
+        "faceWidth": 59,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 87.5649
+      },
+      {
+        "size": 164.82814,
+        "offsetX": 0.02373,
+        "faceWidth": 60,
+        "worldFaceWidth": 19.3158,
+        "visibleHeight": 84.3456
+      },
+      {
+        "size": 102.36695,
+        "offsetX": -30.77423,
+        "faceWidth": 95,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 88.3715
+      },
+      {
+        "size": 102.36695,
+        "offsetX": -30.77423,
+        "faceWidth": 97,
+        "worldFaceWidth": 19.3937,
+        "visibleHeight": 88.3715
+      },
+      {
+        "size": 102.36695,
+        "offsetX": -30.77423,
+        "faceWidth": 95,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 87.9716
+      },
+      {
+        "size": 102.36695,
+        "offsetX": -30.77423,
+        "faceWidth": 81,
+        "worldFaceWidth": 16.1948,
+        "visibleHeight": 87.9716
+      },
+      {
+        "size": 102.36695,
+        "offsetX": -30.77423,
+        "faceWidth": 95,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 88.3715
+      },
+      {
+        "size": 102.36695,
+        "offsetX": -30.77423,
+        "faceWidth": 97,
+        "worldFaceWidth": 19.3937,
+        "visibleHeight": 88.3715
+      },
+      {
+        "size": 102.36695,
+        "offsetX": -30.77423,
+        "faceWidth": 95,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 87.9716
+      },
+      {
+        "size": 102.36695,
+        "offsetX": -30.77423,
+        "faceWidth": 81,
+        "worldFaceWidth": 16.1948,
+        "visibleHeight": 87.9716
+      },
+      {
+        "size": 143.01265,
+        "offsetX": 0.0298,
+        "faceWidth": 66,
+        "worldFaceWidth": 18.4352,
+        "visibleHeight": 76.2548
+      },
+      {
+        "size": 143.01265,
+        "offsetX": 0.0298,
+        "faceWidth": 68,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 75.6961
+      },
+      {
+        "size": 143.01265,
+        "offsetX": 0.0298,
+        "faceWidth": 68,
+        "worldFaceWidth": 18.9939,
+        "visibleHeight": 75.4168
+      },
+      {
+        "size": 143.01265,
+        "offsetX": 0.0298,
+        "faceWidth": 65,
+        "worldFaceWidth": 18.1559,
+        "visibleHeight": 76.2548
+      }
+    ]
+  },
+  "assets": {
+    "nightmare-phase-1-idle": {
+      "file": "public/arcade/act-two/nightmare-coherence-v7/phase-1-idle.webp",
+      "loop": true,
+      "frames": [
+        {
+          "face": {
+            "left": 190,
+            "top": 166,
+            "width": 71,
+            "height": 75,
+            "area": 2625
+          },
+          "body": {
+            "left": 17,
+            "top": 82,
+            "width": 479,
+            "height": 416
+          },
+          "footX": 292.8755090168703
+        },
+        {
+          "face": {
+            "left": 185,
+            "top": 169,
+            "width": 81,
+            "height": 75,
+            "area": 2685
+          },
+          "body": {
+            "left": 19,
+            "top": 85,
+            "width": 474,
+            "height": 414
+          },
+          "footX": 293.0724284844796
+        },
+        {
+          "face": {
+            "left": 193,
+            "top": 170,
+            "width": 78,
+            "height": 73,
+            "area": 2647
+          },
+          "body": {
+            "left": 16,
+            "top": 85,
+            "width": 480,
+            "height": 414
+          },
+          "footX": 295.89688834655277
+        },
+        {
+          "face": {
+            "left": 191,
+            "top": 165,
+            "width": 74,
+            "height": 77,
+            "area": 2766
+          },
+          "body": {
+            "left": 19,
+            "top": 82,
+            "width": 475,
+            "height": 417
+          },
+          "footX": 299.18442884492663
+        }
+      ]
+    },
+    "nightmare-phase-1-cast": {
+      "file": "public/arcade/act-two/nightmare-coherence-v7/phase-1-cast.webp",
+      "loop": true,
+      "frames": [
+        {
+          "face": {
+            "left": 173,
+            "top": 150,
+            "width": 86,
+            "height": 77,
+            "area": 2746
+          },
+          "body": {
+            "left": 24,
+            "top": 69,
+            "width": 464,
+            "height": 429
+          },
+          "footX": 285.84213615023475
+        },
+        {
+          "face": {
+            "left": 163,
+            "top": 150,
+            "width": 87,
+            "height": 77,
+            "area": 2698
+          },
+          "body": {
+            "left": 17,
+            "top": 69,
+            "width": 478,
+            "height": 430
+          },
+          "footX": 295.9065015479876
+        },
+        {
+          "face": {
+            "left": 169,
+            "top": 150,
+            "width": 86,
+            "height": 80,
+            "area": 3036
+          },
+          "body": {
+            "left": 18,
+            "top": 71,
+            "width": 476,
+            "height": 428
+          },
+          "footX": 283.85601935874166
+        },
+        {
+          "face": {
+            "left": 174,
+            "top": 149,
+            "width": 78,
+            "height": 79,
+            "area": 2806
+          },
+          "body": {
+            "left": 20,
+            "top": 71,
+            "width": 473,
+            "height": 428
+          },
+          "footX": 295.40631036703155
+        }
+      ]
+    },
+    "nightmare-phase-2-idle": {
+      "file": "public/arcade/act-two/nightmare-coherence-v7/phase-2-idle.webp",
+      "loop": true,
+      "frames": [
+        {
+          "face": {
+            "left": 190,
+            "top": 187,
+            "width": 72,
+            "height": 71,
+            "area": 2108
+          },
+          "body": {
+            "left": 22,
+            "top": 103,
+            "width": 469,
+            "height": 396
+          },
+          "footX": 296.81713084603257
+        },
+        {
+          "face": {
+            "left": 185,
+            "top": 188,
+            "width": 68,
+            "height": 71,
+            "area": 1908
+          },
+          "body": {
+            "left": 18,
+            "top": 103,
+            "width": 476,
+            "height": 396
+          },
+          "footX": 297.0094130675526
+        },
+        {
+          "face": {
+            "left": 184,
+            "top": 191,
+            "width": 71,
+            "height": 72,
+            "area": 2039
+          },
+          "body": {
+            "left": 16,
+            "top": 106,
+            "width": 480,
+            "height": 393
+          },
+          "footX": 291.0078165711308
+        },
+        {
+          "face": {
+            "left": 192,
+            "top": 191,
+            "width": 72,
+            "height": 71,
+            "area": 2111
+          },
+          "body": {
+            "left": 22,
+            "top": 106,
+            "width": 468,
+            "height": 393
+          },
+          "footX": 296.0763520678685
+        }
+      ]
+    },
+    "nightmare-phase-2-cast": {
+      "file": "public/arcade/act-two/nightmare-coherence-v7/phase-2-cast.webp",
+      "loop": true,
+      "frames": [
+        {
+          "face": {
+            "left": 172,
+            "top": 162,
+            "width": 77,
+            "height": 78,
+            "area": 2800
+          },
+          "body": {
+            "left": 24,
+            "top": 77,
+            "width": 465,
+            "height": 422
+          },
+          "footX": 292.5935943060498
+        },
+        {
+          "face": {
+            "left": 161,
+            "top": 160,
+            "width": 91,
+            "height": 79,
+            "area": 2892
+          },
+          "body": {
+            "left": 23,
+            "top": 69,
+            "width": 466,
+            "height": 430
+          },
+          "footX": 285.84387351778656
+        },
+        {
+          "face": {
+            "left": 174,
+            "top": 163,
+            "width": 92,
+            "height": 81,
+            "area": 3043
+          },
+          "body": {
+            "left": 20,
+            "top": 78,
+            "width": 472,
+            "height": 421
+          },
+          "footX": 297.11341542449776
+        },
+        {
+          "face": {
+            "left": 178,
+            "top": 163,
+            "width": 86,
+            "height": 80,
+            "area": 2894
+          },
+          "body": {
+            "left": 25,
+            "top": 78,
+            "width": 462,
+            "height": 421
+          },
+          "footX": 283.988867059594
+        }
+      ]
+    },
+    "nightmare-phase-3-idle": {
+      "file": "public/arcade/act-two/nightmare-coherence-v7/phase-3-idle.webp",
+      "loop": true,
+      "frames": [
+        {
+          "face": {
+            "left": 185,
+            "top": 156,
+            "width": 103,
+            "height": 89,
+            "area": 2955
+          },
+          "body": {
+            "left": 23,
+            "top": 69,
+            "width": 467,
+            "height": 430
+          },
+          "footX": 292.35339366515836
+        },
+        {
+          "face": {
+            "left": 181,
+            "top": 159,
+            "width": 101,
+            "height": 88,
+            "area": 2899
+          },
+          "body": {
+            "left": 23,
+            "top": 71,
+            "width": 467,
+            "height": 428
+          },
+          "footX": 293.1377880184332
+        },
+        {
+          "face": {
+            "left": 184,
+            "top": 158,
+            "width": 102,
+            "height": 87,
+            "area": 2958
+          },
+          "body": {
+            "left": 22,
+            "top": 72,
+            "width": 468,
+            "height": 427
+          },
+          "footX": 288.80723443223445
+        },
+        {
+          "face": {
+            "left": 186,
+            "top": 157,
+            "width": 101,
+            "height": 88,
+            "area": 2852
+          },
+          "body": {
+            "left": 23,
+            "top": 69,
+            "width": 467,
+            "height": 430
+          },
+          "footX": 292.70217588395286
+        }
+      ]
+    },
+    "nightmare-phase-3-cast": {
+      "file": "public/arcade/act-two/nightmare-coherence-v7/phase-3-cast.webp",
+      "loop": true,
+      "frames": [
+        {
+          "face": {
+            "left": 163,
+            "top": 157,
+            "width": 96,
+            "height": 84,
+            "area": 2739
+          },
+          "body": {
+            "left": 23,
+            "top": 77,
+            "width": 465,
+            "height": 422
+          },
+          "footX": 324.52397743300423
+        },
+        {
+          "face": {
+            "left": 168,
+            "top": 156,
+            "width": 93,
+            "height": 83,
+            "area": 2617
+          },
+          "body": {
+            "left": 25,
+            "top": 70,
+            "width": 462,
+            "height": 429
+          },
+          "footX": 345.0251293422025
+        },
+        {
+          "face": {
+            "left": 165,
+            "top": 154,
+            "width": 93,
+            "height": 86,
+            "area": 2640
+          },
+          "body": {
+            "left": 22,
+            "top": 71,
+            "width": 468,
+            "height": 428
+          },
+          "footX": 335.7668195718654
+        },
+        {
+          "face": {
+            "left": 172,
+            "top": 156,
+            "width": 93,
+            "height": 86,
+            "area": 2680
+          },
+          "body": {
+            "left": 26,
+            "top": 69,
+            "width": 461,
+            "height": 430
+          },
+          "footX": 342.6067892503536
+        }
+      ]
+    },
+    "nightmare-phase-one": {
+      "file": "public/arcade/act-two/nightmare-madness-v2/phase-two.webp",
+      "loop": false,
+      "frames": [
+        {
+          "face": {
+            "left": 213,
+            "top": 262,
+            "width": 78,
+            "height": 64,
+            "area": 1505
+          },
+          "body": {
+            "left": 27,
+            "top": 183,
+            "width": 460,
+            "height": 316
+          },
+          "footX": 306.3193277310924
+        },
+        {
+          "face": {
+            "left": 136,
+            "top": 232,
+            "width": 70,
+            "height": 70,
+            "area": 1847
+          },
+          "body": {
+            "left": 85,
+            "top": 188,
+            "width": 342,
+            "height": 311
+          },
+          "footX": 211.23321554770317
+        },
+        {
+          "face": {
+            "left": 185,
+            "top": 251,
+            "width": 65,
+            "height": 60,
+            "area": 1831
+          },
+          "body": {
+            "left": 92,
+            "top": 189,
+            "width": 330,
+            "height": 310
+          },
+          "footX": 254.1875
+        },
+        {
+          "face": {
+            "left": 110,
+            "top": 253,
+            "width": 63,
+            "height": 61,
+            "area": 1760
+          },
+          "body": {
+            "left": 57,
+            "top": 183,
+            "width": 398,
+            "height": 316
+          },
+          "footX": 216.75122549019608
+        },
+        {
+          "face": {
+            "left": 224,
+            "top": 300,
+            "width": 75,
+            "height": 52,
+            "area": 1431
+          },
+          "body": {
+            "left": 40,
+            "top": 211,
+            "width": 433,
+            "height": 288
+          },
+          "footX": 297.47327249022163
+        },
+        {
+          "face": {
+            "left": 206,
+            "top": 272,
+            "width": 67,
+            "height": 63,
+            "area": 1600
+          },
+          "body": {
+            "left": 17,
+            "top": 211,
+            "width": 479,
+            "height": 288
+          },
+          "footX": 343.37695852534563
+        },
+        {
+          "face": {
+            "left": 226,
+            "top": 313,
+            "width": 53,
+            "height": 32,
+            "area": 660
+          },
+          "body": {
+            "left": 103,
+            "top": 186,
+            "width": 306,
+            "height": 313
+          },
+          "footX": 294.64112903225805
+        },
+        {
+          "face": {
+            "left": 200,
+            "top": 289,
+            "width": 69,
+            "height": 56,
+            "area": 1397
+          },
+          "body": {
+            "left": 16,
+            "top": 214,
+            "width": 480,
+            "height": 285
+          },
+          "footX": 326.0540712468193
+        },
+        {
+          "face": {
+            "left": 225,
+            "top": 237,
+            "width": 66,
+            "height": 68,
+            "area": 1626
+          },
+          "body": {
+            "left": 40,
+            "top": 209,
+            "width": 434,
+            "height": 290
+          },
+          "footX": 292.1194751381216
+        },
+        {
+          "face": {
+            "left": 213,
+            "top": 230,
+            "width": 69,
+            "height": 55,
+            "area": 1360
+          },
+          "body": {
+            "left": 48,
+            "top": 192,
+            "width": 416,
+            "height": 307
+          },
+          "footX": 249.2489158716392
+        },
+        {
+          "face": {
+            "left": 183,
+            "top": 285,
+            "width": 71,
+            "height": 60,
+            "area": 1522
+          },
+          "body": {
+            "left": 63,
+            "top": 216,
+            "width": 386,
+            "height": 282
+          },
+          "footX": 251.70598591549296
+        },
+        {
+          "face": {
+            "left": 144,
+            "top": 242,
+            "width": 78,
+            "height": 64,
+            "area": 1831
+          },
+          "body": {
+            "left": 39,
+            "top": 69,
+            "width": 435,
+            "height": 430
+          },
+          "footX": 289.00467289719626
+        },
+        {
+          "face": {
+            "left": 143,
+            "top": 296,
+            "width": 47,
+            "height": 42,
+            "area": 824
+          },
+          "body": {
+            "left": 83,
+            "top": 220,
+            "width": 348,
+            "height": 279
+          },
+          "footX": 221.47320341047504
+        },
+        {
+          "face": {
+            "left": 283,
+            "top": 255,
+            "width": 59,
+            "height": 59,
+            "area": 1287
+          },
+          "body": {
+            "left": 47,
+            "top": 229,
+            "width": 419,
+            "height": 270
+          },
+          "footX": 162.625
+        },
+        {
+          "face": {
+            "left": 238,
+            "top": 293,
+            "width": 68,
+            "height": 55,
+            "area": 1718
+          },
+          "body": {
+            "left": 17,
+            "top": 264,
+            "width": 478,
+            "height": 235
+          },
+          "footX": 236.1079845233908
+        },
+        {
+          "face": {
+            "left": 190,
+            "top": 412,
+            "width": 56,
+            "height": 43,
+            "area": 1483
+          },
+          "body": {
+            "left": 47,
+            "top": 334,
+            "width": 419,
+            "height": 165
+          },
+          "footX": 201.72633856138452
+        }
+      ]
+    },
+    "nightmare-phase-two": {
+      "file": "public/arcade/act-two/nightmare-madness-v2/phase-two.webp",
+      "loop": false,
+      "frames": [
+        {
+          "face": {
+            "left": 213,
+            "top": 262,
+            "width": 78,
+            "height": 64,
+            "area": 1505
+          },
+          "body": {
+            "left": 27,
+            "top": 183,
+            "width": 460,
+            "height": 316
+          },
+          "footX": 306.3193277310924
+        },
+        {
+          "face": {
+            "left": 136,
+            "top": 232,
+            "width": 70,
+            "height": 70,
+            "area": 1847
+          },
+          "body": {
+            "left": 85,
+            "top": 188,
+            "width": 342,
+            "height": 311
+          },
+          "footX": 211.23321554770317
+        },
+        {
+          "face": {
+            "left": 185,
+            "top": 251,
+            "width": 65,
+            "height": 60,
+            "area": 1831
+          },
+          "body": {
+            "left": 92,
+            "top": 189,
+            "width": 330,
+            "height": 310
+          },
+          "footX": 254.1875
+        },
+        {
+          "face": {
+            "left": 110,
+            "top": 253,
+            "width": 63,
+            "height": 61,
+            "area": 1760
+          },
+          "body": {
+            "left": 57,
+            "top": 183,
+            "width": 398,
+            "height": 316
+          },
+          "footX": 216.75122549019608
+        },
+        {
+          "face": {
+            "left": 224,
+            "top": 300,
+            "width": 75,
+            "height": 52,
+            "area": 1431
+          },
+          "body": {
+            "left": 40,
+            "top": 211,
+            "width": 433,
+            "height": 288
+          },
+          "footX": 297.47327249022163
+        },
+        {
+          "face": {
+            "left": 206,
+            "top": 272,
+            "width": 67,
+            "height": 63,
+            "area": 1600
+          },
+          "body": {
+            "left": 17,
+            "top": 211,
+            "width": 479,
+            "height": 288
+          },
+          "footX": 343.37695852534563
+        },
+        {
+          "face": {
+            "left": 226,
+            "top": 313,
+            "width": 53,
+            "height": 32,
+            "area": 660
+          },
+          "body": {
+            "left": 103,
+            "top": 186,
+            "width": 306,
+            "height": 313
+          },
+          "footX": 294.64112903225805
+        },
+        {
+          "face": {
+            "left": 200,
+            "top": 289,
+            "width": 69,
+            "height": 56,
+            "area": 1397
+          },
+          "body": {
+            "left": 16,
+            "top": 214,
+            "width": 480,
+            "height": 285
+          },
+          "footX": 326.0540712468193
+        },
+        {
+          "face": {
+            "left": 225,
+            "top": 237,
+            "width": 66,
+            "height": 68,
+            "area": 1626
+          },
+          "body": {
+            "left": 40,
+            "top": 209,
+            "width": 434,
+            "height": 290
+          },
+          "footX": 292.1194751381216
+        },
+        {
+          "face": {
+            "left": 213,
+            "top": 230,
+            "width": 69,
+            "height": 55,
+            "area": 1360
+          },
+          "body": {
+            "left": 48,
+            "top": 192,
+            "width": 416,
+            "height": 307
+          },
+          "footX": 249.2489158716392
+        },
+        {
+          "face": {
+            "left": 183,
+            "top": 285,
+            "width": 71,
+            "height": 60,
+            "area": 1522
+          },
+          "body": {
+            "left": 63,
+            "top": 216,
+            "width": 386,
+            "height": 282
+          },
+          "footX": 251.70598591549296
+        },
+        {
+          "face": {
+            "left": 144,
+            "top": 242,
+            "width": 78,
+            "height": 64,
+            "area": 1831
+          },
+          "body": {
+            "left": 39,
+            "top": 69,
+            "width": 435,
+            "height": 430
+          },
+          "footX": 289.00467289719626
+        },
+        {
+          "face": {
+            "left": 143,
+            "top": 296,
+            "width": 47,
+            "height": 42,
+            "area": 824
+          },
+          "body": {
+            "left": 83,
+            "top": 220,
+            "width": 348,
+            "height": 279
+          },
+          "footX": 221.47320341047504
+        },
+        {
+          "face": {
+            "left": 283,
+            "top": 255,
+            "width": 59,
+            "height": 59,
+            "area": 1287
+          },
+          "body": {
+            "left": 47,
+            "top": 229,
+            "width": 419,
+            "height": 270
+          },
+          "footX": 162.625
+        },
+        {
+          "face": {
+            "left": 238,
+            "top": 293,
+            "width": 68,
+            "height": 55,
+            "area": 1718
+          },
+          "body": {
+            "left": 17,
+            "top": 264,
+            "width": 478,
+            "height": 235
+          },
+          "footX": 236.1079845233908
+        },
+        {
+          "face": {
+            "left": 190,
+            "top": 412,
+            "width": 56,
+            "height": 43,
+            "area": 1483
+          },
+          "body": {
+            "left": 47,
+            "top": 334,
+            "width": 419,
+            "height": 165
+          },
+          "footX": 201.72633856138452
+        }
+      ]
+    },
+    "nightmare-phase-three": {
+      "file": "public/arcade/act-two/nightmare-madness-v2/phase-three.webp",
+      "loop": false,
+      "frames": [
+        {
+          "face": {
+            "left": 163,
+            "top": 252,
+            "width": 51,
+            "height": 65,
+            "area": 1116
+          },
+          "body": {
+            "left": 48,
+            "top": 191,
+            "width": 416,
+            "height": 308
+          },
+          "footX": 309.6811501597444
+        },
+        {
+          "face": {
+            "left": 116,
+            "top": 247,
+            "width": 86,
+            "height": 56,
+            "area": 1466
+          },
+          "body": {
+            "left": 76,
+            "top": 193,
+            "width": 362,
+            "height": 306
+          },
+          "footX": 260.8886198547215
+        },
+        {
+          "face": {
+            "left": 183,
+            "top": 269,
+            "width": 78,
+            "height": 43,
+            "area": 774
+          },
+          "body": {
+            "left": 56,
+            "top": 197,
+            "width": 399,
+            "height": 302
+          },
+          "footX": 220.00249376558602
+        },
+        {
+          "face": {
+            "left": 180,
+            "top": 230,
+            "width": 63,
+            "height": 56,
+            "area": 880
+          },
+          "body": {
+            "left": 66,
+            "top": 191,
+            "width": 382,
+            "height": 308
+          },
+          "footX": 276.40265780730897
+        },
+        {
+          "face": {
+            "left": 244,
+            "top": 256,
+            "width": 76,
+            "height": 47,
+            "area": 1162
+          },
+          "body": {
+            "left": 32,
+            "top": 200,
+            "width": 449,
+            "height": 299
+          },
+          "footX": 309.2675698560542
+        },
+        {
+          "face": {
+            "left": 210,
+            "top": 276,
+            "width": 34,
+            "height": 45,
+            "area": 518
+          },
+          "body": {
+            "left": 16,
+            "top": 220,
+            "width": 480,
+            "height": 279
+          },
+          "footX": 267.6057934508816
+        },
+        {
+          "face": {
+            "left": 206,
+            "top": 229,
+            "width": 72,
+            "height": 57,
+            "area": 687
+          },
+          "body": {
+            "left": 52,
+            "top": 193,
+            "width": 409,
+            "height": 306
+          },
+          "footX": 244.67719519898927
+        },
+        {
+          "face": {
+            "left": 193,
+            "top": 329,
+            "width": 45,
+            "height": 49,
+            "area": 1019
+          },
+          "body": {
+            "left": 35,
+            "top": 219,
+            "width": 444,
+            "height": 280
+          },
+          "footX": 256.63894139886577
+        },
+        {
+          "face": {
+            "left": 119,
+            "top": 271,
+            "width": 77,
+            "height": 51,
+            "area": 1356
+          },
+          "body": {
+            "left": 59,
+            "top": 201,
+            "width": 395,
+            "height": 298
+          },
+          "footX": 255.26818181818183
+        },
+        {
+          "face": {
+            "left": 237,
+            "top": 217,
+            "width": 39,
+            "height": 35,
+            "area": 414
+          },
+          "body": {
+            "left": 63,
+            "top": 190,
+            "width": 387,
+            "height": 309
+          },
+          "footX": 305.0016501650165
+        },
+        {
+          "face": {
+            "left": 414,
+            "top": 260,
+            "width": 39,
+            "height": 35,
+            "area": 399
+          },
+          "body": {
+            "left": 26,
+            "top": 183,
+            "width": 462,
+            "height": 316
+          },
+          "footX": 222.57847222222222
+        },
+        {
+          "face": {
+            "left": 173,
+            "top": 277,
+            "width": 78,
+            "height": 49,
+            "area": 1305
+          },
+          "body": {
+            "left": 102,
+            "top": 159,
+            "width": 309,
+            "height": 340
+          },
+          "footX": 153.43157894736842
+        },
+        {
+          "face": {
+            "left": 183,
+            "top": 259,
+            "width": 72,
+            "height": 41,
+            "area": 681
+          },
+          "body": {
+            "left": 35,
+            "top": 194,
+            "width": 443,
+            "height": 305
+          },
+          "footX": 344.5475372279496
+        },
+        {
+          "face": {
+            "left": 355,
+            "top": 273,
+            "width": 42,
+            "height": 54,
+            "area": 364
+          },
+          "body": {
+            "left": 40,
+            "top": 188,
+            "width": 433,
+            "height": 311
+          },
+          "footX": 368.9327176781003
+        },
+        {
+          "face": {
+            "left": 173,
+            "top": 286,
+            "width": 77,
+            "height": 60,
+            "area": 919
+          },
+          "body": {
+            "left": 29,
+            "top": 226,
+            "width": 455,
+            "height": 273
+          },
+          "footX": 346.54185022026434
+        },
+        {
+          "face": {
+            "left": 154,
+            "top": 401,
+            "width": 66,
+            "height": 45,
+            "area": 1390
+          },
+          "body": {
+            "left": 22,
+            "top": 309,
+            "width": 470,
+            "height": 190
+          },
+          "footX": 431.9963190184049
+        }
+      ]
+    },
+    "nightmare-phase-one-walk": {
+      "file": "public/arcade/act-two/nightmare-madness-v2/phase-two-walk.webp",
+      "loop": true,
+      "frames": [
+        {
+          "face": {
+            "left": 160,
+            "top": 173,
+            "width": 87,
+            "height": 74,
+            "area": 2519
+          },
+          "body": {
+            "left": 32,
+            "top": 94,
+            "width": 449,
+            "height": 405
+          },
+          "footX": 242.7391304347826
+        },
+        {
+          "face": {
+            "left": 142,
+            "top": 157,
+            "width": 88,
+            "height": 79,
+            "area": 2728
+          },
+          "body": {
+            "left": 28,
+            "top": 73,
+            "width": 456,
+            "height": 426
+          },
+          "footX": 184.2780487804878
+        },
+        {
+          "face": {
+            "left": 156,
+            "top": 174,
+            "width": 86,
+            "height": 76,
+            "area": 2668
+          },
+          "body": {
+            "left": 38,
+            "top": 91,
+            "width": 438,
+            "height": 408
+          },
+          "footX": 429.76911976911975
+        },
+        {
+          "face": {
+            "left": 152,
+            "top": 160,
+            "width": 86,
+            "height": 79,
+            "area": 2536
+          },
+          "body": {
+            "left": 45,
+            "top": 79,
+            "width": 424,
+            "height": 420
+          },
+          "footX": 213.9514003294893
+        },
+        {
+          "face": {
+            "left": 155,
+            "top": 166,
+            "width": 85,
+            "height": 77,
+            "area": 2557
+          },
+          "body": {
+            "left": 31,
+            "top": 92,
+            "width": 452,
+            "height": 407
+          },
+          "footX": 289.38048780487804
+        },
+        {
+          "face": {
+            "left": 156,
+            "top": 192,
+            "width": 85,
+            "height": 75,
+            "area": 2428
+          },
+          "body": {
+            "left": 37,
+            "top": 107,
+            "width": 439,
+            "height": 392
+          },
+          "footX": 312.8864717878994
+        },
+        {
+          "face": {
+            "left": 158,
+            "top": 168,
+            "width": 87,
+            "height": 79,
+            "area": 2569
+          },
+          "body": {
+            "left": 42,
+            "top": 87,
+            "width": 429,
+            "height": 412
+          },
+          "footX": 185.76296296296297
+        },
+        {
+          "face": {
+            "left": 159,
+            "top": 164,
+            "width": 87,
+            "height": 77,
+            "area": 2563
+          },
+          "body": {
+            "left": 41,
+            "top": 89,
+            "width": 431,
+            "height": 410
+          },
+          "footX": 290.10297239915076
+        },
+        {
+          "face": {
+            "left": 155,
+            "top": 161,
+            "width": 87,
+            "height": 78,
+            "area": 2713
+          },
+          "body": {
+            "left": 39,
+            "top": 93,
+            "width": 434,
+            "height": 406
+          },
+          "footX": 355.20132325141776
+        },
+        {
+          "face": {
+            "left": 147,
+            "top": 154,
+            "width": 86,
+            "height": 80,
+            "area": 2709
+          },
+          "body": {
+            "left": 32,
+            "top": 73,
+            "width": 448,
+            "height": 426
+          },
+          "footX": 192.472049689441
+        },
+        {
+          "face": {
+            "left": 155,
+            "top": 157,
+            "width": 85,
+            "height": 77,
+            "area": 2641
+          },
+          "body": {
+            "left": 37,
+            "top": 69,
+            "width": 439,
+            "height": 430
+          },
+          "footX": 375.7
+        },
+        {
+          "face": {
+            "left": 143,
+            "top": 171,
+            "width": 86,
+            "height": 78,
+            "area": 2605
+          },
+          "body": {
+            "left": 37,
+            "top": 94,
+            "width": 438,
+            "height": 405
+          },
+          "footX": 205.5883408071749
+        }
+      ]
+    },
+    "nightmare-phase-two-walk": {
+      "file": "public/arcade/act-two/nightmare-madness-v2/phase-two-walk.webp",
+      "loop": true,
+      "frames": [
+        {
+          "face": {
+            "left": 160,
+            "top": 173,
+            "width": 87,
+            "height": 74,
+            "area": 2519
+          },
+          "body": {
+            "left": 32,
+            "top": 94,
+            "width": 449,
+            "height": 405
+          },
+          "footX": 242.7391304347826
+        },
+        {
+          "face": {
+            "left": 142,
+            "top": 157,
+            "width": 88,
+            "height": 79,
+            "area": 2728
+          },
+          "body": {
+            "left": 28,
+            "top": 73,
+            "width": 456,
+            "height": 426
+          },
+          "footX": 184.2780487804878
+        },
+        {
+          "face": {
+            "left": 156,
+            "top": 174,
+            "width": 86,
+            "height": 76,
+            "area": 2668
+          },
+          "body": {
+            "left": 38,
+            "top": 91,
+            "width": 438,
+            "height": 408
+          },
+          "footX": 429.76911976911975
+        },
+        {
+          "face": {
+            "left": 152,
+            "top": 160,
+            "width": 86,
+            "height": 79,
+            "area": 2536
+          },
+          "body": {
+            "left": 45,
+            "top": 79,
+            "width": 424,
+            "height": 420
+          },
+          "footX": 213.9514003294893
+        },
+        {
+          "face": {
+            "left": 155,
+            "top": 166,
+            "width": 85,
+            "height": 77,
+            "area": 2557
+          },
+          "body": {
+            "left": 31,
+            "top": 92,
+            "width": 452,
+            "height": 407
+          },
+          "footX": 289.38048780487804
+        },
+        {
+          "face": {
+            "left": 156,
+            "top": 192,
+            "width": 85,
+            "height": 75,
+            "area": 2428
+          },
+          "body": {
+            "left": 37,
+            "top": 107,
+            "width": 439,
+            "height": 392
+          },
+          "footX": 312.8864717878994
+        },
+        {
+          "face": {
+            "left": 158,
+            "top": 168,
+            "width": 87,
+            "height": 79,
+            "area": 2569
+          },
+          "body": {
+            "left": 42,
+            "top": 87,
+            "width": 429,
+            "height": 412
+          },
+          "footX": 185.76296296296297
+        },
+        {
+          "face": {
+            "left": 159,
+            "top": 164,
+            "width": 87,
+            "height": 77,
+            "area": 2563
+          },
+          "body": {
+            "left": 41,
+            "top": 89,
+            "width": 431,
+            "height": 410
+          },
+          "footX": 290.10297239915076
+        },
+        {
+          "face": {
+            "left": 155,
+            "top": 161,
+            "width": 87,
+            "height": 78,
+            "area": 2713
+          },
+          "body": {
+            "left": 39,
+            "top": 93,
+            "width": 434,
+            "height": 406
+          },
+          "footX": 355.20132325141776
+        },
+        {
+          "face": {
+            "left": 147,
+            "top": 154,
+            "width": 86,
+            "height": 80,
+            "area": 2709
+          },
+          "body": {
+            "left": 32,
+            "top": 73,
+            "width": 448,
+            "height": 426
+          },
+          "footX": 192.472049689441
+        },
+        {
+          "face": {
+            "left": 155,
+            "top": 157,
+            "width": 85,
+            "height": 77,
+            "area": 2641
+          },
+          "body": {
+            "left": 37,
+            "top": 69,
+            "width": 439,
+            "height": 430
+          },
+          "footX": 375.7
+        },
+        {
+          "face": {
+            "left": 143,
+            "top": 171,
+            "width": 86,
+            "height": 78,
+            "area": 2605
+          },
+          "body": {
+            "left": 37,
+            "top": 94,
+            "width": 438,
+            "height": 405
+          },
+          "footX": 205.5883408071749
+        }
+      ]
+    },
+    "nightmare-phase-three-walk": {
+      "file": "public/arcade/act-two/nightmare-madness-v2/phase-three-walk.webp",
+      "loop": true,
+      "frames": [
+        {
+          "face": {
+            "left": 139,
+            "top": 179,
+            "width": 84,
+            "height": 83,
+            "area": 2136
+          },
+          "body": {
+            "left": 43,
+            "top": 101,
+            "width": 426,
+            "height": 398
+          },
+          "footX": 325.35323943661973
+        },
+        {
+          "face": {
+            "left": 147,
+            "top": 160,
+            "width": 87,
+            "height": 81,
+            "area": 2183
+          },
+          "body": {
+            "left": 50,
+            "top": 83,
+            "width": 412,
+            "height": 416
+          },
+          "footX": 307.7981859410431
+        },
+        {
+          "face": {
+            "left": 150,
+            "top": 167,
+            "width": 82,
+            "height": 84,
+            "area": 2115
+          },
+          "body": {
+            "left": 49,
+            "top": 84,
+            "width": 416,
+            "height": 415
+          },
+          "footX": 416.85985401459857
+        },
+        {
+          "face": {
+            "left": 170,
+            "top": 189,
+            "width": 44,
+            "height": 56,
+            "area": 925
+          },
+          "body": {
+            "left": 36,
+            "top": 86,
+            "width": 440,
+            "height": 413
+          },
+          "footX": 151.8734439834025
+        },
+        {
+          "face": {
+            "left": 156,
+            "top": 220,
+            "width": 52,
+            "height": 56,
+            "area": 1020
+          },
+          "body": {
+            "left": 39,
+            "top": 102,
+            "width": 436,
+            "height": 397
+          },
+          "footX": 380.1666666666667
+        },
+        {
+          "face": {
+            "left": 166,
+            "top": 193,
+            "width": 56,
+            "height": 58,
+            "area": 937
+          },
+          "body": {
+            "left": 36,
+            "top": 84,
+            "width": 441,
+            "height": 415
+          },
+          "footX": 169.36486486486487
+        },
+        {
+          "face": {
+            "left": 176,
+            "top": 199,
+            "width": 44,
+            "height": 55,
+            "area": 1021
+          },
+          "body": {
+            "left": 39,
+            "top": 92,
+            "width": 436,
+            "height": 407
+          },
+          "footX": 166.40625
+        },
+        {
+          "face": {
+            "left": 171,
+            "top": 207,
+            "width": 46,
+            "height": 51,
+            "area": 694
+          },
+          "body": {
+            "left": 50,
+            "top": 91,
+            "width": 412,
+            "height": 408
+          },
+          "footX": 294.986562150056
+        },
+        {
+          "face": {
+            "left": 148,
+            "top": 185,
+            "width": 75,
+            "height": 73,
+            "area": 1445
+          },
+          "body": {
+            "left": 50,
+            "top": 101,
+            "width": 414,
+            "height": 398
+          },
+          "footX": 336.16964285714283
+        },
+        {
+          "face": {
+            "left": 145,
+            "top": 165,
+            "width": 83,
+            "height": 79,
+            "area": 1583
+          },
+          "body": {
+            "left": 35,
+            "top": 69,
+            "width": 443,
+            "height": 430
+          },
+          "footX": 179.40218878248973
+        },
+        {
+          "face": {
+            "left": 147,
+            "top": 180,
+            "width": 39,
+            "height": 76,
+            "area": 903
+          },
+          "body": {
+            "left": 41,
+            "top": 96,
+            "width": 430,
+            "height": 403
+          },
+          "footX": 425.31476683937825
+        },
+        {
+          "face": {
+            "left": 143,
+            "top": 187,
+            "width": 43,
+            "height": 76,
+            "area": 1062
+          },
+          "body": {
+            "left": 47,
+            "top": 95,
+            "width": 419,
+            "height": 404
+          },
+          "footX": 323.0401606425703
+        }
+      ]
+    },
+    "aerial-boss-air-actions": {
+      "file": "public/arcade/act-two/nightmare-aerial-v3/boss-air-actions.webp",
+      "loop": false,
+      "frames": [
+        {
+          "face": {
+            "left": 140,
+            "top": 302,
+            "width": 79,
+            "height": 68,
+            "area": 1931
+          },
+          "body": {
+            "left": 117,
+            "top": 210,
+            "width": 296,
+            "height": 289
+          },
+          "footX": 252.67589220684633
+        },
+        {
+          "face": {
+            "left": 84,
+            "top": 215,
+            "width": 79,
+            "height": 74,
+            "area": 1933
+          },
+          "body": {
+            "left": 62,
+            "top": 125,
+            "width": 300,
+            "height": 374
+          },
+          "footX": 256.46784565916397
+        },
+        {
+          "face": {
+            "left": 127,
+            "top": 177,
+            "width": 54,
+            "height": 57,
+            "area": 1160
+          },
+          "body": {
+            "left": 62,
+            "top": 106,
+            "width": 279,
+            "height": 393
+          },
+          "footX": 256.52941176470586
+        },
+        {
+          "face": {
+            "left": 157,
+            "top": 165,
+            "width": 64,
+            "height": 74,
+            "area": 1738
+          },
+          "body": {
+            "left": 62,
+            "top": 95,
+            "width": 285,
+            "height": 404
+          },
+          "footX": 256.3881932021467
+        },
+        {
+          "face": {
+            "left": 124,
+            "top": 180,
+            "width": 66,
+            "height": 71,
+            "area": 1335
+          },
+          "body": {
+            "left": 22,
+            "top": 90,
+            "width": 323,
+            "height": 409
+          },
+          "footX": 256.9222797927461
+        },
+        {
+          "face": {
+            "left": 163,
+            "top": 193,
+            "width": 75,
+            "height": 57,
+            "area": 1431
+          },
+          "body": {
+            "left": 81,
+            "top": 88,
+            "width": 298,
+            "height": 411
+          },
+          "footX": 256.88318584070794
+        },
+        {
+          "face": {
+            "left": 133,
+            "top": 160,
+            "width": 75,
+            "height": 73,
+            "area": 1367
+          },
+          "body": {
+            "left": 59,
+            "top": 67,
+            "width": 280,
+            "height": 432
+          },
+          "footX": 256.9652448657188
+        },
+        {
+          "face": {
+            "left": 149,
+            "top": 175,
+            "width": 65,
+            "height": 54,
+            "area": 1150
+          },
+          "body": {
+            "left": 71,
+            "top": 61,
+            "width": 265,
+            "height": 438
+          },
+          "footX": 256.27767354596625
+        },
+        {
+          "face": {
+            "left": 157,
+            "top": 153,
+            "width": 78,
+            "height": 76,
+            "area": 1813
+          },
+          "body": {
+            "left": 54,
+            "top": 60,
+            "width": 308,
+            "height": 439
+          },
+          "footX": 256.6135593220339
+        },
+        {
+          "face": {
+            "left": 138,
+            "top": 168,
+            "width": 77,
+            "height": 60,
+            "area": 1386
+          },
+          "body": {
+            "left": 55,
+            "top": 63,
+            "width": 293,
+            "height": 436
+          },
+          "footX": 256.66995073891627
+        },
+        {
+          "face": {
+            "left": 147,
+            "top": 234,
+            "width": 53,
+            "height": 49,
+            "area": 812
+          },
+          "body": {
+            "left": 45,
+            "top": 125,
+            "width": 302,
+            "height": 374
+          },
+          "footX": 256.5768566493955
+        },
+        {
+          "face": {
+            "left": 216,
+            "top": 209,
+            "width": 80,
+            "height": 60,
+            "area": 1713
+          },
+          "body": {
+            "left": 152,
+            "top": 111,
+            "width": 266,
+            "height": 388
+          },
+          "footX": 257.05451448040884
+        },
+        {
+          "face": {
+            "left": 160,
+            "top": 221,
+            "width": 79,
+            "height": 64,
+            "area": 1724
+          },
+          "body": {
+            "left": 82,
+            "top": 118,
+            "width": 330,
+            "height": 381
+          },
+          "footX": 256.2556634304207
+        },
+        {
+          "face": {
+            "left": 78,
+            "top": 236,
+            "width": 80,
+            "height": 63,
+            "area": 1677
+          },
+          "body": {
+            "left": 12,
+            "top": 136,
+            "width": 303,
+            "height": 363
+          },
+          "footX": 256.25615763546796
+        },
+        {
+          "face": {
+            "left": 339,
+            "top": 151,
+            "width": 61,
+            "height": 68,
+            "area": 1561
+          },
+          "body": {
+            "left": 219,
+            "top": 85,
+            "width": 258,
+            "height": 414
+          },
+          "footX": 257.14246575342463
+        },
+        {
+          "face": {
+            "left": 278,
+            "top": 207,
+            "width": 64,
+            "height": 68,
+            "area": 1725
+          },
+          "body": {
+            "left": 149,
+            "top": 137,
+            "width": 268,
+            "height": 362
+          },
+          "footX": 293.2651515151515
+        }
+      ]
+    },
+    "pressure-boss-air": {
+      "file": "public/arcade/act-two/nightmare-sprites-v6/boss-air.webp",
+      "loop": true,
+      "frames": [
+        {
+          "face": {
+            "left": 119,
+            "top": 265,
+            "width": 59,
+            "height": 52,
+            "area": 1231
+          },
+          "body": {
+            "left": 33,
+            "top": 228,
+            "width": 255,
+            "height": 270
+          },
+          "footX": 254.95257731958762
+        },
+        {
+          "face": {
+            "left": 128,
+            "top": 274,
+            "width": 59,
+            "height": 49,
+            "area": 1267
+          },
+          "body": {
+            "left": 53,
+            "top": 236,
+            "width": 247,
+            "height": 263
+          },
+          "footX": 256.4482109227872
+        },
+        {
+          "face": {
+            "left": 115,
+            "top": 272,
+            "width": 59,
+            "height": 51,
+            "area": 1276
+          },
+          "body": {
+            "left": 38,
+            "top": 227,
+            "width": 254,
+            "height": 272
+          },
+          "footX": 255.47368421052633
+        },
+        {
+          "face": {
+            "left": 102,
+            "top": 274,
+            "width": 60,
+            "height": 52,
+            "area": 1303
+          },
+          "body": {
+            "left": 23,
+            "top": 237,
+            "width": 258,
+            "height": 262
+          },
+          "footX": 255.92627599243858
+        },
+        {
+          "face": {
+            "left": 159,
+            "top": 136,
+            "width": 95,
+            "height": 85,
+            "area": 2577
+          },
+          "body": {
+            "left": 27,
+            "top": 57,
+            "width": 458,
+            "height": 442
+          },
+          "footX": 409.92083333333335
+        },
+        {
+          "face": {
+            "left": 158,
+            "top": 135,
+            "width": 97,
+            "height": 83,
+            "area": 2765
+          },
+          "body": {
+            "left": 27,
+            "top": 57,
+            "width": 458,
+            "height": 442
+          },
+          "footX": 410.02364394993043
+        },
+        {
+          "face": {
+            "left": 157,
+            "top": 136,
+            "width": 95,
+            "height": 86,
+            "area": 2661
+          },
+          "body": {
+            "left": 25,
+            "top": 59,
+            "width": 463,
+            "height": 440
+          },
+          "footX": 408.25069637883007
+        },
+        {
+          "face": {
+            "left": 160,
+            "top": 136,
+            "width": 81,
+            "height": 83,
+            "area": 2681
+          },
+          "body": {
+            "left": 27,
+            "top": 59,
+            "width": 458,
+            "height": 440
+          },
+          "footX": 409.8919288645691
+        },
+        {
+          "face": {
+            "left": 159,
+            "top": 136,
+            "width": 95,
+            "height": 85,
+            "area": 2577
+          },
+          "body": {
+            "left": 27,
+            "top": 57,
+            "width": 458,
+            "height": 442
+          },
+          "footX": 409.92083333333335
+        },
+        {
+          "face": {
+            "left": 158,
+            "top": 135,
+            "width": 97,
+            "height": 83,
+            "area": 2765
+          },
+          "body": {
+            "left": 27,
+            "top": 57,
+            "width": 458,
+            "height": 442
+          },
+          "footX": 410.02364394993043
+        },
+        {
+          "face": {
+            "left": 157,
+            "top": 136,
+            "width": 95,
+            "height": 86,
+            "area": 2661
+          },
+          "body": {
+            "left": 25,
+            "top": 59,
+            "width": 463,
+            "height": 440
+          },
+          "footX": 408.25069637883007
+        },
+        {
+          "face": {
+            "left": 160,
+            "top": 136,
+            "width": 81,
+            "height": 83,
+            "area": 2681
+          },
+          "body": {
+            "left": 27,
+            "top": 59,
+            "width": 458,
+            "height": 440
+          },
+          "footX": 409.8919288645691
+        },
+        {
+          "face": {
+            "left": 90,
+            "top": 279,
+            "width": 66,
+            "height": 52,
+            "area": 1314
+          },
+          "body": {
+            "left": 8,
+            "top": 226,
+            "width": 270,
+            "height": 273
+          },
+          "footX": 256.1970802919708
+        },
+        {
+          "face": {
+            "left": 91,
+            "top": 280,
+            "width": 68,
+            "height": 51,
+            "area": 1293
+          },
+          "body": {
+            "left": 21,
+            "top": 228,
+            "width": 262,
+            "height": 271
+          },
+          "footX": 255.89330543933053
+        },
+        {
+          "face": {
+            "left": 113,
+            "top": 287,
+            "width": 68,
+            "height": 54,
+            "area": 1414
+          },
+          "body": {
+            "left": 46,
+            "top": 229,
+            "width": 247,
+            "height": 270
+          },
+          "footX": 255.3929961089494
+        },
+        {
+          "face": {
+            "left": 107,
+            "top": 280,
+            "width": 65,
+            "height": 53,
+            "area": 1336
+          },
+          "body": {
+            "left": 30,
+            "top": 226,
+            "width": 256,
+            "height": 273
+          },
+          "footX": 255.23828125
+        }
+      ]
+    }
+  },
+  "muzzles": {
+    "nightmare-phase-1-idle": [
+      [
+        190,
+        241
+      ],
+      [
+        185,
+        244
+      ],
+      [
+        193,
+        243
+      ],
+      [
+        191,
+        242
+      ]
+    ],
+    "nightmare-phase-1-cast": [
+      [
+        75.89436947417403,
+        229.628664495114
+      ],
+      [
+        67.36834462729912,
+        229.01984511132625
+      ],
+      [
+        70.17293906810036,
+        229.30555555555554
+      ],
+      [
+        71.22598870056497,
+        228.90348399246705
+      ]
+    ],
+    "nightmare-phase-2-idle": [
+      [
+        190,
+        258
+      ],
+      [
+        185,
+        259
+      ],
+      [
+        184,
+        263
+      ],
+      [
+        192,
+        262
+      ]
+    ],
+    "nightmare-phase-2-cast": [
+      [
+        73.70008992805755,
+        239.9581834532374
+      ],
+      [
+        72.09375,
+        241.24264705882354
+      ],
+      [
+        73.60466084061589,
+        245.32501040366208
+      ],
+      [
+        78.26508447304907,
+        244.63555913113436
+      ]
+    ],
+    "nightmare-phase-3-idle": [
+      [
+        185,
+        245
+      ],
+      [
+        181,
+        247
+      ],
+      [
+        184,
+        245
+      ],
+      [
+        186,
+        245
+      ]
+    ],
+    "nightmare-phase-3-cast": [
+      [
+        74.45149253731343,
+        238.1679104477612
+      ],
+      [
+        76.12063086104007,
+        236.70204603580564
+      ],
+      [
+        73.34074373484236,
+        234.77607113985448
+      ],
+      [
+        78.16023246160232,
+        236.1340805313408
+      ]
+    ],
+    "nightmare-phase-one": [
+      [
+        99.76,
+        252.51999999999998
+      ],
+      [
+        139.72,
+        256.42
+      ],
+      [
+        143.96,
+        257.2
+      ],
+      [
+        120.68,
+        251.74
+      ],
+      [
+        108.44,
+        274.36
+      ],
+      [
+        52,
+        314.68
+      ],
+      [
+        164.2,
+        211.04
+      ],
+      [
+        92.8,
+        276.7
+      ],
+      [
+        108.60000000000001,
+        272.02
+      ],
+      [
+        114.56,
+        259.54
+      ],
+      [
+        124.75999999999999,
+        278.26
+      ],
+      [
+        108.60000000000001,
+        163.6
+      ],
+      [
+        137.84,
+        281.38
+      ],
+      [
+        114.04,
+        288.4
+      ],
+      [
+        93.48,
+        315.7
+      ],
+      [
+        114.04,
+        369.52
+      ]
+    ],
+    "nightmare-phase-two": [
+      [
+        99.76,
+        252.51999999999998
+      ],
+      [
+        139.72,
+        256.42
+      ],
+      [
+        143.96,
+        257.2
+      ],
+      [
+        120.68,
+        251.74
+      ],
+      [
+        108.44,
+        274.36
+      ],
+      [
+        52,
+        314.68
+      ],
+      [
+        164.2,
+        211.04
+      ],
+      [
+        92.8,
+        276.7
+      ],
+      [
+        108.60000000000001,
+        272.02
+      ],
+      [
+        114.56,
+        259.54
+      ],
+      [
+        124.75999999999999,
+        278.26
+      ],
+      [
+        108.60000000000001,
+        163.6
+      ],
+      [
+        137.84,
+        281.38
+      ],
+      [
+        114.04,
+        288.4
+      ],
+      [
+        93.48,
+        315.7
+      ],
+      [
+        114.04,
+        369.52
+      ]
+    ],
+    "nightmare-phase-three": [
+      [
+        114.56,
+        257.98
+      ],
+      [
+        133.07999999999998,
+        260.32
+      ],
+      [
+        120,
+        262.65999999999997
+      ],
+      [
+        126.28,
+        257.98
+      ],
+      [
+        103.84,
+        265.78
+      ],
+      [
+        52,
+        319.15999999999997
+      ],
+      [
+        133,
+        217.48
+      ],
+      [
+        105.2,
+        280.6
+      ],
+      [
+        122.2,
+        265.78
+      ],
+      [
+        124.08,
+        257.98
+      ],
+      [
+        99.08,
+        252.51999999999998
+      ],
+      [
+        150.6,
+        233.8
+      ],
+      [
+        105.88,
+        261.1
+      ],
+      [
+        109.28,
+        256.42
+      ],
+      [
+        101.8,
+        286.06
+      ],
+      [
+        96.36,
+        350.02
+      ]
+    ],
+    "nightmare-phase-one-walk": [
+      [
+        103.84,
+        181.54000000000002
+      ],
+      [
+        101.12,
+        166.72
+      ],
+      [
+        107.24,
+        180.76
+      ],
+      [
+        112,
+        171.4
+      ],
+      [
+        102.48,
+        181.54000000000002
+      ],
+      [
+        69,
+        248.12
+      ],
+      [
+        127.80000000000001,
+        119.96000000000001
+      ],
+      [
+        109.96000000000001,
+        178.42000000000002
+      ],
+      [
+        108.44,
+        180.76
+      ],
+      [
+        103.68,
+        166.72
+      ],
+      [
+        106.4,
+        163.6
+      ],
+      [
+        107.08,
+        182.32
+      ]
+    ],
+    "nightmare-phase-two-walk": [
+      [
+        103.84,
+        181.54000000000002
+      ],
+      [
+        101.12,
+        166.72
+      ],
+      [
+        107.24,
+        180.76
+      ],
+      [
+        112,
+        171.4
+      ],
+      [
+        102.48,
+        181.54000000000002
+      ],
+      [
+        69,
+        248.12
+      ],
+      [
+        127.80000000000001,
+        119.96000000000001
+      ],
+      [
+        109.96000000000001,
+        178.42000000000002
+      ],
+      [
+        108.44,
+        180.76
+      ],
+      [
+        103.68,
+        166.72
+      ],
+      [
+        106.4,
+        163.6
+      ],
+      [
+        107.08,
+        182.32
+      ]
+    ],
+    "nightmare-phase-three-walk": [
+      [
+        111.16,
+        188.56
+      ],
+      [
+        115.92,
+        173.74
+      ],
+      [
+        114.72,
+        174.51999999999998
+      ],
+      [
+        106.4,
+        176.86
+      ],
+      [
+        107.92,
+        188.56
+      ],
+      [
+        69.07499999999999,
+        233.4
+      ],
+      [
+        125.4,
+        124.56
+      ],
+      [
+        115.92,
+        179.98000000000002
+      ],
+      [
+        114.56,
+        187.78
+      ],
+      [
+        105.04,
+        163.6
+      ],
+      [
+        109.8,
+        183.88
+      ],
+      [
+        114.04,
+        183.88
+      ]
+    ],
+    "aerial-boss-air-actions": [
+      [
+        167.01,
+        332.7
+      ],
+      [
+        111.55,
+        261.97
+      ],
+      [
+        110.15,
+        203.34
+      ],
+      [
+        132.27,
+        128.74
+      ],
+      [
+        108.97,
+        135.46
+      ],
+      [
+        167.81,
+        133.78
+      ],
+      [
+        135.66,
+        114
+      ],
+      [
+        169.13,
+        113.39
+      ],
+      [
+        161.3,
+        109.72
+      ],
+      [
+        139.5,
+        112.84
+      ],
+      [
+        91.04,
+        321.93
+      ],
+      [
+        194.83,
+        300.6
+      ],
+      [
+        136.11,
+        309.45
+      ],
+      [
+        67.63,
+        314.09
+      ],
+      [
+        259.84,
+        156.58
+      ],
+      [
+        187.08,
+        192.57
+      ]
+    ],
+    "pressure-boss-air": [
+      [
+        67.67475482258372,
+        304.2928012090714
+      ],
+      [
+        85.58845566012802,
+        309.9283437331219
+      ],
+      [
+        70.28794783305051,
+        305.52885770396784
+      ],
+      [
+        57.41581637164229,
+        318.29763567879183
+      ],
+      [
+        85.77056621373713,
+        209.9108902086378
+      ],
+      [
+        85.485165848626,
+        209.70065714196392
+      ],
+      [
+        84.57287836274583,
+        210.3722716532526
+      ],
+      [
+        85.37884216834377,
+        210.7596057329771
+      ],
+      [
+        85.77056621373713,
+        209.9108902086378
+      ],
+      [
+        85.485165848626,
+        209.70065714196392
+      ],
+      [
+        84.57287836274583,
+        210.3722716532526
+      ],
+      [
+        85.37884216834377,
+        210.7596057329771
+      ],
+      [
+        42.55001822459326,
+        324.32964975645314
+      ],
+      [
+        57.28243293320858,
+        327.49530639947096
+      ],
+      [
+        80.59465552976474,
+        332.2138187531345
+      ],
+      [
+        64.95376519443838,
+        324.7263403890449
+      ]
+    ]
+  }
+}

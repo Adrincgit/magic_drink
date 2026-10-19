@@ -1,0 +1,24 @@
+{
+  "report": [
+    {
+      "name": "hexy-parallel",
+      "approvedOpaqueRGB": "unchanged"
+    },
+    {
+      "name": "hexy-shock",
+      "approvedOpaqueRGB": "unchanged"
+    },
+    {
+      "name": "hexy-support",
+      "approvedOpaqueRGB": "unchanged"
+    }
+  ],
+  "backgroundSamples": "clear",
+  "starRegistration": "finite and within atlas",
+  "heldSupport": "same native drawing",
+  "portraitPixels": [
+    2048,
+    2080
+  ],
+  "note": "Anatomy and animation are verified from rendered output, not inferred by this check."
+}

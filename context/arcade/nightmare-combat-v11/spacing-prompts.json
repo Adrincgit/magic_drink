@@ -1,0 +1,17 @@
+[
+  {
+    "name": "staff-sweep-2-spaced",
+    "path": "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-combat-v11/staff-sweep-2-preview.png",
+    "prompt": "Re-layout this exact set of twelve Harlequin drawings as a production sprite sheet. Preserve all twelve actions and the SAME anatomy, face, costume, staff and painted gold-purple motion smears. Make a 4-column by 3-row grid on true transparent alpha. Each COMPLETE figure including its ENTIRE smear must occupy at most 65% of its cell width and 75% of its cell height. Scale the entire figures down uniformly for this spacing. Leave very broad transparent gutters on all four sides of every cel, including edges. ZERO overlaps or touching between any two drawings or smears. Detached motion smears stay close to their own pose. No labels, grid lines or background. Do not change the poses or add drawings. Keep correct two arms, five fingers per visible glove. Do NOT redraw faces into a new character."
+  },
+  {
+    "name": "staff-sweep-3-spaced",
+    "path": "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-combat-v11/staff-sweep-3-preview.png",
+    "prompt": "Re-layout this exact set of twelve Harlequin drawings as a production sprite sheet. Preserve all twelve actions and the SAME anatomy, face, costume, staff and painted gold-purple motion smears. Make a 4-column by 3-row grid on true transparent alpha. Each COMPLETE figure including its ENTIRE smear must occupy at most 65% of its cell width and 75% of its cell height. Scale the entire figures down uniformly for this spacing. Leave very broad transparent gutters on all four sides of every cel, including edges. ZERO overlaps or touching between any two drawings or smears. Detached motion smears stay close to their own pose. No labels, grid lines or background. Do not change the poses or add drawings. Keep correct two arms, five fingers per visible glove. Do NOT redraw faces into a new character."
+  },
+  {
+    "name": "purple-detonation-spaced",
+    "path": "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/context/arcade/nightmare-combat-v11/purple-detonation-preview.png",
+    "prompt": "Re-layout these exact eight sequential purple magic fire and smoke explosion drawings into a production 4 columns x 2 rows sprite sheet on REAL transparent alpha. Preserve their painted style, violet fire, white lavender cores and dark smoke. Scale all drawings down uniformly so each entire blast fits inside at most 65% of a cell width and 70% cell height, with broad transparent gutters between ALL cels and edges. No overlaps, including smoke tails, shock rings or flames. Eight drawings only, no text or grid. The rows need a generous empty gap so the rising blasts never touch the next row. Every isolated blast includes all its smoke wisps, with soft transparent edges."
+  }
+]

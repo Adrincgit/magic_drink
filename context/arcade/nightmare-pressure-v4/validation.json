@@ -1,0 +1,200 @@
+{
+  "date": "2026-10-18",
+  "local": true,
+  "published": false,
+  "artMode": "built-in ImageGen",
+  "selection": "anatomy-selection.json",
+  "art": {
+    "runtimeCels": 92,
+    "meter": [
+      1800,
+      404
+    ],
+    "report": [
+      {
+        "name": "hexy-ground",
+        "cells": 20,
+        "nativeFrames": 20,
+        "dimensions": [
+          1280,
+          1600
+        ],
+        "smallest": 0.2605078125,
+        "largest": 0.34177734375,
+        "alphaEdges": "clear",
+        "portraitUpscaling": false
+      },
+      {
+        "name": "hexy-air",
+        "cells": 20,
+        "nativeFrames": 20,
+        "dimensions": [
+          1280,
+          1600
+        ],
+        "smallest": 0.0902734375,
+        "largest": 0.15392578125,
+        "alphaEdges": "clear",
+        "portraitUpscaling": false
+      },
+      {
+        "name": "hexy-portraits",
+        "cells": 20,
+        "nativeFrames": 20,
+        "dimensions": [
+          2560,
+          3200
+        ],
+        "smallest": 0.3807666015625,
+        "largest": 0.4863232421875,
+        "alphaEdges": "clear",
+        "portraitUpscaling": false
+      },
+      {
+        "name": "boss-air",
+        "cells": 16,
+        "nativeFrames": 16,
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "smallest": 0.12675857543945312,
+        "largest": 0.14641952514648438,
+        "alphaEdges": "clear",
+        "portraitUpscaling": false
+      },
+      {
+        "name": "boss-portraits",
+        "cells": 16,
+        "nativeFrames": 16,
+        "dimensions": [
+          2560,
+          2560
+        ],
+        "smallest": 0.350771484375,
+        "largest": 0.42458740234375,
+        "alphaEdges": "clear",
+        "portraitUpscaling": false
+      }
+    ]
+  },
+  "tests": {
+    "regression": {
+      "passed": 55,
+      "log": "tests/artifacts/arcade/nightmare-pressure-v4/test-log.txt"
+    },
+    "finalPressureAndActualUI": {
+      "passed": 8,
+      "log": "tests/artifacts/arcade/nightmare-pressure-v4/final-ui-log.txt"
+    },
+    "note": "The final eight tests repeat pressure coverage and verify the final mirrored HUD; they are not eight additional unique regression cases."
+  },
+  "build": {
+    "complete": true,
+    "diagnosticErrors": 0,
+    "diagnosticWarnings": 0,
+    "hints": 34,
+    "log": "tests/artifacts/arcade/nightmare-pressure-v4/build-log.txt"
+  },
+  "browser": {
+    "errors": [],
+    "missing": []
+  },
+  "clips": [
+    {
+      "name": "double-reversal",
+      "states": [
+        "windup",
+        "travel",
+        "contest",
+        "boss-boost",
+        "hexy-boost",
+        "resolve",
+        "flight",
+        "land",
+        "recover",
+        "dying",
+        "defeated"
+      ],
+      "hp": 0,
+      "hearts": 5,
+      "decodedSheet": "double-reversal-playback.jpg",
+      "reviewed": true,
+      "revision": "final portrait and composition revision"
+    },
+    {
+      "name": "candy-loss",
+      "states": [
+        "windup",
+        "travel",
+        "contest",
+        "boss-boost",
+        "resolve",
+        "flight",
+        "land",
+        "recover",
+        "patrol",
+        "attack"
+      ],
+      "hp": 260,
+      "hearts": 1,
+      "decodedSheet": "candy-loss-playback.jpg",
+      "reviewed": true,
+      "revision": "final portrait and composition revision"
+    },
+    {
+      "name": "phase-two-moves",
+      "states": [
+        "patrol",
+        "game-windup",
+        "game-attack",
+        "recover",
+        "windup",
+        "attack"
+      ],
+      "hp": 520,
+      "hearts": 5,
+      "decodedSheet": "phase-two-moves-playback.jpg",
+      "reviewed": true,
+      "revision": "ordinary movement reviewed before final portrait replacement; ordinary AI unchanged"
+    },
+    {
+      "name": "phase-three-moves",
+      "states": [
+        "patrol",
+        "game-windup",
+        "game-attack",
+        "recover",
+        "windup",
+        "attack"
+      ],
+      "hp": 260,
+      "hearts": 5,
+      "decodedSheet": "phase-three-moves-playback.jpg",
+      "reviewed": true,
+      "revision": "ordinary movement reviewed before final portrait replacement; ordinary AI unchanged"
+    }
+  ],
+  "manualVisualReview": [
+    "Inspected the single corrected anatomical master, all 20 large Hexy portrait cels and the 12 replacement grounded and 12 airborne effort cels.",
+    "Inspected actual reaction captures and decoded victory/loss videos: two bent arms with separated elbows, near-chest grip, surprise then support and sustained effort.",
+    "Upper boss portrait touches y=0, lower Hexy portrait touches y=540; waist and side alpha fades remove rectangular portrait cuts.",
+    "Continuous black manga divider connects both screen edges; large outlined boss speech remains legible.",
+    "Actual desktop and 780px UI captures verify opposite-corner reinforcement control and player-side HUD that leaves the upper boss face unobscured."
+  ],
+  "resolvedVerificationIssues": [
+    "Earlier star-height assertions assumed the overhead grip; updated the directional/height bounds for the new tucked airborne chest grip.",
+    "UI screenshot encoding could outlast the last-stand input window. Final tests click the real button first, assert reinforcement, then capture."
+  ],
+  "limitations": [
+    "Controlled starts and temporary invulnerability are used for animation review; these are not a human assessment of difficulty or fun."
+  ],
+  "runtimeHashes": {
+    "hexy-ground.webp": "89b82c73215191ed25d96b1442c9f6abf43af1524ea68580635ae30f5625d54e",
+    "hexy-air.webp": "bd811238b8a9cee9701080ecf69eedc5aa8e8828d5a02653c808f6acac9c9b99",
+    "hexy-portraits.webp": "cb0afd9053ce288a0b6a02c1866190a89a5ed829a440bfd331e929353ba531b3",
+    "boss-air.webp": "0aa81735279acaa4ac50889aff7a60b896dd5fad52b2f1155af84101e988e42b",
+    "boss-portraits.webp": "7824b0760ebad6b5e4ff351e14abccd4c2e2413913fa8d5ca98a9deb2bd6f042",
+    "meter.webp": "43d8ed1d512d8d93684ef35a5a6ed82585950e5d9738e574cd5fe983937a2f19"
+  }
+}

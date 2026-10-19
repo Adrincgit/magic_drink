@@ -23,6 +23,9 @@ import {SUPER_WINDUP} from '../../engine/adventureSuperTiming';
 import {clashPortraitFrames,castingWindFrame} from '../../engine/clashActing';
 import {hexyRegistration} from './hexyPoseRegistration';
 import {shopEntryPose} from '../../engine/adventureShop';
+import {NIGHTMARE_PRESSURE_HEXY} from '../bosses/nightmarePressureRegistration';
+import {NIGHTMARE_HEXY_ATLAS} from '../bosses/nightmareAerialRegistration';
+import {hexyNightmarePose} from './hexyNightmareClash';
 import {circusEntryPose} from '../../engine/adventureCircusEntrance';
 const atlas={...originalAtlas,...combatAtlas,...movementAtlas,...handAtlas,...airSuperAtlas,...standingDownAtlas,...crouchRestAtlas,...actionAtlas};
 atlas.fear=Array.from({length:12},()=>({tip:[236,250]}));
@@ -34,6 +37,7 @@ Object.assign(atlas,feedbackAtlas);
 atlas['super-cast']=superCastAtlas;
 const activeActingAtlas=Object.fromEntries(Object.entries(actingAtlas).filter(([name])=>!name.startsWith('tired-')));
 Object.assign(atlas,activeActingAtlas);
+Object.assign(atlas,NIGHTMARE_HEXY_ATLAS,NIGHTMARE_PRESSURE_HEXY);
 // Horizontal aerial charge holds the accepted one-handed discharge drawing.
 atlas['air-super']=airSuperAtlas['air-super-release'];
 atlas['ribbon-swing']=ribbonAtlas;
@@ -74,6 +78,8 @@ function hexyActionPose(s){
  if(s.done)return s.won?{sheet:'celebrate',frame:Math.floor(s.fxTime*6)%4}:{sheet:'reactions',frame:5};
  if(p.drinkCast>0)return{sheet:p.sipKind==='ribbon'?'ribbon-dance':'drink-original',frame:(p.sipKind==='ribbon'?16:0)+clamp(Math.floor((.7-p.drinkCast)/.175),0,3)};
  const hit=hitReactionPose(p);if(hit)return hit;
+ const nightmare=hexyNightmarePose(s);if(nightmare)return nightmare;
+ if(s.powerClash?.kind==='nightmare'&&p.charge>0&&!s.superCinematic?.airborne)return{sheet:'super-charge',frame:clamp(Math.floor(p.charge/SUPER_WINDUP*4),0,3)};
  if(s.ribbonDance&&p.dash>0)return{sheet:'ribbon-spin',frame:clamp(Math.floor((1-p.dash/p.dashDuration)*8),0,7)};
  if(p.dash>0&&p.dashAir&&p.dashY>0)return {sheet:'comet-kick',frame:clamp(Math.floor((1-p.dash/p.dashDuration)*4),0,3)};
  if(p.dash>0)return {sheet:p.dashAir?'air-dash':'roll',frame:clamp(Math.floor((1-p.dash/p.dashDuration)*8),0,7)};

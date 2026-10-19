@@ -136,6 +136,10 @@ export function drawVillagers(c,s,art,reduced){
  }
 }
 export function drawCandyHexy(c,s,art,reduced){
+ const clash=s.powerClash;
+ if(clash?.kind==='nightmare'&&clash.won===false&&(clash.state==='flight'||clash.state==='land'&&clash.age<.8)){
+  c.save();c.translate(s.player.x,s.player.y);c.rotate(clash.state==='flight'?clash.age*9:0);cel(c,art['village-candy-spell-v4'],8+Math.floor(clash.age*8)%3,0,0,105);c.restore();return true;
+ }
  const q=s.player.candy;if(!q)return false;
  if(q.pumpkin){if(q.containerId)return true;const frame=q.convertAge<.9?Math.min(3,Math.floor(q.convertAge/.225)):4+(reduced?0:Math.floor(q.convertAge*8)%4);cel(c,art['village-hexy-pumpkin-v6'],frame,s.player.x,s.player.y,100);return true;}
  const turning=q.age<.9,frame=turning?4+Math.min(3,Math.floor(q.age/.23)):q.terminal?7:8+Math.min(2,Math.floor(q.effort/21*3));

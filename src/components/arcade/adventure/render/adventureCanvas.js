@@ -73,6 +73,10 @@ import {drawHexy as hexy,drawHexyCastLighting} from './hexyCanvas';
 import {drawDiveKick,drawPaperDecoy,drawTacticalFX,drawReturnedBolt} from './tacticalModsCanvas';
 import {SPECIALS,SUPER_WINDUP,specialArt,spellFor} from '../engine/adventureMagic';
 import {ACTOR_SHEETS,bossDrawing,enemyDrawing,MAGIC_ROWS,HOSTILE_ROWS,effectFrame,collectibleFrame} from './adventureSprites';
+import {drawEpisodeHorizon,drawEpisodePeople,drawEpisodeScreen} from './episodeTwoCanvas';
+import {drawNightmareScreen} from './nightmareClashCanvas';
+import {drawNightmarePrismScreen} from './nightmareComboCanvas';
+import {nightmareFloorView} from './nightmareArenaCanvas';
 import {drawCornForeground} from './cornfieldCanvas';
 
 import {actTwoArtPaths,drawActTwoBackdrop,drawActTwoScenery,drawActTwoTerrain,drawActTwoEncounter,drawActTwoProjectile,drawActTwoDust} from './actTwoCanvas';
@@ -338,6 +342,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  // Use one projected camera for the room, feet, fire, beams and portraits.
  // This is a render-only comparison; the physical arena and wood view remain.
  s=grandRingFloorView(s,circusFloor);
+ s=nightmareFloorView(s);
  const c=canvas.getContext('2d'),W=960,H=540;c.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);c.clearRect(0,0,W,H);
  c.save();if(s.superCinematic){const offset=superCameraOffset(s,reduced);c.translate(offset.x,offset.y);}
  else if(!reduced&&s.shake>0){const force=Math.min(1,s.shake/.12);c.translate(Math.sin(s.fxTime*137)*3*force,Math.cos(s.fxTime*113)*2*force);}
@@ -353,6 +358,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  else if(s.level.riverRoute)drawRiverBackdrop(c,s,art,reduced);
  else if(s.level.groundRoute){drawMeadowSky(c,s,art,reduced);for(const plane of MEADOW_PLANES)paintMeadowPlane(c,art[plane.key],s.camera,plane,s.level.width);}
  else layer(c,bg,s.camera.x,world.farSpeed,-70-s.camera.y*.12,610);
+ drawEpisodeHorizon(c,s,art,reduced);
  if(s.level.groundRoute&&!s.level.actTwo&&!s.level.riverRoute&&!s.level.grandRing&&!s.level.emberTrail&&!s.level.nightmareTrail&&!s.level.villageTrail){
   // The forest enters from the right as solid cutouts. Crossfading entire
   // panoramas made trunks transparent against the hills behind them.
@@ -412,7 +418,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
   drawNightmareFog(c,s,art);
  }
  if(s.level.villageTrail){drawVillageScenery(c,s,art);drawVillageCarriages(c,s,art,reduced);drawVillageObstacles(c,s,art);drawVillageRubble(c,s,art);drawHarvesterBroom(c,s,art,reduced);}
- drawAquaGround(c,s,art,reduced);
+ drawAquaGround(c,s,art,reduced);drawEpisodePeople(c,s,art,reduced);
  if(s.level.riverRoute)drawRiverPierWater(c,s,art,reduced);
  // Playable boats and swimmers occupy the channel in front of the supports.
  if(s.level.riverRoute)for(const e of s.enemies)if(e.type===9||diverInWater(e))drawAquaticEnemy(c,e,art,reduced);
@@ -649,6 +655,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  if(s.level.villageTrail)drawVillageGate(c,s,art,true);if(s.level.cornfield)drawCornForeground(c,s,art,reduced);c.restore();
  c.restore();
  if(s.level.villageTrail)drawVillageForeground(c,s,art);
+ drawNightmarePrismScreen(c,s,reduced);
  drawClashScreenFlash(c,s,reduced);drawPopcornScreenFlash(c,s,reduced);
  drawInfernoForeground(c,s,art,reduced);
  if(s.level.emberTrail)drawEmberForeground(c,s,art,reduced);
@@ -663,6 +670,7 @@ export function renderAdventure(canvas,s,art,{reduced=false,en=false,circusFloor
  if(!s.powerClash)superCaption(c,s,en,cutin);
  drawHarlequinCutin(c,s,art,reduced,en);drawClashMeter(c,s,art,en,reduced);
  drawClashPortraits(c,s,art,reduced);
+ drawNightmareScreen(c,s,art,en,reduced);drawEpisodeScreen(c,s,art,en);
  drawMangaClashImpact(c,s,reduced);
  if(s.shopTransition?.alpha>0){c.save();c.globalAlpha=s.shopTransition.alpha;c.fillStyle='#000';c.fillRect(0,0,W,H);c.restore();}
  drawCircusTransition(c,s);drawFortFade(c,s,en);

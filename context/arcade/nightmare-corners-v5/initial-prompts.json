@@ -1,0 +1,14 @@
+[
+  {
+    "name": "hexy-cast",
+    "prompt": "Use case: illustration-story. SINGLE FULL BODY game character key pose on transparent background, NOT a sprite sheet. Reference is approved young Hexy identity, rendering and clothing. Draw petite CHIBI Hexy, the same very young rounded face, big pink eyes, short compact body and limbs, oversized blue star witch hat, flowing long pink hair, white sailor blouse, red bow, blue short pleated skirt, blue socks and buckle boots. Keep compact 3-to-3.5 heads tall proportions, absolutely no elongated teenage/adult torso or legs. Rich detailed polished anime cartoon ink and cel shading consistent with reference.\nA clear POWERFUL ACTIVE CAST: facing right, low wide braced stance with both knees bent, leaning her whole body FORWARD under huge recoil; right arm thrust diagonally UP-RIGHT pointing the dark star wand toward the incoming enemy power, wand is an extension of the aiming arm, STAR well above and to the right of her face. Other LEFT arm is bent into a SINGLE fist at her left waist, not touching aiming arm. Shoulders tense, brows strongly furrowed, mouth gritted teeth, sweat, serious effort, never a calm upright idle stance. Pink hair and skirt blow strongly LEFT behind her. Exactly TWO anatomically clear arms, one aiming arm and ONE fist at waist, no hidden extra limb, no motion echo. Keep all hat, hair, wand star, fingers, legs and boots inside frame with 10% clear margin. No background, energy beam, aura, speed lines, text or cropped tips.",
+    "refs": [
+      "G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink/public/arcade/sprites/ui/hexy-encore-full.webp"
+    ]
+  },
+  {
+    "name": "corner-magic",
+    "prompt": "Use case: illustration-story. Raster painted magic texture for two animated anime cartoon manga corner panels in a fantasy game. WIDE landscape canvas, divided into TWO equal halves with NO line or gap: LEFT HALF luminous magenta-pink star magic streaming diagonally from lower-left toward upper-right, RIGHT HALF deep violet/cyan wind magic rushing diagonally from upper-right toward lower-left. Rich hand painted nebula, luminous flecks, organic curved force trails and stardust, dense bright particles at distant outer corners and darker clear areas near centers where character faces will be overlaid. Gorgeous dramatic anime-cartoon energy; dimensional glowing magic rather than rigid vector rays. No characters, faces, hands, words, letters, logos, circles, frames, UI or border. Entire canvas filled; each half is a texture that can be panned behind a character.",
+    "refs": []
+  }
+]

@@ -1,0 +1,74 @@
+{
+  "runtimeCels": 92,
+  "meter": [
+    1800,
+    404
+  ],
+  "report": [
+    {
+      "name": "hexy-ground",
+      "cells": 20,
+      "nativeFrames": 20,
+      "dimensions": [
+        1280,
+        1600
+      ],
+      "smallest": 0.2605078125,
+      "largest": 0.34177734375,
+      "alphaEdges": "clear",
+      "portraitUpscaling": false
+    },
+    {
+      "name": "hexy-air",
+      "cells": 20,
+      "nativeFrames": 20,
+      "dimensions": [
+        1280,
+        1600
+      ],
+      "smallest": 0.0902734375,
+      "largest": 0.15392578125,
+      "alphaEdges": "clear",
+      "portraitUpscaling": false
+    },
+    {
+      "name": "hexy-portraits",
+      "cells": 20,
+      "nativeFrames": 20,
+      "dimensions": [
+        2560,
+        3200
+      ],
+      "smallest": 0.3807666015625,
+      "largest": 0.4863232421875,
+      "alphaEdges": "clear",
+      "portraitUpscaling": false
+    },
+    {
+      "name": "boss-air",
+      "cells": 16,
+      "nativeFrames": 16,
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "smallest": 0.12675857543945312,
+      "largest": 0.14641952514648438,
+      "alphaEdges": "clear",
+      "portraitUpscaling": false
+    },
+    {
+      "name": "boss-portraits",
+      "cells": 16,
+      "nativeFrames": 16,
+      "dimensions": [
+        2560,
+        2560
+      ],
+      "smallest": 0.350771484375,
+      "largest": 0.42458740234375,
+      "alphaEdges": "clear",
+      "portraitUpscaling": false
+    }
+  ]
+}

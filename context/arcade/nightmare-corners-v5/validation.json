@@ -1,0 +1,142 @@
+{
+  "date": "2026-10-18",
+  "local": true,
+  "published": false,
+  "artMode": "built-in ImageGen",
+  "selection": "selection.json",
+  "art": {
+    "report": [
+      {
+        "name": "hexy-parallel",
+        "approvedOpaqueRGB": "unchanged"
+      },
+      {
+        "name": "hexy-shock",
+        "approvedOpaqueRGB": "unchanged"
+      },
+      {
+        "name": "hexy-support",
+        "approvedOpaqueRGB": "unchanged"
+      }
+    ],
+    "backgroundSamples": "clear",
+    "starRegistration": "finite and within atlas",
+    "heldSupport": "same native drawing",
+    "portraitPixels": [
+      2048,
+      2080
+    ],
+    "note": "Anatomy and animation are verified from rendered output, not inferred by this check."
+  },
+  "tests": {
+    "regression": {
+      "passed": 56,
+      "log": "tests/artifacts/arcade/nightmare-corners-v5/test-log.txt"
+    },
+    "finalPressureAndActualUI": {
+      "passed": 9,
+      "log": "tests/artifacts/arcade/nightmare-corners-v5/final-ui-log.txt"
+    },
+    "note": "The final nine checks repeat pressure coverage and verify the current packed art and actual UI; they are not nine additional unique regression cases."
+  },
+  "build": {
+    "complete": true,
+    "diagnosticErrors": 0,
+    "diagnosticWarnings": 0,
+    "hints": 37,
+    "log": "tests/artifacts/arcade/nightmare-corners-v5/build-log.txt",
+    "note": "Existing Browserslist age and bundle-size notices remain."
+  },
+  "browser": {
+    "errors": [],
+    "missing": []
+  },
+  "clips": [
+    {
+      "name": "double-reversal",
+      "states": [
+        "windup",
+        "travel",
+        "contest",
+        "boss-boost",
+        "hexy-boost",
+        "resolve",
+        "flight",
+        "land",
+        "recover",
+        "dying",
+        "defeated"
+      ],
+      "hp": 0,
+      "hearts": 5,
+      "decodedSheet": "double-reversal-playback.jpg",
+      "reviewed": true
+    },
+    {
+      "name": "candy-loss",
+      "states": [
+        "windup",
+        "travel",
+        "contest",
+        "boss-boost",
+        "resolve",
+        "flight",
+        "land",
+        "recover",
+        "patrol",
+        "attack"
+      ],
+      "hp": 260,
+      "hearts": 1,
+      "decodedSheet": "candy-loss-playback.jpg",
+      "reviewed": true
+    }
+  ],
+  "manualVisualReview": [
+    "Reviewed current VP9 victory and loss recordings through decoded playback sheets.",
+    "Reviewed 24 closer samples spaced 0.12 seconds apart: cast, supported strain, and counter reaction. Stable silhouette, exactly two arms, continuous hair/clothing/tension deformation.",
+    "Approved lower aiming arm and youthful proportions retained; support uses the second hand under the aiming forearm.",
+    "Both portraits occupy opposite corner triangles; each diagonal connects adjacent edges. The center of the battle stays clear.",
+    "Character faces and arms remain opaque, no rectangular backdrop; moving pink and violet magic backgrounds remain visible.",
+    "Counter expression changes only the eyes; the held head, mouth, hands and body do not jump to a different illustration.",
+    "Brief speech balloons clear during sustained combat. Impact camera follows the front toward the losing caster.",
+    "Actual desktop and 780px mirrored UI captures verify the real Encore button and opposite-side HUD."
+  ],
+  "detailSheets": [
+    "held-motion-playback.jpg",
+    "counter-reaction-playback.jpg",
+    "actual-counter-1.jpg",
+    "actual-counter--1.jpg"
+  ],
+  "resolvedVerificationIssues": [
+    "Removed the across-screen manga slash; replaced it with two corner borders.",
+    "Stopped cycling unrelated portrait and actor illustrations; held artwork is deformed continuously.",
+    "Kept perspective floor periods positive when the impact camera moves vertically.",
+    "Registered cleanup alpha masks by the wand star, preserved approved RGB, and removed residual dark haze without erasing physical arms or face."
+  ],
+  "limitations": [
+    "Controlled starts and temporary invulnerability are used for visual review; this does not assess human difficulty or fun."
+  ],
+  "runtimeHashes": {
+    "boss-air.webp": "7219b4750150317703d903c7a07f16968ace45eb46fc7c3d646cd7b2e90a72a1",
+    "boss-eyes.webp": "8c4512c993fbd722e2af4105396765c9e5dce71a5fc2f8f4fdf219da88a17950",
+    "boss-portraits.webp": "92a28d078e95393a138e9898367215715fee44b409ffbf852a57032862ddf5ec",
+    "corner-magic.webp": "ca1a463c66f0d4fed0f913a20cc21dbf129b6e421d75c47931e8d04fe81e5df9",
+    "hexy-air.webp": "aa061b9c5cd2f0dac505b6e2b7f9e7818487754135a749fd71f18292c050d787",
+    "hexy-ground.webp": "aa061b9c5cd2f0dac505b6e2b7f9e7818487754135a749fd71f18292c050d787",
+    "hexy-portraits.webp": "6b746491805ecaf4a32d9f628c71b16ee7be29d2b18fb36ede9b93c893a34a15"
+  },
+  "sourceHashes": {
+    "boss-held-alpha.png": "9e3097b9392ed22e7a28e0bb583929d8315c5defa037484d7ae59da6e9490a42",
+    "boss-held.png": "e54dcbc8b8a82649adc3b751f985e68d91c40e2e309611029b5dcd48cbb7adae",
+    "boss-reaction.png": "b15cbd896c9bde46183c8b6e155c8cbb74beade2ca232478d7944b46b6b61206",
+    "corner-magic.png": "00ec84dd1a2295c29e46781a06cf1d470d5841d563ce0362a2a5f7ca2a346bcb",
+    "hexy-cast.png": "6d3d616802ef0eebc04e5d46b275bb27994c67f20f3f066ac842310eb9aaf83e",
+    "hexy-parallel-alpha.png": "2d9ce016f20c32b81b9a852733e280e3e78aaa3d5c4bdc57ec022856003279b7",
+    "hexy-parallel.png": "cb41142a3d98e6446553549a5cea4c8906a26de30679a8bfc23ccc87336cd571",
+    "hexy-shock-alpha.png": "9597bcb26869cce6b3b3156196aa765df057cbda5d07af4970aa20587c3e72c6",
+    "hexy-shock.png": "80112c760f4fd2ea9557798734b8000b2e7cecd7849fd72f03d4d7a42b35cd85",
+    "hexy-support-alpha.png": "cb2f0fe7bef520ec464a344abec15f037d95d94dc2e2626aeff036eaa9cbf675",
+    "hexy-support.png": "89a5f12fcb250c89e474fbe3c9677aac3a1d2aa07413c65a9cfeb9c2c4e40847"
+  }
+}
