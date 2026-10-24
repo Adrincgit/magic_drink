@@ -1,4 +1,0 @@
-{
-  "tool": "built-in imagegen",
-  "prompt": "Remove ONLY every haze, glow, fog and shadow wash surrounding this gate, including inside the open passage and between bars. Make that surrounding background completely transparent (alpha zero). Preserve the gate's complete uncropped silhouette, stone, lantern, ironwork, ivy, grassy bases, exact composition and painted detail. All solid materials remain fully opaque. Only normal narrow antialiasing at true object edges. No colored translucent aura around the gate, no backdrop rectangle, no environment. This is a clean production game prop cutout on actual transparency."
-}

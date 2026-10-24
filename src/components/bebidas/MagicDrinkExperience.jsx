@@ -8,7 +8,7 @@ import useReducedMotion from '../hexy/components/useReducedMotion';
 import IllustratedMenu, { IllustratedMenuTrigger } from '../global/IllustratedMenu';
 import useIllustratedFinish from '../global/useIllustratedFinish';
 import HexyFinish from '../hexy/HexyFinish';
-import {HuntBunny,HuntToast} from '../arcade/hunt/BunnyHunt';
+import SceneBunny from '../scenery/SceneBunny';
 import styles from './magicDrinkExperience.module.css';
 
 const art = '/image/magic-drink/v49/';
@@ -181,16 +181,16 @@ export default function MagicDrinkExperience() {
       <div className={styles.sceneViewport}><div className={styles.sceneCanvas}>
         <Atmosphere />
         <div className={styles.roomGround} data-drink-ground="lounge"><picture><source media="(max-width: 720px)" srcSet={`${art}lounge-mobile.webp`} /><img {...decorative} className={styles.roomArt} src={`${art}lounge-room.webp`} loading="lazy" data-drink-layer="architecture" /></picture>
-          <div className={styles.bunnyTable} data-drink-contact="table"><HuntBunny id="interview" en={en} place="loungeBunny"/><span className={styles.tableShadow} /><img {...decorative} src={`${art}bunny-table.webp`} loading="lazy" width="1254" height="1254" /><img {...decorative} className={styles.bunnyBlink} src={`${art}bunny-blink.webp`} loading="lazy" width="1254" height="1254" data-drink-bunny-cel /><img {...decorative} className={styles.tableCan} src="/image/journey/original.webp" loading="lazy" /></div>
+          <div className={styles.bunnyTable} data-drink-contact="table"><SceneBunny id="interview" place="loungeBunny"/><span className={styles.tableShadow} /><img {...decorative} src={`${art}bunny-table.webp`} loading="lazy" width="1254" height="1254" /><img {...decorative} className={styles.bunnyBlink} src={`${art}bunny-blink.webp`} loading="lazy" width="1254" height="1254" data-drink-bunny-cel /><img {...decorative} className={styles.tableCan} src="/image/journey/original.webp" loading="lazy" /></div>
         </div>
         <LightDust />
       </div></div>
       <div className={styles.sceneCanvas}>
         <div className={styles.loungeCopy}><span className={styles.overline}>{en ? 'THERE IS A SEAT FOR YOU' : 'HAY UN LUGAR PARA TI'}</span><h2 id="lounge-title">{en ? 'Stay a little' : 'Quédate'}<br /><em>{en ? 'longer.' : 'un ratito más.'}</em></h2><p>{en ? 'A Magic Drink. Good company. And nowhere else you need to be.' : 'Una Magic Drink. Buena compañía. Y ninguna prisa por irte.'}</p><div className={styles.loungeActions}><SceneButton href="/#directorio-wonderpop">{en ? 'Let’s go to Wonderpop' : 'Vamos a Wonderpop'}</SceneButton><a href="/hexy" className={styles.musicLink}>{en ? 'Hexy brings the music' : 'Hexy pone la música'} <span aria-hidden="true">♫</span></a></div></div>
       </div>
-      <footer className={styles.footer}><a href="/">MAGIC DRINK <SceneStar /></a><a href="/arcade">{en ? 'Play with Hexy' : 'Juega con Hexy'}</a><a href="#la-barra">{en ? 'Back to the counter ↑' : 'Volver a la barra ↑'}</a></footer>
+      <footer className={styles.footer}><a href="/">MAGIC DRINK <SceneStar /></a><a href="#la-barra">{en ? 'Back to the counter ↑' : 'Volver a la barra ↑'}</a></footer>
     </section>
     <HexyFinish enabled={finish.enabled} reduced={reduced} settings={finish} target={finishTarget} />
-    <HuntToast en={en}/>
+
   </div>;
 }

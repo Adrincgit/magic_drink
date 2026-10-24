@@ -1,9 +1,0 @@
-{
-  "mode": "Built-in ImageGen, transparent generation with identity references",
-  "references": [
-    "public/arcade/sprites/enemies/village-run-adults-v7.webp",
-    "public/arcade/sprites/enemies/village-run-children-v7.webp"
-  ],
-  "selected": "sources/warning.png",
-  "prompt": "Transparent alpha sprite sheet, FOUR columns TWO rows (8 separate full body cells), side-scrolling hand-painted Halloween arcade cartoon. The two references are identity/style only, not edit targets. Row1 four warning poses of baker: brown cap, moustache, cream shirt, blue vest, white apron, brown boots. Row2 four warning poses of small curly brown-haired boy: cream shirt, blue short overalls, orange Halloween cape and boots. In EVERY pose the face, nose and pupils look LEFT at Hexy standing to their LEFT in the same world, NOT at the camera/viewer. Body profile or three-quarter LEFT. One hand stretches low toward Hexy on LEFT as a 'stop, don't go there' gesture. The OTHER arm points BACK over their shoulder toward RIGHT, where the town and enemies are. Head keeps looking left while pointing right behind themselves. Readable physically coherent shoulder/arms, no front-facing presentation or eye contact with audience. Four successive poses each: warn open left palm and right finger pointing behind; glance briefly right toward danger; turn head left toward Hexy and urgently point back right; take first step fleeing left with one final warning to Hexy. Same head/body scale and outfit throughout each row. Leave bags at waist so hands free. No Hexy, enemies, scenery, ground, labels or grid actually drawn. Full boots and fingertips inside each cell, generous transparent gutters. Dimensional cartoon, strong dark outlines, warm cloth shading and blue night shadows. Do not point at viewer. Eyes look along horizontal LEFT toward character, not out of image toward audience."
-}

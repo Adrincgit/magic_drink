@@ -18,7 +18,7 @@ import HexyFinish from '../../hexy/HexyFinish';
 import StoryPanel from './StoryPanel';
 import useIllustratedFinish from '../../global/useIllustratedFinish';
 import CityLookout from './CityLookout';
-import { HuntBunny, HuntToast } from '../../arcade/hunt/BunnyHunt';
+import SceneBunny from '../../scenery/SceneBunny';
 
 const art = '/image/journey/';
 const words = {
@@ -377,7 +377,7 @@ export default function IndexJourney({ en = false }) {
                 {Array.from({ length: 10 }, (_, i) => <i key={i} style={{ '--i': i }} />)}
               </div>
             </div>
-            <div className={`${styles.streetFurniture} ${styles.lookoutPlane}`} data-depth="lookout" data-look="street" data-lookout-mount><HuntBunny id="shore" en={en} place="shore" active={assetsReady && chapter < 2 && chapter >= 0} /></div>
+            <div className={`${styles.streetFurniture} ${styles.lookoutPlane}`} data-depth="lookout" data-look="street" data-lookout-mount><SceneBunny id="shore" place="shore" active={assetsReady && chapter < 2 && chapter >= 0} /></div>
             <div
               className={styles.foreground}
               data-depth="counter"
@@ -444,7 +444,7 @@ export default function IndexJourney({ en = false }) {
               </div>
             </div>
             <section id="ciudad" className={`${styles.copy} ${styles.cityCopy}`} data-chapter="1" data-story-wrapper>
-              <HuntBunny id="shore" en={en} place="cityPerch" />
+              <SceneBunny id="shore" place="cityPerch" />
               <StoryPanel en={en} number="02" label={t.eyebrow} title={t.city} compactText={en ? 'A sip of Magic Drink, and an ordinary day starts to become a story.' : 'Un sorbo de Magic Drink, y un día cualquiera empieza a convertirse en una historia.'} actions={<SceneButton variant="violet" href="#hexy" data-go=".87">{t.follow}</SceneButton>}>
                 {t.cityBody}
               </StoryPanel>
@@ -464,7 +464,7 @@ export default function IndexJourney({ en = false }) {
         </div>
       </section>
       <CityLookout root={root} active={assetsReady} en={en} />
-      <HuntToast en={en} />
+
       {showCompact && <ScenePlayer {...playerProps} compact onClose={() => {
         playRequest.current++;
         continuePlayback.current = false;

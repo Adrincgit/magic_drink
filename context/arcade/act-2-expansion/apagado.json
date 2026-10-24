@@ -1,8 +1,0 @@
-﻿{
-    "estado":  "apagado programado",
-    "codigoSalida":  0,
-    "orden":  "shutdown.exe /s /t 60",
-    "fechaLocal":  "2026-10-16T11:30:33.6465866-07:00",
-    "fechaPrevista":  "2026-10-16T11:31:33.6465866-07:00",
-    "autorizacion":  "El usuario solicito apagar la PC al terminar."
-}

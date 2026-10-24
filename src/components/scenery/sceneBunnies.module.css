@@ -1,0 +1,14 @@
+.sprite{display:block;width:100%;aspect-ratio:1;background:url('/image/scenery/bunny-atlas.webp') 0 100%/400% 300%;pointer-events:none}
+.bunny{position:absolute;z-index:9;width:112px;aspect-ratio:1;pointer-events:none;transform-origin:center bottom;filter:drop-shadow(0 4px 2px #31163444)}
+.bunny[hidden]{display:none}.bunny:before{content:'';position:absolute;bottom:1%;left:24%;width:52%;height:8%;border-radius:50%;background:#29132d55;filter:blur(3px)}
+.shore{left:calc(clamp(0px,calc(144svh - 58vw),max(0px,calc(300svh - 100vw))) + 26px);bottom:10%;width:clamp(90px,13svh,140px)}
+.cityPerch{display:none}
+.lookout{left:17.8%;top:calc(68.8% - 30px * var(--zoom,1));width:calc(30px * var(--zoom,1));z-index:2;pointer-events:auto;filter:sepia(.3) saturate(.65);opacity:.88}
+.festival{left:38%;bottom:23%;width:clamp(100px,13svh,145px)}
+.plaza{right:15%;bottom:12%;width:clamp(90px,12svh,130px)}
+.interview{right:3%;top:-76px;width:90px}
+.scrapbookBunny{left:67%;top:-6%;width:78px;z-index:0;rotate:9deg;filter:sepia(.12) saturate(.8)}
+.loungeBunny{left:43.5%;top:25%;bottom:auto;width:15%;z-index:0;filter:sepia(.25) saturate(.65) brightness(.85)}
+@media(max-width:700px),(max-width:1000px) and (max-aspect-ratio:1/1){.shore{display:none}.cityPerch{display:block;right:12px;top:-77px;width:90px}.festival{left:43%;bottom:25%;width:100px}.plaza{right:44%;bottom:44%;width:90px}.interview{width:65px;top:-54px;right:2%}.lookout{width:calc(30px * var(--zoom,1))}.scrapbookBunny{left:65%;top:-8%;width:68px}}
+@media(prefers-reduced-motion:reduce){.shore{display:none}.cityPerch{display:block;right:12px;top:-80px;width:90px}}
+@media(max-width:1300px){.shore{display:none}.cityPerch{display:block;right:12px;top:-77px;width:90px}}

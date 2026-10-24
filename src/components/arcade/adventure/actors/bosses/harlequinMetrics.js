@@ -1,2 +1,0 @@
-export const HARLEQUIN_SCALE=.72;
-export const HARLEQUIN_SIZE=320*HARLEQUIN_SCALE;

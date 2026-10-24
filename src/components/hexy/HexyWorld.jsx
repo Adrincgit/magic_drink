@@ -13,7 +13,7 @@ import IllustratedMenu, { IllustratedMenuTrigger } from '../global/IllustratedMe
 import useIllustratedFinish from '../global/useIllustratedFinish';
 import HexyFinish from './HexyFinish';
 import HexyConcert from './HexyConcert';
-import {HuntBunny,HuntToast} from '../arcade/hunt/BunnyHunt';
+import SceneBunny from '../scenery/SceneBunny';
 import styles from './HexyWorld.module.css';
 
 const art = '/image/hexy/world-v34/';
@@ -187,7 +187,7 @@ function Backstage({ en }) {
     <div className={styles.chapterRail}><span>01 / {en ? 'BACKSTAGE' : 'ENTRE BASTIDORES'}</span><i /><SceneStar /></div>
     <div className={styles.backstageLayout}>
       <div className={styles.scrapbook}>
-        <HuntBunny id="festival" en={en} place="scrapbookBunny" />
+        <SceneBunny id="festival" place="scrapbookBunny" />
         <Layer className={styles.photoBack} depth={.65} travel={-.4}><span>HEXY · MAGIC DRINK</span></Layer>
         <Layer className={styles.photoFront} depth={1.3} travel={-.25}>
           <img src="/image/hexy/hexy-bunnies-concert.webp" alt={en ? 'Hexy singing with the Magic Bunnies' : 'Hexy cantando con los Magic Bunnies'} loading="lazy" />
@@ -269,6 +269,6 @@ export default function HexyWorld() {
     <HexyMiniPlayer />
     <HexyListeningRoom />
     <HexyFinish enabled={finish.enabled} reduced={reduced} settings={finish} target={finishTarget} expanded={expanded} />
-    <HuntToast en={en}/>
+
   </div>;
 }

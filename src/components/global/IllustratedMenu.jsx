@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { SceneButton, SceneLabel, SceneStar } from './SceneControls';
 import { isEnglish } from '../../data/variables';
 import styles from './css/illustratedMenu.module.css';
-import { ArcadeWallet } from '../arcade/hunt/BunnyHunt';
 
 export function IllustratedMenuTrigger({ en, className = '', ...props }) {
   const [ready,setReady]=useState(false);
@@ -33,7 +32,7 @@ export function FinishControls({ en, finish, onChange }) {
 }
 
 export default function IllustratedMenu({ dialogRef, id, en, currentPath, finish, onFinishChange, onClose, onClosed, resume, ...props }) {
-  const destinations = [['/', en ? 'The journey' : 'El recorrido'], ['/bebidas', 'Magic Drink'], ['/hexy', 'Hexy'], ['/arcade', 'Arcade']];
+  const destinations = [['/', en ? 'The journey' : 'El recorrido'], ['/bebidas', 'Magic Drink'], ['/hexy', 'Hexy']];
   const language = lang => {
     isEnglish.set(lang === 'en');
     try { localStorage.setItem('lang', lang); } catch { /* The selection works for this visit. */ }
@@ -57,7 +56,6 @@ export default function IllustratedMenu({ dialogRef, id, en, currentPath, finish
       {destinations.filter(([href]) => currentPath !== '/' || href !== '/').map(([href, label], index) =>
         <a href={href} key={href} aria-current={href === currentPath ? 'page' : undefined}><small aria-hidden="true">0{index + 1}</small><span>{label}</span><span aria-hidden="true">↗</span></a>)}
     </nav>
-    <ArcadeWallet en={en} />
     <FinishControls en={en} finish={finish} onChange={onFinishChange} />
     <div className={styles.bottom}>
       <div className={styles.languages} role="group" aria-label={en ? 'Language' : 'Idioma'}>

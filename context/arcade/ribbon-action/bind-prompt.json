@@ -1,8 +1,0 @@
-{
-  "mode": "built-in imagegen",
-  "prompt": "Use case: stylized-concept. Create a production-ready 2D anime cartoon video game EFFECT sprite sheet on a truly transparent background. Exactly 4 columns by 2 rows, all eight equal square cells, no labels, no grid. Reference is STYLE ONLY: glossy raspberry-pink satin ribbon, gold-white thin highlights, dark plum hand drawn contours, broad expressive tapered forms. TOP ROW: four animation frames of magical ribbon wrapping around an invisible upright enemy's torso: 1 an open curved strip sweeping inward from left, 2 two diagonal coils nearly encircling empty torso space, 3 three taut crossing coils and a small secure knot at front with fluttering ends, 4 those same tied coils with differently fluttering ends (idle variant). Coils occupy middle half of each square, body absent, not a floor hoop, no character or mannequin. BOTTOM ROW: four frames of a single stretched ribbon tether from x10% y50% to x90% y50%, shallow undulating tension ripple, center visible satin band about 12% of cell height, consistent endpoints; last frame little snapping taper. This is tactile silky ribbon, not laser, vector line, abstract circle, bubbles, ropes or glowing cloud. Isolated shapes, clean alpha edges, generous transparent margins, no parts cross cells. No background, text, shadows, logos.",
-  "source": "exec-fcea5b1a-98fe-463a-91e2-f9b8c785451c.png",
-  "reference": "public/arcade/sprites/effects/ribbon-slam.webp",
-  "selected": true,
-  "output": "public/arcade/sprites/effects/ribbon-bind.webp"
-}

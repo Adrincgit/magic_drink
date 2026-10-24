@@ -1,54 +1,27 @@
-# Astro Starter Kit: Basics
+# Magic Drink - portal oficial
 
-```sh
-npm create astro@latest -- --template basics
+Este proyecto contiene el portal actual de Magic Drink: portada continua con parallax (`IndexJourney`), ciudad, Hexy, festival y Wonderpop, además de las páginas de bebidas y Hexy. La rama de trabajo es `paralax`. No sustituir esta portada por las secciones antiguas.
+
+## Desarrollo
+
+```powershell
+npm ci
+npm run dev
+npm run build
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+Portal: http://localhost:4321. `src/pages/index.astro` monta `IndexExperience`, que utiliza `src/components/index/Secciones/IndexJourney.jsx`. El movimiento vive en `src/components/index/animations`; las ilustraciones del recorrido, en `public/image/journey`.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Proyectos separados
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+- Portal: `G:/TRABAJO/ASTRO/ADRINC_WEBS/magicdrink`.
+- Juego web: `G:/TRABAJO/ASTRO/ADRINC_WEBS/hexy-lost-chorus` (puerto 4322).
+- Juego Unity: `G:/TRABAJO/UNITY/ADRINC_GAMES/hexy-lost-chorus-unity`.
 
-## 🚀 Project Structure
+El portal no incluye el motor, niveles, sprites, música ni herramientas del videojuego. Los conejitos del paisaje viven en `src/components/scenery`: son decoración, sin monedas, cartera, premios ni guardado de progreso. El juego web y Unity conservan sus proyectos independientes. La antigua ruta `/arcade` fue retirada del portal.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Espacio y pruebas
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+`dist`, cachés y `tests/artifacts` son resultados regenerables. Conservar informes pequeños y vídeos seleccionados, evitando acumular secuencias completas y compilaciones duplicadas. El historial de Git se conserva: quitar archivos del portal no elimina sus versiones antiguas del repositorio. No reescribir el historial para reducir tamaño sin una decisión expresa.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+La documentación y fuentes del juego se mantienen en el proyecto web independiente. Las referencias únicas antes omitidas están en `context/arcade/legacy-reference-assets`; los documentos históricos que difieren, en `context/portal-extraction-2026-10-23`. El archivo externo `_magicdrink_archive` conserva material histórico original y no es una copia del portal vigente.

@@ -4,7 +4,7 @@ import { SceneButton } from '../../global/SceneControls';
 import usePlazaDialog from './usePlazaDialog';
 import styles from '../css/cityLookout.module.css';
 import waterStyles from '../css/waterSurface.module.css';
-import { HuntBunny } from '../../arcade/hunt/BunnyHunt';
+import SceneBunny from '../../scenery/SceneBunny';
 
 const art = '/image/journey/';
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
@@ -88,11 +88,8 @@ export default function CityLookout({ root, active, en }) {
   function startDrag(event) {
     if (event.button !== 0) return;
     event.preventDefault();
-    // A tap can discover Nube; a drag starting on him still pans the city.
-    if (!event.target.closest('[data-hunt-bunny]')) {
-      event.currentTarget.focus({ preventScroll: true });
-      event.currentTarget.setPointerCapture(event.pointerId);
-    }
+    event.currentTarget.focus({ preventScroll: true });
+    event.currentTarget.setPointerCapture(event.pointerId);
     drag.current = { originX: camera.current.x, originY: camera.current.y, pointerX: event.clientX, pointerY: event.clientY };
     event.currentTarget.dataset.dragging = 'true';
   }
@@ -124,7 +121,7 @@ export default function CityLookout({ root, active, en }) {
         <div className={styles.lenses}>
           <div ref={panorama} className={styles.panorama} data-lookout-panorama style={{ '--zoom': zoom }}>
             <LookoutLandscape reduced={reduced} />
-            <HuntBunny id="lookout" en={en} place="lookout" />
+            <SceneBunny id="lookout" place="lookout" />
           </div>
           <div className={styles.optics} aria-hidden="true" />
         </div>
