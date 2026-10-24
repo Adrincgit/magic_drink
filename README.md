@@ -1,6 +1,6 @@
 # Magic Drink - portal oficial
 
-Este proyecto contiene el portal actual de Magic Drink: portada continua con parallax (`IndexJourney`), ciudad, Hexy, festival y Wonderpop, además de las páginas de bebidas y Hexy. La rama de trabajo es `paralax`. No sustituir esta portada por las secciones antiguas.
+Este proyecto contiene el portal actual de Magic Drink: portada continua con parallax (`IndexJourney`), ciudad, Hexy, festival y Wonderpop, además de las páginas de bebidas y Hexy. La rama de producción y trabajo actual es `main`, publicada en https://magic-drink.vercel.app. La portada con parallax se trasladó desde `paralax` conservando el historial. No sustituir esta portada por las secciones antiguas.
 
 ## Desarrollo
 
